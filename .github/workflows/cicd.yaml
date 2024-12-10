@@ -93,71 +93,71 @@ jobs:
           name: build
           path: dist/
 
-  tofu:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-    needs: preflight
-    # Runs if there are changes to the infra (PR) or the event isn't PR
-    if: |
-      needs.preflight.outputs.infra == 'true' || github.event_name != 'pull_request'
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
+  # tofu:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #     id-token: write
+  #   needs: preflight
+  #   # Runs if there are changes to the infra (PR) or the event isn't PR
+  #   if: |
+  #     needs.preflight.outputs.infra == 'true' || github.event_name != 'pull_request'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         ref: ${{ github.head_ref || github.ref_name }}
 
-      - name: Get GH token from Github App
-        id: gh-app-auth
-        uses: getsentry/action-github-app-token@v3
-        with:
-          app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
-          private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
+  #     - name: Get GH token from Github App
+  #       id: gh-app-auth
+  #       uses: getsentry/action-github-app-token@v3
+  #       with:
+  #         app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
+  #         private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
 
-      - name: Hack for github internal repo access :(
-        run: git config --global url."https://foo:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
+  #     - name: Hack for github internal repo access :(
+  #       run: git config --global url."https://foo:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
 
-      - name: Get tofu version from .opentofu-version
-        run: echo "tofu_version=$(cat .opentofu-version)" >> $GITHUB_OUTPUT
-        id: get_tofu_version
-        working-directory: tf
+  #     - name: Get tofu version from .opentofu-version
+  #       run: echo "tofu_version=$(cat .opentofu-version)" >> $GITHUB_OUTPUT
+  #       id: get_tofu_version
+  #       working-directory: tf
 
-      - uses: opentofu/setup-opentofu@v1
-        with:
-          tofu_version: ${{ steps.get_tofu_version.outputs.tofu_version }}
+  #     - uses: opentofu/setup-opentofu@v1
+  #       with:
+  #         tofu_version: ${{ steps.get_tofu_version.outputs.tofu_version }}
 
-      - run: tofu fmt
-        if: github.event_name == 'pull_request'
-        working-directory: tf
+  #     - run: tofu fmt
+  #       if: github.event_name == 'pull_request'
+  #       working-directory: tf
 
-      - run: tofu init && tofu validate
-        working-directory: tf
+  #     - run: tofu init && tofu validate
+  #       working-directory: tf
 
-      - name: Render OpenTofu docs
-        if: github.event_name == 'pull_request'
-        uses: terraform-docs/gh-actions@v1
-        with:
-          output-method: inject
-          config-file: .terraform-docs.yaml
-          working-dir: tf
+  #     - name: Render OpenTofu docs
+  #       if: github.event_name == 'pull_request'
+  #       uses: terraform-docs/gh-actions@v1
+  #       with:
+  #         output-method: inject
+  #         config-file: .terraform-docs.yaml
+  #         working-dir: tf
 
-      - name: tofu clean
-        run: rm -rf .terraform/ .terraform.lock.hcl
-        working-directory: tf
+  #     - name: tofu clean
+  #       run: rm -rf .terraform/ .terraform.lock.hcl
+  #       working-directory: tf
 
-      - name: Fix .git owner
-        if: github.event_name == 'pull_request'
-        run: sudo chown runner:docker -R .git
-        # https://github.com/terraform-docs/gh-actions/issues/90
+  #     - name: Fix .git owner
+  #       if: github.event_name == 'pull_request'
+  #       run: sudo chown runner:docker -R .git
+  #       # https://github.com/terraform-docs/gh-actions/issues/90
 
-      - name: 'Push to ${{ github.head_ref || github.ref_name }}'
-        if: github.event_name == 'pull_request'
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "ci(auto): generate docs and format" || exit 0
-          git push
+  #     - name: 'Push to ${{ github.head_ref || github.ref_name }}'
+  #       if: github.event_name == 'pull_request'
+  #       run: |
+  #         git config user.name github-actions
+  #         git config user.email github-actions@github.com
+  #         git add .
+  #         git commit -m "ci(auto): generate docs and format" || exit 0
+  #         git push
 
   # release:
   #   runs-on: ubuntu-latest
