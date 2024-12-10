@@ -17,7 +17,6 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "setup": "git init && npx playwright install",
     "format": "prettier \"src/**/*.{ts,tsx}\" --write",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "eslint --max-warnings 0 --fix",

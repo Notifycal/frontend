@@ -47,6 +47,7 @@ A more detailed list of the included packages can be found in the [Installed Pac
 ## Requirements
 
 - [NodeJS 18+](https://nodejs.org/en)
+- [Playwright](https://playwright.dev): Install with `npx playwright install`.
 
 If you'd like to use the included Dockerfile then [Docker](https://www.docker.com) is required as well:
 
@@ -55,19 +56,13 @@ If you'd like to use the included Dockerfile then [Docker](https://www.docker.co
 Getting started is a simple as cloning the repository
 
 ```
-git clone git@github.com:RicardoValdovinos/vite-react-boilerplate.git
+git clone git@github.com:Notifycal/frontend.git
 ```
 
 Changing into the new directory
 
 ```
-cd vite-react-boilerplate
-```
-
-Removing the .git folder (and any additional files, folders or dependencies you may not need)
-
-```
-rm -rf .git
+cd frontend
 ```
 
 Installing dependencies
@@ -76,23 +71,8 @@ Installing dependencies
 npm install
 ```
 
-And running the setup script (initializes git repository and husky and installs playwright)
+Congrats! You're ready to starting working!
 
-```
-npm run setup
-```
-
-Congrats! You're ready to starting working on that new project!
-
-If you'd rather run the commands above in one go, check out the command below:
-
-```
-git clone git@github.com:RicardoValdovinos/vite-react-boilerplate.git &&\
-cd vite-react-boilerplate &&\
-rm -rf .git &&\
-npm install &&\
-npm run setup
-```
 
 ## Important Note
 
