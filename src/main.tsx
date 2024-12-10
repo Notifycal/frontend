@@ -30,12 +30,8 @@ if (!rootElement.innerHTML) {
     <React.StrictMode>
       <React.Suspense fallback="loading">
         <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-          <TanStackRouterDevelopmentTools
-            initialIsOpen={false}
-            position="bottom-right"
-            router={router}
-          />
+          <RouterProvider router={router} />
+          <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
           <ReactQueryDevelopmentTools initialIsOpen={false} />
         </QueryClientProvider>
       </React.Suspense>
