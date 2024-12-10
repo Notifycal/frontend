@@ -19,7 +19,6 @@ Everything you need to kick off your next Vite + React web app!
 
 Built with type safety, scalability, and developer experience in mind. A batteries included Vite + React template.
 
-- [pnpm](https://pnpm.io) - A strict and efficient alternative to npm with up to 3x faster performance
 - [TypeScript](https://www.typescriptlang.org) - A typed superset of JavaScript designed with large scale applications in mind
 - [ESLint](https://eslint.org) - Static code analysis to help find problems within a codebase
 - [Prettier](https://prettier.io) - An opinionated code formatter
@@ -49,7 +48,6 @@ A more detailed list of the included packages can be found in the [Installed Pac
 ## Requirements
 
 - [NodeJS 18+](https://nodejs.org/en)
-- [pnpm](https://pnpm.io) (or equivalent)
 
 If you'd like to use the included Dockerfile then [Docker](https://www.docker.com) is required as well:
 
@@ -76,13 +74,13 @@ rm -rf .git
 Installing dependencies
 
 ```
-pnpm install
+npm install
 ```
 
 And running the setup script (initializes git repository and husky and installs playwright)
 
 ```
-pnpm run setup
+npm run setup
 ```
 
 Congrats! You're ready to starting working on that new project!
@@ -93,8 +91,8 @@ If you'd rather run the commands above in one go, check out the command below:
 git clone git@github.com:RicardoValdovinos/vite-react-boilerplate.git &&\
 cd vite-react-boilerplate &&\
 rm -rf .git &&\
-pnpm install &&\
-pnpm run setup
+npm install &&\
+npm run setup
 ```
 
 **Note**: This project comes with two git hooks added by [husky](https://typicode.github.io/husky/). A prepare-commit-msg hook to run the [Commitizen](https://github.com/commitizen/cz-cli#readme) cli for those nice commit messages and a commit-msg hook to run [Commitlint](https://commitlint.js.org/#/) on the message itself. Commitlint will ensure the commit message follows the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) (it will if you used commitizen).
@@ -123,7 +121,7 @@ Unit testing is handled by React Testing Library and Vitest while End-to-End (E2
 If you'd like to run all tests, Unit and E2E alike, execute the following command:
 
 ```
-pnpm run test
+npm run test
 ```
 
 ### Unit Testing
@@ -133,13 +131,13 @@ When running unit test scripts, it is assumed that unit tests will be colocated 
 If you'd like to execute unit tests specifically, the below command will execute vitest:
 
 ```
-pnpm run test:unit
+npm run test:unit
 ```
 
 If instead you are interested in coverage reporting, run:
 
 ```
-pnpm run test:unit:coverage
+npm run test:unit:coverage
 ```
 
 All unit tests run in watch mode by default. If you'd like to disable watch mode, change the package.json test scripts with the following
@@ -169,13 +167,13 @@ After:
 Running E2E tests use a similar syntax to running unit tests:
 
 ```
-pnpm run test:e2e
+npm run test:e2e
 ```
 
 If you wish to see the reports, run:
 
 ```
-pnpm run test:e2e:report
+npm run test:e2e:report
 ```
 
 ## Preparing for Deployment
@@ -187,7 +185,7 @@ Instructions are provided for deploying both with and without Docker. Both optio
 Deploying is as easy as running
 
 ```
-pnpm run build
+npm run build
 ```
 
 and pointing your web server to the generated `index.html` file found at `dist/index.html`
@@ -196,7 +194,7 @@ and pointing your web server to the generated `index.html` file found at `dist/i
 
 A Dockerfile with an [NGINX](https://www.nginx.com) base image is also provided for quick and easy deployments. Simply execute the following commands:
 
-1. `pnpm run build`
+1. `npm run build`
 2. `docker build . -t <container_name>`
    - Example: `docker build . -t todo-app`
 3. `docker run  -p <port_number>:80 <container_name>`
