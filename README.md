@@ -1,4 +1,4 @@
-# Vite React Boilerplate
+# frontend
 
 ![](/public/vite-react-boilerplate.png)
 
@@ -40,7 +40,6 @@ Built with type safety, scalability, and developer experience in mind. A batteri
 - [Faker](https://fakerjs.dev/) - Generate massive amounts of fake (but realistic) data for testing and development
 - [Dayjs](https://day.js.org/en/) - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
 - [ts-reset](https://github.com/total-typescript/ts-reset#readme) - Improvements for TypeScripts built-in typings for use in applications
-- [Docker](https://www.docker.com) - Containerization tool for deploying your vite-react-boilerplate app
 
 A more detailed list of the included packages can be found in the [Installed Packages](#installed-packages) section. Packages not shown above include Devtools, ui helper libraries, and eslint plugins/configs.
 
@@ -48,8 +47,6 @@ A more detailed list of the included packages can be found in the [Installed Pac
 
 - [NodeJS 18+](https://nodejs.org/en)
 - [Playwright](https://playwright.dev): Install with `npx playwright install`.
-
-If you'd like to use the included Dockerfile then [Docker](https://www.docker.com) is required as well:
 
 ## Getting Started
 
@@ -151,33 +148,20 @@ If you wish to see the reports, run:
 npm run test:e2e:report
 ```
 
-## Preparing for Deployment
+## Creating a build
 
-Instructions are provided for deploying both with and without Docker. Both options still require a platform to host the application.
-
-### Without Docker
-
-Deploying is as easy as running
+Creating a build is as easy as running:
 
 ```
 npm run build
 ```
 
-and pointing your web server to the generated `index.html` file found at `dist/index.html`
+and pointing your web server to the generated `index.html` file found at `dist/index.html`.
 
-### With Docker
-
-A Dockerfile with an [NGINX](https://www.nginx.com) base image is also provided for quick and easy deployments. Simply execute the following commands:
-
-1. `npm run build`
-2. `docker build . -t <container_name>`
-   - Example: `docker build . -t todo-app`
-3. `docker run  -p <port_number>:80 <container_name>`
-   - Example: `docker run -p 8080:80 todo-app`
 
 ### Continuous Integration
 
-Due to the vast array of tools, opinions, requirements and preferences a CI template is not included in this project.
+##### TODO
 
 ## Devtools
 
