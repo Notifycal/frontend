@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { createRouter } from '@tanstack/react-router';
-import App from './App.tsx';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen.ts';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
+import { ReactQueryDevelopmentTools } from './components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 
 import './index.css';
 import './common/i18n';
@@ -17,13 +21,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+const queryClient = new QueryClient();
+
 const rootElement = document.querySelector('#root') as Element;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
       <React.Suspense fallback="loading">
-        <App router={router} />
+        <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+          <TanStackRouterDevelopmentTools
+            initialIsOpen={false}
+            position="bottom-right"
+            router={router}
+          />
+          <ReactQueryDevelopmentTools initialIsOpen={false} />
+        </QueryClientProvider>
       </React.Suspense>
     </React.StrictMode>
   );
