@@ -17,7 +17,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "setup": "git init && npx husky init && npx playwright install && shx rm .husky/pre-commit",
+    "setup": "git init && npx playwright install",
     "format": "prettier \"src/**/*.{ts,tsx}\" --write",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "eslint --max-warnings 0 --fix",
@@ -31,10 +31,7 @@
     "test:e2e": "playwright test",
     "test:e2e:report": "playwright show-report",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "commitlint": "commitlint --edit",
-    "commitizen": "exec < /dev/tty && git cz --hook || true",
-    "prepare": "husky"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -57,8 +54,6 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.4.1",
-    "@commitlint/config-conventional": "^19.4.1",
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.9.1",
     "@faker-js/faker": "^8.4.1",
@@ -91,8 +86,6 @@
     "@vitejs/plugin-react-swc": "^3.7.0",
     "@vitest/coverage-v8": "2.0.5",
     "autoprefixer": "^10.4.20",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -103,7 +96,6 @@
     "eslint-plugin-storybook": "0.11.1",
     "eslint-plugin-unicorn": "^55.0.0",
     "globals": "^15.9.0",
-    "husky": "^9.1.5",
     "jsdom": "^25.0.0",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
@@ -116,10 +108,5 @@
     "vite": "5.4.2",
     "vite-plugin-static-copy": "^1.0.6",
     "vitest": "2.0.5"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }

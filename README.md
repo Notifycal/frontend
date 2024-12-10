@@ -39,7 +39,6 @@ Built with type safety, scalability, and developer experience in mind. A batteri
 - [react-i18next](https://react.i18next.com/) - A powerful internationalization framework for React/React Native based on i18next
 - [Faker](https://fakerjs.dev/) - Generate massive amounts of fake (but realistic) data for testing and development
 - [Dayjs](https://day.js.org/en/) - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
-- [Husky](https://github.com/typicode/husky#readme) + [Commitizen](https://github.com/commitizen/cz-cli#readme) + [Commitlint](https://github.com/conventional-changelog/commitlint#readme) - Git hooks and commit linting to ensure use of descriptive and practical commit messages
 - [ts-reset](https://github.com/total-typescript/ts-reset#readme) - Improvements for TypeScripts built-in typings for use in applications
 - [Docker](https://www.docker.com) - Containerization tool for deploying your vite-react-boilerplate app
 
@@ -94,10 +93,6 @@ rm -rf .git &&\
 npm install &&\
 npm run setup
 ```
-
-**Note**: This project comes with two git hooks added by [husky](https://typicode.github.io/husky/). A prepare-commit-msg hook to run the [Commitizen](https://github.com/commitizen/cz-cli#readme) cli for those nice commit messages and a commit-msg hook to run [Commitlint](https://commitlint.js.org/#/) on the message itself. Commitlint will ensure the commit message follows the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) (it will if you used commitizen).
-
-If you wish to remove any hooks, simply delete the corresponding file in the .husky directory.
 
 ## Important Note
 
@@ -321,12 +316,6 @@ A simplified list can be found in the [Overview](#overview) section.
 - [TanStack Router Devtools](https://tanstack.com/router/v1/docs/devtools)
 - [TanStack Table Devtools](https://www.npmjs.com/package/@tanstack/react-table-devtools)
 - [React Hook Form Devtools](https://react-hook-form.com/dev-tools)
-
-### Git
-
-- [Husky](https://github.com/typicode/husky#readme)
-- [Commitizen](https://github.com/commitizen/cz-cli#readme)
-- [Commitlint](https://github.com/conventional-changelog/commitlint#readme)
 
 ### Other
 
