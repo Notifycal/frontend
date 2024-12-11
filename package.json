@@ -1,36 +1,34 @@
 {
   "name": "vite-react-boilerplate",
-  "author": "Ricardo Valdovinos <ricardovaldovinos1996@gmail.com>",
-  "description": "A production ready, batteries included starter template for Vite + React projects",
+  "author": "Notifycal",
+  "description": "Private-area frontend SPA",
   "keywords": [
     "vite",
     "react",
-    "boilerplate",
-    "starter",
-    "template"
+    "tanstack"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/RicardoValdovinos/vite-react-boilerplate"
+    "url": "https://github.com/Notifycal/frontend"
   },
   "license": "MIT",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "format": "prettier \"src/**/*.{ts,tsx}\" --write",
-    "lint": "eslint --max-warnings 0",
-    "lint:fix": "eslint --max-warnings 0 --fix",
     "dev": "vite",
-    "storybook": "storybook dev -p 6006",
-    "storybook:setup": "node node_modules/@storybook/addon-styling/bin/postinstall.js",
-    "storybook:build": "storybook build",
-    "test": "vitest run src/ && playwright test",
+    "build": "tsc && vite build",
+    "preview": "$npm_execpath run build && vite preview",
     "test:unit": "vitest src/",
     "test:unit:coverage": "vitest --coverage src/",
     "test:e2e": "playwright test",
     "test:e2e:report": "playwright show-report",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "lint": "eslint '**/*.{js,ts,jsx,tsx,cjs,mjs}' --no-error-on-unmatched-pattern",
+    "lint:fix": "$npm_execpath run lint -- --fix",
+    "prettier": "prettier . --check",
+    "prettier:fix": "$npm_execpath run prettier -- --write",
+    "storybook": "storybook dev -p 6006",
+    "storybook:setup": "node node_modules/@storybook/addon-styling/bin/postinstall.js",
+    "storybook:build": "storybook build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

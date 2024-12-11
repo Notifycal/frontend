@@ -70,7 +70,6 @@ npm install
 
 Congrats! You're ready to starting working!
 
-
 ## Important Note
 
 1. This boilerplate project does not include a demo. At most, a few utilities (types, devtools, initial home page routes) are included. There is no glue to get in your way when trying to modify the template.
@@ -157,7 +156,6 @@ npm run build
 ```
 
 and pointing your web server to the generated `index.html` file found at `dist/index.html`.
-
 
 ### Continuous Integration
 
