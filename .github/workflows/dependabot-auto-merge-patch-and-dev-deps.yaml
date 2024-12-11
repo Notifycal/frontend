@@ -1,7 +1,7 @@
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 name: Dependabot auto-merge patches and dev dependencies
 permissions:
