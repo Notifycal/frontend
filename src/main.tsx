@@ -9,7 +9,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
 import { ReactQueryDevelopmentTools } from './components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 
+import { MantineProvider } from '@mantine/core';
+
 import './index.css';
+import '@mantine/core/styles.css';
+
 import './common/i18n';
 
 const router = createRouter({ routeTree });
@@ -29,11 +33,13 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <React.Suspense fallback="loading">
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
-          <ReactQueryDevelopmentTools initialIsOpen={false} />
-        </QueryClientProvider>
+        <MantineProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
+            <ReactQueryDevelopmentTools initialIsOpen={false} />
+          </QueryClientProvider>
+        </MantineProvider>
       </React.Suspense>
     </React.StrictMode>
   );
