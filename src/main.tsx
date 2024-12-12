@@ -11,8 +11,8 @@ import { ReactQueryDevelopmentTools } from './components/utils/development-tools
 
 import { MantineProvider } from '@mantine/core';
 
-import './index.css';
 import '@mantine/core/styles.css';
+import './index.css';
 
 import './common/i18n';
 
