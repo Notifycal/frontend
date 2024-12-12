@@ -110,9 +110,7 @@ export default function Navigation(props: UserProps): FunctionComponent {
           </div>
           <div className="flex lg:hidden">
             {/* Mobile menu button */}
-            <button className="group relative inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500/75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
+            <div className="group relative inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500/75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
               <Burger
                 aria-label="Toggle navigation"
                 opened={opened}
@@ -121,8 +119,11 @@ export default function Navigation(props: UserProps): FunctionComponent {
                   burger: 'bg-indigo-200 before:bg-indigo-200 after:bg-indigo-200'
                 }}
                 onClick={toggle}
-              />
-            </button>
+              >
+                <span className="absolute -inset-0.5" />
+                <span className="sr-only">Open main menu</span>
+              </Burger>
+            </div>
           </div>
 
           <div className="hidden lg:ml-4 lg:block">
