@@ -10,7 +10,7 @@ interface AppLayoutProps {
   user: UserModel;
   useFancyHeader: boolean;
   fancyHeaderTitle: string;
-};
+}
 
 export default function AppLayout({
   user,
