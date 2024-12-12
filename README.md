@@ -25,17 +25,18 @@ Built with type safety, scalability, and developer experience in mind. A batteri
 - [Vite](https://vitejs.dev) - Feature rich and highly optimized frontend tooling with TypeScript support out of the box
 - [React](https://react.dev) - A modern front-end JavaScript library for building user interfaces based on components
 - [Tailwind CSS](https://tailwindcss.com) - A utility-first CSS framework packed with classes to build any web design imaginable
+- [Mantine](https://mantine.dev) - A fully featured React components library
+- [Tabler Icons](https://tabler.io/icons) - 5754 pixel-perfect icons for web design
 - [Storybook](https://storybook.js.org) - A frontend workshop for building UI components and pages in isolation
 - [TanStack Router](https://tanstack.com/router/v1) - Fully typesafe, modern and scalable routing for React applications
 - [TanStack Query](https://tanstack.com/query/latest) - Declarative, always-up-to-date auto-managed queries and mutations
 - [TanStack Table](https://tanstack.com/table/v8) - Headless UI for building powerful tables & datagrids
 - [Zustand](https://zustand-demo.pmnd.rs) - An unopinionated, small, fast and scalable bearbones state-management solution
-- [React Hook Form](https://react-hook-form.com) - Performant, flexible and extensible forms with easy-to-use validation
+- [React Hook Form](https://react-hook-form.com) - Performant, flexible and extensible forms with easy-to-use validation - Potentially superseded by Mantine form hooks
 - [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
 - [React Testing Library](https://testing-library.com) - A very light-weight, best practice first, solution for testing React components
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
 - [Playwright](https://playwright.dev) - Enables reliable end-to-end testing for modern web apps
-- [Nivo](https://nivo.rocks) - A rich set of data visualization components, built on top of D3 and React
 - [react-i18next](https://react.i18next.com/) - A powerful internationalization framework for React/React Native based on i18next
 - [Faker](https://fakerjs.dev/) - Generate massive amounts of fake (but realistic) data for testing and development
 - [Dayjs](https://day.js.org/en/) - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
@@ -72,11 +73,7 @@ Congrats! You're ready to starting working!
 
 ## Important Note
 
-1. This boilerplate project does not include a demo. At most, a few utilities (types, devtools, initial home page routes) are included. There is no glue to get in your way when trying to modify the template.
-
-2. Due to empty directories not being included in git commits, placeholder README files have been added to these empty directories. These README files contain simple descriptions about how the different directories in the accompanying folder structure may be used. As an example check out the [recommended component organizational structure](src/components/README.md) as well as the [recommended folder structure](src/features/README.md).
-
-3. [Faker](https://fakerjs.dev/) is included to encourage more isolated testing and allow for rapid development of demos and MVPs. However, please make note that, [due to a bug](https://github.com/faker-js/faker/issues/1791), importing Faker from the main package (without a locale) will result in the entire Faker lib being imported causing bundle sizes to increase up to 2+ MB. Instead prefer [localized imports](https://fakerjs.dev/guide/localization.html#individual-localized-packages) as shown below.
+1. [Faker](https://fakerjs.dev/) is included to encourage more isolated testing and allow for rapid development of demos and MVPs. However, please make note that, [due to a bug](https://github.com/faker-js/faker/issues/1791), importing Faker from the main package (without a locale) will result in the entire Faker lib being imported causing bundle sizes to increase up to 2+ MB. Instead prefer [localized imports](https://fakerjs.dev/guide/localization.html#individual-localized-packages) as shown below.
 
    ```
    // import { faker } from '@faker-js/faker';
@@ -134,6 +131,8 @@ After:
 **Note**: Faker is included to provide mock data. See the [Important Note](#important-note) section for crucial details regarding this package. Specifically, point 3.
 
 ### End-to-End (E2E) Testing
+
+This has to go out of this repo.
 
 Running E2E tests use a similar syntax to running unit tests:
 
