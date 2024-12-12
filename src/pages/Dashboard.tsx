@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import type { FunctionComponent } from '../common/types';
 
 import AppLayout from '../components/layout/AppLayout';
@@ -11,11 +10,12 @@ const user = {
 };
 
 export const Dashboard = (): FunctionComponent => {
-  const { t } = useTranslation();
-
   return (
     <AppLayout user={user} fancyHeaderTitle="Dashboard" useFancyHeader>
-      <div>foobar</div>
+      <>
+        <div>foobar</div>
+        <div>foobar</div>
+      </>
     </AppLayout>
   );
 };
