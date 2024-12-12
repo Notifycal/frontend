@@ -11,7 +11,7 @@ const user = {
 
 export const Dashboard = (): FunctionComponent => {
   return (
-    <AppLayout user={user} fancyHeaderTitle="Dashboard" useFancyHeader>
+    <AppLayout useFancyHeader fancyHeaderTitle="Dashboard" user={user}>
       <>
         <div>foobar</div>
         <div>foobar</div>

@@ -35,7 +35,7 @@ interface UserProps {
 const ProfilePictureDesktop = (props: UserProps): FunctionComponent => {
   const { user } = props;
   return (
-    <Menu shadow="md" width={200} position="bottom-end">
+    <Menu position="bottom-end" shadow="md" width={200}>
       <Menu.Target>
         <button
           className="relative flex rounded-full bg-indigo-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
@@ -43,7 +43,7 @@ const ProfilePictureDesktop = (props: UserProps): FunctionComponent => {
         >
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>
-          <img alt="" src={user.imageUrl} className="size-8 rounded-full" />
+          <img alt="" className="size-8 rounded-full" src={user.imageUrl} />
         </button>
       </Menu.Target>
 
@@ -54,7 +54,7 @@ const ProfilePictureDesktop = (props: UserProps): FunctionComponent => {
         <Menu.Item
           leftSection={<IconSearch style={{ width: rem(14), height: rem(14) }} />}
           rightSection={
-            <Text size="xs" c="dimmed">
+            <Text c="dimmed" size="xs">
               ⌘K
             </Text>
           }
