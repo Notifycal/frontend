@@ -1,13 +1,13 @@
 import { fixupPluginRules } from '@eslint/compat';
 import eslintJS from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
-//import eslintPluginStorybook from "eslint-plugin-storybook" // does not support eslint v9
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginImport from 'eslint-plugin-import';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import eslintPluginReact from 'eslint-plugin-react';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import eslintPluginReactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginStorybook from 'eslint-plugin-storybook'; // does not support eslint v9
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
@@ -15,9 +15,13 @@ import typescriptEslint from 'typescript-eslint';
 const patchedReactHooksPlugin = fixupPluginRules(eslintPluginReactHooks);
 const patchedImportPlugin = fixupPluginRules(eslintPluginImport);
 
+const mainLintableFiles = ['src/**/*.ts', 'src/**/*.tsx'];
+const storybookFiles = ['**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)'];
+
 const baseESLintConfig = {
   name: 'eslint',
   extends: [eslintJS.configs.recommended],
+  files: mainLintableFiles,
   rules: {
     'no-await-in-loop': 'error',
     'no-constant-binary-expression': 'error',
@@ -38,6 +42,7 @@ const baseESLintConfig = {
 const typescriptConfig = {
   name: 'typescript',
   extends: [...typescriptEslint.configs.recommendedTypeChecked],
+  files: mainLintableFiles,
   languageOptions: {
     parser: tsParser,
     parserOptions: {
@@ -96,6 +101,7 @@ const typescriptConfig = {
 const reactConfig = {
   name: 'react',
   extends: [eslintPluginReact.configs.flat['jsx-runtime']],
+  files: mainLintableFiles,
   plugins: {
     'react-hooks': patchedReactHooksPlugin,
     'react-refresh': eslintPluginReactRefresh
@@ -127,6 +133,7 @@ const reactConfig = {
 const jsxA11yConfig = {
   name: 'jsxA11y',
   ...jsxA11yPlugin.flatConfigs.recommended,
+  files: mainLintableFiles,
   plugins: {
     'jsx-a11y': jsxA11yPlugin
   },
@@ -145,6 +152,7 @@ const unicornConfig = {
   plugins: {
     unicorn: eslintPluginUnicorn
   },
+  files: mainLintableFiles,
   rules: {
     'unicorn/custom-error-definition': 'error',
     'unicorn/empty-brace-spaces': 'error',
@@ -177,17 +185,20 @@ const unicornConfig = {
   }
 };
 
+const storybookConfig = {
+  name: 'storybook',
+  extends: [...eslintPluginStorybook.configs['flat/recommended']],
+  files: storybookFiles
+};
+
 const eslintConfig = typescriptEslint.config(
   baseESLintConfig,
   typescriptConfig,
   eslintConfigPrettier,
   reactConfig,
   jsxA11yConfig,
-  unicornConfig
+  unicornConfig,
+  storybookConfig
 );
-
-eslintConfig.map((config) => {
-  config.files = ['src/**/*.ts', 'src/**/*.tsx'];
-});
 
 export default eslintConfig;
