@@ -1,5 +1,10 @@
 {
   "home": {
-    "greeting": "¡Hola, Mundo!"
+    "greeting": "¡Hola, Mundo!",
+    "signInToYourAccount": "Accede al área privada",
+    "orCheckOurDemo": "O visita nuestra demo",
+    "wantToKnowMore": "¿Quieres saber más?",
+    "checkOurSite": "Ésta es nuestra web",
+    "demo": "Demo"
   }
 }
