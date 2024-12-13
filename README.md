@@ -71,7 +71,7 @@ npm install
 
 Congrats! You're ready to starting working!
 
-## Important Note
+## Important Notes
 
 1. [Faker](https://fakerjs.dev/) is included to encourage more isolated testing and allow for rapid development of demos and MVPs. However, please make note that, [due to a bug](https://github.com/faker-js/faker/issues/1791), importing Faker from the main package (without a locale) will result in the entire Faker lib being imported causing bundle sizes to increase up to 2+ MB. Instead prefer [localized imports](https://fakerjs.dev/guide/localization.html#individual-localized-packages) as shown below.
 
@@ -81,6 +81,11 @@ Congrats! You're ready to starting working!
    ```
 
    The imported lib will instead be around 600 KB. Nonetheless, Faker should **NOT** be used in production and instead be limited to testing and demos.
+
+
+2. [Tailwind](https://tailwindui.com/) and [Mantine](https://mantine.dev/) aren't necessarily made to work with each other. Buttons might behave incorrectly if their setups aren't 100% right. These are some links with info just in case it happens to us:
+
+- [Using Mantine with Tailwind](https://shenyien.hashnode.dev/using-mantine-with-tailwind)
 
 ## Testing
 
@@ -172,10 +177,6 @@ This project includes a set of Devtools. Some are additional package dependencie
 - [@hookform/DevTools](https://react-hook-form.com/dev-tools) - React Hook Form Devtools to help debug forms with validation
 
 A set of utility components are provided in `src/components/utils/development-tools/`. These [wrapper components](https://tanstack.com/router/v1/docs/devtools#only-importing-and-using-devtools-in-developmentgit) check whether the application is running in development or production mode and render the component or null respectively. In other words, you can confidently use them during development without having to worry about them showing up for end users in production.
-
-**TanStack Query Devtools** are ready to go out of the box. The development vs. production rendering mechanism is built into the devtools. If you do wish to [render the devtools in production](https://tanstack.com/query/latest/docs/react/devtools) you can freely do so by following the TanStack Query Devtools documentation. The devtools component can be found in `src/App.tsx`.
-
-When running the application in development mode you can find the TanStack Query Devtools icon in the bottom left corner of the page sporting the [React Query Logo](https://img.stackshare.io/service/25599/default_c6db7125f2c663e452ba211df91b2ced3bb7f0ff.png).
 
 **TanStack Router Devtools**, however, utilizes its respective utility component in this project. The initial setup has been taken care of but if you wish to modify or remove the component, have a look in `src/App.tsx`.
 
