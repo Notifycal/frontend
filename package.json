@@ -25,7 +25,9 @@
     "lint": "eslint '**/*.{js,ts,jsx,tsx,cjs,mjs}' --no-error-on-unmatched-pattern",
     "lint:fix": "$npm_execpath run lint -- --fix",
     "prettier": "prettier . --check",
-    "prettier:fix": "$npm_execpath run prettier -- --write"
+    "prettier:fix": "$npm_execpath run prettier -- --write",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -48,6 +50,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.9.1",
     "@faker-js/faker": "^8.4.1",
@@ -55,6 +58,13 @@
     "@heroicons/react": "^2.1.5",
     "@hookform/devtools": "^4.3.1",
     "@playwright/test": "^1.46.1",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-onboarding": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-vite": "^8.4.7",
+    "@storybook/test": "^8.4.7",
     "@tanstack/react-query-devtools": "^5.53.1",
     "@tanstack/react-table-devtools": "^8.20.5",
     "@tanstack/router-devtools": "^1.51.6",
@@ -79,6 +89,7 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "5.1.0",
     "eslint-plugin-react-refresh": "^0.4.11",
+    "eslint-plugin-storybook": "^0.11.1",
     "eslint-plugin-unicorn": "^56.0.1",
     "globals": "^15.9.0",
     "jsdom": "^25.0.0",
@@ -88,11 +99,17 @@
     "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
     "shx": "^0.3.4",
+    "storybook": "^8.4.7",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.3.0",
     "vite": "5.4.2",
     "vite-plugin-static-copy": "^1.0.6",
     "vitest": "2.0.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
   }
 }
