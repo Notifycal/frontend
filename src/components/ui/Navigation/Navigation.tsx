@@ -1,15 +1,15 @@
 import { Link } from '@tanstack/react-router';
 
-import { Burger, Menu, Text, rem, Drawer } from '@mantine/core';
+import { Burger, Drawer, Menu, Text, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import {
-  IconSettings,
-  IconSearch,
-  IconPhoto,
+  IconArrowsLeftRight,
   IconMessageCircle,
-  IconTrash,
-  IconArrowsLeftRight
+  IconPhoto,
+  IconSearch,
+  IconSettings,
+  IconTrash
 } from '@tabler/icons-react';
 
 import type { FunctionComponent } from '../../../common/types';
@@ -27,6 +27,27 @@ const userNavigation = [
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' }
 ];
+
+interface NavigationMenuProps {
+  className: string;
+  activeClassName: string; 
+}
+
+const NavigationMenu = ({className, activeClassName}: NavigationMenuProps): FunctionComponent => (
+  <>
+    {navigation.map((item) => (
+      <Link
+        key={item.href}
+        activeProps={{className: activeClassName}}
+        className={className}
+        to={item.href}
+      >
+        {item.name}
+      </Link>
+    ))}
+  </>
+);
+
 
 interface UserProps {
   user: UserModel;
@@ -95,16 +116,7 @@ export default function Navigation(props: UserProps): FunctionComponent {
             </div>
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.href}
-                    activeProps={{ className: 'bg-indigo-700' }}
-                    className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500/75"
-                    to={item.href}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                <NavigationMenu activeClassName="bg-indigo-700" className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500/75"/>
               </div>
             </div>
           </div>
@@ -145,16 +157,7 @@ export default function Navigation(props: UserProps): FunctionComponent {
       >
         <div className="lg:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                activeProps={{ className: 'bg-indigo-700 text-white' }}
-                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500/75"
-                to={item.href}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <NavigationMenu activeClassName="bg-indigo-700 text-white" className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500/75"/>
           </div>
           <div className="border-t border-indigo-700 pb-3 pt-4">
             <div className="flex items-center px-5">
