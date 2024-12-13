@@ -3,6 +3,8 @@ import type { FunctionComponent } from '../common/types';
 
 import type { ReactElement } from 'react';
 
+import { signIn } from '../auth/auth';
+
 const GoogleSVG = (): ReactElement<SVGElement> => {
   return (
     <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24">
@@ -54,13 +56,14 @@ export const Login = (): FunctionComponent => {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-          <a
+          <button
             className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
             href="#"
+            onClick={signIn}
           >
             {GoogleSVG()}
             <span className="text-sm/6 font-semibold">Google</span>
-          </a>
+          </button>
 
           <div>
             <div className="relative mt-10">
