@@ -6,5 +6,10 @@
     "wantToKnowMore": "¿Quieres saber más?",
     "checkOurSite": "Ésta es nuestra web",
     "demo": "Demo"
+  },
+  "404": {
+    "pageNotFound": "¡Oops!",
+    "weCouldNotFindThePage": "Vaya, no pudimos encontrar esa página.",
+    "backToDashboard": "Vuelve al Dashboard"
   }
 }
