@@ -27,7 +27,7 @@
     "prettier": "prettier . --check",
     "prettier:fix": "$npm_execpath run prettier -- --write",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook:build": "storybook build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
