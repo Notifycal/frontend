@@ -1,8 +1,10 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react';
 
-// Import to Tailwind's styles file
-import '../src/index.css';
+import { MantineProvider } from '@mantine/core';
+
+// Import to main styles file
+import '../src/styles/index.css';
 
 const preview: Preview = {
   parameters: {
@@ -22,7 +24,10 @@ const preview: Preview = {
         dark: 'dark'
       },
       defaultTheme: 'light'
-    })
+    }),
+    (renderStory: any) => (
+      <MantineProvider>{renderStory()}</MantineProvider>
+    )
   ]
 };
 
