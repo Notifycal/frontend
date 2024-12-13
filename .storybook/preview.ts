@@ -1,6 +1,9 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react';
 
+// Import to Tailwind's styles file
+import '../src/index.css';
+
 const preview: Preview = {
   parameters: {
     controls: {
