@@ -25,9 +25,7 @@ const preview: Preview = {
       },
       defaultTheme: 'light'
     }),
-    (renderStory: any) => (
-      <MantineProvider>{renderStory()}</MantineProvider>
-    )
+    (renderStory: any) => <MantineProvider>{renderStory()}</MantineProvider>
   ]
 };
 
