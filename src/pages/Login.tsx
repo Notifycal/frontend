@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import type { FunctionComponent } from '../common/types';
 
-import type { ReactElement } from 'react';
-
-import { signIn } from '../auth/auth';
+import { useGoogleLogin, type TokenResponse } from '@react-oauth/google';
+import { useState, type ReactElement } from 'react';
 
 const GoogleSVG = (): ReactElement<SVGElement> => {
   return (
@@ -41,7 +40,32 @@ export const Login = (): FunctionComponent => {
     }
   };
 
-  return (
+  const [tokenResponse, setTokenResponse] = useState<TokenResponse | null>(null);
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse: TokenResponse) => {
+      setTokenResponse(tokenResponse);
+      console.log(tokenResponse);
+    },
+    onError: (errorResponse) => {
+      console.log(errorResponse);
+    }
+  });
+
+  return tokenResponse !== null ? (
+    <div>
+      <ul>
+        {Object.keys(tokenResponse).map((k) => {
+          return (
+            <li>
+              <span>{k}:</span>
+              <span>{tokenResponse[k]}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ) : (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
@@ -57,8 +81,9 @@ export const Login = (): FunctionComponent => {
           </div>
           <button
             className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
-            href="#"
-            onClick={signIn}
+            onClick={() => {
+              googleLogin();
+            }}
           >
             {GoogleSVG()}
             <span className="text-sm/6 font-semibold">Google</span>
