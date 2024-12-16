@@ -43,19 +43,18 @@ export const Login = (): FunctionComponent => {
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md mb-6">
-        <img
-          alt="Your Company"
-          className="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-        />
-        <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-          {t('home.signInToYourAccount')}
-        </h2>
-      </div>
-
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+          <div className="sm:mx-auto sm:w-full sm:max-w-md mb-6">
+            <img
+              alt="Your Company"
+              className="mx-auto h-10 w-auto"
+              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+            />
+            <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+              {t('home.signInToYourAccount')}
+            </h2>
+          </div>
           <button
             className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
             href="#"
@@ -79,14 +78,13 @@ export const Login = (): FunctionComponent => {
               {t('home.demo')}
             </a>
           </div>
+          <p className="mt-10 text-center text-sm/6 text-gray-500">
+            {t('home.wantToKnowMore')}{' '}
+            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href="https://dev.notifycal.com/">
+              {t('home.checkOurSite')}
+            </a>
+          </p>
         </div>
-
-        <p className="mt-10 text-center text-sm/6 text-gray-500">
-          {t('home.wantToKnowMore')}{' '}
-          <a className="font-semibold text-indigo-600 hover:text-indigo-500" href="https://dev.notifycal.com/">
-            {t('home.checkOurSite')}
-          </a>
-        </p>
       </div>
     </div>
   );
