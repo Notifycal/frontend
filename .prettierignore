@@ -6,3 +6,6 @@ CHANGELOG.md
 
 # Automatically generated file, should not be even formatted. Check the file for more details
 src/routeTree.gen.ts
+
+# Storybook sample stories, remove when deleting them
+src/sampleStories/**
