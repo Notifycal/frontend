@@ -11,6 +11,7 @@ import { ReactQueryDevelopmentTools } from './components/utils/development-tools
 import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
 
 import type { FunctionComponent } from './common/types.ts';
+import AuthProvider from './hooks/AuthProvider.tsx';
 
 // TODO: How to handle this for different environments?
 const GOOGLE_CLIENT_ID = '658640078137-omuaokg6rcajv50879674moielbpvljl.apps.googleusercontent.com';
@@ -25,12 +26,14 @@ const App = ({ router }: AppProps): FunctionComponent => {
   return (
     <MantineProvider>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          {/* Development tools */}
-          <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
-          <ReactQueryDevelopmentTools initialIsOpen={false} />
-        </QueryClientProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            {/* Development tools */}
+            <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
+            <ReactQueryDevelopmentTools initialIsOpen={false} />
+          </QueryClientProvider>
+        </AuthProvider>
       </GoogleOAuthProvider>
     </MantineProvider>
   );

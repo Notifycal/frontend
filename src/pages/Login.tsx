@@ -2,7 +2,9 @@ import { useTranslation } from 'react-i18next';
 import type { FunctionComponent } from '../common/types';
 
 import { useGoogleLogin, type TokenResponse } from '@react-oauth/google';
-import { useState, type ReactElement } from 'react';
+import type { ReactElement } from 'react';
+
+import { useAuth } from '../hooks/AuthProvider';
 
 const GoogleSVG = (): ReactElement<SVGElement> => {
   return (
@@ -40,16 +42,21 @@ export const Login = (): FunctionComponent => {
     }
   };
 
-  const [tokenResponse, setTokenResponse] = useState<TokenResponse | null>(null);
+  const { tokenResponse, login } = useAuth();
+
+  const handleGoogleLoginSuccess = (tokenResponse: TokenResponse): void => {
+    login(tokenResponse);
+  };
+
+  const handleGoogleLoginError = (
+    errorResponse: Pick<TokenResponse, 'error' | 'error_description' | 'error_uri'>
+  ): void => {
+    console.log('Login failed:', errorResponse);
+  };
 
   const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse: TokenResponse) => {
-      setTokenResponse(tokenResponse);
-      console.log(tokenResponse);
-    },
-    onError: (errorResponse) => {
-      console.log(errorResponse);
-    }
+    onSuccess: handleGoogleLoginSuccess,
+    onError: handleGoogleLoginError
   });
 
   return tokenResponse !== null ? (
