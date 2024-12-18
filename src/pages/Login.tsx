@@ -43,10 +43,10 @@ export const Login = (): FunctionComponent => {
     }
   };
 
-  const { tokenResponse, login } = useAuth();
+  const { codeResponse, login } = useAuth();
 
-  const handleGoogleLoginSuccess = (tokenResponse: CodeResponse): void => {
-    login(tokenResponse);
+  const handleGoogleLoginSuccess = (codeResponse: CodeResponse): void => {
+    login(codeResponse);
   };
 
   const handleGoogleLoginError = (
@@ -62,14 +62,14 @@ export const Login = (): FunctionComponent => {
     scope: GOOGLE_OAUTH_SCOPES.join(' ')
   });
 
-  return tokenResponse !== null ? (
+  return codeResponse !== null ? (
     <div>
       <ul>
-        {Object.keys(tokenResponse).map((k) => {
+        {Object.keys(codeResponse).map((k) => {
           return (
             <li>
               <span>{k}:</span>
-              <span>{tokenResponse[k]}</span>
+              <span>{codeResponse[k]}</span>
             </li>
           );
         })}
