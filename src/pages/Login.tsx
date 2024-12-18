@@ -1,8 +1,9 @@
+import { useGoogleLogin, type CodeResponse } from '@react-oauth/google';
 import { useTranslation } from 'react-i18next';
-import type { FunctionComponent } from '../common/types';
+import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
 
-import { useGoogleLogin, type TokenResponse } from '@react-oauth/google';
 import type { ReactElement } from 'react';
+import type { FunctionComponent } from '../common/types';
 
 import { useAuth } from '../hooks/AuthProvider';
 
@@ -44,19 +45,21 @@ export const Login = (): FunctionComponent => {
 
   const { tokenResponse, login } = useAuth();
 
-  const handleGoogleLoginSuccess = (tokenResponse: TokenResponse): void => {
+  const handleGoogleLoginSuccess = (tokenResponse: CodeResponse): void => {
     login(tokenResponse);
   };
 
   const handleGoogleLoginError = (
-    errorResponse: Pick<TokenResponse, 'error' | 'error_description' | 'error_uri'>
+    errorResponse: Pick<CodeResponse, 'error' | 'error_description' | 'error_uri'>
   ): void => {
     console.log('Login failed:', errorResponse);
   };
 
   const googleLogin = useGoogleLogin({
+    flow: 'auth-code',
     onSuccess: handleGoogleLoginSuccess,
-    onError: handleGoogleLoginError
+    onError: handleGoogleLoginError,
+    scope: GOOGLE_OAUTH_SCOPES.join(' ')
   });
 
   return tokenResponse !== null ? (
