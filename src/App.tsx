@@ -11,7 +11,7 @@ import { ReactQueryDevelopmentTools } from './components/utils/development-tools
 import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
 
 import type { FunctionComponent } from './common/types.ts';
-import AuthProvider from './hooks/AuthProvider.tsx';
+import AuthProvider, { useAuth } from './hooks/AuthProvider.tsx';
 
 // TODO: How to handle this for different environments?
 const GOOGLE_CLIENT_ID = '658640078137-omuaokg6rcajv50879674moielbpvljl.apps.googleusercontent.com';
@@ -22,13 +22,22 @@ type AppProps = {
   router: typeof router;
 };
 
+const InnerApp = ({ router }: AppProps): FunctionComponent => {
+  // Splitting this from the main App function/component because:
+  // useAuth must be used within an AuthProvider. Otherwise it will throw an error.
+  // If setting the auth at the top of App, the hook is invoked before the AuthProvider
+  // is rendered and tries to read a React context that doesn't exist yet.
+  const auth = useAuth();
+  return (<RouterProvider context={{ auth }} router={router}/>);
+};
+
 const App = ({ router }: AppProps): FunctionComponent => {
   return (
     <MantineProvider>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <InnerApp router={router}/>
             {/* Development tools */}
             <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
             <ReactQueryDevelopmentTools initialIsOpen={false} />
