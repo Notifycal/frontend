@@ -1,46 +1,53 @@
+import type { CodeResponse } from '@react-oauth/google';
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { FunctionComponent } from '../common/types';
 import { sleep } from '../common/utils';
 
 export interface AuthContext {
   isAuthenticated: boolean;
-  login: (username: string) => Promise<void>;
-  user: string | null;
+  login: (codeResponse: CodeResponse) => Promise<void>;
+  codeResponse: CodeResponse | null;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
 
-const key = 'tanstack.auth.user';
+const key = 'google.code.response';
 
-function getStoredUser(): string | null {
-  return localStorage.getItem(key);
+function getStoredCodeResponse(): CodeResponse | null {
+  const localStorageValue = localStorage.getItem(key);
+  if (localStorageValue) {
+    return JSON.stringify(localStorageValue) as unknown as CodeResponse;
+  }
+
+  return null;
 }
 
-function setStoredUser(user: string | null): void {
-  if (user) {
-    localStorage.setItem(key, user);
+function setStoredCodeResponse(codeResponse: CodeResponse | null): void {
+  if (codeResponse) {
+    localStorage.setItem(key, JSON.stringify(codeResponse));
   } else {
     localStorage.removeItem(key);
   }
 }
 
 export const AuthProvider = ({ children }: {children: ReactNode}): FunctionComponent => {
-  const [user, setUser] = useState<string | null>(getStoredUser());
-  const isAuthenticated = !!user;
+  const [codeResponse, setCodeResponse] = useState<CodeResponse | null>(getStoredCodeResponse());
+  const isAuthenticated = !!codeResponse; // TODO
 
-  const login = useCallback(async (username: string) => {
+  const login = useCallback(async (codeResponse: CodeResponse) => {
     await sleep(500);
 
-    setStoredUser(username);
-    setUser(username);
+    setStoredCodeResponse(codeResponse);
+    setCodeResponse(codeResponse);
   }, []);
 
+  // TODO: Should use useEffect here?
   useEffect(() => {
-    setUser(getStoredUser());
+    setCodeResponse(getStoredCodeResponse());
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login }}>
+    <AuthContext.Provider value={{ isAuthenticated, codeResponse, login }}>
       {children}
     </AuthContext.Provider>
   );

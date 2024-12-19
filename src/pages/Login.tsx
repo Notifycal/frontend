@@ -5,7 +5,7 @@ import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
 import type { ReactElement } from 'react';
 import type { FunctionComponent } from '../common/types';
 
-import { useRouter, useRouterState } from '@tanstack/react-router';
+import { useRouter } from '@tanstack/react-router';
 import { useAuth } from '../hooks/AuthProvider';
 
 import { sleep } from '../common/utils';
@@ -49,12 +49,11 @@ export const Login = (): FunctionComponent => {
 
   const auth = useAuth();
   const router = useRouter();
-  const isLoading = useRouterState({ select: (s) => s.isLoading });
   const navigate = Route.useNavigate();
   const search = Route.useSearch();
 
-  const handleGoogleLoginSuccess = async (tokenResponse: CodeResponse): Promise<void> => {
-    await auth.login(JSON.stringify(tokenResponse));
+  const handleGoogleLoginSuccess = async (codeResponse: CodeResponse): Promise<void> => {
+    await auth.login(codeResponse);
     await router.invalidate();
 
     // hack
