@@ -54,6 +54,9 @@ export const Login = (): FunctionComponent => {
 
   const handleGoogleLoginSuccess = async (codeResponse: CodeResponse): Promise<void> => {
     await auth.login(codeResponse);
+    
+    // This invalidate has to do with the fact that the router has a context (AuthContext) not
+    // with the navigation itself.
     await router.invalidate();
 
     // hack
