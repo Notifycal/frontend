@@ -119,8 +119,7 @@ const reactConfig = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-deps': 'error',
-    ...patchedReactHooksPlugin.configs.recommended.rules,
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }]
+    ...patchedReactHooksPlugin.configs.recommended.rules
   }
 };
 
