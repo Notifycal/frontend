@@ -1,23 +1,26 @@
+import { Outlet } from '@tanstack/react-router';
+
 import clsx from 'clsx';
 
+import type { FunctionComponent } from '../../common/types';
 import Navigation from '../ui/Navigation/Navigation';
 
-import type { PropsWithChildren } from 'react';
-import type { FunctionComponent } from '../../common/types';
-import type { UserModel } from '../../types/UserModel';
-
 interface AppLayoutProps {
-  user: UserModel;
   useFancyHeader: boolean;
   fancyHeaderTitle: string;
 }
 
+const user = {
+  name: 'Tom Cook',
+  email: 'tom@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+};
+
 export default function AppLayout({
-  user,
-  children,
   useFancyHeader,
   fancyHeaderTitle
-}: PropsWithChildren<AppLayoutProps>): FunctionComponent {
+}: AppLayoutProps): FunctionComponent {
   return (
     <div className="min-h-full">
       <div className={clsx({ 'bg-indigo-600': true, 'pb-32': useFancyHeader })}>
@@ -34,7 +37,9 @@ export default function AppLayout({
       </div>
       <main className={clsx({ '-mt-32': useFancyHeader })}>
         <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">{children}</div>
+          <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+            <Outlet />
+          </div>
         </div>
       </main>
     </div>

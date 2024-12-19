@@ -1,14 +1,16 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { isAuthenticated } from '../auth/auth';
 import { Login } from '../pages/Login';
 
+import { z } from 'zod';
+
 export const Route = createFileRoute('/')({
-  beforeLoad: ({ location }) => {
+  validateSearch: z.object({
+    redirect: z.string().optional().catch(''),
+  }),
+  beforeLoad: ({ context, search }) => {
     // If the user is authenticated, there is no need to show them the login page.
-    if (isAuthenticated()) {
-      return redirect({
-        to: '/dashboard'
-      });
+    if (context.auth.isAuthenticated) {
+      throw redirect({ to: search.redirect || '/dashboard' });
     }
   },
   component: Login

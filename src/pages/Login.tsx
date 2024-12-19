@@ -5,7 +5,11 @@ import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
 import type { ReactElement } from 'react';
 import type { FunctionComponent } from '../common/types';
 
+import { useRouter, useRouterState } from '@tanstack/react-router';
 import { useAuth } from '../hooks/AuthProvider';
+
+import { sleep } from '../common/utils';
+import { Route } from '../routes/index';
 
 const GoogleSVG = (): ReactElement<SVGElement> => {
   return (
@@ -43,10 +47,20 @@ export const Login = (): FunctionComponent => {
     }
   };
 
-  const { tokenResponse, login } = useAuth();
+  const auth = useAuth();
+  const router = useRouter();
+  const isLoading = useRouterState({ select: (s) => s.isLoading });
+  const navigate = Route.useNavigate();
+  const search = Route.useSearch();
 
-  const handleGoogleLoginSuccess = (tokenResponse: CodeResponse): void => {
-    login(tokenResponse);
+  const handleGoogleLoginSuccess = async (tokenResponse: CodeResponse): Promise<void> => {
+    await auth.login(JSON.stringify(tokenResponse));
+    await router.invalidate();
+
+    // hack
+    await sleep(1)
+
+    await navigate({ to: search.redirect || '/dashboard' });
   };
 
   const handleGoogleLoginError = (
@@ -62,20 +76,7 @@ export const Login = (): FunctionComponent => {
     scope: GOOGLE_OAUTH_SCOPES.join(' ')
   });
 
-  return tokenResponse !== null ? (
-    <div>
-      <ul>
-        {Object.keys(tokenResponse).map((k) => {
-          return (
-            <li>
-              <span>{k}:</span>
-              <span>{tokenResponse[k]}</span>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  ) : (
+  return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">

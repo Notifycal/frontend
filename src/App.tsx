@@ -11,7 +11,7 @@ import { ReactQueryDevelopmentTools } from './components/utils/development-tools
 import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
 
 import type { FunctionComponent } from './common/types.ts';
-import AuthProvider, { useAuth } from './hooks/AuthProvider.tsx';
+import { AuthProvider, useAuth } from './hooks/AuthProvider.tsx';
 
 // TODO: How to handle this for different environments?
 const GOOGLE_CLIENT_ID = '658640078137-omuaokg6rcajv50879674moielbpvljl.apps.googleusercontent.com';
