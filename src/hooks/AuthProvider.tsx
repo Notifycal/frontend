@@ -5,7 +5,6 @@ import { sleep } from '../common/utils';
 export interface AuthContext {
   isAuthenticated: boolean;
   login: (username: string) => Promise<void>;
-  logout: () => Promise<void>;
   user: string | null;
 }
 
@@ -29,13 +28,6 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
   const [user, setUser] = useState<string | null>(getStoredUser());
   const isAuthenticated = !!user;
 
-  const logout = useCallback(async () => {
-    await sleep(250);
-
-    setStoredUser(null);
-    setUser(null);
-  }, []);
-
   const login = useCallback(async (username: string) => {
     await sleep(500);
 
@@ -48,7 +40,7 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login ,logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login }}>
       {children}
     </AuthContext.Provider>
   );
