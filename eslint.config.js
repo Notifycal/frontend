@@ -2,6 +2,8 @@ import { fixupPluginRules } from '@eslint/compat';
 import eslintJS from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
 //import eslintPluginStorybook from "eslint-plugin-storybook" // does not support eslint v9
+import eslintPluginQuery from '@tanstack/eslint-plugin-query';
+import eslintPluginRouter from '@tanstack/eslint-plugin-router';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginImport from 'eslint-plugin-import';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
@@ -176,13 +178,22 @@ const unicornConfig = {
   }
 };
 
+const tanstackConfig = {
+  name: 'tanstack',
+  extends: [
+    eslintPluginRouter.configs['flat/recommended'],
+    eslintPluginQuery.configs['flat/recommended']
+  ],
+};
+
 const eslintConfig = typescriptEslint.config(
   baseESLintConfig,
   typescriptConfig,
   eslintConfigPrettier,
   reactConfig,
   jsxA11yConfig,
-  unicornConfig
+  unicornConfig,
+  tanstackConfig
 );
 
 eslintConfig.map((config) => {
