@@ -1,5 +1,27 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute, redirect, useMatches } from '@tanstack/react-router';
 import AppLayout from '../components/layout/AppLayout';
+
+import type { FunctionComponent } from '../common/types';
+
+const AuthLayoutWrapper = (): FunctionComponent => {
+  const matches = useMatches();
+  const currentRoute = matches[matches.length - 1];
+
+  const defaultLayoutProps = {
+    useFancyHeader: false,
+    fancyHeaderTitle: ''
+  };
+
+  const layoutConfig = currentRoute && currentRoute.pathname === '/dashboard' ? {
+    useFancyHeader: true,
+    fancyHeaderTitle: 'Dashboard'
+  } : defaultLayoutProps;
+
+  return (
+    <AppLayout {...layoutConfig} />
+  )
+};
+
 
 // This route (and all the routes starting with _) is not an actual route
 // In fact this defines the layout of all authenticated routes.
@@ -14,5 +36,5 @@ export const Route = createFileRoute('/_auth')({
       });
     }
   },
-  component: AppLayout,
+  component: AuthLayoutWrapper,
 });

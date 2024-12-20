@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
+import { Route as AuthTemplateImport } from './routes/_auth.template'
 import { Route as AuthDashboardImport } from './routes/_auth.dashboard'
 
 // Create/Update Routes
@@ -26,6 +27,12 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AuthTemplateRoute = AuthTemplateImport.update({
+  id: '/template',
+  path: '/template',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 const AuthDashboardRoute = AuthDashboardImport.update({
@@ -59,6 +66,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthDashboardImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/template': {
+      id: '/_auth/template'
+      path: '/template'
+      fullPath: '/template'
+      preLoaderRoute: typeof AuthTemplateImport
+      parentRoute: typeof AuthImport
+    }
   }
 }
 
@@ -66,10 +80,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteChildren {
   AuthDashboardRoute: typeof AuthDashboardRoute
+  AuthTemplateRoute: typeof AuthTemplateRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthDashboardRoute: AuthDashboardRoute,
+  AuthTemplateRoute: AuthTemplateRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -78,12 +94,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthRouteWithChildren
   '/dashboard': typeof AuthDashboardRoute
+  '/template': typeof AuthTemplateRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthRouteWithChildren
   '/dashboard': typeof AuthDashboardRoute
+  '/template': typeof AuthTemplateRoute
 }
 
 export interface FileRoutesById {
@@ -91,14 +109,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_auth/dashboard': typeof AuthDashboardRoute
+  '/_auth/template': typeof AuthTemplateRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/dashboard'
+  fullPaths: '/' | '' | '/dashboard' | '/template'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/dashboard'
-  id: '__root__' | '/' | '/_auth' | '/_auth/dashboard'
+  to: '/' | '' | '/dashboard' | '/template'
+  id: '__root__' | '/' | '/_auth' | '/_auth/dashboard' | '/_auth/template'
   fileRoutesById: FileRoutesById
 }
 
@@ -132,11 +151,16 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
-        "/_auth/dashboard"
+        "/_auth/dashboard",
+        "/_auth/template"
       ]
     },
     "/_auth/dashboard": {
       "filePath": "_auth.dashboard.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/template": {
+      "filePath": "_auth.template.tsx",
       "parent": "/_auth"
     }
   }
