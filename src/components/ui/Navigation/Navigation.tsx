@@ -1,19 +1,13 @@
 import { Link } from '@tanstack/react-router';
 
-import { Burger, Drawer, Menu, Text, rem } from '@mantine/core';
+import { Burger, Drawer, Menu, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import {
-  IconArrowsLeftRight,
-  IconMessageCircle,
-  IconPhoto,
-  IconSearch,
-  IconSettings,
-  IconTrash
-} from '@tabler/icons-react';
+import { IconLogout2 } from '@tabler/icons-react';
 
 import type { FunctionComponent } from '../../../common/types';
 
+import { useAuth } from '../../../hooks/AuthProvider';
 import type { UserModel } from '../../../types/UserModel';
 
 const navigation = [
@@ -30,77 +24,34 @@ const userNavigation = [
 
 interface NavigationMenuProps {
   className: string;
-  activeClassName: string; 
+  activeClassName: string;
 }
 
-const NavigationMenu = ({className, activeClassName}: NavigationMenuProps): FunctionComponent => (
+const NavigationMenu = ({ className, activeClassName }: NavigationMenuProps): FunctionComponent => (
   <>
     {navigation.map((item) => (
-      <Link
-        key={item.href}
-        activeProps={{className: activeClassName}}
-        className={className}
-        to={item.href}
-      >
+      <Link key={item.href} activeProps={{ className: activeClassName }} className={className} to={item.href}>
         {item.name}
       </Link>
     ))}
   </>
 );
 
-
 interface UserProps {
   user: UserModel;
 }
 
-const ProfilePictureDesktop = (props: UserProps): FunctionComponent => {
-  const { user } = props;
-  return (
-    <Menu position="bottom-end" shadow="md" width={200}>
-      <Menu.Target>
-        <button
-          className="relative flex rounded-full bg-indigo-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
-          type="button"
-        >
-          <span className="absolute -inset-1.5" />
-          <span className="sr-only">Open user menu</span>
-          <img alt="" className="size-8 rounded-full" src={user.imageUrl} />
-        </button>
-      </Menu.Target>
-
-      <Menu.Dropdown>
-        <Menu.Item leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>Settings</Menu.Item>
-        <Menu.Item leftSection={<IconMessageCircle style={{ width: rem(14), height: rem(14) }} />}>Messages</Menu.Item>
-        <Menu.Item leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}>Gallery</Menu.Item>
-        <Menu.Item
-          leftSection={<IconSearch style={{ width: rem(14), height: rem(14) }} />}
-          rightSection={
-            <Text c="dimmed" size="xs">
-              ⌘K
-            </Text>
-          }
-        >
-          Search
-        </Menu.Item>
-
-        <Menu.Divider />
-
-        <Menu.Label>Danger zone</Menu.Label>
-        <Menu.Item leftSection={<IconArrowsLeftRight style={{ width: rem(14), height: rem(14) }} />}>
-          Transfer my data
-        </Menu.Item>
-        <Menu.Item color="red" leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}>
-          Delete my account
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
-  );
-};
-
 export default function Navigation(props: UserProps): FunctionComponent {
   const { user } = props;
 
+  const auth = useAuth();
+
   const [opened, { toggle }] = useDisclosure();
+  
+  const onLogoutHandler = async (): Promise<void> => {
+    await auth.logout();
+  }
+
 
   return (
     <nav className="border-b border-indigo-300/25 bg-indigo-600 lg:border-none">
@@ -116,7 +67,10 @@ export default function Navigation(props: UserProps): FunctionComponent {
             </div>
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
-                <NavigationMenu activeClassName="bg-indigo-700" className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500/75"/>
+                <NavigationMenu
+                  activeClassName="bg-indigo-700"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500/75"
+                />
               </div>
             </div>
           </div>
@@ -140,7 +94,28 @@ export default function Navigation(props: UserProps): FunctionComponent {
 
           <div className="hidden lg:ml-4 lg:block">
             <div className="flex items-center">
-              <ProfilePictureDesktop user={user} />
+              <Menu position="bottom-end" shadow="md" width={200}>
+                <Menu.Target>
+                  <button
+                    className="relative flex rounded-full bg-indigo-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                    type="button"
+                  >
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    <img alt="" className="size-8 rounded-full" src={user.imageUrl} />
+                  </button>
+                </Menu.Target>
+
+                <Menu.Dropdown>
+                  <Menu.Item
+                    color="red"
+                    leftSection={<IconLogout2 style={{ width: rem(14), height: rem(14) }} />}
+                    onClick={onLogoutHandler}
+                  >
+                    Logout
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
             </div>
           </div>
         </div>
@@ -157,7 +132,10 @@ export default function Navigation(props: UserProps): FunctionComponent {
       >
         <div className="lg:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-          <NavigationMenu activeClassName="bg-indigo-700 text-white" className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500/75"/>
+            <NavigationMenu
+              activeClassName="bg-indigo-700 text-white"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500/75"
+            />
           </div>
           <div className="border-t border-indigo-700 pb-3 pt-4">
             <div className="flex items-center px-5">

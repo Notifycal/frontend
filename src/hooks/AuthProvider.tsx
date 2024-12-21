@@ -1,11 +1,17 @@
 import type { CodeResponse } from '@react-oauth/google';
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
-import type { FunctionComponent } from '../common/types';
+
+import { userLogin } from '../auth/backend';
+import { checkScopes } from '../auth/google';
+
 import { sleep } from '../common/utils';
+
+import type { FunctionComponent } from '../common/types';
 
 export interface AuthContext {
   isAuthenticated: boolean;
   login: (codeResponse: CodeResponse) => Promise<void>;
+  logout: () => Promise<void>;
   codeResponse: CodeResponse | null;
 }
 
@@ -37,8 +43,22 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
   const login = useCallback(async (codeResponse: CodeResponse) => {
     await sleep(500);
 
-    setStoredCodeResponse(codeResponse);
-    setCodeResponse(codeResponse);
+    if (checkScopes(codeResponse.scope)) {
+      // All scopes are fiiine!
+      setStoredCodeResponse(codeResponse);
+      setCodeResponse(codeResponse);
+      const foo = await userLogin(codeResponse);
+      console.log(`foo: ${foo}`);
+    } else {}
+
+
+  }, []);
+
+  const logout = useCallback(async () => {
+    await sleep(250);
+
+    setStoredCodeResponse(null);
+    setCodeResponse(null);
   }, []);
 
   // TODO: Should use useEffect here?
@@ -47,7 +67,7 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, codeResponse, login }}>
+    <AuthContext.Provider value={{ isAuthenticated, codeResponse, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -15,3 +15,7 @@ const GOOGLE_OAUTH_SCOPE_SUFFIXES = [
 export const GOOGLE_OAUTH_SCOPES = GOOGLE_OAUTH_SCOPE_SUFFIXES.map(
   (scopeSuffix) => `${GOOGLE_SCOPE_BASE_PREFIX}/${scopeSuffix}`
 );
+
+export function checkScopes(scopes: string): boolean {
+  return GOOGLE_OAUTH_SCOPES.every((item) => scopes.includes(item));
+}
