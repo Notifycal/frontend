@@ -5,7 +5,8 @@
     "orCheckOurDemo": "Or check our demo",
     "wantToKnowMore": "Want to know more?",
     "checkOurSite": "Check our website",
-    "demo": "Demo"
+    "demo": "Demo",
+    "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in."
   },
   "404": {
     "pageNotFound": "Page not found",

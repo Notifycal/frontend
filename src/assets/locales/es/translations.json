@@ -5,7 +5,8 @@
     "orCheckOurDemo": "O visita nuestra demo",
     "wantToKnowMore": "¿Quieres saber más?",
     "checkOurSite": "Ésta es nuestra web",
-    "demo": "Demo"
+    "demo": "Demo",
+    "loginErrorInvalidScopes": "Ha habido un error al hacer login. Por favor asegura que seleccionas todos los scopes al acceder con tu cuenta de Google."
   },
   "404": {
     "pageNotFound": "¡Oops!",

@@ -8,11 +8,14 @@ import { sleep } from '../common/utils';
 
 import type { FunctionComponent } from '../common/types';
 
+type LoginError = 'loginErrorInvalidScopes' | null;
+
 export interface AuthContext {
   isAuthenticated: boolean;
   login: (codeResponse: CodeResponse) => Promise<void>;
   logout: () => Promise<void>;
   codeResponse: CodeResponse | null;
+  loginError: LoginError;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -38,6 +41,8 @@ function setStoredCodeResponse(codeResponse: CodeResponse | null): void {
 
 export const AuthProvider = ({ children }: {children: ReactNode}): FunctionComponent => {
   const [codeResponse, setCodeResponse] = useState<CodeResponse | null>(getStoredCodeResponse());
+  const [loginError, setLoginError] = useState<LoginError>(null);
+
   const isAuthenticated = !!codeResponse; // TODO
 
   const login = useCallback(async (codeResponse: CodeResponse) => {
@@ -49,7 +54,9 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
       setCodeResponse(codeResponse);
       const foo = await userLogin(codeResponse);
       console.log(`foo: ${foo}`);
-    } else {}
+    } else {
+      setLoginError('loginErrorInvalidScopes');
+    }
 
 
   }, []);
@@ -67,7 +74,7 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, codeResponse, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, codeResponse, login, logout, loginError }}>
       {children}
     </AuthContext.Provider>
   );
