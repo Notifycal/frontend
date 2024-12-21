@@ -1,15 +1,16 @@
+import { Alert } from '@mantine/core';
 import { useGoogleLogin, type CodeResponse } from '@react-oauth/google';
-import { useTranslation } from 'react-i18next';
-import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
-
-import type { ReactElement } from 'react';
-import type { FunctionComponent } from '../common/types';
-
 import { useRouter } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
+
+import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
 import { useAuth } from '../hooks/AuthProvider';
 
 import { sleep } from '../common/utils';
 import { Route } from '../routes/index';
+
+import type { ReactElement } from 'react';
+import type { FunctionComponent } from '../common/types';
 
 const GoogleSVG = (): ReactElement<SVGElement> => {
   return (
@@ -104,7 +105,11 @@ export const Login = (): FunctionComponent => {
             <span className="text-sm/6 font-semibold">Google</span>
           </button>
 
-          {loginErrorMessage && <div className="text-red-600 text-center">{t(`home.${loginErrorMessage}`)}</div>}
+          {loginErrorMessage && (
+            <Alert className="rounded-md" color="red" variant="light">
+              <p className="text-red-600">{t(`home.${loginErrorMessage}`)}</p>
+            </Alert>
+          )}
 
           <div className="relative mt-5">
             <div aria-hidden="true" className="absolute inset-0 flex items-center">
