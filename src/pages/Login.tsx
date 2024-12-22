@@ -1,10 +1,12 @@
 import { Alert } from '@mantine/core';
-import { useGoogleLogin, type CodeResponse } from '@react-oauth/google';
+import { type CodeResponse } from '@react-oauth/google';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
+
 import { useAuth } from '../hooks/AuthProvider';
+import usePromisifiedGoogleLogin from '../hooks/usePromisifiedGoogleLogin';
 
 import { sleep } from '../common/utils';
 import { Route } from '../routes/index';
@@ -68,18 +70,20 @@ export const Login = (): FunctionComponent => {
     await navigate({ to: search.redirect || '/dashboard' });
   };
 
-  const handleGoogleLoginError = (
-    errorResponse: Pick<CodeResponse, 'error' | 'error_description' | 'error_uri'>
-  ): void => {
-    console.log('Login failed:', errorResponse);
-  };
-
-  const googleLogin = useGoogleLogin({
+  const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
-    onSuccess: handleGoogleLoginSuccess,
-    onError: handleGoogleLoginError,
     scope: GOOGLE_OAUTH_SCOPES.join(' ')
-  });
+  })
+
+  const handleGoogleLogin = async () => {
+    googleLogin()
+      .then((codeResponse) => {
+        handleGoogleLoginSuccess(codeResponse)
+      })
+      .catch((errorResponse) => {
+        console.log('Login failed:', errorResponse);
+      });
+  }
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
@@ -97,9 +101,7 @@ export const Login = (): FunctionComponent => {
           </div>
           <button
             className="flex w-full items-center justify-center gap-3 mb-5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
-            onClick={() => {
-              googleLogin();
-            }}
+            onClick={handleGoogleLogin}
           >
             {GoogleSVG()}
             <span className="text-sm/6 font-semibold">Google</span>
