@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { userLogin } from '../auth/backend';
 import { checkScopes } from '../auth/google';
 
-import { sleep } from '../common/utils';
+import { getLocalStorageItem, setLocalStorageItem, sleep } from '../common/utils';
 
 import type { FunctionComponent } from '../common/types';
 
@@ -14,67 +14,50 @@ export interface AuthContext {
   isAuthenticated: boolean;
   login: (codeResponse: CodeResponse) => Promise<void>;
   logout: () => Promise<void>;
-  codeResponse: CodeResponse | null;
   loginError: LoginError;
 }
 
 const AuthContext = createContext<AuthContext | null>(null);
 
-const key = 'google.code.response';
-
-function getStoredCodeResponse(): CodeResponse | null {
-  const localStorageValue = localStorage.getItem(key);
-  if (localStorageValue) {
-    return JSON.stringify(localStorageValue) as unknown as CodeResponse;
-  }
-
-  return null;
-}
-
-function setStoredCodeResponse(codeResponse: CodeResponse | null): void {
-  if (codeResponse) {
-    localStorage.setItem(key, JSON.stringify(codeResponse));
-  } else {
-    localStorage.removeItem(key);
-  }
-}
-
 export const AuthProvider = ({ children }: {children: ReactNode}): FunctionComponent => {
-  const [codeResponse, setCodeResponse] = useState<CodeResponse | null>(getStoredCodeResponse());
+  const [accessToken, setAccessToken] = useState<string | null>(getLocalStorageItem('accessToken'));
+  const [refreshToken, setRefreshToken] = useState<string | null>(getLocalStorageItem('refreshToken'));
   const [loginError, setLoginError] = useState<LoginError>(null);
 
-  const isAuthenticated = !!codeResponse; // TODO
+  const isAuthenticated = !!accessToken && !!refreshToken; // TODO
 
   const login = useCallback(async (codeResponse: CodeResponse) => {
     await sleep(500);
 
     if (checkScopes(codeResponse.scope)) {
-      // All scopes are fiiine!
-      setStoredCodeResponse(codeResponse);
-      setCodeResponse(codeResponse);
-      const foo = await userLogin(codeResponse);
-      console.log(`foo: ${foo}`);
+      const { accessToken, refreshToken } = await userLogin(codeResponse);
+      setAccessToken(accessToken);
+      setLocalStorageItem('accessToken', accessToken);
+      
+      setRefreshToken(refreshToken);
+      setLocalStorageItem('refreshToken', refreshToken);
     } else {
       setLoginError('loginErrorInvalidScopes');
     }
-
-
   }, []);
 
   const logout = useCallback(async () => {
     await sleep(250);
+    // TODO: Call backend logout to invalidate tokens
+    setLocalStorageItem('accessToken', null);
+    setAccessToken(null);
 
-    setStoredCodeResponse(null);
-    setCodeResponse(null);
+    setLocalStorageItem('refreshToken', null);
+    setRefreshToken(null);
   }, []);
 
-  // TODO: Should use useEffect here?
   useEffect(() => {
-    setCodeResponse(getStoredCodeResponse());
+    setAccessToken(getLocalStorageItem('accessToken'));
+    setRefreshToken(getLocalStorageItem('refreshToken'));
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, codeResponse, login, logout, loginError }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>
       {children}
     </AuthContext.Provider>
   );

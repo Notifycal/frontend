@@ -1,16 +1,16 @@
 import type { CodeResponse } from '@react-oauth/google';
+import { getConfigValue } from '../common/utils';
 
-type Jwt = string;
-
-interface LoginResponse {
+export interface LoginResponse {
   accessToken: string;
   tokenType: 'Bearer';
   refreshToken: 'WIP';
 }
 
-const URL = 'http://localhost:8080/api/v1/login';
+const BASE_URL = getConfigValue('BACKEND_BASE_URL') as string;
+const URL = `${BASE_URL}/api/v1/login`;
 
-export const userLogin = async (codeResponse: CodeResponse): Promise<[Jwt, string]> => {
+export const userLogin = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
     const response = await fetch(URL, {
       method: 'POST',
@@ -22,11 +22,11 @@ export const userLogin = async (codeResponse: CodeResponse): Promise<[Jwt, strin
       })
     });
 
-    const body = await response.json();
-    const { accessToken, refreshToken } = body as LoginResponse;
+    const body = await response.json() as LoginResponse;
 
-    if (response.status === 200 && accessToken && refreshToken) {
-      return [accessToken, refreshToken];
+    if (response.status === 200) {
+      // Returning all the body as we'll need refresh token and expiry soon as well?
+      return body;
     } else {
       throw new Error('No 200 or access/refresh token present in response');
     }
