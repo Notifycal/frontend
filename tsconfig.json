@@ -25,6 +25,6 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "*.d.ts"],
+  "include": ["src", "*.d.ts", ".storybook/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,0 +1,11 @@
+@layer tw-base {
+  @tailwind base;
+}
+
+@layer tw-components {
+  @tailwind components;
+}
+
+@layer tw-utilities {
+  @tailwind utilities;
+}

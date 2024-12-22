@@ -1,0 +1,5 @@
+/* Following this to ensure styles are loaded in a sane order
+https://github.com/orgs/mantinedev/discussions/1672#discussioncomment-11534898 */
+@layer tw-base, mantine, tw-components, tw-utilities;
+@import './tailwind';
+@import './mantine';

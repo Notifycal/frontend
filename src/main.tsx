@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { router } from './router.ts';
 
-import '@mantine/core/styles.css';
-import './index.css';
+import './styles/index.css';
 
 import './common/i18n';
 
