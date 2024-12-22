@@ -1,12 +1,9 @@
 import { Alert } from '@mantine/core';
-import { type CodeResponse } from '@react-oauth/google';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-import { GOOGLE_OAUTH_SCOPES } from '../auth/google';
 
 import { useAuth } from '../hooks/AuthProvider';
-import usePromisifiedGoogleLogin from '../hooks/usePromisifiedGoogleLogin';
 
 import { sleep } from '../common/utils';
 import { Route } from '../routes/index';
@@ -57,8 +54,8 @@ export const Login = (): FunctionComponent => {
 
   const loginErrorMessage = auth.loginError;
 
-  const handleGoogleLoginSuccess = async (codeResponse: CodeResponse): Promise<void> => {
-    await auth.login(codeResponse);
+  const handleLogin = async () => {
+    await auth.login();
 
     // This invalidate has to do with the fact that the router has a context (AuthContext) not
     // with the navigation itself.
@@ -68,21 +65,6 @@ export const Login = (): FunctionComponent => {
     await sleep(1);
 
     await navigate({ to: search.redirect || '/dashboard' });
-  };
-
-  const googleLogin = usePromisifiedGoogleLogin({
-    flow: 'auth-code',
-    scope: GOOGLE_OAUTH_SCOPES.join(' ')
-  })
-
-  const handleGoogleLogin = async () => {
-    googleLogin()
-      .then((codeResponse) => {
-        handleGoogleLoginSuccess(codeResponse)
-      })
-      .catch((errorResponse) => {
-        console.log('Login failed:', errorResponse);
-      });
   }
 
   return (
@@ -101,7 +83,7 @@ export const Login = (): FunctionComponent => {
           </div>
           <button
             className="flex w-full items-center justify-center gap-3 mb-5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
-            onClick={handleGoogleLogin}
+            onClick={handleLogin}
           >
             {GoogleSVG()}
             <span className="text-sm/6 font-semibold">Google</span>

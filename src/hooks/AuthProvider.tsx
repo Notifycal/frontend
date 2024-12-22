@@ -1,8 +1,8 @@
-import type { CodeResponse } from '@react-oauth/google';
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 
 import { userLogin } from '../auth/backend';
-import { checkScopes } from '../auth/google';
+import { checkScopes, GOOGLE_OAUTH_SCOPES } from '../auth/google';
+import usePromisifiedGoogleLogin from './usePromisifiedGoogleLogin';
 
 import { getLocalStorageItem, setLocalStorageItem } from '../common/utils';
 
@@ -12,7 +12,7 @@ type LoginError = 'loginErrorInvalidScopes' | null;
 
 export interface AuthContext {
   isAuthenticated: boolean;
-  login: (codeResponse: CodeResponse) => Promise<void>;
+  login: () => Promise<void>;
   logout: () => Promise<void>;
   loginError: LoginError;
 }
@@ -37,7 +37,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   // This will go soon, and we'll rely on the API responses
   const isAuthenticated = !!accessToken && !!refreshToken; // TODO
 
-  const login = useCallback(async (codeResponse: CodeResponse) => {
+  const googleLogin = usePromisifiedGoogleLogin({
+    flow: 'auth-code',
+    scope: GOOGLE_OAUTH_SCOPES.join(' ')
+  });
+
+  const login = useCallback(async () => {
+    // TODO: Try/catch
+    const codeResponse = await googleLogin();
+
     if (checkScopes(codeResponse.scope)) {
       const { accessToken, refreshToken } = await userLogin(codeResponse);
 
