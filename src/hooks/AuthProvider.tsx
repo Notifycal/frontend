@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   const isAuthenticated = !!accessToken && !!refreshToken; // TODO
 
   const login = useCallback(async (codeResponse: CodeResponse) => {
-
     if (checkScopes(codeResponse.scope)) {
       const { accessToken, refreshToken } = await userLogin(codeResponse);
 
