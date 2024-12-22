@@ -10,11 +10,12 @@ import type { router } from './router.ts';
 import { ReactQueryDevelopmentTools } from './components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
 
-import type { FunctionComponent } from './common/types.ts';
+import { getConfigValue } from './common/utils.ts';
 import { AuthProvider, useAuth } from './hooks/AuthProvider.tsx';
 
-// TODO: How to handle this for different environments?
-const GOOGLE_CLIENT_ID = '658640078137-omuaokg6rcajv50879674moielbpvljl.apps.googleusercontent.com';
+import type { FunctionComponent } from './common/types.ts';
+
+const GOOGLE_CLIENT_ID = getConfigValue('GOOGLE_CLIENT_ID') as string;
 
 const queryClient = new QueryClient();
 
