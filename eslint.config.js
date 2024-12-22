@@ -193,7 +193,13 @@ const eslintConfig = typescriptEslint.config(
   reactConfig,
   jsxA11yConfig,
   unicornConfig,
-  tanstackConfig
+  tanstackConfig,
+  {
+    files: ['src/routes/**'],
+    rules: {
+      '@typescript-eslint/only-throw-error': 'off'
+    }
+  }
 );
 
 eslintConfig.map((config) => {
