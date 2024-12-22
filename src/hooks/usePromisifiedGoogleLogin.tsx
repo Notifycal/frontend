@@ -5,9 +5,9 @@ type PromiseResolveType = (codeResponse: CodeResponse) => {};
 type PromiseRejectType = (errorResponse: Pick<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => {};
 
 type PromiseHandlersRef = {
-  resolve: PromiseResolveType | null,
-  reject: PromiseRejectType | null
-}
+  resolve: PromiseResolveType | null;
+  reject: PromiseRejectType | null;
+};
 
 export default function usePromisifiedGoogleLogin(options: UseGoogleLoginOptionsAuthCodeFlow) {
   const promiseHandlers = useRef<PromiseHandlersRef>({ resolve: null, reject: null });

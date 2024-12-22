@@ -2,7 +2,6 @@ import { Alert } from '@mantine/core';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-
 import { useAuth } from '../hooks/AuthProvider';
 
 import { sleep } from '../common/utils';
@@ -53,23 +52,23 @@ export const Login = (): FunctionComponent => {
   const search = Route.useSearch();
 
   const loginErrorMessage = auth.loginError;
-  
+
   const handleLogin = async () => {
-      try {
+    try {
       await auth.login();
-  
+
       // This invalidate has to do with the fact that the router has a context (AuthContext) not
       // with the navigation itself.
       await router.invalidate();
-  
+
       // hack. It doesn't redirect if removed :/. copied from official docs
       await sleep(1);
-  
+
       await navigate({ to: search.redirect || '/dashboard' });
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
