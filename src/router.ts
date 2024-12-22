@@ -17,4 +17,10 @@ declare module '@tanstack/react-router' {
     // This infers the type of our router and registers it across your entire project
     router: typeof router;
   }
+  interface StaticDataRouteOption {
+    layout?: {
+      useFancyHeader: boolean;
+      fancyHeaderTitle: string;
+    };
+  }
 }
