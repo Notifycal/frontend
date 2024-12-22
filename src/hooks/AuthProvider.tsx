@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { userLogin } from '../auth/backend';
 import { checkScopes } from '../auth/google';
 
-import { getLocalStorageItem, setLocalStorageItem, sleep } from '../common/utils';
+import { getLocalStorageItem, setLocalStorageItem } from '../common/utils';
 
 import type { FunctionComponent } from '../common/types';
 
@@ -17,43 +17,58 @@ export interface AuthContext {
   loginError: LoginError;
 }
 
+type AuthState = {
+  accessToken: string | null;
+  refreshToken: string | null;
+  loginError: LoginError;
+};
+
 const AuthContext = createContext<AuthContext | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
-  const [accessToken, setAccessToken] = useState<string | null>(getLocalStorageItem('accessToken'));
-  const [refreshToken, setRefreshToken] = useState<string | null>(getLocalStorageItem('refreshToken'));
-  const [loginError, setLoginError] = useState<LoginError>(null);
+  const [authState, setAuthState] = useState<AuthState>({
+    accessToken: getLocalStorageItem('accessToken'),
+    refreshToken: getLocalStorageItem('refreshToken'),
+    loginError: null
+  });
 
+  const { accessToken, refreshToken, loginError } = authState;
+
+  // This will go soon, and we'll rely on the API responses
   const isAuthenticated = !!accessToken && !!refreshToken; // TODO
 
   const login = useCallback(async (codeResponse: CodeResponse) => {
-    await sleep(500);
 
     if (checkScopes(codeResponse.scope)) {
       const { accessToken, refreshToken } = await userLogin(codeResponse);
-      setAccessToken(accessToken);
-      setLocalStorageItem('accessToken', accessToken);
 
-      setRefreshToken(refreshToken);
+      setAuthState((prev: AuthState) => ({ ...prev, accessToken, refreshToken }));
+
+      setLocalStorageItem('accessToken', accessToken);
       setLocalStorageItem('refreshToken', refreshToken);
     } else {
-      setLoginError('loginErrorInvalidScopes');
+      setAuthState((prev: AuthState) => ({
+        ...prev,
+        accessToken: null,
+        refreshToken: null,
+        loginError: 'loginErrorInvalidScopes'
+      }));
     }
   }, []);
 
   const logout = useCallback(async () => {
-    await sleep(250);
     // TODO: Call backend logout to invalidate tokens
     setLocalStorageItem('accessToken', null);
-    setAccessToken(null);
-
     setLocalStorageItem('refreshToken', null);
-    setRefreshToken(null);
+
+    setAuthState((prev: AuthState) => ({ ...prev, accessToken: null, refreshToken: null }));
   }, []);
 
   useEffect(() => {
-    setAccessToken(getLocalStorageItem('accessToken'));
-    setRefreshToken(getLocalStorageItem('refreshToken'));
+    const accessToken = getLocalStorageItem('accessToken');
+    const refreshToken = getLocalStorageItem('refreshToken');
+
+    setAuthState((prev: AuthState) => ({ ...prev, accessToken, refreshToken }));
   }, []);
 
   return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;

@@ -1,3 +1,6 @@
+// This will probably be temporary and go away when we are able to check the scopes
+// in the backend.
+
 const GOOGLE_SCOPE_BASE_PREFIX = 'https://www.googleapis.com/auth';
 
 const GOOGLE_OAUTH_SCOPE_SUFFIXES = [
