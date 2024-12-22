@@ -31,7 +31,6 @@ export const userLogin = async (codeResponse: CodeResponse): Promise<LoginRespon
       throw new Error('No 200 or access/refresh token present in response');
     }
   } catch (error) {
-    console.log('POR EL OTRO LAO');
     throw new Error(`Something went wrong about api/v1/login call. Error: ${JSON.stringify(error)}`);
   }
 };

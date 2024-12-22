@@ -8,7 +8,7 @@ import { getLocalStorageItem, setLocalStorageItem } from '../common/utils';
 
 import type { FunctionComponent } from '../common/types';
 
-type LoginError = 'loginErrorInvalidScopes' | null;
+type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 
 export interface AuthContext {
   isAuthenticated: boolean;
@@ -43,22 +43,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   });
 
   const login = useCallback(async () => {
-    // TODO: Try/catch
-    const codeResponse = await googleLogin();
+    try {
+      const codeResponse = await googleLogin();
 
-    if (checkScopes(codeResponse.scope)) {
-      const { accessToken, refreshToken } = await userLogin(codeResponse);
+      if (checkScopes(codeResponse.scope)) {
+        const { accessToken, refreshToken } = await userLogin(codeResponse);
 
-      setAuthState((prev: AuthState) => ({ ...prev, accessToken, refreshToken }));
+        setAuthState((prev: AuthState) => ({ ...prev, accessToken, refreshToken }));
 
-      setLocalStorageItem('accessToken', accessToken);
-      setLocalStorageItem('refreshToken', refreshToken);
-    } else {
+        setLocalStorageItem('accessToken', accessToken);
+        setLocalStorageItem('refreshToken', refreshToken);
+      } else {
+        throw new Error('loginErrorInvalidScopes');
+      }
+    } catch (err) {
+      const { message } = err as Error;
+      const loginError = message === 'loginErrorInvalidScopes' ? message : 'loginErrorGeneric';
+
       setAuthState((prev: AuthState) => ({
         ...prev,
         accessToken: null,
         refreshToken: null,
-        loginError: 'loginErrorInvalidScopes'
+        loginError
       }));
     }
   }, []);

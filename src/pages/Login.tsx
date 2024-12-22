@@ -53,18 +53,22 @@ export const Login = (): FunctionComponent => {
   const search = Route.useSearch();
 
   const loginErrorMessage = auth.loginError;
-
+  
   const handleLogin = async () => {
-    await auth.login();
-
-    // This invalidate has to do with the fact that the router has a context (AuthContext) not
-    // with the navigation itself.
-    await router.invalidate();
-
-    // hack
-    await sleep(1);
-
-    await navigate({ to: search.redirect || '/dashboard' });
+      try {
+      await auth.login();
+  
+      // This invalidate has to do with the fact that the router has a context (AuthContext) not
+      // with the navigation itself.
+      await router.invalidate();
+  
+      // hack. It doesn't redirect if removed :/. copied from official docs
+      await sleep(1);
+  
+      await navigate({ to: search.redirect || '/dashboard' });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

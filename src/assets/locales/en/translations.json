@@ -6,7 +6,8 @@
     "wantToKnowMore": "Want to know more?",
     "checkOurSite": "Check our website",
     "demo": "Demo",
-    "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in."
+    "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
+    "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
   },
   "404": {
     "pageNotFound": "Page not found",
