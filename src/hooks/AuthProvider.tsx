@@ -8,7 +8,7 @@ import { getLocalStorageItem, setLocalStorageItem } from '../common/utils';
 
 import type { FunctionComponent } from '../common/types';
 
-type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
+export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 
 export interface AuthContext {
   isAuthenticated: boolean;
@@ -43,6 +43,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   });
 
   const login = useCallback(async () => {
+    // Reset loginError on new login
+    setAuthState((prev: AuthState) => ({...prev, loginError: null}))
+
     try {
       const codeResponse = await googleLogin();
 

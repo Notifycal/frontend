@@ -1,13 +1,13 @@
-import { Alert } from '@mantine/core';
+import { Alert, Transition } from '@mantine/core';
 import { useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../hooks/AuthProvider';
+import { useAuth, type LoginError } from '../hooks/AuthProvider';
 
 import { sleep } from '../common/utils';
 import { Route } from '../routes/index';
 
-import type { ReactElement } from 'react';
+import { useEffect, useState, type ReactElement } from 'react';
 import type { FunctionComponent } from '../common/types';
 
 const GoogleSVG = (): ReactElement<SVGElement> => {
@@ -46,12 +46,20 @@ export const Login = (): FunctionComponent => {
     }
   };
 
+  const [lastLoginError, setLastLoginError] = useState<LoginError | null>(null);
+
   const auth = useAuth();
   const router = useRouter();
   const navigate = Route.useNavigate();
   const search = Route.useSearch();
 
   const loginErrorMessage = auth.loginError;
+
+  useEffect(() => {
+    if (loginErrorMessage) {
+      setLastLoginError(loginErrorMessage);
+    }
+  }, [loginErrorMessage]);
 
   const handleLogin = async () => {
     try {
@@ -92,11 +100,13 @@ export const Login = (): FunctionComponent => {
             <span className="text-sm/6 font-semibold">Google</span>
           </button>
 
-          {loginErrorMessage && (
-            <Alert className="rounded-md" color="red" variant="light">
-              <p className="text-red-600">{t(`home.${loginErrorMessage}`)}</p>
-            </Alert>
-          )}
+          {lastLoginError && <Transition mounted={!!loginErrorMessage} transition="fade" duration={300} timingFunction="ease">
+            {(styles) => (
+              <Alert style={styles} className="rounded-md" color="red" variant="light">
+                <p className="text-red-600">{t(`home.${lastLoginError}`)}</p>
+              </Alert>
+            )}
+          </Transition>}
 
           <div className="relative mt-5">
             <div aria-hidden="true" className="absolute inset-0 flex items-center">
