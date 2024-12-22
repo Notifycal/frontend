@@ -47,11 +47,10 @@ export default function Navigation(props: UserProps): FunctionComponent {
   const auth = useAuth();
 
   const [opened, { toggle }] = useDisclosure();
-  
+
   const onLogoutHandler = async (): Promise<void> => {
     await auth.logout();
-  }
-
+  };
 
   return (
     <nav className="border-b border-indigo-300/25 bg-indigo-600 lg:border-none">

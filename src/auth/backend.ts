@@ -22,7 +22,7 @@ export const userLogin = async (codeResponse: CodeResponse): Promise<LoginRespon
       })
     });
 
-    const body = await response.json() as LoginResponse;
+    const body = (await response.json()) as LoginResponse;
 
     if (response.status === 200) {
       // Returning all the body as we'll need refresh token and expiry soon as well?

@@ -180,10 +180,7 @@ const unicornConfig = {
 
 const tanstackConfig = {
   name: 'tanstack',
-  extends: [
-    eslintPluginRouter.configs['flat/recommended'],
-    eslintPluginQuery.configs['flat/recommended']
-  ],
+  extends: [eslintPluginRouter.configs['flat/recommended'], eslintPluginQuery.configs['flat/recommended']]
 };
 
 const eslintConfig = typescriptEslint.config(

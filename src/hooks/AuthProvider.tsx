@@ -19,7 +19,7 @@ export interface AuthContext {
 
 const AuthContext = createContext<AuthContext | null>(null);
 
-export const AuthProvider = ({ children }: {children: ReactNode}): FunctionComponent => {
+export const AuthProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
   const [accessToken, setAccessToken] = useState<string | null>(getLocalStorageItem('accessToken'));
   const [refreshToken, setRefreshToken] = useState<string | null>(getLocalStorageItem('refreshToken'));
   const [loginError, setLoginError] = useState<LoginError>(null);
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
       const { accessToken, refreshToken } = await userLogin(codeResponse);
       setAccessToken(accessToken);
       setLocalStorageItem('accessToken', accessToken);
-      
+
       setRefreshToken(refreshToken);
       setLocalStorageItem('refreshToken', refreshToken);
     } else {
@@ -56,16 +56,12 @@ export const AuthProvider = ({ children }: {children: ReactNode}): FunctionCompo
     setRefreshToken(getLocalStorageItem('refreshToken'));
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = (): AuthContext  => {
+export const useAuth = (): AuthContext => {
   const context = useContext(AuthContext);
-  if (! context) {
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;

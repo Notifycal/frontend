@@ -82,7 +82,6 @@ Congrats! You're ready to starting working!
 
    The imported lib will instead be around 600 KB. Nonetheless, Faker should **NOT** be used in production and instead be limited to testing and demos.
 
-
 2. [Tailwind](https://tailwindui.com/) and [Mantine](https://mantine.dev/) aren't necessarily made to work with each other. Buttons might behave incorrectly if their setups aren't 100% right. These are some links with info just in case it happens to us:
 
 - [Using Mantine with Tailwind](https://shenyien.hashnode.dev/using-mantine-with-tailwind)

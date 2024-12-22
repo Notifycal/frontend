@@ -29,7 +29,7 @@ const InnerApp = ({ router }: AppProps): FunctionComponent => {
   // If setting the auth at the top of App, the hook is invoked before the AuthProvider
   // is rendered and tries to read a React context that doesn't exist yet.
   const auth = useAuth();
-  return (<RouterProvider context={{ auth }} router={router}/>);
+  return <RouterProvider context={{ auth }} router={router} />;
 };
 
 const App = ({ router }: AppProps): FunctionComponent => {
@@ -38,7 +38,7 @@ const App = ({ router }: AppProps): FunctionComponent => {
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
-            <InnerApp router={router}/>
+            <InnerApp router={router} />
             {/* Development tools */}
             <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
             <ReactQueryDevelopmentTools initialIsOpen={false} />

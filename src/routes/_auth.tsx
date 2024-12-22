@@ -9,10 +9,10 @@ export const Route = createFileRoute('/_auth')({
       throw redirect({
         to: '/',
         search: {
-          redirect: location.href,
-        },
+          redirect: location.href
+        }
       });
     }
   },
-  component: AppLayout,
+  component: AppLayout
 });
