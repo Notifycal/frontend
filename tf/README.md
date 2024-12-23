@@ -7,37 +7,11 @@
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
 | <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 4.0 |
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 4.48.0 |
-
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_static_landing"></a> [static\_landing](#module\_static\_landing) | git@github.com:Notifycal/tofu-module-static-website.git | v1.0.1 |
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [aws_s3_bucket_policy.cloudflare_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
-| [cloudflare_access_application.private_app](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/access_application) | resource |
-| [cloudflare_access_policy.gh_org](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/access_policy) | resource |
-| [cloudflare_record.es_main](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
-| [cloudflare_record.es_www_redirect](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
-| [cloudflare_record.main](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
-| [cloudflare_record.www_redirect](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
-| [cloudflare_ruleset.es_main](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/ruleset) | resource |
-| [aws_iam_policy_document.cloudflare_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [cloudflare_access_identity_provider.github](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/data-sources/access_identity_provider) | data source |
-| [cloudflare_accounts.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/data-sources/accounts) | data source |
-| [cloudflare_ip_ranges.cloudflare](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/data-sources/ip_ranges) | data source |
-| [cloudflare_zone.es_zones](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/data-sources/zone) | data source |
-| [cloudflare_zone.main](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/data-sources/zone) | data source |
+| <a name="module_frontend"></a> [frontend](#module\_frontend) | git@github.com:Notifycal/tofu-module-static-website.git | v1.1.0 |
 
 ## Inputs
 
