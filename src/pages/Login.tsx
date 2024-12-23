@@ -1,5 +1,7 @@
 import { useRouter } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
+
+import { Alert, Transition } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth, type LoginError } from '../hooks/AuthProvider';
@@ -7,17 +9,16 @@ import { useAuth, type LoginError } from '../hooks/AuthProvider';
 import { getConfigValue, sleep } from '../common/utils';
 import { Route } from '../routes/index';
 
-import { Alert, Transition } from '@mantine/core';
-
 import GoogleIcon from '../components/ui/GoogleIcon/GoogleIcon';
 
 import type { FunctionComponent } from '../common/types';
 
 export const Login = (): FunctionComponent => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  // const { t, i18n } = useTranslation();
 
   // TODO: Add language toggle/picker
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   // const onTranslateButtonClick = async (): Promise<void> => {
   //   if (i18n.resolvedLanguage === 'en') {
   //     await i18n.changeLanguage('es');
@@ -41,7 +42,7 @@ export const Login = (): FunctionComponent => {
     }
   }, [loginErrorMessage]);
 
-  const handleLogin = async () => {
+  const handleLogin = async (): Promise<void> => {
     try {
       await auth.login();
 
@@ -53,8 +54,8 @@ export const Login = (): FunctionComponent => {
       await sleep(1);
 
       await navigate({ to: search.redirect || '/dashboard' });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -82,13 +83,15 @@ export const Login = (): FunctionComponent => {
             <span className="text-sm/6 font-semibold">Google</span>
           </button>
 
-          {lastLoginError && <Transition mounted={!!loginErrorMessage} transition="fade" duration={300} timingFunction="ease">
-            {(styles) => (
-              <Alert style={styles} className="rounded-md" color="red" variant="light">
-                <p className="text-red-600">{t(`home.${lastLoginError}`)}</p>
-              </Alert>
-            )}
-          </Transition>}
+          {lastLoginError && (
+            <Transition duration={300} mounted={!!loginErrorMessage} timingFunction="ease" transition="fade">
+              {(styles) => (
+                <Alert className="rounded-md" color="red" style={styles} variant="light">
+                  <p className="text-red-600">{t(`home.${lastLoginError}`)}</p>
+                </Alert>
+              )}
+            </Transition>
+          )}
 
           <div className="relative mt-5">
             <div aria-hidden="true" className="absolute inset-0 flex items-center">

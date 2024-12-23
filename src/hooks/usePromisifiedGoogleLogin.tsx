@@ -1,8 +1,8 @@
-import { CodeResponse, UseGoogleLoginOptionsAuthCodeFlow, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin, type CodeResponse, type UseGoogleLoginOptionsAuthCodeFlow } from '@react-oauth/google';
 import { useRef } from 'react';
 
-type PromiseResolveType = (codeResponse: CodeResponse) => {};
-type PromiseRejectType = (errorResponse: Pick<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => {};
+type PromiseResolveType = (codeResponse: CodeResponse) => unknown;
+type PromiseRejectType = (errorResponse: Pick<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => unknown;
 
 type PromiseHandlersRef = {
   resolve: PromiseResolveType | null;
@@ -30,7 +30,7 @@ export default function usePromisifiedGoogleLogin(options: UseGoogleLoginOptions
     }
   });
 
-  return () => {
+  return (): Promise<CodeResponse> => {
     return new Promise<CodeResponse>((resolve, reject) => {
       promiseHandlers.current.resolve = resolve as PromiseResolveType;
       promiseHandlers.current.reject = reject as PromiseRejectType;

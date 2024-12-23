@@ -13,7 +13,7 @@ export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 export interface AuthContext {
   isAuthenticated: boolean;
   login: () => Promise<void>;
-  logout: () => Promise<void>;
+  logout: () => void;
   loginError: LoginError;
 }
 
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const login = useCallback(async () => {
     // Reset loginError on new login
-    setAuthState((prev: AuthState) => ({...prev, loginError: null}))
+    setAuthState((previous: AuthState) => ({ ...previous, loginError: null }));
 
     try {
       const codeResponse = await googleLogin();
@@ -52,39 +52,39 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       if (checkScopes(codeResponse.scope)) {
         const { accessToken, refreshToken } = await userLogin(codeResponse);
 
-        setAuthState((prev: AuthState) => ({ ...prev, accessToken, refreshToken }));
+        setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
 
         setLocalStorageItem('accessToken', accessToken);
         setLocalStorageItem('refreshToken', refreshToken);
       } else {
         throw new Error('loginErrorInvalidScopes');
       }
-    } catch (err) {
-      const { message } = err as Error;
+    } catch (error) {
+      const { message } = error as Error;
       const loginError = message === 'loginErrorInvalidScopes' ? message : 'loginErrorGeneric';
 
-      setAuthState((prev: AuthState) => ({
-        ...prev,
+      setAuthState((previous: AuthState) => ({
+        ...previous,
         accessToken: null,
         refreshToken: null,
         loginError
       }));
     }
-  }, []);
+  }, [googleLogin]);
 
-  const logout = useCallback(async () => {
+  const logout = useCallback(() => {
     // TODO: Call backend logout to invalidate tokens
     setLocalStorageItem('accessToken', null);
     setLocalStorageItem('refreshToken', null);
 
-    setAuthState((prev: AuthState) => ({ ...prev, accessToken: null, refreshToken: null }));
+    setAuthState((previous: AuthState) => ({ ...previous, accessToken: null, refreshToken: null }));
   }, []);
 
   useEffect(() => {
     const accessToken = getLocalStorageItem('accessToken');
     const refreshToken = getLocalStorageItem('refreshToken');
 
-    setAuthState((prev: AuthState) => ({ ...prev, accessToken, refreshToken }));
+    setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
   }, []);
 
   return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;

@@ -48,8 +48,8 @@ export default function Navigation(props: UserProps): FunctionComponent {
 
   const [opened, { toggle }] = useDisclosure();
 
-  const onLogoutHandler = async (): Promise<void> => {
-    await auth.logout();
+  const onLogoutHandler = (): void => {
+    auth.logout();
   };
 
   return (
