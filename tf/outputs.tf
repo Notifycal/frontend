@@ -1,9 +1,9 @@
 output "main_bucket_name" {
-  value = module.static_landing.bucket_names.main
+  value = module.frontend.bucket_names.main
 }
 
 output "bucket_names" {
-  value = module.static_landing.bucket_names
+  value = module.frontend.bucket_names
 }
 
 output "site_urls" {
