@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAuth, type LoginError } from '../hooks/AuthProvider';
 
-import { sleep } from '../common/utils';
+import { getConfigValue, sleep } from '../common/utils';
 import { Route } from '../routes/index';
 
 import { Alert, Transition } from '@mantine/core';
@@ -58,6 +58,8 @@ export const Login = (): FunctionComponent => {
     }
   };
 
+  const staticLandingURL = getConfigValue('STATIC_LANDING_URL') as string;
+
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -103,7 +105,7 @@ export const Login = (): FunctionComponent => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             {t('home.wantToKnowMore')}{' '}
-            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href="https://dev.notifycal.com/">
+            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href={staticLandingURL}>
               {t('home.checkOurSite')}
             </a>
           </p>
