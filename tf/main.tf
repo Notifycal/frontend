@@ -1,4 +1,4 @@
-module "static_landing" {
+module "frontend" {
   source = "git@github.com:Notifycal/tofu-module-static-website.git?ref=v1.1.0"
 
   base_domain   = var.base_domain
