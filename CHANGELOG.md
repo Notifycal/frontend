@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Notifycal/frontend/compare/v1.0.0...v1.1.0) (2024-12-24)
+
+
+### Features
+
+* Private routes the madness ([#20](https://github.com/Notifycal/frontend/issues/20)) ([192cff6](https://github.com/Notifycal/frontend/commit/192cff6d4b9463e2320c3962d358c953d26fb8b2))
+
 ## 1.0.0 (2024-12-23)
 
 
