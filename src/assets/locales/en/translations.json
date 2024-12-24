@@ -1,5 +1,17 @@
 {
   "home": {
-    "greeting": "Hello, world!"
+    "greeting": "Hello, world!",
+    "signInToYourAccount": "Sign in to your private area",
+    "orCheckOurDemo": "Or check our demo",
+    "wantToKnowMore": "Want to know more?",
+    "checkOurSite": "Check our website",
+    "demo": "Demo",
+    "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
+    "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
+  },
+  "404": {
+    "pageNotFound": "Page not found",
+    "weCouldNotFindThePage": "Sorry, we couldn’t find the page you’re looking for.",
+    "backToDashboard": "Back to the Dashboard"
   }
 }

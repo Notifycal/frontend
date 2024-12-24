@@ -1,6 +1,9 @@
 import { fixupPluginRules } from '@eslint/compat';
 import eslintJS from '@eslint/js';
 import tsParser from '@typescript-eslint/parser';
+//import eslintPluginStorybook from "eslint-plugin-storybook" // does not support eslint v9
+import eslintPluginQuery from '@tanstack/eslint-plugin-query';
+import eslintPluginRouter from '@tanstack/eslint-plugin-router';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginImport from 'eslint-plugin-import';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
@@ -125,8 +128,7 @@ const reactConfig = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react-hooks/exhaustive-deps': 'error',
-    ...patchedReactHooksPlugin.configs.recommended.rules,
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }]
+    ...patchedReactHooksPlugin.configs.recommended.rules
   }
 };
 
@@ -185,6 +187,11 @@ const unicornConfig = {
   }
 };
 
+const tanstackConfig = {
+  name: 'tanstack',
+  extends: [eslintPluginRouter.configs['flat/recommended'], eslintPluginQuery.configs['flat/recommended']]
+};
+
 const storybookConfig = {
   name: 'storybook',
   extends: [...eslintPluginStorybook.configs['flat/recommended']],
@@ -198,7 +205,14 @@ const eslintConfig = typescriptEslint.config(
   reactConfig,
   jsxA11yConfig,
   unicornConfig,
-  storybookConfig
+  tanstackConfig,
+  storybookConfig,
+  {
+    files: ['src/routes/**'],
+    rules: {
+      '@typescript-eslint/only-throw-error': 'off'
+    }
+  }
 );
 
 // Doing this so eslint completely ignores the Storybook sample stories folder.
