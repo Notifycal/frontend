@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { Login } from '../pages/Login';
+
+import { Login } from '@pages/Login';
 
 import { z } from 'zod';
 

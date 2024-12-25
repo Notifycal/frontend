@@ -1,6 +1,6 @@
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 
-import type { AuthContext } from '../hooks/AuthProvider';
+import type { AuthContext } from '@hooks/AuthProvider';
 
 interface MyRouterContext {
   auth: AuthContext;

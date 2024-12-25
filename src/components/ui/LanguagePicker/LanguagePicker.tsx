@@ -4,12 +4,12 @@ import { useState } from 'react';
 
 import clsx from 'clsx';
 
-import type { FunctionComponent } from '../../../common/types';
+import type { FunctionComponent } from '@common/types';
 
 import classes from './LanguagePicker.module.css';
 
-import flagEn from '../../../assets/icons/lang/en.png';
-import flagEs from '../../../assets/icons/lang/es.png';
+import flagEn from '@assets/icons/lang/en.png';
+import flagEs from '@assets/icons/lang/es.png';
 
 const data = [
   { label: 'English', shorthand: 'EN', image: flagEn },

@@ -5,10 +5,10 @@ import { useDisclosure } from '@mantine/hooks';
 
 import { IconLogout2 } from '@tabler/icons-react';
 
-import type { FunctionComponent } from '../../../common/types';
+import type { FunctionComponent } from '@common/types';
 
-import { useAuth } from '../../../hooks/AuthProvider';
-import type { UserModel } from '../../../types/UserModel';
+import type { UserModel } from '@appTypes/UserModel';
+import { useAuth } from '@hooks/AuthProvider';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
