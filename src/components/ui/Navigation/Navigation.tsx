@@ -7,8 +7,8 @@ import { IconLogout2 } from '@tabler/icons-react';
 
 import type { FunctionComponent } from '@common/types';
 
-import type { UserModel } from '@appTypes/UserModel';
 import { useAuth } from '@hooks/AuthProvider';
+import type { UserModel } from '@our-types/UserModel';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
