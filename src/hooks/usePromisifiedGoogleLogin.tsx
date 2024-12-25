@@ -1,5 +1,6 @@
-import { useGoogleLogin, type CodeResponse, type UseGoogleLoginOptionsAuthCodeFlow } from '@react-oauth/google';
 import { useRef } from 'react';
+
+import { useGoogleLogin, type CodeResponse, type UseGoogleLoginOptionsAuthCodeFlow } from '@react-oauth/google';
 
 type PromiseResolveType = (codeResponse: CodeResponse) => unknown;
 type PromiseRejectType = (errorResponse: Pick<CodeResponse, 'error' | 'error_description' | 'error_uri'>) => unknown;

@@ -1,4 +1,4 @@
-import type { FunctionComponent } from '../../../common/types';
+import type { FunctionComponent } from '@common/types';
 
 export default function GoogleIcon(): FunctionComponent {
   return (

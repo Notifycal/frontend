@@ -1,5 +1,6 @@
 import type { CodeResponse } from '@react-oauth/google';
-import { getConfigValue } from '../common/utils';
+
+import { getConfigValue } from '@common/utils';
 
 export interface LoginResponse {
   accessToken: string;

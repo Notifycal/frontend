@@ -1,12 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 
-import { userLogin } from '../auth/backend';
-import { checkScopes, GOOGLE_OAUTH_SCOPES } from '../auth/google';
-import usePromisifiedGoogleLogin from './usePromisifiedGoogleLogin';
+import { userLogin } from '@auth/backend';
+import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
+import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 
-import { getLocalStorageItem, setLocalStorageItem } from '../common/utils';
+import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
 
-import type { FunctionComponent } from '../common/types';
+import type { FunctionComponent } from '@common/types';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { isProduction } from '../../../common/utils';
+
+import { isProduction } from '@common/utils';
 
 export const ReactQueryDevelopmentTools = isProduction
   ? (): null => null

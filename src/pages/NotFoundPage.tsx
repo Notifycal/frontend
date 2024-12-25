@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Link } from '@tanstack/react-router';
 
-import type { FunctionComponent } from '../common/types';
+import type { FunctionComponent } from '@common/types';
 
 export const NotFoundPage = (): FunctionComponent => {
   const { t } = useTranslation();

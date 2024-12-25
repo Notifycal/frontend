@@ -7,13 +7,13 @@ import { MantineProvider } from '@mantine/core';
 
 import type { router } from './router.ts';
 
-import { ReactQueryDevelopmentTools } from './components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
-import { TanStackRouterDevelopmentTools } from './components/utils/development-tools/TanStackRouterDevelopmentTools';
+import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
+import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
 
-import { getConfigValue } from './common/utils.ts';
-import { AuthProvider, useAuth } from './hooks/AuthProvider.tsx';
+import { getConfigValue } from '@common/utils.ts';
+import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
 
-import type { FunctionComponent } from './common/types.ts';
+import type { FunctionComponent } from '@common/types.ts';
 
 const GOOGLE_CLIENT_ID = getConfigValue('GOOGLE_CLIENT_ID') as string;
 

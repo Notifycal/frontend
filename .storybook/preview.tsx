@@ -4,7 +4,7 @@ import type { Preview } from '@storybook/react';
 import { MantineProvider } from '@mantine/core';
 
 // Import to main styles file
-import '../src/styles/index.css';
+import '@styles/index.css';
 
 const preview: Preview = {
   parameters: {
