@@ -6,7 +6,7 @@ import { initReactI18next } from 'react-i18next';
 import translationEN from '@assets/locales/en/translations.json';
 import translationES from '@assets/locales/es/translations.json';
 
-import { isProduction } from './utils';
+import { isProduction } from '@common/utils';
 
 export const defaultNS = 'translations';
 export const resources = {
