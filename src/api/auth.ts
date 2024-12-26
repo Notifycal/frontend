@@ -11,7 +11,7 @@ export interface LoginResponse {
 export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
     const response = await apiClient.post(
-      '/login',
+      '/api/v1/login',
       {
         'google-code': codeResponse.code
       },
