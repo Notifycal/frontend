@@ -10,11 +10,15 @@ export interface LoginResponse {
 
 export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
-    const response = await apiClient.post('/login', {
-      'google-code': codeResponse.code
-    }, {
-      skipAuthorization: true
-    });
+    const response = await apiClient.post(
+      '/login',
+      {
+        'google-code': codeResponse.code
+      },
+      {
+        skipAuthorization: true
+      }
+    );
 
     const body = response.data as LoginResponse;
 
