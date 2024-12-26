@@ -1,6 +1,6 @@
 import type { CodeResponse } from '@react-oauth/google';
 
-import { getConfigValue } from '@common/utils';
+import apiClient from './common';
 
 export interface LoginResponse {
   accessToken: string;
@@ -8,22 +8,19 @@ export interface LoginResponse {
   refreshToken: 'WIP';
 }
 
-const BASE_URL = getConfigValue('BACKEND_BASE_URL') as string;
-const URL = `${BASE_URL}/api/v1/login`;
-
-export const userLogin = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
+export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
-    const response = await fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    const response = await apiClient.post(
+      '/api/v1/login',
+      {
         'google-code': codeResponse.code
-      })
-    });
+      },
+      {
+        skipAuthorization: true
+      }
+    );
 
-    const body = (await response.json()) as LoginResponse;
+    const body = response.data as LoginResponse;
 
     if (response.status === 200) {
       // Returning all the body as we'll need refresh token and expiry soon as well?

@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 
-import { userLogin } from '@auth/backend';
+import { login as apiLogin } from '@api/auth';
 import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
 import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       const codeResponse = await googleLogin();
 
       if (checkScopes(codeResponse.scope)) {
-        const { accessToken, refreshToken } = await userLogin(codeResponse);
+        const { accessToken, refreshToken } = await apiLogin(codeResponse);
 
         setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
 
