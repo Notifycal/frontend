@@ -9,7 +9,7 @@ export interface LoginResponse {
 }
 
 const BASE_URL = getConfigValue('BACKEND_BASE_URL') as string;
-const URL = `${BASE_URL}/api/v1/login`;
+const URL = `${BASE_URL}/login`;
 
 export const userLogin = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
