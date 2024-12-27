@@ -15,7 +15,7 @@ import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
 
 import type { FunctionComponent } from '@common/types.ts';
 
-const GOOGLE_CLIENT_ID = getConfigValue('GOOGLE_CLIENT_ID') as string;
+const GOOGLE_CLIENT_ID = getConfigValue('GOOGLE_CLIENT_ID');
 
 const queryClient = new QueryClient();
 

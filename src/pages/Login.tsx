@@ -59,7 +59,7 @@ export const Login = (): FunctionComponent => {
     }
   };
 
-  const staticLandingURL = getConfigValue('STATIC_LANDING_URL') as string;
+  const staticLandingURL = getConfigValue('STATIC_LANDING_URL');
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
