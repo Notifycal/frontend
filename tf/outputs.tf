@@ -6,6 +6,6 @@ output "bucket_names" {
   value = module.frontend.bucket_names
 }
 
-output "site_urls" {
-  value = formatlist("https://%s", concat([local.domain], values(local.redirect_domains)))
+output "site_url" {
+  value = "https://${local.domain}"
 }
