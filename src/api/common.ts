@@ -2,7 +2,7 @@ import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 import { getConfigValue, getLocalStorageItem } from '../common/utils';
 
-const BASE_URL = getConfigValue('BACKEND_BASE_URL') as string;
+const BASE_URL = getConfigValue('BACKEND_BASE_URL');
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
