@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/Notifycal/frontend/compare/v0.2.0...v0.2.1) (2024-12-27)
+
+
+### Bug Fixes
+
+* use types for globalConfig keys and values for better intellisense ([#41](https://github.com/Notifycal/frontend/issues/41)) ([b0b9a3b](https://github.com/Notifycal/frontend/commit/b0b9a3b7377d83dce1d87e606c2b525acd1469e1))
+
 ## [0.2.0](https://github.com/Notifycal/frontend/compare/v0.1.1...v0.2.0) (2024-12-27)
 
 
