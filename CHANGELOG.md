@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0](https://github.com/Notifycal/frontend/compare/v0.1.1...v0.2.0) (2024-12-27)
+
+
+### Features
+
+* use axios with interceptor for Auth Bearer (with ability to disable) ([#39](https://github.com/Notifycal/frontend/issues/39)) ([176369b](https://github.com/Notifycal/frontend/commit/176369b660d8fd225b37480c230b47e76762b74b))
+
+
+### Bug Fixes
+
+* drop es-specific redirect vars ([#43](https://github.com/Notifycal/frontend/issues/43)) ([9c06edd](https://github.com/Notifycal/frontend/commit/9c06edd79dedcf0df2af3355859984c29134a076))
+
 ## [0.1.1](https://github.com/Notifycal/frontend/compare/v0.1.0...v0.1.1) (2024-12-25)
 
 
