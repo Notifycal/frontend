@@ -13,11 +13,6 @@ variable "enable_www_redirect" {
   default     = true
 }
 
-variable "redirect_base_domains" {
-  type    = list(string)
-  default = []
-}
-
 variable "is_public" {
   type        = bool
   default     = true
@@ -25,8 +20,7 @@ variable "is_public" {
 }
 
 locals {
-  domain           = var.domain_prefix == "" ? var.base_domain : "${var.domain_prefix}.${var.base_domain}"
-  redirect_domains = { for redirect_domain in var.redirect_base_domains : redirect_domain => var.domain_prefix == "" ? redirect_domain : "${var.domain_prefix}.${redirect_domain}" }
+  domain = var.domain_prefix == "" ? var.base_domain : "${var.domain_prefix}.${var.base_domain}"
 
   main_dns_record_name     = var.domain_prefix == "" ? "@" : var.domain_prefix
   redirect_dns_record_name = var.domain_prefix == "" ? "www" : "www.${var.domain_prefix}"

@@ -48,7 +48,7 @@ echo
 
 # Display site URL
 echo "Site deployed at:"
-jq -r '.site_urls.value | to_entries[] | .value'  <<< "$JSON_OUTPUT"
+jq -r '.site_url.value' <<< "$JSON_OUTPUT"
 echo
 
 popd > /dev/null
