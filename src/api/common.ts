@@ -1,6 +1,6 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
-import { getConfigValue, getLocalStorageItem } from '../common/utils';
+import { getConfigValue } from '../common/utils';
 
 const BASE_URL = getConfigValue('BACKEND_BASE_URL');
 
@@ -11,18 +11,11 @@ const apiClient = axios.create({
   }
 });
 
-apiClient.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const accessToken = getLocalStorageItem('accessToken');
-
-    if (accessToken && !config.skipAuthorization) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error);
-  }
-);
+export const setupRequestInterceptor = (
+  onRequest: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>,
+  onError: (error: AxiosError) => Promise<never>
+): void => {
+  apiClient.interceptors.request.use(onRequest, onError);
+};
 
 export default apiClient;

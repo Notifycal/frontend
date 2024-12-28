@@ -6,7 +6,9 @@ import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 
 import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
 
+import { setupRequestInterceptor } from '@api/common';
 import type { FunctionComponent } from '@common/types';
+import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 
@@ -54,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
         setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
 
-        setLocalStorageItem('accessToken', accessToken);
+        // setLocalStorageItem('accessToken', accessToken);
         setLocalStorageItem('refreshToken', refreshToken);
       } else {
         throw new Error('loginErrorInvalidScopes');
@@ -86,6 +88,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
     setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
   }, []);
+
+  useEffect(() => {
+    setupRequestInterceptor(
+      (config: InternalAxiosRequestConfig) => {
+        if (authState.accessToken && !config.skipAuthorization) {
+          config.headers.Authorization = `Bearer ${authState.accessToken}`;
+        }
+        return config;
+      },
+      (error: AxiosError) => Promise.reject(error)
+    );
+  }, [authState.accessToken]);
 
   return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;
 };
