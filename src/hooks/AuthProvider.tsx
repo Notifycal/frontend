@@ -6,7 +6,8 @@ import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 
 import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
 
-import { setupRequestInterceptor, setupResponseInterceptor } from '@api/common';
+import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorReturn } from '@api/common';
+
 import type { FunctionComponent } from '@common/types';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
@@ -35,8 +36,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const { accessToken, refreshToken, loginError } = authState;
 
-  // This will go soon, and we'll rely on the API responses
-  const isAuthenticated = !!accessToken && !!refreshToken; // TODO
+  // TODO: This will go soon, and we'll rely on the API responses
+  const isAuthenticated = !!accessToken && !!refreshToken;
 
   const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
@@ -60,22 +61,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
     hasMounted.current = true;
 
-    const accessToken = getLocalStorageItem('accessToken');
     const refreshToken = getLocalStorageItem('refreshToken');
 
-    const refreshTokenFromServer = async () => {
+    const refreshTokenFromServer = async (): Promise<void> => {
       let newAccessToken: string | null = null;
       let newRefreshToken: string | null = null;
 
       if (refreshToken) {
-        try {
-          const response = await refresh(refreshToken);
-          newAccessToken = response.accessToken;
-          newRefreshToken = response.refreshToken;
-        } catch (error) {
-          console.log('Error refreshing the token:', error);
-        }
+        const response = await refresh(refreshToken);
+        newAccessToken = response.accessToken;
+        newRefreshToken = response.refreshToken;
       }
+
       setAuthState((previous: AuthState) => ({
         ...previous,
         accessToken: newAccessToken,
@@ -83,7 +80,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       }));
     };
 
-    refreshTokenFromServer();
+    // cannot use async functions from useEffect, must use Promise or IIFE
+    refreshTokenFromServer()
+      .catch((error) => {
+        console.log('Error refreshing the token on page load:', error);
+      });
   }, []);
 
   const login = useCallback(async () => {
@@ -120,19 +121,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   useEffect(() => {
     // Setup axios interceptor for authentication when the access token changes
+    let requestInterceptor: InterceptorReturn;
+
     if (accessToken) {
       const authInterceptor = createAuthInterceptor(accessToken);
-      const requestInterceptor = setupRequestInterceptor(authInterceptor);
-
-      // Cleanup by ejecting interceptor on component unmount
-      return (): void => {
-        requestInterceptor.eject();
-      };
+      requestInterceptor = setupRequestInterceptor(authInterceptor);
     }
+    
+    return (): void => {
+      // Cleanup by ejecting interceptor on component unmount
+      if (requestInterceptor) {
+        requestInterceptor.eject();
+      }
+    };
   }, [accessToken]);
 
   useEffect(() => {
     // Setup axios interceptor for token refresh on 401 unauthorized
+    let responseInterceptor: InterceptorReturn;
+
     if (refreshToken) {
       const unauthorizedInterceptor = createUnauthorizedInterceptor(
         refreshToken,
@@ -145,13 +152,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
           }));
         }
       );
-      const responseInterceptor = setupResponseInterceptor(unauthorizedInterceptor);
-
-      // Cleanup by ejecting interceptor on component unmount
-      return (): void => {
-        responseInterceptor.eject();
-      };
+      responseInterceptor = setupResponseInterceptor(unauthorizedInterceptor);
     }
+    
+    return (): void => {
+      // Cleanup by ejecting interceptor on component unmount
+      if (responseInterceptor) {
+        responseInterceptor.eject();
+      }
+    };
   }, [refreshToken]);
 
   return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;

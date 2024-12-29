@@ -16,7 +16,7 @@ export interface RequestInterceptor {
   onError: (error: AxiosError) => Promise<never>;
 }
 
-type InterceptorReturn = {
+export type InterceptorReturn = {
   eject: () => void;
 };
 
