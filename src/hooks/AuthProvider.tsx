@@ -1,14 +1,13 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 
-import { login as apiLogin } from '@api/auth';
+import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor } from '@api/auth';
 import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
 import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 
 import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
 
-import { setupRequestInterceptor } from '@api/common';
+import { setupRequestInterceptor, setupResponseInterceptor } from '@api/common';
 import type { FunctionComponent } from '@common/types';
-import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 
@@ -44,6 +43,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     scope: GOOGLE_OAUTH_SCOPES.join(' ')
   });
 
+  // Update localstorage whenever the state (tokens) changes
+  // Using `useEffect` avoids having to call these functions along setAuthState
+  useEffect(() => {
+    setLocalStorageItem('accessToken', accessToken);
+    setLocalStorageItem('refreshToken', refreshToken);
+  }, [accessToken, refreshToken]);
+
+  // Runs only once on mount, doesn't re-run on updates (because dependency array is empty).
+  useEffect(() => {
+    const accessToken = getLocalStorageItem('accessToken');
+    const refreshToken = getLocalStorageItem('refreshToken');
+
+    setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
+  }, []);
+
   const login = useCallback(async () => {
     // Reset loginError on new login
     setAuthState((previous: AuthState) => ({ ...previous, loginError: null }));
@@ -55,9 +69,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
         const { accessToken, refreshToken } = await apiLogin(codeResponse);
 
         setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
-
-        // setLocalStorageItem('accessToken', accessToken);
-        setLocalStorageItem('refreshToken', refreshToken);
       } else {
         throw new Error('loginErrorInvalidScopes');
       }
@@ -76,30 +87,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const logout = useCallback(() => {
     // TODO: Call backend logout to invalidate tokens
-    setLocalStorageItem('accessToken', null);
-    setLocalStorageItem('refreshToken', null);
-
     setAuthState((previous: AuthState) => ({ ...previous, accessToken: null, refreshToken: null }));
   }, []);
 
   useEffect(() => {
-    const accessToken = getLocalStorageItem('accessToken');
-    const refreshToken = getLocalStorageItem('refreshToken');
-
-    setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
-  }, []);
-
+    // Setup axios interceptor for authentication when the access token changes
+    if (accessToken) {
+      const authInterceptor = createAuthInterceptor(accessToken);
+      setupRequestInterceptor(authInterceptor);
+    }
+  }, [accessToken]);
+  
   useEffect(() => {
-    setupRequestInterceptor(
-      (config: InternalAxiosRequestConfig) => {
-        if (authState.accessToken && !config.skipAuthorization) {
-          config.headers.Authorization = `Bearer ${authState.accessToken}`;
+    // Setup axios interceptor for token refresh on 401 unauthorized
+    if (refreshToken) {
+      const unauthorizedInterceptor = createUnauthorizedInterceptor(
+        refreshToken,
+        // useCallback here?
+        (newAccessToken, newRefreshToken): void => {
+          setAuthState((previous) => ({
+            ...previous,
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken
+          }));
         }
-        return config;
-      },
-      (error: AxiosError) => Promise.reject(error)
-    );
-  }, [authState.accessToken]);
+      );
+      setupResponseInterceptor(unauthorizedInterceptor);
+    }
+  }, [refreshToken]);
 
   return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;
 };

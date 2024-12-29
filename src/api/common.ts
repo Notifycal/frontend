@@ -1,4 +1,4 @@
-import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
 
 import { getConfigValue } from '../common/utils';
 
@@ -11,11 +11,22 @@ const apiClient = axios.create({
   }
 });
 
-export const setupRequestInterceptor = (
-  onRequest: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>,
-  onError: (error: AxiosError) => Promise<never>
-): void => {
+export interface RequestInterceptor {
+  onRequest: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
+  onError: (error: AxiosError) => Promise<never>;
+}
+
+export const setupRequestInterceptor = ({ onRequest, onError }: RequestInterceptor): void => {
   apiClient.interceptors.request.use(onRequest, onError);
+};
+
+export interface ResponseInterceptor {
+  onResponse: (response: AxiosResponse) => AxiosResponse;
+  onResponseError: (error: AxiosError) => Promise<never>;
+}
+
+export const setupResponseInterceptor = ({ onResponse, onResponseError }: ResponseInterceptor): void => {
+  apiClient.interceptors.response.use(onResponse, onResponseError);
 };
 
 export default apiClient;
