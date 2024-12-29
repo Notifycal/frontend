@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       setupRequestInterceptor(authInterceptor);
     }
   }, [accessToken]);
-  
+
   useEffect(() => {
     // Setup axios interceptor for token refresh on 401 unauthorized
     if (refreshToken) {
