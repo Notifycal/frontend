@@ -16,8 +16,18 @@ export interface RequestInterceptor {
   onError: (error: AxiosError) => Promise<never>;
 }
 
-export const setupRequestInterceptor = ({ onRequest, onError }: RequestInterceptor): void => {
-  apiClient.interceptors.request.use(onRequest, onError);
+type InterceptorReturn = {
+  eject: () => void;
+};
+
+export const setupRequestInterceptor = ({ onRequest, onError }: RequestInterceptor): InterceptorReturn => {
+  const interceptorId = apiClient.interceptors.request.use(onRequest, onError);
+
+  return {
+    eject: (): void => {
+      apiClient.interceptors.request.eject(interceptorId);
+    }
+  };
 };
 
 export interface ResponseInterceptor {
@@ -25,8 +35,14 @@ export interface ResponseInterceptor {
   onResponseError: (error: AxiosError) => Promise<never>;
 }
 
-export const setupResponseInterceptor = ({ onResponse, onResponseError }: ResponseInterceptor): void => {
-  apiClient.interceptors.response.use(onResponse, onResponseError);
+export const setupResponseInterceptor = ({ onResponse, onResponseError }: ResponseInterceptor): InterceptorReturn => {
+  const interceptorId = apiClient.interceptors.response.use(onResponse, onResponseError);
+
+  return {
+    eject: (): void => {
+      apiClient.interceptors.response.eject(interceptorId);
+    }
+  };
 };
 
 export default apiClient;

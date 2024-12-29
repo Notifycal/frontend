@@ -94,7 +94,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     // Setup axios interceptor for authentication when the access token changes
     if (accessToken) {
       const authInterceptor = createAuthInterceptor(accessToken);
-      setupRequestInterceptor(authInterceptor);
+      const requestInterceptor = setupRequestInterceptor(authInterceptor);
+
+      // Cleanup by ejecting interceptor on component unmount
+      return (): void => {
+        requestInterceptor.eject();
+      };
     }
   }, [accessToken]);
 
@@ -112,7 +117,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
           }));
         }
       );
-      setupResponseInterceptor(unauthorizedInterceptor);
+      const responseInterceptor = setupResponseInterceptor(unauthorizedInterceptor);
+
+      // Cleanup by ejecting interceptor on component unmount
+      return (): void => {
+        responseInterceptor.eject();
+      };
     }
   }, [refreshToken]);
 
