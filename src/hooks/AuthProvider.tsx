@@ -29,7 +29,7 @@ const AuthContext = createContext<AuthContext | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
   const [authState, setAuthState] = useState<AuthState>({
-    accessToken: getLocalStorageItem('accessToken'),
+    accessToken: null,
     refreshToken: getLocalStorageItem('refreshToken'),
     loginError: null
   });
@@ -49,9 +49,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   // Update localstorage whenever the state (tokens) changes
   // Using `useEffect` avoids having to call these functions along setAuthState
   useEffect(() => {
-    setLocalStorageItem('accessToken', accessToken);
     setLocalStorageItem('refreshToken', refreshToken);
-  }, [accessToken, refreshToken]);
+  }, [refreshToken]);
 
   // Runs only once on mount, doesn't re-run on updates (because dependency array is empty).
   useEffect(() => {
