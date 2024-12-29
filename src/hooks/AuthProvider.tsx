@@ -1,6 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 
-import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor } from '@api/auth';
+import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor, refresh } from '@api/auth';
 import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
 import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 
@@ -43,6 +43,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     scope: GOOGLE_OAUTH_SCOPES.join(' ')
   });
 
+  const hasMounted = useRef(false);
+
   // Update localstorage whenever the state (tokens) changes
   // Using `useEffect` avoids having to call these functions along setAuthState
   useEffect(() => {
@@ -52,10 +54,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   // Runs only once on mount, doesn't re-run on updates (because dependency array is empty).
   useEffect(() => {
+    if (hasMounted.current) {
+      return; // Skip if already mounted
+    }
+
+    hasMounted.current = true;
+
     const accessToken = getLocalStorageItem('accessToken');
     const refreshToken = getLocalStorageItem('refreshToken');
 
-    setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
+    const refreshTokenFromServer = async () => {
+      let newAccessToken: string | null = null;
+      let newRefreshToken: string | null = null;
+
+      if (refreshToken) {
+        try {
+          const response = await refresh(refreshToken);
+          newAccessToken = response.accessToken;
+          newRefreshToken = response.refreshToken;
+        } catch (error) {
+          console.log('Error refreshing the token:', error);
+        }
+      }
+      setAuthState((previous: AuthState) => ({
+        ...previous,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken
+      }));
+    };
+
+    refreshTokenFromServer();
   }, []);
 
   const login = useCallback(async () => {
