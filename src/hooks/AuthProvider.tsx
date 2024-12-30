@@ -64,28 +64,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     const refreshToken = getLocalStorageItem('refreshToken');
 
     const refreshTokenFromServer = async (): Promise<void> => {
-      let newAccessToken: string | null = null;
-      let newRefreshToken: string | null = null;
-      let refreshSuccess = false;
-
       if (refreshToken) {
         const response = await refresh(refreshToken);
-        newAccessToken = response.accessToken;
-        newRefreshToken = response.refreshToken;
-        refreshSuccess = true;
-      }
+        const newAccessToken = response.accessToken;
+        const newRefreshToken = response.refreshToken;
 
-      setAuthState((previous: AuthState) => ({
-        ...previous,
-        accessToken: newAccessToken,
-        refreshToken: newRefreshToken,
-        loginStatus: refreshSuccess ? 'success' : 'unauthorized'
-      }));
+        setAuthState((previous: AuthState) => ({
+          ...previous,
+          accessToken: newAccessToken,
+          refreshToken: newRefreshToken,
+          loginStatus: 'success'
+        }));
+      } else {
+        throw new Error('No refresh token available');
+      }
     };
 
     // cannot use async functions from useEffect, must use Promise or IIFE
-    refreshTokenFromServer().catch((error) => {
-      console.log('Error refreshing the token on page load:', error);
+    refreshTokenFromServer().catch(() => {
+      // this catches both a failed request, as well as a missing refresh token
+      setAuthState((previous: AuthState) => ({
+        ...previous,
+        accessToken: null,
+        refreshToken: null,
+        loginStatus: 'unauthorized'
+      }));
     });
   }, []);
 
@@ -174,7 +177,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   if (loginStatus === 'loading') {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-        <Loader color="white" size="xl"/>
+        <Loader color="white" size="xl" />
       </div>
     );
   }
