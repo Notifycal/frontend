@@ -1,4 +1,3 @@
-import { useRouter } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 
 import { Alert, Transition } from '@mantine/core';
@@ -6,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAuth, type LoginError } from '@hooks/AuthProvider';
 
-import { getConfigValue, sleep } from '@common/utils';
-import { Route } from '@routes/index';
+import { getConfigValue } from '@common/utils';
 
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
 
@@ -30,10 +28,6 @@ export const Login = (): FunctionComponent => {
   const [lastLoginError, setLastLoginError] = useState<LoginError | null>(null);
 
   const auth = useAuth();
-  const router = useRouter();
-  const navigate = Route.useNavigate();
-  const search = Route.useSearch();
-
   const loginErrorMessage = auth.loginError;
 
   useEffect(() => {
@@ -42,22 +36,7 @@ export const Login = (): FunctionComponent => {
     }
   }, [loginErrorMessage]);
 
-  const handleLogin = async (): Promise<void> => {
-    try {
-      await auth.login();
-
-      // This invalidate has to do with the fact that the router has a context (AuthContext) not
-      // with the navigation itself.
-      await router.invalidate();
-
-      // hack. It doesn't redirect if removed :/. copied from official docs
-      await sleep(1);
-
-      await navigate({ to: search.redirect || '/dashboard' });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const handleLogin = auth.login;
 
   const staticLandingURL = getConfigValue('STATIC_LANDING_URL');
 

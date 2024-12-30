@@ -1,7 +1,7 @@
 import apiClient from './common';
 
 interface UserProfile {
-  UserId: string;   // TODO: make this user-id
+  UserId: string; // TODO: make this user-id
 }
 
 export const getUserProfile = async (): Promise<UserProfile> => {
