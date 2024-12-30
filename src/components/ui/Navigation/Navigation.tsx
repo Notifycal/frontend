@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 
 import { Burger, Drawer, Menu, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -7,8 +7,10 @@ import { IconLogout2 } from '@tabler/icons-react';
 
 import type { FunctionComponent } from '@common/types';
 
+import { sleep } from '@common/utils';
 import { useAuth } from '@hooks/AuthProvider';
 import type { UserModel } from '@our-types/UserModel';
+import { router } from '@router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -45,11 +47,19 @@ export default function Navigation(props: UserProps): FunctionComponent {
   const { user } = props;
 
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const [opened, { toggle }] = useDisclosure();
 
-  const onLogoutHandler = (): void => {
+  const onLogoutHandler = async (): Promise<void> => {
     auth.logout();
+
+    await router.invalidate();
+    
+    // hack. It doesn't redirect if removed :/. copied from official docs
+    await sleep(1);
+
+    await navigate({ to: '/' });
   };
 
   return (
