@@ -31,7 +31,6 @@ Built with type safety, scalability, and developer experience in mind. A batteri
 - [TanStack Router](https://tanstack.com/router/v1) - Fully typesafe, modern and scalable routing for React applications
 - [TanStack Query](https://tanstack.com/query/latest) - Declarative, always-up-to-date auto-managed queries and mutations
 - [TanStack Table](https://tanstack.com/table/v8) - Headless UI for building powerful tables & datagrids
-- [Zustand](https://zustand-demo.pmnd.rs) - An unopinionated, small, fast and scalable bearbones state-management solution
 - [React Hook Form](https://react-hook-form.com) - Performant, flexible and extensible forms with easy-to-use validation - Potentially superseded by Mantine form hooks
 - [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
 - [React Testing Library](https://testing-library.com) - A very light-weight, best practice first, solution for testing React components
@@ -188,12 +187,6 @@ function Table(): FunctionComponent {
 
 To reiterate, if you wish to restrict the Devtools to development builds use the provided components found at `src/components/utils/development-tools` instead of the built-in components from their respective modules.
 
-### Built-in Devtools:
-
-- Zustand
-
-**Zustand** provides a built-in [devtools middleware](https://github.com/pmndrs/zustand#redux-devtools) for use with [Redux DevTools](https://github.com/reduxjs/redux-devtools#redux-devtools).
-
 ## Installed Packages
 
 A simplified list can be found in the [Overview](#overview) section.
@@ -223,7 +216,6 @@ A simplified list can be found in the [Overview](#overview) section.
 ### State Management
 
 - [TanStack Query (React Query)](https://tanstack.com/query/latest)
-- [Zustand](https://zustand-demo.pmnd.rs)
 
 ### UI
 
