@@ -36,7 +36,6 @@ Built with type safety, scalability, and developer experience in mind. A batteri
 - [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
 - [React Testing Library](https://testing-library.com) - A very light-weight, best practice first, solution for testing React components
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
-- [Playwright](https://playwright.dev) - Enables reliable end-to-end testing for modern web apps
 - [react-i18next](https://react.i18next.com/) - A powerful internationalization framework for React/React Native based on i18next
 - [Faker](https://fakerjs.dev/) - Generate massive amounts of fake (but realistic) data for testing and development
 - [Dayjs](https://day.js.org/en/) - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
@@ -47,7 +46,6 @@ A more detailed list of the included packages can be found in the [Installed Pac
 ## Requirements
 
 - [NodeJS 18+](https://nodejs.org/en)
-- [Playwright](https://playwright.dev): Install with `npx playwright install`.
 
 ## Getting Started
 
@@ -88,9 +86,7 @@ Congrats! You're ready to starting working!
 
 ## Testing
 
-Unit testing is handled by React Testing Library and Vitest while End-to-End (E2E) Testing is conducted by Playwright.
-
-If you'd like to run all tests, Unit and E2E alike, execute the following command:
+Unit testing is handled by React Testing Library and Vitest.
 
 ```
 npm run test
@@ -133,22 +129,6 @@ After:
 ```
 
 **Note**: Faker is included to provide mock data. See the [Important Note](#important-note) section for crucial details regarding this package. Specifically, point 3.
-
-### End-to-End (E2E) Testing
-
-This has to go out of this repo.
-
-Running E2E tests use a similar syntax to running unit tests:
-
-```
-npm run test:e2e
-```
-
-If you wish to see the reports, run:
-
-```
-npm run test:e2e:report
-```
 
 ## Creating a build
 
@@ -269,7 +249,6 @@ A simplified list can be found in the [Overview](#overview) section.
 
 - [Vitest](https://vitest.dev)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [Playwright](https://playwright.dev)
 
 ### Development Tools
 

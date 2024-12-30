@@ -24,8 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 /test-results/
-/playwright-report/
-/playwright/.cache/
 
 # storybook
 storybook-static
