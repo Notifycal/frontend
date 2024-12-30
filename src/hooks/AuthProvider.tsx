@@ -10,6 +10,8 @@ import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorRetu
 
 import type { FunctionComponent } from '@common/types';
 
+import { Loader } from '@mantine/core';
+
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
 
 export interface AuthContext {
@@ -23,6 +25,7 @@ type AuthState = {
   accessToken: string | null;
   refreshToken: string | null;
   loginError: LoginError;
+  loginStatus: 'unauthorized' | 'loading' | 'success';
 };
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -31,13 +34,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   const [authState, setAuthState] = useState<AuthState>({
     accessToken: null,
     refreshToken: getLocalStorageItem('refreshToken'),
-    loginError: null
+    loginError: null,
+    loginStatus: 'loading'
   });
 
-  const { accessToken, refreshToken, loginError } = authState;
-
-  // TODO: This will go soon, and we'll rely on the API responses
-  const isAuthenticated = !!accessToken && !!refreshToken;
+  const { accessToken, refreshToken, loginError, loginStatus } = authState;
 
   const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
@@ -65,25 +66,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     const refreshTokenFromServer = async (): Promise<void> => {
       let newAccessToken: string | null = null;
       let newRefreshToken: string | null = null;
+      let refreshSuccess = false;
 
       if (refreshToken) {
         const response = await refresh(refreshToken);
         newAccessToken = response.accessToken;
         newRefreshToken = response.refreshToken;
+        refreshSuccess = true;
       }
 
       setAuthState((previous: AuthState) => ({
         ...previous,
         accessToken: newAccessToken,
-        refreshToken: newRefreshToken
+        refreshToken: newRefreshToken,
+        loginStatus: refreshSuccess ? 'success' : 'unauthorized'
       }));
     };
 
     // cannot use async functions from useEffect, must use Promise or IIFE
-    refreshTokenFromServer()
-      .catch((error) => {
-        console.log('Error refreshing the token on page load:', error);
-      });
+    refreshTokenFromServer().catch((error) => {
+      console.log('Error refreshing the token on page load:', error);
+    });
   }, []);
 
   const login = useCallback(async () => {
@@ -96,7 +99,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       if (checkScopes(codeResponse.scope)) {
         const { accessToken, refreshToken } = await apiLogin(codeResponse);
 
-        setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken }));
+        setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken, loginStatus: 'success' }));
       } else {
         throw new Error('loginErrorInvalidScopes');
       }
@@ -108,6 +111,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
         ...previous,
         accessToken: null,
         refreshToken: null,
+        loginStatus: 'unauthorized',
         loginError
       }));
     }
@@ -115,7 +119,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const logout = useCallback(() => {
     // TODO: Call backend logout to invalidate tokens
-    setAuthState((previous: AuthState) => ({ ...previous, accessToken: null, refreshToken: null }));
+    setAuthState((previous: AuthState) => ({
+      ...previous,
+      accessToken: null,
+      refreshToken: null,
+      loginStatus: 'unauthorized'
+    }));
   }, []);
 
   useEffect(() => {
@@ -126,7 +135,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       const authInterceptor = createAuthInterceptor(accessToken);
       requestInterceptor = setupRequestInterceptor(authInterceptor);
     }
-    
+
     return (): void => {
       // Cleanup by ejecting interceptor on component unmount
       if (requestInterceptor) {
@@ -153,7 +162,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       );
       responseInterceptor = setupResponseInterceptor(unauthorizedInterceptor);
     }
-    
+
     return (): void => {
       // Cleanup by ejecting interceptor on component unmount
       if (responseInterceptor) {
@@ -162,7 +171,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     };
   }, [refreshToken]);
 
-  return <AuthContext.Provider value={{ isAuthenticated, login, logout, loginError }}>{children}</AuthContext.Provider>;
+  if (loginStatus === 'loading') {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+        <Loader color="white" size="xl"/>
+      </div>
+    );
+  }
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated: loginStatus === 'success', login, logout, loginError }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = (): AuthContext => {
