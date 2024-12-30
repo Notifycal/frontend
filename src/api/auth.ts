@@ -87,7 +87,7 @@ export const createUnauthorizedInterceptor = (
       }
 
       // TODO: max number of retries?
-      if ((error.response?.status === 401 || error.response?.status === 503) && !originalRequest._retry) {
+      if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
 
         try {
