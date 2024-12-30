@@ -23,7 +23,7 @@ export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> 
     const response = await apiClient.post(
       '/api/v1/login',
       { 'google-code': codeResponse.code },
-      { skipAuthorization: true }
+      { skipAuthorization: true, skipTokenRefresh: true }
     );
 
     const body = response.data as LoginResponse;
@@ -44,7 +44,7 @@ export const refresh = async (refreshToken: string): Promise<RefreshResponse> =>
     const response = await apiClient.post(
       '/api/v1/refresh',
       { 'refresh-token': refreshToken },
-      { skipAuthorization: true }
+      { skipAuthorization: true, skipTokenRefresh: true }
     );
 
     const body = response.data as RefreshResponse;
@@ -71,7 +71,7 @@ export const createAuthInterceptor = (accessToken: string): RequestInterceptor =
   };
 };
 
-export type TokenRefreshCallback = (accessToken: string, refreshToken: string) => void;
+export type TokenRefreshCallback = (accessToken: string | null, refreshToken: string | null, success: boolean) => void;
 
 export const createUnauthorizedInterceptor = (
   refreshToken: string,
@@ -82,6 +82,10 @@ export const createUnauthorizedInterceptor = (
     onResponseError: async (error: AxiosError): Promise<never> => {
       const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
+      if (originalRequest.skipTokenRefresh) {
+        return Promise.reject(error);
+      }
+
       // TODO: max number of retries?
       // TODO: kick on refresh failure
       if (error.response?.status === 401 && !originalRequest._retry) {
@@ -89,7 +93,7 @@ export const createUnauthorizedInterceptor = (
 
         try {
           const response = await refresh(refreshToken);
-          onTokenRefresh(response.accessToken, response.refreshToken);
+          onTokenRefresh(response.accessToken, response.refreshToken, true);
 
           if (originalRequest.headers) {
             originalRequest.headers.Authorization = `Bearer ${response.accessToken}`;
@@ -98,6 +102,7 @@ export const createUnauthorizedInterceptor = (
           // Retry the original request
           return await axios(originalRequest);
         } catch (error) {
+          onTokenRefresh(null, null, false);
           console.log('Token refresh failed', error);
           return Promise.reject(error as Error);
         }

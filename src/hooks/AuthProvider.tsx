@@ -155,11 +155,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       const unauthorizedInterceptor = createUnauthorizedInterceptor(
         refreshToken,
         // useCallback here?
-        (newAccessToken, newRefreshToken): void => {
+        (newAccessToken, newRefreshToken, success): void => {
           setAuthState((previous) => ({
             ...previous,
             accessToken: newAccessToken,
-            refreshToken: newRefreshToken
+            refreshToken: newRefreshToken,
+            loginStatus: success ? 'success' : 'unauthorized'
           }));
         }
       );
