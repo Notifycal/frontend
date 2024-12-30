@@ -220,8 +220,8 @@ A simplified list can be found in the [Overview](#overview) section.
 ### UI
 
 - [Tailwind CSS](https://tailwindcss.com)
-- [HeadlessUI](https://headlessui.com)
-- [heroicons](https://heroicons.com)
+- [Mantine](https://mantine.dev/)
+- [Tabler icons](https://tabler.io/icons)
 - [TanStack Table](https://tanstack.com/table/v8)
 - [Storybook](https://storybook.js.org)
 
