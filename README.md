@@ -31,12 +31,10 @@ Built with type safety, scalability, and developer experience in mind. A batteri
 - [TanStack Router](https://tanstack.com/router/v1) - Fully typesafe, modern and scalable routing for React applications
 - [TanStack Query](https://tanstack.com/query/latest) - Declarative, always-up-to-date auto-managed queries and mutations
 - [TanStack Table](https://tanstack.com/table/v8) - Headless UI for building powerful tables & datagrids
-- [Zustand](https://zustand-demo.pmnd.rs) - An unopinionated, small, fast and scalable bearbones state-management solution
 - [React Hook Form](https://react-hook-form.com) - Performant, flexible and extensible forms with easy-to-use validation - Potentially superseded by Mantine form hooks
 - [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
 - [React Testing Library](https://testing-library.com) - A very light-weight, best practice first, solution for testing React components
 - [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
-- [Playwright](https://playwright.dev) - Enables reliable end-to-end testing for modern web apps
 - [react-i18next](https://react.i18next.com/) - A powerful internationalization framework for React/React Native based on i18next
 - [Faker](https://fakerjs.dev/) - Generate massive amounts of fake (but realistic) data for testing and development
 - [Dayjs](https://day.js.org/en/) - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
@@ -47,7 +45,6 @@ A more detailed list of the included packages can be found in the [Installed Pac
 ## Requirements
 
 - [NodeJS 18+](https://nodejs.org/en)
-- [Playwright](https://playwright.dev): Install with `npx playwright install`.
 
 ## Getting Started
 
@@ -88,9 +85,7 @@ Congrats! You're ready to starting working!
 
 ## Testing
 
-Unit testing is handled by React Testing Library and Vitest while End-to-End (E2E) Testing is conducted by Playwright.
-
-If you'd like to run all tests, Unit and E2E alike, execute the following command:
+Unit testing is handled by React Testing Library and Vitest.
 
 ```
 npm run test
@@ -133,22 +128,6 @@ After:
 ```
 
 **Note**: Faker is included to provide mock data. See the [Important Note](#important-note) section for crucial details regarding this package. Specifically, point 3.
-
-### End-to-End (E2E) Testing
-
-This has to go out of this repo.
-
-Running E2E tests use a similar syntax to running unit tests:
-
-```
-npm run test:e2e
-```
-
-If you wish to see the reports, run:
-
-```
-npm run test:e2e:report
-```
 
 ## Creating a build
 
@@ -208,12 +187,6 @@ function Table(): FunctionComponent {
 
 To reiterate, if you wish to restrict the Devtools to development builds use the provided components found at `src/components/utils/development-tools` instead of the built-in components from their respective modules.
 
-### Built-in Devtools:
-
-- Zustand
-
-**Zustand** provides a built-in [devtools middleware](https://github.com/pmndrs/zustand#redux-devtools) for use with [Redux DevTools](https://github.com/reduxjs/redux-devtools#redux-devtools).
-
 ## Installed Packages
 
 A simplified list can be found in the [Overview](#overview) section.
@@ -243,13 +216,12 @@ A simplified list can be found in the [Overview](#overview) section.
 ### State Management
 
 - [TanStack Query (React Query)](https://tanstack.com/query/latest)
-- [Zustand](https://zustand-demo.pmnd.rs)
 
 ### UI
 
 - [Tailwind CSS](https://tailwindcss.com)
-- [HeadlessUI](https://headlessui.com)
-- [heroicons](https://heroicons.com)
+- [Mantine](https://mantine.dev/)
+- [Tabler icons](https://tabler.io/icons)
 - [TanStack Table](https://tanstack.com/table/v8)
 - [Storybook](https://storybook.js.org)
 
@@ -269,7 +241,6 @@ A simplified list can be found in the [Overview](#overview) section.
 
 - [Vitest](https://vitest.dev)
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [Playwright](https://playwright.dev)
 
 ### Development Tools
 

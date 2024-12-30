@@ -48,9 +48,7 @@ export default function Navigation(props: UserProps): FunctionComponent {
 
   const [opened, { toggle }] = useDisclosure();
 
-  const onLogoutHandler = (): void => {
-    auth.logout();
-  };
+  const onLogoutHandler = auth.logout;
 
   return (
     <nav className="border-b border-indigo-300/25 bg-indigo-600 lg:border-none">

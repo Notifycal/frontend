@@ -1,9 +1,10 @@
 import { Outlet, useMatches } from '@tanstack/react-router';
 
+import Navigation from '@components/ui/Navigation/Navigation';
+
 import clsx from 'clsx';
 
 import type { FunctionComponent } from '@common/types';
-import Navigation from '@components/ui/Navigation/Navigation';
 
 const user = {
   name: 'Tom Cook',
