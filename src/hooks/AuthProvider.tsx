@@ -12,19 +12,19 @@ import type { FunctionComponent } from '@common/types';
 
 import { Loader } from '@mantine/core';
 
-export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric' | null;
+export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
 
 export interface AuthContext {
   isAuthenticated: boolean;
   login: () => Promise<void>;
   logout: () => void;
-  loginError: LoginError;
+  loginError: LoginError | null;
 }
 
 type AuthState = {
   accessToken: string | null;
   refreshToken: string | null;
-  loginError: LoginError;
+  loginError: LoginError | null;
   loginStatus: 'unauthorized' | 'loading' | 'success';
 };
 
