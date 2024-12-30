@@ -11,8 +11,6 @@ export const Dashboard = (): FunctionComponent => {
     queryFn: getUserProfile
   });
 
-  console.log(query.data);
-
   return (
     <>
       <span>Username:
