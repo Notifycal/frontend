@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
@@ -7,14 +8,19 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import { MantineProvider } from '@mantine/core';
 
+import { useTranslation } from 'react-i18next';
+
 import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
 
 import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
+import { ServiceConfigProvider, useServiceConfig } from '@hooks/ServiceConfigProvider.tsx';
 
 import { initializeApiClient } from '@api/common.ts';
+
+import FullScreenError from '@components/ui/FullScreenError/FullScreenError.tsx';
+
 import type { FunctionComponent } from '@common/types.ts';
-import { ServiceConfigProvider, useServiceConfig } from '@hooks/ServiceConfigProvider.tsx';
 import type { router } from './router.ts';
 
 const queryClient = new QueryClient();
@@ -65,11 +71,24 @@ const ServiceConfiguredApp = ({ router }: AppProps): FunctionComponent => {
 };
 
 const App = ({ router }: AppProps): FunctionComponent => {
+  const { t } = useTranslation();
+
   return (
     <MantineProvider>
-      <ServiceConfigProvider>
-        <ServiceConfiguredApp router={router} />
-      </ServiceConfigProvider>
+      <ErrorBoundary
+        fallback={
+          <FullScreenError
+            errorBody={t('globalError.genericError')}
+            onRetry={() => {
+              window.location.reload();
+            }}
+          />
+        }
+      >
+        <ServiceConfigProvider>
+          <ServiceConfiguredApp router={router} />
+        </ServiceConfigProvider>
+      </ErrorBoundary>
     </MantineProvider>
   );
 };
