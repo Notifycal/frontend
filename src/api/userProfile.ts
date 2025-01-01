@@ -1,4 +1,4 @@
-import apiClient from './common';
+import getApiClient from './common';
 
 interface UserProfile {
   UserId: string; // TODO: make this user-id
@@ -6,7 +6,7 @@ interface UserProfile {
 
 export const getUserProfile = async (): Promise<UserProfile> => {
   try {
-    const response = await apiClient.get('/api/v1/user-profile');
+    const response = await getApiClient().get('/api/v1/user-profile');
     console.log('data:', response);
     return response.data as UserProfile;
   } catch (error) {

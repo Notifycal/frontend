@@ -6,22 +6,6 @@ export async function sleep(ms: number): Promise<void> {
   });
 }
 
-export function getConfigValue(key: ConfigKey): string {
-  const { globalConfig } = window;
-
-  if (!globalConfig) {
-    console.error('globalConfig is not defined');
-    return '';
-  }
-
-  if (globalConfig[key]) {
-    return globalConfig[key];
-  } else {
-    console.error(`Config key not defined: ${key}`);
-    return '';
-  }
-}
-
 export function getLocalStorageItem(itemKey: string): string | null {
   return localStorage.getItem(itemKey);
 }
