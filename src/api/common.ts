@@ -29,11 +29,11 @@ export type InterceptorReturn = {
 };
 
 export const setupRequestInterceptor = ({ onRequest, onError }: RequestInterceptor): InterceptorReturn => {
-  const interceptorId = apiClient.interceptors.request.use(onRequest, onError);
+  const interceptorId = getApiClient().interceptors.request.use(onRequest, onError);
 
   return {
     eject: (): void => {
-      apiClient.interceptors.request.eject(interceptorId);
+      getApiClient().interceptors.request.eject(interceptorId);
     }
   };
 };
@@ -44,11 +44,11 @@ export interface ResponseInterceptor {
 }
 
 export const setupResponseInterceptor = ({ onResponse, onResponseError }: ResponseInterceptor): InterceptorReturn => {
-  const interceptorId = apiClient.interceptors.response.use(onResponse, onResponseError);
+  const interceptorId = getApiClient().interceptors.response.use(onResponse, onResponseError);
 
   return {
     eject: (): void => {
-      apiClient.interceptors.response.eject(interceptorId);
+      getApiClient().interceptors.response.eject(interceptorId);
     }
   };
 };
