@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/Notifycal/frontend/compare/v0.4.0...v0.5.0) (2025-01-02)
+
+
+### Features
+
+* improve config handling for prod and dev ([#59](https://github.com/Notifycal/frontend/issues/59)) ([a0e50fd](https://github.com/Notifycal/frontend/commit/a0e50fd907f3ffafcb643e436a91c693350cc466))
+
 ## [0.4.0](https://github.com/Notifycal/frontend/compare/v0.3.0...v0.4.0) (2025-01-02)
 
 
