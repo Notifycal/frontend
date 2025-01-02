@@ -22,7 +22,7 @@ export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> 
   try {
     const response = await getApiClient().post(
       '/api/v1/login',
-      { 'google-code': codeResponse.code },
+      { googleCode: codeResponse.code },
       { skipAuthorization: true, skipTokenRefresh: true }
     );
 
@@ -43,7 +43,7 @@ export const refresh = async (refreshToken: string): Promise<RefreshResponse> =>
   try {
     const response = await getApiClient().post(
       '/api/v1/refresh',
-      { 'refresh-token': refreshToken },
+      { refreshToken: refreshToken },
       { skipAuthorization: true, skipTokenRefresh: true }
     );
 
