@@ -15,8 +15,10 @@
   "version": "0.4.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "$npm_execpath run dev:config && vite",
+    "dev:config": "cp config/config.local.js public/config.js",
+    "build": "rm -rf public/config.js && tsc && vite build && $npm_execpath run build:config",
+    "build:config": "cp config/config.skel.js dist/",
     "preview": "$npm_execpath run build && vite preview",
     "test:unit": "vitest src/",
     "test:unit:coverage": "vitest --coverage src/",
