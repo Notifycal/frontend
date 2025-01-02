@@ -44,11 +44,10 @@ gh release download "${STACK_VERSION}" --repo "${_GH_ORG}/${STACK_NAME}"
 unzip dist.zip
 echo
 
-pushd dist > /dev/null
-echo "Service discovery (channel)"
+echo "Service discovery"
 service-discovery --environment "${ENVIRONMENT}" \
-  --skel_file config/frontend.skel.js
-popd > /dev/null
+  --skel_file dist/config.skel.js > dist/config.js && \
+  rm -rf dist/config.skel.js
 
 echo "Uploading to S3 static site bucket..."
 aws s3 sync --delete ./dist/ "s3://${BUCKET_NAME}"
