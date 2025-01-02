@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/Notifycal/frontend/compare/v0.3.0...v0.4.0) (2025-01-02)
+
+
+### Features
+
+* validate globalConfig on app mount and make it available throughout the app with a Provider/Context pattern ([#54](https://github.com/Notifycal/frontend/issues/54)) ([875b415](https://github.com/Notifycal/frontend/commit/875b415e874653f9d80925d6cbedecd5285d4ba1))
+
+
+### Bug Fixes
+
+* initialize axios client outside of the callback ([#56](https://github.com/Notifycal/frontend/issues/56)) ([519a71a](https://github.com/Notifycal/frontend/commit/519a71a589878a70d8c7a3a466b97c26ac94e19d))
+
 ## [0.3.0](https://github.com/Notifycal/frontend/compare/v0.2.1...v0.3.0) (2024-12-30)
 
 
