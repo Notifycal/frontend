@@ -11,19 +11,21 @@ TF_TOOL="${TF_TOOL:-terragrunt}"
 
 STACK_NAME=$1
 STACK_VERSION=$2
+ENVIRONMENT=$3
 
 # current path is working dir unless there is an argument
 RUNNING_PATH="$(pwd)"
 if [[ $# -eq 3 ]] ; then
-  RUNNING_PATH=$3
+  RUNNING_PATH=$4
 fi
 
 echo
 echo "Running $0..."
 echo "==================================="
+echo "ENVIRONMENT: ${ENVIRONMENT}"
 echo "STACK NAME: ${STACK_NAME}"
 echo "STACK_VERSION: ${STACK_VERSION}"    # Assumes STACK_NAME == repository name
-echo "PATH: $RUNNING_PATH"
+echo "PATH: ${RUNNING_PATH}"
 echo "==================================="
 echo
 
@@ -41,6 +43,12 @@ pushd "${TMP_DIR}" > /dev/null
 gh release download "${STACK_VERSION}" --repo "${_GH_ORG}/${STACK_NAME}"
 unzip dist.zip
 echo
+
+pushd dist > /dev/null
+echo "Service discovery (channel)"
+service-discovery --environment "${ENVIRONMENT}" \
+  --skel_file config/frontend.skel.js
+popd > /dev/null
 
 echo "Uploading to S3 static site bucket..."
 aws s3 sync --delete ./dist/ "s3://${BUCKET_NAME}"

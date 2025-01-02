@@ -20,7 +20,7 @@
     "preview": "$npm_execpath run build && vite preview",
     "test:unit": "vitest src/",
     "test:unit:coverage": "vitest --coverage src/",
-    "lint": "eslint '**/*.{js,ts,jsx,tsx,cjs,mjs}' --no-error-on-unmatched-pattern",
+    "lint": "eslint --no-error-on-unmatched-pattern",
     "lint:fix": "$npm_execpath run lint -- --fix",
     "prettier": "prettier . --check",
     "prettier:fix": "$npm_execpath run prettier -- --write",
