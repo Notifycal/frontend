@@ -52,6 +52,8 @@ const ServiceConfiguredApp = ({ router }: AppProps): FunctionComponent => {
   const { GOOGLE_CLIENT_ID, BACKEND_BASE_URL } = useServiceConfig();
 
   // We don't expect BACKEND_BASE_URL to change after the app loads, that's why there are no dependencies.
+  initializeApiClient(BACKEND_BASE_URL);
+
   useEffect(() => {
     initializeApiClient(BACKEND_BASE_URL);
   });
