@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/Notifycal/frontend/compare/v0.5.0...v0.5.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* skel file name ([#61](https://github.com/Notifycal/frontend/issues/61)) ([09e38e8](https://github.com/Notifycal/frontend/commit/09e38e89471c1bff441838a1780b285903af3158))
+
 ## [0.5.0](https://github.com/Notifycal/frontend/compare/v0.4.0...v0.5.0) (2025-01-02)
 
 
