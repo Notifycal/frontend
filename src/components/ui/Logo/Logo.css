@@ -1,0 +1,75 @@
+#notification-bubble {
+  fill: #aade87;
+  fill-opacity: 1;
+  stroke-width: 9.94776;
+}
+
+#notification-bubble-shadow {
+  fill: #808080;
+  fill-opacity: 1;
+  stroke-width: 9.94776;
+}
+
+#calendar-shadow {
+  fill: #808080;
+  stroke-width: 0;
+}
+
+#tick-shadow {
+  display: inline;
+  fill: #44aa00;
+  fill-opacity: 1;
+  stroke: #44aa00;
+  stroke-width: 1.05833;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: none;
+  stroke-opacity: 1;
+}
+
+#tick {
+  fill: #ffffff;
+  fill-opacity: 1;
+  stroke: #ffffff;
+  stroke-width: 1.05833;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: none;
+  stroke-opacity: 1;
+}
+
+#calendar-days path {
+  fill: #b3b3b3;
+  stroke-width: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#calendar {
+  #calendar-body {
+    fill: #ececec;
+    stroke-width: 0;
+  }
+
+  #calendar-border {
+    fill: #5f8dd3;
+    stroke: none;
+    stroke-width: 0;
+  }
+}
+
+.calendar-ring-hole {
+  fill: #2c5aa0;
+  fill-opacity: 1;
+  stroke-width: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.calendar-ring {
+  fill: #b3b3b3;
+  fill-opacity: 1;
+  stroke-width: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
