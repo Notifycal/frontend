@@ -1,15 +1,23 @@
 import axios, { type AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
 
-import { getConfigValue } from '../common/utils';
+let apiClient: ReturnType<typeof axios.create>;
 
-const BASE_URL = getConfigValue('BACKEND_BASE_URL');
+export const initializeApiClient = (baseURL: string): void => {
+  apiClient = axios.create({
+    baseURL: baseURL,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+};
 
-const apiClient = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json'
+export const getApiClient = (): ReturnType<typeof axios.create> => {
+  if (!apiClient) {
+    throw new Error('API Client is not initialized. Call initializeApiClient first');
   }
-});
+
+  return apiClient;
+};
 
 export interface RequestInterceptor {
   onRequest: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
@@ -21,11 +29,11 @@ export type InterceptorReturn = {
 };
 
 export const setupRequestInterceptor = ({ onRequest, onError }: RequestInterceptor): InterceptorReturn => {
-  const interceptorId = apiClient.interceptors.request.use(onRequest, onError);
+  const interceptorId = getApiClient().interceptors.request.use(onRequest, onError);
 
   return {
     eject: (): void => {
-      apiClient.interceptors.request.eject(interceptorId);
+      getApiClient().interceptors.request.eject(interceptorId);
     }
   };
 };
@@ -36,13 +44,13 @@ export interface ResponseInterceptor {
 }
 
 export const setupResponseInterceptor = ({ onResponse, onResponseError }: ResponseInterceptor): InterceptorReturn => {
-  const interceptorId = apiClient.interceptors.response.use(onResponse, onResponseError);
+  const interceptorId = getApiClient().interceptors.response.use(onResponse, onResponseError);
 
   return {
     eject: (): void => {
-      apiClient.interceptors.response.eject(interceptorId);
+      getApiClient().interceptors.response.eject(interceptorId);
     }
   };
 };
 
-export default apiClient;
+export default getApiClient;

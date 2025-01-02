@@ -13,5 +13,11 @@
     "pageNotFound": "¡Oops!",
     "weCouldNotFindThePage": "Vaya, no pudimos encontrar esa página.",
     "backToDashboard": "Vuelve al Dashboard"
+  },
+  "globalError": {
+    "somethingWrong": "Ooops! Algo ha fallado",
+    "refreshPage": "Refrescar la página",
+    "contactSupport": "Contactar con soporte",
+    "genericError": "Por favor, refresque la pagina o contacte con soporte si el problema persiste."
   }
 }
