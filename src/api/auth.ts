@@ -5,7 +5,7 @@ import axios, {
   type InternalAxiosRequestConfig
 } from 'axios';
 
-import apiClient, { type RequestInterceptor, type ResponseInterceptor } from './common';
+import getApiClient, { type RequestInterceptor, type ResponseInterceptor } from './common';
 
 import type { CodeResponse } from '@react-oauth/google';
 
@@ -20,7 +20,7 @@ export type RefreshResponse = GenericAuthResponse;
 
 export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
-    const response = await apiClient.post(
+    const response = await getApiClient().post(
       '/api/v1/login',
       { 'google-code': codeResponse.code },
       { skipAuthorization: true, skipTokenRefresh: true }
@@ -41,7 +41,7 @@ export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> 
 
 export const refresh = async (refreshToken: string): Promise<RefreshResponse> => {
   try {
-    const response = await apiClient.post(
+    const response = await getApiClient().post(
       '/api/v1/refresh',
       { 'refresh-token': refreshToken },
       { skipAuthorization: true, skipTokenRefresh: true }

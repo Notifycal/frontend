@@ -5,11 +5,10 @@ import { useTranslation } from 'react-i18next';
 
 import { useAuth, type LoginError } from '@hooks/AuthProvider';
 
-import { getConfigValue } from '@common/utils';
-
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
 
 import type { FunctionComponent } from '@common/types';
+import { useServiceConfig } from '@hooks/ServiceConfigProvider';
 
 export const Login = (): FunctionComponent => {
   const { t } = useTranslation();
@@ -38,7 +37,7 @@ export const Login = (): FunctionComponent => {
 
   const handleLogin = auth.login;
 
-  const staticLandingURL = getConfigValue('STATIC_LANDING_URL');
+  const { STATIC_LANDING_URL } = useServiceConfig();
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
@@ -87,7 +86,7 @@ export const Login = (): FunctionComponent => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             {t('home.wantToKnowMore')}{' '}
-            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href={staticLandingURL}>
+            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href={STATIC_LANDING_URL}>
               {t('home.checkOurSite')}
             </a>
           </p>
