@@ -7,6 +7,8 @@ import { useAuth, type LoginError } from '@hooks/AuthProvider';
 
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
 
+import Logo from '@components/ui/Logo/Logo';
+
 import type { FunctionComponent } from '@common/types';
 import { useServiceConfig } from '@hooks/ServiceConfigProvider';
 
@@ -44,11 +46,7 @@ export const Login = (): FunctionComponent => {
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
           <div className="sm:mx-auto sm:w-full sm:max-w-md mb-6">
-            <img
-              alt="Your Company"
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-            />
+            <Logo classNames="mx-auto h-30 w-auto" />
             <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
               {t('home.signInToYourAccount')}
             </h2>
