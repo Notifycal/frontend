@@ -15,7 +15,7 @@ ENVIRONMENT=$3
 
 # current path is working dir unless there is an argument
 RUNNING_PATH="$(pwd)"
-if [[ $# -eq 3 ]] ; then
+if [[ $# -eq 4 ]] ; then
   RUNNING_PATH=$4
 fi
 
@@ -35,6 +35,7 @@ pushd $RUNNING_PATH > /dev/null
 echo "Retrieving outputs from ${TF_TOOL}..."
 JSON_OUTPUT=$(${TF_TOOL} output -json 2>/dev/null | jq -r '.')
 BUCKET_NAME=$(jq -r '.main_bucket_name.value' <<< "$JSON_OUTPUT")
+echo "Bucket: ${BUCKET_NAME}"
 echo
 
 echo "Retrieving release from Github..."
