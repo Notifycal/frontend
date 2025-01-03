@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/Notifycal/frontend/compare/v0.5.1...v0.5.2) (2025-01-03)
+
+
+### Bug Fixes
+
+* use proper path on post-apply script ([#63](https://github.com/Notifycal/frontend/issues/63)) ([38def00](https://github.com/Notifycal/frontend/commit/38def00c8ee1d4da56e0ef9b5e1cb56ddf2c56c3))
+
 ## [0.5.1](https://github.com/Notifycal/frontend/compare/v0.5.0...v0.5.1) (2025-01-02)
 
 
