@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.5.2](https://github.com/Notifycal/frontend/compare/v0.5.1...v0.5.2) (2025-01-03)
+
+
+### Bug Fixes
+
+* use proper path on post-apply script ([#63](https://github.com/Notifycal/frontend/issues/63)) ([38def00](https://github.com/Notifycal/frontend/commit/38def00c8ee1d4da56e0ef9b5e1cb56ddf2c56c3))
+
+## [0.5.1](https://github.com/Notifycal/frontend/compare/v0.5.0...v0.5.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* skel file name ([#61](https://github.com/Notifycal/frontend/issues/61)) ([09e38e8](https://github.com/Notifycal/frontend/commit/09e38e89471c1bff441838a1780b285903af3158))
+
+## [0.5.0](https://github.com/Notifycal/frontend/compare/v0.4.0...v0.5.0) (2025-01-02)
+
+
+### Features
+
+* improve config handling for prod and dev ([#59](https://github.com/Notifycal/frontend/issues/59)) ([a0e50fd](https://github.com/Notifycal/frontend/commit/a0e50fd907f3ffafcb643e436a91c693350cc466))
+
+## [0.4.0](https://github.com/Notifycal/frontend/compare/v0.3.0...v0.4.0) (2025-01-02)
+
+
+### Features
+
+* validate globalConfig on app mount and make it available throughout the app with a Provider/Context pattern ([#54](https://github.com/Notifycal/frontend/issues/54)) ([875b415](https://github.com/Notifycal/frontend/commit/875b415e874653f9d80925d6cbedecd5285d4ba1))
+
+
+### Bug Fixes
+
+* initialize axios client outside of the callback ([#56](https://github.com/Notifycal/frontend/issues/56)) ([519a71a](https://github.com/Notifycal/frontend/commit/519a71a589878a70d8c7a3a466b97c26ac94e19d))
+
 ## [0.3.0](https://github.com/Notifycal/frontend/compare/v0.2.1...v0.3.0) (2024-12-30)
 
 

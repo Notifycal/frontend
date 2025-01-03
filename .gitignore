@@ -32,3 +32,5 @@ storybook-static
 /coverage/
 
 *storybook.log
+
+public/config.js
