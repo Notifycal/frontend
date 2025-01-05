@@ -2,38 +2,16 @@ import type { FunctionComponent } from '@common/types';
 
 import { motion } from 'motion/react';
 
+import { getAnimationVariants, type LogoAnimationVariants } from './Logo.animationVariants';
+
 import './Logo.css';
-
-const CalendarDay = (path: string, index: number): FunctionComponent => {
-  const row = Math.trunc(index / 4);
-  const col = index % 4;
-
-  return (
-    <motion.path
-      key={index}
-      animate={{ translateY: 0 }}
-      d={path}
-      id={`day-${row}-${col}`}
-      initial={{ translateY: -50 }}
-      transition={{
-        translateY: {
-          type: 'spring',
-          stiffness: 100,
-          damping: 10,
-          delay: Math.random() * 3,
-          duration: Math.random() * 2
-        }
-      }}
-    />
-  );
-};
 
 interface LogoProps {
   classNames?: string;
-  // animated?: boolean;
+  animation?: LogoAnimationVariants;
 }
 
-export default function Logo({ classNames = '' }: LogoProps): FunctionComponent {
+export default function Logo({ classNames = '', animation = 'static' }: LogoProps): FunctionComponent {
   const calendarDaysPaths = [
     'm 104.37451,140.8312 c -0.69597,-0.013 -1.30276,0.40869 -1.42782,1.03766 l -0.19896,1.00201 c -0.14293,0.71882 0.39838,1.42792 1.21388,1.59008 l 2.02055,0.40153 c 0.81551,0.16216 1.58668,-0.28577 1.72961,-1.00459 l 0.19947,-1.00201 c 0.14293,-0.71882 -0.39838,-1.42792 -1.21388,-1.59008 l -2.02055,-0.40205 c -0.10193,-0.0203 -0.20288,-0.0307 -0.3023,-0.0326 z',
     'm 111.79318,142.30656 c -0.69597,-0.013 -1.30223,0.40869 -1.42731,1.03766 l -0.19947,1.00149 c -0.14293,0.71882 0.39838,1.42793 1.21388,1.59009 l 2.02055,0.40204 c 0.8155,0.16216 1.5872,-0.28629 1.73013,-1.00511 l 0.19895,-1.00149 c 0.14294,-0.71882 -0.39838,-1.42846 -1.21388,-1.5906 l -2.02055,-0.40152 c -0.10193,-0.0203 -0.20288,-0.0307 -0.3023,-0.0326 z',
@@ -53,6 +31,8 @@ export default function Logo({ classNames = '' }: LogoProps): FunctionComponent 
     'm 123.84412,159.26986 c -0.69596,-0.013 -1.30224,0.4087 -1.4273,1.03767 l -0.19896,1.002 c -0.14294,0.71882 0.39838,1.42795 1.21388,1.59009 l 2.02003,0.40152 c 0.8155,0.16216 1.58719,-0.28577 1.73013,-1.00459 l 0.19896,-1.002 c 0.14293,-0.71882 -0.39837,-1.42792 -1.21388,-1.59009 l -2.02004,-0.40204 c -0.10193,-0.0203 -0.2034,-0.0307 -0.30282,-0.0326 z'
   ];
 
+  const animationVariant = getAnimationVariants(animation);
+
   return (
     <motion.svg
       className={classNames}
@@ -65,16 +45,10 @@ export default function Logo({ classNames = '' }: LogoProps): FunctionComponent 
     >
       <motion.g id="g28" transform="translate(-73.818748,-128.32293)">
         <motion.g
-          animate={{ translateX: 0 }}
+          animate={animationVariant('notification-bubble-full', 'animate')}
           id="notification-bubble-full"
-          initial={{ translateX: -50 }}
-          transition={{
-            translateX: {
-              type: 'spring',
-              stiffness: 100,
-              damping: 10
-            }
-          }}
+          initial={animationVariant('notification-bubble-full', 'initial')}
+          transition={animationVariant('notification-bubble-full', 'transition')}
         >
           <motion.path
             d="m 1492.3609,817.23228 c -7.6829,1.08912 -12.8657,9.03117 -11.6215,17.80743 l 6.1679,43.5103 c 1.2441,8.77627 8.4301,14.96493 16.113,13.87581 l 22.4803,-3.18679 c -1.105,4.30751 -2.5512,8.44024 -4.3255,12.3189 -1.4771,2.81821 -3.164,5.42602 -5.035,7.78768 -1.4562,1.86484 -1.4641,4.9957 -0.018,6.96996 0.9788,1.31597 2.4079,1.82208 3.7181,1.31934 15.2545,-6.16412 28.1044,-16.58717 37.9876,-32.97855 l 54.8075,-7.76944 c 7.683,-1.08913 12.8676,-9.03144 11.6235,-17.80771 l -6.168,-43.5103 c -1.2441,-8.77626 -8.4319,-14.96466 -16.1149,-13.87553 z"
@@ -88,17 +62,10 @@ export default function Logo({ classNames = '' }: LogoProps): FunctionComponent 
           />
         </motion.g>
         <motion.g
-          animate={{ translateY: 0 }}
+          animate={animationVariant('calendar', 'animate')}
           id="calendar"
-          initial={{ translateY: -50 }}
-          transition={{
-            translateY: {
-              type: 'spring',
-              stiffness: 100,
-              duration: 2,
-              damping: 10
-            }
-          }}
+          initial={animationVariant('calendar', 'initial')}
+          transition={animationVariant('calendar', 'transition')}
         >
           <motion.path
             d="m 109.11681,129.91029 c -0.6163,0.003 -1.16323,0.43659 -1.28829,1.06555 l -0.41755,2.0991 -0.78135,-0.15555 c -1.41907,-0.28218 -2.78844,0.63302 -3.07061,2.05208 l -0.37931,1.90582 -0.37878,1.90582 -0.17002,0.85371 -1.26711,6.37273 -2.5833,12.99196 -0.248565,1.25005 c -0.28217,1.4191 0.632999,2.78845 2.052075,3.07063 l 27.22056,5.41258 c 0.70942,0.14107 1.40662,-0.0172 1.96163,-0.38809 0.55506,-0.37092 0.96789,-0.95443 1.10898,-1.66397 l 0.24856,-1.25005 2.58486,-13.00025 1.26556,-6.36447 0.17001,-0.85368 0.37879,-1.90584 0.37879,-1.90582 c 0.28217,-1.41907 -0.633,-2.78845 -2.05207,-3.07063 l -0.87954,-0.17465 0.41755,-2.0991 c 0.14293,-0.71882 -0.32039,-1.41253 -1.03921,-1.55546 -0.71883,-0.14292 -1.41253,0.32039 -1.55547,1.03921 l -0.41754,2.0991 -20.3693,-4.0504 0.41754,-2.09857 c 0.14294,-0.71882 -0.3209,-1.41306 -1.03972,-1.55599 -0.0899,-0.018 -0.17913,-0.0262 -0.26717,-0.0259 z"
@@ -151,22 +118,41 @@ export default function Logo({ classNames = '' }: LogoProps): FunctionComponent 
             y="104.86134"
           />
         </motion.g>
-        <motion.g id="calendar-days"> {calendarDaysPaths.map(CalendarDay)} </motion.g>
+        <motion.g id="calendar-days">
+          {calendarDaysPaths.map((path: string, index: number): FunctionComponent => {
+            const row = Math.trunc(index / 4);
+            const col = index % 4;
+
+            return (
+              <motion.path
+                key={index}
+                animate={animationVariant('day', 'animate')}
+                d={path}
+                id={`day-${row}-${col}`}
+                initial={animationVariant('day', 'initial')}
+                transition={{
+                  translateY: {
+                    // This is cheating a bit...
+                    ...animationVariant('day', 'transition')['translateY'],
+                    delay: Math.random() * 3,
+                    duration: Math.random() * 2
+                  }
+                }}
+              />
+            );
+          })}
+        </motion.g>
 
         <mask id="reveal-tick">
           <motion.rect
-            animate={{ x: 0 }} // Move to reveal the path
+            animate={animationVariant('reveal-tick', 'animate')}
             fill="white"
             height="200"
-            initial={{ x: -200 }} // Start outside the view
+            initial={animationVariant('reveal-tick', 'initial')}
+            transition={animationVariant('reveal-tick', 'transition')}
             width="200"
             x="0"
             y="0"
-            transition={{
-              delay: 3,
-              duration: 5,
-              ease: 'easeInOut'
-            }}
           />
         </mask>
 
