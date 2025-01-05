@@ -94,12 +94,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const login = useCallback(async () => {
     // Reset loginError on new login
-    setAuthState((previous: AuthState) => ({ ...previous, loginError: null }));
+    setAuthState((previous: AuthState) => ({
+      ...previous,
+      loginError: null
+    }));
 
     try {
       const codeResponse = await googleLogin();
 
       if (checkScopes(codeResponse.scope)) {
+        setAuthState((previous: AuthState) => ({ ...previous, loginStatus: 'loading' }));
+
         const { accessToken, refreshToken } = await apiLogin(codeResponse);
 
         setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken, loginStatus: 'success' }));

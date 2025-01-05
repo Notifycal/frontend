@@ -34,3 +34,6 @@ storybook-static
 *storybook.log
 
 public/config.js
+
+tf/.terraform
+.terraform.lock.hcl
