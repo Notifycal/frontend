@@ -21,8 +21,42 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Main: Story = {
+export const Static: Story = {
   args: {
-    classNames: 'mx-auto w-auto'
+    classNames: 'mx-auto w-[250px]',
+    animation: 'static',
+    showCalendarDays: true
+  }
+};
+
+export const DefaultAnimation: Story = {
+  args: {
+    classNames: 'mx-auto w-[250px]',
+    animation: 'default',
+    showCalendarDays: true
+  }
+};
+
+export const Bouncy: Story = {
+  args: {
+    classNames: 'mx-auto w-[250px]',
+    animation: 'bouncy',
+    showCalendarDays: true
+  }
+};
+
+export const StaticWithoutDays: Story = {
+  args: {
+    classNames: 'mx-auto w-[250px]',
+    animation: 'static',
+    showCalendarDays: false
+  }
+};
+
+export const BouncyWithoutDays: Story = {
+  args: {
+    classNames: 'mx-auto w-[250px]',
+    animation: 'bouncy',
+    showCalendarDays: false
   }
 };
