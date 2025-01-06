@@ -15,7 +15,7 @@ const meta = {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     classNames: { control: 'text' }
-  },
+  }
 } satisfies Meta<typeof Logo>;
 
 export default meta;
@@ -26,4 +26,3 @@ export const Main: Story = {
     classNames: 'mx-auto w-auto'
   }
 };
-
