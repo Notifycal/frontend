@@ -9,6 +9,7 @@ import type { FunctionComponent } from '@common/types';
 
 import { useAuth } from '@hooks/AuthProvider';
 import type { UserModel } from '@our-types/UserModel';
+import Logo from '../Logo/Logo';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -56,11 +57,9 @@ export default function Navigation(props: UserProps): FunctionComponent {
         <div className="relative flex h-16 items-center justify-between lg:border-b lg:border-indigo-400/25">
           <div className="flex items-center px-2 lg:px-0">
             <div className="shrink-0">
-              <img
-                alt="Your Company"
-                className="block size-8"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=300"
-              />
+              <Link to="/">
+                <Logo animation="static" classNames="block size-14" />
+              </Link>
             </div>
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">

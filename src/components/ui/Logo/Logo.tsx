@@ -9,9 +9,14 @@ import './Logo.css';
 interface LogoProps {
   classNames?: string;
   animation?: LogoAnimationVariants;
+  showCalendarDays?: boolean;
 }
 
-export default function Logo({ classNames = '', animation = 'static' }: LogoProps): FunctionComponent {
+export default function Logo({
+  classNames = '',
+  animation = 'static',
+  showCalendarDays = false
+}: LogoProps): FunctionComponent {
   const calendarDaysPaths = [
     'm 104.37451,140.8312 c -0.69597,-0.013 -1.30276,0.40869 -1.42782,1.03766 l -0.19896,1.00201 c -0.14293,0.71882 0.39838,1.42792 1.21388,1.59008 l 2.02055,0.40153 c 0.81551,0.16216 1.58668,-0.28577 1.72961,-1.00459 l 0.19947,-1.00201 c 0.14293,-0.71882 -0.39838,-1.42792 -1.21388,-1.59008 l -2.02055,-0.40205 c -0.10193,-0.0203 -0.20288,-0.0307 -0.3023,-0.0326 z',
     'm 111.79318,142.30656 c -0.69597,-0.013 -1.30223,0.40869 -1.42731,1.03766 l -0.19947,1.00149 c -0.14293,0.71882 0.39838,1.42793 1.21388,1.59009 l 2.02055,0.40204 c 0.8155,0.16216 1.5872,-0.28629 1.73013,-1.00511 l 0.19895,-1.00149 c 0.14294,-0.71882 -0.39838,-1.42846 -1.21388,-1.5906 l -2.02055,-0.40152 c -0.10193,-0.0203 -0.20288,-0.0307 -0.3023,-0.0326 z',
@@ -119,28 +124,29 @@ export default function Logo({ classNames = '', animation = 'static' }: LogoProp
           />
         </motion.g>
         <motion.g id="calendar-days">
-          {calendarDaysPaths.map((path: string, index: number): FunctionComponent => {
-            const row = Math.trunc(index / 4);
-            const col = index % 4;
+          {showCalendarDays &&
+            calendarDaysPaths.map((path: string, index: number): FunctionComponent => {
+              const row = Math.trunc(index / 4);
+              const col = index % 4;
 
-            return (
-              <motion.path
-                key={index}
-                animate={animationVariant('day', 'animate')}
-                d={path}
-                id={`day-${row}-${col}`}
-                initial={animationVariant('day', 'initial')}
-                transition={{
-                  translateY: {
-                    // This is cheating a bit...
-                    ...(animationVariant('day', 'transition')?.['translateY'] || {}),
-                    delay: Math.random() * 3,
-                    duration: Math.random() * 2
-                  }
-                }}
-              />
-            );
-          })}
+              return (
+                <motion.path
+                  key={index}
+                  animate={animationVariant('day', 'animate')}
+                  d={path}
+                  id={`day-${row}-${col}`}
+                  initial={animationVariant('day', 'initial')}
+                  transition={{
+                    translateY: {
+                      // This is cheating a bit...
+                      ...(animationVariant('day', 'transition')?.['translateY'] || {}),
+                      delay: Math.random() * 3,
+                      duration: Math.random() * 2
+                    }
+                  }}
+                />
+              );
+            })}
         </motion.g>
 
         <mask id="reveal-tick">
