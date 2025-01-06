@@ -35,15 +35,15 @@ export default function Logo({ classNames = '', animation = 'static' }: LogoProp
 
   return (
     <motion.svg
+      animate={animationVariant('full-svg', 'animate')}
       className={classNames}
-      height="40.462894mm"
-      id="svg1"
+      id="full-svg"
+      transition={animationVariant('full-svg', 'transition')}
       version="1.1"
       viewBox="0 0 62.13406 40.462894"
-      width="62.13406mm"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <motion.g id="g28" transform="translate(-73.818748,-128.32293)">
+      <motion.g transform="translate(-73.818748,-128.32293)">
         <motion.g
           animate={animationVariant('notification-bubble-full', 'animate')}
           id="notification-bubble-full"
@@ -133,7 +133,7 @@ export default function Logo({ classNames = '', animation = 'static' }: LogoProp
                 transition={{
                   translateY: {
                     // This is cheating a bit...
-                    ...animationVariant('day', 'transition')['translateY'],
+                    ...(animationVariant('day', 'transition')?.['translateY'] || {}),
                     delay: Math.random() * 3,
                     duration: Math.random() * 2
                   }

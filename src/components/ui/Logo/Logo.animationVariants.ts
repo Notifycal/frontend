@@ -1,17 +1,19 @@
 type AnimationValues = {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   animate: Record<string, any>;
-  initial: Record<string, any>;
+  initial?: Record<string, any>;
   transition: Record<string, any>;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 };
 
 type AnimationProperty = keyof AnimationValues;
 
-type AnimationTarget = 'notification-bubble-full' | 'calendar' | 'reveal-tick' | 'day';
+type AnimationTarget = 'notification-bubble-full' | 'calendar' | 'reveal-tick' | 'day' | 'full-svg';
 type LogoAnimatedAnimationVariants = 'default' | 'bouncy' | 'error';
 
 export type LogoAnimationVariants = LogoAnimatedAnimationVariants | 'static';
 
-type AnimationVariants = Record<LogoAnimatedAnimationVariants, Record<AnimationTarget, AnimationValues>>;
+type AnimationVariants = Record<LogoAnimatedAnimationVariants, Partial<Record<AnimationTarget, AnimationValues>>>;
 
 const animationVariants: AnimationVariants = {
   default: {
@@ -59,15 +61,37 @@ const animationVariants: AnimationVariants = {
       }
     }
   },
-  bouncy: {},
+  bouncy: {
+    'full-svg': {
+      animate: {
+        y: ['-0.5rem', '1rem'],
+        scale: ['90%', '110%']
+      },
+      transition: {
+        y: {
+          duration: 0.8,
+          repeat: Infinity,
+          ease: 'easeIn',
+          repeatType: 'reverse'
+        },
+        scale: {
+          duration: 1.6,
+          repeat: Infinity,
+          ease: 'easeOut',
+          repeatType: 'reverse'
+        }
+      }
+    }
+  },
   error: {}
 };
 
 export const getAnimationVariants = (variant: LogoAnimationVariants) => {
   return (objectId: AnimationTarget, property: AnimationProperty): AnimationValues[AnimationProperty] => {
-    if (variant === 'static') {
-      return {};
+    if (variant !== 'static' && animationVariants[variant] && animationVariants[variant][objectId]) {
+      return animationVariants[variant][objectId][property];
     }
-    return animationVariants[variant][objectId][property];
+
+    return {};
   };
 };
