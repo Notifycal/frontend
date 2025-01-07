@@ -1,5 +1,5 @@
 variable "base_domain" {
-  type = string
+  type    = string
   default = "notifycal.com"
 }
 
