@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.3](https://github.com/Notifycal/frontend/compare/v0.5.2...v0.5.3) (2025-01-07)
+
+
+### Bug Fixes
+
+* define base_domain at stack level as it will not change that often ([#70](https://github.com/Notifycal/frontend/issues/70)) ([388ccf7](https://github.com/Notifycal/frontend/commit/388ccf71beb9045260c0d8214c03aca5cbe289e2))
+* empty S3 bucket before syncing the build to it ([#72](https://github.com/Notifycal/frontend/issues/72)) ([9cb4f2b](https://github.com/Notifycal/frontend/commit/9cb4f2b30d3df7181668406191686a23ec019a5a))
+
 ## [0.5.2](https://github.com/Notifycal/frontend/compare/v0.5.1...v0.5.2) (2025-01-03)
 
 
