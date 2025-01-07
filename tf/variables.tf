@@ -20,6 +20,11 @@ variable "is_public" {
   description = "When set to false, the site will be behind auth."
 }
 
+variable "is_local_env" {
+  type = bool
+  default = false
+}
+
 locals {
   domain = var.domain_prefix == "" ? var.base_domain : "${var.domain_prefix}.${var.base_domain}"
 
