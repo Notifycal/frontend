@@ -1,5 +1,6 @@
 variable "base_domain" {
   type = string
+  default = "notifycal.com"
 }
 
 variable "domain_prefix" {
