@@ -20,6 +20,20 @@ variable "is_public" {
   description = "When set to false, the site will be behind auth."
 }
 
+variable "cloudflare_config" {
+  type = object({
+    account_name = optional(string, "notifycal.com")
+    private_site_auth = optional(object({
+      # Name of the identity provider set up in Cloudflare
+      idp_name = optional(string, "Github")
+    }))
+  })
+  default = {
+    private_site_auth = null
+  }
+  description = "Controls the creation of Cloudflare resources such us DNS records, S3 access from Cloudflare and private app access. If null is provided as a value, none of those resources are created"
+}
+
 locals {
   domain = var.domain_prefix == "" ? var.base_domain : "${var.domain_prefix}.${var.base_domain}"
 
