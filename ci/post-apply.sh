@@ -50,8 +50,9 @@ service-discovery --environment "${ENVIRONMENT}" \
   --skel_file dist/config.skel.js > dist/config.js && \
   rm -rf dist/config.skel.js
 
-echo "Uploading to S3 static site bucket..."
-aws s3 sync --delete ./dist/ "s3://${BUCKET_NAME}"
+echo "Uploading to S3 static site bucket... but emptying the bucket first ;)"
+aws s3 rm "s3://${BUCKET_NAME}" --recursive && \
+  aws s3 sync --delete ./dist/ "s3://${BUCKET_NAME}"
 echo
 
 # Display site URL
