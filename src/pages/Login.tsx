@@ -8,7 +8,7 @@ import { useAuth, type LoginError } from '@hooks/AuthProvider';
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
 
 import type { FunctionComponent } from '@common/types';
-import { useServiceConfig } from '@hooks/ServiceConfigProvider';
+// import { useServiceConfig } from '@hooks/ServiceConfigProvider';
 
 export const Login = (): FunctionComponent => {
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export const Login = (): FunctionComponent => {
 
   const handleLogin = auth.login;
 
-  const { STATIC_LANDING_URL } = useServiceConfig();
+  // const { STATIC_LANDING_URL } = useServiceConfig();
 
   return (
     <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
@@ -86,7 +86,7 @@ export const Login = (): FunctionComponent => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             {t('home.wantToKnowMore')}{' '}
-            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href={STATIC_LANDING_URL}>
+            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href="#">
               {t('home.checkOurSite')}
             </a>
           </p>
