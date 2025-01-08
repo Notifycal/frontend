@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/Notifycal/frontend/compare/v0.6.0...v0.6.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* bump static website module. Remove unused variable ([#75](https://github.com/Notifycal/frontend/issues/75)) ([8a9237d](https://github.com/Notifycal/frontend/commit/8a9237d38808560396faf3e8ddaa1498260f6aad))
+
 ## [0.6.0](https://github.com/Notifycal/frontend/compare/v0.5.3...v0.6.0) (2025-01-07)
 
 
