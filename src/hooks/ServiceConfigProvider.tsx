@@ -6,8 +6,8 @@ import type { FunctionComponent } from '@common/types';
 
 export const ServiceConfigSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().nonempty('GOOGLE_CLIENT_ID is required'),
-  BACKEND_BASE_URL: z.string().url('BACKEND_BASE_URL must be a valid URL'),
-  STATIC_LANDING_URL: z.string().url('STATIC_LANDING_URL must be a valid URL')
+  BACKEND_BASE_URL: z.string().url('BACKEND_BASE_URL must be a valid URL')
+  // STATIC_LANDING_URL: z.string().url('STATIC_LANDING_URL must be a valid URL')
 });
 
 export type ServiceConfig = z.infer<typeof ServiceConfigSchema>;
