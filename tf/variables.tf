@@ -14,12 +14,6 @@ variable "enable_www_redirect" {
   default     = true
 }
 
-variable "is_public" {
-  type        = bool
-  default     = true
-  description = "When set to false, the site will be behind auth."
-}
-
 variable "cloudflare_config" {
   type = object({
     account_name = optional(string, "notifycal.com")
