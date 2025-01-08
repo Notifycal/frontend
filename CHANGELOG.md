@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/Notifycal/frontend/compare/v0.6.1...v0.6.2) (2025-01-08)
+
+
+### Bug Fixes
+
+* stop relying in STATIC_LANDING_URL for now ([#77](https://github.com/Notifycal/frontend/issues/77)) ([1e21efb](https://github.com/Notifycal/frontend/commit/1e21efbe5c3df7ff33a3f43533eddb7c7616c7e4))
+
 ## [0.6.1](https://github.com/Notifycal/frontend/compare/v0.6.0...v0.6.1) (2025-01-08)
 
 
