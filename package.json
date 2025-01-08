@@ -12,7 +12,7 @@
     "url": "https://github.com/Notifycal/frontend"
   },
   "license": "MIT",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "type": "module",
   "scripts": {
     "dev": "$npm_execpath run dev:config && vite",

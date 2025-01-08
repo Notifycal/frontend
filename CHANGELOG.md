@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/Notifycal/frontend/compare/v0.5.3...v0.6.0) (2025-01-07)
+
+
+### Features
+
+* add cloudflare_config parameter to determine whether or not cloudfla… ([#73](https://github.com/Notifycal/frontend/issues/73)) ([88b084e](https://github.com/Notifycal/frontend/commit/88b084e14d80f63eb3da09ad2d42acbdc0732ad6))
+
 ## [0.5.3](https://github.com/Notifycal/frontend/compare/v0.5.2...v0.5.3) (2025-01-07)
 
 
