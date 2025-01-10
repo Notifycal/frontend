@@ -44,12 +44,12 @@ jobs:
           filters: |
             tf:
               - 'tf/**'
-              - '.github/workflows/*.yaml'
+              - '.github/workflows/cicd.yaml'
             web:
               - '**'
               - '!tf/**'
               - '!README.md'
-              - '.github/workflows/*.yaml'
+              - '.github/workflows/cicd.yaml'
 
   build:
     runs-on: ubuntu-latest
