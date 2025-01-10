@@ -3,7 +3,7 @@ on:
     types:
       - opened
 
-name: add-issue-to-project
+name: Add opened issue to project
 jobs:
   add-issue-to-project:
     uses: Notifycal/gh-actions/.github/workflows/add-issue-to-project.yaml@main
