@@ -11,7 +11,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_frontend"></a> [frontend](#module\_frontend) | git@github.com:Notifycal/tofu-module-static-website.git | v2.0.0 |
+| <a name="module_frontend"></a> [frontend](#module\_frontend) | git@github.com:Notifycal/tofu-module-static-website.git | v2.0.1 |
 
 ## Inputs
 
@@ -21,7 +21,6 @@
 | <a name="input_cloudflare_config"></a> [cloudflare\_config](#input\_cloudflare\_config) | Controls the creation of Cloudflare resources such us DNS records, S3 access from Cloudflare and private app access. If null is provided as a value, none of those resources are created | <pre>object({<br/>    account_name = optional(string, "notifycal.com")<br/>    private_site_auth = optional(object({<br/>      # Name of the identity provider set up in Cloudflare<br/>      idp_name = optional(string, "Github")<br/>    }))<br/>  })</pre> | <pre>{<br/>  "private_site_auth": null<br/>}</pre> | no |
 | <a name="input_domain_prefix"></a> [domain\_prefix](#input\_domain\_prefix) | n/a | `string` | `""` | no |
 | <a name="input_enable_www_redirect"></a> [enable\_www\_redirect](#input\_enable\_www\_redirect) | When set to true, www. will redirect to the naked domain. | `string` | `true` | no |
-| <a name="input_is_public"></a> [is\_public](#input\_is\_public) | When set to false, the site will be behind auth. | `bool` | `true` | no |
 
 ## Outputs
 
