@@ -41,7 +41,15 @@ echo
 echo "Retrieving release from Github..."
 TMP_DIR=$(mktemp -d "/tmp/${STACK_NAME}.XXXXX")
 pushd "${TMP_DIR}" > /dev/null
-gh release download "${STACK_VERSION}" --repo "${_GH_ORG}/${STACK_NAME}"
+
+if [[ "${STACK_VERSION}" == "main" ]]; then
+  latest_release=$(gh release list --repo "${_GH_ORG}/${STACK_NAME}" --json name,isLatest |jq -rc '.[] | select(.isLatest)|.name')
+  echo "Downloading the latest release (${latest_release}) as STACK_VERSION is 'main'"
+  gh release download "${latest_release}" --repo "${_GH_ORG}/${STACK_NAME}" --dir "${TMP_DIR}"
+else
+  gh release download "${STACK_VERSION}" --repo "${_GH_ORG}/${STACK_NAME}" --dir "${TMP_DIR}"
+fi
+
 unzip dist.zip
 echo
 
