@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/Notifycal/frontend/compare/v0.6.2...v0.7.0) (2025-01-14)
+
+
+### Features
+
+* add config so app can interact with localstack too ([#93](https://github.com/Notifycal/frontend/issues/93)) ([3c103ff](https://github.com/Notifycal/frontend/commit/3c103fff57fdc47b1a9a138e6c9e0f6ea5ac1fee))
+
 ## [0.6.2](https://github.com/Notifycal/frontend/compare/v0.6.1...v0.6.2) (2025-01-08)
 
 
