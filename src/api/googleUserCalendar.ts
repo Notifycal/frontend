@@ -10,7 +10,7 @@ interface UserCalendars {
 }
 
 export const getUserCalendarsFromGoogle = async (): Promise<UserCalendars> => {
-  console.log('Fake API')
+  console.log('Fake API');
   await sleep(5000);
   return fakeResponse as UserCalendars;
 
