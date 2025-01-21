@@ -21,7 +21,7 @@ export type RefreshResponse = GenericAuthResponse;
 export const login = async (codeResponse: CodeResponse): Promise<LoginResponse> => {
   try {
     const response = await getApiClient().post(
-      '/api/v1/login',
+      '/api/v1/login?idp=google.com',
       { googleCode: codeResponse.code },
       { skipAuthorization: true, skipTokenRefresh: true }
     );
