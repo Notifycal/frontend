@@ -20,7 +20,7 @@ const StepFourComponent = (): FunctionComponent => {
 
   const businessName = watch('businessName');
 
-  const { data: calendars, isLoading } = useQuery({
+  const { data: Calendars, isLoading } = useQuery({
     queryKey: ['userIdPCalendars'],
     queryFn: getUserCalendarsFromGoogle
   });
@@ -34,7 +34,7 @@ const StepFourComponent = (): FunctionComponent => {
           <MultiSelect
             {...field} // Pass value and onChange from react-hook-form
             comboboxProps={{ shadow: 'md' }}
-            data={calendars?.calendars}
+            data={Calendars?.Calendars}
             disabled={isLoading}
             error={errors['businessCalendars']?.message || undefined}
             label={`Selecciona los calendarios que quieres usar para ${businessName}`}

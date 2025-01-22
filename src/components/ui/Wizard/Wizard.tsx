@@ -1,4 +1,4 @@
-import { useState, type ComponentType } from 'react';
+import { useState, type ComponentType, type HTMLProps } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -26,6 +26,8 @@ export type WizardConfig<TFormValues extends Record<string, unknown>> = Array<St
 
 interface WizardProps {
   header: string;
+  className?: HTMLProps<HTMLElement>['className'];
+  buttonClassName?: HTMLProps<HTMLElement>['className'];
   wizardSteps: WizardConfig<FormValues>;
   handleFinish: (data: FormValues) => Promise<unknown>;
   handleNext?: () => void;
@@ -38,8 +40,17 @@ export const wizardTransitionVariants = {
   exit: { opacity: 0, x: -50 } // Exit to the left and invisible
 };
 
-const Wizard = ({ header, wizardSteps, handleFinish, handleNext, handlePrevious }: WizardProps): FunctionComponent => {
+const Wizard = ({
+  header,
+  wizardSteps,
+  className,
+  buttonClassName = 'rounded-lg',
+  handleFinish,
+  handleNext,
+  handlePrevious
+}: WizardProps): FunctionComponent => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isWaitingForFinish, setWaitingForFinish] = useState(false);
 
   const isLastStep = currentStep === wizardSteps.length - 1;
 
@@ -62,7 +73,6 @@ const Wizard = ({ header, wizardSteps, handleFinish, handleNext, handlePrevious 
 
   const onNextStep = async (): Promise<void> => {
     const isValid = await methods.trigger();
-    console.log(isValid);
     if (isValid) {
       if (handleNext) {
         handleNext();
@@ -78,16 +88,21 @@ const Wizard = ({ header, wizardSteps, handleFinish, handleNext, handlePrevious 
     setCurrentStep((previous) => previous - 1);
   };
 
+  const onFormFinish = async (): Promise<void> => {
+    setWaitingForFinish(true);
+    const formData = methods.getValues();
+    await handleFinish(formData);
+    setWaitingForFinish(false);
+  };
+
   const CurrentStepComponent = wizardSteps[currentStep]?.component;
 
   return (
     <FormProvider {...methods}>
       <form
-        className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left mt-6 md:mt-0 px-6 py-12"
-        onSubmit={methods.handleSubmit(async () => {
-          // This isn't how react-hook-form is meant to work, hey... it works
-          await handleFinish(methods.getValues());
-        })}
+        className={`flex flex-col ${className}`}
+        // className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${className}`}
+        onSubmit={onFormFinish}
       >
         {header && <h1 className="text-xl md:text-2xl font-bold mb-4">{header}</h1>}
         <AnimatePresence mode="wait">
@@ -95,7 +110,7 @@ const Wizard = ({ header, wizardSteps, handleFinish, handleNext, handlePrevious 
             <motion.div
               key={currentStep}
               animate="center"
-              className="w-full"
+              className="flex-1"
               exit="exit"
               initial="enter"
               transition={{ duration: 0.15, ease: 'easeInOut' }}
@@ -105,10 +120,10 @@ const Wizard = ({ header, wizardSteps, handleFinish, handleNext, handlePrevious 
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="flex justify-between w-full mt-auto">
+        <div className="flex justify-between">
           {currentStep != 0 && (
             <Button
-              className="rounded-lg"
+              className={buttonClassName}
               leftSection={<IconArrowLeft size={14} />}
               variant="light"
               onClick={onPreviousStep}
@@ -117,12 +132,13 @@ const Wizard = ({ header, wizardSteps, handleFinish, handleNext, handlePrevious 
             </Button>
           )}
           {isLastStep ? (
-            <Button className="rounded-lg" rightSection={<IconCheck size={14} />} type="submit">
+            <Button key={currentStep} className={buttonClassName} loading={isWaitingForFinish} rightSection={<IconCheck size={14} />} type="submit">
               Finalizar
             </Button>
           ) : (
             <Button
-              className="rounded-lg"
+              key={currentStep}
+              className={buttonClassName}
               rightSection={<IconArrowRight size={14} />}
               type="button"
               onClick={onNextStep}

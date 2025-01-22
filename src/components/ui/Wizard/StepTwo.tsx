@@ -1,4 +1,5 @@
 import type { FunctionComponent } from '@common/types';
+import { TextInput } from '@mantine/core';
 import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 import type { Step } from './Wizard';
@@ -11,14 +12,13 @@ const StepTwoComponent = (): FunctionComponent => {
 
   return (
     <>
-      <p className="text-sm md:text-base text-gray-600 mb-6">¿Cómo se llama tu negocio?</p>
-      <input
-        className="border rounded-md p-2 w-full"
-        placeholder="Nombre del negocio"
-        type="text"
+      <TextInput
+        autoFocus
+        label="¿Cómo se llama tu negocio?"
         {...register('businessName')}
+        error={errors['businessName']?.message}
+        type="text"
       />
-      {errors.businessName && <p className="text-red-500 text-sm">{errors.businessName.message}</p>}
     </>
   );
 };

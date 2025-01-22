@@ -16,7 +16,9 @@ async function enableMocking(): Promise<void> {
   }
 
   const { worker } = await import('@api/mocks/browser.ts');
-  await worker.start();
+  await worker.start({
+    onUnhandledRequest: 'bypass'
+  });
 }
 
 const rootElement = document.querySelector('#root') as Element;

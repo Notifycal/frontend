@@ -1,5 +1,6 @@
 import { getUserProfile } from '@api/userProfile';
 import type { FunctionComponent } from '@common/types';
+import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate, useMatchRoute } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
@@ -10,15 +11,16 @@ export const UserProvider = ({ children }: { children: ReactNode }): FunctionCom
   const { data: user, isLoading } = useQuery({
     queryKey: ['userProfile'],
     queryFn: getUserProfile,
-    retry: false,
+    retry: false
   });
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading)
+    return <FullPageSpinner />;
 
   if (user && user.Status === 'onboarding' && !matchRoute({ to: '/onboarding' })) {
-    return <Navigate to="/onboarding"/>
+    return <Navigate to="/onboarding" />;
     // return null;
   }
 
-  return <>{ children }</>;
+  return <>{children}</>;
 };

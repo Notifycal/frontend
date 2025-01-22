@@ -18,6 +18,6 @@ export const Route = createFileRoute('/_auth')({
   component: () => (
     <UserProvider>
       <Outlet />
-    </UserProvider>      
+    </UserProvider>
   )
 });
