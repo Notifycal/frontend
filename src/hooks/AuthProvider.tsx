@@ -176,7 +176,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   }, [refreshToken]);
 
   if (loginStatus === 'loading') {
-    return <FullPageSpinner />
+    return <FullPageSpinner />;
   }
 
   return (

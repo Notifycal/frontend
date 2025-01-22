@@ -13,7 +13,6 @@ const StepTwoComponent = (): FunctionComponent => {
   return (
     <>
       <TextInput
-        autoFocus
         label="¿Cómo se llama tu negocio?"
         {...register('businessName')}
         error={errors['businessName']?.message}

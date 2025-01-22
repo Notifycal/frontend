@@ -132,7 +132,13 @@ const Wizard = ({
             </Button>
           )}
           {isLastStep ? (
-            <Button key={currentStep} className={buttonClassName} loading={isWaitingForFinish} rightSection={<IconCheck size={14} />} type="submit">
+            <Button
+              key={currentStep}
+              className={buttonClassName}
+              loading={isWaitingForFinish}
+              rightSection={<IconCheck size={14} />}
+              type="submit"
+            >
               Finalizar
             </Button>
           ) : (

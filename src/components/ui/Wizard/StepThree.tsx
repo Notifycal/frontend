@@ -17,7 +17,6 @@ const StepThreeComponent = (): FunctionComponent => {
   return (
     <>
       <TextInput
-        autoFocus
         label={`Cual es la direccion de ${businessName}?`}
         {...register('businessAddress')}
         error={errors['businessAddress']?.message}
