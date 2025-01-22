@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/Notifycal/frontend/compare/v0.7.0...v0.8.0) (2025-01-22)
+
+
+### Features
+
+* absorb API breaking changes ([ae8c8c1](https://github.com/Notifycal/frontend/commit/ae8c8c13e90ddc8c88c47b24ba89854e66dc2904))
+* previous commit was not a chore. it was actually a breaking change ([964a0b6](https://github.com/Notifycal/frontend/commit/964a0b693074fc7a33dd84097efa0bd85efd65b4))
+
 ## [0.7.0](https://github.com/Notifycal/frontend/compare/v0.6.2...v0.7.0) (2025-01-14)
 
 
