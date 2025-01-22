@@ -15,6 +15,7 @@
   "version": "0.7.0",
   "type": "module",
   "scripts": {
+    "types": "tsc",
     "dev": "$npm_execpath run dev:config && vite",
     "dev:config": "cp config/config.local.js public/config.js",
     "build": "rm -rf public/config.js && tsc && vite build && $npm_execpath run build:config",
