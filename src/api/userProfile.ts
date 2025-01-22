@@ -1,8 +1,8 @@
 import getApiClient from './common';
 
 interface UserProfile {
-  UserId: string;
-  Status: 'onboarding';
+  UserId: string; // TODO: make this user-id
+  UserStatus: 'live' | 'banned' | 'onboarding';
 }
 
 export const getUserProfile = async (): Promise<UserProfile> => {
