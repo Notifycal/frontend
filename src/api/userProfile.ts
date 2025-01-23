@@ -16,11 +16,11 @@ export const getUserProfile = async (): Promise<UserProfile> => {
   }
 };
 
-export interface UserProfileBusinessDetails {
-  BusinessAddress: string;
-  BusinessName: string;
-  BusinessCalendars: Array<string>;
-}
+type UserProfileBusinessAddress = string;
+type UserProfileBusinessName = string;
+type UserProfileBusinessCalendars = Array<string>;
+
+// export interface UserProfileBusinessDetails = UserProfileBusinessName & UserProfileBusinessAddress & UserProfileBusinessCalendars;
 
 export const updateUserProfile = async (userData: Partial<UserProfileBusinessDetails>): Promise<void> => {
   try {

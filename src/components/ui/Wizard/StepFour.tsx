@@ -47,12 +47,16 @@ const StepFourComponent = (): FunctionComponent => {
   );
 };
 
-export const StepFour: Step<{ businessCalendars: Array<string> }> = {
+const StepFourSchema = z.object({
+  businessCalendars: z.array(z.string()).min(1, { message: 'Debes seleccionar al menos un calendario' })
+});
+
+const defaultValues: z.infer<typeof StepFourSchema> = {
+  businessCalendars: []
+};
+
+export const StepFour: Step<z.infer<typeof StepFourSchema>> = {
   component: StepFourComponent,
-  schema: z.object({
-    businessCalendars: z.array(z.string()).min(1, { message: 'Debes seleccionar al menos un calendario' })
-  }),
-  defaultValues: {
-    businessCalendars: []
-  }
+  schema: StepFourSchema,
+  defaultValues,
 };

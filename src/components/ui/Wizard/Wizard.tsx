@@ -1,6 +1,7 @@
 import { useState, type ComponentType, type HTMLProps } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import type { FieldValues} from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button } from '@mantine/core';
@@ -13,23 +14,20 @@ import { z, type ZodSchema } from 'zod';
 // Utility to infer form values from wizardConfig
 export type InferFormValues<T> = T extends Array<{ defaultValues: infer U }> ? U : never;
 
-// Generic type for form values
-export type FormValues = Record<string, unknown>; // Replace with a specific structure if needed
-
-export type Step<TFormValues extends Record<string, unknown>> = {
+export type Step<TFormValues extends FieldValues> = {
   component: ComponentType;
   schema: ZodSchema<TFormValues>;
   defaultValues: TFormValues;
 };
 
-export type WizardConfig<TFormValues extends Record<string, unknown>> = Array<Step<TFormValues>>;
+export type WizardConfig<TFormValues extends FieldValues> = Array<Step<TFormValues>>;
 
 interface WizardProps {
   header: string;
   className?: HTMLProps<HTMLElement>['className'];
   buttonClassName?: HTMLProps<HTMLElement>['className'];
-  wizardSteps: WizardConfig<FormValues>;
-  handleFinish: (data: FormValues) => Promise<unknown>;
+  wizardSteps: WizardConfig<FieldValues>;
+  handleFinish: (data: FieldValues) => Promise<unknown>;
   handleNext?: () => void;
   handlePrevious?: () => void;
 }
@@ -64,7 +62,7 @@ const Wizard = ({
 
   const { schema } = wizardSteps[currentStep] || { schema: z.object({}) };
 
-  const methods = useForm<FormValues>({
+  const methods = useForm<FieldValues>({
     resolver: zodResolver(schema),
     defaultValues,
     mode: 'onTouched',

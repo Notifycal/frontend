@@ -12,8 +12,10 @@ const StepFiveComponent = (): FunctionComponent => {
   );
 };
 
-export const StepFive: Step<Record<string, never>> = {
+const StepFiveSchema = z.object({});
+
+export const StepFive: Step<z.infer<typeof StepFiveSchema>> = {
   component: StepFiveComponent,
-  schema: z.object({}),
+  schema: StepFiveSchema,
   defaultValues: {}
 };

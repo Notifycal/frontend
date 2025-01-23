@@ -8,7 +8,8 @@ import { StepTwo } from '@components/ui/Wizard/StepTwo';
 
 import { useNavigate } from '@tanstack/react-router';
 
-import { updateUserProfile, type UserProfileBusinessDetails } from '@api/userProfile';
+import type { UserProfileBusinessDetails } from '@api/userProfile';
+import { updateUserProfile } from '@api/userProfile';
 
 import onboardingImg from '@assets/images/onboarding.png';
 
@@ -20,7 +21,11 @@ const Onboarding = (): FunctionComponent => {
   const onboardingConfig: WizardConfig<Record<string, unknown>> = [StepOne, StepTwo, StepThree, StepFour, StepFive];
 
   const onOnboardingFinish = async (data: UserProfileBusinessDetails): Promise<void> => {
-    await updateUserProfile(data);
+    await updateUserProfile({
+      BusinessAddress: data.businessAddress,
+      BusinessCalendars: data.businessCalendars,
+      BusinessName: data.businessNames
+    });
     await navigate({ to: '/dashboard' });
   };
 
