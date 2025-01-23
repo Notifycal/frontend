@@ -15,8 +15,9 @@ const StepOneComponent = (): FunctionComponent => {
   );
 };
 
-export const StepOne: Step<Record<string, never>> = {
+const StepOneSchema = z.object({})
+export const StepOne: Step<typeof StepOneSchema> = {
   component: StepOneComponent,
-  schema: z.object({}),
+  schema: StepOneSchema,
   defaultValues: {}
 };

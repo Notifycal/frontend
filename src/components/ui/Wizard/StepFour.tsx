@@ -7,16 +7,18 @@ import { useQuery } from '@tanstack/react-query';
 import { Controller, useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 import type { Step } from './Wizard';
+import type { StepTwoValues } from './StepTwo';
 
+const StepFourSchema = z.object({
+  businessCalendars: z.array(z.string()).min(1, { message: 'Debes seleccionar al menos un calendario' })
+});
+type StepFourValues = z.infer<typeof StepFourSchema>;
 const StepFourComponent = (): FunctionComponent => {
   const {
     formState: { errors },
     watch,
     control
-  } = useFormContext<{
-    businessCalendars: Array<string>;
-    businessName: string; // Required only for display purposes
-  }>();
+  } = useFormContext<StepFourValues & StepTwoValues>();
 
   const businessName = watch('businessName');
 
@@ -47,16 +49,10 @@ const StepFourComponent = (): FunctionComponent => {
   );
 };
 
-const StepFourSchema = z.object({
-  businessCalendars: z.array(z.string()).min(1, { message: 'Debes seleccionar al menos un calendario' })
-});
-
-const defaultValues: z.infer<typeof StepFourSchema> = {
-  businessCalendars: []
-};
-
-export const StepFour: Step<z.infer<typeof StepFourSchema>> = {
+export const StepFour: Step<typeof StepFourSchema> = {
   component: StepFourComponent,
   schema: StepFourSchema,
-  defaultValues,
+  defaultValues: {
+    businessCalendars: []
+  }
 };

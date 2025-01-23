@@ -4,13 +4,18 @@ import { TextInput } from '@mantine/core';
 import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 import type { Step } from './Wizard';
+import type { StepTwoValues } from './StepTwo';
 
+const StepThreeSchema = z.object({
+  businessAddress: z.string().min(1, { message: 'La direccion del negocio es obligatorio. ' })
+});
+type StepThreeValues = z.infer<typeof StepThreeSchema>
 const StepThreeComponent = (): FunctionComponent => {
   const {
     register,
     formState: { errors },
     watch
-  } = useFormContext<{ businessAddress: string; businessName: string }>();
+  } = useFormContext<StepThreeValues & StepTwoValues>();
 
   const businessName = watch('businessName');
 
@@ -24,12 +29,9 @@ const StepThreeComponent = (): FunctionComponent => {
     </>
   );
 };
-
-export const StepThree: Step<{ businessAddress: string }> = {
+export const StepThree: Step<typeof StepThreeSchema> = {
   component: StepThreeComponent,
-  schema: z.object({
-    businessAddress: z.string().min(1, { message: 'La direccion del negocio es obligatorio. ' })
-  }),
+  schema: StepThreeSchema,
   defaultValues: {
     businessAddress: ''
   }

@@ -1,33 +1,26 @@
 import { useState, type ComponentType, type HTMLProps } from 'react';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import type { FieldValues} from 'react-hook-form';
-import { FormProvider, useForm } from 'react-hook-form';
-
+import { FormProvider, type FieldValues, type UseFormReturn } from 'react-hook-form';
 import { Button } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
-
 import type { FunctionComponent } from '@common/types';
-import { z, type ZodSchema } from 'zod';
+import { z } from 'zod';
 
-// Utility to infer form values from wizardConfig
-export type InferFormValues<T> = T extends Array<{ defaultValues: infer U }> ? U : never;
-
-export type Step<TFormValues extends FieldValues> = {
+export type Step<TSchema extends z.AnyZodObject> = {
   component: ComponentType;
-  schema: ZodSchema<TFormValues>;
-  defaultValues: TFormValues;
+  schema: TSchema;
+  defaultValues: z.infer<TSchema>;
 };
 
-export type WizardConfig<TFormValues extends FieldValues> = Array<Step<TFormValues>>;
+export type WizardConfig<TSchema extends z.AnyZodObject> = Array<Step<TSchema>>;
 
-interface WizardProps {
+interface WizardProps<TSchema extends z.AnyZodObject, TResult extends FieldValues> {
   header: string;
   className?: HTMLProps<HTMLElement>['className'];
   buttonClassName?: HTMLProps<HTMLElement>['className'];
-  wizardSteps: WizardConfig<FieldValues>;
-  handleFinish: (data: FieldValues) => Promise<unknown>;
+  wizardSteps: WizardConfig<TSchema>;
+  handleFinish: (data: TResult) => Promise<void>;
+  useFormFn: (stepSchema: TSchema) => UseFormReturn<TResult>;
   handleNext?: () => void;
   handlePrevious?: () => void;
 }
@@ -38,37 +31,17 @@ export const wizardTransitionVariants = {
   exit: { opacity: 0, x: -50 } // Exit to the left and invisible
 };
 
-const Wizard = ({
-  header,
-  wizardSteps,
-  className,
-  buttonClassName = 'rounded-lg',
-  handleFinish,
-  handleNext,
-  handlePrevious
-}: WizardProps): FunctionComponent => {
+function Wizard<TResult extends FieldValues>({
+  header, wizardSteps, className, buttonClassName = 'rounded-lg', handleFinish, useFormFn, handleNext, handlePrevious
+}: WizardProps<z.AnyZodObject, TResult>): FunctionComponent {
   const [currentStep, setCurrentStep] = useState(0);
   const [isWaitingForFinish, setWaitingForFinish] = useState(false);
 
   const isLastStep = currentStep === wizardSteps.length - 1;
 
-  const defaultValues = wizardSteps.reduce(
-    (accumulator, step) => ({
-      ...accumulator,
-      ...step.defaultValues
-    }),
-    {}
-  );
-
   const { schema } = wizardSteps[currentStep] || { schema: z.object({}) };
-
-  const methods = useForm<FieldValues>({
-    resolver: zodResolver(schema),
-    defaultValues,
-    mode: 'onTouched',
-    shouldUnregister: false
-  });
-
+  const methods = useFormFn(schema)
+  
   const onNextStep = async (): Promise<void> => {
     const isValid = await methods.trigger();
     if (isValid) {
@@ -154,6 +127,6 @@ const Wizard = ({
       </form>
     </FormProvider>
   );
-};
+}
 
 export default Wizard;

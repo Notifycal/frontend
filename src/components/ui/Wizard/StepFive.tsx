@@ -13,8 +13,7 @@ const StepFiveComponent = (): FunctionComponent => {
 };
 
 const StepFiveSchema = z.object({});
-
-export const StepFive: Step<z.infer<typeof StepFiveSchema>> = {
+export const StepFive: Step<typeof StepFiveSchema> = {
   component: StepFiveComponent,
   schema: StepFiveSchema,
   defaultValues: {}

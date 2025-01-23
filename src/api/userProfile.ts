@@ -16,15 +16,15 @@ export const getUserProfile = async (): Promise<UserProfile> => {
   }
 };
 
-type UserProfileBusinessAddress = string;
-type UserProfileBusinessName = string;
-type UserProfileBusinessCalendars = Array<string>;
+export interface UserProfileBusinessDetails {
+  businessAddress: string;
+  businessName: string;
+  businessCalendars: Array<string>;
+}
 
-// export interface UserProfileBusinessDetails = UserProfileBusinessName & UserProfileBusinessAddress & UserProfileBusinessCalendars;
-
-export const updateUserProfile = async (userData: Partial<UserProfileBusinessDetails>): Promise<void> => {
+export const updateUserProfile = async (data: UserProfileBusinessDetails): Promise<void> => {
   try {
-    const response = await getApiClient().put('/api/v1/user-profile', { userData });
+    const response = await getApiClient().put('/api/v1/user-profile', data);
     if (response.status === 200) {
       return;
     } else {
