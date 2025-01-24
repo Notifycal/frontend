@@ -11,6 +11,7 @@ import { useNavigate } from '@tanstack/react-router';
 import onboardingImg from '@assets/images/onboarding.png';
 
 import type { FunctionComponent } from '@common/types';
+import { useErrorBoundary } from 'react-error-boundary';
 import { z } from 'zod';
 
 const Onboarding = (): FunctionComponent => {
@@ -23,15 +24,15 @@ const Onboarding = (): FunctionComponent => {
 
   const navigate = useNavigate();
 
+  const { showBoundary } = useErrorBoundary();
+
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
     const parsingResult = UserProfileBusinessDetailsSchema.safeParse(data);
     if (parsingResult.success) {
       await updateUserProfile(parsingResult.data);
       await navigate({ to: '/dashboard' });
     } else {
-      console.error('BOOOOOOOM!');
-      // TODO handle gracefully
-      throw new Error('This should not happen');
+      showBoundary(new Error('This should not happen'));
     }
   };
 
