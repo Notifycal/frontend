@@ -3,7 +3,7 @@ import getApiClient from './common';
 
 interface UserProfile {
   UserId: string;
-  Status: 'onboarding' | 'live' | 'banned';
+  UserStatus: 'onboarding' | 'live' | 'banned';
 }
 
 export const getUserProfile = async (): Promise<UserProfile> => {

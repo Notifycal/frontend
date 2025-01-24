@@ -16,7 +16,7 @@ export const handlers = [
     await delay(2500);
     return HttpResponse.json({
       SignedUpAt: 1736857377448,
-      Status: userStatus,
+      UserStatus: userStatus,
       LastSignInAt: 1737164323173,
       UserId: 'notifycal@gmail.com'
     });
@@ -34,7 +34,7 @@ export const handlers = [
     await delay(2500);
     return HttpResponse.json({
       SignedUpAt: 1736857377448,
-      Status: userStatus,
+      UserStatus: userStatus,
       LastSignInAt: 1737164323173,
       UserId: 'notifycal@gmail.com'
     });
