@@ -4,11 +4,11 @@ import type { FunctionComponent } from '@common/types';
 import { Button } from '@mantine/core';
 
 interface FullScreenErrorProps {
-  errorBody?: string;
+  errorMessage?: string;
   onRetry?: () => void;
 }
 
-const FullScreenError = ({ errorBody, onRetry }: FullScreenErrorProps): FunctionComponent => {
+const FullPageError = ({ errorMessage, onRetry }: FullScreenErrorProps): FunctionComponent => {
   const { t } = useTranslation();
 
   return (
@@ -22,7 +22,7 @@ const FullScreenError = ({ errorBody, onRetry }: FullScreenErrorProps): Function
               src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
             />
             <h1 className="text-3xl font-bold text-gray-800 mb-4">{t('globalError.somethingWrong')}</h1>
-            {errorBody && <p className="text-gray-600 mb-6">{errorBody}</p>}
+            {errorMessage && <p className="text-gray-600 mb-6">{errorMessage}</p>}
           </div>
           <div className="space-y-4">
             <Button
@@ -44,4 +44,4 @@ const FullScreenError = ({ errorBody, onRetry }: FullScreenErrorProps): Function
   );
 };
 
-export default FullScreenError;
+export default FullPageError;
