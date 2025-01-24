@@ -16,9 +16,8 @@ export const UserProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   if (isLoading) return <FullPageSpinner />;
 
-  if (user && user.Status === 'onboarding' && !matchRoute({ to: '/onboarding' })) {
+  if (user && user.UserStatus === 'onboarding' && !matchRoute({ to: '/onboarding' })) {
     return <Navigate to="/onboarding" />;
-    // return null;
   }
 
   return <>{children}</>;
