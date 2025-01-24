@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
-import { router } from './router.ts';
+import { router } from './router.tsx';
 
 import { isProduction } from '@common/utils.ts';
 

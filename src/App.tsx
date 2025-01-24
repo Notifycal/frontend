@@ -21,7 +21,7 @@ import { initializeApiClient } from '@api/common.ts';
 import FullScreenError from '@components/ui/FullScreenError/FullScreenError.tsx';
 
 import type { FunctionComponent } from '@common/types.ts';
-import type { router } from './router.ts';
+import type { router } from './router.tsx';
 
 const queryClient = new QueryClient();
 
