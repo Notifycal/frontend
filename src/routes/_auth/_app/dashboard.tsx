@@ -1,14 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import AppLayout from '@components/layout/AppLayout';
 import { Dashboard } from '@pages/Dashboard';
 
-export const Route = createFileRoute('/_auth/dashboard')({
-  component: () => (
-    <AppLayout>
-      <Dashboard />
-    </AppLayout>
-  ),
+export const Route = createFileRoute('/_auth/_app/dashboard')({
+  component: Dashboard,
   staticData: {
     layout: {
       useFancyHeader: true,
