@@ -15,7 +15,7 @@ const StepThreeComponent = (): FunctionComponent => {
     register,
     formState: { errors },
     watch
-  } = useFormContext<StepThreeValues & StepTwoValues>();
+  } = useFormContext<StepThreeValues & Pick<StepTwoValues, 'businessName'>>();
 
   const businessName = watch('businessName');
 
