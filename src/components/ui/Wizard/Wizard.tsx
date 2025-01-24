@@ -1,10 +1,11 @@
 import { useState, type ComponentType, type HTMLProps } from 'react';
-import { FormProvider, type FieldValues, type UseFormReturn } from 'react-hook-form';
+import { type DefaultValues, FormProvider, useForm, type FieldValues } from 'react-hook-form';
 import { Button } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
 import type { FunctionComponent } from '@common/types';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export type Step<TSchema extends z.AnyZodObject> = {
   component: ComponentType;
@@ -20,7 +21,6 @@ interface WizardProps<TSchema extends z.AnyZodObject, TResult extends FieldValue
   buttonClassName?: HTMLProps<HTMLElement>['className'];
   wizardSteps: WizardConfig<TSchema>;
   handleFinish: (data: TResult) => Promise<void>;
-  useFormFn: (stepSchema: TSchema) => UseFormReturn<TResult>;
   handleNext?: () => void;
   handlePrevious?: () => void;
 }
@@ -32,7 +32,7 @@ export const wizardTransitionVariants = {
 };
 
 function Wizard<TResult extends FieldValues>({
-  header, wizardSteps, className, buttonClassName = 'rounded-lg', handleFinish, useFormFn, handleNext, handlePrevious
+  header, wizardSteps, className, buttonClassName = 'rounded-lg', handleFinish, handleNext, handlePrevious
 }: WizardProps<z.AnyZodObject, TResult>): FunctionComponent {
   const [currentStep, setCurrentStep] = useState(0);
   const [isWaitingForFinish, setWaitingForFinish] = useState(false);
@@ -40,7 +40,16 @@ function Wizard<TResult extends FieldValues>({
   const isLastStep = currentStep === wizardSteps.length - 1;
 
   const { schema } = wizardSteps[currentStep] || { schema: z.object({}) };
-  const methods = useFormFn(schema)
+  const defaultValues = wizardSteps.map(s => s.defaultValues).reduce((accumulator, item) => ({
+      ...accumulator,
+      ...item
+    }), {}) as DefaultValues<TResult>;
+  const methods = useForm<TResult>({
+    resolver: zodResolver(schema),
+    defaultValues,
+    mode: 'onTouched',
+    shouldUnregister: false
+  });
   
   const onNextStep = async (): Promise<void> => {
     const isValid = await methods.trigger();

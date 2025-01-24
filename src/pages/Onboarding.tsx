@@ -1,5 +1,4 @@
 import Wizard from '@components/ui/Wizard/Wizard';
-
 import { StepFive } from '@components/ui/Wizard/StepFive';
 import { StepFour } from '@components/ui/Wizard/StepFour';
 import { StepOne } from '@components/ui/Wizard/StepOne';
@@ -7,42 +6,40 @@ import { StepThree } from '@components/ui/Wizard/StepThree';
 import { StepTwo } from '@components/ui/Wizard/StepTwo';
 
 import { useNavigate } from '@tanstack/react-router';
-
- 
-import { type UserProfileBusinessDetails, updateUserProfile } from '@api/userProfile';
+import { updateUserProfile, UserProfileBusinessDetailsSchema } from '@api/userProfile';
 
 import onboardingImg from '@assets/images/onboarding.png';
 
 import type { FunctionComponent } from '@common/types';
-import type { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { type UseFormReturn, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const Onboarding = (): FunctionComponent => {
-  const steps = [StepOne, StepTwo, StepThree, StepFour, StepFive];
+  const stepsConfig = [
+    StepOne,
+    StepTwo,
+    StepThree,
+    StepFour,
+    StepFive,
+   ];
+  const steps = Object.values(stepsConfig).map(s => s.schema)
+  const initialValue: z.AnyZodObject = z.object({})
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const schema = StepTwo.schema.merge(StepThree.schema).merge(StepFour.schema) satisfies z.ZodType<UserProfileBusinessDetails>;
+  const schema = steps.reduce((accumulator, item) => accumulator.merge(item), initialValue);
   type FormResult = z.infer<typeof schema>
 
-  const defaultValues = steps.map(s => s.defaultValues).reduce((accumulator, item) => ({
-    ...accumulator,
-    ...item
-  }));
   const navigate = useNavigate();
 
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
-    await updateUserProfile(data);
+    const parsingResult = UserProfileBusinessDetailsSchema.safeParse(data)
+    if (parsingResult.success) {
+    await updateUserProfile(parsingResult.data);
     await navigate({ to: '/dashboard' });
+    } else {
+      console.error('BOOOOOOOM!')
+      // TODO handle gracefully
+      throw new Error('This should not happen')
+    }
   };
-
-  function useFormFn<TSchema extends z.AnyZodObject>(schema: TSchema): UseFormReturn<FormResult> {
-    return useForm<FormResult>({
-      resolver: zodResolver(schema),
-      defaultValues,
-      mode: 'onTouched',
-      shouldUnregister: false
-    });
-  }
   
   return (
     <div className="container h-screen md:max-h-[500px] mx-auto bg-white shadow-sm rounded-lg lg:max-w-[66.6%]">
@@ -57,8 +54,7 @@ const Onboarding = (): FunctionComponent => {
           className="flex-shrink-0 flex-grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
           handleFinish={onOnboardingFinish}
           header="Bienvenid@ a Notifycal"
-          useFormFn={useFormFn}
-          wizardSteps={steps}
+          wizardSteps={stepsConfig}
         />
       </div>
     </div>

@@ -7,7 +7,7 @@ import type { Step } from './Wizard';
 const StepTwoSchema = z.object({
   businessName: z.string().min(1, { message: 'El nombre del negocio es obligatorio. ' })
 })
-export type StepTwoValues = z.infer<typeof StepTwoSchema>
+export type StepTwoValues = z.infer<typeof StepTwoSchema>;
 const StepTwoComponent = (): FunctionComponent => {
   const {
     register,
