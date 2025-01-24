@@ -1,7 +1,5 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 
-import { UserProvider } from '@hooks/UserProvider';
-
 // This route (and all the routes starting with _) is not an actual route
 // In fact this defines the layout of all authenticated routes.
 export const Route = createFileRoute('/_auth')({
@@ -15,9 +13,5 @@ export const Route = createFileRoute('/_auth')({
       });
     }
   },
-  component: () => (
-    <UserProvider>
-      <Outlet />
-    </UserProvider>
-  )
+  component: Outlet
 });
