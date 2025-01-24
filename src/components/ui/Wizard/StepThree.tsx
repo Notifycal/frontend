@@ -9,7 +9,7 @@ import type { StepTwoValues } from './StepTwo';
 const StepThreeSchema = z.object({
   businessAddress: z.string().min(1, { message: 'La direccion del negocio es obligatorio. ' })
 });
-type StepThreeValues = z.infer<typeof StepThreeSchema>
+type StepThreeValues = z.infer<typeof StepThreeSchema>;
 const StepThreeComponent = (): FunctionComponent => {
   const {
     register,

@@ -32,7 +32,13 @@ export const wizardTransitionVariants = {
 };
 
 function Wizard<TResult extends FieldValues>({
-  header, wizardSteps, className, buttonClassName = 'rounded-lg', handleFinish, handleNext, handlePrevious
+  header,
+  wizardSteps,
+  className,
+  buttonClassName = 'rounded-lg',
+  handleFinish,
+  handleNext,
+  handlePrevious
 }: WizardProps<z.AnyZodObject, TResult>): FunctionComponent {
   const [currentStep, setCurrentStep] = useState(0);
   const [isWaitingForFinish, setWaitingForFinish] = useState(false);
@@ -40,17 +46,22 @@ function Wizard<TResult extends FieldValues>({
   const isLastStep = currentStep === wizardSteps.length - 1;
 
   const { schema } = wizardSteps[currentStep] || { schema: z.object({}) };
-  const defaultValues = wizardSteps.map(s => s.defaultValues).reduce((accumulator, item) => ({
-      ...accumulator,
-      ...item
-    }), {}) as DefaultValues<TResult>;
+  const defaultValues = wizardSteps
+    .map((s) => s.defaultValues)
+    .reduce(
+      (accumulator, item) => ({
+        ...accumulator,
+        ...item
+      }),
+      {}
+    ) as DefaultValues<TResult>;
   const methods = useForm<TResult>({
     resolver: zodResolver(schema),
     defaultValues,
     mode: 'onTouched',
     shouldUnregister: false
   });
-  
+
   const onNextStep = async (): Promise<void> => {
     const isValid = await methods.trigger();
     if (isValid) {
