@@ -1,11 +1,14 @@
 import { useState, type ComponentType, type HTMLProps } from 'react';
-import { type DefaultValues, FormProvider, useForm, type FieldValues } from 'react-hook-form';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, useForm, type DefaultValues, type FieldValues } from 'react-hook-form';
+import { z } from 'zod';
+
 import { Button } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
+
 import type { FunctionComponent } from '@common/types';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 export type Step<TSchema extends z.AnyZodObject> = {
   component: ComponentType;
@@ -90,10 +93,7 @@ function Wizard<TResult extends FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form
-        className={`flex flex-col ${className}`}
-        onSubmit={onFormFinish}
-      >
+      <form className={`flex flex-col ${className}`} onSubmit={onFormFinish}>
         {header && <h1 className="text-xl md:text-2xl font-bold mb-4">{header}</h1>}
         <AnimatePresence mode="wait">
           {CurrentStepComponent && (
