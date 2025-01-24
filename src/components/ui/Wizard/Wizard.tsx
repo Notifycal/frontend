@@ -92,7 +92,6 @@ function Wizard<TResult extends FieldValues>({
     <FormProvider {...methods}>
       <form
         className={`flex flex-col ${className}`}
-        // className={`w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left ${className}`}
         onSubmit={onFormFinish}
       >
         {header && <h1 className="text-xl md:text-2xl font-bold mb-4">{header}</h1>}
