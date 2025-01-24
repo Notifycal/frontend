@@ -114,6 +114,7 @@ function Wizard<TResult extends FieldValues>({
           {currentStep != 0 && (
             <Button
               className={buttonClassName}
+              disabled={isWaitingForFinish}
               leftSection={<IconArrowLeft size={14} />}
               variant="light"
               onClick={onPreviousStep}
