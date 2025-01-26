@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/Notifycal/frontend/compare/v0.8.0...v0.8.1) (2025-01-26)
+
+
+### Bug Fixes
+
+* trigger new release ([#106](https://github.com/Notifycal/frontend/issues/106)) ([a90efd4](https://github.com/Notifycal/frontend/commit/a90efd47a42979161e6a1d913ce5a267e636a6dc))
+
 ## [0.8.0](https://github.com/Notifycal/frontend/compare/v0.7.0...v0.8.0) (2025-01-22)
 
 
