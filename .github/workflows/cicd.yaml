@@ -66,6 +66,8 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm ci
       - name: Lint files
         id: lint
