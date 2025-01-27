@@ -1,4 +1,3 @@
-import { z } from 'zod';
 import getApiClient from './common';
 
 interface UserProfile {
@@ -17,12 +16,11 @@ export const getUserProfile = async (): Promise<UserProfile> => {
   }
 };
 
-export const UserProfileBusinessDetailsSchema = z.object({
-  businessAddress: z.string(),
-  businessName: z.string(),
-  businessCalendars: z.array(z.string())
-});
-export type UserProfileBusinessDetails = z.infer<typeof UserProfileBusinessDetailsSchema>;
+export interface UserProfileBusinessDetails {
+  businessAddress: string;
+  businessName: string;
+  businessCalendars: Array<string>;
+}
 
 export const updateUserProfile = async (data: UserProfileBusinessDetails): Promise<void> => {
   try {

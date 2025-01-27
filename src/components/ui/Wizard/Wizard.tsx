@@ -18,7 +18,7 @@ export type Step<TSchema extends z.AnyZodObject> = {
 
 export type WizardConfig<TSchema extends z.AnyZodObject> = Array<Step<TSchema>>;
 
-interface WizardProps<TSchema extends z.AnyZodObject, TResult extends FieldValues> {
+interface WizardProps<TSchema extends z.AnyZodObject, TResult> {
   header: string;
   className?: HTMLProps<HTMLElement>['className'];
   buttonClassName?: HTMLProps<HTMLElement>['className'];

@@ -1,39 +1,32 @@
-import { StepFive } from '@components/ui/Wizard/StepFive';
+import Wizard from '@components/ui/Wizard/Wizard';
 import { StepFour } from '@components/ui/Wizard/StepFour';
-import { StepOne } from '@components/ui/Wizard/StepOne';
 import { StepThree } from '@components/ui/Wizard/StepThree';
 import { StepTwo } from '@components/ui/Wizard/StepTwo';
-import Wizard from '@components/ui/Wizard/Wizard';
 
-import { updateUserProfile, UserProfileBusinessDetailsSchema } from '@api/userProfile';
 import { useNavigate } from '@tanstack/react-router';
+import { updateUserProfile, type UserProfileBusinessDetails } from '@api/userProfile';
 
 import onboardingImg from '@assets/images/onboarding.png';
 
 import type { FunctionComponent } from '@common/types';
-import { useErrorBoundary } from 'react-error-boundary';
-import { z } from 'zod';
+import type { z } from 'zod';
+import { StepOne } from '@components/ui/Wizard/StepOne';
+import { StepFive } from '@components/ui/Wizard/StepFive';
 
 const Onboarding = (): FunctionComponent => {
   const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive];
-  const steps = Object.values(stepsConfig).map((s) => s.schema);
-  const initialValue: z.AnyZodObject = z.object({});
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const schema = steps.reduce((accumulator, item) => accumulator.merge(item), initialValue);
+  const schema = StepOne.schema
+    .merge(StepTwo.schema)
+    .merge(StepThree.schema)
+    .merge(StepFour.schema)
+    .merge(StepFive.schema);
   type FormResult = z.infer<typeof schema>;
 
   const navigate = useNavigate();
-
-  const { showBoundary } = useErrorBoundary();
-
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
-    const parsingResult = UserProfileBusinessDetailsSchema.safeParse(data);
-    if (parsingResult.success) {
-      await updateUserProfile(parsingResult.data);
-      await navigate({ to: '/dashboard' });
-    } else {
-      showBoundary(new Error('This should not happen'));
-    }
+    await updateUserProfile(data satisfies UserProfileBusinessDetails);
+    await navigate({ to: '/dashboard' });
   };
 
   return (
