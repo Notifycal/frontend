@@ -5,24 +5,23 @@ updates:
     # specify `/.github/workflows` for `directory`. You can use `directory: "/"`.)
     directory: '/'
     schedule:
-      interval: 'daily'
-      time: '18:45'
+      interval: 'weekly'
+    registries:
+      - notifycal-github
 
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
-      time: '18:45'
+      interval: 'weekly'
     registries:
       - npm-github-registry
 
   - package-ecosystem: 'terraform'
     directory: '/tf'
     schedule:
-      interval: 'daily'
-      time: '18:45'
+      interval: 'weekly'
     registries:
-      - terraform-github
+      - notifycal-github
 
 registries:
   npm-github-registry:
@@ -30,7 +29,7 @@ registries:
     url: https://npm.pkg.github.com
     token: ${{secrets.DEPENDABOT_PAT}}
 
-  terraform-github:
+  notifycal-github:
     type: git
     url: 'https://github.com/Notifycal'
     token: ${{secrets.DEPENDABOT_PAT}}
