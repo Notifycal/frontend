@@ -6,13 +6,32 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    registries:
+      - notifycal-github
 
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'weekly'
+    registries:
+      - npm-github-registry
 
   - package-ecosystem: 'terraform'
-    directory: '/tf'
+    directories:
+      - '/tf'
+      - '/tf/**'
     schedule:
       interval: 'weekly'
+    registries:
+      - notifycal-github
+
+registries:
+  npm-github-registry:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{secrets.DEPENDABOT_PAT}}
+  notifycal-github:
+    type: git
+    url: 'https://github.com'
+    username: x-access-token
+    password: ${{secrets.DEPENDABOT_PAT}}
