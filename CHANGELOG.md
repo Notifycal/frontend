@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.2](https://github.com/Notifycal/frontend/compare/v0.8.1...v0.8.2) (2025-01-28)
+
+
+### Bug Fixes
+
+* use App token for commits to trigger workflow ([#125](https://github.com/Notifycal/frontend/issues/125)) ([f323b80](https://github.com/Notifycal/frontend/commit/f323b80fe89e006427eb256c86b2cb27f470f349))
+
 ## [0.8.1](https://github.com/Notifycal/frontend/compare/v0.8.0...v0.8.1) (2025-01-26)
 
 
