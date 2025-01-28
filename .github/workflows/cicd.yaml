@@ -17,6 +17,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+env:
+  PR_LABEL_CI_PASS: 'ci: pass'
+  PR_LABEL_CI_FAIL: 'ci: fail'
+
 jobs:
   preflight:
     runs-on: ubuntu-latest
@@ -28,6 +32,20 @@ jobs:
       infra: ${{ steps.filter.outputs.tf }}
       web: ${{ steps.filter.outputs.web }}
     steps:
+      - name: Get GH token from Github App
+        id: gh-app-auth
+        if: github.event_name == 'pull_request'
+        uses: getsentry/action-github-app-token@v3
+        with:
+          app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
+          private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
+      - name: Remove ci labels if any
+        if: github.event_name == 'pull_request'
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "${{ env.PR_LABEL_CI_FAIL}}"
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "${{ env.PR_LABEL_CI_PASS}}"
+        env:
+          GITHUB_TOKEN: ${{ steps.gh-app-auth.outputs.token }}
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref || github.ref_name }}
