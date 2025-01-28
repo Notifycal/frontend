@@ -209,6 +209,8 @@ jobs:
       - name: Add label to PR
         run: |
           gh pr edit ${{ github.event.pull_request.number }} --add-label "ci: pass"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     runs-on: ubuntu-latest
