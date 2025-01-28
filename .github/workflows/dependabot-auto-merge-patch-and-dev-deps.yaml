@@ -12,9 +12,11 @@ jobs:
   dependabot:
     runs-on: ubuntu-latest
     # Only runs for PRs created by dependabot, when the label is `ci: pass`
-    if: |
-      github.actor == 'dependabot[bot]'
+    # if: |
+    #   github.actor == 'dependabot[bot]'
     steps:
+      - run: |
+          echo "${{ github.actor }}"
       - run: |
           echo "${{ toJson(github.event) }}"
       - name: Dependabot metadata
