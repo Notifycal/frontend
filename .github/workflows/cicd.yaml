@@ -209,7 +209,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Add label to PR
         run: |
-          gh pr edit ${{ github.event.pull_request.number }} --add-label "$LABEL"
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "ci: pass"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
