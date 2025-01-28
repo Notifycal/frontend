@@ -39,6 +39,9 @@ jobs:
         with:
           app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
           private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Remove ci labels if any
         if: github.event_name == 'pull_request'
         run: |
@@ -46,9 +49,6 @@ jobs:
           gh pr edit ${{ github.event.pull_request.number }} --remove-label "${{ env.PR_LABEL_CI_PASS}}"
         env:
           GITHUB_TOKEN: ${{ steps.gh-app-auth.outputs.token }}
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
       - name: Validate commits with commitlint
         uses: wagoid/commitlint-github-action@v6
         id: commitlint
