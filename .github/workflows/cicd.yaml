@@ -204,7 +204,11 @@ jobs:
       contents: read
       pull-requests: write
       repository-projects: read
-    if: ${{ github.event_name == 'pull_request' && needs.tofu.outputs.git_changes == 'false' }}
+    if: |
+      github.event_name == 'pull_request' && (
+        needs.tofu.result == 'skipped' || 
+        needs.tofu.outputs.git_changes == 'false'
+      )
     steps:
       - uses: actions/checkout@v4
       - name: Add label to PR
