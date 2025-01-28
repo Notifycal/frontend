@@ -205,6 +205,7 @@ jobs:
       pull-requests: write
       repository-projects: read
     if: |
+      always() && 
       github.event_name == 'pull_request' && (
         needs.tofu.result == 'skipped' || 
         needs.tofu.outputs.git_changes == 'false'
