@@ -6,5 +6,5 @@ module "frontend" {
 
   enable_www_redirect = var.enable_www_redirect
 
-  cloudflare_config     = var.cloudflare_config
+  cloudflare_config = var.cloudflare_config
 }
