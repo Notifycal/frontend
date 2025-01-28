@@ -207,9 +207,17 @@ jobs:
     if: ${{ github.event_name == 'pull_request' && needs.tofu.outputs.git_changes == 'false' }}
     steps:
       - uses: actions/checkout@v4
-      - name: Add label to PR
+      - name: Ensure label exists and add it to PR
         run: |
-          gh pr edit ${{ github.event.pull_request.number }} --add-label "ci: pass"
+          LABEL="ci: pass"
+          COLOR="00FF00"
+          DESCRIPTION="Label added by CI for passing checks"
+
+          if ! gh label list | grep -q "^$LABEL"; then
+            gh label create "$LABEL" --color "$COLOR" --description "$DESCRIPTION"
+          fi
+
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "$LABEL"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
