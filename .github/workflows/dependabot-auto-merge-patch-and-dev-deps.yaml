@@ -18,7 +18,7 @@ jobs:
       - run: |
           echo "${{ github.actor }}"
       - run: |
-          echo "${{ toJson(github.event) }}"
+          echo '${{ toJson(github.event) }}'
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v2
