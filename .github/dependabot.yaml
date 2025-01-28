@@ -30,7 +30,6 @@ registries:
     type: npm-registry
     url: https://npm.pkg.github.com
     token: ${{secrets.DEPENDABOT_PAT}}
-
   notifycal-github:
     type: git
     url: 'https://github.com'
