@@ -7,5 +7,5 @@ output "bucket_names" {
 }
 
 output "site_url" {
-  value       = "https://${local.domain}"
+  value = "https://${local.domain}"
 }
