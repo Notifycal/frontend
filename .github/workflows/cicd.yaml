@@ -105,16 +105,17 @@ jobs:
     if: |
       needs.preflight.outputs.infra == 'true' || github.event_name != 'pull_request'
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
-
       - name: Get GH token from Github App
         id: gh-app-auth
         uses: getsentry/action-github-app-token@v3
         with:
           app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
           private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          token: ${{ steps.gh-app-auth.outputs.token }}
 
       - name: Hack for github internal repo access :(
         run: git config --global url."https://foo:${{ steps.gh-app-auth.outputs.token }}@github.com".insteadOf ssh://git@github.com
