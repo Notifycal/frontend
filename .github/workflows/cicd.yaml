@@ -203,6 +203,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      repository-projects: read
     if: ${{ github.event_name == 'pull_request' && needs.tofu.outputs.git_changes == 'false' }}
     steps:
       - uses: actions/checkout@v4
