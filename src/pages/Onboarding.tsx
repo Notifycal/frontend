@@ -1,17 +1,18 @@
-import Wizard from '@components/ui/Wizard/Wizard';
 import { StepFour } from '@components/ui/Wizard/StepFour';
 import { StepThree } from '@components/ui/Wizard/StepThree';
 import { StepTwo } from '@components/ui/Wizard/StepTwo';
+import Wizard from '@components/ui/Wizard/Wizard';
 
-import { useNavigate } from '@tanstack/react-router';
 import { updateUserProfile, type UserProfileBusinessDetails } from '@api/userProfile';
+import { useNavigate } from '@tanstack/react-router';
 
 import onboardingImg from '@assets/images/onboarding.png';
 
 import type { FunctionComponent } from '@common/types';
-import type { z } from 'zod';
-import { StepOne } from '@components/ui/Wizard/StepOne';
 import { StepFive } from '@components/ui/Wizard/StepFive';
+import { StepOne } from '@components/ui/Wizard/StepOne';
+import { useTranslation } from 'react-i18next';
+import type { z } from 'zod';
 
 const Onboarding = (): FunctionComponent => {
   const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive];
@@ -22,7 +23,7 @@ const Onboarding = (): FunctionComponent => {
     .merge(StepFour.schema)
     .merge(StepFive.schema);
   type FormResult = z.infer<typeof schema>;
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
     await updateUserProfile(data satisfies UserProfileBusinessDetails);
@@ -41,7 +42,7 @@ const Onboarding = (): FunctionComponent => {
         <Wizard
           className="flex-shrink-0 flex-grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
           handleFinish={onOnboardingFinish}
-          header="Bienvenid@ a Notifycal"
+          header={t('onboarding.step1.header')}
           wizardSteps={stepsConfig}
         />
       </div>

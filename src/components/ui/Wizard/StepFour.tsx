@@ -5,6 +5,7 @@ import { IconRefresh } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import type { StepTwoValues } from './StepTwo';
 import type { Step } from './Wizard';
@@ -18,6 +19,7 @@ const StepFourSchema = z.object({
 });
 type StepFourValues = z.infer<typeof StepFourSchema>;
 const StepFourComponent = (): FunctionComponent => {
+  const { t } = useTranslation();
   const {
     formState: { errors },
     watch,
@@ -42,9 +44,9 @@ const StepFourComponent = (): FunctionComponent => {
             data={(Calendars || []).map((c) => ({ label: c.name, value: c.id }))}
             disabled={isLoading}
             error={errors['calendars']?.message || undefined}
-            label={`Selecciona los calendarios que quieres usar para ${businessName}`}
+            label={t('onboarding.step4.msg1', { businessName: businessName })}
             leftSection={isLoading && <IconRefresh size={14} />}
-            placeholder={isLoading ? 'Buscando calendarios del usuario...' : 'Selecciona uno o más calendarios'}
+            placeholder={isLoading ? t('onboarding.step4.selectMenu.loading') : t('onboarding.step4.selectMenu.loaded')}
             onChange={(v) => {
               onChange((Calendars || []).filter((c) => v.includes(c.id)));
             }}

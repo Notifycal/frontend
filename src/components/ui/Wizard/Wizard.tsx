@@ -9,6 +9,7 @@ import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
 
 import type { FunctionComponent } from '@common/types';
+import { useTranslation } from 'react-i18next';
 
 export type Step<TSchema extends z.AnyZodObject> = {
   component: ComponentType;
@@ -43,6 +44,7 @@ function Wizard<TResult extends FieldValues>({
   handleNext,
   handlePrevious
 }: WizardProps<z.AnyZodObject, TResult>): FunctionComponent {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
   const [isWaitingForFinish, setWaitingForFinish] = useState(false);
 
@@ -119,7 +121,7 @@ function Wizard<TResult extends FieldValues>({
               variant="light"
               onClick={onPreviousStep}
             >
-              Atrás
+              {t('wizard.button.back')}
             </Button>
           )}
           {isLastStep ? (
@@ -130,7 +132,7 @@ function Wizard<TResult extends FieldValues>({
               rightSection={<IconCheck size={14} />}
               type="submit"
             >
-              Finalizar
+              {t('wizard.button.finish')}
             </Button>
           ) : (
             <Button
@@ -140,7 +142,7 @@ function Wizard<TResult extends FieldValues>({
               type="button"
               onClick={onNextStep}
             >
-              Continuar
+              {t('wizard.button.continue')}
             </Button>
           )}
         </div>
