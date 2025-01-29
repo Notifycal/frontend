@@ -1,16 +1,17 @@
 import getApiClient from './common';
 
-interface UserCalendars {
-  Calendars: Array<string>; // TODO: review
+export interface Calendar {
+  id: string;
+  name: string;
 }
 
-export const getUserCalendarsFromGoogle = async (): Promise<UserCalendars> => {
+export const getUserCalendarsFromGoogle = async (): Promise<Array<Calendar>> => {
   try {
-    const response = await getApiClient().get('/api/v1/user-calendars');
-    return {
-      ...response.data
-    } as UserCalendars;
+    const response = await getApiClient().get('/api/v1/idp/user-calendars');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const calendars = response.data?.['result'] as Array<Calendar>;
+    return calendars;
   } catch (error) {
-    throw new Error(`Something went wrong about GET /api/v1/user-calendars call. Error: ${JSON.stringify(error)}`);
+    throw new Error(`Something went wrong about GET /api/v1/idp/user-calendars call. Error: ${JSON.stringify(error)}`);
   }
 };

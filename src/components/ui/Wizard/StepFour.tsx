@@ -6,11 +6,15 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Controller, useFormContext } from 'react-hook-form';
 import { z } from 'zod';
-import type { Step } from './Wizard';
 import type { StepTwoValues } from './StepTwo';
+import type { Step } from './Wizard';
 
+export const calendarSchema = z.object({
+  id: z.string(),
+  name: z.string()
+});
 const StepFourSchema = z.object({
-  businessCalendars: z.array(z.string()).min(1, { message: 'Debes seleccionar al menos un calendario' })
+  calendars: z.array(calendarSchema).min(1, { message: 'Debes seleccionar al menos un calendario' })
 });
 type StepFourValues = z.infer<typeof StepFourSchema>;
 const StepFourComponent = (): FunctionComponent => {
@@ -31,17 +35,19 @@ const StepFourComponent = (): FunctionComponent => {
     <>
       <Controller
         control={control}
-        name="businessCalendars"
-        render={({ field }) => (
+        name="calendars"
+        render={({ field: { onChange } }) => (
           <MultiSelect
-            {...field} // Pass value and onChange from react-hook-form
             comboboxProps={{ shadow: 'md' }}
-            data={Calendars?.Calendars}
+            data={(Calendars || []).map((c) => ({ label: c.name, value: c.id }))}
             disabled={isLoading}
-            error={errors['businessCalendars']?.message || undefined}
+            error={errors['calendars']?.message || undefined}
             label={`Selecciona los calendarios que quieres usar para ${businessName}`}
             leftSection={isLoading && <IconRefresh size={14} />}
             placeholder={isLoading ? 'Buscando calendarios del usuario...' : 'Selecciona uno o más calendarios'}
+            onChange={(v) => {
+              onChange((Calendars || []).filter((c) => v.includes(c.id)));
+            }}
           />
         )}
       />
@@ -53,6 +59,6 @@ export const StepFour: Step<typeof StepFourSchema> = {
   component: StepFourComponent,
   schema: StepFourSchema,
   defaultValues: {
-    businessCalendars: []
+    calendars: []
   }
 };
