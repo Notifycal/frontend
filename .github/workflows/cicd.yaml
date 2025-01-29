@@ -227,12 +227,7 @@ jobs:
       contents: read
       pull-requests: write
       repository-projects: read
-    if: |
-      always() && 
-      github.event_name == 'pull_request' && (
-        needs.tofu.result == 'skipped' || 
-        needs.tofu.outputs.git_changes == 'false'
-      )
+    if: ${{ always() && github.event_name == 'pull_request' }}
     steps:
       - name: Get GH token from Github App
         id: gh-app-auth
