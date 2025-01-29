@@ -11,8 +11,8 @@ import type { StepTwoValues } from './StepTwo';
 import type { Step } from './Wizard';
 
 export const calendarSchema = z.object({
-  id: z.string(),
-  name: z.string()
+  id: z.string().brand('CalendarId'),
+  name: z.string().brand('CalendarName')
 });
 const StepFourSchema = z.object({
   calendars: z.array(calendarSchema).min(1, { message: 'Debes seleccionar al menos un calendario' })

@@ -1,29 +1,17 @@
+import type { IdpName, ReminderConfig, SuccessResponseContainer, User } from '@notifycal/shared/types';
 import getApiClient from './common';
-import type { Calendar } from './googleUserCalendar';
 
-interface UserProfile {
-  UserId: string;
-  UserStatus: 'onboarding' | 'live' | 'banned';
-}
-
-export const getUserProfile = async (): Promise<UserProfile> => {
+export const getUserProfile = async (): Promise<User<IdpName>> => {
   try {
     const response = await getApiClient().get('/api/v1/user-profile');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const user = response.data?.['result'] as UserProfile;
-    return user;
+    const { result } = response.data as SuccessResponseContainer<User<IdpName>>;
+    return result;
   } catch (error) {
     throw new Error(`Something went wrong about GET api/v1/user-profile call. Error: ${JSON.stringify(error)}`);
   }
 };
 
-export interface UserProfileBusinessDetails {
-  businessAddress: string;
-  businessName: string;
-  calendars: Array<Calendar>;
-}
-
-export const updateUserProfile = async (data: UserProfileBusinessDetails): Promise<void> => {
+export const updateUserProfile = async (data: ReminderConfig): Promise<void> => {
   try {
     const response = await getApiClient().patch('/api/v1/user-profile', data);
     if (response.status === 204) {

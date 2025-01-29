@@ -15,7 +15,7 @@ export const Dashboard = (): FunctionComponent => {
     <>
       <span>
         Username:
-        {!!query.data && <span> {query.data.UserId}</span>}
+        {!!query.data && <span> {query.data.userId}</span>}
       </span>
     </>
   );

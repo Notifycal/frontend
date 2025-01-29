@@ -3,7 +3,7 @@ import { StepThree } from '@components/ui/Wizard/StepThree';
 import { StepTwo } from '@components/ui/Wizard/StepTwo';
 import Wizard from '@components/ui/Wizard/Wizard';
 
-import { updateUserProfile, type UserProfileBusinessDetails } from '@api/userProfile';
+import { updateUserProfile } from '@api/userProfile';
 import { useNavigate } from '@tanstack/react-router';
 
 import onboardingImg from '@assets/images/onboarding.png';
@@ -11,6 +11,7 @@ import onboardingImg from '@assets/images/onboarding.png';
 import type { FunctionComponent } from '@common/types';
 import { StepFive } from '@components/ui/Wizard/StepFive';
 import { StepOne } from '@components/ui/Wizard/StepOne';
+import type { ReminderConfig } from '@notifycal/shared/types';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
@@ -26,7 +27,7 @@ const Onboarding = (): FunctionComponent => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
-    await updateUserProfile(data satisfies UserProfileBusinessDetails);
+    await updateUserProfile(data satisfies ReminderConfig);
     await navigate({ to: '/dashboard' });
   };
 
