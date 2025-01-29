@@ -25,7 +25,7 @@ export interface UserProfileBusinessDetails {
 
 export const updateUserProfile = async (data: UserProfileBusinessDetails): Promise<void> => {
   try {
-    const response = await getApiClient().patch('/api/v1/user-profile', { ...data, userStatus: 'live' });
+    const response = await getApiClient().patch('/api/v1/user-profile', data);
     if (response.status === 204) {
       return;
     } else {
