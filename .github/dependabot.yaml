@@ -13,6 +13,19 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    groups:
+      mantine:
+        patterns:
+          - '@mantine/*'
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - '@chromatic-com/storybook'
+      eslint:
+        patterns:
+          - 'eslint'
+          - 'eslint-*'
+          - '@eslint/*'
     registries:
       - npm-github-registry
 
