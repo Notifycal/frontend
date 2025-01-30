@@ -27,7 +27,6 @@ jobs:
     permissions:
       pull-requests: read
       contents: read
-      packages: read
     # Set job outputs to values from filter step
     outputs:
       infra: ${{ steps.filter.outputs.tf }}
@@ -75,6 +74,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      packages: read
     needs: preflight
     if: |
       needs.preflight.outputs.web == 'true' || github.event_name != 'pull_request'
