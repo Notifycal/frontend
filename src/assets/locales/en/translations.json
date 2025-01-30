@@ -25,7 +25,8 @@
       "msg1": "Select the calendar you want to use for {{businessName}}",
       "selectMenu": {
         "loading": "Searching for your calendars...",
-        "loaded": "Select one or more calendars"
+        "loaded": "Select one or more calendars",
+        "error": "At least one calendar needs to be selected"
       }
     },
     "step5": {

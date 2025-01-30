@@ -4,6 +4,7 @@ import { MultiSelect } from '@mantine/core';
 import { IconRefresh } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 
+import i18next from 'i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -15,7 +16,7 @@ export const calendarSchema = z.object({
   name: z.string().brand('CalendarName')
 });
 const StepFourSchema = z.object({
-  calendars: z.array(calendarSchema).min(1, { message: 'Debes seleccionar al menos un calendario' })
+  calendars: z.array(calendarSchema).min(1, { message: i18next.t('onboarding.step4.selectMenu.error') })
 });
 type StepFourValues = z.infer<typeof StepFourSchema>;
 const StepFourComponent = (): FunctionComponent => {
@@ -43,7 +44,7 @@ const StepFourComponent = (): FunctionComponent => {
             comboboxProps={{ shadow: 'md' }}
             data={(Calendars || []).map((c) => ({ label: c.name, value: c.id }))}
             disabled={isLoading}
-            error={errors['calendars']?.message || undefined}
+            error={errors['calendars']?.message}
             label={t('onboarding.step4.msg1', { businessName: businessName })}
             leftSection={isLoading && <IconRefresh size={14} />}
             placeholder={isLoading ? t('onboarding.step4.selectMenu.loading') : t('onboarding.step4.selectMenu.loaded')}
