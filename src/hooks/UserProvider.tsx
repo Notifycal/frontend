@@ -9,7 +9,7 @@ export const UserProvider = ({ children }: { children: ReactNode }): FunctionCom
   const matchRoute = useMatchRoute();
 
   const { data: user, isLoading } = useQuery({
-    queryKey: ['userProfile'],
+    queryKey: ['user-profile'],
     queryFn: getUserProfile,
     retry: false
   });
