@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/Notifycal/frontend/compare/v0.8.1...v0.9.0) (2025-01-30)
+
+
+### Features
+
+* onboarding/post-login wizard ([#96](https://github.com/Notifycal/frontend/issues/96)) ([e8c55a8](https://github.com/Notifycal/frontend/commit/e8c55a8a5e935ebb915e374e94824a6e641d4086))
+
 ## [0.8.1](https://github.com/Notifycal/frontend/compare/v0.8.0...v0.8.1) (2025-01-26)
 
 
