@@ -7,7 +7,7 @@ import type { FunctionComponent } from '@common/types';
 export const Dashboard = (): FunctionComponent => {
   // const queryClient = useQueryClient();
   const query = useQuery({
-    queryKey: ['userProfile'],
+    queryKey: ['user-profile'],
     queryFn: getUserProfile
   });
 
@@ -15,7 +15,7 @@ export const Dashboard = (): FunctionComponent => {
     <>
       <span>
         Username:
-        {!!query.data && <span> {query.data.UserId}</span>}
+        {!!query.data && <span> {query.data.userId}</span>}
       </span>
     </>
   );

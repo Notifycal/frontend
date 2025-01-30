@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { Dashboard } from '@pages/Dashboard';
 
-export const Route = createFileRoute('/_auth/dashboard')({
+export const Route = createFileRoute('/_auth/_app/dashboard')({
   component: Dashboard,
   staticData: {
     layout: {

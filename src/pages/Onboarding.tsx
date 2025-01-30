@@ -1,0 +1,70 @@
+import { StepFour } from '@components/ui/Wizard/StepFour';
+import { StepThree } from '@components/ui/Wizard/StepThree';
+import { StepTwo } from '@components/ui/Wizard/StepTwo';
+import Wizard from '@components/ui/Wizard/Wizard';
+
+import { updateUserProfile } from '@api/userProfile';
+import { useNavigate } from '@tanstack/react-router';
+
+import onboardingImg from '@assets/images/onboarding.png';
+
+import type { FunctionComponent } from '@common/types';
+import { StepFive } from '@components/ui/Wizard/StepFive';
+import { StepOne } from '@components/ui/Wizard/StepOne';
+import { useTranslation } from 'react-i18next';
+import type { z } from 'zod';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+const Onboarding = (): FunctionComponent => {
+  const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const schema = StepOne.schema
+    .merge(StepTwo.schema)
+    .merge(StepThree.schema)
+    .merge(StepFour.schema)
+    .merge(StepFive.schema);
+  type FormResult = z.infer<typeof schema>;
+
+  const { t } = useTranslation();
+
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const updateUser = useMutation({
+    mutationFn: updateUserProfile,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
+      await queryClient.refetchQueries({ queryKey: ['user-profile'] });
+    },
+    onError: (error) => {
+      console.log(error);
+    }
+  });
+
+  const onOnboardingFinish = async (data: FormResult): Promise<void> => {
+    await updateUser.mutateAsync(data satisfies FormResult);
+    await navigate({ to: '/dashboard' });
+  };
+
+  return (
+    <div className="container h-screen md:max-h-[500px] mx-auto bg-white shadow-sm rounded-lg lg:max-w-[66.6%]">
+      <div className="flex flex-col md:flex-row h-full">
+        <div
+          className="flex-shrink-0 flex-grow-0 basis-2/5 md:basis-1/2 bg-cover bg-center overflow-hidden"
+          style={{
+            backgroundImage: `url(${onboardingImg})`
+          }}
+        ></div>
+        <Wizard
+          className="flex-shrink-0 flex-grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
+          handleFinish={onOnboardingFinish}
+          header={t('onboarding.step1.header')}
+          wizardSteps={stepsConfig}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Onboarding;

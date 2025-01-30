@@ -18,10 +18,10 @@ import { ServiceConfigProvider, useServiceConfig } from '@hooks/ServiceConfigPro
 
 import { initializeApiClient } from '@api/common.ts';
 
-import FullScreenError from '@components/ui/FullScreenError/FullScreenError.tsx';
+import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
 
 import type { FunctionComponent } from '@common/types.ts';
-import type { router } from './router.ts';
+import type { router } from './router.tsx';
 
 const queryClient = new QueryClient();
 
@@ -79,8 +79,8 @@ const App = ({ router }: AppProps): FunctionComponent => {
     <MantineProvider>
       <ErrorBoundary
         fallback={
-          <FullScreenError
-            errorBody={t('globalError.genericError')}
+          <FullPageError
+            errorMessage={t('globalError.genericError')}
             onRetry={() => {
               window.location.reload();
             }}

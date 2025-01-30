@@ -9,6 +9,37 @@
     "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
     "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
   },
+  "onboarding": {
+    "step1": {
+      "header": "Welcome to Notifycal",
+      "msg1": "Before you continue, we need to know more about you and your business.",
+      "msg2": "The following information is needed to be able to send reminders to your clients."
+    },
+    "step2": {
+      "msg1": "What is your business name?"
+    },
+    "step3": {
+      "msg1": "What is the business address of {{businessName}}?"
+    },
+    "step4": {
+      "msg1": "Select the calendar you want to use for {{businessName}}",
+      "selectMenu": {
+        "loading": "Searching for your calendars...",
+        "loaded": "Select one or more calendars",
+        "error": "At least one calendar needs to be selected"
+      }
+    },
+    "step5": {
+      "msg1": "You can continue now! Click on Finish to access to Notifycal."
+    }
+  },
+  "wizard": {
+    "button": {
+      "back": "Back",
+      "finish": "Finish",
+      "continue": "Continue"
+    }
+  },
   "404": {
     "pageNotFound": "Page not found",
     "weCouldNotFindThePage": "Sorry, we couldn’t find the page you’re looking for.",

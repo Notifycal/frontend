@@ -102,7 +102,6 @@ export const createUnauthorizedInterceptor = (
           return await axios(originalRequest);
         } catch (error) {
           onTokenRefresh(null, null, false);
-          console.log('Token refresh failed', error);
           return Promise.reject(error as Error);
         }
       }

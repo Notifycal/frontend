@@ -9,6 +9,37 @@
     "loginErrorInvalidScopes": "Ha habido un error al hacer login. Por favor asegura que seleccionas todos los scopes al acceder con tu cuenta de Google.",
     "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos."
   },
+  "onboarding": {
+    "step1": {
+      "header": "Bienvenid@ a Notifycal",
+      "msg1": "Antes de continuar, necesitamos conocer un poco más sobre ti y tu negocio.",
+      "msg2": "Estos datos son necesarios para poder mandarle recordatorios a tus clientes."
+    },
+    "step2": {
+      "msg1": "¿Cómo se llama tu negocio?"
+    },
+    "step3": {
+      "msg1": "¿Cual es la direccion de {{businessName}}?"
+    },
+    "step4": {
+      "msg1": "Selecciona los calendarios que quieres usar para {{businessName}}",
+      "selectMenu": {
+        "loading": "Buscando calendarios del usuario...",
+        "loaded": "Selecciona uno o más calendarios",
+        "error": "Debes seleccionar al menos un calendario"
+      }
+    },
+    "step5": {
+      "msg1": "Ya puedes continuar! Haz click en Finalizar para acceder a Notifycal."
+    }
+  },
+  "wizard": {
+    "button": {
+      "back": "Atrás",
+      "finish": "Finalizar",
+      "continue": "Continuar"
+    }
+  },
   "404": {
     "pageNotFound": "¡Oops!",
     "weCouldNotFindThePage": "Vaya, no pudimos encontrar esa página.",

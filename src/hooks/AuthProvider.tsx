@@ -10,7 +10,7 @@ import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorRetu
 
 import type { FunctionComponent } from '@common/types';
 
-import { Loader } from '@mantine/core';
+import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
 
@@ -176,11 +176,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   }, [refreshToken]);
 
   if (loginStatus === 'loading') {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-        <Loader color="white" size="xl" />
-      </div>
-    );
+    return <FullPageSpinner />;
   }
 
   return (

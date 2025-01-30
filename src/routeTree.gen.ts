@@ -13,8 +13,10 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
-import { Route as AuthTemplateImport } from './routes/_auth.template'
-import { Route as AuthDashboardImport } from './routes/_auth.dashboard'
+import { Route as AuthOnboardingImport } from './routes/_auth/onboarding'
+import { Route as AuthAppImport } from './routes/_auth/_app'
+import { Route as AuthAppTemplateImport } from './routes/_auth/_app/template'
+import { Route as AuthAppDashboardImport } from './routes/_auth/_app/dashboard'
 
 // Create/Update Routes
 
@@ -29,16 +31,27 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthTemplateRoute = AuthTemplateImport.update({
-  id: '/template',
-  path: '/template',
+const AuthOnboardingRoute = AuthOnboardingImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AuthDashboardRoute = AuthDashboardImport.update({
+const AuthAppRoute = AuthAppImport.update({
+  id: '/_app',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthAppTemplateRoute = AuthAppTemplateImport.update({
+  id: '/template',
+  path: '/template',
+  getParentRoute: () => AuthAppRoute,
+} as any)
+
+const AuthAppDashboardRoute = AuthAppDashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => AuthAppRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -59,65 +72,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
-    '/_auth/dashboard': {
-      id: '/_auth/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthDashboardImport
+    '/_auth/_app': {
+      id: '/_auth/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthAppImport
       parentRoute: typeof AuthImport
     }
-    '/_auth/template': {
-      id: '/_auth/template'
+    '/_auth/onboarding': {
+      id: '/_auth/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthOnboardingImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/_app/dashboard': {
+      id: '/_auth/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthAppDashboardImport
+      parentRoute: typeof AuthAppImport
+    }
+    '/_auth/_app/template': {
+      id: '/_auth/_app/template'
       path: '/template'
       fullPath: '/template'
-      preLoaderRoute: typeof AuthTemplateImport
-      parentRoute: typeof AuthImport
+      preLoaderRoute: typeof AuthAppTemplateImport
+      parentRoute: typeof AuthAppImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AuthAppRouteChildren {
+  AuthAppDashboardRoute: typeof AuthAppDashboardRoute
+  AuthAppTemplateRoute: typeof AuthAppTemplateRoute
+}
+
+const AuthAppRouteChildren: AuthAppRouteChildren = {
+  AuthAppDashboardRoute: AuthAppDashboardRoute,
+  AuthAppTemplateRoute: AuthAppTemplateRoute,
+}
+
+const AuthAppRouteWithChildren =
+  AuthAppRoute._addFileChildren(AuthAppRouteChildren)
+
 interface AuthRouteChildren {
-  AuthDashboardRoute: typeof AuthDashboardRoute
-  AuthTemplateRoute: typeof AuthTemplateRoute
+  AuthAppRoute: typeof AuthAppRouteWithChildren
+  AuthOnboardingRoute: typeof AuthOnboardingRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthDashboardRoute: AuthDashboardRoute,
-  AuthTemplateRoute: AuthTemplateRoute,
+  AuthAppRoute: AuthAppRouteWithChildren,
+  AuthOnboardingRoute: AuthOnboardingRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '': typeof AuthRouteWithChildren
-  '/dashboard': typeof AuthDashboardRoute
-  '/template': typeof AuthTemplateRoute
+  '': typeof AuthAppRouteWithChildren
+  '/onboarding': typeof AuthOnboardingRoute
+  '/dashboard': typeof AuthAppDashboardRoute
+  '/template': typeof AuthAppTemplateRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '': typeof AuthRouteWithChildren
-  '/dashboard': typeof AuthDashboardRoute
-  '/template': typeof AuthTemplateRoute
+  '': typeof AuthAppRouteWithChildren
+  '/onboarding': typeof AuthOnboardingRoute
+  '/dashboard': typeof AuthAppDashboardRoute
+  '/template': typeof AuthAppTemplateRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
-  '/_auth/dashboard': typeof AuthDashboardRoute
-  '/_auth/template': typeof AuthTemplateRoute
+  '/_auth/_app': typeof AuthAppRouteWithChildren
+  '/_auth/onboarding': typeof AuthOnboardingRoute
+  '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
+  '/_auth/_app/template': typeof AuthAppTemplateRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/dashboard' | '/template'
+  fullPaths: '/' | '' | '/onboarding' | '/dashboard' | '/template'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/dashboard' | '/template'
-  id: '__root__' | '/' | '/_auth' | '/_auth/dashboard' | '/_auth/template'
+  to: '/' | '' | '/onboarding' | '/dashboard' | '/template'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_auth/_app'
+    | '/_auth/onboarding'
+    | '/_auth/_app/dashboard'
+    | '/_auth/_app/template'
   fileRoutesById: FileRoutesById
 }
 
@@ -151,17 +202,29 @@ export const routeTree = rootRoute
     "/_auth": {
       "filePath": "_auth.tsx",
       "children": [
-        "/_auth/dashboard",
-        "/_auth/template"
+        "/_auth/_app",
+        "/_auth/onboarding"
       ]
     },
-    "/_auth/dashboard": {
-      "filePath": "_auth.dashboard.tsx",
+    "/_auth/_app": {
+      "filePath": "_auth/_app.tsx",
+      "parent": "/_auth",
+      "children": [
+        "/_auth/_app/dashboard",
+        "/_auth/_app/template"
+      ]
+    },
+    "/_auth/onboarding": {
+      "filePath": "_auth/onboarding.tsx",
       "parent": "/_auth"
     },
-    "/_auth/template": {
-      "filePath": "_auth.template.tsx",
-      "parent": "/_auth"
+    "/_auth/_app/dashboard": {
+      "filePath": "_auth/_app/dashboard.tsx",
+      "parent": "/_auth/_app"
+    },
+    "/_auth/_app/template": {
+      "filePath": "_auth/_app/template.tsx",
+      "parent": "/_auth/_app"
     }
   }
 }
