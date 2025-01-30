@@ -11,9 +11,11 @@ import onboardingImg from '@assets/images/onboarding.png';
 import type { FunctionComponent } from '@common/types';
 import { StepFive } from '@components/ui/Wizard/StepFive';
 import { StepOne } from '@components/ui/Wizard/StepOne';
-import type { ReminderConfig } from '@notifycal/shared/types';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
+
+import type { ReminderConfig } from '@notifycal/shared/types';
+import { useQueryClient } from '@tanstack/react-query';
 
 const Onboarding = (): FunctionComponent => {
   const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive];
@@ -24,10 +26,16 @@ const Onboarding = (): FunctionComponent => {
     .merge(StepFour.schema)
     .merge(StepFive.schema);
   type FormResult = z.infer<typeof schema>;
+
   const { t } = useTranslation();
+
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
     await updateUserProfile(data satisfies ReminderConfig);
+    await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
+    await queryClient.refetchQueries({ queryKey: ['user-profile'] });
     await navigate({ to: '/dashboard' });
   };
 
