@@ -7,12 +7,8 @@ const StepOneComponent = (): FunctionComponent => {
   const { t } = useTranslation();
   return (
     <>
-      <p className="text-sm md:text-base text-gray-600 mb-6">
-      {t('onboarding.step1.msg1')}
-      </p>
-      <p className="text-sm md:text-base text-gray-600 mb-6">
-      {t('onboarding.step1.msg2')}
-      </p>
+      <p className="text-sm md:text-base text-gray-600 mb-6">{t('onboarding.step1.msg1')}</p>
+      <p className="text-sm md:text-base text-gray-600 mb-6">{t('onboarding.step1.msg2')}</p>
     </>
   );
 };
