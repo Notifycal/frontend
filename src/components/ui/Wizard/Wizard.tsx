@@ -95,7 +95,13 @@ function Wizard<TResult extends FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form className={`flex flex-col ${className}`} onSubmit={onFormFinish}>
+      <form
+        className={`flex flex-col ${className}`}
+        onSubmit={async (event) => {
+          event.preventDefault();
+          await onFormFinish();
+        }}
+      >
         {header && <h1 className="text-xl md:text-2xl font-bold mb-4">{header}</h1>}
         <AnimatePresence mode="wait">
           {CurrentStepComponent && (
