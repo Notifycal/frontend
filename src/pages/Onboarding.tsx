@@ -14,8 +14,7 @@ import { StepOne } from '@components/ui/Wizard/StepOne';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
-import type { ReminderConfig } from '@notifycal/shared/types';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Onboarding = (): FunctionComponent => {
   const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive];
@@ -32,10 +31,19 @@ const Onboarding = (): FunctionComponent => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  const updateUser = useMutation({
+    mutationFn: updateUserProfile,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
+      await queryClient.refetchQueries({ queryKey: ['user-profile'] });
+    },
+    onError: (error) => {
+      console.log(error);
+    }
+  });
+
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
-    await updateUserProfile(data satisfies ReminderConfig);
-    await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
-    await queryClient.refetchQueries({ queryKey: ['user-profile'] });
+    await updateUser.mutateAsync(data satisfies FormResult);
     await navigate({ to: '/dashboard' });
   };
 
