@@ -12,14 +12,10 @@ on:
       - 'CHANGELOG.md' # This is what release-please changes in the release PRs
 
 concurrency:
-  # github.head_ref is only set when the workflow was triggered by a pull_request and it
-  # contains the value of the source branch of the PR.
+  # github.head_ref is only set when the workflow was triggered by a
+  # pull_request and it contains the value of the source branch of the PR.
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-
-env:
-  PR_LABEL_CI_PASS: 'ci: pass'
-  PR_LABEL_CI_FAIL: 'ci: fail'
 
 jobs:
   preflight:
@@ -32,23 +28,9 @@ jobs:
       infra: ${{ steps.filter.outputs.tf }}
       web: ${{ steps.filter.outputs.web }}
     steps:
-      - name: Get GH token from Github App
-        id: gh-app-auth
-        if: github.event_name == 'pull_request'
-        uses: getsentry/action-github-app-token@v3
-        with:
-          app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
-          private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref || github.ref_name }}
-      - name: Remove ci labels if any
-        if: github.event_name == 'pull_request'
-        run: |
-          gh pr edit ${{ github.event.pull_request.number }} --remove-label "${{ env.PR_LABEL_CI_FAIL}}"
-          gh pr edit ${{ github.event.pull_request.number }} --remove-label "${{ env.PR_LABEL_CI_PASS}}"
-        env:
-          GITHUB_TOKEN: ${{ steps.gh-app-auth.outputs.token }}
       - name: Validate commits with commitlint
         uses: wagoid/commitlint-github-action@v6
         id: commitlint
@@ -181,11 +163,11 @@ jobs:
         env:
           TOFU_VERSION: ${{ steps.get_tofu_version.outputs.tofu_version }}
 
-      - run: tofu fmt -recursive
-        if: github.event_name == 'pull_request'
+      - run: tofu init && tofu validate
         working-directory: tf
 
-      - run: tofu init && tofu validate
+      - run: tofu fmt -recursive
+        if: github.event_name == 'pull_request'
         working-directory: tf
 
       - name: Render OpenTofu docs
@@ -206,7 +188,6 @@ jobs:
         # https://github.com/terraform-docs/gh-actions/issues/90
 
       - name: 'Push to ${{ github.head_ref || github.ref_name }}'
-        id: tofu_git_changes
         if: github.event_name == 'pull_request'
         run: |
           git config user.name github-actions
@@ -222,36 +203,6 @@ jobs:
             git commit -m "ci(auto): generate docs and format"
             git push
           fi
-
-  label-pr:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - tofu
-    permissions:
-      contents: read
-      pull-requests: write
-      repository-projects: read
-    if: ${{ always() && github.event_name == 'pull_request' }}
-    steps:
-      - name: Get GH token from Github App
-        id: gh-app-auth
-        uses: getsentry/action-github-app-token@v3
-        with:
-          app_id: ${{ secrets.NOTIFYCAL_CICD_APP_ID }}
-          private_key: ${{ secrets.NOTIFYCAL_CICD_APP_SECRET }}
-      - uses: actions/checkout@v4
-      - name: Add label to PR
-        run: |
-          if [[ ${{ contains(needs.*.result, 'failure') }} == "true" ]]; then
-            PR_LABEL="${{ env.PR_LABEL_CI_FAIL }}"
-          else
-            PR_LABEL="${{ env.PR_LABEL_CI_PASS }}"
-          fi
-
-          gh pr edit ${{ github.event.pull_request.number }} --add-label "$PR_LABEL"
-        env:
-          GITHUB_TOKEN: ${{ steps.gh-app-auth.outputs.token }}
 
   release:
     runs-on: ubuntu-latest
