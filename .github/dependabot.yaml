@@ -26,6 +26,13 @@ updates:
           - 'eslint'
           - 'eslint-*'
           - '@eslint/*'
+      vitest:
+        patterns:
+          - 'vitest'
+          - '@vitest/*'
+      testing-lib:
+        patterns:
+          - '@testing-library/*'
     registries:
       - npm-github-registry
 
