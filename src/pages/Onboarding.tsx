@@ -1,4 +1,4 @@
-import { StepFour } from '@components/ui/Wizard/StepFour';
+import { StepFive } from '@components/ui/Wizard/StepFive';
 import { StepThree } from '@components/ui/Wizard/StepThree';
 import { StepTwo } from '@components/ui/Wizard/StepTwo';
 import Wizard from '@components/ui/Wizard/Wizard';
@@ -9,21 +9,24 @@ import { useNavigate } from '@tanstack/react-router';
 import onboardingImg from '@assets/images/onboarding.png';
 
 import type { FunctionComponent } from '@common/types';
-import { StepFive } from '@components/ui/Wizard/StepFive';
 import { StepOne } from '@components/ui/Wizard/StepOne';
+import { StepSix } from '@components/ui/Wizard/StepSix';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
+import { StepFour } from '@components/ui/Wizard/StepFour';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Onboarding = (): FunctionComponent => {
-  const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive];
+  const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const schema = StepOne.schema
     .merge(StepTwo.schema)
     .merge(StepThree.schema)
-    .merge(StepFour.schema)
-    .merge(StepFive.schema);
+    // StepFour intentionally skipped cause the collected value then gets baked into StepFive selection
+    .merge(StepFive.schema)
+    .merge(StepSix.schema)
+    .strip();
   type FormResult = z.infer<typeof schema>;
 
   const { t } = useTranslation();
@@ -48,7 +51,7 @@ const Onboarding = (): FunctionComponent => {
   };
 
   return (
-    <div className="container h-screen md:max-h-[500px] mx-auto bg-white shadow-sm rounded-lg lg:max-w-[66.6%]">
+    <div className="container h-screen md:max-h-[600px] mx-auto bg-white shadow-sm rounded-lg lg:max-w-[66.6%]">
       <div className="flex flex-col md:flex-row h-full">
         <div
           className="flex-shrink-0 flex-grow-0 basis-2/5 md:basis-1/2 bg-cover bg-center overflow-hidden"

@@ -16,12 +16,18 @@
       "msg2": "Estos datos son necesarios para poder mandarle recordatorios a tus clientes."
     },
     "step2": {
-      "msg1": "¿Cómo se llama tu negocio?"
+      "msg1": "¿Cómo se llama tu negocio?",
+      "noBusinessName": "El nombre del negocio es obligatorio."
     },
     "step3": {
-      "msg1": "¿Cual es la direccion de {{businessName}}?"
+      "msg1": "¿Cual es la direccion de {{businessName}}?",
+      "noBusinessAddress": "La direccion del negocio es obligatoria."
     },
     "step4": {
+      "msg1": "Selecciona el tipo de recordatorio que quieres enviar a tus clientes:",
+      "noTemplateSelected": "Seleciona un tipo de plantilla"
+    },
+    "step5": {
       "msg1": "Selecciona los calendarios que quieres usar para {{businessName}}",
       "selectMenu": {
         "loading": "Buscando calendarios del usuario...",
@@ -29,7 +35,7 @@
         "error": "Debes seleccionar al menos un calendario"
       }
     },
-    "step5": {
+    "step6": {
       "msg1": "Ya puedes continuar! Haz click en Finalizar para acceder a Notifycal."
     }
   },

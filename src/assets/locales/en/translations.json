@@ -16,12 +16,18 @@
       "msg2": "The following information is needed to be able to send reminders to your clients."
     },
     "step2": {
-      "msg1": "What is your business name?"
+      "msg1": "What is your business name?",
+      "noBusinessName": "Business name is required"
     },
     "step3": {
-      "msg1": "What is the business address of {{businessName}}?"
+      "msg1": "What is the business address of {{businessName}}?",
+      "noBusinessAddress": "Business address is required"
     },
     "step4": {
+      "msg1": "Select the kind of reminder you want to send to your clients:",
+      "noTemplateSelected": "Select one template"
+    },
+    "step5": {
       "msg1": "Select the calendar you want to use for {{businessName}}",
       "selectMenu": {
         "loading": "Searching for your calendars...",
@@ -29,7 +35,7 @@
         "error": "At least one calendar needs to be selected"
       }
     },
-    "step5": {
+    "step6": {
       "msg1": "You can continue now! Click on Finish to access to Notifycal."
     }
   },
