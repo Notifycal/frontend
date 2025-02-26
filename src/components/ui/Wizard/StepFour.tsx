@@ -1,60 +1,75 @@
-import { getUserCalendarsFromGoogle } from '@api/googleUserCalendar';
 import type { FunctionComponent } from '@common/types';
-import { MultiSelect } from '@mantine/core';
-import { IconRefresh } from '@tabler/icons-react';
-import { useQuery } from '@tanstack/react-query';
-
+import { Card, Group, Radio, Stack, Text } from '@mantine/core';
+import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
+import type { BusinessAddress, BusinessName, TemplateId, TemplateMap } from '@notifycal/shared/types';
 import i18next from 'i18next';
-import { Controller, useFormContext } from 'react-hook-form';
+import { DateTime } from 'luxon';
+import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
-import type { StepTwoValues } from './StepTwo';
+import LanguagePicker from '../LanguagePicker/LanguagePicker';
 import type { Step } from './Wizard';
 
-export const calendarSchema = z.object({
-  id: z.string().brand('CalendarId'),
-  name: z.string().brand('CalendarName')
-});
 const StepFourSchema = z.object({
-  calendars: z.array(calendarSchema).min(1, { message: i18next.t('onboarding.step4.selectMenu.error') })
+  templateId: z
+    .string()
+    .min(1, { message: i18next.t('onboarding.step4.noTemplateSelected') })
+    .brand('TemplateId')
 });
-type StepFourValues = z.infer<typeof StepFourSchema>;
+export type StepFourValues = z.infer<typeof StepFourSchema>;
 const StepFourComponent = (): FunctionComponent => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const initialTemplateLanguage: TemplateMap = i18n.language === 'en' ? templateEnMap : templateEsMap;
+  const [templateOptions, setTemplateLanguages] = useState(initialTemplateLanguage);
   const {
     formState: { errors },
-    watch,
-    control
-  } = useFormContext<StepFourValues & Pick<StepTwoValues, 'businessName'>>();
-
-  const businessName = watch('businessName');
-
-  const { data: Calendars, isLoading } = useQuery({
-    queryKey: ['userIdPCalendars'],
-    queryFn: getUserCalendarsFromGoogle
-  });
+    setValue,
+    watch
+  } = useFormContext<StepFourValues>();
+  const selectedTemplateId = watch('templateId');
 
   return (
-    <>
-      <Controller
-        control={control}
-        name="calendars"
-        render={({ field: { onChange } }) => (
-          <MultiSelect
-            comboboxProps={{ shadow: 'md' }}
-            data={(Calendars || []).map((c) => ({ label: c.name, value: c.id }))}
-            disabled={isLoading}
-            error={errors['calendars']?.message}
-            label={t('onboarding.step4.msg1', { businessName: businessName })}
-            leftSection={isLoading && <IconRefresh size={14} />}
-            placeholder={isLoading ? t('onboarding.step4.selectMenu.loading') : t('onboarding.step4.selectMenu.loaded')}
-            onChange={(v) => {
-              onChange((Calendars || []).filter((c) => v.includes(c.id)));
-            }}
-          />
-        )}
+    <Stack>
+      <Text size="sm">{t('onboarding.step4.msg1')}</Text>
+      <LanguagePicker
+        onLanguageSelected={(item) => {
+          setTemplateLanguages(item.shorthand === 'es' ? templateEsMap : templateEnMap);
+        }}
       />
-    </>
+      <Radio.Group
+        error={errors.templateId?.message}
+        value={selectedTemplateId}
+        styles={{
+          error: {
+            paddingTop: '6px',
+            paddingBottom: '6px'
+          }
+        }}
+        onChange={(value) => {
+          setValue('templateId', value as TemplateId);
+        }}
+      >
+        <Group>
+          {Object.values(templateOptions).map((template) => (
+            <Card key={template.id} withBorder padding="xs">
+              <Radio
+                value={template.id}
+                label={
+                  <Text size="xs">
+                    {template.interpolate(
+                      'Notifycal' as BusinessName,
+                      'Avenue Legendary, 54, Spain' as BusinessAddress,
+                      DateTime.now()
+                    )}
+                  </Text>
+                }
+              />
+            </Card>
+          ))}
+        </Group>
+      </Radio.Group>
+    </Stack>
   );
 };
 
@@ -62,6 +77,6 @@ export const StepFour: Step<typeof StepFourSchema> = {
   component: StepFourComponent,
   schema: StepFourSchema,
   defaultValues: {
-    calendars: []
+    templateId: '' as TemplateId
   }
 };
