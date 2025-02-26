@@ -1,5 +1,5 @@
 import type { FunctionComponent } from '@common/types';
-import { Card, Radio, Stack, Text } from '@mantine/core';
+import { Card, Group, Radio, Stack, Text } from '@mantine/core';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
 import type { BusinessAddress, BusinessName, TemplateId, TemplateMap } from '@notifycal/shared/types';
 import i18next from 'i18next';
@@ -40,11 +40,17 @@ const StepFourComponent = (): FunctionComponent => {
       <Radio.Group
         error={errors.templateId?.message}
         value={selectedTemplateId}
+        styles={{
+          error: {
+            paddingTop: '6px',
+            paddingBottom: '6px'
+          }
+        }}
         onChange={(value) => {
           setValue('templateId', value as TemplateId);
         }}
       >
-        <Stack>
+        <Group>
           {Object.values(templateOptions).map((template) => (
             <Card key={template.id} withBorder padding="xs">
               <Radio
@@ -61,7 +67,7 @@ const StepFourComponent = (): FunctionComponent => {
               />
             </Card>
           ))}
-        </Stack>
+        </Group>
       </Radio.Group>
     </Stack>
   );
