@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/Notifycal/frontend/compare/v0.9.0...v0.10.0) (2025-02-26)
+
+
+### Features
+
+* reminder template in wizard ([#163](https://github.com/Notifycal/frontend/issues/163)) ([d4ab8d8](https://github.com/Notifycal/frontend/commit/d4ab8d8632be4c61d86a7441ef5a44b2d2c4086c))
+
 ## [0.9.0](https://github.com/Notifycal/frontend/compare/v0.8.1...v0.9.0) (2025-01-30)
 
 
