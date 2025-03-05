@@ -9,25 +9,28 @@ import i18next from 'i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
-import { StepFour, type StepFourValues } from './StepFour';
-import type { StepTwoValues } from './StepTwo';
+import type { StepBusinessDetailsValues } from './StepBusinessDetails';
+import { StepReminderType, type StepReminderTypeValues } from './StepReminderType';
 import type { Step } from './Wizard';
 
-const StepFiveSchema = z.object({
+const StepCalendarsSchema = z.object({
   calendars: z
-    .array(calendarSchema.merge(StepFour.schema))
-    .min(1, { message: i18next.t('onboarding.step5.selectMenu.error') })
+    .array(calendarSchema.merge(StepReminderType.schema))
+    .min(1, { message: i18next.t('onboarding.stepCalendars.selectMenu.error') })
 });
-type StepFiveValues = z.infer<typeof StepFiveSchema>;
-const StepFiveComponent = (): FunctionComponent => {
+type StepCalendarsValues = z.infer<typeof StepCalendarsSchema>;
+const StepCalendarsComponent = (): FunctionComponent => {
   const { t } = useTranslation();
   const {
     formState: { errors },
     watch,
     control
-  } = useFormContext<StepFiveValues & Pick<StepTwoValues, 'businessName'> & Pick<StepFourValues, 'templateId'>>();
+  } = useFormContext<
+    StepCalendarsValues  &
+      Pick<StepReminderTypeValues, 'templateId'>
+  >();
 
-  const businessName = watch('businessName');
+  const businessName = watch('name');
   const templateId = watch('templateId');
 
   const { data: Calendars, isLoading } = useQuery({
@@ -46,9 +49,13 @@ const StepFiveComponent = (): FunctionComponent => {
             data={(Calendars || []).map((c) => ({ label: c.name, value: c.id }))}
             disabled={isLoading}
             error={errors['calendars']?.message}
-            label={t('onboarding.step5.msg1', { businessName: businessName })}
+            label={t('onboarding.stepCalendars.msg1', { businessName: businessName })}
             leftSection={isLoading && <IconRefresh size={14} />}
-            placeholder={isLoading ? t('onboarding.step5.selectMenu.loading') : t('onboarding.step5.selectMenu.loaded')}
+            placeholder={
+              isLoading
+                ? t('onboarding.stepCalendars.selectMenu.loading')
+                : t('onboarding.stepCalendars.selectMenu.loaded')
+            }
             onChange={(v) => {
               onChange(
                 (Calendars || []).filter((c) => v.includes(c.id)).map((c) => ({ ...c, templateId: templateId }))
@@ -61,9 +68,9 @@ const StepFiveComponent = (): FunctionComponent => {
   );
 };
 
-export const StepFive: Step<typeof StepFiveSchema> = {
-  component: StepFiveComponent,
-  schema: StepFiveSchema,
+export const StepCalendars: Step<typeof StepCalendarsSchema> = {
+  component: StepCalendarsComponent,
+  schema: StepCalendarsSchema,
   defaultValues: {
     calendars: []
   }

@@ -11,14 +11,14 @@ import { z } from 'zod';
 import LanguagePicker from '../LanguagePicker/LanguagePicker';
 import type { Step } from './Wizard';
 
-const StepFourSchema = z.object({
+const StepReminderTypeSchema = z.object({
   templateId: z
     .string()
-    .min(1, { message: i18next.t('onboarding.step4.noTemplateSelected') })
+    .min(1, { message: i18next.t('onboarding.stepReminderType.noTemplateSelected') })
     .brand('TemplateId')
 });
-export type StepFourValues = z.infer<typeof StepFourSchema>;
-const StepFourComponent = (): FunctionComponent => {
+export type StepReminderTypeValues = z.infer<typeof StepReminderTypeSchema>;
+const StepReminderTypeComponent = (): FunctionComponent => {
   const { t, i18n } = useTranslation();
   const initialTemplateLanguage: TemplateMap = i18n.language === 'en' ? templateEnMap : templateEsMap;
   const [templateOptions, setTemplateLanguages] = useState(initialTemplateLanguage);
@@ -26,12 +26,12 @@ const StepFourComponent = (): FunctionComponent => {
     formState: { errors },
     setValue,
     watch
-  } = useFormContext<StepFourValues>();
+  } = useFormContext<StepReminderTypeValues>();
   const selectedTemplateId = watch('templateId');
 
   return (
     <Stack>
-      <Text size="sm">{t('onboarding.step4.msg1')}</Text>
+      <Text size="sm">{t('onboarding.stepReminderType.msg1')}</Text>
       <LanguagePicker
         onLanguageSelected={(item) => {
           setTemplateLanguages(item.shorthand === 'es' ? templateEsMap : templateEnMap);
@@ -73,9 +73,9 @@ const StepFourComponent = (): FunctionComponent => {
   );
 };
 
-export const StepFour: Step<typeof StepFourSchema> = {
-  component: StepFourComponent,
-  schema: StepFourSchema,
+export const StepReminderType: Step<typeof StepReminderTypeSchema> = {
+  component: StepReminderTypeComponent,
+  schema: StepReminderTypeSchema,
   defaultValues: {
     templateId: '' as TemplateId
   }
