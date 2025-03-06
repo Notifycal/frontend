@@ -49,6 +49,7 @@ const StepCalendarsComponent = (): FunctionComponent => {
             disabled={isLoading}
             error={errors['calendars']?.message}
             label={t('onboarding.stepCalendars.msg1', { businessName: businessName })}
+            labelProps={{ pb: 'sm' }}
             leftSection={isLoading && <IconRefresh size={14} />}
             placeholder={
               isLoading

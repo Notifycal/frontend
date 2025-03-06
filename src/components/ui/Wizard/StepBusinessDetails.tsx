@@ -37,12 +37,15 @@ const StepBusinessDetailsComponent = (): FunctionComponent => {
     <>
       <TextInput
         label={t('onboarding.stepBusinessDetails.msg1')}
+        labelProps={{ pb: 'sm' }}
+        pb="md"
         {...register('business.name')}
         error={errors.business?.name?.message}
         type="text"
       />
       <TextInput
         label={t('onboarding.stepBusinessDetails.msg2')}
+        labelProps={{ pb: 'sm' }}
         {...register('business.address')}
         error={errors.business?.address?.message}
       />

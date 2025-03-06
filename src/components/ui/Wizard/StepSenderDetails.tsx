@@ -32,6 +32,7 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
         render={({ field: { onChange, name, value } }) => (
           <PhoneInput
             international
+            className="flex gap-3 border rounded-lg p-2 w-full"
             countries={['ES']}
             country="ES"
             countryCallingCodeEditable={false}
