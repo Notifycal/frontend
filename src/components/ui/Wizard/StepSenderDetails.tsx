@@ -5,7 +5,7 @@ import type { PhoneNumber } from '@notifycal/shared/types';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInput from 'react-phone-number-input/react-hook-form';
+import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 import 'react-phone-number-input/style.css';
 import { z } from 'zod';
 import type { Step } from './Wizard';
@@ -30,7 +30,7 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
         control={control}
         name="contactDetails.identifier"
         render={({ field: { onChange, name, value } }) => (
-          <PhoneInput
+          <PhoneInputWithCountry
             international
             className="flex gap-3 border rounded-lg p-2 w-full"
             countries={['ES']}
