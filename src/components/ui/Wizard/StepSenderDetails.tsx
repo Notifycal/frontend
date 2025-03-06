@@ -29,6 +29,7 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
       <Controller
         control={control}
         name="contactDetails.identifier"
+        rules={{ required: true, validate: (v) => isValidPhoneNumber(v) }}
         render={({ field: { onChange, name, value } }) => (
           <PhoneInputWithCountry
             international
@@ -48,10 +49,6 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
             }}
           />
         )}
-        rules={{
-          required: t('onboarding.stepSenderDetails.invalidPhoneNumber'),
-          validate: (v: string) => isValidPhoneNumber(v)
-        }}
       />
     </>
   );
