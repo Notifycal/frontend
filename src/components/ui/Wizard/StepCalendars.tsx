@@ -26,11 +26,10 @@ const StepCalendarsComponent = (): FunctionComponent => {
     watch,
     control
   } = useFormContext<
-    StepCalendarsValues  &
-      Pick<StepReminderTypeValues, 'templateId'>
+    StepCalendarsValues & Pick<StepReminderTypeValues, 'templateId'> & Pick<StepBusinessDetailsValues, 'business'>
   >();
 
-  const businessName = watch('name');
+  const businessName = watch('business').name;
   const templateId = watch('templateId');
 
   const { data: Calendars, isLoading } = useQuery({

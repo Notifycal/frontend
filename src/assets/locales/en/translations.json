@@ -23,6 +23,7 @@
     },
     "stepReminderType": {
       "msg1": "Select the kind of reminder you want to send to your clients:",
+      "characterCounterHeadsUp": "Selection results in reminders {{characterCount}} characters long. Reminders are charged in multiples of 160 characters.",
       "noTemplateSelected": "Select one template"
     },
     "stepCalendars": {

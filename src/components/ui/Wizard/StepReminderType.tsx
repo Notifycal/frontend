@@ -1,7 +1,7 @@
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
-import type { BusinessAddress, BusinessName, TemplateId, TemplateMap } from '@notifycal/shared/types';
+import type { TemplateId, TemplateMap } from '@notifycal/shared/types';
 import i18next from 'i18next';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
@@ -9,6 +9,7 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import LanguagePicker from '../LanguagePicker/LanguagePicker';
+import type { StepBusinessDetailsValues } from './StepBusinessDetails';
 import type { Step } from './Wizard';
 
 const StepReminderTypeSchema = z.object({
@@ -26,8 +27,10 @@ const StepReminderTypeComponent = (): FunctionComponent => {
     formState: { errors },
     setValue,
     watch
-  } = useFormContext<StepReminderTypeValues>();
+  } = useFormContext<StepReminderTypeValues & Pick<StepBusinessDetailsValues, 'business'>>();
+
   const selectedTemplateId = watch('templateId');
+  const business = watch('business');
 
   return (
     <Stack>
@@ -54,21 +57,22 @@ const StepReminderTypeComponent = (): FunctionComponent => {
           {Object.values(templateOptions).map((template) => (
             <Card key={template.id} withBorder padding="xs">
               <Radio
+                label={<Text size="xs">{template.interpolate(business.name, business.address, DateTime.now())}</Text>}
                 value={template.id}
-                label={
-                  <Text size="xs">
-                    {template.interpolate(
-                      'Notifycal' as BusinessName,
-                      'Avenue Legendary, 54, Spain' as BusinessAddress,
-                      DateTime.now()
-                    )}
-                  </Text>
-                }
               />
             </Card>
           ))}
         </Group>
       </Radio.Group>
+      <Text hidden={!selectedTemplateId} size="xs">
+        {t('onboarding.stepReminderType.characterCounterHeadsUp', {
+          characterCount: templateOptions[selectedTemplateId]?.interpolate(
+            business.name,
+            business.address,
+            DateTime.now()
+          ).length
+        })}
+      </Text>
     </Stack>
   );
 };

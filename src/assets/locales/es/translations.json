@@ -21,8 +21,9 @@
       "noBusinessName": "El nombre del negocio es obligatorio.",
       "noBusinessAddress": "La direccion del negocio es obligatoria."
     },
-    "stepRemiderTypes": {
+    "stepRemiderType": {
       "msg1": "Selecciona el tipo de recordatorio que quieres enviar a tus clientes:",
+      "characterCounterHeadsUp": "La seleccion resulta en recordatorios de {{chracterCount}} caracteres. Los recordatorios son tarificados en multiplos de 160 caracteres.",
       "noTemplateSelected": "Seleciona un tipo de plantilla"
     },
     "stepCalendars": {
