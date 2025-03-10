@@ -8,37 +8,26 @@ import type { FunctionComponent } from '@common/types';
 
 import classes from './LanguagePicker.module.css';
 
-import flagEn from '@assets/icons/lang/en.png';
-import flagEs from '@assets/icons/lang/es.png';
+import type { CountryData, LanguageCode, LanguageData } from '@common/i18n';
 import { useTranslation } from 'react-i18next';
 
-type LanguageShorthand = 'en' | 'es';
-export type LanguageData = {
-  label: 'English' | 'Spanish';
-  image: string;
-  shorthand: LanguageShorthand;
-};
-
-const data: Record<LanguageShorthand, LanguageData> = {
-  es: { label: 'Spanish', shorthand: 'es', image: flagEs },
-  en: { label: 'English', shorthand: 'en', image: flagEn }
-};
-
 interface LanguagePickerProps {
-  onLanguageSelected: (item: LanguageData) => void;
+  onLanguageSelected: (item: LanguageData | CountryData) => void;
   displayFlagOnly?: boolean;
+  languageData: Record<LanguageCode, LanguageData | CountryData>;
 }
 
 // Inspiration from https://ui.mantine.dev/component/language-picker/
 export default function LanguagePicker({
   onLanguageSelected,
+  languageData,
   displayFlagOnly = false
 }: LanguagePickerProps): FunctionComponent {
   const { i18n } = useTranslation();
   const [opened, setOpened] = useState(false);
-  const [selected, setSelected] = useState(i18n.language === 'es' ? data.es : data.en);
+  const [selected, setSelected] = useState(i18n.language === 'es' ? languageData.es : languageData.en);
 
-  const items = Object.values(data).map((item) => (
+  const items = Object.values(languageData).map((item) => (
     <Menu.Item
       key={item.label}
       leftSection={<Image alt="" className="h-4 w-4" src={item.image} />}
@@ -47,15 +36,16 @@ export default function LanguagePicker({
         onLanguageSelected(item);
       }}
     >
-      {displayFlagOnly ? item.shorthand : item.label}
+      {item.label}
     </Menu.Item>
   ));
 
   return (
     <Menu
-      withinPortal
-      radius="md"
-      width="target"
+      // withinPortal
+      // radius="md"
+      // width="target"
+      position="bottom-start"
       onClose={() => {
         setOpened(false);
       }}
@@ -66,16 +56,17 @@ export default function LanguagePicker({
       <Menu.Target>
         <UnstyledButton
           data-expanded={opened}
+          style={{ padding: 'var(--mantine-spacing-xs)' }}
           className={clsx(
             classes['control'],
             displayFlagOnly ? classes['control_no_labels'] : classes['control_with_labels']
           )}
         >
           {displayFlagOnly ? (
-            <Image alt="" className="w-5 h-5" src={selected.image} />
+            <Image alt="" className="w-4 h-4" src={selected.image} />
           ) : (
             <Group gap="xs">
-              <Image alt="" className="w-5 h-5" src={selected.image} />
+              <Image alt="" className="w-4 h-4" src={selected.image} />
               <span className={classes['label']}>{selected.label}</span>
             </Group>
           )}
