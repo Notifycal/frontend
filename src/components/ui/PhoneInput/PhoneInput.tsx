@@ -56,7 +56,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                 handleCountryChange(selectedCountry as CountryData);
               }}
             />
-            <span className="text-sm">{dialCode}</span>
+            <span className="ml-2 text-sm self-center">{dialCode}</span>
           </div>
         }
         onChange={handleInputChange}
