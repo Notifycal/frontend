@@ -1,4 +1,4 @@
-import type { LanguageCode } from '@common/i18n';
+import { isValidMobilePhoneNumber, type LanguageCode } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
 import type { PhoneNumber } from '@notifycal/shared/types';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -8,23 +8,31 @@ import { z } from 'zod';
 import PhoneInput from '../PhoneInput/PhoneInput';
 import type { Step } from './Wizard';
 
-const StepSenderDetailsSchema = z.object({
-  contactDetails: z.object({
-    type: z.literal('phone'),
-    identifier: z.object({
-      country: z.string().min(2, { message: 'Phone country is required' }),
-      phoneNumber: z.string().min(1, { message: 'Phone number is required' })
+const StepSenderDetailsSchema = z
+  .object({
+    contactDetails: z.object({
+      type: z.literal('phone'),
+      identifier: z.object({
+        country: z.string().min(2, { message: 'Phone country is required' }),
+        phoneNumber: z.string().min(1, { message: 'Phone number is required' })
+      })
     })
   })
-})
-// .refine(
-//   (data) => {
-//     return isValidMobilePhoneNumber(data.contactDetails.identifier as PhoneNumber, 'es');
-//   },
-//   { message: 'Invalid phone number', path: ['contactDetails', 'identifier'] }
-// );
+  .superRefine((data, context) => {
+    if (
+      !isValidMobilePhoneNumber(
+        data.contactDetails.identifier.phoneNumber as PhoneNumber,
+        data.contactDetails.identifier.country as LanguageCode
+      )
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Invalid phone number',
+        path: ['contactDetails', 'identifier', 'phoneNumber']
+      });
+    }
+  });
 
-// const StepSenderDetailsSchema = z.object({ contactDetails: phoneContactSchema });
 export type StepSenderDetailsValues = z.infer<typeof StepSenderDetailsSchema>;
 const StepSenderDetailsComponent = (): FunctionComponent => {
   const { t } = useTranslation();
@@ -58,5 +66,7 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
 export const StepSenderDetails: Step<typeof StepSenderDetailsSchema> = {
   component: StepSenderDetailsComponent,
   schema: StepSenderDetailsSchema,
-  defaultValues: { contactDetails: { identifier: { country: 'es' as LanguageCode, phoneNumber: '' as PhoneNumber }, type: 'phone' } }
+  defaultValues: {
+    contactDetails: { identifier: { country: 'es' as LanguageCode, phoneNumber: '' as PhoneNumber }, type: 'phone' }
+  }
 };
