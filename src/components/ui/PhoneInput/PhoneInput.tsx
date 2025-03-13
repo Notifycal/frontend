@@ -1,38 +1,34 @@
 import { countryData, type CountryData, type LanguageCode } from '@common/i18n';
 import { TextInput, type TextInputProps } from '@mantine/core';
 
-import { forwardRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+
+import type { PhoneNumber } from '@notifycal/shared/types';
+import { forwardRef } from 'react';
 import LanguagePicker from '../LanguagePicker/LanguagePicker';
+
+interface PhoneInputValue {
+  country: LanguageCode;
+  phoneNumber: PhoneNumber;
+}
 
 interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
   label: string;
   error?: string;
-  onChange?: (value: string) => void;
+  value: PhoneInputValue;
+  onChange: (value: PhoneInputValue) => void;
 }
 
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, error, onChange = (): void => {}, ...rest }, ref) => {
-    const { i18n } = useTranslation();
-
-    // Falls back to Spain if the language isn't defined
-    const initialCountry = countryData[i18n.language as LanguageCode] ?? countryData.es;
-    const [selectedCountry, setSelectedCountry] = useState<CountryData>(initialCountry);
-    const [localNumber, setLocalNumber] = useState<string>('');
-
-    const dialCode = selectedCountry.phoneDetails.dialCode;
+  ({ label, error, value, onChange = (): void => {}, ...rest }, ref) => {
+    const { country, phoneNumber } = value;
+    const dialCode = countryData[country].phoneDetails.dialCode;
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-      const inputValue = event.target.value;
-      const newLocalNumber = inputValue.substring(dialCode.length + 1); // space between area code and number
-      setLocalNumber(newLocalNumber);
-      // Report the new full phone number back to parent
-      onChange(dialCode + newLocalNumber);
+      onChange({ ...value, phoneNumber: event.currentTarget.value as PhoneNumber });
     };
 
     const handleCountryChange = (country: CountryData): void => {
-      setSelectedCountry(country);
-      onChange(country.phoneDetails.dialCode + localNumber);
+      onChange({ ...value, country: country.code });
     };
 
     return (
@@ -43,9 +39,10 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
         leftSectionWidth="calc(3.2rem * var(--mantine-scale) * 2)"
         placeholder="Enter phone number"
         type="text"
+        value={phoneNumber}
         leftSection={
           <div
-            className="relative inline-flex justify-center"
+            className="flex justify-center"
             style={{
               height: 'calc(1.875rem * var(--mantine-scale))',
               width: 'calc(2.875rem * var(--mantine-scale) * 2)'
@@ -54,11 +51,12 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
             <LanguagePicker
               displayFlagOnly
               languageData={countryData}
-              onLanguageSelected={(country) => {
-                handleCountryChange(country as CountryData);
+              value={country}
+              onLanguageSelected={(selectedCountry) => {
+                handleCountryChange(selectedCountry as CountryData);
               }}
             />
-            <span>{dialCode}</span>
+            <span className="text-sm">{dialCode}</span>
           </div>
         }
         onChange={handleInputChange}

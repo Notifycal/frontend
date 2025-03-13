@@ -1,26 +1,22 @@
+import type { LanguageCode } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
+import type { PhoneNumber } from '@notifycal/shared/types';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import 'react-phone-number-input/style.css';
 import { z } from 'zod';
-import NewPhoneInput from '../PhoneInput/NewPhoneInput';
+import PhoneInput from '../PhoneInput/PhoneInput';
 import type { Step } from './Wizard';
 
-// const StepSenderDetailsSchema = z.object({
-//   contactDetails: z.object({
-//     type: z.literal('phone'),
-//     identifier: z.object({
-//       country: z.string().min(5, { message: 'Phone country is required' }),
-//       localIdentifier: z.string().min(5, { message: 'Phone number is required' })
-//     })
-//   })
-// });
 const StepSenderDetailsSchema = z.object({
-  testFoo: z.object(
-    { number: z.string().min(1, { message: 'invalid phone' }), checked: z.literal(true, { message: 'bool fail' }) },
-    { message: 'hey you!!' }
-  )
-});
+  contactDetails: z.object({
+    type: z.literal('phone'),
+    identifier: z.object({
+      country: z.string().min(2, { message: 'Phone country is required' }),
+      phoneNumber: z.string().min(1, { message: 'Phone number is required' })
+    })
+  })
+})
 // .refine(
 //   (data) => {
 //     return isValidMobilePhoneNumber(data.contactDetails.identifier as PhoneNumber, 'es');
@@ -31,22 +27,27 @@ const StepSenderDetailsSchema = z.object({
 // const StepSenderDetailsSchema = z.object({ contactDetails: phoneContactSchema });
 export type StepSenderDetailsValues = z.infer<typeof StepSenderDetailsSchema>;
 const StepSenderDetailsComponent = (): FunctionComponent => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { control } = useFormContext<StepSenderDetailsValues>();
 
   return (
     <Controller
       control={control}
-      name="testFoo"
-      render={({ field: { value, onChange, ...rest }, formState }) => {
-        console.log('FormState:', formState);
+      name="contactDetails.identifier"
+      render={({ field, formState }) => {
+        const error =
+          formState.errors.contactDetails?.identifier?.phoneNumber?.message ||
+          formState.errors.contactDetails?.identifier?.country?.message;
+
         return (
-          <NewPhoneInput
-            error={formState.errors.testFoo?.checked?.message || formState.errors.testFoo?.number?.message}
+          <PhoneInput
+            error={error}
             label={t('onboarding.stepSenderDetails.msg1')}
-            {...rest}
-            value={value}
-            onChange={onChange}
+            {...field}
+            value={{
+              country: field.value.country as LanguageCode,
+              phoneNumber: field.value.phoneNumber as PhoneNumber
+            }}
           />
         );
       }}
@@ -57,5 +58,5 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
 export const StepSenderDetails: Step<typeof StepSenderDetailsSchema> = {
   component: StepSenderDetailsComponent,
   schema: StepSenderDetailsSchema,
-  defaultValues: { testFoo: { checked: false, number: '' } }
+  defaultValues: { contactDetails: { identifier: { country: 'es' as LanguageCode, phoneNumber: '' as PhoneNumber }, type: 'phone' } }
 };

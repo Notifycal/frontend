@@ -29,13 +29,15 @@ export const MainLang: Story = {
   args: {
     displayFlagOnly: false,
     languageData: languageData,
+    value: 'es'
   }
 };
 
 export const SmallLang: Story = {
   args: {
     displayFlagOnly: true,
-    languageData: languageData
+    languageData: languageData,
+    value: 'en'
   }
 };
 
@@ -43,12 +45,14 @@ export const MainCountry: Story = {
   args: {
     displayFlagOnly: false,
     languageData: countryData,
+    value: 'en'
   }
 };
 
 export const SmallCountry: Story = {
   args: {
     displayFlagOnly: true,
-    languageData: countryData
+    languageData: countryData,
+    value: 'es'
   }
 };

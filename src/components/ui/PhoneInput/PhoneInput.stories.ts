@@ -3,6 +3,7 @@ import { fn } from '@storybook/test';
 
 // import LanguagePicker from './LanguagePicker';
 
+import type { PhoneNumber } from '@notifycal/shared/types';
 import PhoneInput from './PhoneInput';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -29,5 +30,9 @@ type Story = StoryObj<typeof meta>;
 export const Main: Story = {
   args: {
     label: 'Your phone number',
+    value: {
+      country: 'es',
+      phoneNumber: '666666666' as PhoneNumber
+    },
   }
 };
