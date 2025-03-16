@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { countryData, languageData } from '@common/i18n';
+import { languageData, phoneData } from '@notifycal/shared/i18n';
 import LanguagePicker from './LanguagePicker';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -19,7 +19,7 @@ const meta = {
     displayFlagOnly: { control: 'boolean' }
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onLanguageSelected: fn() }
+  args: { onSelected: fn() }
 } satisfies Meta<typeof LanguagePicker>;
 
 export default meta;
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const MainLang: Story = {
   args: {
     displayFlagOnly: false,
-    languageData: languageData,
+    data: languageData,
     value: 'es'
   }
 };
@@ -36,7 +36,7 @@ export const MainLang: Story = {
 export const SmallLang: Story = {
   args: {
     displayFlagOnly: true,
-    languageData: languageData,
+    data: languageData,
     value: 'en'
   }
 };
@@ -44,7 +44,7 @@ export const SmallLang: Story = {
 export const MainCountry: Story = {
   args: {
     displayFlagOnly: false,
-    languageData: countryData,
+    data: phoneData,
     value: 'en'
   }
 };
@@ -52,7 +52,7 @@ export const MainCountry: Story = {
 export const SmallCountry: Story = {
   args: {
     displayFlagOnly: true,
-    languageData: countryData,
+    data: phoneData,
     value: 'es'
   }
 };

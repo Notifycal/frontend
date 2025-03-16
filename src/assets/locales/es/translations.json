@@ -36,7 +36,8 @@
     },
     "stepSenderDetails": {
       "msg1": "Introduce el numero de telefono desde el que quieres mandar los recordatorios",
-      "invalidPhoneNumber": "El numero de telefono introducido es invalido"
+      "invalidPhoneNumber": "El numero de telefono introducido es invalido",
+      "requiredPhoneNumber": "El numero de telefono es obligatorio"
     },
     "stepFinal": {
       "msg1": "Ya puedes continuar! Haz click en Finalizar para acceder a Notifycal."

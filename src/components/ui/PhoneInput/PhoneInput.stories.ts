@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-// import LanguagePicker from './LanguagePicker';
-
 import type { PhoneNumber } from '@notifycal/shared/types';
 import PhoneInput from './PhoneInput';
 
@@ -31,8 +29,9 @@ export const Main: Story = {
   args: {
     label: 'Your phone number',
     value: {
-      country: 'es',
+      type: 'phone',
+      countryCode: 'ES',
       phoneNumber: '666666666' as PhoneNumber
-    },
+    }
   }
 };

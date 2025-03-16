@@ -1,6 +1,8 @@
-import { isValidMobilePhoneNumber, type LanguageCode } from '@common/i18n';
+import { isValidMobilePhoneNumber } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
+import { countryCodeSchema } from '@notifycal/shared/schemas';
 import type { PhoneNumber } from '@notifycal/shared/types';
+import i18next from 'i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import 'react-phone-number-input/style.css';
@@ -12,23 +14,19 @@ const StepSenderDetailsSchema = z
   .object({
     contactDetails: z.object({
       type: z.literal('phone'),
-      identifier: z.object({
-        country: z.string().min(2, { message: 'Phone country is required' }),
-        phoneNumber: z.string().min(1, { message: 'Phone number is required' })
-      })
+      countryCode: countryCodeSchema,
+      phoneNumber: z
+        .string()
+        .min(1, { message: i18next.t('onboarding.stepSenderDetails.requiredPhoneNumber') })
+        .brand('PhoneNumber')
     })
   })
   .superRefine((data, context) => {
-    if (
-      !isValidMobilePhoneNumber(
-        data.contactDetails.identifier.phoneNumber as PhoneNumber,
-        data.contactDetails.identifier.country as LanguageCode
-      )
-    ) {
+    if (!isValidMobilePhoneNumber(data.contactDetails.phoneNumber as PhoneNumber, data.contactDetails.countryCode)) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
-        message: 'Invalid phone number',
-        path: ['contactDetails', 'identifier', 'phoneNumber']
+        message: i18next.t('onboarding.stepSenderDetails.invalidPhoneNumber'),
+        path: ['contactDetails', 'phoneNumber']
       });
     }
   });
@@ -41,11 +39,12 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
   return (
     <Controller
       control={control}
-      name="contactDetails.identifier"
+      name="contactDetails"
       render={({ field, formState }) => {
+        console.log(formState);
         const error =
-          formState.errors.contactDetails?.identifier?.phoneNumber?.message ||
-          formState.errors.contactDetails?.identifier?.country?.message;
+          formState.errors.contactDetails?.phoneNumber?.message ||
+          formState.errors.contactDetails?.countryCode?.message;
 
         return (
           <PhoneInput
@@ -53,7 +52,8 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
             label={t('onboarding.stepSenderDetails.msg1')}
             {...field}
             value={{
-              country: field.value.country as LanguageCode,
+              type: 'phone',
+              countryCode: field.value.countryCode,
               phoneNumber: field.value.phoneNumber as PhoneNumber
             }}
           />
@@ -67,6 +67,6 @@ export const StepSenderDetails: Step<typeof StepSenderDetailsSchema> = {
   component: StepSenderDetailsComponent,
   schema: StepSenderDetailsSchema,
   defaultValues: {
-    contactDetails: { identifier: { country: 'es' as LanguageCode, phoneNumber: '' as PhoneNumber }, type: 'phone' }
+    contactDetails: { type: 'phone', countryCode: 'ES', phoneNumber: '' as PhoneNumber }
   }
 };

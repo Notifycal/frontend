@@ -1,13 +1,12 @@
-import { countryData, type CountryData, type LanguageCode } from '@common/i18n';
 import { TextInput, type TextInputProps } from '@mantine/core';
-
-
-import type { PhoneNumber } from '@notifycal/shared/types';
+import { phoneData } from '@notifycal/shared/i18n';
+import type { CountryCode, CountryName, InternationalizationData, PhoneNumber } from '@notifycal/shared/types';
 import { forwardRef } from 'react';
 import LanguagePicker from '../LanguagePicker/LanguagePicker';
 
 interface PhoneInputValue {
-  country: LanguageCode;
+  type: 'phone';
+  countryCode: CountryCode;
   phoneNumber: PhoneNumber;
 }
 
@@ -20,15 +19,15 @@ interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
 
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   ({ label, error, value, onChange = (): void => {}, ...rest }, ref) => {
-    const { country, phoneNumber } = value;
-    const dialCode = countryData[country].phoneDetails.dialCode;
+    const { countryCode: country, phoneNumber } = value;
+    const dialCode = phoneData[country].phoneDetails.dialCode;
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
       onChange({ ...value, phoneNumber: event.currentTarget.value as PhoneNumber });
     };
 
-    const handleCountryChange = (country: CountryData): void => {
-      onChange({ ...value, country: country.code });
+    const handleCountryChange = (country: InternationalizationData<CountryCode, CountryName>): void => {
+      onChange({ ...value, countryCode: country.code });
     };
 
     return (
@@ -50,10 +49,10 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           >
             <LanguagePicker
               displayFlagOnly
-              languageData={countryData}
+              data={phoneData}
               value={country}
-              onLanguageSelected={(selectedCountry) => {
-                handleCountryChange(selectedCountry as CountryData);
+              onSelected={(selectedCountry) => {
+                handleCountryChange(selectedCountry);
               }}
             />
             <span className="ml-2 text-sm self-center">{dialCode}</span>

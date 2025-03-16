@@ -1,8 +1,8 @@
-import { type LanguageCode, languageData } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
+import { languageData } from '@notifycal/shared/i18n';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
-import type { TemplateId, TemplateMap } from '@notifycal/shared/types';
+import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
 import i18next from 'i18next';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
@@ -43,9 +43,9 @@ const StepReminderTypeComponent = (): FunctionComponent => {
     <Stack>
       <Text size="sm">{t('onboarding.stepReminderType.msg1')}</Text>
       <LanguagePicker
-        languageData={languageData}
+        data={languageData}
         value={language}
-        onLanguageSelected={(item) => {
+        onSelected={(item) => {
           setSelectedLanguage(item.code);
         }}
       />
