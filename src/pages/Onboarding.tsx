@@ -24,7 +24,7 @@ const Onboarding = (): FunctionComponent => {
     .merge(StepBusinessDetails.schema)
     // StepReminderType intentionally skipped cause the collected value then gets baked into StepCalendars selection
     .merge(StepCalendars.schema)
-    .merge(StepSenderDetails.schema)
+    .merge(StepSenderDetails.schema.innerType())
     .merge(StepFinal.schema)
     .strip();
   type FormResult = z.infer<typeof schema>;
