@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import classes from './LanguagePicker.module.css';
 
-interface LanguagePickerProps<
+interface InternationalizationPickerProps<
   TCode extends string,
   TLabel extends string,
   TData extends InternationalizationData<TCode, TLabel>
@@ -18,7 +18,7 @@ interface LanguagePickerProps<
 }
 
 // Inspiration from https://ui.mantine.dev/component/language-picker/
-export default function LanguagePicker<
+export default function InternationalizationPicker<
   TCode extends string,
   TLabel extends string,
   TData extends InternationalizationData<TCode, TLabel>
@@ -27,7 +27,7 @@ export default function LanguagePicker<
   data: data,
   value: value,
   displayFlagOnly = false
-}: LanguagePickerProps<TCode, TLabel, TData>): FunctionComponent {
+}: InternationalizationPickerProps<TCode, TLabel, TData>): FunctionComponent {
   const [opened, setOpened] = useState(false);
 
   const items = Object.values<TData>(data).map((item) => (

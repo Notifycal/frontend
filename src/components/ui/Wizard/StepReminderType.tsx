@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
-import LanguagePicker from '../LanguagePicker/LanguagePicker';
+import InternationalizationPicker from '../InternationalizationPicker/InternationalizationPicker';
 import type { StepBusinessDetailsValues } from './StepBusinessDetails';
 import type { Step } from './Wizard';
 
@@ -42,7 +42,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
   return (
     <Stack>
       <Text size="sm">{t('onboarding.stepReminderType.msg1')}</Text>
-      <LanguagePicker
+      <InternationalizationPicker
         data={languageData}
         value={language}
         onSelected={(item) => {

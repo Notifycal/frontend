@@ -2,7 +2,7 @@ import { TextInput, type TextInputProps } from '@mantine/core';
 import { phoneData } from '@notifycal/shared/i18n';
 import type { CountryCode, CountryName, InternationalizationData, PhoneNumber } from '@notifycal/shared/types';
 import { forwardRef } from 'react';
-import LanguagePicker from '../LanguagePicker/LanguagePicker';
+import InternationalizationPicker from '../InternationalizationPicker/InternationalizationPicker';
 
 interface PhoneInputValue {
   type: 'phone';
@@ -47,7 +47,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
               width: 'calc(2.875rem * var(--mantine-scale) * 2)'
             }}
           >
-            <LanguagePicker
+            <InternationalizationPicker
               displayFlagOnly
               data={phoneData}
               value={country}
