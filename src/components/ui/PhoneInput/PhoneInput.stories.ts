@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import LanguagePicker from './LanguagePicker';
+import type { PhoneNumber } from '@notifycal/shared/types';
+import PhoneInput from './PhoneInput';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Notifycal/LanguagePicker',
-  component: LanguagePicker,
+  title: 'Notifycal/PhoneInput',
+  component: PhoneInput,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered'
@@ -15,23 +16,22 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    displayFlagOnly: { control: 'boolean' }
+    label: { control: 'text' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onLanguageSelected: fn() }
-} satisfies Meta<typeof LanguagePicker>;
+  args: { onChange: fn() }
+} satisfies Meta<typeof PhoneInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Main: Story = {
   args: {
-    displayFlagOnly: false
-  }
-};
-
-export const Small: Story = {
-  args: {
-    displayFlagOnly: true
+    label: 'Your phone number',
+    value: {
+      type: 'phone',
+      countryCode: 'ES',
+      phoneNumber: '666666666' as PhoneNumber
+    }
   }
 };

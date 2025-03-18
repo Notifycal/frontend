@@ -11,15 +11,15 @@ import { AnimatePresence, motion } from 'motion/react';
 import type { FunctionComponent } from '@common/types';
 import { useTranslation } from 'react-i18next';
 
-export type Step<TSchema extends z.AnyZodObject> = {
+export type Step<TSchema extends z.AnyZodObject | z.ZodEffects<z.AnyZodObject>> = {
   component: ComponentType;
   schema: TSchema;
   defaultValues: z.infer<TSchema>;
 };
 
-export type WizardConfig<TSchema extends z.AnyZodObject> = Array<Step<TSchema>>;
+export type WizardConfig<TSchema extends z.AnyZodObject | z.ZodEffects<z.AnyZodObject>> = Array<Step<TSchema>>;
 
-interface WizardProps<TSchema extends z.AnyZodObject, TResult> {
+interface WizardProps<TSchema extends z.AnyZodObject | z.ZodEffects<z.AnyZodObject>, TResult> {
   header: string;
   className?: HTMLProps<HTMLElement>['className'];
   buttonClassName?: HTMLProps<HTMLElement>['className'];
@@ -43,7 +43,7 @@ function Wizard<TResult extends FieldValues>({
   handleFinish,
   handleNext,
   handlePrevious
-}: WizardProps<z.AnyZodObject, TResult>): FunctionComponent {
+}: WizardProps<z.AnyZodObject | z.ZodEffects<z.AnyZodObject>, TResult>): FunctionComponent {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
   const [isWaitingForFinish, setWaitingForFinish] = useState(false);

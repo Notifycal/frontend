@@ -1,14 +1,15 @@
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
+import { languageData } from '@notifycal/shared/i18n';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
-import type { TemplateId, TemplateMap } from '@notifycal/shared/types';
+import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
 import i18next from 'i18next';
 import { DateTime } from 'luxon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
-import LanguagePicker from '../LanguagePicker/LanguagePicker';
+import InternationalizationPicker from '../InternationalizationPicker/InternationalizationPicker';
 import type { StepBusinessDetailsValues } from './StepBusinessDetails';
 import type { Step } from './Wizard';
 
@@ -29,15 +30,23 @@ const StepReminderTypeComponent = (): FunctionComponent => {
     watch
   } = useFormContext<StepReminderTypeValues & Pick<StepBusinessDetailsValues, 'business'>>();
 
+  const [language, setSelectedLanguage] = useState<LanguageCode>('es');
+
   const selectedTemplateId = watch('templateId');
   const business = watch('business');
+
+  useEffect(() => {
+    setTemplateLanguages(language === 'es' ? templateEsMap : templateEnMap);
+  }, [language]);
 
   return (
     <Stack>
       <Text size="sm">{t('onboarding.stepReminderType.msg1')}</Text>
-      <LanguagePicker
-        onLanguageSelected={(item) => {
-          setTemplateLanguages(item.shorthand === 'es' ? templateEsMap : templateEnMap);
+      <InternationalizationPicker
+        data={languageData}
+        value={language}
+        onSelected={(item) => {
+          setSelectedLanguage(item.code);
         }}
       />
       <Radio.Group

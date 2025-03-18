@@ -36,7 +36,8 @@
     },
     "stepSenderDetails": {
       "msg1": "Type the phone number the remidner will be send from",
-      "invalidPhoneNumber": "Phone number is invalid"
+      "invalidPhoneNumber": "Phone number is invalid",
+      "requiredPhoneNumber": "Phone number is required"
     },
     "stepFinal": {
       "msg1": "You can continue now! Click on Finish to access to Notifycal."

@@ -1,65 +1,72 @@
+import { isValidMobilePhoneNumber } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
-import { Text } from '@mantine/core';
-import { phoneContactSchema } from '@notifycal/shared/schemas';
+import { countryCodeSchema } from '@notifycal/shared/schemas';
 import type { PhoneNumber } from '@notifycal/shared/types';
+import i18next from 'i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 import 'react-phone-number-input/style.css';
 import { z } from 'zod';
+import PhoneInput from '../PhoneInput/PhoneInput';
 import type { Step } from './Wizard';
 
-const StepSenderDetailsSchema = z.object({
-  contactDetails: phoneContactSchema
-});
+const StepSenderDetailsSchema = z
+  .object({
+    contactDetails: z.object({
+      type: z.literal('phone'),
+      countryCode: countryCodeSchema,
+      phoneNumber: z
+        .string()
+        .min(1, { message: i18next.t('onboarding.stepSenderDetails.requiredPhoneNumber') })
+        .brand('PhoneNumber')
+    })
+  })
+  .superRefine((data, context) => {
+    if (!isValidMobilePhoneNumber(data.contactDetails.phoneNumber as PhoneNumber, data.contactDetails.countryCode)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: i18next.t('onboarding.stepSenderDetails.invalidPhoneNumber'),
+        path: ['contactDetails', 'phoneNumber']
+      });
+    }
+  });
+
 export type StepSenderDetailsValues = z.infer<typeof StepSenderDetailsSchema>;
 const StepSenderDetailsComponent = (): FunctionComponent => {
   const { t } = useTranslation();
-  const {
-    control,
-    formState: { errors }
-  } = useFormContext<StepSenderDetailsValues>();
+  const { control } = useFormContext<StepSenderDetailsValues>();
 
   return (
-    <>
-      <Text pb="sm" size="sm">
-        {t('onboarding.stepSenderDetails.msg1')}
-      </Text>
-      <Controller
-        control={control}
-        name="contactDetails.identifier"
-        rules={{ required: true, validate: (v) => isValidPhoneNumber(v) }}
-        render={({ field: { onChange, name, value } }) => (
-          <PhoneInputWithCountry
-            international
-            className="flex gap-3 border rounded-lg p-2 w-full"
-            countries={['ES']}
-            country="ES"
-            countryCallingCodeEditable={false}
-            defaultCountry="ES"
-            error={errors['contactDetails']?.identifier?.message}
-            locales={['ES', 'EN']}
-            name={name}
-            placeholder="   666 77 88 99"
-            value={value}
-            withCountryCallingCode={false}
-            onChange={(v: string) => {
-              onChange(v as PhoneNumber);
+    <Controller
+      control={control}
+      name="contactDetails"
+      render={({ field, formState }) => {
+        console.log(formState);
+        const error =
+          formState.errors.contactDetails?.phoneNumber?.message ||
+          formState.errors.contactDetails?.countryCode?.message;
+
+        return (
+          <PhoneInput
+            error={error}
+            label={t('onboarding.stepSenderDetails.msg1')}
+            {...field}
+            value={{
+              type: 'phone',
+              countryCode: field.value.countryCode,
+              phoneNumber: field.value.phoneNumber as PhoneNumber
             }}
           />
-        )}
-      />
-    </>
+        );
+      }}
+    />
   );
 };
+
 export const StepSenderDetails: Step<typeof StepSenderDetailsSchema> = {
   component: StepSenderDetailsComponent,
   schema: StepSenderDetailsSchema,
   defaultValues: {
-    contactDetails: {
-      type: 'phone',
-      identifier: '' as PhoneNumber
-    }
+    contactDetails: { type: 'phone', countryCode: 'ES', phoneNumber: '' as PhoneNumber }
   }
 };

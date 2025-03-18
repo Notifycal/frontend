@@ -7,6 +7,8 @@ import translationEN from '@assets/locales/en/translations.json';
 import translationES from '@assets/locales/es/translations.json';
 
 import { isProduction } from '@common/utils';
+import { phoneData } from '@notifycal/shared/i18n';
+import type { CountryCode, PhoneNumber } from '@notifycal/shared/types';
 
 export const defaultNS = 'translations';
 export const resources = {
@@ -28,3 +30,8 @@ const i18nOptions: InitOptions<HttpBackendOptions> = {
 };
 
 void i18n.use(initReactI18next).use(LanguageDetector).use(Backend).init<HttpBackendOptions>(i18nOptions);
+
+export const isValidMobilePhoneNumber = (number: PhoneNumber, country: CountryCode): boolean => {
+  const regex = phoneData[country].phoneDetails.numberMask;
+  return regex.test(number);
+};
