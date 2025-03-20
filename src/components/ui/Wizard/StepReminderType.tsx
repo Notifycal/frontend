@@ -1,6 +1,6 @@
+import { languageData } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
-import { languageData } from '@notifycal/shared/i18n';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
 import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
 import i18next from 'i18next';

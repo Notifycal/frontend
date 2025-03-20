@@ -6,9 +6,12 @@ import { initReactI18next } from 'react-i18next';
 import translationEN from '@assets/locales/en/translations.json';
 import translationES from '@assets/locales/es/translations.json';
 
+import flagEn from '@assets/icons/lang/en.png';
+import flagEs from '@assets/icons/lang/es.png';
 import { isProduction } from '@common/utils';
-import { phoneData } from '@notifycal/shared/i18n';
-import type { CountryCode, PhoneNumber } from '@notifycal/shared/types';
+import { languageByLanguageCode, phoneByCountry } from '@notifycal/shared/i18n';
+import type { CountryCode, LanguageCode, LanguageData, PhoneData, PhoneNumber } from '@notifycal/shared/types';
+import { deepmerge } from 'deepmerge-ts';
 
 export const defaultNS = 'translations';
 export const resources = {
@@ -28,6 +31,26 @@ const i18nOptions: InitOptions<HttpBackendOptions> = {
     loadPath: isProduction ? 'locales/{{lng}}/translations.json' : 'src/assets/locales/{{lng}}/translations.json'
   }
 };
+
+const flagsByCountry: Record<CountryCode, Pick<PhoneData, 'image'>> = {
+  ES: { image: flagEs },
+  EN: { image: flagEn }
+};
+
+const flagsByLanguage: Record<LanguageCode, Pick<LanguageData, 'image'>> = {
+  es: { image: flagEs },
+  en: { image: flagEn }
+};
+
+export const languageData: Record<LanguageCode, LanguageData> = deepmerge(
+  languageByLanguageCode,
+  flagsByLanguage
+) as Record<LanguageCode, LanguageData>;
+
+export const phoneData: Record<CountryCode, PhoneData> = deepmerge(phoneByCountry, flagsByCountry) as Record<
+  CountryCode,
+  PhoneData
+>;
 
 void i18n.use(initReactI18next).use(LanguageDetector).use(Backend).init<HttpBackendOptions>(i18nOptions);
 

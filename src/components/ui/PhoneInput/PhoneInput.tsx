@@ -1,5 +1,5 @@
+import { phoneData } from '@common/i18n';
 import { TextInput, type TextInputProps } from '@mantine/core';
-import { phoneData } from '@notifycal/shared/i18n';
 import type { CountryCode, CountryName, InternationalizationData, PhoneNumber } from '@notifycal/shared/types';
 import { forwardRef } from 'react';
 import InternationalizationPicker from '../InternationalizationPicker/InternationalizationPicker';

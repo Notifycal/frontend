@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { languageData, phoneData } from '@notifycal/shared/i18n';
+import { languageData, phoneData } from '@common/i18n';
 import InternationalizationPicker from './InternationalizationPicker';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
