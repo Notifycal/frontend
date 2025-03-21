@@ -25,14 +25,9 @@ const StepBusinessDetailsComponent = (): FunctionComponent => {
   const { t } = useTranslation();
   const {
     register,
-    watch,
     formState: { errors }
   } = useFormContext<StepBusinessDetailsValues & StepSenderDetailsValues>();
 
-  //TODO: remove
-  const xxx = watch('contactDetails');
-
-  console.info(xxx);
   return (
     <>
       <TextInput

@@ -40,7 +40,6 @@ const StepSenderDetailsComponent = (): FunctionComponent => {
       control={control}
       name="contactDetails"
       render={({ field, formState }) => {
-        console.log(formState);
         const error =
           formState.errors.contactDetails?.phoneNumber?.message ||
           formState.errors.contactDetails?.countryCode?.message;
