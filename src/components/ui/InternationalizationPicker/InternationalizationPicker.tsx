@@ -4,7 +4,7 @@ import type { InternationalizationData } from '@notifycal/shared/types';
 import { IconChevronDown } from '@tabler/icons-react';
 import clsx from 'clsx';
 import { useState } from 'react';
-import classes from './LanguagePicker.module.css';
+import classes from './InternationalizationPicker.module.css';
 
 interface InternationalizationPickerProps<
   TCode extends string,

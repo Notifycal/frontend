@@ -18,7 +18,7 @@ import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Onboarding = (): FunctionComponent => {
-  const stepsConfig = [StepWelcome, StepSenderDetails, StepBusinessDetails, StepReminderType, StepCalendars, StepFinal];
+  const stepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails, StepFinal];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const schema = StepWelcome.schema
     .merge(StepBusinessDetails.schema)

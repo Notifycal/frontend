@@ -5,7 +5,6 @@ import type { PhoneNumber } from '@notifycal/shared/types';
 import i18next from 'i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import 'react-phone-number-input/style.css';
 import { z } from 'zod';
 import PhoneInput from '../PhoneInput/PhoneInput';
 import type { Step } from './Wizard';
