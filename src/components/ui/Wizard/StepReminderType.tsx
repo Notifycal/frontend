@@ -3,7 +3,6 @@ import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
 import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
-import i18next from 'i18next';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -14,10 +13,7 @@ import type { StepBusinessDetailsValues } from './StepBusinessDetails';
 import type { Step } from './Wizard';
 
 const StepReminderTypeSchema = z.object({
-  templateId: z
-    .string()
-    .min(1, { message: i18next.t('onboarding.stepReminderType.noTemplateSelected') })
-    .brand('TemplateId')
+  templateId: z.string().min(1, { message: 'onboarding.stepReminderType.noTemplateSelected' }).brand('TemplateId')
 });
 export type StepReminderTypeValues = z.infer<typeof StepReminderTypeSchema>;
 const StepReminderTypeComponent = (): FunctionComponent => {
@@ -38,7 +34,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
   useEffect(() => {
     setTemplateLanguages(language === 'es' ? templateEsMap : templateEnMap);
   }, [language]);
-
+  const errorKey = errors.templateId?.message;
   return (
     <Stack>
       <Text size="sm">{t('onboarding.stepReminderType.msg1')}</Text>
@@ -50,7 +46,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
         }}
       />
       <Radio.Group
-        error={errors.templateId?.message}
+        error={errorKey ? t(errorKey as 'onboarding.stepReminderType.noTemplateSelected') : ''}
         value={selectedTemplateId}
         styles={{
           error: {

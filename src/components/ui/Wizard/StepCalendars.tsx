@@ -5,7 +5,6 @@ import { calendarSchema } from '@notifycal/shared/schemas';
 import { IconRefresh } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 
-import i18next from 'i18next';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -16,7 +15,7 @@ import type { Step } from './Wizard';
 const StepCalendarsSchema = z.object({
   calendars: z
     .array(calendarSchema.merge(StepReminderType.schema))
-    .min(1, { message: i18next.t('onboarding.stepCalendars.selectMenu.error') })
+    .min(1, { message: 'onboarding.stepCalendars.selectMenu.error' })
 });
 type StepCalendarsValues = z.infer<typeof StepCalendarsSchema>;
 const StepCalendarsComponent = (): FunctionComponent => {
@@ -36,7 +35,7 @@ const StepCalendarsComponent = (): FunctionComponent => {
     queryKey: ['userIdPCalendars'],
     queryFn: getUserCalendarsFromGoogle
   });
-
+  const errorKey = errors.calendars?.message;
   return (
     <>
       <Controller
@@ -47,7 +46,7 @@ const StepCalendarsComponent = (): FunctionComponent => {
             comboboxProps={{ shadow: 'md' }}
             data={(Calendars || []).map((c) => ({ label: c.name, value: c.id }))}
             disabled={isLoading}
-            error={errors['calendars']?.message}
+            error={errorKey ? t(errorKey as 'onboarding.stepCalendars.selectMenu.error') : ''}
             label={t('onboarding.stepCalendars.msg1', { businessName: businessName })}
             labelProps={{ pb: 'sm' }}
             leftSection={isLoading && <IconRefresh size={14} />}

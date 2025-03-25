@@ -1,7 +1,6 @@
 import type { FunctionComponent } from '@common/types';
 import { TextInput } from '@mantine/core';
 import type { BusinessAddress, BusinessName } from '@notifycal/shared/types';
-import i18next from 'i18next';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -10,16 +9,13 @@ import type { Step } from './Wizard';
 
 const StepBusinessDetailsSchema = z.object({
   business: z.object({
-    name: z
-      .string()
-      .min(1, { message: i18next.t('onboarding.stepBusinessDetails.noBusinessName') })
-      .brand('BusinessName'),
-    address: z
-      .string()
-      .min(1, { message: i18next.t('onboarding.stepBusinessDetails.noBusinessAddress') })
-      .brand('BusinessAddress')
+    name: z.string().min(1, { message: 'onboarding.stepBusinessDetails.noBusinessName' }).brand('BusinessName'),
+    address: z.string().min(1, { message: 'onboarding.stepBusinessDetails.noBusinessAddress' }).brand('BusinessAddress')
   })
 });
+export type ErrorMessageKey =
+  | 'onboarding.stepBusinessDetails.noBusinessName'
+  | 'onboarding.stepBusinessDetails.noBusinessAddress';
 export type StepBusinessDetailsValues = z.infer<typeof StepBusinessDetailsSchema>;
 const StepBusinessDetailsComponent = (): FunctionComponent => {
   const { t } = useTranslation();
@@ -28,6 +24,8 @@ const StepBusinessDetailsComponent = (): FunctionComponent => {
     formState: { errors }
   } = useFormContext<StepBusinessDetailsValues & StepSenderDetailsValues>();
 
+  const errorKeyName = errors.business?.name?.message;
+  const errorKeyAddress = errors.business?.address?.message;
   return (
     <>
       <TextInput
@@ -35,14 +33,14 @@ const StepBusinessDetailsComponent = (): FunctionComponent => {
         labelProps={{ pb: 'sm' }}
         pb="md"
         {...register('business.name')}
-        error={errors.business?.name?.message}
+        error={errorKeyName ? t(errorKeyName as ErrorMessageKey) : ''}
         type="text"
       />
       <TextInput
         label={t('onboarding.stepBusinessDetails.msg2')}
         labelProps={{ pb: 'sm' }}
         {...register('business.address')}
-        error={errors.business?.address?.message}
+        error={errorKeyAddress ? t(errorKeyAddress as ErrorMessageKey) : ''}
       />
     </>
   );
