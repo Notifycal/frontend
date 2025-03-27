@@ -1,6 +1,7 @@
 import { languageData } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
+import { languageCodeSchema } from '@notifycal/shared/schemas';
 import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
 import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
 import { DateTime } from 'luxon';
@@ -13,7 +14,8 @@ import type { StepBusinessDetailsValues } from './StepBusinessDetails';
 import type { Step } from './Wizard';
 
 const StepReminderTypeSchema = z.object({
-  templateId: z.string().min(1, { message: 'onboarding.stepReminderType.noTemplateSelected' }).brand('TemplateId')
+  id: z.string().min(1, { message: 'onboarding.stepReminderType.noTemplateSelected' }).brand('TemplateId'),
+  language: languageCodeSchema
 });
 export type StepReminderTypeValues = z.infer<typeof StepReminderTypeSchema>;
 const StepReminderTypeComponent = (): FunctionComponent => {
@@ -26,15 +28,16 @@ const StepReminderTypeComponent = (): FunctionComponent => {
     watch
   } = useFormContext<StepReminderTypeValues & Pick<StepBusinessDetailsValues, 'business'>>();
 
-  const [language, setSelectedLanguage] = useState<LanguageCode>('es');
-
-  const selectedTemplateId = watch('templateId');
+  const selectedTemplateId = watch('id');
+  const selectedTemplateLanguage = watch('language');
   const business = watch('business');
+
+  const [language, setSelectedLanguage] = useState<LanguageCode>(selectedTemplateLanguage);
 
   useEffect(() => {
     setTemplateLanguages(language === 'es' ? templateEsMap : templateEnMap);
   }, [language]);
-  const errorKey = errors.templateId?.message;
+  const errorKey = errors.id?.message;
   return (
     <Stack>
       <Text size="sm">{t('onboarding.stepReminderType.msg1')}</Text>
@@ -55,7 +58,8 @@ const StepReminderTypeComponent = (): FunctionComponent => {
           }
         }}
         onChange={(value) => {
-          setValue('templateId', value as TemplateId);
+          setValue('id', value as TemplateId);
+          setValue('language', language);
         }}
       >
         <Group>
@@ -86,6 +90,7 @@ export const StepReminderType: Step<typeof StepReminderTypeSchema> = {
   component: StepReminderTypeComponent,
   schema: StepReminderTypeSchema,
   defaultValues: {
-    templateId: '' as TemplateId
+    id: '' as TemplateId,
+    language: 'es'
   }
 };

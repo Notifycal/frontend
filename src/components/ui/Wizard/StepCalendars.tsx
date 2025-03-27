@@ -14,7 +14,7 @@ import type { Step } from './Wizard';
 
 const StepCalendarsSchema = z.object({
   calendars: z
-    .array(calendarSchema.merge(StepReminderType.schema))
+    .array(calendarSchema.extend({ template: StepReminderType.schema }))
     .min(1, { message: 'onboarding.stepCalendars.selectMenu.error' })
 });
 type StepCalendarsValues = z.infer<typeof StepCalendarsSchema>;
@@ -24,12 +24,11 @@ const StepCalendarsComponent = (): FunctionComponent => {
     formState: { errors },
     watch,
     control
-  } = useFormContext<
-    StepCalendarsValues & Pick<StepReminderTypeValues, 'templateId'> & Pick<StepBusinessDetailsValues, 'business'>
-  >();
+  } = useFormContext<StepCalendarsValues & StepReminderTypeValues & Pick<StepBusinessDetailsValues, 'business'>>();
 
   const businessName = watch('business').name;
-  const templateId = watch('templateId');
+  const templateId = watch('id');
+  const templateLanguage = watch('language');
 
   const { data: Calendars, isLoading } = useQuery({
     queryKey: ['userIdPCalendars'],
@@ -57,7 +56,9 @@ const StepCalendarsComponent = (): FunctionComponent => {
             }
             onChange={(v) => {
               onChange(
-                (Calendars || []).filter((c) => v.includes(c.id)).map((c) => ({ ...c, templateId: templateId }))
+                (Calendars || [])
+                  .filter((c) => v.includes(c.id))
+                  .map((c) => ({ ...c, template: { id: templateId, language: templateLanguage } }))
               );
             }}
           />

@@ -6,8 +6,8 @@ import { initReactI18next } from 'react-i18next';
 import translationEN from '@assets/locales/en/translations.json';
 import translationES from '@assets/locales/es/translations.json';
 
-import flagEn from '@assets/icons/lang/en.png';
 import flagEs from '@assets/icons/lang/es.png';
+import flagGb from '@assets/icons/lang/gb.png';
 import { isProduction } from '@common/utils';
 import { languageByLanguageCode, phoneByCountry } from '@notifycal/shared/i18n';
 import type { CountryCode, LanguageCode, LanguageData, PhoneData, PhoneNumber } from '@notifycal/shared/types';
@@ -34,12 +34,12 @@ const i18nOptions: InitOptions<HttpBackendOptions> = {
 
 const flagsByCountry: Record<CountryCode, Pick<PhoneData, 'image'>> = {
   ES: { image: flagEs },
-  EN: { image: flagEn }
+  GB: { image: flagGb }
 };
 
 const flagsByLanguage: Record<LanguageCode, Pick<LanguageData, 'image'>> = {
   es: { image: flagEs },
-  en: { image: flagEn }
+  en: { image: flagGb }
 };
 
 export const languageData: Record<LanguageCode, LanguageData> = deepmerge(
