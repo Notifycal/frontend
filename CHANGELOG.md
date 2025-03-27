@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/Notifycal/frontend/compare/v0.10.0...v0.11.0) (2025-03-27)
+
+
+### Features
+
+* sender phone number wizard. Rename Oboarding steps so they aren't numbered ([#170](https://github.com/Notifycal/frontend/issues/170)) ([6e418f2](https://github.com/Notifycal/frontend/commit/6e418f20b280d9ef86b034231b3dba83dd2c1597))
+
 ## [0.10.0](https://github.com/Notifycal/frontend/compare/v0.9.0...v0.10.0) (2025-02-26)
 
 
