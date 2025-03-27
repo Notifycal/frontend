@@ -10,24 +10,23 @@
     "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos."
   },
   "onboarding": {
-    "step1": {
+    "stepWelcome": {
       "header": "Bienvenid@ a Notifycal",
       "msg1": "Antes de continuar, necesitamos conocer un poco más sobre ti y tu negocio.",
       "msg2": "Estos datos son necesarios para poder mandarle recordatorios a tus clientes."
     },
-    "step2": {
+    "stepBusinessDetails": {
       "msg1": "¿Cómo se llama tu negocio?",
-      "noBusinessName": "El nombre del negocio es obligatorio."
-    },
-    "step3": {
-      "msg1": "¿Cual es la direccion de {{businessName}}?",
+      "msg2": "¿Cual es la direccion de tu negocio?",
+      "noBusinessName": "El nombre del negocio es obligatorio.",
       "noBusinessAddress": "La direccion del negocio es obligatoria."
     },
-    "step4": {
+    "stepRemiderType": {
       "msg1": "Selecciona el tipo de recordatorio que quieres enviar a tus clientes:",
+      "characterCounterHeadsUp": "La seleccion resulta en recordatorios de {{chracterCount}} caracteres. Los recordatorios son tarificados en multiplos de 160 caracteres.",
       "noTemplateSelected": "Seleciona un tipo de plantilla"
     },
-    "step5": {
+    "stepCalendars": {
       "msg1": "Selecciona los calendarios que quieres usar para {{businessName}}",
       "selectMenu": {
         "loading": "Buscando calendarios del usuario...",
@@ -35,7 +34,12 @@
         "error": "Debes seleccionar al menos un calendario"
       }
     },
-    "step6": {
+    "stepSenderDetails": {
+      "msg1": "Introduce el numero de telefono desde el que quieres mandar los recordatorios",
+      "invalidPhoneNumber": "El numero de telefono introducido es invalido",
+      "requiredPhoneNumber": "El numero de telefono es obligatorio"
+    },
+    "stepFinal": {
       "msg1": "Ya puedes continuar! Haz click en Finalizar para acceder a Notifycal."
     }
   },

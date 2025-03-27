@@ -1,5 +1,5 @@
 {
-  "name": "vite-react-boilerplate",
+  "name": "frontend",
   "author": "Notifycal",
   "description": "Private-area frontend SPA",
   "keywords": [
@@ -28,13 +28,14 @@
     "prettier": "prettier . --check",
     "prettier:fix": "$npm_execpath run prettier -- --write",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "checkCircularDeps": "madge --ts-config tsconfig.json --extensions ts --circular ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@mantine/core": "7.16.2",
     "@mantine/hooks": "7.16.2",
-    "@notifycal/shared": "^1.4.0",
+    "@notifycal/shared": "^3.0.0",
     "@react-oauth/google": "^0.12.1",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-query": "^5.64.2",
@@ -44,6 +45,7 @@
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
+    "deepmerge-ts": "^7.1.5",
     "i18next": "^24.2.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^3.0.2",
@@ -53,7 +55,7 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^5.0.0",
     "react-hook-form": "^7.54.2",
-    "react-i18next": "^15.4.0",
+    "react-i18next": "^15.4.1",
     "zod": "3.24.1"
   },
   "devDependencies": {
@@ -99,6 +101,7 @@
     "eslint-plugin-unicorn": "^56.0.1",
     "globals": "^15.9.0",
     "jsdom": "^26.0.0",
+    "madge": "^8.0.0",
     "msw": "^2.7.0",
     "postcss": "8.5.1",
     "postcss-preset-mantine": "1.17.0",
@@ -107,7 +110,7 @@
     "prop-types": "^15.8.1",
     "storybook": "^8.6.4",
     "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4",
+    "typescript": "^5.7.3",
     "typescript-eslint": "^8.22.0",
     "vite": "^5.4.14",
     "vite-plugin-static-copy": "^2.2.0",

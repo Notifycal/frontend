@@ -1,4 +1,5 @@
-import type { IdpName, ReminderConfig, SuccessResponseContainer, User } from '@notifycal/shared/types';
+import type { ReminderConfig } from '@notifycal/shared/schemas';
+import type { IdpName, SuccessResponseContainer, User } from '@notifycal/shared/types';
 import getApiClient from './common';
 
 export const getUserProfile = async (): Promise<User<IdpName>> => {

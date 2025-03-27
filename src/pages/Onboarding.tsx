@@ -1,6 +1,6 @@
-import { StepFive } from '@components/ui/Wizard/StepFive';
-import { StepThree } from '@components/ui/Wizard/StepThree';
-import { StepTwo } from '@components/ui/Wizard/StepTwo';
+import { StepBusinessDetails } from '@components/ui/Wizard/StepBusinessDetails';
+import { StepCalendars } from '@components/ui/Wizard/StepCalendars';
+import { StepSenderDetails } from '@components/ui/Wizard/StepSenderDetails';
 import Wizard from '@components/ui/Wizard/Wizard';
 
 import { updateUserProfile } from '@api/userProfile';
@@ -9,23 +9,23 @@ import { useNavigate } from '@tanstack/react-router';
 import onboardingImg from '@assets/images/onboarding.png';
 
 import type { FunctionComponent } from '@common/types';
-import { StepOne } from '@components/ui/Wizard/StepOne';
-import { StepSix } from '@components/ui/Wizard/StepSix';
+import { StepFinal } from '@components/ui/Wizard/StepFinal';
+import { StepWelcome } from '@components/ui/Wizard/StepWelcome';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
-import { StepFour } from '@components/ui/Wizard/StepFour';
+import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Onboarding = (): FunctionComponent => {
-  const stepsConfig = [StepOne, StepTwo, StepThree, StepFour, StepFive, StepSix];
+  const stepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails, StepFinal];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const schema = StepOne.schema
-    .merge(StepTwo.schema)
-    .merge(StepThree.schema)
-    // StepFour intentionally skipped cause the collected value then gets baked into StepFive selection
-    .merge(StepFive.schema)
-    .merge(StepSix.schema)
+  const schema = StepWelcome.schema
+    .merge(StepBusinessDetails.schema)
+    // StepReminderType intentionally skipped cause the collected value then gets baked into StepCalendars selection
+    .merge(StepCalendars.schema)
+    .merge(StepSenderDetails.schema.innerType())
+    .merge(StepFinal.schema)
     .strip();
   type FormResult = z.infer<typeof schema>;
 
@@ -46,7 +46,14 @@ const Onboarding = (): FunctionComponent => {
   });
 
   const onOnboardingFinish = async (data: FormResult): Promise<void> => {
-    await updateUser.mutateAsync(data satisfies FormResult);
+    const result = {
+      calendars: data.calendars,
+      business: {
+        ...data.business,
+        senderContact: data.contactDetails
+      }
+    };
+    await updateUser.mutateAsync(result);
     await navigate({ to: '/dashboard' });
   };
 
@@ -62,7 +69,7 @@ const Onboarding = (): FunctionComponent => {
         <Wizard
           className="flex-shrink-0 flex-grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
           handleFinish={onOnboardingFinish}
-          header={t('onboarding.step1.header')}
+          header={t('onboarding.stepWelcome.header')}
           wizardSteps={stepsConfig}
         />
       </div>

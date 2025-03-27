@@ -10,24 +10,23 @@
     "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
   },
   "onboarding": {
-    "step1": {
+    "stepWelcome": {
       "header": "Welcome to Notifycal",
       "msg1": "Before you continue, we need to know more about you and your business.",
       "msg2": "The following information is needed to be able to send reminders to your clients."
     },
-    "step2": {
+    "stepBusinessDetails": {
       "msg1": "What is your business name?",
-      "noBusinessName": "Business name is required"
-    },
-    "step3": {
-      "msg1": "What is the business address of {{businessName}}?",
+      "msg2": "What is the business address?",
+      "noBusinessName": "Business name is required",
       "noBusinessAddress": "Business address is required"
     },
-    "step4": {
+    "stepReminderType": {
       "msg1": "Select the kind of reminder you want to send to your clients:",
+      "characterCounterHeadsUp": "Selection results in reminders {{characterCount}} characters long. Reminders are charged in multiples of 160 characters.",
       "noTemplateSelected": "Select one template"
     },
-    "step5": {
+    "stepCalendars": {
       "msg1": "Select the calendar you want to use for {{businessName}}",
       "selectMenu": {
         "loading": "Searching for your calendars...",
@@ -35,7 +34,12 @@
         "error": "At least one calendar needs to be selected"
       }
     },
-    "step6": {
+    "stepSenderDetails": {
+      "msg1": "Type the phone number the remidner will be send from",
+      "invalidPhoneNumber": "Phone number is invalid",
+      "requiredPhoneNumber": "Phone number is required"
+    },
+    "stepFinal": {
       "msg1": "You can continue now! Click on Finish to access to Notifycal."
     }
   },
