@@ -50,7 +50,7 @@ const Onboarding = (): FunctionComponent => {
       calendars: data.calendars,
       business: {
         ...data.business,
-        contactDetails: data.contactDetails
+        senderContact: data.contactDetails
       }
     };
     await updateUser.mutateAsync(result);
