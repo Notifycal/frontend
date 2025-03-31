@@ -99,7 +99,10 @@ function Wizard<TResult extends FieldValues>({
         className={`flex flex-col ${className}`}
         onSubmit={async (event) => {
           event.preventDefault();
-          await onFormFinish();
+          event.stopPropagation();
+          if (isLastStep) {
+            await onFormFinish();
+          }
         }}
       >
         {header && <h1 className="text-xl md:text-2xl font-bold mb-4">{header}</h1>}
