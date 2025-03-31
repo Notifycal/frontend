@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/Notifycal/frontend/compare/v0.11.0...v0.11.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* stop PATCH request onEnter before the form is ready ([#184](https://github.com/Notifycal/frontend/issues/184)) ([e392af3](https://github.com/Notifycal/frontend/commit/e392af32e9007aab5d84b42f25b2212c431aa0f0))
+
 ## [0.11.0](https://github.com/Notifycal/frontend/compare/v0.10.0...v0.11.0) (2025-03-27)
 
 
