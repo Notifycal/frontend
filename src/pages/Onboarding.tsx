@@ -58,16 +58,16 @@ const Onboarding = (): FunctionComponent => {
   };
 
   return (
-    <div className="container h-screen md:max-h-[600px] mx-auto bg-white shadow-sm rounded-lg lg:max-w-[66.6%]">
+    <div className="container h-screen md:max-h-[600px] mx-auto bg-white shadow-xs rounded-lg lg:max-w-[66.6%]">
       <div className="flex flex-col md:flex-row h-full">
         <div
-          className="flex-shrink-0 flex-grow-0 basis-2/5 md:basis-1/2 bg-cover bg-center overflow-hidden"
+          className="shrink-0 grow-0 basis-2/5 md:basis-1/2 bg-cover bg-center overflow-hidden"
           style={{
             backgroundImage: `url(${onboardingImg})`
           }}
         ></div>
         <Wizard
-          className="flex-shrink-0 flex-grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
+          className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
           handleFinish={onOnboardingFinish}
           header={t('onboarding.stepWelcome.header')}
           wizardSteps={stepsConfig}

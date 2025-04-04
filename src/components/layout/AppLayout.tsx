@@ -36,7 +36,7 @@ export default function AppLayout(): FunctionComponent {
       </div>
       <main className={clsx({ '-mt-32': useFancyHeader })}>
         <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+          <div className="rounded-lg bg-white px-5 py-6 shadow-sm sm:px-6">
             <Outlet />
           </div>
         </div>
