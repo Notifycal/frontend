@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.0](https://github.com/Notifycal/frontend/compare/v0.11.1...v0.12.0) (2025-04-04)
+
+
+### Features
+
+* upgrade to React v19 ([#194](https://github.com/Notifycal/frontend/issues/194)) ([7c0e1c0](https://github.com/Notifycal/frontend/commit/7c0e1c0111c2a37804ed2b7beb04ceca19676bda))
+* upgrade to tailwindcss v4 ([#196](https://github.com/Notifycal/frontend/issues/196)) ([5300bef](https://github.com/Notifycal/frontend/commit/5300befd7a894c7130cd67130f188d4523f049be))
+
 ## [0.11.1](https://github.com/Notifycal/frontend/compare/v0.11.0...v0.11.1) (2025-03-31)
 
 
