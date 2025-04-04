@@ -14,7 +14,7 @@ const FullPageError = ({ errorMessage, onRetry }: FullScreenErrorProps): Functio
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="text-center bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+        <div className="text-center bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
           <div className=" sm:mx-auto sm:w-full sm:max-w-md mb-6">
             <img
               alt="Your Company"
