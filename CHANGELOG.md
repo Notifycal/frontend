@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/Notifycal/frontend/compare/v0.12.0...v0.12.1) (2025-04-08)
+
+
+### Bug Fixes
+
+* remove r trademark ([#197](https://github.com/Notifycal/frontend/issues/197)) ([cef9fbe](https://github.com/Notifycal/frontend/commit/cef9fbe802ede0bebcd6dd8fb358cfc2bf4973bc))
+
 ## [0.12.0](https://github.com/Notifycal/frontend/compare/v0.11.1...v0.12.0) (2025-04-04)
 
 
