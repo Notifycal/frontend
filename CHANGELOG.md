@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.2](https://github.com/Notifycal/frontend/compare/v0.12.1...v0.12.2) (2025-04-15)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency i18next to v25 ([#212](https://github.com/Notifycal/frontend/issues/212)) ([bbba3c7](https://github.com/Notifycal/frontend/commit/bbba3c7195fa1fc0ede80db4937a009228240aff))
+* **deps:** Update Node.js Dependencies ([#204](https://github.com/Notifycal/frontend/issues/204)) ([3d1718b](https://github.com/Notifycal/frontend/commit/3d1718b4e9a5352646eb89f2fabac9bf8a447b0c))
+
 ## [0.12.1](https://github.com/Notifycal/frontend/compare/v0.12.0...v0.12.1) (2025-04-08)
 
 
