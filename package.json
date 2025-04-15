@@ -32,7 +32,7 @@
     "checkCircularDeps": "madge --ts-config tsconfig.json --extensions ts --circular ."
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.0",
+    "@hookform/resolvers": "^5.0.0",
     "@mantine/core": "7.17.4",
     "@mantine/hooks": "7.17.4",
     "@notifycal/shared": "^3.0.1",
@@ -46,7 +46,7 @@
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "deepmerge-ts": "^7.1.5",
-    "i18next": "^24.2.2",
+    "i18next": "^25.0.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^3.0.2",
     "luxon": "^3.5.0",
