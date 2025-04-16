@@ -39,6 +39,10 @@
       "invalidPhoneNumber": "Phone number is invalid",
       "requiredPhoneNumber": "Phone number is required"
     },
+    "stepDemoReminder": {
+      "header": "Try it out",
+      "msg1": "Check out the reminder example we will send to your clients on your phone"
+    },
     "stepFinal": {
       "msg1": "You can continue now! Click on Finish to access to Notifycal."
     }

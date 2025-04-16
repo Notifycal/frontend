@@ -39,6 +39,10 @@
       "invalidPhoneNumber": "El numero de telefono introducido es invalido",
       "requiredPhoneNumber": "El numero de telefono es obligatorio"
     },
+    "stepDemoReminder": {
+      "header": "Pruebalo",
+      "msg1": "Mira el ejemplo de recordatorio que enviaremos a tus clientes en tu movil"
+    },
     "stepFinal": {
       "msg1": "Ya puedes continuar! Haz click en Finalizar para acceder a Notifycal."
     }

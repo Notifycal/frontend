@@ -14,11 +14,13 @@ import { StepWelcome } from '@components/ui/Wizard/StepWelcome';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
+import { StepDemoReminder } from '@components/ui/Wizard/StepDemoReminder';
 import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const Onboarding = (): FunctionComponent => {
-  const stepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails, StepFinal];
+  const onboardingStepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const schema = StepWelcome.schema
     .merge(StepBusinessDetails.schema)
@@ -29,10 +31,12 @@ const Onboarding = (): FunctionComponent => {
     .strip();
   type FormResult = z.infer<typeof schema>;
 
-  const { t } = useTranslation();
+  const demoReminderStepsConfig = [StepDemoReminder];
 
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [isOnboardingFinished, finishOnboarding] = useState<boolean>(false);
 
   const updateUser = useMutation({
     mutationFn: updateUserProfile,
@@ -53,7 +57,11 @@ const Onboarding = (): FunctionComponent => {
         senderContact: data.contactDetails
       }
     };
-    await updateUser.mutateAsync(result);
+    await updateUser.mutateAsync(result).then();
+    finishOnboarding(true);
+  };
+
+  const onDemoReminderFinish = async (): Promise<void> => {
     await navigate({ to: '/dashboard' });
   };
 
@@ -66,12 +74,21 @@ const Onboarding = (): FunctionComponent => {
             backgroundImage: `url(${onboardingImg})`
           }}
         ></div>
-        <Wizard
-          className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
-          handleFinish={onOnboardingFinish}
-          header={t('onboarding.stepWelcome.header')}
-          wizardSteps={stepsConfig}
-        />
+        {isOnboardingFinished ? (
+          <Wizard
+            className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
+            handleFinish={onDemoReminderFinish}
+            header={t('onboarding.stepDemoReminder.header')}
+            wizardSteps={demoReminderStepsConfig}
+          />
+        ) : (
+          <Wizard
+            className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
+            handleFinish={onOnboardingFinish}
+            header={t('onboarding.stepWelcome.header')}
+            wizardSteps={onboardingStepsConfig}
+          />
+        )}
       </div>
     </div>
   );
