@@ -1,7 +1,8 @@
 import { type DemoReminderPayload, sendDemoReminder } from '@api/reminder';
 import { getUserProfile } from '@api/userProfile';
+import phoneNotificationImg from '@assets/images/phone-notification.svg';
 import type { FunctionComponent } from '@common/types';
-import { Button } from '@mantine/core';
+import { Button, Image } from '@mantine/core';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useTranslation } from 'react-i18next';
@@ -46,6 +47,7 @@ const StepDemoReminderComponent = (): FunctionComponent => {
   return (
     <>
       <p className="text-sm md:text-base text-gray-600 mb-6">{t('onboarding.stepDemoReminder.msg1')}</p>
+      <Image alt="Phone Notification" h={200} radius="sm" src={phoneNotificationImg} w="auto" />
       <Button type="button" onClick={onNextStep}>
         Send Reminder
       </Button>

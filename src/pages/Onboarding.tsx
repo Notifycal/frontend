@@ -36,7 +36,7 @@ const Onboarding = (): FunctionComponent => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isOnboardingFinished, finishOnboarding] = useState<boolean>(false);
+  const [isOnboardingFinished, finishOnboarding] = useState<boolean>(true); //TODO set false
 
   const updateUser = useMutation({
     mutationFn: updateUserProfile,
