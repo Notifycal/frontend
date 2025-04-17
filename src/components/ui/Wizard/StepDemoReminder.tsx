@@ -1,10 +1,11 @@
-import { type DemoReminderPayload, sendDemoReminder } from '@api/reminder';
+import { sendDemoReminder } from '@api/reminder';
 import { getUserProfile } from '@api/userProfile';
 import phoneNotificationImg from '@assets/images/phone-notification.svg';
 import type { FunctionComponent } from '@common/types';
 import { Button, Image } from '@mantine/core';
+import type { DateTime, DemoReminderPayload, PhoneContact, TimeZone } from '@notifycal/shared/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { DateTime } from 'luxon';
+import { DateTime as DT } from 'luxon';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import type { Step } from './Wizard';
@@ -33,10 +34,10 @@ const StepDemoReminderComponent = (): FunctionComponent => {
     const senderDetails = userProfile.data?.config?.business.senderContact;
     if (senderDetails) {
       const demoReminderPayload: DemoReminderPayload = {
-        receiverDetails: senderDetails,
+        receiverContact: senderDetails as PhoneContact, // This assertion is valid while RCS isn't implemented
         startTime: {
-          dateTime: DateTime.now().toISO(),
-          timeZone: 'Europe/Madrid'
+          dateTime: DT.now().toISO() as DateTime,
+          timeZone: 'Europe/Madrid' as TimeZone
         }
       };
       await _sendDemoReminder.mutateAsync(demoReminderPayload);

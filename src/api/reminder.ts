@@ -1,14 +1,5 @@
-import type { senderSchema } from '@notifycal/shared/schemas';
-import type { z } from 'zod';
+import type { DemoReminderPayload } from '@notifycal/shared/types';
 import getApiClient from './common';
-
-export interface DemoReminderPayload {
-  receiverDetails: z.infer<typeof senderSchema>;
-  startTime: {
-    dateTime: string;
-    timeZone: string;
-  };
-}
 
 export const sendDemoReminder = async (data: DemoReminderPayload): Promise<void> => {
   try {
