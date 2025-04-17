@@ -2,8 +2,13 @@ import { languageData } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
-import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
-import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
+import {
+  templateEnMap,
+  templateEsMap,
+  type LanguageCode,
+  type TemplateId,
+  type TemplateMap
+} from '@notifycal/shared/types';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';

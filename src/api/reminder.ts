@@ -3,7 +3,6 @@ import type { z } from 'zod';
 import getApiClient from './common';
 
 export interface DemoReminderPayload {
-  template: { id: string; fields: { business: { name: string; address: string } } };
   receiverDetails: z.infer<typeof senderSchema>;
   startTime: {
     dateTime: string;
