@@ -1,23 +1,17 @@
+import { updateUserProfile } from '@api/userProfile';
+import onboardingImg from '@assets/images/onboarding.png';
+import type { FunctionComponent } from '@common/types';
 import { StepBusinessDetails } from '@components/ui/Wizard/StepBusinessDetails';
 import { StepCalendars } from '@components/ui/Wizard/StepCalendars';
-import { StepSenderDetails } from '@components/ui/Wizard/StepSenderDetails';
-import Wizard from '@components/ui/Wizard/Wizard';
-
-import { updateUserProfile } from '@api/userProfile';
-import { useNavigate } from '@tanstack/react-router';
-
-import onboardingImg from '@assets/images/onboarding.png';
-
-import type { FunctionComponent } from '@common/types';
 import { StepFinal } from '@components/ui/Wizard/StepFinal';
+import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
+import { StepSenderDetails } from '@components/ui/Wizard/StepSenderDetails';
 import { StepWelcome } from '@components/ui/Wizard/StepWelcome';
+import Wizard from '@components/ui/Wizard/Wizard';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
-
-import { StepDemoReminder } from '@components/ui/Wizard/StepDemoReminder';
-import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 
 const Onboarding = (): FunctionComponent => {
   const onboardingStepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails];
@@ -31,12 +25,9 @@ const Onboarding = (): FunctionComponent => {
     .strip();
   type FormResult = z.infer<typeof schema>;
 
-  const demoReminderStepsConfig = [StepDemoReminder];
-
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isOnboardingFinished, finishOnboarding] = useState<boolean>(true); //TODO set false
 
   const updateUser = useMutation({
     mutationFn: updateUserProfile,
@@ -57,12 +48,8 @@ const Onboarding = (): FunctionComponent => {
         senderContact: data.contactDetails
       }
     };
-    await updateUser.mutateAsync(result).then();
-    finishOnboarding(true);
-  };
-
-  const onDemoReminderFinish = async (): Promise<void> => {
-    await navigate({ to: '/dashboard' });
+    await updateUser.mutateAsync(result);
+    await navigate({ to: '/demo-reminder' });
   };
 
   return (
@@ -74,23 +61,12 @@ const Onboarding = (): FunctionComponent => {
             backgroundImage: `url(${onboardingImg})`
           }}
         ></div>
-        {isOnboardingFinished ? (
-          <Wizard
-            key="demo"
-            className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
-            handleFinish={onDemoReminderFinish}
-            header={t('onboarding.stepDemoReminder.header')}
-            wizardSteps={demoReminderStepsConfig}
-          />
-        ) : (
-          <Wizard
-            key="onboarding"
-            className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
-            handleFinish={onOnboardingFinish}
-            header={t('onboarding.stepWelcome.header')}
-            wizardSteps={onboardingStepsConfig}
-          />
-        )}
+        <Wizard
+          className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
+          handleFinish={onOnboardingFinish}
+          header={t('onboarding.stepWelcome.header')}
+          wizardSteps={onboardingStepsConfig}
+        />
       </div>
     </div>
   );

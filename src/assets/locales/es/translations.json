@@ -9,6 +9,12 @@
     "loginErrorInvalidScopes": "Ha habido un error al hacer login. Por favor asegura que seleccionas todos los scopes al acceder con tu cuenta de Google.",
     "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos."
   },
+  "demoReminder": {
+    "stepDemoReminder": {
+      "header": "Pruebalo",
+      "msg1": "Mira el ejemplo de recordatorio que enviaremos a tus clientes en tu movil"
+    }
+  },
   "onboarding": {
     "stepWelcome": {
       "header": "Bienvenid@ a Notifycal",
@@ -38,10 +44,6 @@
       "msg1": "Introduce el numero de telefono desde el que quieres mandar los recordatorios",
       "invalidPhoneNumber": "El numero de telefono introducido es invalido",
       "requiredPhoneNumber": "El numero de telefono es obligatorio"
-    },
-    "stepDemoReminder": {
-      "header": "Pruebalo",
-      "msg1": "Mira el ejemplo de recordatorio que enviaremos a tus clientes en tu movil"
     },
     "stepFinal": {
       "msg1": "Ya puedes continuar! Haz click en Finalizar para acceder a Notifycal."

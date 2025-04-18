@@ -25,7 +25,7 @@ const StepReminderTypeSchema = z.object({
 export type StepReminderTypeValues = z.infer<typeof StepReminderTypeSchema>;
 const StepReminderTypeComponent = (): FunctionComponent => {
   const { t, i18n } = useTranslation();
-  const initialTemplateLanguage: TemplateMap = i18n.language === 'en' ? templateEnMap : templateEsMap;
+  const initialTemplateLanguage: TemplateMap = i18n.language.includes('en') ? templateEnMap : templateEsMap;
   const [templateOptions, setTemplateLanguages] = useState(initialTemplateLanguage);
   const {
     formState: { errors },
@@ -40,7 +40,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
   const [language, setSelectedLanguage] = useState<LanguageCode>(selectedTemplateLanguage);
 
   useEffect(() => {
-    setTemplateLanguages(language === 'es' ? templateEsMap : templateEnMap);
+    setTemplateLanguages(language.includes('en') ? templateEnMap : templateEsMap);
   }, [language]);
   const errorKey = errors.id?.message;
   return (

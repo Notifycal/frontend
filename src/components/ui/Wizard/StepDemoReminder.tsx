@@ -1,4 +1,4 @@
-import { sendDemoReminder } from '@api/reminder';
+import { sendDemoReminder } from '@api/demoReminder';
 import { getUserProfile } from '@api/userProfile';
 import phoneNotificationImg from '@assets/images/phone-notification.svg';
 import type { FunctionComponent } from '@common/types';
@@ -36,7 +36,7 @@ const StepDemoReminderComponent = (): FunctionComponent => {
       const demoReminderPayload: DemoReminderPayload = {
         receiverContact: senderDetails as PhoneContact, // This assertion is valid while RCS isn't implemented
         startTime: {
-          dateTime: DT.now().toISO() as DateTime,
+          dateTime: DT.now().toUTC().toISO() as DateTime,
           timeZone: 'Europe/Madrid' as TimeZone
         }
       };
@@ -47,7 +47,7 @@ const StepDemoReminderComponent = (): FunctionComponent => {
   const { t } = useTranslation();
   return (
     <>
-      <p className="text-sm md:text-base text-gray-600 mb-6">{t('onboarding.stepDemoReminder.msg1')}</p>
+      <p className="text-sm md:text-base text-gray-600 mb-6">{t('demoReminder.stepDemoReminder.msg1')}</p>
       <Image alt="Phone Notification" h={200} radius="sm" src={phoneNotificationImg} w="auto" />
       <Button type="button" onClick={onNextStep}>
         Send Reminder
