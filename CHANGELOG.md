@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/Notifycal/frontend/compare/v0.12.2...v0.13.0) (2025-04-18)
+
+
+### Features
+
+* reminder demo ([#214](https://github.com/Notifycal/frontend/issues/214)) ([092935d](https://github.com/Notifycal/frontend/commit/092935d1621479eda57c2857fc306e134951baec))
+
 ## [0.12.2](https://github.com/Notifycal/frontend/compare/v0.12.1...v0.12.2) (2025-04-15)
 
 
