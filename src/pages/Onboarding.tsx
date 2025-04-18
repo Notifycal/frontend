@@ -81,9 +81,9 @@ const Onboarding = (): FunctionComponent => {
             handleFinish={onDemoReminderFinish}
             header={t('onboarding.stepDemoReminder.header')}
             wizardSteps={demoReminderStepsConfig}
-            />
-          ) : (
-            <Wizard
+          />
+        ) : (
+          <Wizard
             key="onboarding"
             className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
             handleFinish={onOnboardingFinish}
