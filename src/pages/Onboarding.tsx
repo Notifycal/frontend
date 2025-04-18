@@ -1,24 +1,27 @@
+import { updateUserProfile } from '@api/userProfile';
+import onboardingImg from '@assets/images/onboarding.png';
+import type { FunctionComponent } from '@common/types';
 import { StepBusinessDetails } from '@components/ui/Wizard/StepBusinessDetails';
 import { StepCalendars } from '@components/ui/Wizard/StepCalendars';
-import { StepSenderDetails } from '@components/ui/Wizard/StepSenderDetails';
-import Wizard from '@components/ui/Wizard/Wizard';
-
-import { updateUserProfile } from '@api/userProfile';
-import { useNavigate } from '@tanstack/react-router';
-
-import onboardingImg from '@assets/images/onboarding.png';
-
-import type { FunctionComponent } from '@common/types';
 import { StepFinal } from '@components/ui/Wizard/StepFinal';
+import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
+import { StepSenderDetails } from '@components/ui/Wizard/StepSenderDetails';
 import { StepWelcome } from '@components/ui/Wizard/StepWelcome';
+import Wizard from '@components/ui/Wizard/Wizard';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
-import { StepReminderType } from '@components/ui/Wizard/StepReminderType';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 const Onboarding = (): FunctionComponent => {
-  const stepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails, StepFinal];
+  const onboardingStepsConfig = [
+    StepWelcome,
+    StepBusinessDetails,
+    StepReminderType,
+    StepCalendars,
+    StepSenderDetails,
+    StepFinal
+  ];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const schema = StepWelcome.schema
     .merge(StepBusinessDetails.schema)
@@ -30,7 +33,6 @@ const Onboarding = (): FunctionComponent => {
   type FormResult = z.infer<typeof schema>;
 
   const { t } = useTranslation();
-
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -54,7 +56,7 @@ const Onboarding = (): FunctionComponent => {
       }
     };
     await updateUser.mutateAsync(result);
-    await navigate({ to: '/dashboard' });
+    await navigate({ to: '/demo-reminder' });
   };
 
   return (
@@ -70,7 +72,7 @@ const Onboarding = (): FunctionComponent => {
           className="shrink-0 grow-0 basis-3/5 md:basis-1/2 px-6 py-12 h-full"
           handleFinish={onOnboardingFinish}
           header={t('onboarding.stepWelcome.header')}
-          wizardSteps={stepsConfig}
+          wizardSteps={onboardingStepsConfig}
         />
       </div>
     </div>

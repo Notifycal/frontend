@@ -2,8 +2,13 @@ import { languageData } from '@common/i18n';
 import type { FunctionComponent } from '@common/types';
 import { Card, Group, Radio, Stack, Text } from '@mantine/core';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
-import { templateEnMap, templateEsMap } from '@notifycal/shared/templates';
-import type { LanguageCode, TemplateId, TemplateMap } from '@notifycal/shared/types';
+import {
+  templateEnMap,
+  templateEsMap,
+  type LanguageCode,
+  type TemplateId,
+  type TemplateMap
+} from '@notifycal/shared/types';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -20,8 +25,8 @@ const StepReminderTypeSchema = z.object({
 export type StepReminderTypeValues = z.infer<typeof StepReminderTypeSchema>;
 const StepReminderTypeComponent = (): FunctionComponent => {
   const { t, i18n } = useTranslation();
-  const initialTemplateLanguage: TemplateMap = i18n.language === 'en' ? templateEnMap : templateEsMap;
-  const [templateOptions, setTemplateLanguages] = useState(initialTemplateLanguage);
+  const initialTemplateLanguage: TemplateMap = i18n.language.startsWith('en') ? templateEnMap : templateEsMap;
+  const [templateCollection, setTemplateCollection] = useState(initialTemplateLanguage);
   const {
     formState: { errors },
     setValue,
@@ -35,7 +40,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
   const [language, setSelectedLanguage] = useState<LanguageCode>(selectedTemplateLanguage);
 
   useEffect(() => {
-    setTemplateLanguages(language === 'es' ? templateEsMap : templateEnMap);
+    setTemplateCollection(language.startsWith('en') ? templateEnMap : templateEsMap);
   }, [language]);
   const errorKey = errors.id?.message;
   return (
@@ -63,7 +68,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
         }}
       >
         <Group>
-          {Object.values(templateOptions).map((template) => (
+          {Object.values(templateCollection).map((template) => (
             <Card key={template.id} withBorder padding="xs">
               <Radio
                 label={<Text size="xs">{template.interpolate(business.name, business.address, DateTime.now())}</Text>}
@@ -75,7 +80,7 @@ const StepReminderTypeComponent = (): FunctionComponent => {
       </Radio.Group>
       <Text hidden={!selectedTemplateId} size="xs">
         {t('onboarding.stepReminderType.characterCounterHeadsUp', {
-          characterCount: templateOptions[selectedTemplateId]?.interpolate(
+          characterCount: templateCollection[selectedTemplateId]?.interpolate(
             business.name,
             business.address,
             DateTime.now()

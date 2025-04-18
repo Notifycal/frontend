@@ -9,6 +9,14 @@
     "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
     "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
   },
+  "demoReminder": {
+    "stepDemoReminder": {
+      "header": "Try it out",
+      "sendReminderButton": "Send reminder",
+      "msg1": "Check out the reminder example we will send to your clients on your phone.",
+      "msg2": "You will receive a reminder shortly."
+    }
+  },
   "onboarding": {
     "stepWelcome": {
       "header": "Welcome to Notifycal",

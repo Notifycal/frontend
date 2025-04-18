@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthOnboardingImport } from './routes/_auth/onboarding'
+import { Route as AuthDemoReminderImport } from './routes/_auth/demo-reminder'
 import { Route as AuthAppImport } from './routes/_auth/_app'
 import { Route as AuthAppTemplateImport } from './routes/_auth/_app/template'
 import { Route as AuthAppDashboardImport } from './routes/_auth/_app/dashboard'
@@ -34,6 +35,12 @@ const IndexRoute = IndexImport.update({
 const AuthOnboardingRoute = AuthOnboardingImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthDemoReminderRoute = AuthDemoReminderImport.update({
+  id: '/demo-reminder',
+  path: '/demo-reminder',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -79,6 +86,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/demo-reminder': {
+      id: '/_auth/demo-reminder'
+      path: '/demo-reminder'
+      fullPath: '/demo-reminder'
+      preLoaderRoute: typeof AuthDemoReminderImport
+      parentRoute: typeof AuthImport
+    }
     '/_auth/onboarding': {
       id: '/_auth/onboarding'
       path: '/onboarding'
@@ -120,11 +134,13 @@ const AuthAppRouteWithChildren =
 
 interface AuthRouteChildren {
   AuthAppRoute: typeof AuthAppRouteWithChildren
+  AuthDemoReminderRoute: typeof AuthDemoReminderRoute
   AuthOnboardingRoute: typeof AuthOnboardingRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAppRoute: AuthAppRouteWithChildren,
+  AuthDemoReminderRoute: AuthDemoReminderRoute,
   AuthOnboardingRoute: AuthOnboardingRoute,
 }
 
@@ -133,6 +149,7 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
+  '/demo-reminder': typeof AuthDemoReminderRoute
   '/onboarding': typeof AuthOnboardingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
@@ -141,6 +158,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
+  '/demo-reminder': typeof AuthDemoReminderRoute
   '/onboarding': typeof AuthOnboardingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
@@ -151,6 +169,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_auth/_app': typeof AuthAppRouteWithChildren
+  '/_auth/demo-reminder': typeof AuthDemoReminderRoute
   '/_auth/onboarding': typeof AuthOnboardingRoute
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
   '/_auth/_app/template': typeof AuthAppTemplateRoute
@@ -158,14 +177,21 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/onboarding' | '/dashboard' | '/template'
+  fullPaths:
+    | '/'
+    | ''
+    | '/demo-reminder'
+    | '/onboarding'
+    | '/dashboard'
+    | '/template'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/onboarding' | '/dashboard' | '/template'
+  to: '/' | '' | '/demo-reminder' | '/onboarding' | '/dashboard' | '/template'
   id:
     | '__root__'
     | '/'
     | '/_auth'
     | '/_auth/_app'
+    | '/_auth/demo-reminder'
     | '/_auth/onboarding'
     | '/_auth/_app/dashboard'
     | '/_auth/_app/template'
@@ -203,6 +229,7 @@ export const routeTree = rootRoute
       "filePath": "_auth.tsx",
       "children": [
         "/_auth/_app",
+        "/_auth/demo-reminder",
         "/_auth/onboarding"
       ]
     },
@@ -213,6 +240,10 @@ export const routeTree = rootRoute
         "/_auth/_app/dashboard",
         "/_auth/_app/template"
       ]
+    },
+    "/_auth/demo-reminder": {
+      "filePath": "_auth/demo-reminder.tsx",
+      "parent": "/_auth"
     },
     "/_auth/onboarding": {
       "filePath": "_auth/onboarding.tsx",

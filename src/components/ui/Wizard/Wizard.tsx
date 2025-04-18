@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm, type DefaultValues, type FieldValues } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Button } from '@mantine/core';
+import { Button, Grid } from '@mantine/core';
 import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
 import { AnimatePresence, motion } from 'motion/react';
 
@@ -121,40 +121,44 @@ function Wizard<TResult extends FieldValues>({
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="flex justify-between">
-          {currentStep != 0 && (
-            <Button
-              className={buttonClassName}
-              disabled={isWaitingForFinish}
-              leftSection={<IconArrowLeft size={14} />}
-              variant="light"
-              onClick={onPreviousStep}
-            >
-              {t('wizard.button.back')}
-            </Button>
-          )}
-          {isLastStep ? (
-            <Button
-              key={currentStep}
-              className={buttonClassName}
-              loading={isWaitingForFinish}
-              rightSection={<IconCheck size={14} />}
-              type="submit"
-            >
-              {t('wizard.button.finish')}
-            </Button>
-          ) : (
-            <Button
-              key={currentStep}
-              className={buttonClassName}
-              rightSection={<IconArrowRight size={14} />}
-              type="button"
-              onClick={onNextStep}
-            >
-              {t('wizard.button.continue')}
-            </Button>
-          )}
-        </div>
+        <Grid justify="space-around">
+          <Grid.Col span={3}>
+            {currentStep != 0 && (
+              <Button
+                className={buttonClassName}
+                disabled={isWaitingForFinish}
+                leftSection={<IconArrowLeft size={14} />}
+                variant="light"
+                onClick={onPreviousStep}
+              >
+                {t('wizard.button.back')}
+              </Button>
+            )}
+          </Grid.Col>
+          <Grid.Col offset={3} span={3}>
+            {isLastStep ? (
+              <Button
+                key={currentStep}
+                className={buttonClassName}
+                loading={isWaitingForFinish}
+                rightSection={<IconCheck size={14} />}
+                type="submit"
+              >
+                {t('wizard.button.finish')}
+              </Button>
+            ) : (
+              <Button
+                key={currentStep}
+                className={buttonClassName}
+                rightSection={<IconArrowRight size={14} />}
+                type="button"
+                onClick={onNextStep}
+              >
+                {t('wizard.button.continue')}
+              </Button>
+            )}
+          </Grid.Col>
+        </Grid>
       </form>
     </FormProvider>
   );
