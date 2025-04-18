@@ -14,7 +14,14 @@ import { useTranslation } from 'react-i18next';
 import type { z } from 'zod';
 
 const Onboarding = (): FunctionComponent => {
-  const onboardingStepsConfig = [StepWelcome, StepBusinessDetails, StepReminderType, StepCalendars, StepSenderDetails];
+  const onboardingStepsConfig = [
+    StepWelcome,
+    StepBusinessDetails,
+    StepReminderType,
+    StepCalendars,
+    StepSenderDetails,
+    StepFinal
+  ];
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const schema = StepWelcome.schema
     .merge(StepBusinessDetails.schema)

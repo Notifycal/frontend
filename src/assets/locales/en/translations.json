@@ -12,7 +12,9 @@
   "demoReminder": {
     "stepDemoReminder": {
       "header": "Try it out",
-      "msg1": "Check out the reminder example we will send to your clients on your phone"
+      "sendReminderButton": "Send reminder",
+      "msg1": "Check out the reminder example we will send to your clients on your phone.",
+      "msg2": "You will receive a reminder shortly."
     }
   },
   "onboarding": {
