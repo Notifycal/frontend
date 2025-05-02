@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/Notifycal/frontend/compare/v0.14.0...v0.14.1) (2025-05-02)
+
+
+### Bug Fixes
+
+* **deps:** Update @notifycal/shared and zod ([#232](https://github.com/Notifycal/frontend/issues/232)) ([6c29a7e](https://github.com/Notifycal/frontend/commit/6c29a7e3cb6b80810fc0fb6fe48d0bdefc15b7ee))
+
 ## [0.14.0](https://github.com/Notifycal/frontend/compare/v0.13.0...v0.14.0) (2025-05-02)
 
 
