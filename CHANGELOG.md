@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/Notifycal/frontend/compare/v0.13.0...v0.14.0) (2025-05-02)
+
+
+### Features
+
+* use const type parameters for useTranslation() ([e00b5f4](https://github.com/Notifycal/frontend/commit/e00b5f401b6dd259e33f3b2159e572110feaccbd))
+
 ## [0.13.0](https://github.com/Notifycal/frontend/compare/v0.12.2...v0.13.0) (2025-04-18)
 
 
