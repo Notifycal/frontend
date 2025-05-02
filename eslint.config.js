@@ -200,6 +200,9 @@ const storybookConfig = {
 };
 
 const eslintConfig = typescriptEslint.config(
+  {
+    ignores: ['config/**', 'public/**', 'dist/**']
+  },
   baseESLintConfig,
   typescriptConfig,
   eslintConfigPrettier,
@@ -215,10 +218,5 @@ const eslintConfig = typescriptEslint.config(
     }
   }
 );
-
-// Doing this so eslint completely ignores the Storybook sample stories folder.
-eslintConfig.map((config) => {
-  config.ignores = ['src/sampleStories/**', 'config/**', 'public/**', 'dist/**'];
-});
 
 export default eslintConfig;
