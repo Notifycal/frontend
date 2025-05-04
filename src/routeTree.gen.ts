@@ -13,11 +13,18 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
+import { Route as AuthWizardImport } from './routes/_auth/wizard'
 import { Route as AuthOnboardingImport } from './routes/_auth/onboarding'
 import { Route as AuthDemoReminderImport } from './routes/_auth/demo-reminder'
 import { Route as AuthAppImport } from './routes/_auth/_app'
+import { Route as AuthWizardIndexImport } from './routes/_auth/wizard/index'
+import { Route as AuthWizardStepImport } from './routes/_auth/wizard/_step'
+import { Route as AuthWizardNostepImport } from './routes/_auth/wizard/_nostep'
 import { Route as AuthAppTemplateImport } from './routes/_auth/_app/template'
 import { Route as AuthAppDashboardImport } from './routes/_auth/_app/dashboard'
+import { Route as AuthWizardStepStepImport } from './routes/_auth/wizard/_step/$step'
+import { Route as AuthWizardNostepWelcomeImport } from './routes/_auth/wizard/_nostep/welcome'
+import { Route as AuthWizardNostepCompletedImport } from './routes/_auth/wizard/_nostep/completed'
 
 // Create/Update Routes
 
@@ -30,6 +37,12 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AuthWizardRoute = AuthWizardImport.update({
+  id: '/wizard',
+  path: '/wizard',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 const AuthOnboardingRoute = AuthOnboardingImport.update({
@@ -49,6 +62,22 @@ const AuthAppRoute = AuthAppImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
+const AuthWizardIndexRoute = AuthWizardIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthWizardRoute,
+} as any)
+
+const AuthWizardStepRoute = AuthWizardStepImport.update({
+  id: '/_step',
+  getParentRoute: () => AuthWizardRoute,
+} as any)
+
+const AuthWizardNostepRoute = AuthWizardNostepImport.update({
+  id: '/_nostep',
+  getParentRoute: () => AuthWizardRoute,
+} as any)
+
 const AuthAppTemplateRoute = AuthAppTemplateImport.update({
   id: '/template',
   path: '/template',
@@ -59,6 +88,24 @@ const AuthAppDashboardRoute = AuthAppDashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthAppRoute,
+} as any)
+
+const AuthWizardStepStepRoute = AuthWizardStepStepImport.update({
+  id: '/$step',
+  path: '/$step',
+  getParentRoute: () => AuthWizardStepRoute,
+} as any)
+
+const AuthWizardNostepWelcomeRoute = AuthWizardNostepWelcomeImport.update({
+  id: '/welcome',
+  path: '/welcome',
+  getParentRoute: () => AuthWizardNostepRoute,
+} as any)
+
+const AuthWizardNostepCompletedRoute = AuthWizardNostepCompletedImport.update({
+  id: '/completed',
+  path: '/completed',
+  getParentRoute: () => AuthWizardNostepRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -100,6 +147,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthOnboardingImport
       parentRoute: typeof AuthImport
     }
+    '/_auth/wizard': {
+      id: '/_auth/wizard'
+      path: '/wizard'
+      fullPath: '/wizard'
+      preLoaderRoute: typeof AuthWizardImport
+      parentRoute: typeof AuthImport
+    }
     '/_auth/_app/dashboard': {
       id: '/_auth/_app/dashboard'
       path: '/dashboard'
@@ -113,6 +167,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/template'
       preLoaderRoute: typeof AuthAppTemplateImport
       parentRoute: typeof AuthAppImport
+    }
+    '/_auth/wizard/_nostep': {
+      id: '/_auth/wizard/_nostep'
+      path: ''
+      fullPath: '/wizard'
+      preLoaderRoute: typeof AuthWizardNostepImport
+      parentRoute: typeof AuthWizardImport
+    }
+    '/_auth/wizard/_step': {
+      id: '/_auth/wizard/_step'
+      path: ''
+      fullPath: '/wizard'
+      preLoaderRoute: typeof AuthWizardStepImport
+      parentRoute: typeof AuthWizardImport
+    }
+    '/_auth/wizard/': {
+      id: '/_auth/wizard/'
+      path: '/'
+      fullPath: '/wizard/'
+      preLoaderRoute: typeof AuthWizardIndexImport
+      parentRoute: typeof AuthWizardImport
+    }
+    '/_auth/wizard/_nostep/completed': {
+      id: '/_auth/wizard/_nostep/completed'
+      path: '/completed'
+      fullPath: '/wizard/completed'
+      preLoaderRoute: typeof AuthWizardNostepCompletedImport
+      parentRoute: typeof AuthWizardNostepImport
+    }
+    '/_auth/wizard/_nostep/welcome': {
+      id: '/_auth/wizard/_nostep/welcome'
+      path: '/welcome'
+      fullPath: '/wizard/welcome'
+      preLoaderRoute: typeof AuthWizardNostepWelcomeImport
+      parentRoute: typeof AuthWizardNostepImport
+    }
+    '/_auth/wizard/_step/$step': {
+      id: '/_auth/wizard/_step/$step'
+      path: '/$step'
+      fullPath: '/wizard/$step'
+      preLoaderRoute: typeof AuthWizardStepStepImport
+      parentRoute: typeof AuthWizardStepImport
     }
   }
 }
@@ -132,16 +228,59 @@ const AuthAppRouteChildren: AuthAppRouteChildren = {
 const AuthAppRouteWithChildren =
   AuthAppRoute._addFileChildren(AuthAppRouteChildren)
 
+interface AuthWizardNostepRouteChildren {
+  AuthWizardNostepCompletedRoute: typeof AuthWizardNostepCompletedRoute
+  AuthWizardNostepWelcomeRoute: typeof AuthWizardNostepWelcomeRoute
+}
+
+const AuthWizardNostepRouteChildren: AuthWizardNostepRouteChildren = {
+  AuthWizardNostepCompletedRoute: AuthWizardNostepCompletedRoute,
+  AuthWizardNostepWelcomeRoute: AuthWizardNostepWelcomeRoute,
+}
+
+const AuthWizardNostepRouteWithChildren =
+  AuthWizardNostepRoute._addFileChildren(AuthWizardNostepRouteChildren)
+
+interface AuthWizardStepRouteChildren {
+  AuthWizardStepStepRoute: typeof AuthWizardStepStepRoute
+}
+
+const AuthWizardStepRouteChildren: AuthWizardStepRouteChildren = {
+  AuthWizardStepStepRoute: AuthWizardStepStepRoute,
+}
+
+const AuthWizardStepRouteWithChildren = AuthWizardStepRoute._addFileChildren(
+  AuthWizardStepRouteChildren,
+)
+
+interface AuthWizardRouteChildren {
+  AuthWizardNostepRoute: typeof AuthWizardNostepRouteWithChildren
+  AuthWizardStepRoute: typeof AuthWizardStepRouteWithChildren
+  AuthWizardIndexRoute: typeof AuthWizardIndexRoute
+}
+
+const AuthWizardRouteChildren: AuthWizardRouteChildren = {
+  AuthWizardNostepRoute: AuthWizardNostepRouteWithChildren,
+  AuthWizardStepRoute: AuthWizardStepRouteWithChildren,
+  AuthWizardIndexRoute: AuthWizardIndexRoute,
+}
+
+const AuthWizardRouteWithChildren = AuthWizardRoute._addFileChildren(
+  AuthWizardRouteChildren,
+)
+
 interface AuthRouteChildren {
   AuthAppRoute: typeof AuthAppRouteWithChildren
   AuthDemoReminderRoute: typeof AuthDemoReminderRoute
   AuthOnboardingRoute: typeof AuthOnboardingRoute
+  AuthWizardRoute: typeof AuthWizardRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAppRoute: AuthAppRouteWithChildren,
   AuthDemoReminderRoute: AuthDemoReminderRoute,
   AuthOnboardingRoute: AuthOnboardingRoute,
+  AuthWizardRoute: AuthWizardRouteWithChildren,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -151,8 +290,13 @@ export interface FileRoutesByFullPath {
   '': typeof AuthAppRouteWithChildren
   '/demo-reminder': typeof AuthDemoReminderRoute
   '/onboarding': typeof AuthOnboardingRoute
+  '/wizard': typeof AuthWizardStepRouteWithChildren
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
+  '/wizard/': typeof AuthWizardIndexRoute
+  '/wizard/completed': typeof AuthWizardNostepCompletedRoute
+  '/wizard/welcome': typeof AuthWizardNostepWelcomeRoute
+  '/wizard/$step': typeof AuthWizardStepStepRoute
 }
 
 export interface FileRoutesByTo {
@@ -162,6 +306,10 @@ export interface FileRoutesByTo {
   '/onboarding': typeof AuthOnboardingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
+  '/wizard': typeof AuthWizardIndexRoute
+  '/wizard/completed': typeof AuthWizardNostepCompletedRoute
+  '/wizard/welcome': typeof AuthWizardNostepWelcomeRoute
+  '/wizard/$step': typeof AuthWizardStepStepRoute
 }
 
 export interface FileRoutesById {
@@ -171,8 +319,15 @@ export interface FileRoutesById {
   '/_auth/_app': typeof AuthAppRouteWithChildren
   '/_auth/demo-reminder': typeof AuthDemoReminderRoute
   '/_auth/onboarding': typeof AuthOnboardingRoute
+  '/_auth/wizard': typeof AuthWizardRouteWithChildren
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
   '/_auth/_app/template': typeof AuthAppTemplateRoute
+  '/_auth/wizard/_nostep': typeof AuthWizardNostepRouteWithChildren
+  '/_auth/wizard/_step': typeof AuthWizardStepRouteWithChildren
+  '/_auth/wizard/': typeof AuthWizardIndexRoute
+  '/_auth/wizard/_nostep/completed': typeof AuthWizardNostepCompletedRoute
+  '/_auth/wizard/_nostep/welcome': typeof AuthWizardNostepWelcomeRoute
+  '/_auth/wizard/_step/$step': typeof AuthWizardStepStepRoute
 }
 
 export interface FileRouteTypes {
@@ -182,10 +337,25 @@ export interface FileRouteTypes {
     | ''
     | '/demo-reminder'
     | '/onboarding'
+    | '/wizard'
     | '/dashboard'
     | '/template'
+    | '/wizard/'
+    | '/wizard/completed'
+    | '/wizard/welcome'
+    | '/wizard/$step'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/demo-reminder' | '/onboarding' | '/dashboard' | '/template'
+  to:
+    | '/'
+    | ''
+    | '/demo-reminder'
+    | '/onboarding'
+    | '/dashboard'
+    | '/template'
+    | '/wizard'
+    | '/wizard/completed'
+    | '/wizard/welcome'
+    | '/wizard/$step'
   id:
     | '__root__'
     | '/'
@@ -193,8 +363,15 @@ export interface FileRouteTypes {
     | '/_auth/_app'
     | '/_auth/demo-reminder'
     | '/_auth/onboarding'
+    | '/_auth/wizard'
     | '/_auth/_app/dashboard'
     | '/_auth/_app/template'
+    | '/_auth/wizard/_nostep'
+    | '/_auth/wizard/_step'
+    | '/_auth/wizard/'
+    | '/_auth/wizard/_nostep/completed'
+    | '/_auth/wizard/_nostep/welcome'
+    | '/_auth/wizard/_step/$step'
   fileRoutesById: FileRoutesById
 }
 
@@ -230,7 +407,8 @@ export const routeTree = rootRoute
       "children": [
         "/_auth/_app",
         "/_auth/demo-reminder",
-        "/_auth/onboarding"
+        "/_auth/onboarding",
+        "/_auth/wizard"
       ]
     },
     "/_auth/_app": {
@@ -249,6 +427,15 @@ export const routeTree = rootRoute
       "filePath": "_auth/onboarding.tsx",
       "parent": "/_auth"
     },
+    "/_auth/wizard": {
+      "filePath": "_auth/wizard.tsx",
+      "parent": "/_auth",
+      "children": [
+        "/_auth/wizard/_nostep",
+        "/_auth/wizard/_step",
+        "/_auth/wizard/"
+      ]
+    },
     "/_auth/_app/dashboard": {
       "filePath": "_auth/_app/dashboard.tsx",
       "parent": "/_auth/_app"
@@ -256,6 +443,37 @@ export const routeTree = rootRoute
     "/_auth/_app/template": {
       "filePath": "_auth/_app/template.tsx",
       "parent": "/_auth/_app"
+    },
+    "/_auth/wizard/_nostep": {
+      "filePath": "_auth/wizard/_nostep.tsx",
+      "parent": "/_auth/wizard",
+      "children": [
+        "/_auth/wizard/_nostep/completed",
+        "/_auth/wizard/_nostep/welcome"
+      ]
+    },
+    "/_auth/wizard/_step": {
+      "filePath": "_auth/wizard/_step.tsx",
+      "parent": "/_auth/wizard",
+      "children": [
+        "/_auth/wizard/_step/$step"
+      ]
+    },
+    "/_auth/wizard/": {
+      "filePath": "_auth/wizard/index.tsx",
+      "parent": "/_auth/wizard"
+    },
+    "/_auth/wizard/_nostep/completed": {
+      "filePath": "_auth/wizard/_nostep/completed.tsx",
+      "parent": "/_auth/wizard/_nostep"
+    },
+    "/_auth/wizard/_nostep/welcome": {
+      "filePath": "_auth/wizard/_nostep/welcome.tsx",
+      "parent": "/_auth/wizard/_nostep"
+    },
+    "/_auth/wizard/_step/$step": {
+      "filePath": "_auth/wizard/_step/$step.tsx",
+      "parent": "/_auth/wizard/_step"
     }
   }
 }
