@@ -29,7 +29,7 @@
       "noBusinessName": "El nombre del negocio es obligatorio.",
       "noBusinessAddress": "La direccion del negocio es obligatoria."
     },
-    "stepRemiderType": {
+    "stepReminderType": {
       "msg1": "Selecciona el tipo de recordatorio que quieres enviar a tus clientes:",
       "characterCounterHeadsUp": "La seleccion resulta en recordatorios de {{chracterCount}} caracteres. Los recordatorios son tarificados en multiplos de 160 caracteres.",
       "noTemplateSelected": "Seleciona un tipo de plantilla"
@@ -68,5 +68,15 @@
     "refreshPage": "Refrescar la página",
     "contactSupport": "Contactar con soporte",
     "genericError": "Por favor, refresque la pagina o contacte con soporte si el problema persiste."
+  },
+  "generic": {
+    "button": {
+      "start": "Comenzar!",
+      "back": "Atrás",
+      "finish": "Finalizar",
+      "continue": "Continuar",
+      "complete": "Completar"
+    },
+    "error": "Error"
   }
 }

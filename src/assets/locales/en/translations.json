@@ -68,5 +68,15 @@
     "refreshPage": "Refresh Page",
     "contactSupport": "Contact Support",
     "genericError": "Something has gone wrong. Please refresh the page or contact support if the problem persists."
+  },
+  "generic": {
+    "button": {
+      "start": "Start!",
+      "back": "Back",
+      "finish": "Finish",
+      "continue": "Continue",
+      "complete": "Complete"
+    },
+    "error": "Error"
   }
 }

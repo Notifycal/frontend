@@ -1,0 +1,115 @@
+{
+  "header": "Welcome to Notifycal",
+  "footer": "{{year}} Notifycal. All rights reserved.",
+  "welcome": {
+    "msg1": "Before you continue, we need to know more about you and your business.",
+    "msg2": "The following information is needed to be able to send reminders to your clients."
+  },
+  "businessDetails": {
+    "title": "Business details",
+    "subtitle": "Tell us about your business",
+    "industries": {
+      "technology": "Technology",
+      "healthcare": "Healthcare",
+      "finance": "Finance",
+      "education": "Education",
+      "manufacturing": "Manufacturing",
+      "retail": "Retail",
+      "government": "Government",
+      "nonProfit": "Non-profit",
+      "other": "Other"
+    },
+    "companySizes": {
+      "me": "Just me",
+      "xs": "2-5 employees",
+      "sm": "6-20 employees",
+      "md": "21-50 employees",
+      "lg": "51-200 employees",
+      "xl": "201-1000 employees",
+      "xxl": "1000+ employees"
+    },
+    "formNameField": {
+      "label": "Business name",
+      "placeholder": "Enter the name of your business",
+      "isRequired": "Business name is required"
+    },
+    "formAddressField": {
+      "label": "Business address",
+      "placeholder": "Enter the address of your business",
+      "isRequired": "Business address is required"
+    },
+    "formIndustryField": {
+      "label": "Industry",
+      "placeholder": "Select your industry",
+      "isRequired": "Please select an industry"
+    },
+    "formCompanySizeField": {
+      "label": "Company size",
+      "placeholder": "Select the size of the company",
+      "isRequired": "Please select a company size"
+    },
+    "invalidSMSCharacters": "Contains invalid characters for SMS",
+    "explanation": "This info will help us tailor the reminders your clients will receive."
+  },
+  "reminderType": {
+    "title": "Reminder type",
+    "subtitle": "Configure your reminder message",
+    "formReminderTypeField": {
+      "isRequired": "Select a reminder message type"
+    },
+    "changeReminderLanguage": "Change reminder language",
+    "characterCountHeadsUpBilling": "Reminders are charged in multiples of 160 characters. Special characters are not allowed.",
+    "characterCount": "The selected reminder type results in reminders {{characterCount}} characters long."
+  },
+  "calendars": {
+    "title": "Calendars",
+    "subtitle": "Set up your calendars",
+    "formCalendarsField": {
+      "label": "Select the calendar(s) you want to use for {{businessName}}",
+      "placeholderLoading": "Searching for your calendars...",
+      "placeholderLoaded": "Select one or more calendars"
+    },
+    "selectMenu": {
+      "error": "At least one calendar needs to be selected"
+    },
+    "explanation": "We'll use events from these calendars to send reminders to your customers."
+  },
+  "senderDetails": {
+    "title": "Sender details",
+    "subtitle": "Your phone number",
+    "formSenderNumber": {
+      "label": "Phone number",
+      "placeholder": "Enter your phone number",
+      "isRequired": "Phone number is required",
+      "isInvalid": "Phone number is invalid"
+    },
+    "explanation": "We'll send reminders to your customers from your own number. This way they'll know who's contacting them."
+  },
+  "tryItOut": {
+    "title": "Try it out",
+    "subtitle": "Check out the reminder in your phone!",
+    "imageAlt": "Phone Notification",
+    "sendTestReminder": "Send test reminder",
+    "explanation": "This will help you see the message your clients will receive, in your own phone.",
+    "apiError": "There was a problem sending the test reminder to your phone."
+  },
+  "confirm": {
+    "title": "Confirm",
+    "subtitle": "Finalize your account setup",
+    "accountSummary": "Account Summary",
+    "formTosField": {
+      "label": "I agree to the <0>Terms of Service</0>",
+      "isRequired": "You must accept the Terms of Service"
+    },
+    "formPrivacyField": {
+      "label": "I agree to the <0>Privacy Policy</0>",
+      "isRequired": "You must accept the Privacy Policy"
+    },
+    "apiError": "There was a problem saving your info."
+  },
+  "completed": {
+    "heading": "Onboarding Complete!",
+    "subheading": "Thank you for completing the onboarding process. You're all set to start using our platform!",
+    "goToDashboard": "Go to the Dashboard"
+  }
+}

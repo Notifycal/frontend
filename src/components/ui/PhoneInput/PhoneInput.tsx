@@ -15,10 +15,11 @@ interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
   error?: string;
   value: PhoneInputValue;
   onChange: (value: PhoneInputValue) => void;
+  placeholder?: string;
 }
 
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, error, value, onChange = (): void => {}, ...rest }, ref) => {
+  ({ label, placeholder, error, value, onChange = (): void => {}, ...rest }, ref) => {
     const { countryCode: country, phoneNumber } = value;
     const dialCode = phoneData[country].phoneDetails.dialCode;
 
@@ -27,7 +28,7 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     };
 
     const handleCountryChange = (country: InternationalizationData<CountryCode, CountryName>): void => {
-      onChange({ ...value, countryCode: country.code });
+      onChange({ ...value, countryCode: country.code, phoneNumber: '' as PhoneNumber });
     };
 
     return (
@@ -35,8 +36,9 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
         ref={ref}
         error={error}
         label={label}
+        labelProps={{ pb: 'sm' }}
         leftSectionWidth="calc(3.2rem * var(--mantine-scale) * 2)"
-        placeholder="Enter phone number"
+        placeholder={placeholder}
         type="text"
         value={phoneNumber}
         leftSection={
