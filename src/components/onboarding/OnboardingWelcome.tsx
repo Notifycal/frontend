@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import RouterLink from '@components/RouterLink';
+import RouterLink from '@components/utils/RouterLink';
 import { getStepByIndex } from '@constants/onboardingSteps';
 import { Button } from '@mantine/core';
 import { IconPencil } from '@tabler/icons-react';
