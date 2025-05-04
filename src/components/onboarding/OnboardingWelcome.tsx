@@ -19,7 +19,7 @@ const OnboardingWelcome: React.FC = () => {
 
       <p className="text-gray-600 max-w-md">{t('welcome.msg1')}</p>
       <p className="text-gray-600 mb-10 max-w-md">{t('welcome.msg2')}</p>
-      <Button component={RouterLink} params={{ step: firstStepPath }} size="lg" to="/wizard/$step">
+      <Button component={RouterLink} params={{ step: firstStepPath }} size="lg" to="/onboarding/$step">
         {t('generic.button.start', { ns: 'translations' })}
       </Button>
     </div>

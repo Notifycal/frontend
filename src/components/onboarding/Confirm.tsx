@@ -85,7 +85,7 @@ const Confirm: React.FC = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
       await queryClient.refetchQueries({ queryKey: ['user-profile'] });
-      await navigate({ to: '/wizard/completed'});
+      await navigate({ to: '/onboarding/completed'});
     },
     onError: () => {
       setError(t('confirm.apiError'));
@@ -104,7 +104,6 @@ const Confirm: React.FC = () => {
         senderContact: data.senderDetails?.contactDetails
       }
     };
-    console.log(newData);
     mutation.mutate(newData);
   };
 

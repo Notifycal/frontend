@@ -1,11 +1,11 @@
 import type { KebabCase } from '@common/types';
 
-import BusinessDetails from '@components/ui/onboarding/BusinessDetails';
-import Calendars from '@components/ui/onboarding/Calendars';
-import Confirm from '@components/ui/onboarding/Confirm';
-import ReminderType from '@components/ui/onboarding/ReminderType';
-import SenderDetails from '@components/ui/onboarding/SenderDetails';
-import TryItOut from '@components/ui/onboarding/TryItOut';
+import BusinessDetails from '@components/onboarding/BusinessDetails';
+import Calendars from '@components/onboarding/Calendars';
+import Confirm from '@components/onboarding/Confirm';
+import ReminderType from '@components/onboarding/ReminderType';
+import SenderDetails from '@components/onboarding/SenderDetails';
+import TryItOut from '@components/onboarding/TryItOut';
 
 import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
 

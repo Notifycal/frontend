@@ -30,7 +30,7 @@ const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
       const previousStep = currentStep - 1;
       const step = getStepByIndex(previousStep);
       if (step) {
-        await navigate({ to: '/wizard/$step', params: { step: step.path } });
+        await navigate({ to: '/onboarding/$step', params: { step: step.path } });
       }
     }
   };

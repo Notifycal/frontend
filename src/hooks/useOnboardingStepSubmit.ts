@@ -22,7 +22,7 @@ export function useStepSubmit(): StepSubmitHook {
   
       const nextStep = getStepByIndex(currentStep + 1);
       if (nextStep) {
-        await navigate({ to: `/wizard/$step`, params: { step: nextStep.path } });
+        await navigate({ to: `/onboarding/$step`, params: { step: nextStep.path } });
       }
     }
   };

@@ -1,9 +1,9 @@
-import type { BusinessDetailsValues } from '@components/ui/onboarding/BusinessDetails';
-import type { CalendarsValues } from '@components/ui/onboarding/Calendars';
-import type { ConfirmValues } from '@components/ui/onboarding/Confirm';
-import type { ReminderTypeValues } from '@components/ui/onboarding/ReminderType';
-import type { SenderDetailsValues } from '@components/ui/onboarding/SenderDetails';
-import type { TryItOutValues } from '@components/ui/onboarding/TryItOut';
+import type { BusinessDetailsValues } from '@components/onboarding/BusinessDetails';
+import type { CalendarsValues } from '@components/onboarding/Calendars';
+import type { ConfirmValues } from '@components/onboarding/Confirm';
+import type { ReminderTypeValues } from '@components/onboarding/ReminderType';
+import type { SenderDetailsValues } from '@components/onboarding/SenderDetails';
+import type { TryItOutValues } from '@components/onboarding/TryItOut';
 
 // Combined form data for all steps
 export interface OnboardingData {

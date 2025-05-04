@@ -64,7 +64,7 @@ const StepLayout: React.FC = () => {
                   onStepClick={async (stepIndex) => {
                     const step = getStepByIndex(stepIndex);
                     if (step) {
-                      await navigate({ to: `/wizard/$step`, params: { step: step.path } });
+                      await navigate({ to: `/onboarding/$step`, params: { step: step.path } });
                     }
                   }}
                 >

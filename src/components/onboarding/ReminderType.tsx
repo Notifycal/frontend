@@ -5,12 +5,12 @@ import { z } from 'zod';
 import { languageData, type NotifycalI18nNamespaces } from '@common/i18n';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
-  templateEnMap,
-  templateEsMap,
-  type BusinessAddress,
-  type BusinessName,
-  type TemplateId,
-  type TemplateMap
+    templateEnMap,
+    templateEsMap,
+    type BusinessAddress,
+    type BusinessName,
+    type TemplateId,
+    type TemplateMap
 } from '@notifycal/shared/types';
 import type { TFunction } from 'i18next';
 
@@ -20,11 +20,11 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import InternationalizationPicker from '../InternationalizationPicker/InternationalizationPicker';
+import InternationalizationPicker from '../ui/InternationalizationPicker/InternationalizationPicker';
 import {
-  ReminderTypeCardRadioGroup,
-  ReminderTypeCardRadioGroupOption
-} from '../ReminderTypeCardRadioGroup/ReminderTypeCardRadioGroup';
+    ReminderTypeCardRadioGroup,
+    ReminderTypeCardRadioGroupOption
+} from '../ui/ReminderTypeCardRadioGroup/ReminderTypeCardRadioGroup';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const reminderTypeSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) =>
@@ -107,9 +107,6 @@ const ReminderType: React.FC = () => {
                 data={languageData}
                 value={value}
                 onSelected={(item) => {
-                  // TODO: Doubs about implementation here:
-                  // - reset the templateId on language change
-                  // - don't
                   setValue('reminderId', '' as TemplateId);
                   onChange(item.code);
                 }}

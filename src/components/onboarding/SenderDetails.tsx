@@ -11,7 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import PhoneInput from '../PhoneInput/PhoneInput';
+import PhoneInput from '../ui/PhoneInput/PhoneInput';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const senderDetailsSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) => z
