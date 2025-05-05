@@ -1,7 +1,14 @@
 import { updateUserProfile } from '@api/userProfile';
 import type { NotifycalTFunction } from '@common/i18n';
 import { phoneByCountry } from '@notifycal/shared/i18n';
-import type { CountryCode } from '@notifycal/shared/types';
+import type {
+  BusinessAddress,
+  BusinessName,
+  CountryCode,
+  LanguageCode,
+  PhoneNumber,
+  TemplateId
+} from '@notifycal/shared/types';
 import { z } from 'zod';
 
 import { useI18nForm } from '@hooks/useI18nForm';
@@ -69,15 +76,11 @@ const Confirm: React.FC = () => {
 
   // useMemo only recomputes when the dependencies (2nd param array) change
   const calendarsWithTemplateInfo = useMemo(() => {
-    if (!reminderType || !Array.isArray(calendars)) {
-      return calendars || [];
-    }
-
-    return calendars.map((calendar) => ({
+    return (calendars || []).map((calendar) => ({
       ...calendar,
       template: {
-        id: reminderType.reminderId,
-        language: reminderType.reminderLanguage
+        id: (reminderType?.reminderId || '') as TemplateId,
+        language: (reminderType?.reminderLanguage || '') as LanguageCode
       }
     }));
   }, [reminderType, calendars]);
@@ -101,9 +104,13 @@ const Confirm: React.FC = () => {
     const newData = {
       calendars: calendarsWithTemplateInfo,
       business: {
-        name: data.businessDetails?.name,
-        address: data.businessDetails?.address,
-        senderContact: data.senderDetails?.contactDetails
+        name: (data.businessDetails?.name || '') as BusinessName,
+        address: (data.businessDetails?.address || '') as BusinessAddress,
+        senderContact: data.senderDetails?.contactDetails || {
+          type: 'phone',
+          phoneNumber: '' as PhoneNumber,
+          countryCode: '' as CountryCode
+        }
       }
     };
     mutation.mutate(newData);
