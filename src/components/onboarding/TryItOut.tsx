@@ -1,5 +1,4 @@
 import { sendDemoReminder } from '@api/demoReminder';
-import type { NotifycalTFunction } from '@common/i18n';
 import { errorPopUpTransition } from '@constants/animation';
 import type { DateTime, PhoneContact, TimeZone } from '@notifycal/shared/types';
 import { DateTime as DT } from 'luxon';
@@ -19,8 +18,8 @@ import { motion } from 'motion/react';
 
 import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
-const tryItOutSchema = (t: NotifycalTFunction) => z.object({
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const tryItOutSchema = () => z.object({
   hasSentTestReminder: z.boolean()
 });
 
