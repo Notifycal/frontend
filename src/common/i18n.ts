@@ -32,7 +32,6 @@ export const resources = {
 
 const i18nOptions: InitOptions = {
   defaultNS,
-  // ns: [defaultNS],
   fallbackLng: 'en',
   debug: !isProduction,
   detection: {
