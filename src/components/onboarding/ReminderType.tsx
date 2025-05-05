@@ -1,8 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { DateTime } from 'luxon';
 import { z } from 'zod';
 
-import { languageData, type NotifycalI18nNamespaces } from '@common/i18n';
+import { languageData, type NotifycalTFunction } from '@common/i18n';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
   templateEnMap,
@@ -12,12 +11,11 @@ import {
   type TemplateId,
   type TemplateMap
 } from '@notifycal/shared/types';
-import type { TFunction } from 'i18next';
 
+import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
@@ -28,7 +26,7 @@ import {
 } from '../ui/ReminderTypeCardRadioGroup/ReminderTypeCardRadioGroup';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const reminderTypeSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) =>
+const reminderTypeSchema = (t: NotifycalTFunction) =>
   z.object({
     reminderId: z
       .string()
@@ -50,21 +48,18 @@ const ReminderType: React.FC = () => {
     watch,
     handleSubmit,
     setValue,
-    reset,
     formState: { isValid, errors }
-  } = useForm<ReminderTypeValues>({
-    resolver: zodResolver(reminderTypeSchema(t)),
-    mode: 'onChange',
-    defaultValues: {
-      reminderId: data.reminderType?.reminderId || '',
-      reminderLanguage: data.reminderType?.reminderLanguage || (i18n.languages[0] as keyof typeof languageData)
-    }
-  });
-
-  useEffect(() => {
-    void i18n.language;
-    reset(undefined, {keepValues: true });
-  }, [i18n.language, reset]);
+  } = useI18nForm<ReminderTypeValues>(
+    reminderTypeSchema,
+    {
+      mode: 'onChange',
+      defaultValues: {
+        reminderId: data.reminderType?.reminderId || '',
+        reminderLanguage: data.reminderType?.reminderLanguage || (i18n.languages[0] as keyof typeof languageData)
+      }
+    },
+    t
+  );
 
   // using watch only because we want to use this value before it's saved
   const selectedReminderLanguage = watch('reminderLanguage');

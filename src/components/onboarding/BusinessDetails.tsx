@@ -1,16 +1,14 @@
-import type { NotifycalI18nNamespaces } from '@common/i18n';
+import type { NotifycalTFunction } from '@common/i18n';
 import { smsCharacterRegex } from '@constants/regexes';
-import { zodResolver } from '@hookform/resolvers/zod';
-import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
+import { useI18nForm } from '@hooks/useI18nForm';
 import { Select, TextInput } from '@mantine/core';
 
 const INDUSTRIES = [
@@ -32,57 +30,55 @@ const COMPANY_SIZES = ['me', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 type CompanySize = (typeof COMPANY_SIZES)[number];
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const businessDetailsSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) => z.object({
-  name: z
-    .string()
-    .min(1, { message: t('businessDetails.formNameField.isRequired') })
-    .regex(smsCharacterRegex, {
-      message: t('businessDetails.invalidSMSCharacters')
-    })
-    .brand('BusinessName'),
+const businessDetailsSchema = (t: NotifycalTFunction) =>
+  z.object({
+    name: z
+      .string()
+      .min(1, { message: t('businessDetails.formNameField.isRequired') })
+      .regex(smsCharacterRegex, {
+        message: t('businessDetails.invalidSMSCharacters')
+      })
+      .brand('BusinessName'),
 
-  address: z
-    .string()
-    .min(1, { message: t('businessDetails.formAddressField.isRequired') })
-    .regex(smsCharacterRegex, {
-      message: t('businessDetails.invalidSMSCharacters')
+    address: z
+      .string()
+      .min(1, { message: t('businessDetails.formAddressField.isRequired') })
+      .regex(smsCharacterRegex, {
+        message: t('businessDetails.invalidSMSCharacters')
+      })
+      .brand('BusinessAddress'),
+    companyIndustry: z.enum(INDUSTRIES, {
+      errorMap: () => ({ message: t('businessDetails.formIndustryField.isRequired') })
+    }),
+    companySize: z.enum(COMPANY_SIZES, {
+      errorMap: () => ({ message: t('businessDetails.formCompanySizeField.isRequired') })
     })
-    .brand('BusinessAddress'),
-  companyIndustry: z.enum(INDUSTRIES, {
-    errorMap: () => ({ message: t('businessDetails.formIndustryField.isRequired') })
-  }),
-  companySize: z.enum(COMPANY_SIZES, {
-    errorMap: () => ({ message: t('businessDetails.formCompanySizeField.isRequired')  })
-  })
-});
+  });
 export type BusinessDetailsValues = z.infer<ReturnType<typeof businessDetailsSchema>>;
 
 const BusinessDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { i18n, t } = useTranslation('onboarding');
+  const { t } = useTranslation('onboarding');
 
   const {
     register,
     control,
     handleSubmit,
-    reset,
     formState: { errors, isValid }
-  } = useForm<BusinessDetailsValues>({
-    resolver: zodResolver(businessDetailsSchema(t)),
-    mode: 'onChange',
-    defaultValues: {
-      name: data.businessDetails?.name || '',
-      address: data.businessDetails?.address || '',
-      companyIndustry: data.businessDetails?.companyIndustry || ('' as Industry),
-      companySize: data.businessDetails?.companySize || ('' as CompanySize)
-    }
-  });
-
-  useEffect(() => {
-    void i18n.language;
-    reset(undefined, {keepValues: true });
-  }, [i18n.language, reset]);
+  } = useI18nForm<BusinessDetailsValues>(
+    businessDetailsSchema,
+    {
+      mode: 'onChange',
+      defaultValues: {
+        name: data.businessDetails?.name || '',
+        address: data.businessDetails?.address || '',
+        companyIndustry: data.businessDetails?.companyIndustry || ('' as Industry),
+        companySize: data.businessDetails?.companySize || ('' as CompanySize)
+      }
+    },
+    t
+  );
 
   const industriesData = INDUSTRIES.map((industry) => ({
     value: industry,

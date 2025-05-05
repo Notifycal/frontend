@@ -1,21 +1,19 @@
-import { isValidMobilePhoneNumber, type NotifycalI18nNamespaces } from '@common/i18n';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { type NotifycalTFunction, isValidMobilePhoneNumber } from '@common/i18n';
 import { countryCodeSchema } from '@notifycal/shared/schemas';
 import type { PhoneNumber } from '@notifycal/shared/types';
-import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
+import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import PhoneInput from '../ui/PhoneInput/PhoneInput';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const senderDetailsSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) => z
+const senderDetailsSchema = (t: NotifycalTFunction) => z
   .object({
     contactDetails: z.object({
       type: z.literal('phone'),
@@ -41,15 +39,13 @@ export type SenderDetailsValues = z.infer<ReturnType<typeof senderDetailsSchema>
 const SenderDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t, i18n } = useTranslation('onboarding');
+  const { t } = useTranslation('onboarding');
 
   const {
     control,
     handleSubmit,
-    reset,
     formState: { isValid }
-  } = useForm<SenderDetailsValues>({
-    resolver: zodResolver(senderDetailsSchema(t)),
+  } = useI18nForm<SenderDetailsValues>(senderDetailsSchema, {
     mode: 'onChange',
     defaultValues: {
       contactDetails: {
@@ -58,12 +54,7 @@ const SenderDetails: React.FC = () => {
         phoneNumber: data.senderDetails?.contactDetails.phoneNumber || ('' as PhoneNumber)
       }
     }
-  });
-
-  useEffect(() => {
-    void i18n.language;
-    reset(undefined, {keepValues: true });
-  }, [i18n.language, reset]);
+  }, t);
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>

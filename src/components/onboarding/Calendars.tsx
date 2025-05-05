@@ -1,15 +1,13 @@
 import { getUserCalendarsFromGoogle } from '@api/googleUserCalendar';
-import type { NotifycalI18nNamespaces } from '@common/i18n';
-import { zodResolver } from '@hookform/resolvers/zod';
+import type { NotifycalTFunction } from '@common/i18n';
 import { calendarSchema } from '@notifycal/shared/schemas';
-import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
+import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
@@ -17,7 +15,7 @@ import { MultiSelect } from '@mantine/core';
 import { IconRefresh } from '@tabler/icons-react';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const calendarsSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) =>
+const calendarsSchema = (t: NotifycalTFunction) =>
   z.object({
     calendars: z.array(calendarSchema).min(1, { message: t('calendars.selectMenu.error') })
   });
@@ -29,25 +27,22 @@ type Calendar = z.infer<typeof calendarSchema>;
 const Calendars: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t, i18n } = useTranslation('onboarding');
+  const { t } = useTranslation('onboarding');
 
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors, isValid }
-  } = useForm<CalendarsValues>({
-    resolver: zodResolver(calendarsSchema(t)),
-    mode: 'onChange',
-    defaultValues: {
-      calendars: data.calendars?.calendars || []
-    }
-  });
-
-  useEffect(() => {
-    void i18n.language;
-    reset(undefined, {keepValues: true });
-  }, [i18n.language, reset]);
+  } = useI18nForm<CalendarsValues>(
+    calendarsSchema,
+    {
+      mode: 'onChange',
+      defaultValues: {
+        calendars: data.calendars?.calendars || []
+      }
+    },
+    t
+  );
 
   const { data: userCalendars, isLoading } = useQuery({
     queryKey: ['userIdPCalendars'],

@@ -1,17 +1,16 @@
-import { zodResolver } from '@hookform/resolvers/zod';
+import { sendDemoReminder } from '@api/demoReminder';
+import type { NotifycalTFunction } from '@common/i18n';
+import { errorPopUpTransition } from '@constants/animation';
+import type { DateTime, PhoneContact, TimeZone } from '@notifycal/shared/types';
 import { DateTime as DT } from 'luxon';
 import { z } from 'zod';
 
+import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { sendDemoReminder } from '@api/demoReminder';
-import { errorPopUpTransition } from '@constants/animation';
-import type { DateTime, PhoneContact, TimeZone } from '@notifycal/shared/types';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import { Alert, Button, Image } from '@mantine/core';
@@ -20,34 +19,29 @@ import { motion } from 'motion/react';
 
 import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
-const tryItOutSchema = z.object({
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
+const tryItOutSchema = (t: NotifycalTFunction) => z.object({
   hasSentTestReminder: z.boolean()
 });
 
-export type TryItOutValues = z.infer<typeof tryItOutSchema>;
+export type TryItOutValues = z.infer<ReturnType<typeof tryItOutSchema>>;
 
 const TryItOut: React.FC = () => {
   const { data, setStepData } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
 
   const { handleStepSubmit } = useStepSubmit();
-  const { t, i18n } = useTranslation('onboarding');
+  const { t } = useTranslation('onboarding');
   const queryClient = useQueryClient();
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
-  const { handleSubmit, setValue, watch, reset } = useForm<TryItOutValues>({
-    resolver: zodResolver(tryItOutSchema),
+  const { handleSubmit, setValue, watch } = useI18nForm<TryItOutValues>(tryItOutSchema, {
     mode: 'onChange',
     defaultValues: {
       hasSentTestReminder: data.tryItOut?.hasSentTestReminder || false
     }
-  });
-
-  useEffect(() => {
-    void i18n.language;
-    reset(undefined, {keepValues: true });
-  }, [i18n.language, reset]);
+  }, t);
 
   const sendDemoReminderMutation = useMutation({
     mutationFn: sendDemoReminder,

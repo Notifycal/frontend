@@ -1,4 +1,4 @@
-import i18n, { type InitOptions } from 'i18next';
+import i18n, { type InitOptions, type TFunction } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
@@ -16,6 +16,7 @@ import type { CountryCode, LanguageCode, LanguageData, PhoneData, PhoneNumber } 
 import { deepmerge } from 'deepmerge-ts';
 
 export type NotifycalI18nNamespaces = 'onboarding' | 'translations';
+export type NotifycalTFunction = TFunction<NotifycalI18nNamespaces, undefined>;
 
 export const defaultNS = 'translations';
 export const resources = {

@@ -1,17 +1,15 @@
 import { updateUserProfile } from '@api/userProfile';
-import type { NotifycalI18nNamespaces } from '@common/i18n';
-import { zodResolver } from '@hookform/resolvers/zod';
+import type { NotifycalTFunction } from '@common/i18n';
 import { phoneByCountry } from '@notifycal/shared/i18n';
 import type { CountryCode } from '@notifycal/shared/types';
-import type { TFunction } from 'i18next';
 import { z } from 'zod';
 
+import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
-import { useEffect, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
@@ -21,16 +19,17 @@ import { IconExclamationCircle } from '@tabler/icons-react';
 import { motion } from 'motion/react';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const finalSchema = (t: TFunction<NotifycalI18nNamespaces, undefined>) => z.object({
-  termsAccepted: z.boolean().refine((value) => value === true, {
-    message: t('confirm.formTosField.isRequired')
-  }),
-  privacyAccepted: z.boolean().refine((value) => value === true, {
-    message: t('confirm.formPrivacyField.isRequired')
-  }),
-  marketingOptIn: z.boolean()
-});
-export type ConfirmValues = z.infer<ReturnType<typeof finalSchema>>;
+const confirmSchema = (t: NotifycalTFunction) =>
+  z.object({
+    termsAccepted: z.boolean().refine((value) => value === true, {
+      message: t('confirm.formTosField.isRequired')
+    }),
+    privacyAccepted: z.boolean().refine((value) => value === true, {
+      message: t('confirm.formPrivacyField.isRequired')
+    }),
+    marketingOptIn: z.boolean()
+  });
+export type ConfirmValues = z.infer<ReturnType<typeof confirmSchema>>;
 
 const errorFields = ['privacyAccepted', 'termsAccepted'] as const;
 
@@ -38,29 +37,26 @@ const Confirm: React.FC = () => {
   const { data } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
   const { handleStepSubmit } = useStepSubmit();
-  const { t, i18n } = useTranslation('onboarding');
+  const { t } = useTranslation('onboarding');
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const {
     handleSubmit,
     register,
-    reset,
     formState: { errors, isValid }
-  } = useForm<ConfirmValues>({
-    resolver: zodResolver(finalSchema(t)),
-    mode: 'onChange',
-    defaultValues: {
-      termsAccepted: data.confirm?.termsAccepted || false,
-      privacyAccepted: data.confirm?.privacyAccepted || false,
-      marketingOptIn: data.confirm?.marketingOptIn || false
-    }
-  });
-
-  useEffect(() => {
-    void i18n.language;
-    reset(undefined, {keepValues: true });
-  }, [i18n.language, reset]);
+  } = useI18nForm<ConfirmValues>(
+    confirmSchema,
+    {
+      mode: 'onChange',
+      defaultValues: {
+        termsAccepted: data.confirm?.termsAccepted || false,
+        privacyAccepted: data.confirm?.privacyAccepted || false,
+        marketingOptIn: data.confirm?.marketingOptIn || false
+      }
+    },
+    t
+  );
 
   const reminderType = data.reminderType;
   const calendars = data.calendars?.calendars;
@@ -91,7 +87,7 @@ const Confirm: React.FC = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
       await queryClient.refetchQueries({ queryKey: ['user-profile'] });
-      await navigate({ to: '/onboarding/completed'});
+      await navigate({ to: '/onboarding/completed' });
     },
     onError: () => {
       setError(t('confirm.apiError'));
