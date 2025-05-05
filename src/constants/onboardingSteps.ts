@@ -90,4 +90,5 @@ export const findStepIndexByPath = (pathToFind: KebabCase<StepKey>): number | un
   return index > -1 ? index : undefined;
 };
 
-export const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean => !Object.values(stepsCompleted).every((step) => step)
+export const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
+  !Object.values(stepsCompleted).every((step) => step);

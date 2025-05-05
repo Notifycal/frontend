@@ -13,26 +13,27 @@ import OnboardingNavigation from '@components/layout/onboarding/OnboardingNaviga
 import PhoneInput from '../ui/PhoneInput/PhoneInput';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const senderDetailsSchema = (t: NotifycalTFunction) => z
-  .object({
-    contactDetails: z.object({
-      type: z.literal('phone'),
-      countryCode: countryCodeSchema,
-      phoneNumber: z
-        .string()
-        .min(1, { message: t('senderDetails.formSenderNumber.isRequired') })
-        .brand('PhoneNumber')
+const senderDetailsSchema = (t: NotifycalTFunction) =>
+  z
+    .object({
+      contactDetails: z.object({
+        type: z.literal('phone'),
+        countryCode: countryCodeSchema,
+        phoneNumber: z
+          .string()
+          .min(1, { message: t('senderDetails.formSenderNumber.isRequired') })
+          .brand('PhoneNumber')
+      })
     })
-  })
-  .superRefine((data, context) => {
-    if (!isValidMobilePhoneNumber(data.contactDetails.phoneNumber as PhoneNumber, data.contactDetails.countryCode)) {
-      context.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: t('senderDetails.formSenderNumber.isInvalid'),
-        path: ['contactDetails', 'phoneNumber']
-      });
-    }
-  });
+    .superRefine((data, context) => {
+      if (!isValidMobilePhoneNumber(data.contactDetails.phoneNumber as PhoneNumber, data.contactDetails.countryCode)) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: t('senderDetails.formSenderNumber.isInvalid'),
+          path: ['contactDetails', 'phoneNumber']
+        });
+      }
+    });
 
 export type SenderDetailsValues = z.infer<ReturnType<typeof senderDetailsSchema>>;
 
@@ -45,16 +46,20 @@ const SenderDetails: React.FC = () => {
     control,
     handleSubmit,
     formState: { isValid }
-  } = useI18nForm<SenderDetailsValues>(senderDetailsSchema, {
-    mode: 'onChange',
-    defaultValues: {
-      contactDetails: {
-        type: 'phone',
-        countryCode: data.senderDetails?.contactDetails.countryCode || 'ES',
-        phoneNumber: data.senderDetails?.contactDetails.phoneNumber || ('' as PhoneNumber)
+  } = useI18nForm<SenderDetailsValues>(
+    senderDetailsSchema,
+    {
+      mode: 'onChange',
+      defaultValues: {
+        contactDetails: {
+          type: 'phone',
+          countryCode: data.senderDetails?.contactDetails.countryCode || 'ES',
+          phoneNumber: data.senderDetails?.contactDetails.phoneNumber || ('' as PhoneNumber)
+        }
       }
-    }
-  }, t);
+    },
+    t
+  );
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>

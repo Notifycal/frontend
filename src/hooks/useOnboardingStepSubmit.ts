@@ -16,10 +16,10 @@ export function useStepSubmit(): StepSubmitHook {
 
     if (step) {
       const { stepKey } = step;
-  
+
       setStepData(stepKey, formData);
       markStepAsCompleted(stepKey);
-  
+
       const nextStep = getStepByIndex(currentStep + 1);
       if (nextStep) {
         await navigate({ to: `/onboarding/$step`, params: { step: nextStep.path } });

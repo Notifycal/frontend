@@ -19,9 +19,10 @@ import { motion } from 'motion/react';
 import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const tryItOutSchema = () => z.object({
-  hasSentTestReminder: z.boolean()
-});
+const tryItOutSchema = () =>
+  z.object({
+    hasSentTestReminder: z.boolean()
+  });
 
 export type TryItOutValues = z.infer<ReturnType<typeof tryItOutSchema>>;
 
@@ -35,12 +36,16 @@ const TryItOut: React.FC = () => {
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
-  const { handleSubmit, setValue, watch } = useI18nForm<TryItOutValues>(tryItOutSchema, {
-    mode: 'onChange',
-    defaultValues: {
-      hasSentTestReminder: data.tryItOut?.hasSentTestReminder || false
-    }
-  }, t);
+  const { handleSubmit, setValue, watch } = useI18nForm<TryItOutValues>(
+    tryItOutSchema,
+    {
+      mode: 'onChange',
+      defaultValues: {
+        hasSentTestReminder: data.tryItOut?.hasSentTestReminder || false
+      }
+    },
+    t
+  );
 
   const sendDemoReminderMutation = useMutation({
     mutationFn: sendDemoReminder,
@@ -80,7 +85,11 @@ const TryItOut: React.FC = () => {
         <div className="flex flex-col">
           <Image alt={t('tryItOut.imageAlt')} fit="contain" maw={200} mx="auto" src={phoneNotificationImg} />
 
-          <Button disabled={hasSentTestReminder} loading={sendDemoReminderMutation.isPending} onClick={onTestReminderSendButtonClick}>
+          <Button
+            disabled={hasSentTestReminder}
+            loading={sendDemoReminderMutation.isPending}
+            onClick={onTestReminderSendButtonClick}
+          >
             {t('tryItOut.sendTestReminder')}
           </Button>
         </div>
@@ -88,10 +97,7 @@ const TryItOut: React.FC = () => {
         <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation')}</div>
         {/* Error Message from API */}
         {error && (
-          <motion.div
-            key="error-alert"
-            {...errorPopUpTransition}
-          >
+          <motion.div key="error-alert" {...errorPopUpTransition}>
             <Alert
               withCloseButton
               color="pink"
