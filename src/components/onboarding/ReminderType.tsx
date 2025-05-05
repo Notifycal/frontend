@@ -5,25 +5,26 @@ import { z } from 'zod';
 import { languageData, type NotifycalI18nNamespaces } from '@common/i18n';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
-    templateEnMap,
-    templateEsMap,
-    type BusinessAddress,
-    type BusinessName,
-    type TemplateId,
-    type TemplateMap
+  templateEnMap,
+  templateEsMap,
+  type BusinessAddress,
+  type BusinessName,
+  type TemplateId,
+  type TemplateMap
 } from '@notifycal/shared/types';
 import type { TFunction } from 'i18next';
 
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import InternationalizationPicker from '../ui/InternationalizationPicker/InternationalizationPicker';
 import {
-    ReminderTypeCardRadioGroup,
-    ReminderTypeCardRadioGroupOption
+  ReminderTypeCardRadioGroup,
+  ReminderTypeCardRadioGroupOption
 } from '../ui/ReminderTypeCardRadioGroup/ReminderTypeCardRadioGroup';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -49,6 +50,7 @@ const ReminderType: React.FC = () => {
     watch,
     handleSubmit,
     setValue,
+    reset,
     formState: { isValid, errors }
   } = useForm<ReminderTypeValues>({
     resolver: zodResolver(reminderTypeSchema(t)),
@@ -58,6 +60,11 @@ const ReminderType: React.FC = () => {
       reminderLanguage: data.reminderType?.reminderLanguage || (i18n.languages[0] as keyof typeof languageData)
     }
   });
+
+  useEffect(() => {
+    void i18n.language;
+    reset(undefined, {keepValues: true });
+  }, [i18n.language, reset]);
 
   // using watch only because we want to use this value before it's saved
   const selectedReminderLanguage = watch('reminderLanguage');

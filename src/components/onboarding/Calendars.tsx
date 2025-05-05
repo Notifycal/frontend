@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -28,11 +29,12 @@ type Calendar = z.infer<typeof calendarSchema>;
 const Calendars: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t, i18n } = useTranslation('onboarding');
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isValid }
   } = useForm<CalendarsValues>({
     resolver: zodResolver(calendarsSchema(t)),
@@ -41,6 +43,11 @@ const Calendars: React.FC = () => {
       calendars: data.calendars?.calendars || []
     }
   });
+
+  useEffect(() => {
+    void i18n.language;
+    reset(undefined, {keepValues: true });
+  }, [i18n.language, reset]);
 
   const { data: userCalendars, isLoading } = useQuery({
     queryKey: ['userIdPCalendars'],

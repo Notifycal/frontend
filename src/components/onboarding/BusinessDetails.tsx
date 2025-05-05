@@ -6,6 +6,7 @@ import { z } from 'zod';
 
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -65,7 +66,7 @@ const BusinessDetails: React.FC = () => {
     register,
     control,
     handleSubmit,
-    trigger,
+    reset,
     formState: { errors, isValid }
   } = useForm<BusinessDetailsValues>({
     resolver: zodResolver(businessDetailsSchema(t)),
@@ -78,13 +79,10 @@ const BusinessDetails: React.FC = () => {
     }
   });
 
-  // i18n.on('languageChanged', () => {
-  //   console.log('two');
-  //   console.log(formState.errors);
-  //   if (Object.keys(formState.errors).length > 0) {
-  //     void trigger();
-  //   }
-  // });
+  useEffect(() => {
+    void i18n.language;
+    reset(undefined, {keepValues: true });
+  }, [i18n.language, reset]);
 
   const industriesData = INDUSTRIES.map((industry) => ({
     value: industry,

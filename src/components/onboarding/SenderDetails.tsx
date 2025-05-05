@@ -7,6 +7,7 @@ import { z } from 'zod';
 
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -40,11 +41,12 @@ export type SenderDetailsValues = z.infer<ReturnType<typeof senderDetailsSchema>
 const SenderDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t, i18n } = useTranslation('onboarding');
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isValid }
   } = useForm<SenderDetailsValues>({
     resolver: zodResolver(senderDetailsSchema(t)),
@@ -57,6 +59,11 @@ const SenderDetails: React.FC = () => {
       }
     }
   });
+
+  useEffect(() => {
+    void i18n.language;
+    reset(undefined, {keepValues: true });
+  }, [i18n.language, reset]);
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>

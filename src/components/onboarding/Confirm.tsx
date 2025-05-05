@@ -10,7 +10,7 @@ import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -38,13 +38,14 @@ const Confirm: React.FC = () => {
   const { data } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t, i18n } = useTranslation('onboarding');
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, isValid }
   } = useForm<ConfirmValues>({
     resolver: zodResolver(finalSchema(t)),
@@ -55,6 +56,11 @@ const Confirm: React.FC = () => {
       marketingOptIn: data.confirm?.marketingOptIn || false
     }
   });
+
+  useEffect(() => {
+    void i18n.language;
+    reset(undefined, {keepValues: true });
+  }, [i18n.language, reset]);
 
   const reminderType = data.reminderType;
   const calendars = data.calendars?.calendars;

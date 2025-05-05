@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -31,18 +31,23 @@ const TryItOut: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t, i18n } = useTranslation('onboarding');
   const queryClient = useQueryClient();
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
-  const { handleSubmit, setValue, watch } = useForm<TryItOutValues>({
+  const { handleSubmit, setValue, watch, reset } = useForm<TryItOutValues>({
     resolver: zodResolver(tryItOutSchema),
     mode: 'onChange',
     defaultValues: {
       hasSentTestReminder: data.tryItOut?.hasSentTestReminder || false
     }
   });
+
+  useEffect(() => {
+    void i18n.language;
+    reset(undefined, {keepValues: true });
+  }, [i18n.language, reset]);
 
   const sendDemoReminderMutation = useMutation({
     mutationFn: sendDemoReminder,
