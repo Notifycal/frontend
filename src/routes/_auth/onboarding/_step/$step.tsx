@@ -33,10 +33,6 @@ export const Route = createFileRoute('/_auth/onboarding/_step/$step')({
     const currentStepIndex = findStepIndexByPath(stepPathParameter) || 0;
     const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
 
-    // if (!hasIncompleteSteps(completedSteps)) {
-    //   throw redirect({ to: `/onboarding/completed` });
-    // }
-
     const isAheadOfFirstIncomplete = currentStepIndex > firstIncompleteIndex;
     const firstIncompleteStepPath = getStepByIndex(firstIncompleteIndex)?.path || '';
 
