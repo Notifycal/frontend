@@ -1,7 +1,4 @@
 import {
-  type OnboardingDescriptionKey,
-  type OnboardingTitleKey,
-  type StepKey,
   getFirstIncompleteStepIndex,
   getStepByIndex,
   STEPS
@@ -9,7 +6,6 @@ import {
 
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { Outlet, useNavigate } from '@tanstack/react-router';
-import type { TOptions } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 import ThinProgressBar from '@components/ui/ThinProgressBar/ThinProgressBar';
@@ -40,10 +36,6 @@ const StepLayout: React.FC = () => {
   const navigate = useNavigate();
 
   const { t } = useTranslation('onboarding');
-  const tStepKey = t as unknown as (
-    key: OnboardingTitleKey<StepKey> | OnboardingDescriptionKey<StepKey>,
-    options?: TOptions
-  ) => string;
 
   const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
   const shouldAllowSelectStep = (step: number): boolean => firstIncompleteIndex >= step;
@@ -69,8 +61,8 @@ const StepLayout: React.FC = () => {
                   }}
                 >
                   {STEPS.map(({ title, description, path }, index) => {
-                    const tTitle = tStepKey(title);
-                    const tDescription = tStepKey(description);
+                    const tTitle = t(title);
+                    const tDescription = t(description);
 
                     return (
                       <Stepper.Step key={path} allowStepSelect={shouldAllowSelectStep(index)} label={tTitle}>
@@ -87,7 +79,7 @@ const StepLayout: React.FC = () => {
 
           <div className="flex xl:hidden w-full justify-center bg-white pb-8">
             <div className="container mx-auto px-4 mt-4">
-              <SubHeader description={tStepKey(step.description)} title={tStepKey(step.title)} />
+              <SubHeader description={t(step.description)} title={t(step.title)} />
             </div>
           </div>
 
