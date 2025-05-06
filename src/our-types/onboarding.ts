@@ -5,7 +5,6 @@ import type { ReminderTypeValues } from '@components/onboarding/ReminderType';
 import type { SenderDetailsValues } from '@components/onboarding/SenderDetails';
 import type { TryItOutValues } from '@components/onboarding/TryItOut';
 
-// Combined form data for all steps
 export interface OnboardingData {
   businessDetails: BusinessDetailsValues;
   reminderType: ReminderTypeValues;
@@ -15,7 +14,6 @@ export interface OnboardingData {
   tryItOut: TryItOutValues;
 }
 
-// Step completion status
 export interface StepsCompletion {
   businessDetails: boolean;
   reminderType: boolean;
