@@ -1,36 +1,25 @@
+import { languageByLanguageCode, phoneByCountry } from '@notifycal/shared/i18n';
+import type { CountryCode, LanguageCode, LanguageData, PhoneData, PhoneNumber } from '@notifycal/shared/types';
+
 import i18n, { type InitOptions, type TFunction } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend, { type HttpBackendOptions } from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
-import translationEN from '@assets/locales/en/translations.json';
-import translationES from '@assets/locales/es/translations.json';
-
-import onboardingEN from '@assets/locales/en/onboarding.json';
-import onboardingES from '@assets/locales/es/onboarding.json';
+import { isProduction } from '@common/utils';
+import { deepmerge } from 'deepmerge-ts';
 
 import flagEs from '@assets/icons/lang/es.png';
 import flagGb from '@assets/icons/lang/gb.png';
-import { isProduction } from '@common/utils';
-import { languageByLanguageCode, phoneByCountry } from '@notifycal/shared/i18n';
-import type { CountryCode, LanguageCode, LanguageData, PhoneData, PhoneNumber } from '@notifycal/shared/types';
-import { deepmerge } from 'deepmerge-ts';
 
 export type NotifycalI18nNamespaces = 'onboarding' | 'translations';
 export type NotifycalTFunction = TFunction<NotifycalI18nNamespaces, undefined>;
 
 export const defaultNS = 'translations';
-export const resources = {
-  en: {
-    translations: translationEN,
-    onboarding: onboardingEN
-  },
-  es: {
-    translations: translationES,
-    onboarding: onboardingES
-  }
-} as const;
 
 const i18nOptions: InitOptions = {
+  // https://github.com/i18next/i18next-http-backend?tab=readme-ov-file#seeing-failed-http-requests-like-404
+  load: 'languageOnly',
   defaultNS,
   fallbackLng: 'en',
   debug: !isProduction,
@@ -38,9 +27,11 @@ const i18nOptions: InitOptions = {
     order: ['localStorage', 'navigator'],
     caches: ['localStorage']
   },
-  resources,
   interpolation: {
     escapeValue: false // not needed for react as it escapes by default
+  },
+  backend: {
+    loadPath: isProduction ? 'locales/{{lng}}/{{ns}}.json' : 'src/assets/locales/{{lng}}/{{ns}}.json'
   },
   react: {
     useSuspense: true
@@ -67,7 +58,7 @@ export const phoneData: Record<CountryCode, PhoneData> = deepmerge(phoneByCountr
   PhoneData
 >;
 
-void i18n.use(initReactI18next).use(LanguageDetector).init(i18nOptions);
+void i18n.use(initReactI18next).use(LanguageDetector).use(Backend).init<HttpBackendOptions>(i18nOptions);
 
 export const isValidMobilePhoneNumber = (number: PhoneNumber, country: CountryCode): boolean => {
   const regex = phoneData[country].phoneDetails.numberMask;
