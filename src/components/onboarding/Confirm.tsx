@@ -246,7 +246,7 @@ const Confirm: React.FC = () => {
         isLastStep
         canProceed={isValid}
         isSubmitting={mutation.isPending}
-        onProceed={handleSubmit(onSubmit)}
+        onProceed={handleSubmit(submitUserProfile)}
       />
     </form>
   );
