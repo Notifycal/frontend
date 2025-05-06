@@ -1,7 +1,7 @@
 import { phoneData } from '@common/i18n';
 import { TextInput, type TextInputProps } from '@mantine/core';
 import type { CountryCode, CountryName, InternationalizationData, PhoneNumber } from '@notifycal/shared/types';
-import { forwardRef } from 'react';
+import type { ReactNode } from 'react';
 import InternationalizationPicker from '../InternationalizationPicker/InternationalizationPicker';
 
 interface PhoneInputValue {
@@ -10,16 +10,16 @@ interface PhoneInputValue {
   phoneNumber: PhoneNumber;
 }
 
-interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
-  label: string;
+export interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
+  label?: ReactNode;
   error?: string;
   value: PhoneInputValue;
   onChange: (value: PhoneInputValue) => void;
   placeholder?: string;
+  ref?: React.Ref<HTMLInputElement>
 }
 
-const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ label, placeholder, error, value, onChange = (): void => {}, ...rest }, ref) => {
+const PhoneInput: React.FC<PhoneInputProps> = ({ ref, label, placeholder, error, value, onChange = (): void => {}, ...rest }) => {
     const { countryCode: country, phoneNumber } = value;
     const dialCode = phoneData[country].phoneDetails.dialCode;
 
@@ -65,6 +65,6 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       />
     );
   }
-);
+;
 
 export default PhoneInput;

@@ -68,22 +68,23 @@ const SenderDetails: React.FC = () => {
         <Controller
           control={control}
           name="contactDetails"
-          render={({ field, formState }) => {
+          render={({ field: { ref, value, ...restField }, formState }) => {
             const errorKey =
               formState.errors.contactDetails?.phoneNumber?.message ||
               formState.errors.contactDetails?.countryCode?.message;
 
             return (
               <PhoneInput
+                ref={ref}
                 withAsterisk
                 error={errorKey && errorKey}
                 label={t('senderDetails.formSenderNumber.label')}
                 placeholder={t('senderDetails.formSenderNumber.placeholder')}
-                {...field}
+                {...restField}
                 value={{
                   type: 'phone',
-                  countryCode: field.value.countryCode,
-                  phoneNumber: field.value.phoneNumber as PhoneNumber
+                  countryCode: value.countryCode,
+                  phoneNumber: value.phoneNumber as PhoneNumber
                 }}
               />
             );
