@@ -99,7 +99,6 @@ const Confirm: React.FC = () => {
 
   const submitUserProfile = async (formData: ConfirmValues): Promise<void> => {
     await handleStepSubmit(formData);
-    // Submit all the data to the API
 
     const newData = {
       calendars: calendarsWithTemplateInfo,
