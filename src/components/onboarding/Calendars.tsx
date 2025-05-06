@@ -69,6 +69,7 @@ const Calendars: React.FC = () => {
           name="calendars"
           render={({ field: { value, onChange } }) => (
             <MultiSelect
+              withAsterisk
               comboboxProps={{ shadow: 'md' }}
               data={calendarData}
               disabled={isLoading}

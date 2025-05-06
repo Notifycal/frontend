@@ -75,6 +75,7 @@ const SenderDetails: React.FC = () => {
 
             return (
               <PhoneInput
+                withAsterisk
                 error={errorKey && errorKey}
                 label={t('senderDetails.formSenderNumber.label')}
                 placeholder={t('senderDetails.formSenderNumber.placeholder')}

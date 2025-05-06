@@ -95,6 +95,7 @@ const BusinessDetails: React.FC = () => {
       <div className="space-y-6">
         {/* Company Name */}
         <TextInput
+          withAsterisk
           label={t('businessDetails.formNameField.label')}
           {...register('name')}
           error={errors.name && errors.name.message}
@@ -103,6 +104,7 @@ const BusinessDetails: React.FC = () => {
         />
         {/* Company Address */}
         <TextInput
+          withAsterisk
           label={t('businessDetails.formAddressField.label')}
           {...register('address')}
           error={errors.address && errors.address.message}
@@ -131,6 +133,7 @@ const BusinessDetails: React.FC = () => {
           name="companySize"
           render={({ field }) => (
             <Select
+              withAsterisk
               data={companySizeData}
               label={t('businessDetails.formCompanySizeField.label')}
               placeholder={t('businessDetails.formCompanySizeField.placeholder')}
