@@ -97,7 +97,7 @@ const Confirm: React.FC = () => {
     }
   });
 
-  const onSubmit = async (formData: ConfirmValues): Promise<void> => {
+  const submitUserProfile = async (formData: ConfirmValues): Promise<void> => {
     await handleStepSubmit(formData);
     // Submit all the data to the API
 
@@ -117,7 +117,7 @@ const Confirm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(submitUserProfile)}>
       <div className="space-y-6">
         <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
           <h3 className="text-lg font-medium text-gray-800 mb-4">{t('confirm.accountSummary')}</h3>
