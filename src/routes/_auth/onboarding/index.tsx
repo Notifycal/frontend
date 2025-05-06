@@ -6,7 +6,6 @@ export const Route = createFileRoute('/_auth/onboarding/')({
   beforeLoad: () => {
     const { completedSteps } = useOnboardingStore.getState();
 
-
     const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
     const path = getStepByIndex(firstIncompleteIndex)?.path || '';
     throw redirect({ to: '/onboarding/$step', params: { step: path } });

@@ -1,5 +1,4 @@
 import { sendDemoReminder } from '@api/demoReminder';
-import { errorPopUpTransition } from '@constants/animation';
 import type { DateTime, PhoneContact, TimeZone } from '@notifycal/shared/types';
 import { DateTime as DT } from 'luxon';
 import { z } from 'zod';
@@ -12,9 +11,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import { Alert, Button, Image } from '@mantine/core';
-import { IconExclamationCircle } from '@tabler/icons-react';
-import { motion } from 'motion/react';
+import FlatError from '@components/ui/FlatError/FlatError';
+import { Button, Image } from '@mantine/core';
 
 import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
@@ -97,21 +95,13 @@ const TryItOut: React.FC = () => {
         <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation')}</div>
         {/* Error Message from API */}
         {error && (
-          <motion.div key="error-alert" {...errorPopUpTransition}>
-            <Alert
-              withCloseButton
-              color="pink"
-              icon={<IconExclamationCircle />}
-              radius="md"
-              title={t('generic.error', { ns: 'translations' })}
-              variant="light"
-              onClose={() => {
-                setError(null);
-              }}
-            >
-              {error}
-            </Alert>
-          </motion.div>
+          <FlatError
+            onErrorClose={() => {
+              setError(null);
+            }}
+          >
+            {error}
+          </FlatError>
         )}
       </div>
 

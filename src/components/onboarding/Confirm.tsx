@@ -20,10 +20,8 @@ import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import { errorPopUpTransition } from '@constants/animation';
-import { Alert, Checkbox } from '@mantine/core';
-import { IconExclamationCircle } from '@tabler/icons-react';
-import { motion } from 'motion/react';
+import FlatError from '@components/ui/FlatError/FlatError';
+import { Checkbox } from '@mantine/core';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const confirmSchema = (t: NotifycalTFunction) =>
@@ -223,21 +221,13 @@ const Confirm: React.FC = () => {
         )}
         {/* Error Message from API */}
         {error && (
-          <motion.div key="error-alert" {...errorPopUpTransition}>
-            <Alert
-              withCloseButton
-              color="pink"
-              icon={<IconExclamationCircle />}
-              radius="md"
-              title={t('generic.error', { ns: 'translations' })}
-              variant="light"
-              onClose={() => {
-                setError(null);
-              }}
-            >
-              {error}
-            </Alert>
-          </motion.div>
+          <FlatError
+            onErrorClose={() => {
+              setError(null);
+            }}
+          >
+            {error}
+          </FlatError>
         )}
       </div>
 

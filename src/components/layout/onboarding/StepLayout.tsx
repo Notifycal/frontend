@@ -1,8 +1,4 @@
-import {
-  getFirstIncompleteStepIndex,
-  getStepByIndex,
-  STEPS
-} from '@constants/onboardingSteps';
+import { getFirstIncompleteStepIndex, getStepByIndex, STEPS } from '@constants/onboardingSteps';
 
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { Outlet, useNavigate } from '@tanstack/react-router';

@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface OnboardingState {
+  // State
   data: Partial<OnboardingData>;
   completedSteps: StepsCompletion;
   currentStep: number;
