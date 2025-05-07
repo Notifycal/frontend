@@ -3,6 +3,7 @@ import { countryCodeSchema } from '@notifycal/shared/schemas';
 import type { PhoneNumber } from '@notifycal/shared/types';
 import { z } from 'zod';
 
+import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
@@ -10,7 +11,6 @@ import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import { CloseButton } from '@mantine/core';
 import PhoneInput from '../ui/PhoneInput/PhoneInput';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -49,13 +49,7 @@ const SenderDetails: React.FC = () => {
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
-  const {
-    control,
-    handleSubmit,
-    trigger,
-    setValue,
-    formState: { isValid }
-  } = useI18nForm<SenderDetailsValues>(
+  const methods = useI18nForm<SenderDetailsValues>(
     senderDetailsSchema,
     {
       mode: 'onChange',
@@ -65,6 +59,14 @@ const SenderDetails: React.FC = () => {
     },
     t
   );
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid }
+  } = methods;
+
+  const { commonFormFieldProps } = useFormFieldCommonProps(methods);
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
@@ -81,27 +83,19 @@ const SenderDetails: React.FC = () => {
             return (
               <PhoneInput
                 ref={ref}
-                withAsterisk
-                error={errorKey && errorKey}
-                label={t('senderDetails.formSenderNumber.label')}
-                placeholder={t('senderDetails.formSenderNumber.placeholder')}
-                {...restField}
-                rightSectionPointerEvents="all"
-                rightSection={
-                  <CloseButton
-                    aria-label={t('generic.clear', { ns: 'translations'})}
-                    style={{ display: value ? undefined : 'none' }}
-                    onClick={async () => {
-                      setValue('contactDetails', emptyContactDetails);
-                      await trigger('contactDetails');
-                    }}
-                  />
-                }
                 value={{
                   type: 'phone',
                   countryCode: value.countryCode,
                   phoneNumber: value.phoneNumber as PhoneNumber
                 }}
+                {...commonFormFieldProps('contactDetails', {
+                  label: t('senderDetails.formSenderNumber.label'),
+                  placeholder: t('senderDetails.formSenderNumber.placeholder'),
+                  resetValue: emptyContactDetails,
+                  registration: restField
+                })}
+                error={errorKey && errorKey}
+                // onChange={restField.onChange}
               />
             );
           }}
