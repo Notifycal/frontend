@@ -16,55 +16,61 @@ export interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChang
   value: PhoneInputValue;
   onChange: (value: PhoneInputValue) => void;
   placeholder?: string;
-  ref?: React.Ref<HTMLInputElement>
+  ref?: React.Ref<HTMLInputElement>;
 }
 
-const PhoneInput: React.FC<PhoneInputProps> = ({ ref, label, placeholder, error, value, onChange = (): void => {}, ...rest }) => {
-    const { countryCode: country, phoneNumber } = value;
-    const dialCode = phoneData[country].phoneDetails.dialCode;
+const PhoneInput: React.FC<PhoneInputProps> = ({
+  ref,
+  label,
+  placeholder,
+  error,
+  value,
+  onChange = (): void => {},
+  ...rest
+}) => {
+  const { countryCode: country, phoneNumber } = value;
+  const dialCode = phoneData[country].phoneDetails.dialCode;
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-      onChange({ ...value, phoneNumber: event.currentTarget.value as PhoneNumber });
-    };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    onChange({ ...value, phoneNumber: event.currentTarget.value as PhoneNumber });
+  };
 
-    const handleCountryChange = (country: InternationalizationData<CountryCode, CountryName>): void => {
-      onChange({ ...value, countryCode: country.code, phoneNumber: '' as PhoneNumber });
-    };
+  const handleCountryChange = (country: InternationalizationData<CountryCode, CountryName>): void => {
+    onChange({ ...value, countryCode: country.code, phoneNumber: '' as PhoneNumber });
+  };
 
-    return (
-      <TextInput
-        ref={ref}
-        error={error}
-        label={label}
-        labelProps={{ pb: 'sm' }}
-        leftSectionWidth="calc(3.2rem * var(--mantine-scale) * 2)"
-        placeholder={placeholder}
-        type="text"
-        value={phoneNumber}
-        leftSection={
-          <div
-            className="flex justify-center"
-            style={{
-              height: 'calc(1.875rem * var(--mantine-scale))',
-              width: 'calc(2.875rem * var(--mantine-scale) * 2)'
+  return (
+    <TextInput
+      ref={ref}
+      error={error}
+      label={label}
+      labelProps={{ pb: 'sm' }}
+      leftSectionWidth="calc(3.2rem * var(--mantine-scale) * 2)"
+      placeholder={placeholder}
+      type="text"
+      value={phoneNumber}
+      leftSection={
+        <div
+          className="flex justify-center"
+          style={{
+            height: 'calc(1.875rem * var(--mantine-scale))',
+            width: 'calc(2.875rem * var(--mantine-scale) * 2)'
+          }}
+        >
+          <InternationalizationPicker
+            displayFlagOnly
+            data={phoneData}
+            value={country}
+            onSelected={(selectedCountry) => {
+              handleCountryChange(selectedCountry);
             }}
-          >
-            <InternationalizationPicker
-              displayFlagOnly
-              data={phoneData}
-              value={country}
-              onSelected={(selectedCountry) => {
-                handleCountryChange(selectedCountry);
-              }}
-            />
-            <span className="ml-2 text-sm self-center">{dialCode}</span>
-          </div>
-        }
-        onChange={handleInputChange}
-        {...rest}
-      />
-    );
-  }
-;
-
+          />
+          <span className="ml-2 text-sm self-center">{dialCode}</span>
+        </div>
+      }
+      onChange={handleInputChange}
+      {...rest}
+    />
+  );
+};
 export default PhoneInput;
