@@ -4,8 +4,7 @@ import { useOnboardingStore } from '@store/useOnboardingStore';
 import { Outlet, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-import ThinProgressBar from '@components/ui/ThinProgressBar/ThinProgressBar';
-import { Stepper } from '@mantine/core';
+import { Progress, Stepper } from '@mantine/core';
 import { AnimatePresence, motion } from 'motion/react';
 
 interface SubHeaderProps {
@@ -79,7 +78,7 @@ const StepLayout: React.FC = () => {
             </div>
           </div>
 
-          <ThinProgressBar progress={(currentStep / (STEPS.length - 1)) * 100} />
+          <Progress radius={0} size="sm" value={(currentStep / (STEPS.length - 1)) * 100} />
 
           {/* Main content */}
           <main className="flex-1 container mx-auto px-4 py-6">
