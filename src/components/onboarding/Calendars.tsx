@@ -9,6 +9,7 @@ import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import { MultiSelect } from '@mantine/core';
@@ -29,11 +30,7 @@ const Calendars: React.FC = () => {
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors, isValid }
-  } = useI18nForm<CalendarsValues>(
+  const methods = useI18nForm<CalendarsValues>(
     calendarsSchema,
     {
       mode: 'onChange',
@@ -43,6 +40,14 @@ const Calendars: React.FC = () => {
     },
     t
   );
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid }
+  } = methods;
+
+  const { commonFormFieldProps } = useFormFieldCommonProps(methods);
 
   const { data: userCalendars, isLoading } = useQuery({
     queryKey: ['userIdPCalendars'],
@@ -69,21 +74,21 @@ const Calendars: React.FC = () => {
           name="calendars"
           render={({ field: { value, onChange } }) => (
             <MultiSelect
-              withAsterisk
               comboboxProps={{ shadow: 'md' }}
               data={calendarData}
               disabled={isLoading}
-              error={errors.calendars && errors.calendars.message}
-              label={t('calendars.formCalendarsField.label', { businessName })}
-              labelProps={{ pb: 'sm' }}
               leftSection={isLoading && <IconRefresh size={14} />}
-              placeholder={t(placeholderTextKey)}
               value={isLoading ? [] : value.map((v) => v.id)}
               onChange={(value) => {
                 if (!isLoading) {
                   onChange(calendarValuesToFullCalendars(value));
                 }
               }}
+              {...commonFormFieldProps('calendars', {
+                label: t('calendars.formCalendarsField.label', { businessName }),
+                placeholder: t(placeholderTextKey),
+                resetValue: []
+              })}
             />
           )}
         />
