@@ -1,4 +1,5 @@
 import type { KebabCase } from '@common/types';
+import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
 
 import BusinessDetails from '@components/onboarding/BusinessDetails';
 import Calendars from '@components/onboarding/Calendars';
@@ -7,63 +8,43 @@ import ReminderType from '@components/onboarding/ReminderType';
 import SenderDetails from '@components/onboarding/SenderDetails';
 import TryItOut from '@components/onboarding/TryItOut';
 
-import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
-
 export type StepKey = keyof OnboardingData;
-
-export type OnboardingTitleKey<K extends StepKey> = `${K & string}.title`;
-export type OnboardingDescriptionKey<K extends StepKey> = `${K & string}.subtitle`;
 
 export interface StepConfig {
   path: KebabCase<StepKey>;
   stepKey: StepKey;
-  title: OnboardingTitleKey<StepKey>;
-  description: OnboardingDescriptionKey<StepKey>;
   component: React.ComponentType;
-  hideStepper?: boolean;
 }
 
 export const STEPS: Array<StepConfig> = [
   {
     path: 'business-details',
     stepKey: 'businessDetails',
-    title: 'businessDetails.title',
-    description: 'businessDetails.subtitle',
     component: BusinessDetails
   },
   {
     path: 'reminder-type',
     stepKey: 'reminderType',
-    title: 'reminderType.title',
-    description: 'reminderType.subtitle',
     component: ReminderType
   },
   {
     path: 'calendars',
     stepKey: 'calendars',
-    title: 'calendars.title',
-    description: 'calendars.subtitle',
     component: Calendars
   },
   {
     path: 'sender-details',
     stepKey: 'senderDetails',
-    title: 'senderDetails.title',
-    description: 'senderDetails.subtitle',
     component: SenderDetails
   },
   {
     path: 'try-it-out',
     stepKey: 'tryItOut',
-    title: 'tryItOut.title',
-    description: 'tryItOut.subtitle',
     component: TryItOut
   },
   {
     path: 'confirm',
     stepKey: 'confirm',
-    title: 'confirm.title',
-    description: 'confirm.subtitle',
     component: Confirm
   }
 ];

@@ -9,13 +9,13 @@ import { AnimatePresence, motion } from 'motion/react';
 
 interface SubHeaderProps {
   title: string;
-  description: string;
+  subtitle: string;
 }
 
-const SubHeader: React.FC<SubHeaderProps> = ({ title, description }) => (
+const SubHeader: React.FC<SubHeaderProps> = ({ title, subtitle }) => (
   <div className="text-center xl:mt-8">
     <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-    <p className="text-gray-600">{description}</p>
+    <p className="text-gray-600">{subtitle}</p>
   </div>
 );
 
@@ -55,13 +55,11 @@ const StepLayout: React.FC = () => {
                     }
                   }}
                 >
-                  {STEPS.map(({ title, description, path }, index) => {
-                    const tTitle = t(title);
-                    const tDescription = t(description);
-
+                  {STEPS.map(({ path, stepKey }, index) => {
+                    const tTitle = t(`${stepKey}.title`);
                     return (
                       <Stepper.Step key={path} allowStepSelect={shouldAllowSelectStep(index)} label={tTitle}>
-                        <SubHeader description={tDescription} title={tTitle} />
+                        <SubHeader subtitle={t(`${stepKey}.subtitle`)} title={tTitle} />
                       </Stepper.Step>
                     );
                   })}
@@ -74,7 +72,7 @@ const StepLayout: React.FC = () => {
 
           <div className="flex xl:hidden w-full justify-center bg-white pb-8">
             <div className="container mx-auto px-4 mt-4">
-              <SubHeader description={t(step.description)} title={t(step.title)} />
+              <SubHeader subtitle={t(`${step.stepKey}.subtitle`)} title={t(`${step.stepKey}.title`)} />
             </div>
           </div>
 
