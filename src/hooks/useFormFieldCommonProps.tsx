@@ -1,6 +1,7 @@
 import { CloseButton } from '@mantine/core';
 import type {
   ControllerRenderProps,
+  FieldError,
   FieldPathValue,
   FieldValues,
   Path,
@@ -9,8 +10,7 @@ import type {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import deepEqual from 'fast-deep-equal';
-
+import { isEqual, get } from 'radash';
 
 interface CommonFormFieldPropsReturn {
   rightSection: React.ReactElement | undefined;
@@ -29,6 +29,7 @@ type FormFieldOptions<TFormValues extends FieldValues> = {
   registration?: Partial<
     UseFormRegisterReturn<Path<TFormValues>> | ControllerRenderProps<TFormValues, Path<TFormValues>>
   >;
+  afterFieldClear?: () => void;
 };
 
 interface FormFieldCommonPropsHook<TFormValues extends FieldValues> {
@@ -44,7 +45,8 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
   const {
     trigger,
     setValue,
-    getValues,
+    resetField,
+    watch,
     formState: { errors }
   } = methods;
 
@@ -52,10 +54,12 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
 
   const commonFormFieldProps = (
     fieldName: Path<TFormValues>,
-    { label, placeholder, resetValue, registration }: FormFieldOptions<TFormValues>
+    { label, placeholder, resetValue, registration, afterFieldClear }: FormFieldOptions<TFormValues>
   ): CommonFormFieldPropsReturn => {
-    const fieldValue = getValues(fieldName);
-    const isEmptyFieldValue = deepEqual(fieldValue, resetValue);
+    const fieldValue = watch(fieldName);
+    const isEmptyFieldValue = !fieldValue || isEqual(fieldValue, resetValue);
+
+    const fieldMessageObject = get<FieldError>(errors, fieldName);
 
     return {
       rightSection: !isEmptyFieldValue ? (
@@ -66,6 +70,10 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
           onClick={async () => {
             setValue(fieldName, resetValue);
             await trigger(fieldName);
+
+            if (afterFieldClear) {
+              afterFieldClear();
+            }
           }}
         />
       ) : undefined,
@@ -75,7 +83,7 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
       labelProps: label ? { pb: '.4em' } : undefined,
       placeholder,
       ...(registration ? registration : {}),
-      error: errors[fieldName] && (errors[fieldName].message as string)
+      error: fieldMessageObject && fieldMessageObject['message']
     };
   };
 
