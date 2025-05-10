@@ -9,15 +9,136 @@
     "title": "Business details",
     "subtitle": "Tell us about your business",
     "industries": {
-      "technology": "Technology",
-      "healthcare": "Healthcare",
-      "finance": "Finance",
-      "education": "Education",
-      "manufacturing": "Manufacturing",
-      "retail": "Retail",
-      "government": "Government",
-      "nonProfit": "Non-profit",
-      "other": "Other"
+      "technology": {
+        "label": "Technology",
+        "sectors": {
+          "saas": "Software as a Service (SaaS)",
+          "itSupport": "IT Support",
+          "webDev": "Web Development",
+          "digitalMarketing": "Digital Marketing",
+          "cybersecurity": "Cybersecurity",
+          "other": "Other"
+        }
+      },
+      "healthcare": {
+        "label": "Healthcare",
+        "sectors": {
+          "doctors": "Doctors",
+          "dentists": "Dentists",
+          "therapists": "Therapists",
+          "optometrists": "Optometrists",
+          "chiropractors": "Chiropractors",
+          "veterinarians": "Veterinarians",
+          "other": "Other"
+        }
+      },
+      "wellness": {
+        "label": "Beauty & Wellness",
+        "sectors": {
+          "salons": "Salons & Barbers",
+          "spas": "Spas",
+          "massageTherapists": "Massage Therapists",
+          "nailTechnicians": "Nail Technicians",
+          "other": "Other"
+        }
+      },
+      "homeServices": {
+        "label": "Home Services",
+        "sectors": {
+          "plumbers": "Plumbers",
+          "electricians": "Electricians",
+          "cleaners": "Cleaners",
+          "hvac": "HVAC Technicians",
+          "pestControl": "Pest Control",
+          "other": "Other"
+        }
+      },
+      "finance": {
+        "label": "Finance",
+        "sectors": {
+          "accountants": "Accountants",
+          "taxAdvisors": "Tax Advisors",
+          "financialPlanners": "Financial Planners",
+          "bookkeepers": "Bookkeepers",
+          "insuranceAgents": "Insurance Agents",
+          "other": "Other"
+        }
+      },
+      "legal": {
+        "label": "Legal",
+        "sectors": {
+          "lawFirms": "Law Firms",
+          "notaries": "Notaries",
+          "compliance": "Compliance Consultants",
+          "other": "Other"
+        }
+      },
+      "education": {
+        "label": "Education",
+        "sectors": {
+          "tutors": "Tutors",
+          "testPrep": "Test Prep",
+          "languageInstructors": "Language Instructors",
+          "lifeCoaches": "Life Coaches",
+          "other": "Other"
+        }
+      },
+      "retail": {
+        "label": "Retail",
+        "sectors": {
+          "dryCleaners": "Dry Cleaners",
+          "tailors": "Tailors",
+          "shoeRepair": "Shoe Repair",
+          "subscriptionBoxes": "Subscription Boxes",
+          "mealPlans": "Meal Plans",
+          "other": "Other"
+        }
+      },
+      "automotive": {
+        "label": "Automotive",
+        "sectors": {
+          "mechanics": "Mechanics",
+          "carDetailing": "Car Detailers",
+          "vehicleInspection": "Inspection Services",
+          "other": "Other"
+        }
+      },
+      "events": {
+        "label": "Events & Hospitality",
+        "sectors": {
+          "weddingPlanners": "Wedding Planners",
+          "photographers": "Photographers",
+          "djs": "DJs",
+          "venueManagers": "Venue Managers",
+          "hotels": "Hotels & BnBs",
+          "tourOperators": "Tour Operators",
+          "other": "Other"
+        }
+      },
+      "government": {
+        "label": "Government & Licensing",
+        "sectors": {
+          "dmv": "Vehicle Registration (DMV)",
+          "visaServices": "Visa & Immigration Services",
+          "buildingInspectors": "Building Inspectors",
+          "fireSafety": "Fire Safety Inspectors",
+          "other": "Other"
+        }
+      },
+      "nonProfit": {
+        "label": "Non-Profit",
+        "sectors": {
+          "charities": "Charities",
+          "communityOrgs": "Community Organizations",
+          "other": "Other"
+        }
+      },
+      "other": {
+        "label": "Other",
+        "sectors": {
+          "custom": "Custom/Other"
+        }
+      }
     },
     "companySizes": {
       "me": "Just me",
@@ -38,10 +159,20 @@
       "placeholder": "Enter the address of your business",
       "isRequired": "Business address is required"
     },
-    "formIndustryField": {
+    "formIndustryCategoryField": {
       "label": "Industry",
       "placeholder": "Select your industry",
       "isRequired": "Please select an industry"
+    },
+    "formIndustrySubcategoryField": {
+      "label": "Subindustry",
+      "placeholder": "Select your subindustry",
+      "isRequired": "Please select a subindustry"
+    },
+    "formCustomIndustryField": {
+      "label": "Custom industry",
+      "placeholder": "Type your industry",
+      "isRequired": "Please enter the industry of your business"
     },
     "formCompanySizeField": {
       "label": "Company size",

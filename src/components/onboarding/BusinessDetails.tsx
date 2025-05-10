@@ -1,59 +1,88 @@
 import type { NotifycalTFunction } from '@common/i18n';
-import { smsCharacterRegex } from '@constants/regexes';
 import { z } from 'zod';
+import { smsValidStringSchema, stringArrayValidatorSchema } from '@schemas/util';
+import { flatObjectToDropdownData, labeledObjectToDropdownData } from '@common/ui';
 
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-
-import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
+import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
+
 import { Select, TextInput } from '@mantine/core';
+import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 
-const INDUSTRIES = [
-  'technology',
-  'healthcare',
-  'finance',
-  'education',
-  'manufacturing',
-  'retail',
-  'government',
-  'nonProfit',
-  'other'
-] as const;
+import { get } from 'radash';
 
-type Industry = (typeof INDUSTRIES)[number];
+export type Industries = {
+  [key: string]: {
+    label: string;
+    sectors: {
+      [sectorKey: string]: string;
+    };
+  };
+};
 
-const COMPANY_SIZES = ['me', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
-
-type CompanySize = (typeof COMPANY_SIZES)[number];
+type CompanySizes = {
+  [key: string]: string;
+};
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const businessDetailsSchema = (t: NotifycalTFunction) =>
-  z.object({
-    name: z
-      .string()
+const businessDetailsSchema = (t: NotifycalTFunction) => {
+  const industriesObject = t('businessDetails.industries', { returnObjects: true }) as Industries;
+  const companySizesObject = t('businessDetails.companySizes', { returnObjects: true }) as CompanySizes;
+
+  return z.object({
+    name: smsValidStringSchema({
+      messageRegex: t('businessDetails.invalidSMSCharacters')
+    })
       .min(1, { message: t('businessDetails.formNameField.isRequired') })
-      .regex(smsCharacterRegex, {
-        message: t('businessDetails.invalidSMSCharacters')
-      })
       .brand('BusinessName'),
 
-    address: z
-      .string()
-      .min(1, { message: t('businessDetails.formAddressField.isRequired') })
-      .regex(smsCharacterRegex, {
-        message: t('businessDetails.invalidSMSCharacters')
-      })
-      .brand('BusinessAddress'),
-    companyIndustry: z.enum(INDUSTRIES, {
-      errorMap: () => ({ message: t('businessDetails.formIndustryField.isRequired') })
-    }),
-    companySize: z.enum(COMPANY_SIZES, {
-      errorMap: () => ({ message: t('businessDetails.formCompanySizeField.isRequired') })
+    address: smsValidStringSchema({
+      messageRegex: t('businessDetails.invalidSMSCharacters')
     })
+      .min(1, { message: t('businessDetails.formAddressField.isRequired') })
+      .brand('BusinessAddress'),
+
+    companyIndustry: z
+      .object({
+        category: stringArrayValidatorSchema(
+          Object.keys(industriesObject),
+          t('businessDetails.formIndustryCategoryField.isRequired')
+        ),
+        subcategory: z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') }),
+        customIndustry: z.string({ message: t('businessDetails.formCustomIndustryField.isRequired') }).optional()
+      })
+      .superRefine((data, context) => {
+        console.log(data);
+        const isOther = [data.category, data.subcategory].includes('other');
+        const isValidSubcategory = !!industriesObject[data.category]?.sectors[data.subcategory] || false;
+
+        if (!isValidSubcategory) {
+          context.addIssue({
+            path: ['subcategory'],
+            code: z.ZodIssueCode.custom,
+            message: t('businessDetails.formIndustrySubcategoryField.isRequired')
+          });
+        }
+
+        if (isOther && !data.customIndustry) {
+          context.addIssue({
+            path: ['customIndustry'],
+            code: z.ZodIssueCode.custom,
+            message: t('businessDetails.formCustomIndustryField.isRequired')
+          });
+        }
+      }),
+    companySize: stringArrayValidatorSchema(
+      Object.keys(companySizesObject),
+      t('businessDetails.formCompanySizeField.isRequired')
+    )
   });
+};
+
 export type BusinessDetailsValues = z.infer<ReturnType<typeof businessDetailsSchema>>;
 
 const BusinessDetails: React.FC = () => {
@@ -61,86 +90,144 @@ const BusinessDetails: React.FC = () => {
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors, isValid }
-  } = useI18nForm<BusinessDetailsValues>(
+  const methods = useI18nForm<BusinessDetailsValues>(
     businessDetailsSchema,
     {
       mode: 'onChange',
       defaultValues: {
-        name: data.businessDetails?.name || '',
-        address: data.businessDetails?.address || '',
-        companyIndustry: data.businessDetails?.companyIndustry || ('' as Industry),
-        companySize: data.businessDetails?.companySize || ('' as CompanySize)
+        name: data.businessDetails?.name || undefined,
+        address: data.businessDetails?.address || undefined,
+        companyIndustry: data.businessDetails?.companyIndustry || undefined,
+        companySize: data.businessDetails?.companySize || undefined
       }
     },
     t
   );
 
-  const industriesData = INDUSTRIES.map((industry) => ({
-    value: industry,
-    label: t(`businessDetails.industries.${industry}`)
-  }));
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    resetField,
+    formState: { isValid }
+  } = methods;
 
-  const companySizeData = COMPANY_SIZES.map((companySize) => ({
-    value: companySize,
-    label: t(`businessDetails.companySizes.${companySize}`)
-  }));
+  const { commonFormFieldProps } = useFormFieldCommonProps(methods);
+
+  const selectedIndustryCategory = watch('companyIndustry.category');
+  const selectedIndustrySubCategory = watch('companyIndustry.subcategory');
+  const isCustomIndustry = [selectedIndustrySubCategory, selectedIndustryCategory].includes('other');
+
+  const industryCatgeoryObject = t('businessDetails.industries', { returnObjects: true });
+  const industryCategoryData = labeledObjectToDropdownData(industryCatgeoryObject);
+
+  const industrySubCategoryObject = get(industryCatgeoryObject, `${selectedIndustryCategory}.sectors`, {});
+  const industrySubCategoryData = flatObjectToDropdownData(industrySubCategoryObject);
+
+  const companySizeObject = t('businessDetails.companySizes', { returnObjects: true });
+  const companySizeData = flatObjectToDropdownData(companySizeObject);
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">
         {/* Company Name */}
         <TextInput
-          withAsterisk
-          label={t('businessDetails.formNameField.label')}
-          {...register('name')}
-          error={errors.name && errors.name.message}
-          placeholder={t('businessDetails.formNameField.placeholder')}
           type="text"
+          {...commonFormFieldProps('name', {
+            label: t('businessDetails.formNameField.label'),
+            placeholder: t('businessDetails.formNameField.placeholder'),
+            resetValue: '',
+            registration: register('name')
+          })}
         />
         {/* Company Address */}
         <TextInput
-          withAsterisk
-          label={t('businessDetails.formAddressField.label')}
-          {...register('address')}
-          error={errors.address && errors.address.message}
-          placeholder={t('businessDetails.formAddressField.placeholder')}
           type="text"
+          {...commonFormFieldProps('address', {
+            label: t('businessDetails.formAddressField.label'),
+            placeholder: t('businessDetails.formAddressField.placeholder'),
+            resetValue: '',
+            registration: register('address')
+          })}
         />
 
-        {/* Industry */}
-        <Controller
-          control={control}
-          name="companyIndustry"
-          render={({ field }) => (
-            <Select
-              data={industriesData}
-              label={t('businessDetails.formIndustryField.label')}
-              placeholder={t('businessDetails.formIndustryField.placeholder')}
-              {...field}
-              error={errors.companyIndustry && errors.companyIndustry.message}
+        {/* Industry2 */}
+        <div className="xl:flex gap-6">
+          <div className="xl:w-1/2">
+            <Controller
+              control={control}
+              name="companyIndustry.category"
+              render={({ field }) => {
+                return (
+                  <Select
+                    data={industryCategoryData}
+                    {...commonFormFieldProps('companyIndustry.category', {
+                      label: t('businessDetails.formIndustryCategoryField.label'),
+                      placeholder: t('businessDetails.formIndustryCategoryField.placeholder'),
+                      resetValue: null,
+                      registration: field,
+                      afterFieldClear: () => {
+                        resetField('companyIndustry.subcategory');
+                      }
+                    })}
+                    onChange={(value) => {
+                      resetField('companyIndustry.subcategory');
+                      field.onChange(value);
+                    }}
+                  />
+                );
+              }}
             />
-          )}
-        />
-
+          </div>
+          <div className="xl:w-1/2 mt-6 xl:mt-0">
+            <Controller
+              control={control}
+              name="companyIndustry.subcategory"
+              render={({ field }) => (
+                <Select
+                  data={industrySubCategoryData}
+                  disabled={!selectedIndustryCategory}
+                  {...commonFormFieldProps('companyIndustry.subcategory', {
+                    label: t('businessDetails.formIndustrySubcategoryField.label'),
+                    placeholder: t('businessDetails.formIndustrySubcategoryField.placeholder'),
+                    resetValue: null,
+                    registration: field
+                  })}
+                />
+              )}
+            />
+          </div>
+        </div>
+        {isCustomIndustry && (
+          <TextInput
+            {...commonFormFieldProps('companyIndustry.customIndustry', {
+              label: t('businessDetails.formCustomIndustryField.label'),
+              placeholder: t('businessDetails.formCustomIndustryField.placeholder'),
+              resetValue: '',
+              registration: register('companyIndustry.customIndustry')
+            })}
+            type="text"
+          />
+        )}
         {/* Team size */}
         <Controller
           control={control}
           name="companySize"
-          render={({ field }) => (
-            <Select
-              withAsterisk
-              data={companySizeData}
-              label={t('businessDetails.formCompanySizeField.label')}
-              placeholder={t('businessDetails.formCompanySizeField.placeholder')}
-              {...field}
-              error={errors.companySize && errors.companySize.message}
-            />
-          )}
+          render={({ field }) => {
+            // console.log(field.value);
+            return (
+              <Select
+                data={companySizeData}
+                {...commonFormFieldProps('companySize', {
+                  label: t('businessDetails.formCompanySizeField.label'),
+                  placeholder: t('businessDetails.formCompanySizeField.placeholder'),
+                  resetValue: null,
+                  registration: field
+                })}
+              />
+            );
+          }}
         />
 
         <div className="text-sm text-gray-500 mt-4">{t('businessDetails.explanation')}</div>

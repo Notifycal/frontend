@@ -9,15 +9,136 @@
     "title": "Tu negocio",
     "subtitle": "¿Cómo es tu negocio?",
     "industries": {
-      "technology": "Tecnología",
-      "healthcare": "Salud",
-      "finance": "Finanzas",
-      "education": "Educación",
-      "manufacturing": "Fabricación y manufactura",
-      "retail": "Venta al por menor",
-      "government": "Gubernamental",
-      "nonProfit": "ONG",
-      "other": "Otros"
+      "technology": {
+        "label": "Tecnología",
+        "sectors": {
+          "saas": "Software como Servicio (SaaS)",
+          "itSupport": "Soporte Informático",
+          "webDev": "Desarrollo Web",
+          "digitalMarketing": "Marketing Digital",
+          "cybersecurity": "Ciberseguridad",
+          "other": "Otros"
+        }
+      },
+      "healthcare": {
+        "label": "Salud",
+        "sectors": {
+          "doctors": "Doctores",
+          "dentists": "Dentistas",
+          "therapists": "Terapeutas",
+          "optometrists": "Optometristas",
+          "chiropractors": "Quiroprácticos",
+          "veterinarians": "Veterinarios",
+          "other": "Otros"
+        }
+      },
+      "wellness": {
+        "label": "Belleza y Bienestar",
+        "sectors": {
+          "salons": "Salones y Barberías",
+          "spas": "Spas",
+          "massageTherapists": "Masajistas",
+          "nailTechnicians": "Técnicos de Uñas",
+          "other": "Otros"
+        }
+      },
+      "homeServices": {
+        "label": "Servicios del Hogar",
+        "sectors": {
+          "plumbers": "Fontaneros",
+          "electricians": "Electricistas",
+          "cleaners": "Limpiadores",
+          "hvac": "Técnicos de HVAC",
+          "pestControl": "Control de Plagas",
+          "other": "Otros"
+        }
+      },
+      "finance": {
+        "label": "Finanzas",
+        "sectors": {
+          "accountants": "Contadores",
+          "taxAdvisors": "Asesores Fiscales",
+          "financialPlanners": "Asesores Financieros",
+          "bookkeepers": "Tenedores de Libros",
+          "insuranceAgents": "Agentes de Seguros",
+          "other": "Otros"
+        }
+      },
+      "legal": {
+        "label": "Legal",
+        "sectors": {
+          "lawFirms": "Despachos de Abogados",
+          "notaries": "Notarios",
+          "compliance": "Consultores de Cumplimiento",
+          "other": "Otros"
+        }
+      },
+      "education": {
+        "label": "Educación",
+        "sectors": {
+          "tutors": "Tutores",
+          "testPrep": "Preparación de Exámenes",
+          "languageInstructors": "Instructores de Idiomas",
+          "lifeCoaches": "Coaches de Vida",
+          "other": "Otros"
+        }
+      },
+      "retail": {
+        "label": "Venta al por Menor",
+        "sectors": {
+          "dryCleaners": "Tintorerías",
+          "tailors": "Sastres",
+          "shoeRepair": "Reparación de Calzado",
+          "subscriptionBoxes": "Cajas de Suscripción",
+          "mealPlans": "Planes de Comida",
+          "other": "Otros"
+        }
+      },
+      "automotive": {
+        "label": "Automotriz",
+        "sectors": {
+          "mechanics": "Mecánicos",
+          "carDetailing": "Lavado y Detallado de Autos",
+          "vehicleInspection": "Servicios de Inspección",
+          "other": "Otros"
+        }
+      },
+      "events": {
+        "label": "Eventos y Hospitalidad",
+        "sectors": {
+          "weddingPlanners": "Organizadores de Bodas",
+          "photographers": "Fotógrafos",
+          "djs": "DJs",
+          "venueManagers": "Gestores de Espacios",
+          "hotels": "Hoteles y Alojamientos",
+          "tourOperators": "Operadores Turísticos",
+          "other": "Otros"
+        }
+      },
+      "government": {
+        "label": "Gobierno y Licencias",
+        "sectors": {
+          "dmv": "Registro de Vehículos (DMV)",
+          "visaServices": "Servicios de Visas e Inmigración",
+          "buildingInspectors": "Inspectores de Edificios",
+          "fireSafety": "Inspectores de Seguridad Contra Incendios",
+          "other": "Otros"
+        }
+      },
+      "nonProfit": {
+        "label": "ONG",
+        "sectors": {
+          "charities": "Organizaciones Benéficas",
+          "communityOrgs": "Organizaciones Comunitarias",
+          "other": "Otros"
+        }
+      },
+      "other": {
+        "label": "Otros",
+        "sectors": {
+          "custom": "Otro/Personalizado"
+        }
+      }
     },
     "companySizes": {
       "me": "Autónomo o freelancer",
@@ -38,10 +159,20 @@
       "placeholder": "Introduce la dirección de tu empresa",
       "isRequired": "La direccion del negocio es obligatoria"
     },
-    "formIndustryField": {
+    "formIndustryCategoryField": {
       "label": "Sector",
       "placeholder": "Selecciona el sector de tu empresa",
       "isRequired": "Por favor, selecciona el sector de tu empresa"
+    },
+    "formIndustrySubcategoryField": {
+      "label": "Subsector",
+      "placeholder": "Selecciona el subsector de tu empresa",
+      "isRequired": "Por favor, selecciona el subsector de tu empresa"
+    },
+    "formCustomIndustryField": {
+      "label": "Sector personalizado",
+      "placeholder": "Escribe el sector de tu empresa",
+      "isRequired": "Por favor, escribe el sector de tu empresa"
     },
     "formCompanySizeField": {
       "label": "Tamaño de la empresa",
