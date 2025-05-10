@@ -189,7 +189,11 @@
       "isRequired": "Select a reminder message type"
     },
     "changeReminderLanguage": "Change reminder language",
-    "characterCountHeadsUpBilling": "Reminders are charged in multiples of 160 characters. Special characters are not allowed.",
+    "characterCountHeadsUpBilling": {
+      "msg1": "Reminders are charged in multiples of 160 characters.",
+      "msg2": "Special characters are not allowed."
+    },
+    "specialCharactersExplanation": "Please use standard letters, numbers and basic symbols only.",
     "characterCount": "The selected reminder type results in reminders {{characterCount}} characters long."
   },
   "calendars": {

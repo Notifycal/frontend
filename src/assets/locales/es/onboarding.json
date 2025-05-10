@@ -189,7 +189,11 @@
       "isRequired": "Selecciona un tipo de mensaje"
     },
     "changeReminderLanguage": "Cambia el idioma de los recordatorios",
-    "characterCountHeadsUpBilling": "Los recordatorios se tarifican en multiplos de 160 caracteres. No se permiten carácteres especiales.",
+    "characterCountHeadsUpBilling": {
+      "msg1": "Los recordatorios se tarifican en multiplos de 160 caracteres.",
+      "msg2": "No se permiten carácteres especiales."
+    },
+    "specialCharactersExplanation": "Utiliza letras, números y simbolos básicos (nada de tildes).",
     "characterCount": "El tipo de recordatorio seleccionado resulta en recordatorios de {{chracterCount}} caracteres."
   },
   "calendars": {

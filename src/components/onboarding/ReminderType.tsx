@@ -4,11 +4,11 @@ import { z } from 'zod';
 import { languageData, type NotifycalTFunction } from '@common/i18n';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
-  type LanguageCode,
   templateEnMap,
   templateEsMap,
   type BusinessAddress,
   type BusinessName,
+  type LanguageCode,
   type TemplateId,
   type TemplateMap
 } from '@notifycal/shared/types';
@@ -20,6 +20,7 @@ import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
+import { HoverCard } from '@mantine/core';
 import InternationalizationPicker from '../ui/InternationalizationPicker/InternationalizationPicker';
 import {
   ReminderTypeCardRadioGroup,
@@ -141,7 +142,19 @@ const ReminderType: React.FC = () => {
         />
         {errors && <div className="text-sm text-rose-500">{errors.reminderId?.message}</div>}
 
-        <div className="text-sm text-gray-500 mt-4">{t('reminderType.characterCountHeadsUpBilling')}</div>
+        <div className="text-sm text-gray-500 mt-4">
+          {t('reminderType.characterCountHeadsUpBilling.msg1')}{' '}
+          <HoverCard shadow="md" width={280}>
+            <HoverCard.Target>
+              <span className="text-primary-600 underline cursor-help">
+                {t('reminderType.characterCountHeadsUpBilling.msg2')}
+              </span>
+            </HoverCard.Target>
+            <HoverCard.Dropdown>
+              <span className="text-sm">{t('reminderType.specialCharactersExplanation')}</span>
+            </HoverCard.Dropdown>
+          </HoverCard>
+        </div>
         {/* {!!selectedReminderTemplateId && selectedTemplate && (
           <div className="text-sm text-gray-500 mt-4">
             {t('reminderType.characterCount', {
