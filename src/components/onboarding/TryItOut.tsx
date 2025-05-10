@@ -24,6 +24,10 @@ const tryItOutSchema = () =>
 
 export type TryItOutValues = z.infer<ReturnType<typeof tryItOutSchema>>;
 
+const emptyInitialValue = {
+  hasSentTestReminder: false
+} as const;
+
 const TryItOut: React.FC = () => {
   const { data, setStepData } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
@@ -38,9 +42,7 @@ const TryItOut: React.FC = () => {
     tryItOutSchema,
     {
       mode: 'onChange',
-      defaultValues: {
-        hasSentTestReminder: data.tryItOut?.hasSentTestReminder || false
-      }
+      defaultValues: data.tryItOut || emptyInitialValue
     },
     t
   );

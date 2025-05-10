@@ -25,6 +25,10 @@ export type CalendarsValues = z.infer<ReturnType<typeof calendarsSchema>>;
 
 type Calendar = z.infer<typeof calendarSchema>;
 
+const emptyInitialValue = {
+  calendars: []
+};
+
 const Calendars: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
@@ -34,9 +38,7 @@ const Calendars: React.FC = () => {
     calendarsSchema,
     {
       mode: 'onChange',
-      defaultValues: {
-        calendars: data.calendars?.calendars || []
-      }
+      defaultValues: data.calendars || emptyInitialValue
     },
     t
   );

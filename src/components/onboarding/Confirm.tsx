@@ -38,6 +38,12 @@ export type ConfirmValues = z.infer<ReturnType<typeof confirmSchema>>;
 
 const errorFields = ['privacyAccepted', 'termsAccepted'] as const;
 
+const emptyInitialValue = {
+  termsAccepted: false,
+  privacyAccepted: false,
+  marketingOptIn: false
+} as const;
+
 const Confirm: React.FC = () => {
   const { data } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
@@ -54,11 +60,7 @@ const Confirm: React.FC = () => {
     confirmSchema,
     {
       mode: 'onChange',
-      defaultValues: {
-        termsAccepted: data.confirm?.termsAccepted || false,
-        privacyAccepted: data.confirm?.privacyAccepted || false,
-        marketingOptIn: data.confirm?.marketingOptIn || false
-      }
+      defaultValues: data.confirm || emptyInitialValue
     },
     t
   );

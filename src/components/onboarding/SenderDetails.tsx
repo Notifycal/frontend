@@ -38,10 +38,12 @@ const senderDetailsSchema = (t: NotifycalTFunction) =>
 
 export type SenderDetailsValues = z.infer<ReturnType<typeof senderDetailsSchema>>;
 
-const emptyContactDetails = {
-  type: 'phone',
-  countryCode: 'ES',
-  phoneNumber: '' as PhoneNumber
+const emptyInitialValue = {
+  contactDetails: {
+    type: 'phone',
+    countryCode: 'ES',
+    phoneNumber: '' as PhoneNumber
+  }
 } as const;
 
 const SenderDetails: React.FC = () => {
@@ -53,9 +55,7 @@ const SenderDetails: React.FC = () => {
     senderDetailsSchema,
     {
       mode: 'onChange',
-      defaultValues: {
-        contactDetails: data.senderDetails?.contactDetails || emptyContactDetails
-      }
+      defaultValues: data.senderDetails || emptyInitialValue
     },
     t
   );
@@ -91,7 +91,7 @@ const SenderDetails: React.FC = () => {
                 {...commonFormFieldProps('contactDetails', {
                   label: t('senderDetails.formSenderNumber.label'),
                   placeholder: t('senderDetails.formSenderNumber.placeholder'),
-                  resetValue: emptyContactDetails,
+                  resetValue: emptyInitialValue.contactDetails,
                   registration: restField
                 })}
                 error={errorKey && errorKey}

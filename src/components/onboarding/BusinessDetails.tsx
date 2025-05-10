@@ -85,6 +85,17 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
 
 export type BusinessDetailsValues = z.infer<ReturnType<typeof businessDetailsSchema>>;
 
+const emptyInitialValue = {
+  name: '',
+  address: '',
+  companyIndustry: {
+    category: undefined,
+    subcategory: undefined,
+    customIndustry: ''
+  },
+  companySize: undefined
+} as const;
+
 const BusinessDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
@@ -94,12 +105,7 @@ const BusinessDetails: React.FC = () => {
     businessDetailsSchema,
     {
       mode: 'onChange',
-      defaultValues: {
-        name: data.businessDetails?.name || undefined,
-        address: data.businessDetails?.address || undefined,
-        companyIndustry: data.businessDetails?.companyIndustry || undefined,
-        companySize: data.businessDetails?.companySize || undefined
-      }
+      defaultValues: data.businessDetails || emptyInitialValue
     },
     t
   );

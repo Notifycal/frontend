@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { languageData, type NotifycalTFunction } from '@common/i18n';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
+  type LanguageCode,
   templateEnMap,
   templateEsMap,
   type BusinessAddress,
@@ -37,6 +38,11 @@ const reminderTypeSchema = (t: NotifycalTFunction) =>
 
 export type ReminderTypeValues = z.infer<ReturnType<typeof reminderTypeSchema>>;
 
+const emptyInitialValue = (languageCode: LanguageCode): ReminderTypeValues => ({
+  reminderId: '' as TemplateId,
+  reminderLanguage: languageCode
+});
+
 const ReminderType: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
@@ -53,10 +59,7 @@ const ReminderType: React.FC = () => {
     reminderTypeSchema,
     {
       mode: 'onChange',
-      defaultValues: {
-        reminderId: data.reminderType?.reminderId || '',
-        reminderLanguage: data.reminderType?.reminderLanguage || (i18n.languages[0] as keyof typeof languageData)
-      }
+      defaultValues: data.reminderType || emptyInitialValue(i18n.languages[0] as LanguageCode)
     },
     t
   );
