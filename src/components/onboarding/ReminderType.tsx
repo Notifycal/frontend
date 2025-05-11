@@ -65,39 +65,28 @@ const ReminderType: React.FC = () => {
     t
   );
 
-  // using watch only because we want to use this value before it's saved
   const selectedReminderLanguage = watch('reminderLanguage');
-  // const selectedReminderTemplateId = watch('reminderId');
+  const selectedReminderTemplateId = watch('reminderId');
   const initialTemplateLanguage: TemplateMap = selectedReminderLanguage.startsWith('en')
     ? templateEnMap
     : templateEsMap;
 
-  // const selectedTemplate = initialTemplateLanguage[selectedReminderTemplateId];
+  const interpolatedTemplates = Object.fromEntries(
+    Object.entries(initialTemplateLanguage).map(([key, { id, language, interpolate }]) => [
+      key,
+      {
+        id,
+        language,
+        text: interpolate(
+          data.businessDetails?.name as BusinessName,
+          data.businessDetails?.address as BusinessAddress,
+          DateTime.now()
+        )
+      }
+    ])
+  );
 
-  // const interpolatedTemplates = {};
-
-  // for (const [key, template] of Object.entries(initialTemplateLanguage)) {
-  //   interpolatedTemplates[key] = {
-  //     id: template.id,
-  //     language: template.language,
-  //     template: template.interpolate(
-  //       data.businessDetails?.name as BusinessName,
-  //       data.businessDetails?.address as BusinessAddress,
-  //       DateTime.now()
-  //     )
-  //   };
-  // }
-
-  // const languageTemplates = Object.values(initialTemplateLanguage).map((template) => {
-  //   return {
-  //     value: template.id,
-  //     description: template.interpolate(
-  //       data.businessDetails?.name as BusinessName,
-  //       data.businessDetails?.address as BusinessAddress,
-  //       DateTime.now()
-  //     )
-  //   };
-  // });
+  const selectedTemplate = interpolatedTemplates[selectedReminderTemplateId];
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
@@ -126,16 +115,8 @@ const ReminderType: React.FC = () => {
           name="reminderId"
           render={({ field: { value, onChange } }) => (
             <ReminderTypeCardRadioGroup value={value} onChange={onChange}>
-              {Object.values(initialTemplateLanguage).map((template) => (
-                <ReminderTypeCardRadioGroupOption
-                  key={template.id}
-                  value={template.id}
-                  text={template.interpolate(
-                    data.businessDetails?.name as BusinessName,
-                    data.businessDetails?.address as BusinessAddress,
-                    DateTime.now()
-                  )}
-                />
+              {Object.values(interpolatedTemplates).map((template) => (
+                <ReminderTypeCardRadioGroupOption key={template.id} text={template.text} value={template.id} />
               ))}
             </ReminderTypeCardRadioGroup>
           )}
@@ -155,13 +136,13 @@ const ReminderType: React.FC = () => {
             </HoverCard.Dropdown>
           </HoverCard>
         </div>
-        {/* {!!selectedReminderTemplateId && selectedTemplate && (
+        {!!selectedReminderTemplateId && selectedTemplate && (
           <div className="text-sm text-gray-500 mt-4">
             {t('reminderType.characterCount', {
-              characterCount: selectedTemplate.length
+              characterCount: selectedTemplate.text.length
             })}
           </div>
-        )} */}
+        )}
       </div>
 
       <OnboardingNavigation canProceed={isValid} isLastStep={false} onProceed={handleSubmit(handleStepSubmit)} />

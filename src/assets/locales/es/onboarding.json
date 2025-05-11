@@ -194,7 +194,7 @@
       "msg2": "No se permiten carácteres especiales."
     },
     "specialCharactersExplanation": "Utiliza letras, números y simbolos básicos (nada de tildes).",
-    "characterCount": "El tipo de recordatorio seleccionado resulta en recordatorios de {{chracterCount}} caracteres."
+    "characterCount": "El tipo de recordatorio seleccionado resulta en recordatorios de {{characterCount}} caracteres."
   },
   "calendars": {
     "title": "Calendarios",

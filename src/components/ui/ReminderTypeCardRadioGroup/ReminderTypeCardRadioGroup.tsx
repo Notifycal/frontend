@@ -9,6 +9,8 @@ interface ReminderTypeCardRadioGroupOptionProps {
   text: string;
 }
 
+const SMSCharacterLimit = 160 as const;
+
 export const ReminderTypeCardRadioGroupOption: React.FC<ReminderTypeCardRadioGroupOptionProps> = ({
   value,
   selectedValue,
@@ -41,6 +43,11 @@ export const ReminderTypeCardRadioGroupOption: React.FC<ReminderTypeCardRadioGro
         }}
       >
         <div className="text-gray-600">{text}</div>
+
+        {/* Character Counter */}
+        <div className="pt-2 text-xs text-gray-400 text-end">
+          {text.length} / {SMSCharacterLimit}
+        </div>
 
         {isSelected && (
           <div className="absolute -bottom-2 -right-2 text-white">
