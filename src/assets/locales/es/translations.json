@@ -29,6 +29,7 @@
       "complete": "Completar"
     },
     "error": "Error",
-    "clear": "Borrar"
+    "clear": "Borrar",
+    "skip": "Saltar"
   }
 }

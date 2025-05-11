@@ -103,7 +103,7 @@ const SenderDetails: React.FC = () => {
 
         <div className="text-sm text-gray-500 mt-4">{t('senderDetails.explanation')}</div>
       </div>
-      <OnboardingNavigation canProceed={isValid} isLastStep={false} onProceed={handleSubmit(handleStepSubmit)} />
+      <OnboardingNavigation canProceed={isValid} onProceed={handleSubmit(handleStepSubmit)} />
     </form>
   );
 };

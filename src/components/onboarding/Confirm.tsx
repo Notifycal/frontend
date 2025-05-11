@@ -234,7 +234,6 @@ const Confirm: React.FC = () => {
       </div>
 
       <OnboardingNavigation
-        isLastStep
         canProceed={isValid}
         isSubmitting={mutation.isPending}
         onProceed={handleSubmit(submitUserProfile)}

@@ -98,7 +98,7 @@ const Calendars: React.FC = () => {
         <div className="text-sm text-gray-500 mt-4">{t('calendars.explanation')}</div>
       </div>
 
-      <OnboardingNavigation canProceed={isValid} isLastStep={false} onProceed={handleSubmit(handleStepSubmit)} />
+      <OnboardingNavigation canProceed={isValid} onProceed={handleSubmit(handleStepSubmit)} />
     </form>
   );
 };

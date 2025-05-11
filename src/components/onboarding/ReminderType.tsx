@@ -145,7 +145,7 @@ const ReminderType: React.FC = () => {
         )}
       </div>
 
-      <OnboardingNavigation canProceed={isValid} isLastStep={false} onProceed={handleSubmit(handleStepSubmit)} />
+      <OnboardingNavigation canProceed={isValid} onProceed={handleSubmit(handleStepSubmit)} />
     </form>
   );
 };

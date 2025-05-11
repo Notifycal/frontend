@@ -1,4 +1,4 @@
-import { getStepByIndex } from '@constants/onboardingSteps';
+import { getStepByIndex, isLastStep } from '@constants/onboardingSteps';
 
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useNavigate } from '@tanstack/react-router';
@@ -9,21 +9,24 @@ import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
 
 interface OnboardingNavigationProps {
   canProceed: boolean;
-  isLastStep: boolean;
+  nextButtonLabel?: string;
   onProceed: () => void;
   isSubmitting?: boolean;
 }
 
 const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
   canProceed,
-  isLastStep,
+  nextButtonLabel,
   onProceed,
   isSubmitting = false
 }) => {
   const navigate = useNavigate();
   const { currentStep } = useOnboardingStore();
+  const isTheLastStep = isLastStep(currentStep);
 
   const { t } = useTranslation();
+
+  const nextLabel = nextButtonLabel || t(isTheLastStep ? 'generic.button.complete' : 'generic.button.continue');
 
   const handleBack = async (): Promise<void> => {
     if (currentStep > 0) {
@@ -53,10 +56,10 @@ const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
       <Button
         disabled={!canProceed}
         loading={isSubmitting}
-        rightSection={!isLastStep ? <IconArrowRight size={16} /> : <IconCheck size={16} />}
+        rightSection={!isTheLastStep ? <IconArrowRight size={16} /> : <IconCheck size={16} />}
         onClick={onProceed}
       >
-        {t(isLastStep ? 'generic.button.complete' : 'generic.button.continue')}
+        {nextLabel}
       </Button>
     </Group>
   );

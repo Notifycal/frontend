@@ -79,6 +79,8 @@ const TryItOut: React.FC = () => {
     }
   };
 
+  const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translations' }) : undefined;
+
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">
@@ -107,7 +109,7 @@ const TryItOut: React.FC = () => {
         )}
       </div>
 
-      <OnboardingNavigation canProceed isLastStep={false} onProceed={handleSubmit(handleStepSubmit)} />
+      <OnboardingNavigation canProceed nextButtonLabel={nextButtonLabel} onProceed={handleSubmit(handleStepSubmit)} />
     </form>
   );
 };
