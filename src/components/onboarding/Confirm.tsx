@@ -88,6 +88,7 @@ const Confirm: React.FC = () => {
   const mutation = useMutation({
     mutationFn: updateUserProfile,
     onSuccess: async () => {
+      setError(null);
       await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
       await queryClient.refetchQueries({ queryKey: ['user-profile'] });
       await navigate({ to: '/onboarding/completed' });
@@ -222,7 +223,7 @@ const Confirm: React.FC = () => {
           </div>
         )}
         {/* Error Message from API */}
-        {error && (
+        {!mutation.isPending && mutation.isError && error && (
           <FlatError
             onErrorClose={() => {
               setError(null);

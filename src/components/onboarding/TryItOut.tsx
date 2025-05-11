@@ -50,6 +50,7 @@ const TryItOut: React.FC = () => {
   const sendDemoReminderMutation = useMutation({
     mutationFn: sendDemoReminder,
     onSuccess: async () => {
+      setError(null);
       setValue('hasSentTestReminder', true, { shouldValidate: true });
       // Doing this to persist/"send" the form as soon as the button is clicked
       await handleSubmit(setTryItOutData)();
@@ -98,7 +99,7 @@ const TryItOut: React.FC = () => {
 
         <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation')}</div>
         {/* Error Message from API */}
-        {error && (
+        {!sendDemoReminderMutation.isPending && sendDemoReminderMutation.isError && error && (
           <FlatError
             onErrorClose={() => {
               setError(null);
