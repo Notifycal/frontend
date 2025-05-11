@@ -14,8 +14,7 @@ import { z } from 'zod';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
+import { useMutation } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -47,10 +46,8 @@ const emptyInitialValue = {
 const Confirm: React.FC = () => {
   const { data } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
-  const { handleStepSubmit } = useStepSubmit();
+  const { handleStepNavigation, handleStepData } = useStepSubmit();
   const { t } = useTranslation('onboarding');
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -85,21 +82,19 @@ const Confirm: React.FC = () => {
     }));
   }, [reminderType, calendars]);
 
-  const mutation = useMutation({
+  const saveUserProfileMutation = useMutation({
     mutationFn: updateUserProfile,
     onSuccess: async () => {
       setError(null);
-      await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
-      await queryClient.refetchQueries({ queryKey: ['user-profile'] });
-      await navigate({ to: '/onboarding/completed' });
+      await handleStepNavigation();
     },
     onError: () => {
       setError(t('confirm.apiError'));
     }
   });
 
-  const submitUserProfile = async (formData: ConfirmValues): Promise<void> => {
-    await handleStepSubmit(formData);
+  const submitUserProfile = (formData: ConfirmValues): void => {
+    handleStepData(formData);
 
     const newData = {
       calendars: calendarsWithTemplateInfo,
@@ -113,7 +108,7 @@ const Confirm: React.FC = () => {
         }
       }
     };
-    mutation.mutate(newData);
+    saveUserProfileMutation.mutate(newData);
   };
 
   return (
@@ -223,7 +218,7 @@ const Confirm: React.FC = () => {
           </div>
         )}
         {/* Error Message from API */}
-        {!mutation.isPending && mutation.isError && error && (
+        {!saveUserProfileMutation.isPending && saveUserProfileMutation.isError && error && (
           <FlatError
             onErrorClose={() => {
               setError(null);
@@ -236,7 +231,7 @@ const Confirm: React.FC = () => {
 
       <OnboardingNavigation
         canProceed={isValid}
-        isSubmitting={mutation.isPending}
+        isSubmitting={saveUserProfileMutation.isPending}
         onProceed={handleSubmit(submitUserProfile)}
       />
     </form>

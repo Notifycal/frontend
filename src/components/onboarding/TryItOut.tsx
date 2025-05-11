@@ -1,12 +1,12 @@
 import { sendDemoReminder } from '@api/demoReminder';
-import type { DateTime, PhoneContact, TimeZone } from '@notifycal/shared/types';
+import type { DateTime, TimeZone } from '@notifycal/shared/types';
 import { DateTime as DT } from 'luxon';
 import { z } from 'zod';
 
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -34,11 +34,15 @@ const TryItOut: React.FC = () => {
 
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
-  const queryClient = useQueryClient();
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
-  const { handleSubmit, setValue, watch } = useI18nForm<TryItOutValues>(
+  const {
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { isValid }
+  } = useI18nForm<TryItOutValues>(
     tryItOutSchema,
     {
       mode: 'onChange',
@@ -54,9 +58,6 @@ const TryItOut: React.FC = () => {
       setValue('hasSentTestReminder', true, { shouldValidate: true });
       // Doing this to persist/"send" the form as soon as the button is clicked
       await handleSubmit(setTryItOutData)();
-
-      await queryClient.invalidateQueries({ queryKey: ['post-reminder'] });
-      await queryClient.refetchQueries({ queryKey: ['post-reminder'] });
     },
     onError: () => {
       setError(t('tryItOut.apiError'));
@@ -69,7 +70,6 @@ const TryItOut: React.FC = () => {
     if (!hasSentTestReminder) {
       // API call goes here
       const demoReminderPayload = {
-        receiverContact: data.senderDetails?.contactDetails as PhoneContact,
         startTime: {
           dateTime: DT.now().toUTC().toISO() as DateTime,
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone as TimeZone
@@ -110,7 +110,11 @@ const TryItOut: React.FC = () => {
         )}
       </div>
 
-      <OnboardingNavigation canProceed nextButtonLabel={nextButtonLabel} onProceed={handleSubmit(handleStepSubmit)} />
+      <OnboardingNavigation
+        canProceed={isValid}
+        nextButtonLabel={nextButtonLabel}
+        onProceed={handleSubmit(handleStepSubmit)}
+      />
     </form>
   );
 };

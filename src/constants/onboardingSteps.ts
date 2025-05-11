@@ -38,14 +38,14 @@ export const STEPS: Array<StepConfig> = [
     component: SenderDetails
   },
   {
-    path: 'try-it-out',
-    stepKey: 'tryItOut',
-    component: TryItOut
-  },
-  {
     path: 'confirm',
     stepKey: 'confirm',
     component: Confirm
+  },
+  {
+    path: 'try-it-out',
+    stepKey: 'tryItOut',
+    component: TryItOut
   }
 ];
 
@@ -73,3 +73,5 @@ export const findStepIndexByPath = (pathToFind: KebabCase<StepKey>): number | un
 
 export const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
   !Object.values(stepsCompleted).every((step) => step);
+
+export const isLastStep = (stepIndex: number): boolean => stepIndex === STEPS.length - 1;
