@@ -44,7 +44,6 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
   const {
     trigger,
     setValue,
-    resetField,
     watch,
     formState: { errors }
   } = methods;

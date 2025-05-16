@@ -1,10 +1,10 @@
 import type { KebabCase } from '@common/types';
 import {
   type StepKey,
-  findStepIndexByPath,
+  findStepIndexByProperty,
   getFirstIncompleteStepIndex,
   getStepByIndex,
-  getStepByPath,
+  getStepByProperty,
   isValidStepPath
 } from '@constants/onboardingSteps';
 import { useOnboardingStore } from '@store/useOnboardingStore';
@@ -14,7 +14,7 @@ const StepComponent: React.FC = () => {
   const { params } = useMatch({ from: '/_auth/onboarding/_step/$step' });
 
   const stepPathParameter = params.step as KebabCase<StepKey>;
-  const CurrentStepComponent = getStepByPath(stepPathParameter)?.component;
+  const CurrentStepComponent = getStepByProperty('path', stepPathParameter)?.component;
 
   if (!CurrentStepComponent) {
     return <Navigate to="/onboarding/welcome" />;
@@ -30,7 +30,7 @@ export const Route = createFileRoute('/_auth/onboarding/_step/$step')({
 
     const stepPathParameter = params.step as KebabCase<StepKey>;
 
-    const currentStepIndex = findStepIndexByPath(stepPathParameter) || 0;
+    const currentStepIndex = findStepIndexByProperty('path', stepPathParameter) || 0;
     const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
 
     const isAheadOfFirstIncomplete = currentStepIndex > firstIncompleteIndex;

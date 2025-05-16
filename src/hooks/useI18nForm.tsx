@@ -5,12 +5,14 @@ import { useForm, type FieldValues, type UseFormProps, type UseFormReturn } from
 import { useTranslation } from 'react-i18next';
 import type { ZodType, ZodTypeDef } from 'zod';
 
-type SchemaBuilder<TFormInput, TFormOutput> = (
-  t: NotifycalTFunction
-) => ZodType<TFormOutput, ZodTypeDef, TFormInput>;
+type SchemaBuilder<TFormInput, TFormOutput> = (t: NotifycalTFunction) => ZodType<TFormOutput, ZodTypeDef, TFormInput>;
 
 // Replicating react-hook-form useForm signature generics (including order)
-export function useI18nForm<TFormInput extends FieldValues, TFormContext = unknown, TFormOutput extends FieldValues = TFormInput>(
+export function useI18nForm<
+  TFormInput extends FieldValues,
+  TFormContext = unknown,
+  TFormOutput extends FieldValues = TFormInput
+>(
   schemaBuilder: SchemaBuilder<TFormInput, TFormOutput>,
   formProps: Omit<UseFormProps<TFormInput, TFormContext, TFormOutput>, 'resolver'>,
   t: NotifycalTFunction

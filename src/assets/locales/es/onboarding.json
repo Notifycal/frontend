@@ -159,7 +159,7 @@
       "label": "Dirección de la empresa",
       "placeholder": "Introduce la dirección de tu empresa",
       "isRequired": "La dirección del negocio es obligatoria",
-      "isMax":"La dirección del negocio es demasiado largo"
+      "isMax": "La dirección del negocio es demasiado largo"
     },
     "formIndustryCategoryField": {
       "label": "Sector",

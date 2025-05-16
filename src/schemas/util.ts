@@ -9,7 +9,6 @@ export const stringArrayValidatorSchema = (validValues: Array<string>, message?:
   );
 };
 
-
 export const nullableInputSchema = <T extends z.ZodTypeAny>(
   schema: T,
   message = 'Output value can not be null'

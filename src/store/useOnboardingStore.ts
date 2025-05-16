@@ -1,4 +1,4 @@
-import type { StepKey } from '@constants/onboardingSteps';
+import { findStepIndexByProperty, STEPS, type StepKey } from '@constants/onboardingSteps';
 import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -41,7 +41,18 @@ export const useOnboardingStore = create<OnboardingState>()(
             [step]: data
           };
 
-          return { data: newData };
+          const changedStepIndex = findStepIndexByProperty('stepKey', step);
+
+          const updatedCompletedSteps: StepsCompletion = STEPS.reduce((accumulator, stepConfig, index) => {
+            const shouldInvalidate =
+              stepConfig.resetOnChangeBefore && changedStepIndex !== undefined && index > changedStepIndex;
+            return {
+              ...accumulator,
+              [stepConfig.stepKey]: shouldInvalidate ? false : state.completedSteps[stepConfig.stepKey]
+            };
+          }, state.completedSteps);
+
+          return { data: newData, completedSteps: updatedCompletedSteps };
         });
       },
 
