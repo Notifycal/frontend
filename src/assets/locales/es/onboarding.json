@@ -179,6 +179,11 @@
       "placeholder": "Selecciona el tamaño de tu empresa",
       "isRequired": "Por favor, selecciona el tamaño de tu empresa"
     },
+    "formUserLanguageField": {
+      "label": "Idioma",
+      "placeholder": "Selecciona el idioma",
+      "isRequired": "Por favor, selecciona un idioma"
+    },
     "invalidSMSCharacters": "Contiene carácteres inválidos",
     "explanation": "Esta información nos ayuda a personalizar los recordatorios que recibirán tus clientes."
   },

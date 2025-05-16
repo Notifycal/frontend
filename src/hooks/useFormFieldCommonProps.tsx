@@ -25,11 +25,10 @@ interface CommonFormFieldPropsReturn {
 type FormFieldOptions<TFormValues extends FieldValues> = {
   label: string;
   placeholder?: string;
-  resetValue: FieldPathValue<TFormValues, Path<TFormValues>>;
+  resetValue?: FieldPathValue<TFormValues, Path<TFormValues>>;
   registration?: Partial<
     UseFormRegisterReturn<Path<TFormValues>> | ControllerRenderProps<TFormValues, Path<TFormValues>>
   >;
-  afterFieldClear?: () => void;
 };
 
 interface FormFieldCommonPropsHook<TFormValues extends FieldValues> {
@@ -54,15 +53,16 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
 
   const commonFormFieldProps = (
     fieldName: Path<TFormValues>,
-    { label, placeholder, resetValue, registration, afterFieldClear }: FormFieldOptions<TFormValues>
+    { label, placeholder, resetValue, registration }: FormFieldOptions<TFormValues>
   ): CommonFormFieldPropsReturn => {
     const fieldValue = watch(fieldName);
     const isEmptyFieldValue = !fieldValue || isEqual(fieldValue, resetValue);
+    const displayClearButton = resetValue !== undefined && !isEmptyFieldValue;
 
     const fieldMessageObject = get<FieldError>(errors, fieldName);
 
     return {
-      rightSection: !isEmptyFieldValue ? (
+      rightSection: displayClearButton ? (
         <CloseButton
           aria-label={t('generic.clear')}
           size="sm"
@@ -70,14 +70,10 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
           onClick={async () => {
             setValue(fieldName, resetValue);
             await trigger(fieldName);
-
-            if (afterFieldClear) {
-              afterFieldClear();
-            }
           }}
         />
       ) : undefined,
-      rightSectionPointerEvents: 'all',
+      rightSectionPointerEvents: displayClearButton ? 'all' : undefined,
       withAsterisk: true,
       label,
       labelProps: label ? { pb: '.4em' } : undefined,

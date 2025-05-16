@@ -179,6 +179,11 @@
       "placeholder": "Select the size of the company",
       "isRequired": "Please select a company size"
     },
+    "formUserLanguageField": {
+      "label": "Language",
+      "placeholder": "Select your language",
+      "isRequired": "Please select a language"
+    },
     "invalidSMSCharacters": "Contains invalid characters for SMS",
     "explanation": "This info will help us tailor the reminders your clients will receive."
   },

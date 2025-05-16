@@ -1,18 +1,19 @@
-import type { NotifycalTFunction } from '@common/i18n';
-import { z } from 'zod';
-import { smsValidStringSchema, stringArrayValidatorSchema } from '@schemas/util';
+import { languageData, type NotifycalTFunction } from '@common/i18n';
 import { flatObjectToDropdownData, labeledObjectToDropdownData } from '@common/ui';
+import { createSmsContentSchema } from '@notifycal/shared/schemas';
+import type { BusinessAddress, BusinessName, LanguageCode } from '@notifycal/shared/types';
+import { nullableInputSchema, stringArrayValidatorSchema } from '@schemas/util';
+import { z } from 'zod';
 
+import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
+import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
-import { useI18nForm } from '@hooks/useI18nForm';
 
-import { Select, TextInput } from '@mantine/core';
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-
+import { CheckIcon, Group, Image, Select, TextInput } from '@mantine/core';
 import { get } from 'radash';
 
 export type Industries = {
@@ -34,25 +35,32 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
   const companySizesObject = t('businessDetails.companySizes', { returnObjects: true }) as CompanySizes;
 
   return z.object({
-    name: smsValidStringSchema({
-      messageRegex: t('businessDetails.invalidSMSCharacters')
+    name: createSmsContentSchema({
+      invalidType: t('businessDetails.formNameField.isRequired'),
+      regex: t('businessDetails.invalidSMSCharacters')
     })
       .min(1, { message: t('businessDetails.formNameField.isRequired') })
-      .brand('BusinessName'),
+      .transform((value) => value as BusinessName),
 
-    address: smsValidStringSchema({
-      messageRegex: t('businessDetails.invalidSMSCharacters')
+    address: createSmsContentSchema({
+      invalidType: t('businessDetails.formAddressField.isRequired'),
+      regex: t('businessDetails.invalidSMSCharacters')
     })
       .min(1, { message: t('businessDetails.formAddressField.isRequired') })
-      .brand('BusinessAddress'),
+      .transform((value) => value as BusinessAddress),
 
     companyIndustry: z
       .object({
-        category: stringArrayValidatorSchema(
-          Object.keys(industriesObject),
+        category: nullableInputSchema(
+          stringArrayValidatorSchema(
+            Object.keys(industriesObject),
+            t('businessDetails.formIndustryCategoryField.isRequired')
+          ),
           t('businessDetails.formIndustryCategoryField.isRequired')
         ),
-        subcategory: z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') }),
+        subcategory: nullableInputSchema(
+          z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') })
+        ),
         customIndustry: z.string({ message: t('businessDetails.formCustomIndustryField.isRequired') }).optional()
       })
       .superRefine((data, context) => {
@@ -76,14 +84,21 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
           });
         }
       }),
-    companySize: stringArrayValidatorSchema(
-      Object.keys(companySizesObject),
+    companySize: nullableInputSchema(
+      stringArrayValidatorSchema(Object.keys(companySizesObject), t('businessDetails.formCompanySizeField.isRequired')),
       t('businessDetails.formCompanySizeField.isRequired')
+    ),
+    userLanguage: nullableInputSchema(
+      stringArrayValidatorSchema(Object.keys(languageData), t('businessDetails.formUserLanguageField.isRequired')),
+      t('businessDetails.formUserLanguageField.isRequired')
     )
   });
 };
 
-export type BusinessDetailsValues = z.infer<ReturnType<typeof businessDetailsSchema>>;
+type BusinessDetailsInput = z.input<ReturnType<typeof businessDetailsSchema>>;
+type BusinessDetailsOutput = z.output<ReturnType<typeof businessDetailsSchema>>;
+
+export type BusinessDetailsValues = BusinessDetailsOutput;
 
 const emptyInitialValue = {
   name: '',
@@ -93,15 +108,16 @@ const emptyInitialValue = {
     subcategory: undefined,
     customIndustry: ''
   },
-  companySize: undefined
+  companySize: undefined,
+  language: ''
 } as const;
 
 const BusinessDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t, i18n } = useTranslation('onboarding');
 
-  const methods = useI18nForm<BusinessDetailsValues>(
+  const methods = useI18nForm<BusinessDetailsInput, unknown, BusinessDetailsOutput>(
     businessDetailsSchema,
     {
       mode: 'onChange',
@@ -116,6 +132,7 @@ const BusinessDetails: React.FC = () => {
     handleSubmit,
     watch,
     resetField,
+    setValue,
     formState: { isValid }
   } = methods;
 
@@ -137,6 +154,53 @@ const BusinessDetails: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">
+        {/* Language */}
+        <Controller
+          control={control}
+          name="userLanguage"
+          render={({ field }) => {
+            const image = languageData[field.value as LanguageCode]?.image;
+            return (
+              <Select
+                clearable
+                data={Object.values(languageData).map((item) => ({
+                  value: item.code,
+                  label: item.label
+                }))}
+                {...commonFormFieldProps('userLanguage', {
+                  label: t('businessDetails.formUserLanguageField.label'),
+                  placeholder: t('businessDetails.formUserLanguageField.placeholder'),
+                  registration: field
+                })}
+                leftSection={image && <Image alt="" className="w-4 h-4" src={image} />}
+                renderOption={({ option, checked }) => (
+                  <Group flex="1" gap="xs">
+                    {checked && (
+                      // simulating how mantine does it for consistency, cannot reference their classnames though
+                      <CheckIcon
+                        style={{
+                          width: '0.8em',
+                          minWidth: '0.8em',
+                          height: '0.8em',
+                          opacity: 0.4
+                        }}
+                      />
+                    )}
+                    <Image alt="" className="w-4 h-4" src={languageData[option.value as LanguageCode].image} />
+                    {option.label}
+                  </Group>
+                )}
+                onChange={async (value) => {
+                  if (value) {
+                    await i18n.changeLanguage(value);
+                  }
+                  field.onChange(value);
+                }}
+              />
+            );
+          }}
+        />
+
         {/* Company Name */}
         <TextInput
           type="text"
@@ -147,6 +211,7 @@ const BusinessDetails: React.FC = () => {
             registration: register('name')
           })}
         />
+
         {/* Company Address */}
         <TextInput
           type="text"
@@ -158,7 +223,7 @@ const BusinessDetails: React.FC = () => {
           })}
         />
 
-        {/* Industry2 */}
+        {/* Industry */}
         <div className="xl:flex gap-6">
           <div className="xl:w-1/2">
             <Controller
@@ -167,19 +232,20 @@ const BusinessDetails: React.FC = () => {
               render={({ field }) => {
                 return (
                   <Select
+                    clearable
                     data={industryCategoryData}
                     {...commonFormFieldProps('companyIndustry.category', {
                       label: t('businessDetails.formIndustryCategoryField.label'),
                       placeholder: t('businessDetails.formIndustryCategoryField.placeholder'),
-                      resetValue: null,
-                      registration: field,
-                      afterFieldClear: () => {
-                        resetField('companyIndustry.subcategory');
-                      }
+                      registration: field
                     })}
                     onChange={(value) => {
-                      resetField('companyIndustry.subcategory');
+                      resetField('companyIndustry.subcategory', { defaultValue: null });
+                      // resetField('companyIndustry.subcategory', {defaultValue: ''});
                       field.onChange(value);
+                    }}
+                    onClear={() => {
+                      resetField('companyIndustry.subcategory', { defaultValue: null });
                     }}
                   />
                 );
@@ -192,12 +258,12 @@ const BusinessDetails: React.FC = () => {
               name="companyIndustry.subcategory"
               render={({ field }) => (
                 <Select
+                  clearable
                   data={industrySubCategoryData}
                   disabled={!selectedIndustryCategory}
                   {...commonFormFieldProps('companyIndustry.subcategory', {
                     label: t('businessDetails.formIndustrySubcategoryField.label'),
                     placeholder: t('businessDetails.formIndustrySubcategoryField.placeholder'),
-                    resetValue: null,
                     registration: field
                   })}
                 />
@@ -216,7 +282,7 @@ const BusinessDetails: React.FC = () => {
             type="text"
           />
         )}
-        {/* Team size */}
+        {/* Company size */}
         <Controller
           control={control}
           name="companySize"
@@ -224,11 +290,11 @@ const BusinessDetails: React.FC = () => {
             // console.log(field.value);
             return (
               <Select
+                clearable
                 data={companySizeData}
                 {...commonFormFieldProps('companySize', {
                   label: t('businessDetails.formCompanySizeField.label'),
                   placeholder: t('businessDetails.formCompanySizeField.placeholder'),
-                  resetValue: null,
                   registration: field
                 })}
               />

@@ -33,11 +33,13 @@ const reminderTypeSchema = (t: NotifycalTFunction) =>
     reminderId: z
       .string()
       .min(1, { message: t('reminderType.formReminderTypeField.isRequired') })
-      .brand('TemplateId'),
+      .transform((value) => value as TemplateId),
     reminderLanguage: languageCodeSchema
   });
 
-export type ReminderTypeValues = z.infer<ReturnType<typeof reminderTypeSchema>>;
+type ReminderTypeInput = z.input<ReturnType<typeof reminderTypeSchema>>;
+type ReminderTypeOutput = z.output<ReturnType<typeof reminderTypeSchema>>;
+export type ReminderTypeValues = ReminderTypeOutput;
 
 const emptyInitialValue = (languageCode: LanguageCode): ReminderTypeValues => ({
   reminderId: '' as TemplateId,
@@ -56,7 +58,7 @@ const ReminderType: React.FC = () => {
     handleSubmit,
     setValue,
     formState: { isValid, errors }
-  } = useI18nForm<ReminderTypeValues>(
+  } = useI18nForm<ReminderTypeInput, unknown, ReminderTypeOutput>(
     reminderTypeSchema,
     {
       mode: 'onChange',

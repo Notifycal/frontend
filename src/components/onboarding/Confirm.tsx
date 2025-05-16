@@ -33,7 +33,10 @@ const confirmSchema = (t: NotifycalTFunction) =>
     }),
     marketingOptIn: z.boolean()
   });
-export type ConfirmValues = z.infer<ReturnType<typeof confirmSchema>>;
+
+type ConfirmInput = z.input<ReturnType<typeof confirmSchema>>;
+type ConfirmOutput = z.output<ReturnType<typeof confirmSchema>>;
+export type ConfirmValues = ConfirmOutput;
 
 const errorFields = ['privacyAccepted', 'termsAccepted'] as const;
 
@@ -53,7 +56,7 @@ const Confirm: React.FC = () => {
     handleSubmit,
     register,
     formState: { errors, isValid }
-  } = useI18nForm<ConfirmValues>(
+  } = useI18nForm<ConfirmInput, unknown, ConfirmOutput>(
     confirmSchema,
     {
       mode: 'onChange',

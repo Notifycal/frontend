@@ -1,4 +1,3 @@
-import { smsCharacterRegex } from '@constants/regexes';
 import { z } from 'zod';
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types */
@@ -10,13 +9,18 @@ export const stringArrayValidatorSchema = (validValues: Array<string>, message?:
   );
 };
 
-export const smsValidStringSchema = ({
-  messageRegex,
-  messageString
-}: {
-  messageRegex?: string;
-  messageString?: string;
-}) => {
-  const base = messageString ? z.string({ message: messageString }) : z.string();
-  return messageRegex ? base.regex(smsCharacterRegex, { message: messageRegex }) : base.regex(smsCharacterRegex);
+
+export const nullableInputSchema = <T extends z.ZodTypeAny>(
+  schema: T,
+  message = 'Output value can not be null'
+): z.ZodEffects<z.ZodNullable<T>, z.infer<T>> => {
+  return schema.nullable().superRefine((value, context) => {
+    if (value === null) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        fatal: true,
+        message
+      });
+    }
+  }) as z.ZodEffects<z.ZodNullable<T>, z.infer<T>>;
 };

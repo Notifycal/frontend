@@ -23,7 +23,7 @@ const senderDetailsSchema = (t: NotifycalTFunction) =>
         phoneNumber: z
           .string()
           .min(1, { message: t('senderDetails.formSenderNumber.isRequired') })
-          .brand('PhoneNumber')
+          .transform((value) => value as PhoneNumber)
       })
     })
     .superRefine((data, context) => {
@@ -36,7 +36,9 @@ const senderDetailsSchema = (t: NotifycalTFunction) =>
       }
     });
 
-export type SenderDetailsValues = z.infer<ReturnType<typeof senderDetailsSchema>>;
+type SenderDetailsInput = z.input<ReturnType<typeof senderDetailsSchema>>;
+type SenderDetailsOutput = z.output<ReturnType<typeof senderDetailsSchema>>;
+export type SenderDetailsValues = SenderDetailsOutput;
 
 const emptyInitialValue = {
   contactDetails: {
@@ -51,7 +53,7 @@ const SenderDetails: React.FC = () => {
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
-  const methods = useI18nForm<SenderDetailsValues>(
+  const methods = useI18nForm<SenderDetailsInput, unknown, SenderDetailsOutput>(
     senderDetailsSchema,
     {
       mode: 'onChange',

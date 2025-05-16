@@ -21,7 +21,9 @@ const calendarsSchema = (t: NotifycalTFunction) =>
     calendars: z.array(calendarSchema).min(1, { message: t('calendars.selectMenu.error') })
   });
 
-export type CalendarsValues = z.infer<ReturnType<typeof calendarsSchema>>;
+type CalendarsInput = z.input<ReturnType<typeof calendarsSchema>>;
+type CalendarsOutput = z.output<ReturnType<typeof calendarsSchema>>;
+export type CalendarsValues = CalendarsOutput;
 
 type Calendar = z.infer<typeof calendarSchema>;
 
@@ -34,7 +36,7 @@ const Calendars: React.FC = () => {
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
-  const methods = useI18nForm<CalendarsValues>(
+  const methods = useI18nForm<CalendarsInput, unknown, CalendarsOutput>(
     calendarsSchema,
     {
       mode: 'onChange',
