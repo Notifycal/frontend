@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as FeedbackImport } from './routes/feedback'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthOnboardingImport } from './routes/_auth/onboarding'
@@ -25,6 +26,12 @@ import { Route as AuthOnboardingNostepWelcomeImport } from './routes/_auth/onboa
 import { Route as AuthOnboardingNostepCompletedImport } from './routes/_auth/onboarding/_nostep/completed'
 
 // Create/Update Routes
+
+const FeedbackRoute = FeedbackImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AuthRoute = AuthImport.update({
   id: '/_auth',
@@ -112,6 +119,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
+    }
+    '/feedback': {
+      id: '/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof FeedbackImport
       parentRoute: typeof rootRoute
     }
     '/_auth/_app': {
@@ -257,6 +271,7 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
+  '/feedback': typeof FeedbackRoute
   '/onboarding': typeof AuthOnboardingStepRouteWithChildren
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
@@ -269,6 +284,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
+  '/feedback': typeof FeedbackRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
   '/onboarding': typeof AuthOnboardingIndexRoute
@@ -281,6 +297,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
+  '/feedback': typeof FeedbackRoute
   '/_auth/_app': typeof AuthAppRouteWithChildren
   '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
@@ -298,6 +315,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/feedback'
     | '/onboarding'
     | '/dashboard'
     | '/template'
@@ -309,6 +327,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/feedback'
     | '/dashboard'
     | '/template'
     | '/onboarding'
@@ -319,6 +338,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_auth'
+    | '/feedback'
     | '/_auth/_app'
     | '/_auth/onboarding'
     | '/_auth/_app/dashboard'
@@ -335,11 +355,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
+  FeedbackRoute: typeof FeedbackRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
+  FeedbackRoute: FeedbackRoute,
 }
 
 export const routeTree = rootRoute
@@ -353,7 +375,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_auth"
+        "/_auth",
+        "/feedback"
       ]
     },
     "/": {
@@ -365,6 +388,9 @@ export const routeTree = rootRoute
         "/_auth/_app",
         "/_auth/onboarding"
       ]
+    },
+    "/feedback": {
+      "filePath": "feedback.tsx"
     },
     "/_auth/_app": {
       "filePath": "_auth/_app.tsx",
