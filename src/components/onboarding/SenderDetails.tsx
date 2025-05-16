@@ -46,7 +46,7 @@ const emptyInitialValue = {
     countryCode: 'ES',
     phoneNumber: '' as PhoneNumber
   }
-} as const;
+} as SenderDetailsInput;
 
 const SenderDetails: React.FC = () => {
   const { data } = useOnboardingStore();

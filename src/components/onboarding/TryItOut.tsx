@@ -22,11 +22,13 @@ const tryItOutSchema = () =>
     hasSentTestReminder: z.boolean()
   });
 
-export type TryItOutValues = z.infer<ReturnType<typeof tryItOutSchema>>;
+export type TryItOutInput = z.input<ReturnType<typeof tryItOutSchema>>;
+export type TryItOutOutput = z.output<ReturnType<typeof tryItOutSchema>>;
+export type TryItOutValues = TryItOutOutput;
 
 const emptyInitialValue = {
   hasSentTestReminder: false
-} as const;
+} as TryItOutInput;
 
 const TryItOut: React.FC = () => {
   const { data, setStepData } = useOnboardingStore();
@@ -42,7 +44,7 @@ const TryItOut: React.FC = () => {
     setValue,
     watch,
     formState: { isValid }
-  } = useI18nForm<TryItOutValues>(
+  } = useI18nForm<TryItOutInput, unknown, TryItOutOutput>(
     tryItOutSchema,
     {
       mode: 'onChange',

@@ -29,7 +29,7 @@ type Calendar = z.infer<typeof calendarSchema>;
 
 const emptyInitialValue = {
   calendars: []
-};
+} as CalendarsInput;
 
 const Calendars: React.FC = () => {
   const { data } = useOnboardingStore();

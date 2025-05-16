@@ -44,7 +44,7 @@ const emptyInitialValue = {
   termsAccepted: false,
   privacyAccepted: false,
   marketingOptIn: false
-} as const;
+} as ConfirmInput;
 
 const Confirm: React.FC = () => {
   const { data } = useOnboardingStore();

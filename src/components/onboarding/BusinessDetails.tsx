@@ -109,13 +109,13 @@ const emptyInitialValue = {
   name: '',
   address: '',
   companyIndustry: {
-    category: undefined,
-    subcategory: undefined,
+    category: null,
+    subcategory: null,
     customIndustry: ''
   },
-  companySize: undefined,
-  language: ''
-} as const;
+  companySize: null,
+  userLanguage: ''
+} as BusinessDetailsInput;
 
 const BusinessDetails: React.FC = () => {
   const { data } = useOnboardingStore();
@@ -137,7 +137,6 @@ const BusinessDetails: React.FC = () => {
     handleSubmit,
     watch,
     resetField,
-    setValue,
     formState: { isValid }
   } = methods;
 

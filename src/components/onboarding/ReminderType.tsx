@@ -41,7 +41,7 @@ type ReminderTypeInput = z.input<ReturnType<typeof reminderTypeSchema>>;
 type ReminderTypeOutput = z.output<ReturnType<typeof reminderTypeSchema>>;
 export type ReminderTypeValues = ReminderTypeOutput;
 
-const emptyInitialValue = (languageCode: LanguageCode): ReminderTypeValues => ({
+const emptyInitialValue = (languageCode: LanguageCode): ReminderTypeInput => ({
   reminderId: '' as TemplateId,
   reminderLanguage: languageCode
 });
