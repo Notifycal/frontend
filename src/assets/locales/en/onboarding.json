@@ -152,12 +152,14 @@
     "formNameField": {
       "label": "Business name",
       "placeholder": "Enter the name of your business",
-      "isRequired": "Business name is required"
+      "isRequired": "Business name is required",
+      "isMax": "Business name is too long"
     },
     "formAddressField": {
       "label": "Business address",
       "placeholder": "Enter the address of your business",
-      "isRequired": "Business address is required"
+      "isRequired": "Business address is required",
+      "isMax": "Business address is too long"
     },
     "formIndustryCategoryField": {
       "label": "Industry",
@@ -172,7 +174,8 @@
     "formCustomIndustryField": {
       "label": "Custom industry",
       "placeholder": "Type your industry",
-      "isRequired": "Please enter the industry of your business"
+      "isRequired": "Please enter the industry of your business",
+      "isMax": "Industry is too long"
     },
     "formCompanySizeField": {
       "label": "Company size",

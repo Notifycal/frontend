@@ -40,6 +40,7 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
       regex: t('businessDetails.invalidSMSCharacters')
     })
       .min(1, { message: t('businessDetails.formNameField.isRequired') })
+      .max(128, { message: t('businessDetails.formNameField.isMax') })
       .transform((value) => value as BusinessName),
 
     address: createSmsContentSchema({
@@ -47,6 +48,7 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
       regex: t('businessDetails.invalidSMSCharacters')
     })
       .min(1, { message: t('businessDetails.formAddressField.isRequired') })
+      .max(128, { message: t('businessDetails.formAddressField.isMax') })
       .transform((value) => value as BusinessAddress),
 
     companyIndustry: z
@@ -61,7 +63,10 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
         subcategory: nullableInputSchema(
           z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') })
         ),
-        customIndustry: z.string({ message: t('businessDetails.formCustomIndustryField.isRequired') }).optional()
+        customIndustry: z
+          .string({ message: t('businessDetails.formCustomIndustryField.isRequired') })
+          .max(128, { message: t('businessDetails.formCustomIndustryField.isMax') })
+          .optional()
       })
       .superRefine((data, context) => {
         console.log(data);

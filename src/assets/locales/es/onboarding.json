@@ -152,12 +152,14 @@
     "formNameField": {
       "label": "Nombre de la empresa",
       "placeholder": "Introduce el nombre de tu empresa",
-      "isRequired": "El nombre del negocio es obligatorio"
+      "isRequired": "El nombre del negocio es obligatorio",
+      "isMax": "El nombre del negocio es demasiado largo"
     },
     "formAddressField": {
       "label": "Dirección de la empresa",
       "placeholder": "Introduce la dirección de tu empresa",
-      "isRequired": "La direccion del negocio es obligatoria"
+      "isRequired": "La dirección del negocio es obligatoria",
+      "isMax":"La dirección del negocio es demasiado largo"
     },
     "formIndustryCategoryField": {
       "label": "Sector",
@@ -172,7 +174,8 @@
     "formCustomIndustryField": {
       "label": "Sector personalizado",
       "placeholder": "Escribe el sector de tu empresa",
-      "isRequired": "Por favor, escribe el sector de tu empresa"
+      "isRequired": "Por favor, escribe el sector de tu empresa",
+      "isMax": "El sector es demasiado largo"
     },
     "formCompanySizeField": {
       "label": "Tamaño de la empresa",
