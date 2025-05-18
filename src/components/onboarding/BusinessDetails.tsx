@@ -92,10 +92,10 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
       stringArrayValidatorSchema(Object.keys(companySizesObject), t('businessDetails.formCompanySizeField.isRequired')),
       t('businessDetails.formCompanySizeField.isRequired')
     ),
-    userLanguage: nullableInputSchema(
+    language: nullableInputSchema(
       stringArrayValidatorSchema(Object.keys(languageData), t('businessDetails.formUserLanguageField.isRequired')),
       t('businessDetails.formUserLanguageField.isRequired')
-    )
+    ).transform((value) => value as LanguageCode)
   });
 };
 
@@ -113,7 +113,7 @@ const emptyInitialValue = {
     customIndustry: ''
   },
   companySize: null,
-  userLanguage: ''
+  language: ''
 } as BusinessDetailsInput;
 
 const BusinessDetails: React.FC = () => {
@@ -160,7 +160,7 @@ const BusinessDetails: React.FC = () => {
         {/* Language */}
         <Controller
           control={control}
-          name="userLanguage"
+          name="language"
           render={({ field }) => {
             const image = languageData[field.value as LanguageCode]?.image;
             return (
@@ -170,7 +170,7 @@ const BusinessDetails: React.FC = () => {
                   value: item.code,
                   label: t(`generic.languages.${item.code}`, { ns: 'translations' })
                 }))}
-                {...commonFormFieldProps('userLanguage', {
+                {...commonFormFieldProps('language', {
                   label: t('businessDetails.formUserLanguageField.label'),
                   placeholder: t('businessDetails.formUserLanguageField.placeholder'),
                   registration: field

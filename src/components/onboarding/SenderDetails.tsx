@@ -17,7 +17,7 @@ import PhoneInput from '../ui/PhoneInput/PhoneInput';
 const senderDetailsSchema = (t: NotifycalTFunction) =>
   z
     .object({
-      contactDetails: z.object({
+      senderContact: z.object({
         type: z.literal('phone'),
         countryCode: countryCodeSchema,
         phoneNumber: z
@@ -28,12 +28,12 @@ const senderDetailsSchema = (t: NotifycalTFunction) =>
     })
     .superRefine((values, context) => {
       if (
-        !isValidMobilePhoneNumber(values.contactDetails.phoneNumber as PhoneNumber, values.contactDetails.countryCode)
+        !isValidMobilePhoneNumber(values.senderContact.phoneNumber as PhoneNumber, values.senderContact.countryCode)
       ) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
           message: t('senderDetails.formSenderNumber.isInvalid'),
-          path: ['contactDetails', 'phoneNumber']
+          path: ['senderContact', 'phoneNumber']
         });
       }
     });
@@ -43,7 +43,7 @@ type SenderDetailsOutput = z.output<ReturnType<typeof senderDetailsSchema>>;
 export type SenderDetailsValues = SenderDetailsOutput;
 
 const emptyInitialValue = {
-  contactDetails: {
+  senderContact: {
     type: 'phone',
     countryCode: 'ES',
     phoneNumber: '' as PhoneNumber
@@ -78,11 +78,11 @@ const SenderDetails: React.FC = () => {
         {/* Phone number */}
         <Controller
           control={control}
-          name="contactDetails"
+          name="senderContact"
           render={({ field: { ref, value, ...restField }, formState }) => {
             const errorKey =
-              formState.errors.contactDetails?.phoneNumber?.message ||
-              formState.errors.contactDetails?.countryCode?.message;
+              formState.errors.senderContact?.phoneNumber?.message ||
+              formState.errors.senderContact?.countryCode?.message;
 
             return (
               <PhoneInput
@@ -92,10 +92,10 @@ const SenderDetails: React.FC = () => {
                   countryCode: value.countryCode,
                   phoneNumber: value.phoneNumber as PhoneNumber
                 }}
-                {...commonFormFieldProps('contactDetails', {
+                {...commonFormFieldProps('senderContact', {
                   label: t('senderDetails.formSenderNumber.label'),
                   placeholder: t('senderDetails.formSenderNumber.placeholder'),
-                  resetValue: emptyInitialValue.contactDetails
+                  resetValue: emptyInitialValue.senderContact
                 })}
                 error={errorKey && errorKey}
                 {...restField} // Registering the component this way due to it being the only "weird" one/different than Mantine's

@@ -14,7 +14,7 @@ type AccountOverviewProps = {
 const AccountOverview: React.FC<AccountOverviewProps> = ({ businessDetails, calendars, senderDetails }) => {
   const { t } = useTranslation('onboarding');
 
-  const senderContactDetails = senderDetails.contactDetails;
+  const senderContactDetails = senderDetails.senderContact;
   const currentCountryCode = senderContactDetails.countryCode;
   const dialCode = phoneByCountry[currentCountryCode].phoneDetails.dialCode;
   const canonicalFormattedPhoneNumber = `${dialCode} ${senderContactDetails.phoneNumber}`;

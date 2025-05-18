@@ -25,7 +25,7 @@ const confirmSchema = (t: NotifycalTFunction) =>
     privacyAccepted: z.boolean().refine((value) => value === true, {
       message: t('confirm.formPrivacyField.isRequired')
     }),
-    marketingOptIn: z.boolean()
+    marketingOptInAccepted: z.boolean()
   });
 
 type ConfirmInput = z.input<ReturnType<typeof confirmSchema>>;
@@ -37,7 +37,7 @@ const errorFields = ['privacyAccepted', 'termsAccepted'] as const;
 const emptyInitialValue = {
   termsAccepted: false,
   privacyAccepted: false,
-  marketingOptIn: false
+  marketingOptInAccepted: false
 } as ConfirmInput;
 
 const Confirm: React.FC = () => {
@@ -117,7 +117,7 @@ const Confirm: React.FC = () => {
       url: 'https://TODO/Privacy'
     },
     {
-      name: 'marketingOptIn',
+      name: 'marketingOptInAccepted',
       label: t('confirm.formMarketingField.label')
     }
   ];
