@@ -2,12 +2,11 @@ import { DateTime } from 'luxon';
 import { z } from 'zod';
 
 import { languageData, type NotifycalTFunction } from '@common/i18n';
+import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
   templateEnMap,
   templateEsMap,
-  type BusinessAddress,
-  type BusinessName,
   type LanguageCode,
   type TemplateId,
   type TemplateMap
@@ -48,6 +47,7 @@ const emptyInitialValue = (languageCode: LanguageCode): ReminderTypeInput => ({
 
 const ReminderType: React.FC = () => {
   const { data } = useOnboardingStore();
+  const { businessDetails } = requireOnboardingSteps(data, ['businessDetails']);
   const { handleStepSubmit } = useStepSubmit();
 
   const { t, i18n } = useTranslation('onboarding');
@@ -69,6 +69,7 @@ const ReminderType: React.FC = () => {
 
   const selectedReminderLanguage = watch('reminderLanguage');
   const selectedReminderTemplateId = watch('reminderId');
+
   const initialTemplateLanguage: TemplateMap = selectedReminderLanguage.startsWith('en')
     ? templateEnMap
     : templateEsMap;
@@ -79,11 +80,7 @@ const ReminderType: React.FC = () => {
       {
         id,
         language,
-        text: interpolate(
-          data.businessDetails?.name as BusinessName,
-          data.businessDetails?.address as BusinessAddress,
-          DateTime.now()
-        )
+        text: interpolate(businessDetails.name, businessDetails.address, DateTime.now())
       }
     ])
   );

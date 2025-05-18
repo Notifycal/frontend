@@ -1,14 +1,6 @@
 import { updateUserProfile } from '@api/userProfile';
 import type { NotifycalTFunction } from '@common/i18n';
-import { phoneByCountry } from '@notifycal/shared/i18n';
-import type {
-  BusinessAddress,
-  BusinessName,
-  CountryCode,
-  LanguageCode,
-  PhoneNumber,
-  TemplateId
-} from '@notifycal/shared/types';
+import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { z } from 'zod';
 
 import { useI18nForm } from '@hooks/useI18nForm';
@@ -19,6 +11,7 @@ import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
+import AccountOverview from '@components/ui/AccountOverview/AccountOverview';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { Checkbox } from '@mantine/core';
 
@@ -48,6 +41,12 @@ const emptyInitialValue = {
 
 const Confirm: React.FC = () => {
   const { data } = useOnboardingStore();
+  const { businessDetails, senderDetails, reminderType, calendars } = requireOnboardingSteps(data, [
+    'businessDetails',
+    'senderDetails',
+    'reminderType',
+    'calendars'
+  ]);
   const [error, setError] = useState<string | null>(null);
   const { handleStepNavigation, handleStepData } = useStepSubmit();
   const { t } = useTranslation('onboarding');
@@ -65,25 +64,15 @@ const Confirm: React.FC = () => {
     t
   );
 
-  const reminderType = data.reminderType;
-  const calendars = data.calendars?.calendars;
-  const senderContactDetails = data.senderDetails?.contactDetails;
-
-  const currentCountryCode = senderContactDetails?.countryCode as CountryCode;
-  const dialCode = phoneByCountry[currentCountryCode].phoneDetails.dialCode;
-
-  const canonicalFormattedPhoneNumber = `${dialCode} ${senderContactDetails?.phoneNumber}`;
-
-  // useMemo only recomputes when the dependencies (2nd param array) change
   const calendarsWithTemplateInfo = useMemo(() => {
-    return (calendars || []).map((calendar) => ({
+    return calendars.calendars.map((calendar) => ({
       ...calendar,
       template: {
-        id: (reminderType?.reminderId || '') as TemplateId,
-        language: (reminderType?.reminderLanguage || '') as LanguageCode
+        id: reminderType.reminderId,
+        language: reminderType.reminderLanguage
       }
     }));
-  }, [reminderType, calendars]);
+  }, [reminderType, calendars.calendars]);
 
   const saveUserProfileMutation = useMutation({
     mutationFn: updateUserProfile,
@@ -102,13 +91,9 @@ const Confirm: React.FC = () => {
     const newData = {
       calendars: calendarsWithTemplateInfo,
       business: {
-        name: (data.businessDetails?.name || '') as BusinessName,
-        address: (data.businessDetails?.address || '') as BusinessAddress,
-        senderContact: data.senderDetails?.contactDetails || {
-          type: 'phone',
-          phoneNumber: '' as PhoneNumber,
-          countryCode: '' as CountryCode
-        }
+        name: businessDetails.name,
+        address: businessDetails.address,
+        senderContact: senderDetails.contactDetails
       }
     };
     saveUserProfileMutation.mutate(newData);
@@ -117,92 +102,45 @@ const Confirm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(submitUserProfile)}>
       <div className="space-y-6">
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
-          <h3 className="text-lg font-medium text-gray-800 mb-4">{t('confirm.accountSummary')}</h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 xl:gap-4 text-sm">
-            <div>
-              <p className="text-gray-500">{t('businessDetails.formNameField.label')}</p>
-              <p className="font-medium">{data.businessDetails?.name}</p>
-            </div>
-
-            <div>
-              <p className="text-gray-500">{t('businessDetails.formAddressField.label')}</p>
-              <p className="font-medium">{data.businessDetails?.address}</p>
-            </div>
-
-            <div>
-              <p className="text-gray-500">{t('senderDetails.title')}</p>
-              <p className="font-medium">{canonicalFormattedPhoneNumber}</p>
-            </div>
-
-            {data.businessDetails && data.businessDetails.companyIndustry && (
-              <div>
-                <p className="text-gray-500">{t('businessDetails.formIndustryField.label')}</p>
-                <p className="font-medium">{t(`businessDetails.industries.${data.businessDetails.companyIndustry}`)}</p>
-              </div>
-            )}
-
-            <div>
-              <p className="text-gray-500">{t('calendars.title')}</p>
-              {data.calendars?.calendars.map(({ id, name }) => (
-                <p key={id} className="font-medium">
-                  {name}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
+        <AccountOverview businessDetails={businessDetails} calendars={calendars} senderDetails={senderDetails} />
 
         {/* Terms & Agreements */}
         <div className="space-y-3">
-          <div className="flex items-start">
-            <div className="flex items-center h-5 mt-1">
-              <Checkbox
-                label={
-                  <label className="text-sm text-gray-700" htmlFor="termsAccepted">
-                    <Trans
-                      i18nKey="confirm.formTosField.label"
-                      ns="onboarding"
-                      components={[
-                        <a
-                          className="text-primary-600 hover:underline"
-                          href="#"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        />
-                      ]}
-                    />
-                  </label>
-                }
-                {...register('termsAccepted')}
+          <Checkbox
+            className="mt-1"
+            label={
+              <Trans
+                className="text-sm text-gray-700"
+                i18nKey="confirm.formTosField.label"
+                ns="onboarding"
+                components={[
+                  <a className="text-primary-600 hover:underline" href="#" rel="noopener noreferrer" target="_blank" />
+                ]}
               />
-            </div>
-          </div>
+            }
+            {...register('termsAccepted')}
+          />
 
-          <div className="flex items-start">
-            <div className="flex items-center h-5 mt-1">
-              <Checkbox
-                label={
-                  <label className="text-sm text-gray-700" htmlFor="privacyAccepted">
-                    <Trans
-                      i18nKey="confirm.formPrivacyField.label"
-                      ns="onboarding"
-                      components={[
-                        <a
-                          className="text-primary-600 hover:underline"
-                          href="#"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        />
-                      ]}
-                    />
-                  </label>
-                }
-                {...register('privacyAccepted')}
+          <Checkbox
+            className="mt-1"
+            label={
+              <Trans
+                className="text-sm text-gray-700"
+                i18nKey="confirm.formPrivacyField.label"
+                ns="onboarding"
+                components={[
+                  <a className="text-primary-600 hover:underline" href="#" rel="noopener noreferrer" target="_blank" />
+                ]}
               />
-            </div>
-          </div>
+            }
+            {...register('privacyAccepted')}
+          />
+
+          <Checkbox
+            className="mt-1"
+            label={<span className="text-sm text-gray-700">{t('confirm.formMarketingField.label')}</span>}
+            {...register('marketingOptIn')}
+          />
         </div>
 
         {/* Error Message from validation */}

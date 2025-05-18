@@ -1,15 +1,16 @@
 import { getUserCalendarsFromGoogle } from '@api/googleUserCalendar';
 import type { NotifycalTFunction } from '@common/i18n';
+import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { calendarSchema } from '@notifycal/shared/schemas';
 import { z } from 'zod';
 
+import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import { MultiSelect } from '@mantine/core';
@@ -33,6 +34,7 @@ const emptyInitialValue = {
 
 const Calendars: React.FC = () => {
   const { data } = useOnboardingStore();
+  const { businessDetails } = requireOnboardingSteps(data, ['businessDetails']);
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
@@ -57,8 +59,6 @@ const Calendars: React.FC = () => {
     queryKey: ['userIdPCalendars'],
     queryFn: getUserCalendarsFromGoogle
   });
-
-  const businessName = data.businessDetails?.name;
 
   const calendarData = (userCalendars || []).map((c) => ({ label: c.name, value: c.id }));
 
@@ -89,7 +89,7 @@ const Calendars: React.FC = () => {
                 }
               }}
               {...commonFormFieldProps('calendars', {
-                label: t('calendars.formCalendarsField.label', { businessName }),
+                label: t('calendars.formCalendarsField.label', { businessName: businessDetails.name }),
                 placeholder: t(placeholderTextKey),
                 resetValue: []
               })}

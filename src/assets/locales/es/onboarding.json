@@ -248,6 +248,9 @@
       "label": "Acepto la <0>Política de privacidad</0>",
       "isRequired": "Debes aceptar la Política de Privacidad"
     },
+    "formMarketingField": {
+      "label": "Acepto recibir comunicaciones de marketing (opcional)"
+    },
     "apiError": "Ha habido un problema guardando tus datos."
   },
   "completed": {

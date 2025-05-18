@@ -68,10 +68,9 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
           .max(128, { message: t('businessDetails.formCustomIndustryField.isMax') })
           .optional()
       })
-      .superRefine((data, context) => {
-        console.log(data);
-        const isOther = [data.category, data.subcategory].includes('other');
-        const isValidSubcategory = !!industriesObject[data.category]?.sectors[data.subcategory] || false;
+      .superRefine((values, context) => {
+        const isOther = [values.category, values.subcategory].includes('other');
+        const isValidSubcategory = !!industriesObject[values.category]?.sectors[values.subcategory] || false;
 
         if (!isValidSubcategory) {
           context.addIssue({
@@ -81,7 +80,7 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
           });
         }
 
-        if (isOther && !data.customIndustry) {
+        if (isOther && !values.customIndustry) {
           context.addIssue({
             path: ['customIndustry'],
             code: z.ZodIssueCode.custom,

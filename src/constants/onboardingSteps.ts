@@ -79,3 +79,20 @@ export const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
   !Object.values(stepsCompleted).every((step) => step);
 
 export const isLastStep = (stepIndex: number): boolean => stepIndex === STEPS.length - 1;
+
+export const requireOnboardingSteps = <const Keys extends ReadonlyArray<keyof OnboardingData>>(
+  data: Partial<OnboardingData>,
+  keys: Keys
+): { [K in Keys[number]]: NonNullable<OnboardingData[K]> } => {
+  const entries = keys.map((key) => {
+    const value = data[key];
+    if (!value) {
+      throw new Error(`Missing required onboarding step: ${key}`);
+    }
+    return [key, value] as const;
+  });
+
+  return Object.fromEntries(entries) as {
+    [K in Keys[number]]: NonNullable<OnboardingData[K]>;
+  };
+};

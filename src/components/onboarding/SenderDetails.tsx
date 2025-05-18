@@ -26,8 +26,10 @@ const senderDetailsSchema = (t: NotifycalTFunction) =>
           .transform((value) => value as PhoneNumber)
       })
     })
-    .superRefine((data, context) => {
-      if (!isValidMobilePhoneNumber(data.contactDetails.phoneNumber as PhoneNumber, data.contactDetails.countryCode)) {
+    .superRefine((values, context) => {
+      if (
+        !isValidMobilePhoneNumber(values.contactDetails.phoneNumber as PhoneNumber, values.contactDetails.countryCode)
+      ) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
           message: t('senderDetails.formSenderNumber.isInvalid'),
@@ -93,11 +95,10 @@ const SenderDetails: React.FC = () => {
                 {...commonFormFieldProps('contactDetails', {
                   label: t('senderDetails.formSenderNumber.label'),
                   placeholder: t('senderDetails.formSenderNumber.placeholder'),
-                  resetValue: emptyInitialValue.contactDetails,
-                  registration: restField
+                  resetValue: emptyInitialValue.contactDetails
                 })}
                 error={errorKey && errorKey}
-                // onChange={restField.onChange}
+                {...restField} // Registering the component this way due to it being the only "weird" one/different than Mantine's
               />
             );
           }}

@@ -1,4 +1,5 @@
 import type { KebabCase } from '@common/types';
+import OnboardingErrorFallback from '@components/onboarding/OnboardingErrorFallback';
 import {
   type StepKey,
   findStepIndexByProperty,
@@ -8,10 +9,12 @@ import {
   isValidStepPath
 } from '@constants/onboardingSteps';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { createFileRoute, Navigate, redirect, useMatch } from '@tanstack/react-router';
+import { createFileRoute, Navigate, redirect, useMatch, useNavigate } from '@tanstack/react-router';
+import { ErrorBoundary } from 'react-error-boundary';
 
 const StepComponent: React.FC = () => {
   const { params } = useMatch({ from: '/_auth/onboarding/_step/$step' });
+  const navigate = useNavigate();
 
   const stepPathParameter = params.step as KebabCase<StepKey>;
   const CurrentStepComponent = getStepByProperty('path', stepPathParameter)?.component;
@@ -20,7 +23,11 @@ const StepComponent: React.FC = () => {
     return <Navigate to="/onboarding/welcome" />;
   }
 
-  return <CurrentStepComponent />;
+  return (
+    <ErrorBoundary FallbackComponent={OnboardingErrorFallback} onReset={() => navigate({ to: '/onboarding/welcome' })}>
+      <CurrentStepComponent />
+    </ErrorBoundary>
+  );
 };
 
 export const Route = createFileRoute('/_auth/onboarding/_step/$step')({

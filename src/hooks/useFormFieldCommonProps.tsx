@@ -26,9 +26,7 @@ type FormFieldOptions<TFormValues extends FieldValues> = {
   label: string;
   placeholder?: string;
   resetValue?: FieldPathValue<TFormValues, Path<TFormValues>>;
-  registration?: Partial<
-    UseFormRegisterReturn<Path<TFormValues>> | ControllerRenderProps<TFormValues, Path<TFormValues>>
-  >;
+  registration?: UseFormRegisterReturn<Path<TFormValues>> | ControllerRenderProps<TFormValues, Path<TFormValues>>;
 };
 
 interface FormFieldCommonPropsHook<TFormValues extends FieldValues> {

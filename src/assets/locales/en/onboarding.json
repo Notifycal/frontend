@@ -248,6 +248,9 @@
       "label": "I agree to the <0>Privacy Policy</0>",
       "isRequired": "You must accept the Privacy Policy"
     },
+    "formMarketingField": {
+      "label": "I agree to receive marketing communications (optional)"
+    },
     "apiError": "There was a problem saving your info."
   },
   "completed": {
