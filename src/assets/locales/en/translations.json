@@ -30,6 +30,10 @@
     },
     "error": "Error",
     "clear": "Clear",
-    "skip": "Skip"
+    "skip": "Skip",
+    "languages": {
+      "es": "Spanish",
+      "en": "English" 
+    }
   }
 }

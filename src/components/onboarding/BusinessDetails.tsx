@@ -168,7 +168,7 @@ const BusinessDetails: React.FC = () => {
                 clearable
                 data={Object.values(languageData).map((item) => ({
                   value: item.code,
-                  label: item.label
+                  label: t(`generic.languages.${item.code}`, { ns: 'translations' })
                 }))}
                 {...commonFormFieldProps('userLanguage', {
                   label: t('businessDetails.formUserLanguageField.label'),
