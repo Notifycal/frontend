@@ -1,6 +1,7 @@
 import { updateUserProfile } from '@api/userProfile';
 import type { NotifycalTFunction } from '@common/i18n';
 import { requireOnboardingSteps } from '@constants/onboardingSteps';
+import type { ParseKeys } from 'i18next';
 import { z } from 'zod';
 
 import { useI18nForm } from '@hooks/useI18nForm';
@@ -99,6 +100,28 @@ const Confirm: React.FC = () => {
     saveUserProfileMutation.mutate(newData);
   };
 
+  const checkboxes: Array<{
+    name: keyof ConfirmInput;
+    i18nKey?: ParseKeys<'onboarding'>;
+    label?: string;
+    url?: string;
+  }> = [
+    {
+      name: 'termsAccepted',
+      i18nKey: 'confirm.formTosField.label',
+      url: 'https://TODO/TOS'
+    },
+    {
+      name: 'privacyAccepted',
+      i18nKey: 'confirm.formPrivacyField.label',
+      url: 'https://TODO/Privacy'
+    },
+    {
+      name: 'marketingOptIn',
+      label: t('confirm.formMarketingField.label')
+    }
+  ];
+
   return (
     <form onSubmit={handleSubmit(submitUserProfile)}>
       <div className="space-y-6">
@@ -106,41 +129,32 @@ const Confirm: React.FC = () => {
 
         {/* Terms & Agreements */}
         <div className="space-y-3">
-          <Checkbox
-            className="mt-1"
-            label={
-              <Trans
-                className="text-sm text-gray-700"
-                i18nKey="confirm.formTosField.label"
-                ns="onboarding"
-                components={[
-                  <a className="text-primary-600 hover:underline" href="#" rel="noopener noreferrer" target="_blank" />
-                ]}
-              />
-            }
-            {...register('termsAccepted')}
-          />
-
-          <Checkbox
-            className="mt-1"
-            label={
-              <Trans
-                className="text-sm text-gray-700"
-                i18nKey="confirm.formPrivacyField.label"
-                ns="onboarding"
-                components={[
-                  <a className="text-primary-600 hover:underline" href="#" rel="noopener noreferrer" target="_blank" />
-                ]}
-              />
-            }
-            {...register('privacyAccepted')}
-          />
-
-          <Checkbox
-            className="mt-1"
-            label={<span className="text-sm text-gray-700">{t('confirm.formMarketingField.label')}</span>}
-            {...register('marketingOptIn')}
-          />
+          {checkboxes.map(({ name, i18nKey, label, url }) => (
+            <Checkbox
+              key={name}
+              className="mt-1"
+              label={
+                i18nKey && url ? (
+                  <Trans
+                    className="text-sm text-gray-700"
+                    i18nKey={i18nKey}
+                    ns="onboarding"
+                    components={[
+                      <a
+                        className="text-primary-600 hover:underline"
+                        href={url}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      />
+                    ]}
+                  />
+                ) : (
+                  label
+                )
+              }
+              {...register(name)}
+            />
+          ))}
         </div>
 
         {/* Error Message from validation */}
