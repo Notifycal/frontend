@@ -86,16 +86,16 @@ const Confirm: React.FC = () => {
     }
   });
 
-  const submitUserProfile = (formData: ConfirmValues): void => {
-    handleStepData(formData);
+  const submitUserProfile = (confirmationFormData: ConfirmValues): void => {
+    handleStepData(confirmationFormData);
 
     const newData = {
       calendars: calendarsWithTemplateInfo,
       business: {
-        name: businessDetails.name,
-        address: businessDetails.address,
-        senderContact: senderDetails.contactDetails
-      }
+        ...businessDetails,
+        senderContact: senderDetails.senderContact
+      },
+      confirmation: confirmationFormData
     };
     saveUserProfileMutation.mutate(newData);
   };
