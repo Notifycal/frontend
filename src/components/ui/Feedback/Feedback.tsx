@@ -79,6 +79,9 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
           </Notification>
           <Group mt="md">
             <Button onClick={handleReset}>{t('feedback.sendAnother')}</Button>
+            <Button component="a" href="/dashboard">
+              {t('feedback.goToDashboard')}
+            </Button>
           </Group>
         </Box>
       ) : (

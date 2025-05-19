@@ -25,7 +25,8 @@
     "submit": "Enviar",
     "thankYou": "¡Gracias por tu comentario!",
     "received": "Hemos recibido tu información y la revisaremos pronto.",
-    "sendAnother": "Enviar otro comentario"
+    "sendAnother": "Enviar otro comentario",
+    "goToDashboard": "Ir al dashboard"
   },
   "404": {
     "pageNotFound": "¡Oops!",

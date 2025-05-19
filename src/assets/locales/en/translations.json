@@ -25,7 +25,8 @@
     "submit": "Submit",
     "thankYou": "Thank you for your feedback!",
     "received": "We have received your information and will review it soon.",
-    "sendAnother": "Send another feedback"
+    "sendAnother": "Send another feedback",
+    "goToDashboard": "Go to dashboard"
   },
   "404": {
     "pageNotFound": "Page not found",
