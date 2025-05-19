@@ -1,4 +1,4 @@
-import { getFirstIncompleteStepIndex, getStepByIndex, STEPS } from '@constants/onboardingSteps';
+import { getFirstIncompleteStepIndex, getStepByIndex, onboardingSteps } from '@constants/onboardingSteps';
 
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { Outlet, useNavigate } from '@tanstack/react-router';
@@ -55,7 +55,7 @@ const StepLayout: React.FC = () => {
                     }
                   }}
                 >
-                  {STEPS.map(({ path, stepKey }, index) => {
+                  {onboardingSteps.map(({ path, stepKey }, index) => {
                     const tTitle = t(`${stepKey}.title`);
                     return (
                       <Stepper.Step key={path} allowStepSelect={shouldAllowSelectStep(index)} label={tTitle}>
@@ -76,7 +76,7 @@ const StepLayout: React.FC = () => {
             </div>
           </div>
 
-          <Progress radius={0} size="sm" value={(currentStep / (STEPS.length - 1)) * 100} />
+          <Progress radius={0} size="sm" value={(currentStep / (onboardingSteps.length - 1)) * 100} />
 
           {/* Main content */}
           <main className="flex-1 container mx-auto px-4 py-6">

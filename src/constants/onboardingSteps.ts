@@ -17,7 +17,7 @@ export interface StepConfig {
   resetOnChangeBefore?: boolean;
 }
 
-export const STEPS: Array<StepConfig> = [
+export const onboardingSteps: Array<StepConfig> = [
   {
     path: 'business-details',
     stepKey: 'businessDetails',
@@ -51,14 +51,14 @@ export const STEPS: Array<StepConfig> = [
   }
 ];
 
-export const isValidStepPath = (path: string): boolean => STEPS.map((step) => step.path).includes(path);
+export const isValidStepPath = (path: string): boolean => onboardingSteps.map((step) => step.path).includes(path);
 
 export const getStepByProperty = <K extends keyof StepConfig>(key: K, value: StepConfig[K]): StepConfig | undefined => {
-  return STEPS.find((step) => step[key] === value);
+  return onboardingSteps.find((step) => step[key] === value);
 };
 
 export const getStepByIndex = (index: number): StepConfig | undefined => {
-  const step = STEPS[index];
+  const step = onboardingSteps[index];
   return step;
 };
 
@@ -66,19 +66,19 @@ export const findStepIndexByProperty = <K extends keyof StepConfig>(
   key: K,
   value: StepConfig[K]
 ): number | undefined => {
-  const index = STEPS.findIndex((step) => step[key] === value);
+  const index = onboardingSteps.findIndex((step) => step[key] === value);
   return index > -1 ? index : undefined;
 };
 
 export const getFirstIncompleteStepIndex = (stepsCompleted: StepsCompletion): number | undefined => {
-  const index = STEPS.findIndex((step) => !stepsCompleted[step.stepKey]);
+  const index = onboardingSteps.findIndex((step) => !stepsCompleted[step.stepKey]);
   return index > -1 ? index : undefined;
 };
 
 export const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
   !Object.values(stepsCompleted).every((step) => step);
 
-export const isLastStep = (stepIndex: number): boolean => stepIndex === STEPS.length - 1;
+export const isLastStep = (stepIndex: number): boolean => stepIndex === onboardingSteps.length - 1;
 
 export const requireOnboardingSteps = <const Keys extends ReadonlyArray<keyof OnboardingData>>(
   data: Partial<OnboardingData>,
