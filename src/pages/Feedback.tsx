@@ -1,13 +1,22 @@
 import type { FunctionComponent } from '@common/types';
 import FeedbackForm from '@components/ui/Feedback/Feedback';
-import type { Email, UserId } from '@notifycal/shared/types';
+import { useAuth } from '@hooks/AuthProvider';
+import { useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
 
 export const Feedback = (): FunctionComponent => {
-  const userEmail = 'sergio.test5@gmail.com' as Email;
-  const userId = '12345' as UserId;
-  return (
+  const { authInfo } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authInfo?.email || !authInfo?.userId) {
+      void navigate({ to: '/dashboard' });
+    }
+  }, [authInfo, navigate]);
+
+  return authInfo?.email && authInfo?.userId ? (
     <div>
-      <FeedbackForm email={userEmail} userId={userId} />
+      <FeedbackForm email={authInfo.email} userId={authInfo.userId} />
     </div>
-  );
+  ) : null;
 };

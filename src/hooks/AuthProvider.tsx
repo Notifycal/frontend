@@ -11,14 +11,21 @@ import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorRetu
 import type { FunctionComponent } from '@common/types';
 
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import type { Email, UserId } from '@notifycal/shared/types';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
+
+export type AuthInfo = {
+  userId: UserId;
+  email: Email;
+};
 
 export interface AuthContext {
   isAuthenticated: boolean;
   login: () => Promise<void>;
   logout: () => void;
   loginError: LoginError | null;
+  authInfo: AuthInfo | null;
 }
 
 type AuthState = {
@@ -26,19 +33,36 @@ type AuthState = {
   refreshToken: string | null;
   loginError: LoginError | null;
   loginStatus: 'unauthorized' | 'loading' | 'success';
+  authInfo: AuthInfo | null;
 };
 
 const AuthContext = createContext<AuthContext | null>(null);
+
+const decodeToken = (token: string): { userId: UserId; email: Email } | null => {
+  try {
+    const payload = token.split('.')[1];
+    const decodedPayload = atob(payload!);
+    const parsed = JSON.parse(decodedPayload) as Partial<{ userId: UserId; email: Email }>;
+    if (typeof parsed.userId === 'string' && typeof parsed.email === 'string') {
+      return { userId: parsed.userId, email: parsed.email };
+    }
+    return null;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+};
 
 export const AuthProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
   const [authState, setAuthState] = useState<AuthState>({
     accessToken: null,
     refreshToken: getLocalStorageItem('refreshToken'),
     loginError: null,
-    loginStatus: 'loading'
+    loginStatus: 'loading',
+    authInfo: null
   });
 
-  const { accessToken, refreshToken, loginError, loginStatus } = authState;
+  const { accessToken, refreshToken, loginError, loginStatus, authInfo } = authState;
 
   const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
@@ -47,11 +71,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const hasMounted = useRef(false);
 
+  const updateAuthInfo = useCallback((token: string | null) => {
+    if (!token) {
+      return null;
+    }
+
+    const decoded = decodeToken(token);
+    return decoded;
+  }, []);
+
   // Update localstorage whenever the state (tokens) changes
   // Using `useEffect` avoids having to call these functions along setAuthState
   useEffect(() => {
     setLocalStorageItem('refreshToken', refreshToken);
   }, [refreshToken]);
+
+  useEffect(() => {
+    if (accessToken) {
+      const newAuthInfo = updateAuthInfo(accessToken);
+      if (newAuthInfo) {
+        setAuthState((previous) => ({ ...previous, authInfo: newAuthInfo }));
+      }
+    } else {
+      setAuthState((previous) => ({ ...previous, authInfo: null }));
+    }
+  }, [accessToken, updateAuthInfo]);
 
   // Runs only once on mount, doesn't re-run on updates (because dependency array is empty).
   useEffect(() => {
@@ -102,7 +146,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       if (checkScopes(codeResponse.scope)) {
         const { accessToken, refreshToken } = await apiLogin(codeResponse);
 
-        setAuthState((previous: AuthState) => ({ ...previous, accessToken, refreshToken, loginStatus: 'success' }));
+        setAuthState((previous: AuthState) => ({
+          ...previous,
+          accessToken,
+          refreshToken,
+          loginStatus: 'success'
+        }));
       } else {
         throw new Error('loginErrorInvalidScopes');
       }
@@ -126,7 +175,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       ...previous,
       accessToken: null,
       refreshToken: null,
-      loginStatus: 'unauthorized'
+      loginStatus: 'unauthorized',
+      authInfo: null
     }));
   }, []);
 
@@ -180,7 +230,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: loginStatus === 'success', login, logout, loginError }}>
+    <AuthContext.Provider value={{ isAuthenticated: loginStatus === 'success', login, logout, loginError, authInfo }}>
       {children}
     </AuthContext.Provider>
   );
