@@ -19,12 +19,22 @@ import { Checkbox } from '@mantine/core';
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const confirmSchema = (t: NotifycalTFunction) =>
   z.object({
-    termsAccepted: z.boolean().refine((value) => value === true, {
-      message: t('confirm.formTosField.isRequired')
-    }),
-    privacyAccepted: z.boolean().refine((value) => value === true, {
-      message: t('confirm.formPrivacyField.isRequired')
-    }),
+    termsAccepted: z.preprocess(
+      (value) => value === true,
+      z.literal(true, {
+        errorMap: () => ({
+          message: t('confirm.formTosField.isRequired')
+        })
+      })
+    ),
+    privacyAccepted: z.preprocess(
+      (value) => value === true,
+      z.literal(true, {
+        errorMap: () => ({
+          message: t('confirm.formPrivacyField.isRequired')
+        })
+      })
+    ),
     marketingOptInAccepted: z.boolean()
   });
 
