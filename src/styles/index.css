@@ -1,5 +1,13 @@
 /* Following this to ensure styles are loaded in a sane order
 https://github.com/orgs/mantinedev/discussions/1672#discussioncomment-11534898 */
-@layer tw-base, mantine, tw-components, tw-utilities;
-@import './tailwind.css';
-@import './mantine.css';
+@layer theme, base, mantine, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+/* @import 'tailwindcss/base.css' layer(base); */
+@import 'tailwindcss/utilities.css' layer(utilities);
+/* @import 'tailwindcss/components.css' layer(components); */
+
+@import '@mantine/core/styles.layer.css';
+
+/* @import './tailwind.css'; */
+/* @import './mantine.css'; */

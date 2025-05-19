@@ -1,0 +1,261 @@
+{
+  "header": "Welcome to Notifycal",
+  "footer": "{{year}} Notifycal. All rights reserved.",
+  "welcome": {
+    "msg1": "Before you continue, we need to know more about you and your business.",
+    "msg2": "The following information is needed to be able to send reminders to your clients."
+  },
+  "businessDetails": {
+    "title": "Business details",
+    "subtitle": "Tell us about your business",
+    "industries": {
+      "technology": {
+        "label": "Technology",
+        "sectors": {
+          "saas": "Software as a Service (SaaS)",
+          "itSupport": "IT Support",
+          "webDev": "Web Development",
+          "digitalMarketing": "Digital Marketing",
+          "cybersecurity": "Cybersecurity",
+          "other": "Other"
+        }
+      },
+      "healthcare": {
+        "label": "Healthcare",
+        "sectors": {
+          "doctors": "Doctors",
+          "dentists": "Dentists",
+          "therapists": "Therapists",
+          "optometrists": "Optometrists",
+          "chiropractors": "Chiropractors",
+          "veterinarians": "Veterinarians",
+          "other": "Other"
+        }
+      },
+      "wellness": {
+        "label": "Beauty & Wellness",
+        "sectors": {
+          "salons": "Salons & Barbers",
+          "spas": "Spas",
+          "massageTherapists": "Massage Therapists",
+          "nailTechnicians": "Nail Technicians",
+          "other": "Other"
+        }
+      },
+      "homeServices": {
+        "label": "Home Services",
+        "sectors": {
+          "plumbers": "Plumbers",
+          "electricians": "Electricians",
+          "cleaners": "Cleaners",
+          "hvac": "HVAC Technicians",
+          "pestControl": "Pest Control",
+          "other": "Other"
+        }
+      },
+      "finance": {
+        "label": "Finance",
+        "sectors": {
+          "accountants": "Accountants",
+          "taxAdvisors": "Tax Advisors",
+          "financialPlanners": "Financial Planners",
+          "bookkeepers": "Bookkeepers",
+          "insuranceAgents": "Insurance Agents",
+          "other": "Other"
+        }
+      },
+      "legal": {
+        "label": "Legal",
+        "sectors": {
+          "lawFirms": "Law Firms",
+          "notaries": "Notaries",
+          "compliance": "Compliance Consultants",
+          "other": "Other"
+        }
+      },
+      "education": {
+        "label": "Education",
+        "sectors": {
+          "tutors": "Tutors",
+          "testPrep": "Test Prep",
+          "languageInstructors": "Language Instructors",
+          "lifeCoaches": "Life Coaches",
+          "other": "Other"
+        }
+      },
+      "retail": {
+        "label": "Retail",
+        "sectors": {
+          "dryCleaners": "Dry Cleaners",
+          "tailors": "Tailors",
+          "shoeRepair": "Shoe Repair",
+          "subscriptionBoxes": "Subscription Boxes",
+          "mealPlans": "Meal Plans",
+          "other": "Other"
+        }
+      },
+      "automotive": {
+        "label": "Automotive",
+        "sectors": {
+          "mechanics": "Mechanics",
+          "carDetailing": "Car Detailers",
+          "vehicleInspection": "Inspection Services",
+          "other": "Other"
+        }
+      },
+      "events": {
+        "label": "Events & Hospitality",
+        "sectors": {
+          "weddingPlanners": "Wedding Planners",
+          "photographers": "Photographers",
+          "djs": "DJs",
+          "venueManagers": "Venue Managers",
+          "hotels": "Hotels & BnBs",
+          "tourOperators": "Tour Operators",
+          "other": "Other"
+        }
+      },
+      "government": {
+        "label": "Government & Licensing",
+        "sectors": {
+          "dmv": "Vehicle Registration (DMV)",
+          "visaServices": "Visa & Immigration Services",
+          "buildingInspectors": "Building Inspectors",
+          "fireSafety": "Fire Safety Inspectors",
+          "other": "Other"
+        }
+      },
+      "nonProfit": {
+        "label": "Non-Profit",
+        "sectors": {
+          "charities": "Charities",
+          "communityOrgs": "Community Organizations",
+          "other": "Other"
+        }
+      },
+      "other": {
+        "label": "Other",
+        "sectors": {
+          "custom": "Custom/Other"
+        }
+      }
+    },
+    "companySizes": {
+      "me": "Just me",
+      "xs": "2-5 employees",
+      "sm": "6-20 employees",
+      "md": "21-50 employees",
+      "lg": "51-200 employees",
+      "xl": "201-1000 employees",
+      "xxl": "1000+ employees"
+    },
+    "formNameField": {
+      "label": "Business name",
+      "placeholder": "Enter the name of your business",
+      "isRequired": "Business name is required",
+      "isMax": "Business name is too long"
+    },
+    "formAddressField": {
+      "label": "Business address",
+      "placeholder": "Enter the address of your business",
+      "isRequired": "Business address is required",
+      "isMax": "Business address is too long"
+    },
+    "formIndustryCategoryField": {
+      "label": "Industry",
+      "placeholder": "Select your industry",
+      "isRequired": "Please select an industry"
+    },
+    "formIndustrySubcategoryField": {
+      "label": "Subindustry",
+      "placeholder": "Select your subindustry",
+      "isRequired": "Please select a subindustry"
+    },
+    "formCustomIndustryField": {
+      "label": "Custom industry",
+      "placeholder": "Type your industry",
+      "isRequired": "Please enter the industry of your business",
+      "isMax": "Industry is too long"
+    },
+    "formCompanySizeField": {
+      "label": "Company size",
+      "placeholder": "Select the size of the company",
+      "isRequired": "Please select a company size"
+    },
+    "formUserLanguageField": {
+      "label": "Language",
+      "placeholder": "Select your language",
+      "isRequired": "Please select a language"
+    },
+    "invalidSMSCharacters": "Contains invalid characters for SMS",
+    "explanation": "This info will help us tailor the reminders your clients will receive."
+  },
+  "reminderType": {
+    "title": "Reminder type",
+    "subtitle": "Configure your reminder message",
+    "formReminderTypeField": {
+      "isRequired": "Select a reminder message type"
+    },
+    "changeReminderLanguage": "Change reminder language",
+    "characterCountHeadsUpBilling": {
+      "msg1": "Reminders are charged in multiples of 160 characters.",
+      "msg2": "Special characters are not allowed."
+    },
+    "specialCharactersExplanation": "Please use standard letters, numbers and basic symbols only.",
+    "characterCount": "The selected reminder type results in reminders {{characterCount}} characters long."
+  },
+  "calendars": {
+    "title": "Calendars",
+    "subtitle": "Set up your calendars",
+    "formCalendarsField": {
+      "label": "Select the calendar(s) you want to use for {{businessName}}",
+      "placeholderLoading": "Searching for your calendars...",
+      "placeholderLoaded": "Select one or more calendars"
+    },
+    "selectMenu": {
+      "error": "At least one calendar needs to be selected"
+    },
+    "explanation": "We'll use events from these calendars to send reminders to your customers."
+  },
+  "senderDetails": {
+    "title": "Sender details",
+    "subtitle": "Your phone number",
+    "formSenderNumber": {
+      "label": "Phone number",
+      "placeholder": "Enter your phone number",
+      "isRequired": "Phone number is required",
+      "isInvalid": "Phone number is invalid"
+    },
+    "explanation": "We'll send reminders to your customers from your own number. This way they'll know who's contacting them."
+  },
+  "tryItOut": {
+    "title": "Try it out",
+    "subtitle": "Check out the reminder in your phone!",
+    "imageAlt": "Phone Notification",
+    "sendTestReminder": "Send test reminder",
+    "explanation": "This will help you see the message your clients will receive, in your own phone.",
+    "apiError": "There was a problem sending the test reminder to your phone."
+  },
+  "confirm": {
+    "title": "Confirm",
+    "subtitle": "Finalize your account setup",
+    "accountSummary": "Account Summary",
+    "formTosField": {
+      "label": "I agree to the <0>Terms of Service</0>",
+      "isRequired": "You must accept the Terms of Service"
+    },
+    "formPrivacyField": {
+      "label": "I agree to the <0>Privacy Policy</0>",
+      "isRequired": "You must accept the Privacy Policy"
+    },
+    "formMarketingField": {
+      "label": "I agree to receive marketing communications (optional)"
+    },
+    "apiError": "There was a problem saving your info."
+  },
+  "completed": {
+    "heading": "Onboarding Complete!",
+    "subheading": "Thank you for completing the onboarding process. You're all set to start using our platform!",
+    "goToDashboard": "Go to the Dashboard"
+  }
+}

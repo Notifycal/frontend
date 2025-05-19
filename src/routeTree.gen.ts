@@ -14,10 +14,15 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthOnboardingImport } from './routes/_auth/onboarding'
-import { Route as AuthDemoReminderImport } from './routes/_auth/demo-reminder'
 import { Route as AuthAppImport } from './routes/_auth/_app'
+import { Route as AuthOnboardingIndexImport } from './routes/_auth/onboarding/index'
+import { Route as AuthOnboardingStepImport } from './routes/_auth/onboarding/_step'
+import { Route as AuthOnboardingNostepImport } from './routes/_auth/onboarding/_nostep'
 import { Route as AuthAppTemplateImport } from './routes/_auth/_app/template'
 import { Route as AuthAppDashboardImport } from './routes/_auth/_app/dashboard'
+import { Route as AuthOnboardingStepStepImport } from './routes/_auth/onboarding/_step/$step'
+import { Route as AuthOnboardingNostepWelcomeImport } from './routes/_auth/onboarding/_nostep/welcome'
+import { Route as AuthOnboardingNostepCompletedImport } from './routes/_auth/onboarding/_nostep/completed'
 
 // Create/Update Routes
 
@@ -38,15 +43,25 @@ const AuthOnboardingRoute = AuthOnboardingImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AuthDemoReminderRoute = AuthDemoReminderImport.update({
-  id: '/demo-reminder',
-  path: '/demo-reminder',
-  getParentRoute: () => AuthRoute,
-} as any)
-
 const AuthAppRoute = AuthAppImport.update({
   id: '/_app',
   getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthOnboardingIndexRoute = AuthOnboardingIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthOnboardingRoute,
+} as any)
+
+const AuthOnboardingStepRoute = AuthOnboardingStepImport.update({
+  id: '/_step',
+  getParentRoute: () => AuthOnboardingRoute,
+} as any)
+
+const AuthOnboardingNostepRoute = AuthOnboardingNostepImport.update({
+  id: '/_nostep',
+  getParentRoute: () => AuthOnboardingRoute,
 } as any)
 
 const AuthAppTemplateRoute = AuthAppTemplateImport.update({
@@ -60,6 +75,26 @@ const AuthAppDashboardRoute = AuthAppDashboardImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthAppRoute,
 } as any)
+
+const AuthOnboardingStepStepRoute = AuthOnboardingStepStepImport.update({
+  id: '/$step',
+  path: '/$step',
+  getParentRoute: () => AuthOnboardingStepRoute,
+} as any)
+
+const AuthOnboardingNostepWelcomeRoute =
+  AuthOnboardingNostepWelcomeImport.update({
+    id: '/welcome',
+    path: '/welcome',
+    getParentRoute: () => AuthOnboardingNostepRoute,
+  } as any)
+
+const AuthOnboardingNostepCompletedRoute =
+  AuthOnboardingNostepCompletedImport.update({
+    id: '/completed',
+    path: '/completed',
+    getParentRoute: () => AuthOnboardingNostepRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -86,13 +121,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppImport
       parentRoute: typeof AuthImport
     }
-    '/_auth/demo-reminder': {
-      id: '/_auth/demo-reminder'
-      path: '/demo-reminder'
-      fullPath: '/demo-reminder'
-      preLoaderRoute: typeof AuthDemoReminderImport
-      parentRoute: typeof AuthImport
-    }
     '/_auth/onboarding': {
       id: '/_auth/onboarding'
       path: '/onboarding'
@@ -114,6 +142,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppTemplateImport
       parentRoute: typeof AuthAppImport
     }
+    '/_auth/onboarding/_nostep': {
+      id: '/_auth/onboarding/_nostep'
+      path: ''
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthOnboardingNostepImport
+      parentRoute: typeof AuthOnboardingImport
+    }
+    '/_auth/onboarding/_step': {
+      id: '/_auth/onboarding/_step'
+      path: ''
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthOnboardingStepImport
+      parentRoute: typeof AuthOnboardingImport
+    }
+    '/_auth/onboarding/': {
+      id: '/_auth/onboarding/'
+      path: '/'
+      fullPath: '/onboarding/'
+      preLoaderRoute: typeof AuthOnboardingIndexImport
+      parentRoute: typeof AuthOnboardingImport
+    }
+    '/_auth/onboarding/_nostep/completed': {
+      id: '/_auth/onboarding/_nostep/completed'
+      path: '/completed'
+      fullPath: '/onboarding/completed'
+      preLoaderRoute: typeof AuthOnboardingNostepCompletedImport
+      parentRoute: typeof AuthOnboardingNostepImport
+    }
+    '/_auth/onboarding/_nostep/welcome': {
+      id: '/_auth/onboarding/_nostep/welcome'
+      path: '/welcome'
+      fullPath: '/onboarding/welcome'
+      preLoaderRoute: typeof AuthOnboardingNostepWelcomeImport
+      parentRoute: typeof AuthOnboardingNostepImport
+    }
+    '/_auth/onboarding/_step/$step': {
+      id: '/_auth/onboarding/_step/$step'
+      path: '/$step'
+      fullPath: '/onboarding/$step'
+      preLoaderRoute: typeof AuthOnboardingStepStepImport
+      parentRoute: typeof AuthOnboardingStepImport
+    }
   }
 }
 
@@ -132,16 +202,54 @@ const AuthAppRouteChildren: AuthAppRouteChildren = {
 const AuthAppRouteWithChildren =
   AuthAppRoute._addFileChildren(AuthAppRouteChildren)
 
+interface AuthOnboardingNostepRouteChildren {
+  AuthOnboardingNostepCompletedRoute: typeof AuthOnboardingNostepCompletedRoute
+  AuthOnboardingNostepWelcomeRoute: typeof AuthOnboardingNostepWelcomeRoute
+}
+
+const AuthOnboardingNostepRouteChildren: AuthOnboardingNostepRouteChildren = {
+  AuthOnboardingNostepCompletedRoute: AuthOnboardingNostepCompletedRoute,
+  AuthOnboardingNostepWelcomeRoute: AuthOnboardingNostepWelcomeRoute,
+}
+
+const AuthOnboardingNostepRouteWithChildren =
+  AuthOnboardingNostepRoute._addFileChildren(AuthOnboardingNostepRouteChildren)
+
+interface AuthOnboardingStepRouteChildren {
+  AuthOnboardingStepStepRoute: typeof AuthOnboardingStepStepRoute
+}
+
+const AuthOnboardingStepRouteChildren: AuthOnboardingStepRouteChildren = {
+  AuthOnboardingStepStepRoute: AuthOnboardingStepStepRoute,
+}
+
+const AuthOnboardingStepRouteWithChildren =
+  AuthOnboardingStepRoute._addFileChildren(AuthOnboardingStepRouteChildren)
+
+interface AuthOnboardingRouteChildren {
+  AuthOnboardingNostepRoute: typeof AuthOnboardingNostepRouteWithChildren
+  AuthOnboardingStepRoute: typeof AuthOnboardingStepRouteWithChildren
+  AuthOnboardingIndexRoute: typeof AuthOnboardingIndexRoute
+}
+
+const AuthOnboardingRouteChildren: AuthOnboardingRouteChildren = {
+  AuthOnboardingNostepRoute: AuthOnboardingNostepRouteWithChildren,
+  AuthOnboardingStepRoute: AuthOnboardingStepRouteWithChildren,
+  AuthOnboardingIndexRoute: AuthOnboardingIndexRoute,
+}
+
+const AuthOnboardingRouteWithChildren = AuthOnboardingRoute._addFileChildren(
+  AuthOnboardingRouteChildren,
+)
+
 interface AuthRouteChildren {
   AuthAppRoute: typeof AuthAppRouteWithChildren
-  AuthDemoReminderRoute: typeof AuthDemoReminderRoute
-  AuthOnboardingRoute: typeof AuthOnboardingRoute
+  AuthOnboardingRoute: typeof AuthOnboardingRouteWithChildren
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAppRoute: AuthAppRouteWithChildren,
-  AuthDemoReminderRoute: AuthDemoReminderRoute,
-  AuthOnboardingRoute: AuthOnboardingRoute,
+  AuthOnboardingRoute: AuthOnboardingRouteWithChildren,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -149,19 +257,24 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
-  '/demo-reminder': typeof AuthDemoReminderRoute
-  '/onboarding': typeof AuthOnboardingRoute
+  '/onboarding': typeof AuthOnboardingStepRouteWithChildren
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
+  '/onboarding/': typeof AuthOnboardingIndexRoute
+  '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
+  '/onboarding/$step': typeof AuthOnboardingStepStepRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
-  '/demo-reminder': typeof AuthDemoReminderRoute
-  '/onboarding': typeof AuthOnboardingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
+  '/onboarding': typeof AuthOnboardingIndexRoute
+  '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
+  '/onboarding/$step': typeof AuthOnboardingStepStepRoute
 }
 
 export interface FileRoutesById {
@@ -169,10 +282,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_auth/_app': typeof AuthAppRouteWithChildren
-  '/_auth/demo-reminder': typeof AuthDemoReminderRoute
-  '/_auth/onboarding': typeof AuthOnboardingRoute
+  '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
   '/_auth/_app/template': typeof AuthAppTemplateRoute
+  '/_auth/onboarding/_nostep': typeof AuthOnboardingNostepRouteWithChildren
+  '/_auth/onboarding/_step': typeof AuthOnboardingStepRouteWithChildren
+  '/_auth/onboarding/': typeof AuthOnboardingIndexRoute
+  '/_auth/onboarding/_nostep/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/_auth/onboarding/_nostep/welcome': typeof AuthOnboardingNostepWelcomeRoute
+  '/_auth/onboarding/_step/$step': typeof AuthOnboardingStepStepRoute
 }
 
 export interface FileRouteTypes {
@@ -180,21 +298,37 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
-    | '/demo-reminder'
     | '/onboarding'
     | '/dashboard'
     | '/template'
+    | '/onboarding/'
+    | '/onboarding/completed'
+    | '/onboarding/welcome'
+    | '/onboarding/$step'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/demo-reminder' | '/onboarding' | '/dashboard' | '/template'
+  to:
+    | '/'
+    | ''
+    | '/dashboard'
+    | '/template'
+    | '/onboarding'
+    | '/onboarding/completed'
+    | '/onboarding/welcome'
+    | '/onboarding/$step'
   id:
     | '__root__'
     | '/'
     | '/_auth'
     | '/_auth/_app'
-    | '/_auth/demo-reminder'
     | '/_auth/onboarding'
     | '/_auth/_app/dashboard'
     | '/_auth/_app/template'
+    | '/_auth/onboarding/_nostep'
+    | '/_auth/onboarding/_step'
+    | '/_auth/onboarding/'
+    | '/_auth/onboarding/_nostep/completed'
+    | '/_auth/onboarding/_nostep/welcome'
+    | '/_auth/onboarding/_step/$step'
   fileRoutesById: FileRoutesById
 }
 
@@ -229,7 +363,6 @@ export const routeTree = rootRoute
       "filePath": "_auth.tsx",
       "children": [
         "/_auth/_app",
-        "/_auth/demo-reminder",
         "/_auth/onboarding"
       ]
     },
@@ -241,13 +374,14 @@ export const routeTree = rootRoute
         "/_auth/_app/template"
       ]
     },
-    "/_auth/demo-reminder": {
-      "filePath": "_auth/demo-reminder.tsx",
-      "parent": "/_auth"
-    },
     "/_auth/onboarding": {
       "filePath": "_auth/onboarding.tsx",
-      "parent": "/_auth"
+      "parent": "/_auth",
+      "children": [
+        "/_auth/onboarding/_nostep",
+        "/_auth/onboarding/_step",
+        "/_auth/onboarding/"
+      ]
     },
     "/_auth/_app/dashboard": {
       "filePath": "_auth/_app/dashboard.tsx",
@@ -256,6 +390,37 @@ export const routeTree = rootRoute
     "/_auth/_app/template": {
       "filePath": "_auth/_app/template.tsx",
       "parent": "/_auth/_app"
+    },
+    "/_auth/onboarding/_nostep": {
+      "filePath": "_auth/onboarding/_nostep.tsx",
+      "parent": "/_auth/onboarding",
+      "children": [
+        "/_auth/onboarding/_nostep/completed",
+        "/_auth/onboarding/_nostep/welcome"
+      ]
+    },
+    "/_auth/onboarding/_step": {
+      "filePath": "_auth/onboarding/_step.tsx",
+      "parent": "/_auth/onboarding",
+      "children": [
+        "/_auth/onboarding/_step/$step"
+      ]
+    },
+    "/_auth/onboarding/": {
+      "filePath": "_auth/onboarding/index.tsx",
+      "parent": "/_auth/onboarding"
+    },
+    "/_auth/onboarding/_nostep/completed": {
+      "filePath": "_auth/onboarding/_nostep/completed.tsx",
+      "parent": "/_auth/onboarding/_nostep"
+    },
+    "/_auth/onboarding/_nostep/welcome": {
+      "filePath": "_auth/onboarding/_nostep/welcome.tsx",
+      "parent": "/_auth/onboarding/_nostep"
+    },
+    "/_auth/onboarding/_step/$step": {
+      "filePath": "_auth/onboarding/_step/$step.tsx",
+      "parent": "/_auth/onboarding/_step"
     }
   }
 }

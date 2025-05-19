@@ -35,7 +35,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@mantine/core": "7.17.7",
     "@mantine/hooks": "7.17.7",
-    "@notifycal/shared": "4.0.1",
+    "@notifycal/shared": "^4.2.1",
     "@react-oauth/google": "^0.12.1",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-query": "^5.64.2",
@@ -51,12 +51,14 @@
     "i18next-http-backend": "^3.0.2",
     "luxon": "^3.5.0",
     "motion": "^12.0.6",
+    "radash": "^12.1.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-error-boundary": "^5.0.0",
     "react-hook-form": "^7.54.2",
     "react-i18next": "^15.4.1",
-    "zod": "3.24.3"
+    "zod": "^3.25.6",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
