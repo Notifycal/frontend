@@ -1,5 +1,5 @@
 import { languageData, type NotifycalTFunction } from '@common/i18n';
-import { flatObjectToDropdownData, labeledObjectToDropdownData } from '@common/ui';
+import { flatObjectToDropdownData, labeledObjectToDropdownData } from '@common/mantineHelpers';
 import { createSmsContentSchema } from '@notifycal/shared/schemas';
 import type { BusinessAddress, BusinessName, LanguageCode } from '@notifycal/shared/types';
 import { nullableInputSchema, stringArrayValidatorSchema } from '@schemas/util';
