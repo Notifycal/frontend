@@ -9,6 +9,24 @@
     "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
     "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
   },
+  "feedback": {
+    "type": "You must select a feedback type",
+    "content": "Some content is required",
+    "importance": "Your opinion is important to us",
+    "typeLabel": "Feedback type",
+    "selectOption": "Select an option",
+    "featureRequest": "Feature request",
+    "generalFeedback": "General feedback",
+    "bugReport": "Bug report",
+    "complaint": "Complaint",
+    "other": "Other",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Write your feedback here...",
+    "submit": "Submit",
+    "thankYou": "Thank you for your feedback!",
+    "received": "We have received your information and will review it soon.",
+    "sendAnother": "Send another feedback"
+  },
   "404": {
     "pageNotFound": "Page not found",
     "weCouldNotFindThePage": "Sorry, we couldn’t find the page you’re looking for.",

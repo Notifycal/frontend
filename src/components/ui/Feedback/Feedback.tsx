@@ -4,23 +4,32 @@ import { Box, Button, Group, Notification, Paper, Select, Text, Textarea } from 
 import type { Email, UserId } from '@notifycal/shared/types';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
+
+// This component is used to collect feedback from users. It uses a Google Form to submit the feedback. Make sure of the following:
+// - update the form ID and field IDs in the code below if you start pointing at a different Google Form. Edits don't seem to change field ids.
+// - Enable "Disable autosave for all respondents" so that the form doesn't try to save the draft response in the user's Google Drive and form can be submitted on tab load.
+// - Collect email addresses "Do not collect" so Google authentication is not required. User ids are passed by the app automatically.
+// - Make sure to set the form to "Anyone with the link can respond" so that users can submit the form without being logged in.
+// Note: implementation is based on https://stackoverflow.com/questions/71714110/can-you-submit-a-restful-request-to-a-google-forms-api
 
 interface FeedbackFormProps {
   email: Email;
   userId: UserId;
 }
 
-const feedbackSchema = z.object({
-  type: z.string().min(1, { message: 'Debes seleccionar un tipo de feedback' }),
-  content: z.string().min(5, { message: 'El mensaje debe tener al menos 5 caracteres' })
-});
-
-type FeedbackFormValues = z.infer<typeof feedbackSchema>;
-
 const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useTranslation();
+
+  const feedbackSchema = z.object({
+    type: z.string().min(1, { message: t('feedback.type') }),
+    content: z.string().min(5, { message: t('feedback.content') })
+  });
+
+  type FeedbackFormValues = z.infer<typeof feedbackSchema>;
 
   const {
     control,
@@ -65,17 +74,17 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
     <Paper p="md" shadow="xs">
       {submitted ? (
         <Box>
-          <Notification color="green" title="¡Gracias por tu feedback!" onClose={handleReset}>
-            Hemos recibido tu información y la revisaremos pronto.
+          <Notification color="green" title={t('feedback.thankYou')} onClose={handleReset}>
+            {t('feedback.received')}
           </Notification>
           <Group mt="md">
-            <Button onClick={handleReset}>Enviar otro feedback</Button>
+            <Button onClick={handleReset}>{t('feedback.sendAnother')}</Button>
           </Group>
         </Box>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <Text mb="md" size="lg">
-            Tu opinión es importante para nosotros
+            {t('feedback.importance')}
           </Text>
 
           <Controller
@@ -85,15 +94,16 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
               <Select
                 {...field}
                 error={errors.type?.message}
-                label="Tipo de feedback"
+                label={t('feedback.typeLabel')}
                 mb="md"
-                placeholder="Selecciona una opción"
+                placeholder={t('feedback.selectOption')}
                 data={[
-                  { value: 'Feature request', label: 'Solicitud de funcionalidad' },
-                  { value: 'Feedback', label: 'Feedback general' },
-                  { value: 'Bug', label: 'Reporte de error' },
-                  { value: 'Complain', label: 'Queja' },
-                  { value: 'Other', label: 'Otro' }
+                  // Gotcha: these values need to match values in field in the Google Form. It is case-sensitive.
+                  { value: 'Feature request', label: t('feedback.featureRequest') },
+                  { value: 'Feedback', label: t('feedback.generalFeedback') },
+                  { value: 'Bug', label: t('feedback.bugReport') },
+                  { value: 'Complain', label: t('feedback.complaint') },
+                  { value: 'Other', label: t('feedback.other') }
                 ]}
                 onChange={(value) => {
                   field.onChange(value || '');
@@ -109,17 +119,17 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
               <Textarea
                 {...field}
                 error={errors.content?.message}
-                label="Mensaje"
+                label={t('feedback.messageLabel')}
                 mb="lg"
                 minRows={4}
-                placeholder="Escribe tu feedback aquí..."
+                placeholder={t('feedback.messagePlaceholder')}
               />
             )}
           />
 
           <Group>
             <Button loading={isSubmitting} type="submit">
-              Enviar
+              {t('feedback.submit')}
             </Button>
           </Group>
         </form>
