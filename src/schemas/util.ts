@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
-/* eslint-disable @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types */
-export const stringArrayValidatorSchema = (validValues: Array<string>, message?: string) => {
+export const stringArrayValidatorSchema = (
+  validValues: Array<string>,
+  message?: string
+): z.ZodEffects<z.ZodString, string, string> => {
   const base = message ? z.string({ message }) : z.string();
   return base.refine(
     (currentValue) => (currentValue ? validValues.includes(currentValue) : false),
