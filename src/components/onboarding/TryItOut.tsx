@@ -70,7 +70,6 @@ const TryItOut: React.FC = () => {
 
   const onTestReminderSendButtonClick = (): void => {
     if (!hasSentTestReminder) {
-      // API call goes here
       const demoReminderPayload = {
         startTime: {
           dateTime: DT.now().toUTC().toISO() as DateTime,

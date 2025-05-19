@@ -244,7 +244,6 @@ const BusinessDetails: React.FC = () => {
                     })}
                     onChange={(value) => {
                       resetField('companyIndustry.subcategory', { defaultValue: null });
-                      // resetField('companyIndustry.subcategory', {defaultValue: ''});
                       field.onChange(value);
                     }}
                     onClear={() => {
@@ -289,20 +288,17 @@ const BusinessDetails: React.FC = () => {
         <Controller
           control={control}
           name="companySize"
-          render={({ field }) => {
-            // console.log(field.value);
-            return (
-              <Select
-                clearable
-                data={companySizeData}
-                {...commonFormFieldProps('companySize', {
-                  label: t('businessDetails.formCompanySizeField.label'),
-                  placeholder: t('businessDetails.formCompanySizeField.placeholder'),
-                  registration: field
-                })}
-              />
-            );
-          }}
+          render={({ field }) => (
+            <Select
+              clearable
+              data={companySizeData}
+              {...commonFormFieldProps('companySize', {
+                label: t('businessDetails.formCompanySizeField.label'),
+                placeholder: t('businessDetails.formCompanySizeField.placeholder'),
+                registration: field
+              })}
+            />
+          )}
         />
 
         <div className="text-sm text-gray-500 mt-4">{t('businessDetails.explanation')}</div>
