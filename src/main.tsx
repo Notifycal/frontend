@@ -26,11 +26,11 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   void enableMocking().then(() => {
     root.render(
-      // <React.StrictMode>
-      <React.Suspense fallback="loading">
-        <App router={router} />
-      </React.Suspense>
-      // </React.StrictMode>
+      <React.StrictMode>
+        <React.Suspense fallback="loading">
+          <App router={router} />
+        </React.Suspense>
+      </React.StrictMode>
     );
   });
 }
