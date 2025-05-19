@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.15.0](https://github.com/Notifycal/frontend/compare/v0.14.1...v0.15.0) (2025-05-19)
+
+
+### Features
+
+* onboarding refactor ([#235](https://github.com/Notifycal/frontend/issues/235)) ([38dcefb](https://github.com/Notifycal/frontend/commit/38dcefbb4241f8cce7ad323810056b56f06c9a0d))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency react-error-boundary to v6 ([#238](https://github.com/Notifycal/frontend/issues/238)) ([2dba8a1](https://github.com/Notifycal/frontend/commit/2dba8a110ae162372636164d2cb32707347fc285))
+* **deps:** Update Node.js Dependencies ([#237](https://github.com/Notifycal/frontend/issues/237)) ([c6b26c5](https://github.com/Notifycal/frontend/commit/c6b26c501662951d724d4a0d46ac99b89e70f834))
+* **deps:** Update Node.js Dependencies to v8 (major) ([#243](https://github.com/Notifycal/frontend/issues/243)) ([80d5611](https://github.com/Notifycal/frontend/commit/80d5611e7306111aebbaa58d565ea5a4b003ac78))
+
 ## [0.14.1](https://github.com/Notifycal/frontend/compare/v0.14.0...v0.14.1) (2025-05-02)
 
 
