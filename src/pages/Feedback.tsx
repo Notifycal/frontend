@@ -1,12 +1,13 @@
 import type { FunctionComponent } from '@common/types';
 import FeedbackForm from '@components/ui/Feedback/Feedback';
-import type { Email } from '@notifycal/shared/types';
+import type { Email, UserId } from '@notifycal/shared/types';
 
 export const Feedback = (): FunctionComponent => {
-  const userEmail = 'sergio.test4@gmail.com' as Email;
+  const userEmail = 'sergio.test5@gmail.com' as Email;
+  const userId = '12345' as UserId;
   return (
     <div>
-      <FeedbackForm email={userEmail} />
+      <FeedbackForm email={userEmail} userId={userId} />
     </div>
   );
 };

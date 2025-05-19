@@ -1,13 +1,14 @@
 import type { FunctionComponent } from '@common/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Group, Notification, Paper, Select, Text, Textarea } from '@mantine/core';
-import type { Email } from '@notifycal/shared/types';
+import type { Email, UserId } from '@notifycal/shared/types';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 interface FeedbackFormProps {
   email: Email;
+  userId: UserId;
 }
 
 const feedbackSchema = z.object({
@@ -17,7 +18,7 @@ const feedbackSchema = z.object({
 
 type FeedbackFormValues = z.infer<typeof feedbackSchema>;
 
-const FeedbackForm = ({ email }: FeedbackFormProps): FunctionComponent => {
+const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -36,7 +37,18 @@ const FeedbackForm = ({ email }: FeedbackFormProps): FunctionComponent => {
 
   const onSubmit = (data: FeedbackFormValues): void => {
     setIsSubmitting(true);
-    const formUrl = `https://docs.google.com/forms/d/e/1FAIpQLSe3W5tM1itSTDAuP9vQK2xxcDtAfag19fD0WIx9g0_5SDQK3w/formResponse?&submit=Submit?&usp=sharing&ouid=115891966119018277387&entry.1265482339=${encodeURIComponent(data.type)}&entry.237189155=${encodeURIComponent(data.content)}&entry.1858806569=${encodeURIComponent(email)}`;
+    const formId = `1FAIpQLSe3W5tM1itSTDAuP9vQK2xxcDtAfag19fD0WIx9g0_5SDQK3w`;
+    const sharingLink = `usp=sharing&ouid=115891966119018277387`;
+    const formFieldsAndResponse = {
+      '1265482339': data.type,
+      '237189155': data.content,
+      '1858806569': email,
+      '383910741': userId
+    };
+    const queryParameters = Object.entries(formFieldsAndResponse)
+      .map(([key, value]) => `entry.${key}=${encodeURIComponent(value)}`)
+      .join('&');
+    const formUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse?&submit=Submit?&${sharingLink}&${queryParameters}`;
     window.open(formUrl, '_blank');
 
     setIsSubmitting(false);

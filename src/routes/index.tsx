@@ -1,7 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
-
-import { Feedback } from '@pages/Feedback';
+import { Login } from '@pages/Login';
 import { z } from 'zod';
 
 export const Route = createFileRoute('/')({
@@ -14,5 +13,5 @@ export const Route = createFileRoute('/')({
       throw redirect({ to: search.redirect || '/dashboard' });
     }
   },
-  component: Feedback
+  component: Login
 });
