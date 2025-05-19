@@ -145,10 +145,10 @@ const BusinessDetails: React.FC = () => {
   const selectedIndustrySubCategory = watch('companyIndustry.subcategory');
   const isCustomIndustry = [selectedIndustrySubCategory, selectedIndustryCategory].includes('other');
 
-  const industryCatgeoryObject = t('businessDetails.industries', { returnObjects: true });
-  const industryCategoryData = labeledObjectToDropdownData(industryCatgeoryObject);
+  const industryCategoryObject = t('businessDetails.industries', { returnObjects: true });
+  const industryCategoryData = labeledObjectToDropdownData(industryCategoryObject);
 
-  const industrySubCategoryObject = get(industryCatgeoryObject, `${selectedIndustryCategory}.sectors`, {});
+  const industrySubCategoryObject = get(industryCategoryObject, `${selectedIndustryCategory}.sectors`, {});
   const industrySubCategoryData = flatObjectToDropdownData(industrySubCategoryObject);
 
   const companySizeObject = t('businessDetails.companySizes', { returnObjects: true });
