@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.2](https://github.com/Notifycal/frontend/compare/v0.15.1...v0.15.2) (2025-05-20)
+
+
+### Bug Fixes
+
+* initialize axios client outside of React lifecycle (strict mode issues) ([#250](https://github.com/Notifycal/frontend/issues/250)) ([690ab25](https://github.com/Notifycal/frontend/commit/690ab25e21f0cfd4bb6f6cdecb5a1523cae0bdbc))
+
 ## [0.15.1](https://github.com/Notifycal/frontend/compare/v0.15.0...v0.15.1) (2025-05-20)
 
 
