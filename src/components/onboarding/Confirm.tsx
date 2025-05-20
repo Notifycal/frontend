@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -85,10 +85,13 @@ const Confirm: React.FC = () => {
     }));
   }, [reminderType, calendars.calendars]);
 
+  const queryClient = useQueryClient();
+
   const saveUserProfileMutation = useMutation({
     mutationFn: updateUserProfile,
     onSuccess: async () => {
       setError(null);
+      await queryClient.refetchQueries({ queryKey: ['user-profile'] });
       await handleStepNavigation();
     },
     onError: () => {
@@ -96,7 +99,7 @@ const Confirm: React.FC = () => {
     }
   });
 
-  const submitUserProfile = (confirmationFormData: ConfirmValues): void => {
+  const submitUserProfile = async (confirmationFormData: ConfirmValues): Promise<void> => {
     handleStepData(confirmationFormData);
 
     const newData = {
@@ -107,7 +110,7 @@ const Confirm: React.FC = () => {
       },
       confirmation: confirmationFormData
     };
-    saveUserProfileMutation.mutate(newData);
+    await saveUserProfileMutation.mutateAsync(newData);
   };
 
   const checkboxes: Array<{
