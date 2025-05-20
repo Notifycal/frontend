@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.15.1](https://github.com/Notifycal/frontend/compare/v0.15.0...v0.15.1) (2025-05-20)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @hookform/resolvers to v5 ([#211](https://github.com/Notifycal/frontend/issues/211)) ([7646500](https://github.com/Notifycal/frontend/commit/7646500533a0f72e0e3cb34d8e8a1059c66f8079))
+* infinite onboarding redirect loop ([#249](https://github.com/Notifycal/frontend/issues/249)) ([a301916](https://github.com/Notifycal/frontend/commit/a3019165b39cdc60c9f71a61aa594784e018df0e))
+
 ## [0.15.0](https://github.com/Notifycal/frontend/compare/v0.14.1...v0.15.0) (2025-05-19)
 
 
