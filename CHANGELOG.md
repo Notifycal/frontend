@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.4](https://github.com/Notifycal/frontend/compare/v0.15.3...v0.15.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* onboarding redirect on completion ([#255](https://github.com/Notifycal/frontend/issues/255)) ([2f28f3c](https://github.com/Notifycal/frontend/commit/2f28f3c5e3c60f68fc7fd53380a214edf31fcd86))
+
 ## [0.15.3](https://github.com/Notifycal/frontend/compare/v0.15.2...v0.15.3) (2025-05-20)
 
 
