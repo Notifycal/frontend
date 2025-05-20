@@ -1,27 +1,21 @@
-import { useEffect } from 'react';
+import type { FunctionComponent } from '@common/types.ts';
+import { getServiceConfig } from '@config/serviceConfig.ts';
 import { ErrorBoundary } from 'react-error-boundary';
+import type { router } from './router.tsx';
 
+import { MantineProvider } from '@mantine/core';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
-import { MantineProvider } from '@mantine/core';
-
-import { useTranslation } from 'react-i18next';
-
-import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
-import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
-
 import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
-import { ServiceConfigProvider, useServiceConfig } from '@hooks/ServiceConfigProvider.tsx';
-
-import { initializeApiClient } from '@api/common.ts';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
 
-import type { FunctionComponent } from '@common/types.ts';
-import type { router } from './router.tsx';
+import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
+import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
 
 const queryClient = new QueryClient();
 
@@ -45,35 +39,9 @@ const InnerApp = ({ router }: AppProps): FunctionComponent => {
   return <RouterProvider context={{ auth }} router={router} />;
 };
 
-const ServiceConfiguredApp = ({ router }: AppProps): FunctionComponent => {
-  // Splitting again so we can invoke `useServiceConfig` to pass the Google client id to the
-  // 3rd party GoogleOAuthProvider.
-  // For our own code/components, we should just call `useServiceConfig()` from a child of InnerApp.
-  const { GOOGLE_CLIENT_ID, BACKEND_BASE_URL } = useServiceConfig();
-
-  // We don't expect BACKEND_BASE_URL to change after the app loads, that's why there are no dependencies.
-  initializeApiClient(BACKEND_BASE_URL);
-
-  useEffect(() => {
-    initializeApiClient(BACKEND_BASE_URL);
-  });
-
-  return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          <InnerApp router={router} />
-          {/* Development tools */}
-          <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
-          <ReactQueryDevelopmentTools initialIsOpen={false} />
-        </QueryClientProvider>
-      </AuthProvider>
-    </GoogleOAuthProvider>
-  );
-};
-
 const App = ({ router }: AppProps): FunctionComponent => {
   const { t } = useTranslation();
+  const { GOOGLE_CLIENT_ID } = getServiceConfig();
 
   return (
     <MantineProvider>
@@ -87,9 +55,16 @@ const App = ({ router }: AppProps): FunctionComponent => {
           />
         }
       >
-        <ServiceConfigProvider>
-          <ServiceConfiguredApp router={router} />
-        </ServiceConfigProvider>
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          <AuthProvider>
+            <QueryClientProvider client={queryClient}>
+              <InnerApp router={router} />
+              {/* Development tools */}
+              <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
+              <ReactQueryDevelopmentTools initialIsOpen={false} />
+            </QueryClientProvider>
+          </AuthProvider>
+        </GoogleOAuthProvider>
       </ErrorBoundary>
     </MantineProvider>
   );

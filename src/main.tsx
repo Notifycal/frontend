@@ -9,6 +9,8 @@ import { isProduction } from '@common/utils.ts';
 import '@styles/index.css';
 
 import '@common/i18n';
+import { initializeApiClient } from '@api/common.ts';
+import { getServiceConfig, loadServiceConfig } from '@config/serviceConfig.ts';
 
 async function enableMocking(): Promise<void> {
   if (isProduction) {
@@ -20,6 +22,10 @@ async function enableMocking(): Promise<void> {
     onUnhandledRequest: 'bypass'
   });
 }
+
+loadServiceConfig();
+const config = getServiceConfig();
+initializeApiClient(config.BACKEND_BASE_URL);
 
 const rootElement = document.querySelector('#root') as Element;
 if (!rootElement.innerHTML) {
