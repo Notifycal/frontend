@@ -1,5 +1,6 @@
 import type { FunctionComponent } from '@common/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { Box, Button, Group, Notification, Paper, Select, Text, Textarea } from '@mantine/core';
 import type { Email, UserId } from '@notifycal/shared/types';
 import { useState } from 'react';
@@ -31,18 +32,22 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
 
   type FeedbackFormValues = z.infer<typeof feedbackSchema>;
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<FeedbackFormValues>({
+  const methods = useForm<FeedbackFormValues>({
     resolver: zodResolver(feedbackSchema),
     defaultValues: {
       type: '',
       content: ''
     }
   });
+  const {
+    control,
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors }
+  } = methods;
+
+  const { commonFormFieldProps } = useFormFieldCommonProps(methods);
 
   const onSubmit = (data: FeedbackFormValues): void => {
     setIsSubmitting(true);
@@ -96,6 +101,7 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
             render={({ field }) => (
               <Select
                 {...field}
+                clearable
                 error={errors.type?.message}
                 label={t('feedback.typeLabel')}
                 mb="md"
@@ -121,11 +127,16 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent =
             render={({ field }) => (
               <Textarea
                 {...field}
+                {...commonFormFieldProps('content', {
+                  label: t('feedback.messageLabel'),
+                  placeholder: t('feedback.messagePlaceholder'),
+                  resetValue: '',
+                  registration: register('content')
+                })}
+                autosize
                 error={errors.content?.message}
-                label={t('feedback.messageLabel')}
                 mb="lg"
-                minRows={4}
-                placeholder={t('feedback.messagePlaceholder')}
+                minRows={8}
               />
             )}
           />
