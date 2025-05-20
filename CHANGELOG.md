@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.3](https://github.com/Notifycal/frontend/compare/v0.15.2...v0.15.3) (2025-05-20)
+
+
+### Bug Fixes
+
+* welcome navigation bug ([#253](https://github.com/Notifycal/frontend/issues/253)) ([ec2552f](https://github.com/Notifycal/frontend/commit/ec2552f06c07791287a1ecbf52c7c62ff7b77d46))
+
 ## [0.15.2](https://github.com/Notifycal/frontend/compare/v0.15.1...v0.15.2) (2025-05-20)
 
 
