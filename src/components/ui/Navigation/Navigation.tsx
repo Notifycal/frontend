@@ -14,6 +14,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Template', href: '/template' },
   { name: 'Billing', href: '/billing' },
+  { name: 'Subscription', href: '/subscription' },
   { name: 'Feedback', href: '/feedback' }
 ];
 

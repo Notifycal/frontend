@@ -20,6 +20,9 @@ import { Route as AuthOnboardingStepImport } from './routes/_auth/onboarding/_st
 import { Route as AuthOnboardingNostepImport } from './routes/_auth/onboarding/_nostep'
 import { Route as AuthAppTemplateImport } from './routes/_auth/_app/template'
 import { Route as AuthAppFeedbackImport } from './routes/_auth/_app/feedback'
+import { Route as AuthAppSubscriptionImport } from './routes/_auth/_app/subscription'
+import { Route as AuthAppPaymentSuccessImport } from './routes/_auth/_app/payment-success'
+import { Route as AuthAppPaymentFailureImport } from './routes/_auth/_app/payment-failure'
 import { Route as AuthAppDashboardImport } from './routes/_auth/_app/dashboard'
 import { Route as AuthOnboardingStepStepImport } from './routes/_auth/onboarding/_step/$step'
 import { Route as AuthOnboardingNostepWelcomeImport } from './routes/_auth/onboarding/_nostep/welcome'
@@ -68,12 +71,6 @@ const AuthOnboardingNostepRoute = AuthOnboardingNostepImport.update({
 const AuthAppTemplateRoute = AuthAppTemplateImport.update({
   id: '/template',
   path: '/template',
-  getParentRoute: () => AuthAppRoute,
-} as any)
-
-const AuthAppFeedbackRoute = AuthAppFeedbackImport.update({
-  id: '/feedback',
-  path: '/feedback',
   getParentRoute: () => AuthAppRoute,
 } as any)
 
@@ -142,13 +139,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppDashboardImport
       parentRoute: typeof AuthAppImport
     }
-    '/_auth/_app/feedback': {
-      id: '/_auth/_app/feedback'
-      path: '/feedback'
-      fullPath: '/feedback'
-      preLoaderRoute: typeof AuthAppFeedbackImport
-      parentRoute: typeof AuthAppImport
-    }
     '/_auth/_app/template': {
       id: '/_auth/_app/template'
       path: '/template'
@@ -205,13 +195,11 @@ declare module '@tanstack/react-router' {
 
 interface AuthAppRouteChildren {
   AuthAppDashboardRoute: typeof AuthAppDashboardRoute
-  AuthAppFeedbackRoute: typeof AuthAppFeedbackRoute
   AuthAppTemplateRoute: typeof AuthAppTemplateRoute
 }
 
 const AuthAppRouteChildren: AuthAppRouteChildren = {
   AuthAppDashboardRoute: AuthAppDashboardRoute,
-  AuthAppFeedbackRoute: AuthAppFeedbackRoute,
   AuthAppTemplateRoute: AuthAppTemplateRoute,
 }
 
@@ -275,7 +263,6 @@ export interface FileRoutesByFullPath {
   '': typeof AuthAppRouteWithChildren
   '/onboarding': typeof AuthOnboardingStepRouteWithChildren
   '/dashboard': typeof AuthAppDashboardRoute
-  '/feedback': typeof AuthAppFeedbackRoute
   '/template': typeof AuthAppTemplateRoute
   '/onboarding/': typeof AuthOnboardingIndexRoute
   '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
@@ -287,7 +274,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthAppRouteWithChildren
   '/dashboard': typeof AuthAppDashboardRoute
-  '/feedback': typeof AuthAppFeedbackRoute
   '/template': typeof AuthAppTemplateRoute
   '/onboarding': typeof AuthOnboardingIndexRoute
   '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
@@ -302,7 +288,6 @@ export interface FileRoutesById {
   '/_auth/_app': typeof AuthAppRouteWithChildren
   '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
-  '/_auth/_app/feedback': typeof AuthAppFeedbackRoute
   '/_auth/_app/template': typeof AuthAppTemplateRoute
   '/_auth/onboarding/_nostep': typeof AuthOnboardingNostepRouteWithChildren
   '/_auth/onboarding/_step': typeof AuthOnboardingStepRouteWithChildren
@@ -319,7 +304,6 @@ export interface FileRouteTypes {
     | ''
     | '/onboarding'
     | '/dashboard'
-    | '/feedback'
     | '/template'
     | '/onboarding/'
     | '/onboarding/completed'
@@ -330,7 +314,6 @@ export interface FileRouteTypes {
     | '/'
     | ''
     | '/dashboard'
-    | '/feedback'
     | '/template'
     | '/onboarding'
     | '/onboarding/completed'
@@ -343,7 +326,6 @@ export interface FileRouteTypes {
     | '/_auth/_app'
     | '/_auth/onboarding'
     | '/_auth/_app/dashboard'
-    | '/_auth/_app/feedback'
     | '/_auth/_app/template'
     | '/_auth/onboarding/_nostep'
     | '/_auth/onboarding/_step'
@@ -393,7 +375,6 @@ export const routeTree = rootRoute
       "parent": "/_auth",
       "children": [
         "/_auth/_app/dashboard",
-        "/_auth/_app/feedback",
         "/_auth/_app/template"
       ]
     },
@@ -408,10 +389,6 @@ export const routeTree = rootRoute
     },
     "/_auth/_app/dashboard": {
       "filePath": "_auth/_app/dashboard.tsx",
-      "parent": "/_auth/_app"
-    },
-    "/_auth/_app/feedback": {
-      "filePath": "_auth/_app/feedback.tsx",
       "parent": "/_auth/_app"
     },
     "/_auth/_app/template": {
