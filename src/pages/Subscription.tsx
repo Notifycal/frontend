@@ -1,9 +1,11 @@
 import getApiClient from '@api/common';
 import type { FunctionComponent } from '@common/types';
 import { Alert, Button, Card, Container, Stack, Text } from '@mantine/core';
+import type { LanguageCode } from '@notifycal/shared/types';
 import { IconAlertCircle, IconCreditCard } from '@tabler/icons-react';
 import axios from 'axios';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface PaymentSessionResponse {
   url: string;
@@ -15,13 +17,15 @@ interface ApiErrorResponse {
 export const Subscription = (): FunctionComponent => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { i18n } = useTranslation();
 
   async function handleCheckout(): Promise<void> {
     try {
       setIsLoading(true);
       setError(null);
       const response = await getApiClient().post<PaymentSessionResponse>('/api/v1/payment-session', {
-        tier: 'good'
+        tier: 'good',
+        language: i18n.languages[0] as LanguageCode
       });
       if (response.data.url) {
         window.location.href = response.data.url;
