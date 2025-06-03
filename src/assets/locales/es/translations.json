@@ -9,6 +9,25 @@
     "loginErrorInvalidScopes": "Ha habido un error al hacer login. Por favor asegura que seleccionas todos los scopes al acceder con tu cuenta de Google.",
     "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos."
   },
+  "feedback": {
+    "type": "Debes seleccionar un tipo de comentario",
+    "content": "Debes de escrbir algo",
+    "importance": "Tu opinión es importante para nosotros",
+    "typeLabel": "Tipo de comentario",
+    "selectOption": "Selecciona una opción",
+    "featureRequest": "Solicitud de funcionalidad",
+    "generalFeedback": "Comentario general",
+    "bugReport": "Informe de error",
+    "complaint": "Queja",
+    "other": "Otro",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "Escribe tu comentario aquí...",
+    "submit": "Enviar",
+    "thankYou": "¡Gracias por tu comentario!",
+    "received": "Hemos recibido tu información y la revisaremos pronto.",
+    "sendAnother": "Enviar otro comentario",
+    "goToDashboard": "Ir al dashboard"
+  },
   "404": {
     "pageNotFound": "¡Oops!",
     "weCouldNotFindThePage": "Vaya, no pudimos encontrar esa página.",
