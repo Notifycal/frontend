@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.16.1](https://github.com/Notifycal/frontend/compare/v0.16.0...v0.16.1) (2025-06-06)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-query to v5.80.6 ([#266](https://github.com/Notifycal/frontend/issues/266)) ([c3ad94b](https://github.com/Notifycal/frontend/commit/c3ad94b156f5fba0b803cd6285b4c862f1bf8971))
+* **deps:** Update dependency @tanstack/react-router to v1.120.16 ([#268](https://github.com/Notifycal/frontend/issues/268)) ([8814aee](https://github.com/Notifycal/frontend/commit/8814aeed235b74e0efb6446bb718fb4ac125d664))
+
 ## [0.16.0](https://github.com/Notifycal/frontend/compare/v0.15.4...v0.16.0) (2025-06-03)
 
 
