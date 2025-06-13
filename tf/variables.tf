@@ -8,6 +8,11 @@ variable "domain_prefix" {
   default = ""
 }
 
+variable "force_destroy_bucket" {
+  type    = bool
+  default = false
+}
+
 variable "enable_www_redirect" {
   type        = string
   description = "When set to true, www. will redirect to the naked domain."
