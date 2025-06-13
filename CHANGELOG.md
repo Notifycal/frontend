@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.17.0](https://github.com/Notifycal/frontend/compare/v0.16.1...v0.17.0) (2025-06-13)
+
+
+### Features
+
+* add ability to destroy bucket ([#276](https://github.com/Notifycal/frontend/issues/276)) ([1f61517](https://github.com/Notifycal/frontend/commit/1f61517c0f032564ef7b6db5eca568b87f4e0dbc))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-router to v1.120.18 ([#270](https://github.com/Notifycal/frontend/issues/270)) ([e1fc053](https://github.com/Notifycal/frontend/commit/e1fc0536b1419d3a96f90e6fac8134b47d7a8f25))
+
 ## [0.16.1](https://github.com/Notifycal/frontend/compare/v0.16.0...v0.16.1) (2025-06-06)
 
 
