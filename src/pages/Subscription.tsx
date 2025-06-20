@@ -45,6 +45,19 @@ export const Subscription = (): FunctionComponent => {
     }
   }
 
+  async function handleCustomerPortal(): Promise<void> {
+    try {
+      const response = await getApiClient().post<PaymentSessionResponse>('/api/v1/customer-portal-session');
+      if (response.data.url) {
+        window.location.href = response.data.url;
+      } else {
+        throw new Error('No customer portal URL received');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Container py="xl" size="sm">
       <Card withBorder padding="lg" radius="md" shadow="sm">
@@ -74,6 +87,15 @@ export const Subscription = (): FunctionComponent => {
           </Button>
         </Stack>
       </Card>
+      <Button
+        fullWidth
+        leftSection={<IconCreditCard size="1rem" />}
+        loading={isLoading}
+        size="lg"
+        onClick={handleCustomerPortal}
+      >
+        Customer Portal
+      </Button>
     </Container>
   );
 };
