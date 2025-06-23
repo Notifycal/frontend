@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.17.2](https://github.com/Notifycal/frontend/compare/v0.17.1...v0.17.2) (2025-06-23)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v4.3.0 ([#292](https://github.com/Notifycal/frontend/issues/292)) ([1b4dbc0](https://github.com/Notifycal/frontend/commit/1b4dbc075cfdb415f7930d56db5cf89886df9f8d))
+* **deps:** Update dependency radash to v12.1.1 ([#289](https://github.com/Notifycal/frontend/issues/289)) ([1ff9e1d](https://github.com/Notifycal/frontend/commit/1ff9e1d43685318a47cc39147922110fbbc95d9e))
+* **deps:** Update dependency react-hook-form to v7.58.1 ([#285](https://github.com/Notifycal/frontend/issues/285)) ([b06dfa2](https://github.com/Notifycal/frontend/commit/b06dfa21f2650b37951a8d501568dce5a6fa4802))
+* **deps:** Update Terraform github.com/Notifycal/tofu-module-static-website to v2.2.1 ([#297](https://github.com/Notifycal/frontend/issues/297)) ([9ca797f](https://github.com/Notifycal/frontend/commit/9ca797fad49d9b29867188c52b8e0cebb1b9a377))
+* follow TF module versioning best practices ([#298](https://github.com/Notifycal/frontend/issues/298)) ([02c43c3](https://github.com/Notifycal/frontend/commit/02c43c35a5ab2eeebd301739521771ee4e7f7ca7))
+
 ## [0.17.1](https://github.com/Notifycal/frontend/compare/v0.17.0...v0.17.1) (2025-06-17)
 
 
