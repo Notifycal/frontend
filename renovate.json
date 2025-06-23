@@ -1,6 +1,5 @@
 {
   "extends": ["github>Notifycal/.github-private:renovate.json"],
   "automerge": true,
-  "automergeType": "pr",
-  "platformAutomerge": false
+  "automergeType": "pr"
 }
