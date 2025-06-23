@@ -12,7 +12,7 @@
     "url": "https://github.com/Notifycal/frontend"
   },
   "license": "MIT",
-  "version": "0.17.2",
+  "version": "0.17.3",
   "type": "module",
   "scripts": {
     "types": "tsc",
