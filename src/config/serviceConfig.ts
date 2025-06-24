@@ -2,7 +2,8 @@ import z from 'zod';
 
 export const serviceConfigSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().nonempty('GOOGLE_CLIENT_ID is required'),
-  BACKEND_BASE_URL: z.string().url('BACKEND_BASE_URL must be a valid URL')
+  BACKEND_BASE_URL: z.string().url('BACKEND_BASE_URL must be a valid URL'),
+  TIER_INFO: z.string().transform((string) => JSON.parse(string))
   // STATIC_LANDING_URL: z.string().url('STATIC_LANDING_URL must be a valid URL')
 });
 
