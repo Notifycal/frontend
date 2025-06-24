@@ -8,7 +8,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface PaymentSessionResponse {
-  url: string;
+  result: {
+    url: string;
+  };
 }
 interface ApiErrorResponse {
   message: string;
@@ -27,8 +29,8 @@ export const Subscription = (): FunctionComponent => {
         tier: 'good',
         language: i18n.languages[0] as LanguageCode
       });
-      if (response.data.url) {
-        window.location.href = response.data.url;
+      if (response.data.result.url) {
+        window.location.href = response.data.result.url;
       } else {
         throw new Error('No checkout URL received');
       }
@@ -48,8 +50,8 @@ export const Subscription = (): FunctionComponent => {
   async function handleCustomerPortal(): Promise<void> {
     try {
       const response = await getApiClient().post<PaymentSessionResponse>('/api/v1/customer-portal-session');
-      if (response.data.url) {
-        window.location.href = response.data.url;
+      if (response.data.result.url) {
+        window.location.href = response.data.result.url;
       } else {
         throw new Error('No customer portal URL received');
       }
