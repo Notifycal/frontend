@@ -253,6 +253,17 @@
     },
     "apiError": "Ha habido un problema guardando tus datos."
   },
+  "payment": {
+    "tierDescriptions": {
+      "good": "Ideal para autónomos o emprendedores que trabajan solos.",
+      "better": "Pensado para equipos pequeños de 2-3 personas.",
+      "best": "Perfecto para empresas con más de 5 empleados."
+    },
+    "popularBadge": "Más popular",
+    "numberOfMonthlyReminders": "{{qty}} recordatorios al mes",
+    "googleCalendarIntegration": "Integración con Google Calendar",
+    "disclaimer": "El número de recordatorios indicados se basa en un coste estimado de 0,05 €/recordatorio desde España. Puede variar en función del país de destino."
+  },
   "completed": {
     "heading": "¡Integración completada!",
     "subheading": "Gracias por completar el proceso de integración. ¡Ya puedes utilizar la plataforma!",

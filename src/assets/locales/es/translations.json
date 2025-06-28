@@ -45,7 +45,8 @@
       "back": "Atrás",
       "finish": "Finalizar",
       "continue": "Continuar",
-      "complete": "Completar"
+      "complete": "Completar",
+      "select": "Seleccionar"
     },
     "error": "Error",
     "clear": "Borrar",
@@ -53,6 +54,7 @@
     "languages": {
       "es": "Español",
       "en": "Inglés"
-    }
+    },
+    "month": "mes"
   }
 }

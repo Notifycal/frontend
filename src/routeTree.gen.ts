@@ -8,200 +8,280 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthPricingRouteImport } from './routes/_auth/pricing'
+import { Route as AuthOnboardingRouteImport } from './routes/_auth/onboarding'
+import { Route as AuthAppRouteImport } from './routes/_auth/_app'
+import { Route as AuthOnboardingIndexRouteImport } from './routes/_auth/onboarding/index'
+import { Route as AuthOnboardingStepRouteImport } from './routes/_auth/onboarding/_step'
+import { Route as AuthOnboardingNostepRouteImport } from './routes/_auth/onboarding/_nostep'
+import { Route as AuthAppTemplateRouteImport } from './routes/_auth/_app/template'
+import { Route as AuthAppFeedbackRouteImport } from './routes/_auth/_app/feedback'
+import { Route as AuthAppDashboardRouteImport } from './routes/_auth/_app/dashboard'
+import { Route as AuthOnboardingStepStepRouteImport } from './routes/_auth/onboarding/_step/$step'
+import { Route as AuthOnboardingNostepWelcomeRouteImport } from './routes/_auth/onboarding/_nostep/welcome'
+import { Route as AuthOnboardingNostepCompletedRouteImport } from './routes/_auth/onboarding/_nostep/completed'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as IndexImport } from './routes/index'
-import { Route as AuthOnboardingImport } from './routes/_auth/onboarding'
-import { Route as AuthAppImport } from './routes/_auth/_app'
-import { Route as AuthOnboardingIndexImport } from './routes/_auth/onboarding/index'
-import { Route as AuthOnboardingStepImport } from './routes/_auth/onboarding/_step'
-import { Route as AuthOnboardingNostepImport } from './routes/_auth/onboarding/_nostep'
-import { Route as AuthAppTemplateImport } from './routes/_auth/_app/template'
-import { Route as AuthAppFeedbackImport } from './routes/_auth/_app/feedback'
-import { Route as AuthAppDashboardImport } from './routes/_auth/_app/dashboard'
-import { Route as AuthOnboardingStepStepImport } from './routes/_auth/onboarding/_step/$step'
-import { Route as AuthOnboardingNostepWelcomeImport } from './routes/_auth/onboarding/_nostep/welcome'
-import { Route as AuthOnboardingNostepCompletedImport } from './routes/_auth/onboarding/_nostep/completed'
-
-// Create/Update Routes
-
-const AuthRoute = AuthImport.update({
+const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AuthOnboardingRoute = AuthOnboardingImport.update({
+const AuthPricingRoute = AuthPricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthOnboardingRoute = AuthOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthAppRoute = AuthAppImport.update({
+const AuthAppRoute = AuthAppRouteImport.update({
   id: '/_app',
   getParentRoute: () => AuthRoute,
 } as any)
-
-const AuthOnboardingIndexRoute = AuthOnboardingIndexImport.update({
+const AuthOnboardingIndexRoute = AuthOnboardingIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthOnboardingRoute,
 } as any)
-
-const AuthOnboardingStepRoute = AuthOnboardingStepImport.update({
+const AuthOnboardingStepRoute = AuthOnboardingStepRouteImport.update({
   id: '/_step',
   getParentRoute: () => AuthOnboardingRoute,
 } as any)
-
-const AuthOnboardingNostepRoute = AuthOnboardingNostepImport.update({
+const AuthOnboardingNostepRoute = AuthOnboardingNostepRouteImport.update({
   id: '/_nostep',
   getParentRoute: () => AuthOnboardingRoute,
 } as any)
-
-const AuthAppTemplateRoute = AuthAppTemplateImport.update({
+const AuthAppTemplateRoute = AuthAppTemplateRouteImport.update({
   id: '/template',
   path: '/template',
   getParentRoute: () => AuthAppRoute,
 } as any)
-
-const AuthAppFeedbackRoute = AuthAppFeedbackImport.update({
+const AuthAppFeedbackRoute = AuthAppFeedbackRouteImport.update({
   id: '/feedback',
   path: '/feedback',
   getParentRoute: () => AuthAppRoute,
 } as any)
-
-const AuthAppDashboardRoute = AuthAppDashboardImport.update({
+const AuthAppDashboardRoute = AuthAppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthAppRoute,
 } as any)
-
-const AuthOnboardingStepStepRoute = AuthOnboardingStepStepImport.update({
+const AuthOnboardingStepStepRoute = AuthOnboardingStepStepRouteImport.update({
   id: '/$step',
   path: '/$step',
   getParentRoute: () => AuthOnboardingStepRoute,
 } as any)
-
 const AuthOnboardingNostepWelcomeRoute =
-  AuthOnboardingNostepWelcomeImport.update({
+  AuthOnboardingNostepWelcomeRouteImport.update({
     id: '/welcome',
     path: '/welcome',
     getParentRoute: () => AuthOnboardingNostepRoute,
   } as any)
-
 const AuthOnboardingNostepCompletedRoute =
-  AuthOnboardingNostepCompletedImport.update({
+  AuthOnboardingNostepCompletedRouteImport.update({
     id: '/completed',
     path: '/completed',
     getParentRoute: () => AuthOnboardingNostepRoute,
   } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/onboarding': typeof AuthOnboardingStepRouteWithChildren
+  '/pricing': typeof AuthPricingRoute
+  '/dashboard': typeof AuthAppDashboardRoute
+  '/feedback': typeof AuthAppFeedbackRoute
+  '/template': typeof AuthAppTemplateRoute
+  '/onboarding/': typeof AuthOnboardingIndexRoute
+  '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
+  '/onboarding/$step': typeof AuthOnboardingStepStepRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/pricing': typeof AuthPricingRoute
+  '/dashboard': typeof AuthAppDashboardRoute
+  '/feedback': typeof AuthAppFeedbackRoute
+  '/template': typeof AuthAppTemplateRoute
+  '/onboarding': typeof AuthOnboardingIndexRoute
+  '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
+  '/onboarding/$step': typeof AuthOnboardingStepStepRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/_auth/_app': typeof AuthAppRouteWithChildren
+  '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
+  '/_auth/pricing': typeof AuthPricingRoute
+  '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
+  '/_auth/_app/feedback': typeof AuthAppFeedbackRoute
+  '/_auth/_app/template': typeof AuthAppTemplateRoute
+  '/_auth/onboarding/_nostep': typeof AuthOnboardingNostepRouteWithChildren
+  '/_auth/onboarding/_step': typeof AuthOnboardingStepRouteWithChildren
+  '/_auth/onboarding/': typeof AuthOnboardingIndexRoute
+  '/_auth/onboarding/_nostep/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/_auth/onboarding/_nostep/welcome': typeof AuthOnboardingNostepWelcomeRoute
+  '/_auth/onboarding/_step/$step': typeof AuthOnboardingStepStepRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/onboarding'
+    | '/pricing'
+    | '/dashboard'
+    | '/feedback'
+    | '/template'
+    | '/onboarding/'
+    | '/onboarding/completed'
+    | '/onboarding/welcome'
+    | '/onboarding/$step'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/pricing'
+    | '/dashboard'
+    | '/feedback'
+    | '/template'
+    | '/onboarding'
+    | '/onboarding/completed'
+    | '/onboarding/welcome'
+    | '/onboarding/$step'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/_auth/_app'
+    | '/_auth/onboarding'
+    | '/_auth/pricing'
+    | '/_auth/_app/dashboard'
+    | '/_auth/_app/feedback'
+    | '/_auth/_app/template'
+    | '/_auth/onboarding/_nostep'
+    | '/_auth/onboarding/_step'
+    | '/_auth/onboarding/'
+    | '/_auth/onboarding/_nostep/completed'
+    | '/_auth/onboarding/_nostep/welcome'
+    | '/_auth/onboarding/_step/$step'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/_auth': {
       id: '/_auth'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_auth/_app': {
-      id: '/_auth/_app'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthAppImport
-      parentRoute: typeof AuthImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/pricing': {
+      id: '/_auth/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof AuthPricingRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/onboarding': {
       id: '/_auth/onboarding'
       path: '/onboarding'
       fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthOnboardingImport
-      parentRoute: typeof AuthImport
+      preLoaderRoute: typeof AuthOnboardingRouteImport
+      parentRoute: typeof AuthRoute
     }
-    '/_auth/_app/dashboard': {
-      id: '/_auth/_app/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthAppDashboardImport
-      parentRoute: typeof AuthAppImport
-    }
-    '/_auth/_app/feedback': {
-      id: '/_auth/_app/feedback'
-      path: '/feedback'
-      fullPath: '/feedback'
-      preLoaderRoute: typeof AuthAppFeedbackImport
-      parentRoute: typeof AuthAppImport
-    }
-    '/_auth/_app/template': {
-      id: '/_auth/_app/template'
-      path: '/template'
-      fullPath: '/template'
-      preLoaderRoute: typeof AuthAppTemplateImport
-      parentRoute: typeof AuthAppImport
-    }
-    '/_auth/onboarding/_nostep': {
-      id: '/_auth/onboarding/_nostep'
+    '/_auth/_app': {
+      id: '/_auth/_app'
       path: ''
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthOnboardingNostepImport
-      parentRoute: typeof AuthOnboardingImport
-    }
-    '/_auth/onboarding/_step': {
-      id: '/_auth/onboarding/_step'
-      path: ''
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AuthOnboardingStepImport
-      parentRoute: typeof AuthOnboardingImport
+      fullPath: ''
+      preLoaderRoute: typeof AuthAppRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/onboarding/': {
       id: '/_auth/onboarding/'
       path: '/'
       fullPath: '/onboarding/'
-      preLoaderRoute: typeof AuthOnboardingIndexImport
-      parentRoute: typeof AuthOnboardingImport
+      preLoaderRoute: typeof AuthOnboardingIndexRouteImport
+      parentRoute: typeof AuthOnboardingRoute
     }
-    '/_auth/onboarding/_nostep/completed': {
-      id: '/_auth/onboarding/_nostep/completed'
-      path: '/completed'
-      fullPath: '/onboarding/completed'
-      preLoaderRoute: typeof AuthOnboardingNostepCompletedImport
-      parentRoute: typeof AuthOnboardingNostepImport
+    '/_auth/onboarding/_step': {
+      id: '/_auth/onboarding/_step'
+      path: ''
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthOnboardingStepRouteImport
+      parentRoute: typeof AuthOnboardingRoute
     }
-    '/_auth/onboarding/_nostep/welcome': {
-      id: '/_auth/onboarding/_nostep/welcome'
-      path: '/welcome'
-      fullPath: '/onboarding/welcome'
-      preLoaderRoute: typeof AuthOnboardingNostepWelcomeImport
-      parentRoute: typeof AuthOnboardingNostepImport
+    '/_auth/onboarding/_nostep': {
+      id: '/_auth/onboarding/_nostep'
+      path: ''
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthOnboardingNostepRouteImport
+      parentRoute: typeof AuthOnboardingRoute
+    }
+    '/_auth/_app/template': {
+      id: '/_auth/_app/template'
+      path: '/template'
+      fullPath: '/template'
+      preLoaderRoute: typeof AuthAppTemplateRouteImport
+      parentRoute: typeof AuthAppRoute
+    }
+    '/_auth/_app/feedback': {
+      id: '/_auth/_app/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof AuthAppFeedbackRouteImport
+      parentRoute: typeof AuthAppRoute
+    }
+    '/_auth/_app/dashboard': {
+      id: '/_auth/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthAppDashboardRouteImport
+      parentRoute: typeof AuthAppRoute
     }
     '/_auth/onboarding/_step/$step': {
       id: '/_auth/onboarding/_step/$step'
       path: '/$step'
       fullPath: '/onboarding/$step'
-      preLoaderRoute: typeof AuthOnboardingStepStepImport
-      parentRoute: typeof AuthOnboardingStepImport
+      preLoaderRoute: typeof AuthOnboardingStepStepRouteImport
+      parentRoute: typeof AuthOnboardingStepRoute
+    }
+    '/_auth/onboarding/_nostep/welcome': {
+      id: '/_auth/onboarding/_nostep/welcome'
+      path: '/welcome'
+      fullPath: '/onboarding/welcome'
+      preLoaderRoute: typeof AuthOnboardingNostepWelcomeRouteImport
+      parentRoute: typeof AuthOnboardingNostepRoute
+    }
+    '/_auth/onboarding/_nostep/completed': {
+      id: '/_auth/onboarding/_nostep/completed'
+      path: '/completed'
+      fullPath: '/onboarding/completed'
+      preLoaderRoute: typeof AuthOnboardingNostepCompletedRouteImport
+      parentRoute: typeof AuthOnboardingNostepRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface AuthAppRouteChildren {
   AuthAppDashboardRoute: typeof AuthAppDashboardRoute
@@ -261,194 +341,21 @@ const AuthOnboardingRouteWithChildren = AuthOnboardingRoute._addFileChildren(
 interface AuthRouteChildren {
   AuthAppRoute: typeof AuthAppRouteWithChildren
   AuthOnboardingRoute: typeof AuthOnboardingRouteWithChildren
+  AuthPricingRoute: typeof AuthPricingRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAppRoute: AuthAppRouteWithChildren,
   AuthOnboardingRoute: AuthOnboardingRouteWithChildren,
+  AuthPricingRoute: AuthPricingRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof AuthAppRouteWithChildren
-  '/onboarding': typeof AuthOnboardingStepRouteWithChildren
-  '/dashboard': typeof AuthAppDashboardRoute
-  '/feedback': typeof AuthAppFeedbackRoute
-  '/template': typeof AuthAppTemplateRoute
-  '/onboarding/': typeof AuthOnboardingIndexRoute
-  '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
-  '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
-  '/onboarding/$step': typeof AuthOnboardingStepStepRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof AuthAppRouteWithChildren
-  '/dashboard': typeof AuthAppDashboardRoute
-  '/feedback': typeof AuthAppFeedbackRoute
-  '/template': typeof AuthAppTemplateRoute
-  '/onboarding': typeof AuthOnboardingIndexRoute
-  '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
-  '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
-  '/onboarding/$step': typeof AuthOnboardingStepStepRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/_auth/_app': typeof AuthAppRouteWithChildren
-  '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
-  '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
-  '/_auth/_app/feedback': typeof AuthAppFeedbackRoute
-  '/_auth/_app/template': typeof AuthAppTemplateRoute
-  '/_auth/onboarding/_nostep': typeof AuthOnboardingNostepRouteWithChildren
-  '/_auth/onboarding/_step': typeof AuthOnboardingStepRouteWithChildren
-  '/_auth/onboarding/': typeof AuthOnboardingIndexRoute
-  '/_auth/onboarding/_nostep/completed': typeof AuthOnboardingNostepCompletedRoute
-  '/_auth/onboarding/_nostep/welcome': typeof AuthOnboardingNostepWelcomeRoute
-  '/_auth/onboarding/_step/$step': typeof AuthOnboardingStepStepRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | ''
-    | '/onboarding'
-    | '/dashboard'
-    | '/feedback'
-    | '/template'
-    | '/onboarding/'
-    | '/onboarding/completed'
-    | '/onboarding/welcome'
-    | '/onboarding/$step'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | ''
-    | '/dashboard'
-    | '/feedback'
-    | '/template'
-    | '/onboarding'
-    | '/onboarding/completed'
-    | '/onboarding/welcome'
-    | '/onboarding/$step'
-  id:
-    | '__root__'
-    | '/'
-    | '/_auth'
-    | '/_auth/_app'
-    | '/_auth/onboarding'
-    | '/_auth/_app/dashboard'
-    | '/_auth/_app/feedback'
-    | '/_auth/_app/template'
-    | '/_auth/onboarding/_nostep'
-    | '/_auth/onboarding/_step'
-    | '/_auth/onboarding/'
-    | '/_auth/onboarding/_nostep/completed'
-    | '/_auth/onboarding/_nostep/welcome'
-    | '/_auth/onboarding/_step/$step'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
-}
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/_auth"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_auth": {
-      "filePath": "_auth.tsx",
-      "children": [
-        "/_auth/_app",
-        "/_auth/onboarding"
-      ]
-    },
-    "/_auth/_app": {
-      "filePath": "_auth/_app.tsx",
-      "parent": "/_auth",
-      "children": [
-        "/_auth/_app/dashboard",
-        "/_auth/_app/feedback",
-        "/_auth/_app/template"
-      ]
-    },
-    "/_auth/onboarding": {
-      "filePath": "_auth/onboarding.tsx",
-      "parent": "/_auth",
-      "children": [
-        "/_auth/onboarding/_nostep",
-        "/_auth/onboarding/_step",
-        "/_auth/onboarding/"
-      ]
-    },
-    "/_auth/_app/dashboard": {
-      "filePath": "_auth/_app/dashboard.tsx",
-      "parent": "/_auth/_app"
-    },
-    "/_auth/_app/feedback": {
-      "filePath": "_auth/_app/feedback.tsx",
-      "parent": "/_auth/_app"
-    },
-    "/_auth/_app/template": {
-      "filePath": "_auth/_app/template.tsx",
-      "parent": "/_auth/_app"
-    },
-    "/_auth/onboarding/_nostep": {
-      "filePath": "_auth/onboarding/_nostep.tsx",
-      "parent": "/_auth/onboarding",
-      "children": [
-        "/_auth/onboarding/_nostep/completed",
-        "/_auth/onboarding/_nostep/welcome"
-      ]
-    },
-    "/_auth/onboarding/_step": {
-      "filePath": "_auth/onboarding/_step.tsx",
-      "parent": "/_auth/onboarding",
-      "children": [
-        "/_auth/onboarding/_step/$step"
-      ]
-    },
-    "/_auth/onboarding/": {
-      "filePath": "_auth/onboarding/index.tsx",
-      "parent": "/_auth/onboarding"
-    },
-    "/_auth/onboarding/_nostep/completed": {
-      "filePath": "_auth/onboarding/_nostep/completed.tsx",
-      "parent": "/_auth/onboarding/_nostep"
-    },
-    "/_auth/onboarding/_nostep/welcome": {
-      "filePath": "_auth/onboarding/_nostep/welcome.tsx",
-      "parent": "/_auth/onboarding/_nostep"
-    },
-    "/_auth/onboarding/_step/$step": {
-      "filePath": "_auth/onboarding/_step/$step.tsx",
-      "parent": "/_auth/onboarding/_step"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
