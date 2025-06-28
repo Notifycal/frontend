@@ -7,9 +7,7 @@ import type { Brand, SuccessResponseContainer } from '@notifycal/shared/types';
 type Url = Brand<string, 'Url'>;
 
 export type PaymentSession = {
-  result: {
-    url: Url;
-  };
+  url: Url;
 };
 
 export const getCheckoutURL = async (tierId: TierId): Promise<PaymentSession> => {
