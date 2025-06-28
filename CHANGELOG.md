@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.17.4](https://github.com/Notifycal/frontend/compare/v0.17.3...v0.17.4) (2025-06-27)
+
+
+### Bug Fixes
+
+* **deps:** Update Node.js Dependencies ([#304](https://github.com/Notifycal/frontend/issues/304)) ([9f068fe](https://github.com/Notifycal/frontend/commit/9f068fe59acdbd41f8f1b6bb0130fd9249aba1c7))
+
+## [0.17.3](https://github.com/Notifycal/frontend/compare/v0.17.2...v0.17.3) (2025-06-23)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency motion to v12.19.1 ([#291](https://github.com/Notifycal/frontend/issues/291)) ([494e870](https://github.com/Notifycal/frontend/commit/494e8704e0830e53ad67ff003c44ed4911ac5dc7))
+
 ## [0.17.2](https://github.com/Notifycal/frontend/compare/v0.17.1...v0.17.2) (2025-06-23)
 
 
