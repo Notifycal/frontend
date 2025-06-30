@@ -21,12 +21,12 @@ export const Subscription = (): FunctionComponent => {
   const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  async function handleCheckout(): Promise<void> {
+  async function handleCheckout(product: { tier: 'good' | 'better' | 'best' } | { topup: 'single' }): Promise<void> {
     try {
       setIsLoading(true);
       setError(null);
       const response = await getApiClient().post<PaymentSessionResponse>('/api/v1/payment-session', {
-        tier: 'good',
+        ...product,
         language: i18n.languages[0] as LanguageCode
       });
       if (response.data.result.url) {
@@ -83,9 +83,18 @@ export const Subscription = (): FunctionComponent => {
             leftSection={<IconCreditCard size="1rem" />}
             loading={isLoading}
             size="lg"
-            onClick={handleCheckout}
+            onClick={() => handleCheckout({ tier: 'good' })}
           >
             {isLoading ? 'Redirecting to checkout...' : 'Start Subscription'}
+          </Button>
+          <Button
+            fullWidth
+            leftSection={<IconCreditCard size="1rem" />}
+            loading={isLoading}
+            size="lg"
+            onClick={() => handleCheckout({ topup: 'single' })}
+          >
+            {isLoading ? 'Redirecting to checkout...' : 'Start Topup'}
           </Button>
         </Stack>
       </Card>
