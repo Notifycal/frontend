@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.18.0](https://github.com/Notifycal/frontend/compare/v0.17.5...v0.18.0) (2025-07-01)
+
+
+### Features
+
+* handle service config from vite directly ([#333](https://github.com/Notifycal/frontend/issues/333)) ([3a598f3](https://github.com/Notifycal/frontend/commit/3a598f398cbc42e37ddb5a3fd6fb48c749b7a8fc))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency motion to v12.20.3 ([#330](https://github.com/Notifycal/frontend/issues/330)) ([c9bd13e](https://github.com/Notifycal/frontend/commit/c9bd13e3aaf34b538c71dfeada645a5f3cf77e6f))
+* **deps:** Update dependency motion to v12.20.5 ([#332](https://github.com/Notifycal/frontend/issues/332)) ([298c6bf](https://github.com/Notifycal/frontend/commit/298c6bfb5710c6160d2e3f84f77db17b8c14844b))
+
 ## [0.17.5](https://github.com/Notifycal/frontend/compare/v0.17.4...v0.17.5) (2025-07-01)
 
 
