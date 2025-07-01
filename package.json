@@ -17,6 +17,7 @@
   "scripts": {
     "types": "tsc",
     "dev": "$npm_execpath run dev:config && vite",
+    "dev:remote": "bin/inject-api-url.sh $API_ENV && $npm_execpath run dev",
     "dev:config": "cp config/config.local.js public/config.js",
     "build": "rm -rf public/config.js && tsc && vite build && $npm_execpath run build:config",
     "build:config": "cp config/config.skel.js dist/",
