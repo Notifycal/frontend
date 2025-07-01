@@ -12,11 +12,12 @@
     "url": "https://github.com/Notifycal/frontend"
   },
   "license": "MIT",
-  "version": "0.17.4",
+  "version": "0.17.5",
   "type": "module",
   "scripts": {
     "types": "tsc",
     "dev": "$npm_execpath run dev:config && vite",
+    "dev:remote": "bin/inject-api-url.sh $API_ENV && $npm_execpath run dev",
     "dev:config": "cp config/config.local.js public/config.js",
     "build": "rm -rf public/config.js && tsc && vite build && $npm_execpath run build:config",
     "build:config": "cp config/config.skel.js dist/",
@@ -102,7 +103,7 @@
     "madge": "^8.0.0",
     "msw": "^2.7.0",
     "postcss": "8.5.6",
-    "postcss-preset-mantine": "1.17.0",
+    "postcss-preset-mantine": "1.18.0",
     "postcss-simple-vars": "7.0.1",
     "prettier": "^3.3.3",
     "prop-types": "^15.8.1",

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.17.5](https://github.com/Notifycal/frontend/compare/v0.17.4...v0.17.5) (2025-07-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v4.4.0 ([#306](https://github.com/Notifycal/frontend/issues/306)) ([4caea77](https://github.com/Notifycal/frontend/commit/4caea77d8829baa89c12bd83c8f55659b1e63532))
+* **deps:** Update dependency @notifycal/shared to v4.5.0 ([#312](https://github.com/Notifycal/frontend/issues/312)) ([b56b176](https://github.com/Notifycal/frontend/commit/b56b176bc4cb32ecf873c80ce2d54c044cccda1c))
+* **deps:** Update dependency i18next to v25.3.0 ([#324](https://github.com/Notifycal/frontend/issues/324)) ([6d27985](https://github.com/Notifycal/frontend/commit/6d27985e01b3bdf83763408a224f80d3112d6f04))
+* **deps:** Update dependency motion to v12.20.1 ([#319](https://github.com/Notifycal/frontend/issues/319)) ([0dcd3c2](https://github.com/Notifycal/frontend/commit/0dcd3c272a57ad3d5340935629253374d3571065))
+* **deps:** Update dependency motion to v12.20.2 ([#326](https://github.com/Notifycal/frontend/issues/326)) ([eded0a8](https://github.com/Notifycal/frontend/commit/eded0a82453c918214e99dcfe464d7f353b9b064))
+* **deps:** Update dependency react-hook-form to v7.59.0 ([#313](https://github.com/Notifycal/frontend/issues/313)) ([302ca54](https://github.com/Notifycal/frontend/commit/302ca5411565e8904bd41268e0b3802adadb9eb5))
+* **deps:** Update Node.js Dependencies ([#310](https://github.com/Notifycal/frontend/issues/310)) ([c18d46c](https://github.com/Notifycal/frontend/commit/c18d46cdbeaefb090fe57300d0ec1aa6e8f52617))
+
 ## [0.17.4](https://github.com/Notifycal/frontend/compare/v0.17.3...v0.17.4) (2025-06-27)
 
 
