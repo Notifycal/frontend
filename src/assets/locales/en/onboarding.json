@@ -253,7 +253,10 @@
     },
     "apiError": "There was a problem saving your info."
   },
-  "payment": {
+  "tierSelection": {
+    "title": "Your plan",
+    "subtitle": "Choose the best plan for you",
+    "checkoutURLApiError": "There was a problem with the checkout. Please try again and give us some feedback if it doesn't work.",
     "tierDescriptions": {
       "good": "Ideal for freelancers or solo entrepreneurs.",
       "better": "Designed for small teams of 2–3 people.",

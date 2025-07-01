@@ -253,7 +253,10 @@
     },
     "apiError": "Ha habido un problema guardando tus datos."
   },
-  "payment": {
+  "tierSelection": {
+    "title": "Tu plan",
+    "subtitle": "Elige el plan que más se adapta a ti",
+    "checkoutURLApiError": "Ha habido un problema con el checkout. Vuelve a intentarlo, y danos <0>feedback</0> si no funciona.",
     "tierDescriptions": {
       "good": "Ideal para autónomos o emprendedores que trabajan solos.",
       "better": "Pensado para equipos pequeños de 2-3 personas.",
