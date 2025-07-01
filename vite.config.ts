@@ -53,7 +53,6 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       tanstackRouter({
         target: 'react'
-        // autoCodeSplitting: true
       }),
       react(),
       viteStaticCopy({
