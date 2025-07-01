@@ -8,7 +8,7 @@ const snakeToCamelObjectKeys = <T extends Record<string, unknown>>(object: T): S
 
 const tierDetailsRawSchema = z
   .object({
-    name: z.string(),
+    name: z.enum(['good', 'better', 'best']),
     /* eslint-disable camelcase */
     price_eur: z.number(),
     price_id: z.string(),
