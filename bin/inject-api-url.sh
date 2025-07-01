@@ -28,6 +28,6 @@ REST_API_ID=$(aws apigateway get-rest-apis | jq -rc --arg env "${ENV_NAME}" '.it
 URL="https://${REST_API_ID}.execute-api.${REGION}.amazonaws.com/${STAGE_NAME}"
 
 echo "Updating BACKEND_BASE_URL to: $URL"
-gsed -i -E "s|BACKEND_BASE_URL: '[^']*'|BACKEND_BASE_URL: '${URL}'|" "$CONFIG_FILE"
+"${SED_TOOL}" -E "s|BACKEND_BASE_URL: '[^']*'|BACKEND_BASE_URL: '${URL}'|" "$CONFIG_FILE"
 
 exit 0;
