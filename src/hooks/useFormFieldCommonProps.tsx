@@ -10,7 +10,7 @@ import type {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { isEqual, get } from 'radash';
+import { isEqual, get } from 'radashi';
 
 interface CommonFormFieldPropsReturn {
   rightSection: React.ReactElement | undefined;

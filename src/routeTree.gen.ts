@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthPricingRouteImport } from './routes/_auth/pricing'
 import { Route as AuthOnboardingRouteImport } from './routes/_auth/onboarding'
 import { Route as AuthAppRouteImport } from './routes/_auth/_app'
 import { Route as AuthOnboardingIndexRouteImport } from './routes/_auth/onboarding/index'
@@ -32,11 +31,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AuthPricingRoute = AuthPricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => AuthRoute,
 } as any)
 const AuthOnboardingRoute = AuthOnboardingRouteImport.update({
   id: '/onboarding',
@@ -96,7 +90,6 @@ const AuthOnboardingNostepCompletedRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/onboarding': typeof AuthOnboardingStepRouteWithChildren
-  '/pricing': typeof AuthPricingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/feedback': typeof AuthAppFeedbackRoute
   '/template': typeof AuthAppTemplateRoute
@@ -107,7 +100,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/pricing': typeof AuthPricingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/feedback': typeof AuthAppFeedbackRoute
   '/template': typeof AuthAppTemplateRoute
@@ -122,7 +114,6 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_auth/_app': typeof AuthAppRouteWithChildren
   '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
-  '/_auth/pricing': typeof AuthPricingRoute
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
   '/_auth/_app/feedback': typeof AuthAppFeedbackRoute
   '/_auth/_app/template': typeof AuthAppTemplateRoute
@@ -138,7 +129,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/onboarding'
-    | '/pricing'
     | '/dashboard'
     | '/feedback'
     | '/template'
@@ -149,7 +139,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/pricing'
     | '/dashboard'
     | '/feedback'
     | '/template'
@@ -163,7 +152,6 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_auth/_app'
     | '/_auth/onboarding'
-    | '/_auth/pricing'
     | '/_auth/_app/dashboard'
     | '/_auth/_app/feedback'
     | '/_auth/_app/template'
@@ -195,13 +183,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_auth/pricing': {
-      id: '/_auth/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof AuthPricingRouteImport
-      parentRoute: typeof AuthRoute
     }
     '/_auth/onboarding': {
       id: '/_auth/onboarding'
@@ -341,13 +322,11 @@ const AuthOnboardingRouteWithChildren = AuthOnboardingRoute._addFileChildren(
 interface AuthRouteChildren {
   AuthAppRoute: typeof AuthAppRouteWithChildren
   AuthOnboardingRoute: typeof AuthOnboardingRouteWithChildren
-  AuthPricingRoute: typeof AuthPricingRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthAppRoute: AuthAppRouteWithChildren,
   AuthOnboardingRoute: AuthOnboardingRouteWithChildren,
-  AuthPricingRoute: AuthPricingRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)

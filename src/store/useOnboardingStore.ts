@@ -24,7 +24,8 @@ const initialState = {
     calendars: false,
     senderDetails: false,
     confirm: false,
-    tryItOut: false
+    tryItOut: false,
+    tierSelection: false
   },
   currentStep: 0
 };

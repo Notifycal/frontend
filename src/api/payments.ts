@@ -1,10 +1,5 @@
-import type { TierId } from '@config/pricing';
+import type { TierId, Url , SuccessResponseContainer } from '@notifycal/shared/types';
 import getApiClient from './common';
-
-import type { Brand, SuccessResponseContainer } from '@notifycal/shared/types';
-
-// TODO: extract to shared and refactor
-type Url = Brand<string, 'Url'>;
 
 export type PaymentSession = {
   url: Url;
