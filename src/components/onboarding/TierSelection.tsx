@@ -1,44 +1,34 @@
 import { getCheckoutURL, type PaymentSession } from '@api/payments';
-
 import { getServiceConfig } from '@config/serviceConfig';
+import { getStepByIndex } from '@constants/onboardingSteps';
+import type { TierId } from '@notifycal/shared/types';
+import { tierOrder, tierExtraInfo } from '@constants/tiers';
 
 import { useMutation } from '@tanstack/react-query';
 import { type ReactNode, useState, type FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import { useOnboardingStore } from '@store/useOnboardingStore';
+import { Link, useNavigate } from '@tanstack/react-router';
 
 import clsx from 'clsx';
-import { Card, Button, Badge } from '@mantine/core';
 import FlatError from '@components/ui/FlatError/FlatError';
-import { Link } from '@tanstack/react-router';
-import type { TierId } from '@notifycal/shared/types';
+import { Card, Button, Badge, Group } from '@mantine/core';
+import { IconArrowLeft } from '@tabler/icons-react';
 
-export type TierSelectionValues = unknown;
-
-const tierOrder = ['good', 'better', 'best'] as const;
-
-const tierExtraInfo = {
-  good: {
-    recommended: false,
-    displayName: 'Solo'
-  },
-  better: {
-    recommended: true,
-    displayName: 'Team'
-  },
-  best: {
-    recommended: false,
-    displayName: 'Pro'
-  }
-};
+export type TierSelectionValues = null;
 
 const TierSelection: FC = () => {
   const translationNs = 'onboarding' as const;
+  const { currentStep } = useOnboardingStore();
+  const navigate = useNavigate();
   const { t } = useTranslation(translationNs);
 
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
 
-  const { TIER_INFO: { tiers } } = getServiceConfig();
+  const {
+    TIER_INFO: { tiers }
+  } = getServiceConfig();
   const orderedTierInfo = tierOrder.map((tierId) => ({ ...tiers[tierId], ...tierExtraInfo[tierId], id: tierId }));
 
   const generateCheckoutURLMutation = useMutation<PaymentSession, Error, TierId>({
@@ -62,6 +52,7 @@ const TierSelection: FC = () => {
   });
 
   const isButtonLoading = (tierId: TierId): boolean => selectedTier === tierId && generateCheckoutURLMutation.isPending;
+  const isButtonDisabled = (tierId: TierId): boolean => selectedTier !== tierId && generateCheckoutURLMutation.isPending;
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -118,6 +109,7 @@ const TierSelection: FC = () => {
                 <Button
                   fullWidth
                   color={plan.recommended ? 'dark' : 'blue'}
+                  disabled={isButtonDisabled(plan.id)}
                   loading={isButtonLoading(plan.id)}
                   mt="sm"
                   variant={plan.recommended ? 'white' : 'outline'}
@@ -139,8 +131,26 @@ const TierSelection: FC = () => {
           </div>
         ))}
       </div>
-        {/* TODO: take value from tierinfo */}
+      {/* TODO: take value from tierinfo */}
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
+      <Group justify="space-between" mt="xl" pt="md">
+        <Button
+          // disabled={currentStep === 0}
+          leftSection={<IconArrowLeft size={16} />}
+          variant="default"
+          onClick={async () => {
+            const previousStep = currentStep - 1;
+            const step = getStepByIndex(previousStep);
+            if (step) {
+              await navigate({
+                to: '/onboarding/$step', params: { step: step.path }
+              })
+            }
+          }}
+        >
+          {t('generic.button.back', { ns: 'translations' })}
+        </Button>
+      </Group>
     </div>
   );
 };
