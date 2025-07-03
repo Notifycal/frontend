@@ -34,7 +34,6 @@ const TierSelection: FC = () => {
   const generateCheckoutURLMutation = useMutation<PaymentSession, Error, TierId>({
     mutationFn: getCheckoutURL,
     onSuccess: (result) => {
-      console.log(result);
       window.location.href = result.url;
     },
     onError: () => {
@@ -136,7 +135,6 @@ const TierSelection: FC = () => {
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
       <Group justify="space-between" mt="xl" pt="md">
         <Button
-          // disabled={currentStep === 0}
           leftSection={<IconArrowLeft size={16} />}
           variant="default"
           onClick={async () => {
