@@ -1,7 +1,7 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { type JSX, useEffect } from 'react'
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { type JSX, useEffect } from 'react';
 
-import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner'
+import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
 
 import { sleep } from 'radashi';
 
@@ -15,13 +15,11 @@ function RouteComponent(): JSX.Element {
     };
 
     void run();
+  }, [navigate]);
 
-  }, [navigate])
-
-  return (<FullPageSpinner />);
+  return <FullPageSpinner />;
 }
 
 export const Route = createFileRoute('/_auth/payment-success')({
-  component: RouteComponent,
-})
-
+  component: RouteComponent
+});

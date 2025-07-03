@@ -49,13 +49,13 @@ export const onboardingSteps: Array<StepConfig> = [
   {
     path: 'try-it-out',
     stepKey: 'tryItOut',
-    component: TryItOut,
+    component: TryItOut
   },
   {
     path: 'tier-selection',
     stepKey: 'tierSelection',
     component: TierSelection,
-    customWidth: 'max-w-6xl'    // Tailwind CSS classname
+    customWidth: 'max-w-6xl' // Tailwind CSS classname
   }
 ];
 

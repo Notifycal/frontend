@@ -52,7 +52,8 @@ const TierSelection: FC = () => {
   });
 
   const isButtonLoading = (tierId: TierId): boolean => selectedTier === tierId && generateCheckoutURLMutation.isPending;
-  const isButtonDisabled = (tierId: TierId): boolean => selectedTier !== tierId && generateCheckoutURLMutation.isPending;
+  const isButtonDisabled = (tierId: TierId): boolean =>
+    selectedTier !== tierId && generateCheckoutURLMutation.isPending;
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -143,8 +144,9 @@ const TierSelection: FC = () => {
             const step = getStepByIndex(previousStep);
             if (step) {
               await navigate({
-                to: '/onboarding/$step', params: { step: step.path }
-              })
+                to: '/onboarding/$step',
+                params: { step: step.path }
+              });
             }
           }}
         >

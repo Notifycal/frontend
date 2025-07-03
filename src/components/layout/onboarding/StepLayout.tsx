@@ -82,12 +82,12 @@ const StepLayout: React.FC = () => {
           {/* Main content */}
           <main className="flex-1 container mx-auto px-4 py-6">
             <AnimatePresence mode="wait">
-              <div className={
-                clsx(
+              <div
+                className={clsx(
                   'w-full mx-auto bg-white rounded-lg shadow-md p-6 md:p-8',
                   step.customWidth ?? 'max-w-3xl'
-                )
-              }>
+                )}
+              >
                 <motion.div
                   key={step.path}
                   animate="animate"

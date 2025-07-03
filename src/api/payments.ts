@@ -1,4 +1,4 @@
-import type { TierId, Url , SuccessResponseContainer } from '@notifycal/shared/types';
+import type { TierId, Url, SuccessResponseContainer } from '@notifycal/shared/types';
 import getApiClient from './common';
 
 export type PaymentSession = {
