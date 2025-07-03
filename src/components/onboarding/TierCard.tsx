@@ -1,0 +1,87 @@
+import type { TierId } from '@notifycal/shared/types';
+import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Card, Button, Badge } from '@mantine/core';
+import clsx from 'clsx';
+
+interface TierInfo {
+  id: TierId;
+  displayName: string;
+  priceEur: number;
+  numberOfReminders: number;
+  recommended?: boolean;
+}
+
+interface TierCardProps {
+  plan: TierInfo;
+  isLoading: boolean;
+  isDisabled: boolean;
+  onSelect: (tierId: TierId) => void;
+}
+
+const TierCard: FC<TierCardProps> = ({ plan, isLoading, isDisabled, onSelect }) => {
+  const translationNs = 'onboarding' as const;
+  const { t } = useTranslation(translationNs);
+
+  return (
+    <div key={plan.displayName}>
+      {plan.recommended && (
+        <div className="relative sm:mx-5 lg:mx-15">
+          <Badge
+            fullWidth
+            className="absolute left-1/2 -translate-x-1/2 -top-5 z-10"
+            color="yellow"
+            radius="sm"
+            size="lg"
+            variant="filled"
+          >
+            {t('tierSelection.popularBadge')}
+          </Badge>
+        </div>
+      )}
+      <Card
+        withBorder
+        padding="lg"
+        radius="md"
+        shadow="md"
+        className={clsx(
+          'transition-transform h-full flex flex-col justify-between',
+          plan.recommended
+            ? 'hover:scale-[1.07] scale-105 bg-indigo-700 text-white border-indigo-600 shadow-lg hover:shadow-2xl transition-shadow duration-300'
+            : 'hover:scale-[1.02] bg-white text-gray-900'
+        )}
+      >
+        <div className="space-y-2">
+          <div className="text-xl font-semibold">{plan.displayName}</div>
+          <div className="text-sm opacity-80 min-h-[3.5rem] flex items-start justify-start">
+            {t(`tierSelection.tierDescriptions.${plan.id}`)}
+          </div>
+
+          <div className="flex justify-start items-baseline gap-1">
+            <div className="text-4xl font-bold">{plan.priceEur}€</div>
+            <div className="text-sm opacity-80">/{t('generic.month', { ns: 'translations' })}</div>
+          </div>
+          <Button
+            fullWidth
+            color={plan.recommended ? 'dark' : 'blue'}
+            disabled={isDisabled}
+            loading={isLoading}
+            mt="sm"
+            variant={plan.recommended ? 'white' : 'outline'}
+            onClick={() => onSelect(plan.id)}
+          >
+            {t('generic.button.select', { ns: 'translations' })}
+          </Button>
+          <div className="mt-4 min-h-[8rem] flex flex-col gap-2 items-start text-sm opacity-80">
+            <div>
+              ✔ {t('tierSelection.numberOfMonthlyReminders', { qty: plan.numberOfReminders.toLocaleString() })}
+            </div>
+            <div>✔ {t('tierSelection.googleCalendarIntegration')}</div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+export default TierCard;
