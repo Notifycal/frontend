@@ -131,7 +131,7 @@ const TierSelection: FC = () => {
           </div>
         ))}
       </div>
-      {/* TODO: take value from tierinfo */}
+
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
       <Group justify="space-between" mt="xl" pt="md">
         <Button
