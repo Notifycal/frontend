@@ -68,7 +68,7 @@ const TierCard: FC<TierCardProps> = ({ plan, isLoading, isDisabled, onSelect }) 
             loading={isLoading}
             mt="sm"
             variant={plan.recommended ? 'white' : 'outline'}
-            onClick={() => onSelect(plan.id)}
+            onClick={() => { onSelect(plan.id) }}
           >
             {t('generic.button.select', { ns: 'translations' })}
           </Button>

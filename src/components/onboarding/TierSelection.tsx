@@ -50,7 +50,7 @@ const TierSelection: FC = () => {
   const isButtonDisabled = (tierId: TierId): boolean =>
     selectedTier !== tierId && generateCheckoutURLMutation.isPending;
 
-  const handleTierSelect = (tierId: TierId) => {
+  const handleTierSelect = (tierId: TierId): void => {
     setSelectedTier(tierId);
     generateCheckoutURLMutation.mutate(tierId);
   };
@@ -72,9 +72,9 @@ const TierSelection: FC = () => {
         {orderedTierInfo.map((plan) => (
           <TierCard
             key={plan.displayName}
-            plan={plan}
-            isLoading={isButtonLoading(plan.id)}
             isDisabled={isButtonDisabled(plan.id)}
+            isLoading={isButtonLoading(plan.id)}
+            plan={plan}
             onSelect={handleTierSelect}
           />
         ))}
