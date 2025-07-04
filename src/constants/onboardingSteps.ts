@@ -7,6 +7,7 @@ import Confirm from '@components/onboarding/Confirm';
 import ReminderType from '@components/onboarding/ReminderType';
 import SenderDetails from '@components/onboarding/SenderDetails';
 import TryItOut from '@components/onboarding/TryItOut';
+import TierSelection from '@components/onboarding/TierSelection';
 
 export type StepKey = keyof OnboardingData;
 
@@ -15,6 +16,7 @@ export interface StepConfig {
   stepKey: StepKey;
   component: React.ComponentType;
   resetOnChangeBefore?: boolean;
+  customWidth?: string;
 }
 
 export const onboardingSteps: Array<StepConfig> = [
@@ -48,6 +50,12 @@ export const onboardingSteps: Array<StepConfig> = [
     path: 'try-it-out',
     stepKey: 'tryItOut',
     component: TryItOut
+  },
+  {
+    path: 'tier-selection',
+    stepKey: 'tierSelection',
+    component: TierSelection,
+    customWidth: 'max-w-6xl' // Tailwind CSS classname
   }
 ];
 

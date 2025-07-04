@@ -1,11 +1,11 @@
-import { getStepByIndex, isLastStep } from '@constants/onboardingSteps';
+import { isLastStep } from '@constants/onboardingSteps';
+import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
 
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Group } from '@mantine/core';
-import { IconArrowLeft, IconArrowRight, IconCheck } from '@tabler/icons-react';
+import { IconArrowRight, IconCheck } from '@tabler/icons-react';
 
 interface OnboardingNavigationProps {
   canProceed: boolean;
@@ -20,38 +20,15 @@ const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
   onProceed,
   isSubmitting = false
 }) => {
-  const navigate = useNavigate();
   const { currentStep } = useOnboardingStore();
-  const isTheLastStep = isLastStep(currentStep);
-
   const { t } = useTranslation();
 
+  const isTheLastStep = isLastStep(currentStep);
   const nextLabel = nextButtonLabel || t(isTheLastStep ? 'generic.button.complete' : 'generic.button.continue');
-
-  const handleBack = async (): Promise<void> => {
-    if (currentStep > 0) {
-      const previousStep = currentStep - 1;
-      const step = getStepByIndex(previousStep);
-      if (step) {
-        await navigate({ to: '/onboarding/$step', params: { step: step.path } });
-      }
-    }
-  };
 
   return (
     <Group justify="space-between" mt="xl" pt="md">
-      {currentStep !== 0 ? (
-        <Button
-          disabled={currentStep === 0}
-          leftSection={<IconArrowLeft size={16} />}
-          variant="default"
-          onClick={handleBack}
-        >
-          {t('generic.button.back')}
-        </Button>
-      ) : (
-        <div />
-      )}
+      {currentStep > 0 ? <OnboardingBackButton /> : <div />}
 
       <Button
         disabled={!canProceed}

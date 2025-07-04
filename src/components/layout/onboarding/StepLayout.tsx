@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Progress, Stepper } from '@mantine/core';
 import { AnimatePresence, motion } from 'motion/react';
+import clsx from 'clsx';
 
 interface SubHeaderProps {
   title: string;
@@ -13,7 +14,7 @@ interface SubHeaderProps {
 }
 
 const SubHeader: React.FC<SubHeaderProps> = ({ title, subtitle }) => (
-  <div className="text-center xl:mt-8">
+  <div className="text-center 2xl:mt-8">
     <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
     <p className="text-gray-600">{subtitle}</p>
   </div>
@@ -42,9 +43,9 @@ const StepLayout: React.FC = () => {
       {step && (
         <>
           {/* Stepper */}
-          <div className="hidden xl:flex w-full justify-center bg-white">
+          <div className="hidden 2xl:flex w-full justify-center bg-white">
             <div className="container mx-auto px-4 mb-6">
-              <div className="w-full max-w-5xl mx-auto">
+              <div className="w-full max-w-7xl mx-auto">
                 <Stepper
                   active={currentStep}
                   size="sm"
@@ -70,7 +71,7 @@ const StepLayout: React.FC = () => {
 
           {/* SubHeader for mobile (was inside Stepper block before) */}
 
-          <div className="flex xl:hidden w-full justify-center bg-white pb-8">
+          <div className="flex 2xl:hidden w-full justify-center bg-white pb-8">
             <div className="container mx-auto px-4 mt-4">
               <SubHeader subtitle={t(`${step.stepKey}.subtitle`)} title={t(`${step.stepKey}.title`)} />
             </div>
@@ -81,7 +82,12 @@ const StepLayout: React.FC = () => {
           {/* Main content */}
           <main className="flex-1 container mx-auto px-4 py-6">
             <AnimatePresence mode="wait">
-              <div className="w-full max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 md:p-8">
+              <div
+                className={clsx(
+                  'w-full mx-auto bg-white rounded-lg shadow-md p-6 md:p-8',
+                  step.customWidth ?? 'max-w-3xl'
+                )}
+              >
                 <motion.div
                   key={step.path}
                   animate="animate"
