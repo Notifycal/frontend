@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import { CheckIcon, Group, Image, Select, TextInput } from '@mantine/core';
-import { get } from 'radash';
+import { get } from 'radashi';
 
 export type Industries = {
   [key: string]: {
