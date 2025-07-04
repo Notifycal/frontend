@@ -15,6 +15,7 @@ import OnboardingNavigation from '@components/layout/onboarding/OnboardingNaviga
 import AccountOverview from '@components/ui/AccountOverview/AccountOverview';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { Checkbox } from '@mantine/core';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const confirmSchema = (t: NotifycalTFunction) =>
@@ -59,7 +60,8 @@ const Confirm: React.FC = () => {
     'calendars'
   ]);
   const [error, setError] = useState<string | null>(null);
-  const { handleStepNavigation, handleStepData } = useStepSubmit();
+  const { handleStepData } = useStepSubmit();
+  const { handleForwardNavigation } = useOnboardingNavigation();
   const { t } = useTranslation('onboarding');
 
   const {
@@ -92,7 +94,7 @@ const Confirm: React.FC = () => {
     onSuccess: async () => {
       setError(null);
       await queryClient.refetchQueries({ queryKey: ['user-profile'] });
-      await handleStepNavigation();
+      await handleForwardNavigation();
     },
     onError: () => {
       setError(t('confirm.apiError'));
