@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.19.0](https://github.com/Notifycal/frontend/compare/v0.18.0...v0.19.0) (2025-07-04)
+
+
+### Features
+
+* add testing framework ([#348](https://github.com/Notifycal/frontend/issues/348)) ([e7b7f88](https://github.com/Notifycal/frontend/commit/e7b7f884b9eb58de8ed7ad279dd30e96c0a5dab4))
+* tier selection page ([#316](https://github.com/Notifycal/frontend/issues/316)) ([6452d32](https://github.com/Notifycal/frontend/commit/6452d3256c009685258a32391eb222dc83b1eb26))
+
+
+### Bug Fixes
+
+* **deps:** Update @notifycal/shared and zod ([#347](https://github.com/Notifycal/frontend/issues/347)) ([984c257](https://github.com/Notifycal/frontend/commit/984c2574b1f8e67343faf4c1e0341c7b069ea7a3))
+* **deps:** Update dependency @notifycal/shared to v4.6.0 ([#342](https://github.com/Notifycal/frontend/issues/342)) ([8a2ff04](https://github.com/Notifycal/frontend/commit/8a2ff04697f6c385ec023ec5c9931a1a6fc5f818))
+* **deps:** Update dependency i18next to v25.3.1 ([#349](https://github.com/Notifycal/frontend/issues/349)) ([8319a89](https://github.com/Notifycal/frontend/commit/8319a89b58fc94ee6aea51646fe6a0211ae0284c))
+* **deps:** Update dependency motion to v12.22.0 ([#336](https://github.com/Notifycal/frontend/issues/336)) ([cd08dc9](https://github.com/Notifycal/frontend/commit/cd08dc9a39f31e78a954873800e8db7819ed76de))
+* **deps:** Update dependency motion to v12.23.0 ([#340](https://github.com/Notifycal/frontend/issues/340)) ([9df78ad](https://github.com/Notifycal/frontend/commit/9df78adb3d549ef07039e27e2dc9b901cf0ed673))
+* **deps:** Update dependency react-i18next to v15.6.0 ([#345](https://github.com/Notifycal/frontend/issues/345)) ([b25b937](https://github.com/Notifycal/frontend/commit/b25b937f1154d755b97e525eeb82b5edada96174))
+
 ## [0.18.0](https://github.com/Notifycal/frontend/compare/v0.17.5...v0.18.0) (2025-07-01)
 
 
