@@ -1,168 +1,169 @@
 # frontend
 
-![](/public/vite-react-boilerplate.png)
-
-Everything you need to kick off your next Vite + React web app!
+A modern, type-safe React application for managing business notifications and reminders. Built with scalability, developer experience, and user experience in mind.
 
 ## Table of Contents
 
 - [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
-- [Important Note](#important-note)
+- [Development](#development)
 - [Testing](#testing)
-- [Preparing for Deployment](#preparing-for-deployment)
-- [DevTools](#devtools)
-- [Installed Packages](#installed-packages)
+- [Building](#building)
+- [Project Structure](#project-structure)
+- [Important Notes](#important-notes)
 
 ## Overview
 
-Built with type safety, scalability, and developer experience in mind. A batteries included Vite + React template.
+Notifycal is a comprehensive notification management platform that helps businesses set up automated reminders and notifications. The frontend provides a seamless onboarding experience, calendar integration, and business profile management.
 
-- [TypeScript](https://www.typescriptlang.org) - A typed superset of JavaScript designed with large scale applications in mind
-- [ESLint](https://eslint.org) - Static code analysis to help find problems within a codebase
-- [Prettier](https://prettier.io) - An opinionated code formatter
-- [Vite](https://vitejs.dev) - Feature rich and highly optimized frontend tooling with TypeScript support out of the box
-- [React](https://react.dev) - A modern front-end JavaScript library for building user interfaces based on components
-- [Tailwind CSS](https://tailwindcss.com) - A utility-first CSS framework packed with classes to build any web design imaginable
-- [Mantine](https://mantine.dev) - A fully featured React components library
-- [Tabler Icons](https://tabler.io/icons) - 5754 pixel-perfect icons for web design
-- [Storybook](https://storybook.js.org) - A frontend workshop for building UI components and pages in isolation
-- [TanStack Router](https://tanstack.com/router/v1) - Fully typesafe, modern and scalable routing for React applications
-- [TanStack Query](https://tanstack.com/query/latest) - Declarative, always-up-to-date auto-managed queries and mutations
-- [TanStack Table](https://tanstack.com/table/v8) - Headless UI for building powerful tables & datagrids
-- [React Hook Form](https://react-hook-form.com) - Performant, flexible and extensible forms with easy-to-use validation - Potentially superseded by Mantine form hooks
-- [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
-- [React Testing Library](https://testing-library.com) - A very light-weight, best practice first, solution for testing React components
-- [Vitest](https://vitest.dev) - A blazing fast unit test framework powered by Vite
-- [react-i18next](https://react.i18next.com/) - A powerful internationalization framework for React/React Native based on i18next
-- [Faker](https://fakerjs.dev/) - Generate massive amounts of fake (but realistic) data for testing and development
-- [Dayjs](https://day.js.org/en/) - A minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
-- [ts-reset](https://github.com/total-typescript/ts-reset#readme) - Improvements for TypeScripts built-in typings for use in applications
+## Features
 
-A more detailed list of the included packages can be found in the [Installed Packages](#installed-packages) section. Packages not shown above include Devtools, ui helper libraries, and eslint plugins/configs.
+### Core Features
+
+- **Multi-step Onboarding Flow** - Guided setup for new businesses
+- **Google OAuth Integration** - Secure authentication via Google
+- **Calendar Integration** - Google Calendar connectivity for scheduling
+- **Business Profile Management** - Multi-industry business setup and configuration
+- **Reminder System** - Core notification and reminder functionality
+- **Internationalization** - Full i18n support (English/Spanish)
+- **Phone Number Validation** - International phone number support with country codes
+- **Feedback System** - User feedback collection and management
+
+### Technical Features
+
+- **Type-safe API Layer** - Full TypeScript integration with API mocking
+- **File-based Routing** - TanStack Router with automatic route generation
+- **Comprehensive Error Handling** - Error boundaries and fallback components
+- **Animation Support** - Smooth animations via Motion library
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
+- **Mock Service Worker** - API mocking for development and testing
+
+## Tech Stack
+
+### Core Framework
+
+- **[React](https://react.dev)** - Modern React with latest features
+- **[TypeScript](https://www.typescriptlang.org)** - Type safety throughout the application
+- **[Vite](https://vitejs.dev)** - Fast build tool and development server
+
+### UI & Styling
+
+- **[Mantine](https://mantine.dev)** - Comprehensive React components library
+- **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
+- **[Tabler Icons](https://tabler.io/icons)** - Beautiful SVG icons
+- **[Motion](https://motion.dev)** - Animation library for React
+
+### Routing & State Management
+
+- **[TanStack Router](https://tanstack.com/router/v1)** - Type-safe routing with file-based routes
+- **[TanStack Query](https://tanstack.com/query/latest)** - Server state management
+- **[TanStack Table](https://tanstack.com/table/v8)** - Headless table component
+- **[Zustand](https://zustand.surge.sh)** - Simple state management
+
+### Forms & Validation
+
+- **[React Hook Form](https://react-hook-form.com)** - Performant forms with validation
+- **[Zod](https://zod.dev)** - TypeScript-first schema validation
+- **[@hookform/resolvers](https://github.com/react-hook-form/resolvers)** - Form validation resolvers
+
+### HTTP & API
+
+- **[Axios](https://axios-http.com)** - HTTP client for API requests
+- **[MSW](https://mswjs.io)** - Mock Service Worker for API mocking
+
+### Internationalization
+
+- **[react-i18next](https://react.i18next.com)** - React internationalization
+- **[i18next](https://www.i18next.com)** - Internationalization framework
+- **[i18next-browser-languagedetector](https://github.com/i18next/i18next-browser-languagedetector)** - Language detection
+- **[i18next-http-backend](https://github.com/i18next/i18next-http-backend)** - Backend plugin for loading translations
+
+### Testing
+
+- **[Vitest](https://vitest.dev)** - Unit testing framework
+- **[React Testing Library](https://testing-library.com)** - Component testing utilities
+- **[Faker](https://fakerjs.dev/)** - Generate massive amounts of fake (but realistic) data for testing and development
+
+### Development Tools
+
+- **[Storybook](https://storybook.js.org)** - Component development and documentation
+- **[ESLint](https://eslint.org)** - Comprehensive linting with 8 configurations
+- **[Prettier](https://prettier.io)** - Code formatting
+
+### Utility Libraries
+
+- **[Radash](https://radash.vercel.app)** - Modern utility library
+- **[Luxon](https://moment.github.io/luxon)** - Date and time handling
+- **[Day.js](https://day.js.org)** - Lightweight date manipulation
+- **[Clsx](https://github.com/lukeed/clsx)** - Conditional CSS classes
+- **[Deepmerge-ts](https://github.com/RebeccaStevens/deepmerge-ts)** - Type-safe object merging
+- **[ts-reset](https://github.com/total-typescript/ts-reset)** - Improvements for TypeScript's built-in typings
 
 ## Requirements
 
-- [NodeJS 18+](https://nodejs.org/en)
+- **Node.js 18+** - Required for development
+- **npm** - Package manager (comes with Node.js)
 
 ## Getting Started
 
-Getting started is a simple as cloning the repository
+1. **Clone the repository:**
 
-```
+```bash
 git clone git@github.com:Notifycal/frontend.git
-```
-
-Changing into the new directory
-
-```
 cd frontend
 ```
 
-Installing dependencies
+2. **Install dependencies:**
 
-```
+```bash
 npm install
 ```
 
-Congrats! You're ready to starting working!
+3. **Start development server:**
 
-## Important Notes
-
-1. [Faker](https://fakerjs.dev/) is included to encourage more isolated testing and allow for rapid development of demos and MVPs. However, please make note that, [due to a bug](https://github.com/faker-js/faker/issues/1791), importing Faker from the main package (without a locale) will result in the entire Faker lib being imported causing bundle sizes to increase up to 2+ MB. Instead prefer [localized imports](https://fakerjs.dev/guide/localization.html#individual-localized-packages) as shown below.
-
-   ```
-   // import { faker } from '@faker-js/faker';
-   import { faker } from '@faker-js/faker/locale/en'; // prefer localization when possible
-   ```
-
-   The imported lib will instead be around 600 KB. Nonetheless, Faker should **NOT** be used in production and instead be limited to testing and demos.
-
-2. [Tailwind](https://tailwindui.com/) and [Mantine](https://mantine.dev/) aren't necessarily made to work with each other. Buttons might behave incorrectly if their setups aren't 100% right. These are some links with info just in case it happens to us:
-
-- [Using Mantine with Tailwind](https://shenyien.hashnode.dev/using-mantine-with-tailwind)
-
-## Testing
-
-Unit testing is handled by React Testing Library and Vitest.
-
-```
-npm run test
+```bash
+# Ensure your AWS_PROFILE environment variable is set, and that the chosen environment is deployed and has an API Gateway working
+API_ENV=<environment-name> npm run dev:remote
 ```
 
-### Unit Testing
+4. **Open your browser:**
+   Navigate to `http://localhost:5173`
 
-When running unit test scripts, it is assumed that unit tests will be colocated with the source files. Take a look at the placeholder README file in `src/components` for [an example](src/components/README.md).
+## Development
 
-If you'd like to execute unit tests specifically, the below command will execute vitest:
+### Available Scripts
 
-```
-npm run test:unit
-```
+- `npm run dev` - Start development server with local configuration
+- `npm run dev:remote` - Start with remote API configuration (requires API_ENV environment variable)
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run test` - Run tests (watch mode disabled)
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:ui` - Run tests with UI
+- `npm run test:coverage` - Run tests with coverage
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run prettier` - Check code formatting
+- `npm run prettier:fix` - Fix code formatting
+- `npm run types` - Run TypeScript check
+- `npm run check` - Run all checks (types, lint, prettier, test)
+- `npm run storybook` - Start Storybook development server
+- `npm run storybook:build` - Build Storybook
 
-If instead you are interested in coverage reporting, run:
+### Development Tools
 
-```
-npm run test:unit:coverage
-```
+All devtools are automatically excluded from production builds. The project includes comprehensive development tools:
 
-All unit tests run in watch mode by default. If you'd like to disable watch mode, change the package.json test scripts with the following
+#### **TanStack Router DevTools** - Available in development builds
 
-before:
+#### **TanStack Query DevTools** - Server state debugging
 
-```
-"scripts": {
-  	"test:unit": "vitest src/",
-	"test:unit:coverage": "vitest --coverage src/"
-}
-```
+#### **TanStack Table DevTools** - Table debugging utilities
 
-After:
-
-```
-"scripts": {
-  	"test:unit": "vitest run src/",
-	"test:unit:coverage": "vitest run --coverage src/"
-}
-```
-
-**Note**: Faker is included to provide mock data. See the [Important Note](#important-note) section for crucial details regarding this package. Specifically, point 3.
-
-## Creating a build
-
-Creating a build is as easy as running:
-
-```
-npm run build
-```
-
-and pointing your web server to the generated `index.html` file found at `dist/index.html`.
-
-### Continuous Integration
-
-##### TODO
-
-## Devtools
-
-This project includes a set of Devtools. Some are additional package dependencies whereas others come built-in to the packages themselves.
-
-### Devtool dependencies:
-
-- [@tanstack/react-query-devtools](https://tanstack.com/query/v4/docs/react/devtools) - Dedicated dev tools to help visualize the inner workings of React Query
-- [@tanstack/router-devtools](https://tanstack.com/router/v1/docs/devtools) - Dedicated dev tools to help visualize the inner workings of TanStack Router
-- [@tanstack/react-table-devtools](https://www.npmjs.com/package/@tanstack/react-table-devtools) - Dedicated dev tools to help visualize the inner workings of TanStack Table
-- [@hookform/DevTools](https://react-hook-form.com/dev-tools) - React Hook Form Devtools to help debug forms with validation
-
-A set of utility components are provided in `src/components/utils/development-tools/`. These [wrapper components](https://tanstack.com/router/v1/docs/devtools#only-importing-and-using-devtools-in-developmentgit) check whether the application is running in development or production mode and render the component or null respectively. In other words, you can confidently use them during development without having to worry about them showing up for end users in production.
-
-**TanStack Router Devtools**, however, utilizes its respective utility component in this project. The initial setup has been taken care of but if you wish to modify or remove the component, have a look in `src/App.tsx`.
-
-The TanStack Router Devtools icon can be found in the bottom right corner of the page denoted by the vertically stacked "TANSTACK ROUTER" logo.
-
-The above components, along with their imports, are commented out to start.
-
-**TanStack Table Devtools** Documentation is, at the time of writing this, non-existent. Having said that, usage is similar to the other TanStack devtools. A utility component restricting the devtools to development builds has been provided. The difference in comparison to the other TanStack devtools is the lack of floating mode. Instead, the Devtools are rendered as a component within the actual TanStack Table you define. An additional caveat being that the DevTools component (built-in and provided utility alike) require a table prop from the `useReactTable()` hook. In other words, if you have multiple tables, each table must have its own Devtools component. Check the simplified code below.
+Documentation is, at the time of writing this, non-existent. Having said that, usage is similar to the other TanStack devtools. A utility component restricting the devtools to development builds has been provided. The difference in comparison to the other TanStack devtools is the lack of floating mode. Instead, the Devtools are rendered as a component within the actual TanStack Table you define. An additional caveat being that the DevTools component (built-in and provided utility alike) require a table prop from the `useReactTable()` hook. In other words, if you have multiple tables, each table must have its own Devtools component. Check the simplified code below.
 
 ```
 function Table(): FunctionComponent {
@@ -183,77 +184,104 @@ function Table(): FunctionComponent {
 }
 ```
 
-**React Hook Form DevTools** icon can be recognized in the top right corner of the page by the pink React Hook Form clipboard logo. A utility component has also provided. Like the TanStack Table Devtools component above, a prop must be passed from a specific hook. In this case, it is the control prop from the `useForm()` hook. Similar to TanStack Table, use of React Hook Form DevTools requires the component be added to each unique form. More information can be found in the [React Hook Form DevTools documentation](https://react-hook-form.com/dev-tools).
+#### **React Hook Form DevTools** - Form debugging utilities
+
+The icon can be recognized in the top right corner of the page by the pink React Hook Form clipboard logo. A utility component has also provided. Like the TanStack Table Devtools component above, a prop must be passed from a specific hook. In this case, it is the control prop from the `useForm()` hook. Similar to TanStack Table, use of React Hook Form DevTools requires the component be added to each unique form. More information can be found in the [React Hook Form DevTools documentation](https://react-hook-form.com/dev-tools).
 
 To reiterate, if you wish to restrict the Devtools to development builds use the provided components found at `src/components/utils/development-tools` instead of the built-in components from their respective modules.
 
-## Installed Packages
+## Testing
 
-A simplified list can be found in the [Overview](#overview) section.
+The project uses Vitest and React Testing Library for comprehensive testing:
 
-### Base
+```bash
+# Run all tests
+npm run test
 
-- [TypeScript](https://www.typescriptlang.org)
-- [Vite](https://vitejs.dev)
-- [React](https://react.dev)
+# Run tests in watch mode
+npm run test:watch
 
-### Routing
+# Run tests with coverage
+npm run test:coverage
 
-- [TanStack Router](https://tanstack.com/router/v1)
+# Run tests with UI
+npm run test:ui
+```
 
-### Linting & Formatting
+### Testing Configuration
 
-- [ESLint](https://eslint.org)
-  - [typescript-eslint](https://typescript-eslint.io)
-  - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier#readme)
-  - [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react#readme)
-  - [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
-  - [eslint-plugin-react-refresh](https://github.com/ArnaudBarre/eslint-plugin-react-refresh)
-  - [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn#readme)
-  - [eslint-plugin-storybook](https://github.com/storybookjs/eslint-plugin-storybook#readme)
-- [Prettier](https://prettier.io)
+- **Framework:** Vitest with jsdom environment
+- **Testing Library:** React Testing Library with jest-dom matchers
+- **Mocking:** MSW for API mocking
+- **Coverage:** V8 coverage provider
 
-### State Management
+## Building
 
-- [TanStack Query (React Query)](https://tanstack.com/query/latest)
+### Production Build
 
-### UI
+```bash
+npm run build
+```
 
-- [Tailwind CSS](https://tailwindcss.com)
-- [Mantine](https://mantine.dev/)
-- [Tabler icons](https://tabler.io/icons)
-- [TanStack Table](https://tanstack.com/table/v8)
-- [Storybook](https://storybook.js.org)
+### Production Deployment
 
-### Forms
+The project includes Terraform configuration for infrastructure deployment. See tf/ directory for infrastructure setup.
 
-- [React Hook Form](https://react-hook-form.com)
-- [Zod](https://zod.dev)
+## Project Structure
 
-### Data Visualization
+```
+src/
+├── components/         # Reusable UI components
+│   ├── ui/             # Pure UI components (Spinner, Error, etc.)
+│   ├── onboarding/     # Onboarding flow components
+│   ├── layout/         # Layout components
+│   └── utils/          # Utility components and dev tools
+├── pages/              # Main page components
+├── routes/             # TanStack Router file-based routing
+├── api/                # API layer with mocking support
+├── hooks/              # Custom React hooks and providers
+├── assets/             # Static assets and i18n translations
+├── store/              # State management (Zustand stores)
+├── testing/            # Testing utilities and helpers
+└── styles/             # Global CSS and styling
+```
 
-- [Nivo](https://nivo.rocks)
-  - [Line](https://nivo.rocks/line/)
-  - [Bar](https://nivo.rocks/bar/)
-  - [Pie](https://nivo.rocks/pie/)
+## Important Notes
 
-### Testing
+### 1. Faker Usage
 
-- [Vitest](https://vitest.dev)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+[Faker](https://fakerjs.dev/) is included for development and testing. Due to bundle size concerns, always use localized imports:
 
-### Development Tools
+**TO BE CONFIGURED**
 
-- [TanStack Query Devtools](https://tanstack.com/query/latest/docs/react/devtools?from=reactQueryV3&original=https%3A%2F%2Ftanstack.com%2Fquery%2Fv3%2Fdocs%2Fdevtools)
-- [TanStack Router Devtools](https://tanstack.com/router/v1/docs/devtools)
-- [TanStack Table Devtools](https://www.npmjs.com/package/@tanstack/react-table-devtools)
-- [React Hook Form Devtools](https://react-hook-form.com/dev-tools)
+```typescript
+// ❌ Avoid - imports entire library (~2MB)
+import { faker } from '@faker-js/faker';
 
-### Other
+// ✅ Prefer - localized import (~600KB)
+import { faker } from '@faker-js/faker/locale/en';
+```
 
-- [i18next-browser-languageDetector](https://github.com/i18next/i18next-browser-languageDetector)
-- [i18next](https://www.i18next.com/)
-- [react-i18next](https://react.i18next.com/)
-- [ts-reset](https://github.com/total-typescript/ts-reset#readme)
-- [Faker](https://fakerjs.dev/)
-- [Dayjs](https://day.js.org/en/)
+**Important:** Faker should NOT be used in production builds.
+
+### 2. Tailwind + Mantine Integration
+
+This project uses both Tailwind CSS and Mantine. While they work well together, be aware of potential conflicts. The project is configured to handle this properly, but custom styling may require attention to specificity.
+
+https://shenyien.hashnode.dev/using-mantine-with-tailwind
+
+### 3. Shared Package Dependency
+
+The project depends on `@notifycal/shared` for common types and utilities. Ensure this package is properly configured in your development environment.
+
+### 4. Environment Configuration
+
+The project uses a custom configuration system:
+
+- `config/config.local.js` - Local development configuration
+- `config/config.skel.js` - Configuration template
+- Build process automatically handles environment-specific configs
+
+### 5. API Mocking
+
+MSW is configured for API mocking during development. Mock handlers are defined in the `src/api/` directory and automatically enabled in development mode.
