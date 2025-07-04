@@ -265,7 +265,7 @@
     "popularBadge": "Popular",
     "numberOfMonthlyReminders": "{{qty}} monthly reminders",
     "googleCalendarIntegration": "Integration with Google Calendar",
-    "disclaimer": "The number of reminders is based on an estimated cost of 0,05€/reminder from Spain. It can change depending on the destination country."
+    "disclaimer": "The number of reminders is based on an estimated cost of 0,05€/reminder to Spanish numbers. It can change depending on the destination number country."
   },
   "completed": {
     "heading": "Onboarding Complete!",
