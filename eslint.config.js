@@ -201,7 +201,7 @@ const storybookConfig = {
 
 const eslintConfig = typescriptEslint.config(
   {
-    ignores: ['config/**', 'public/**', 'dist/**']
+    ignores: ['config/**', 'public/**', 'dist/**', 'coverage/**']
   },
   baseESLintConfig,
   typescriptConfig,
