@@ -15,7 +15,7 @@ function PaymentSuccessRedirect(): JSX.Element {
     queryFn: getUserProfile,
     enabled: true, // Only fetch if polling is enabled
     refetchInterval: shouldPoll ? 2000 : false, // Poll every 2 seconds if enabled
-    gcTime: 0, // Data is immediately garbage collected after it's no longer used
+    gcTime: 0 // Data is immediately garbage collected after it's no longer used
   });
 
   useEffect(() => {
