@@ -31,7 +31,7 @@
     "exactOptionalPropertyTypes": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src", "*.d.ts", ".storybook/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
