@@ -1,4 +1,5 @@
 import { sendDemoReminder } from '@api/demoReminder';
+import { getUserProfile } from '@api/userProfile';
 import type { DateTime, TimeZone } from '@notifycal/shared/types';
 import { DateTime as DT } from 'luxon';
 import { z } from 'zod';
@@ -6,7 +7,7 @@ import { z } from 'zod';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -33,11 +34,18 @@ const emptyInitialValue = {
 const TryItOut: React.FC = () => {
   const { data, setStepData } = useOnboardingStore();
   const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
+
+  const { data: user } = useQuery({
+    queryKey: ['user-profile'],
+    queryFn: getUserProfile,
+    retry: false
+  });
 
   const {
     handleSubmit,
@@ -58,6 +66,7 @@ const TryItOut: React.FC = () => {
     onSuccess: async () => {
       setError(null);
       setValue('hasSentTestReminder', true, { shouldValidate: true });
+      await queryClient.refetchQueries({ queryKey: ['user-profile'] });
       // Doing this to persist/"send" the form as soon as the button is clicked
       await handleSubmit(setTryItOutData)();
     },
@@ -66,7 +75,9 @@ const TryItOut: React.FC = () => {
     }
   });
 
-  const hasSentTestReminder = watch('hasSentTestReminder');
+  const hasSentTestReminderFromForm = watch('hasSentTestReminder');
+  const hasSentTestReminderFromApi = user?.demoReminderCount === 1;
+  const hasSentTestReminder = hasSentTestReminderFromForm || hasSentTestReminderFromApi;
 
   const onTestReminderSendButtonClick = (): void => {
     if (!hasSentTestReminder) {
