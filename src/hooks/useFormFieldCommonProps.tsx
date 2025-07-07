@@ -16,10 +16,9 @@ interface CommonFormFieldPropsReturn {
   rightSection: React.ReactElement | undefined;
   rightSectionPointerEvents: React.CSSProperties['pointerEvents'];
   withAsterisk: true;
-  error?: string;
+  error?: string | undefined;
   label?: string;
-  labelProps?: Record<string, unknown> | undefined;
-  placeholder?: string;
+  placeholder?: string | undefined;
 }
 
 type FormFieldOptions<TFormValues extends FieldValues> = {
@@ -73,10 +72,10 @@ export function useFormFieldCommonProps<TFormValues extends FieldValues>(
       rightSectionPointerEvents: displayClearButton ? 'all' : undefined,
       withAsterisk: true,
       label,
-      labelProps: label ? { pb: '.4em' } : undefined,
+      ...(label ? { labelProps: { pb: '.4em' } } : {}),
       placeholder,
       ...(registration ? registration : {}),
-      error: fieldMessageObject && fieldMessageObject['message']
+      error: fieldMessageObject?.message
     };
   };
 
