@@ -12,10 +12,10 @@ interface PhoneInputValue {
 
 export interface PhoneInputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
   label?: ReactNode;
-  error?: string;
+  error?: string | undefined;
   value: PhoneInputValue;
   onChange: (value: PhoneInputValue) => void;
-  placeholder?: string;
+  placeholder?: string | undefined;
   ref?: React.Ref<HTMLInputElement>;
 }
 
@@ -46,7 +46,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
       label={label}
       labelProps={{ pb: 'sm' }}
       leftSectionWidth="calc(3.2rem * var(--mantine-scale) * 2)"
-      placeholder={placeholder}
+      {...(placeholder !== undefined ? { placeholder } : {})}
       type="text"
       value={phoneNumber}
       leftSection={

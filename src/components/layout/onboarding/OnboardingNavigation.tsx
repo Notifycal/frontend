@@ -9,7 +9,7 @@ import { IconArrowRight, IconCheck } from '@tabler/icons-react';
 
 interface OnboardingNavigationProps {
   canProceed: boolean;
-  nextButtonLabel?: string;
+  nextButtonLabel?: string | undefined;
   onProceed: () => void;
   isSubmitting?: boolean;
 }
