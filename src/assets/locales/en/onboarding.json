@@ -234,6 +234,7 @@
     "imageAlt": "Phone Notification",
     "sendTestReminder": "Send test reminder",
     "explanation": "This will help you see the message your clients will receive, in your own phone.",
+    "warning": "Special characters will be replaced or removed from the demo reminder. The reminder will be truncated to 480 characters if it exceeds that length.",
     "apiError": "There was a problem sending the test reminder to your phone."
   },
   "confirm": {

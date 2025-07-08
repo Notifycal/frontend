@@ -110,6 +110,7 @@ const TryItOut: React.FC = () => {
         </div>
 
         <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation')}</div>
+        <div className="text-[10px] text-amber-500/50">{t('tryItOut.warning')}</div>
         {/* Error Message from API */}
         {!sendDemoReminderMutation.isPending && sendDemoReminderMutation.isError && error && (
           <FlatError
