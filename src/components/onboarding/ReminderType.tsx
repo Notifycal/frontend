@@ -4,13 +4,7 @@ import { z } from 'zod';
 import { languageData, type NotifycalTFunction } from '@common/i18n';
 import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
-import {
-  templateEnMap,
-  templateEsMap,
-  type LanguageCode,
-  type TemplateId,
-  type TemplateMap
-} from '@notifycal/shared/types';
+import { templateEnMap, templateEsMap, type LanguageCode, type TemplateId } from '@notifycal/shared/types';
 
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
@@ -70,9 +64,7 @@ const ReminderType: React.FC = () => {
   const selectedReminderLanguage = watch('reminderLanguage');
   const selectedReminderTemplateId = watch('reminderId');
 
-  const initialTemplateLanguage: TemplateMap = selectedReminderLanguage.startsWith('en')
-    ? templateEnMap
-    : templateEsMap;
+  const initialTemplateLanguage = selectedReminderLanguage.startsWith('en') ? templateEnMap : templateEsMap;
 
   const interpolatedTemplates = Object.fromEntries(
     Object.entries(initialTemplateLanguage).map(([key, { id, language, interpolate }]) => [
