@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.20.1](https://github.com/Notifycal/frontend/compare/v0.20.0...v0.20.1) (2025-07-09)
+
+
+### Bug Fixes
+
+* **deps:** Update @notifycal/shared and zod ([#365](https://github.com/Notifycal/frontend/issues/365)) ([8002a95](https://github.com/Notifycal/frontend/commit/8002a957f6d1eff39695bd07b0aa1ee2a46d2c10))
+* **deps:** Update Node.js Dependencies ([#367](https://github.com/Notifycal/frontend/issues/367)) ([5d3c0b0](https://github.com/Notifycal/frontend/commit/5d3c0b083eacb183bec2d3049e66b66b9a4af6d4))
+* try it out heads-up ([#363](https://github.com/Notifycal/frontend/issues/363)) ([49fbf9f](https://github.com/Notifycal/frontend/commit/49fbf9f36e8bb2a51b9ef6cd0fa4e6f02b4839f7))
+
 ## [0.20.0](https://github.com/Notifycal/frontend/compare/v0.19.0...v0.20.0) (2025-07-07)
 
 
