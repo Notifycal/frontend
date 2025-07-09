@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.20.0](https://github.com/Notifycal/frontend/compare/v0.19.0...v0.20.0) (2025-07-07)
+
+
+### Features
+
+* display whole user info in dashboard + proper redirect for user tier ([#353](https://github.com/Notifycal/frontend/issues/353)) ([d782f87](https://github.com/Notifycal/frontend/commit/d782f875fe445e0ad9be2eef11f4173ccdc57fba))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency react-hook-form to v7.60.0 ([#351](https://github.com/Notifycal/frontend/issues/351)) ([836768a](https://github.com/Notifycal/frontend/commit/836768a13d4ada1afe42429f505f4ce704c4f02f))
+* **deps:** Update Node.js Dependencies to v8.1.3 ([#355](https://github.com/Notifycal/frontend/issues/355)) ([be0bf68](https://github.com/Notifycal/frontend/commit/be0bf684606e39832f379993ef7f640ef6fe9559))
+* harden tsconfig.json ([#361](https://github.com/Notifycal/frontend/issues/361)) ([bdf2a5e](https://github.com/Notifycal/frontend/commit/bdf2a5eb11f5ee51e4b696e8158dfa3d31e67137))
+* limit demo reminders using API ([#346](https://github.com/Notifycal/frontend/issues/346)) ([01d3f9e](https://github.com/Notifycal/frontend/commit/01d3f9e4a781330994f88513507b4f2a1d3f5ebb))
+
 ## [0.19.0](https://github.com/Notifycal/frontend/compare/v0.18.0...v0.19.0) (2025-07-04)
 
 
