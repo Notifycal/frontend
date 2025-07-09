@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import FlatError from '@components/ui/FlatError/FlatError';
-import { Button, Image } from '@mantine/core';
+import { Alert, Button, Image } from '@mantine/core';
 
 import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
@@ -93,7 +93,6 @@ const TryItOut: React.FC = () => {
   };
 
   const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translations' }) : undefined;
-
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">
@@ -110,6 +109,9 @@ const TryItOut: React.FC = () => {
         </div>
 
         <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation')}</div>
+        <Alert color="blue" variant="light">
+          <div className="text-sm text-gray-500">{t('tryItOut.warning')}</div>
+        </Alert>
         {/* Error Message from API */}
         {!sendDemoReminderMutation.isPending && sendDemoReminderMutation.isError && error && (
           <FlatError
