@@ -19,7 +19,7 @@ import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import { HoverCard } from '@mantine/core';
+import { Alert, HoverCard } from '@mantine/core';
 import InternationalizationPicker from '../ui/InternationalizationPicker/InternationalizationPicker';
 import {
   ReminderTypeCardRadioGroup,
@@ -121,27 +121,28 @@ const ReminderType: React.FC = () => {
           )}
         />
         {errors && <div className="text-sm text-rose-500">{errors.reminderId?.message}</div>}
-
-        <div className="text-sm text-gray-500 mt-4">
-          {t('reminderType.characterCountHeadsUpBilling.msg1')}{' '}
-          <HoverCard shadow="md" width={280}>
-            <HoverCard.Target>
-              <span className="text-primary-600 underline cursor-help">
-                {t('reminderType.characterCountHeadsUpBilling.msg2')}
-              </span>
-            </HoverCard.Target>
-            <HoverCard.Dropdown>
-              <span className="text-sm">{t('reminderType.specialCharactersExplanation')}</span>
-            </HoverCard.Dropdown>
-          </HoverCard>
-        </div>
-        {!!selectedReminderTemplateId && selectedTemplate && (
-          <div className="text-sm text-gray-500 mt-4">
-            {t('reminderType.characterCount', {
-              characterCount: selectedTemplate.text.length
-            })}
+        <Alert color="blue" variant="light">
+          <div className="text-sm text-gray-500">
+            {t('reminderType.characterCountHeadsUpBilling.msg1')}{' '}
+            <HoverCard shadow="md" width={280}>
+              <HoverCard.Target>
+                <span className="text-primary-600 underline cursor-help">
+                  {t('reminderType.characterCountHeadsUpBilling.msg2')}
+                </span>
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <span className="text-sm">{t('reminderType.specialCharactersExplanation')}</span>
+              </HoverCard.Dropdown>
+            </HoverCard>
           </div>
-        )}
+          {!!selectedReminderTemplateId && selectedTemplate && (
+            <div className="text-sm text-gray-500 mt-4">
+              {t('reminderType.characterCount', {
+                characterCount: selectedTemplate.text.length
+              })}
+            </div>
+          )}
+        </Alert>
       </div>
 
       <OnboardingNavigation canProceed={isValid} onProceed={handleSubmit(handleStepSubmit)} />
