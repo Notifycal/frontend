@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.20.2](https://github.com/Notifycal/frontend/compare/v0.20.1...v0.20.2) (2025-07-11)
+
+
+### Bug Fixes
+
+* **ci:** use `latest` instead of `main` ([#369](https://github.com/Notifycal/frontend/issues/369)) ([d067f4f](https://github.com/Notifycal/frontend/commit/d067f4f1b7dc85538fd70e3bd16d332aeec6d53f))
+* **deps:** Update dependency @notifycal/shared to v4.9.0 ([#371](https://github.com/Notifycal/frontend/issues/371)) ([3500c54](https://github.com/Notifycal/frontend/commit/3500c5496e911e7fe5ac4e9f55ac5e245d4de79e))
+
 ## [0.20.1](https://github.com/Notifycal/frontend/compare/v0.20.0...v0.20.1) (2025-07-09)
 
 
