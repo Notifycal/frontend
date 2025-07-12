@@ -1,7 +1,7 @@
 import { Button, Card, Group, Skeleton, Text, Title } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { getTopupCheckoutURL, type PaymentSession } from '@api/payments';
+import { getProductCheckoutURL, type PaymentSession } from '@api/payments';
 import { getServiceConfig } from '@config/serviceConfig';
 import type { User, IdpName, TopupId } from '@notifycal/shared/types';
 import type { FC } from 'react';
@@ -25,8 +25,8 @@ const TopUpCard: FC<TopUpCardProps> = ({ user, isLoadingUser }) => {
     };
   });
 
-  const generateTopupCheckoutURLMutation = useMutation<PaymentSession, Error, TopupId>({
-    mutationFn: getTopupCheckoutURL,
+  const generateTopupCheckoutURLMutation = useMutation<PaymentSession, Error, { topup: TopupId }>({
+    mutationFn: getProductCheckoutURL,
     onSuccess: (result) => {
       window.location.href = result.url;
     },
@@ -36,7 +36,7 @@ const TopUpCard: FC<TopUpCardProps> = ({ user, isLoadingUser }) => {
   });
 
   const handleAddCredits = (topupId: TopupId): void => {
-    generateTopupCheckoutURLMutation.mutate(topupId);
+    generateTopupCheckoutURLMutation.mutate({ topup: topupId });
   };
 
   return (

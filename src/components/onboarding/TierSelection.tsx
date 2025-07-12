@@ -1,4 +1,4 @@
-import { getCheckoutURL, type PaymentSession } from '@api/payments';
+import { getProductCheckoutURL, type PaymentSession } from '@api/payments';
 import { getServiceConfig } from '@config/serviceConfig';
 import type { TierId } from '@notifycal/shared/types';
 import { tierOrder, tierExtraInfo } from '@constants/tiers';
@@ -27,8 +27,8 @@ const TierSelection: FC = () => {
   } = getServiceConfig();
   const orderedTierInfo = tierOrder.map((tierId) => ({ ...tiers[tierId], ...tierExtraInfo[tierId], id: tierId }));
 
-  const generateCheckoutURLMutation = useMutation<PaymentSession, Error, TierId>({
-    mutationFn: getCheckoutURL,
+  const generateCheckoutURLMutation = useMutation<PaymentSession, Error, {tier: TierId}>({
+    mutationFn: getProductCheckoutURL,
     onSuccess: (result) => {
       window.location.href = result.url;
     },
@@ -52,7 +52,7 @@ const TierSelection: FC = () => {
 
   const handleTierSelect = (tierId: TierId): void => {
     setSelectedTier(tierId);
-    generateCheckoutURLMutation.mutate(tierId);
+    generateCheckoutURLMutation.mutate({ tier: tierId });
   };
 
   return (
