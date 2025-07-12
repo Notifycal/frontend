@@ -56,5 +56,18 @@
       "en": "English"
     },
     "month": "month"
+  },
+  "billing": {
+    "title": "Billing Information",
+    "currentPlan": "Your current plan is:<0>{{tierName}}</0>.",
+    "manageSubscription": "Manage Subscription",
+    "error": {
+      "fetch": "There was an error fetching your billing information."
+    },
+    "topUp": {
+      "title": "Top-up Credits",
+      "currentCredits": "You have {{credits}} Topup credits remaining.",
+      "addCredits": "Add Credits"
+    }
   }
 }

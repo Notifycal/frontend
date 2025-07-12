@@ -45,9 +45,9 @@ const TierCard: FC<TierCardProps> = ({ plan, isLoading, isDisabled, onSelect }) 
         radius="md"
         shadow="md"
         className={clsx(
-          'transition-transform h-full flex flex-col justify-between',
+          'transition-transform h-full flex flex-col justify-between shadow-lg',
           plan.recommended
-            ? 'hover:scale-[1.07] scale-105 bg-indigo-700 text-white border-indigo-600 shadow-lg hover:shadow-2xl transition-shadow duration-300'
+            ? 'hover:scale-[1.07] scale-105 bg-indigo-700 text-white border-indigo-600 shadow-xl hover:shadow-2xl transition-shadow duration-300'
             : 'hover:scale-[1.02] bg-white text-gray-900'
         )}
       >

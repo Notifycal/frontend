@@ -56,5 +56,18 @@
       "en": "Inglés"
     },
     "month": "mes"
+  },
+  "billing": {
+    "title": "Información de Facturación",
+    "currentPlan": "Tu plan actual es: <0>{{tierName}}</0>.",
+    "manageSubscription": "Gestionar Suscripción",
+    "error": {
+      "fetch": "Hubo un error al obtener tu información de facturación."
+    },
+    "topUp": {
+      "title": "Créditos de Recarga",
+      "currentCredits": "Te quedan {{credits}} créditos de Topup.",
+      "addCredits": "Añadir Créditos"
+    }
   }
 }
