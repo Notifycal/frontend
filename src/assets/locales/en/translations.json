@@ -55,19 +55,43 @@
       "es": "Spanish",
       "en": "English"
     },
-    "month": "month"
+    "month": "month",
+    "remember": "remember"
   },
   "billing": {
+    "topup": "Top-up",
+    "subscription": "Subscription",
     "title": "Billing Information",
     "currentPlan": "Your current plan is:<0>{{tierName}}</0>.",
-    "manageSubscription": "Manage Subscription",
     "error": {
       "fetch": "There was an error fetching your billing information."
     },
-    "topUp": {
-      "title": "Top-up Credits",
-      "currentCredits": "You have {{credits}} Topup credits remaining.",
-      "addCredits": "Add Credits"
+    "credits": {
+      "addTopupCredits": "Add Credits",
+      "currentCredits_zero": "You don't have any {{type}} credits.",
+      "currentCredits": "You have {{count}} {{type}} credits remaining.",
+      "title": "Credit balance",
+      "toIncrementSubscriptionCredits": "To increment the number of available subscription credits, you need to <0>upgrade your subscription</0>."
+    },
+    "manage": {
+      "title": "Manage your account",
+      "customerPortal": {
+        "button": "Customer portal",
+        "explanation": "For anything else:"
+      },
+      "modifySubscription": {
+        "button": "Modify subscription",
+        "explanation": "To upgrade or downgrade your subscription:"
+      },
+      "paymentMethods": {
+        "button": "Payment methods",
+        "explanation": "To add or update your payment method:"
+      },
+      "invoices": {
+        "button": "Invoices",
+        "explanation": "To view and download your invoices:"
+      }
     }
+    
   }
 }

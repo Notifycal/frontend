@@ -1,7 +1,6 @@
 import { getProductCheckoutURL, type PaymentSession } from '@api/payments';
-import { getServiceConfig } from '@config/serviceConfig';
 import type { TierId } from '@notifycal/shared/types';
-import { tierOrder, tierExtraInfo } from '@constants/tiers';
+import { tierOrder } from '@constants/tiers';
 
 import { useMutation } from '@tanstack/react-query';
 import { type ReactNode, useState, type FC } from 'react';
@@ -12,6 +11,7 @@ import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
 import TierCard from './TierCard';
 import OnboardingBackButton from './OnboardingBackButton';
+import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 
 export type TierSelectionValues = null;
 
@@ -22,12 +22,9 @@ const TierSelection: FC = () => {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
 
-  const {
-    TIER_INFO: { tiers }
-  } = getServiceConfig();
-  const orderedTierInfo = tierOrder.map((tierId) => ({ ...tiers[tierId], ...tierExtraInfo[tierId], id: tierId }));
+  const extendedTierInfo = tierOrder.map((tierInfo) => useExtendedTierInfo(tierInfo) );
 
-  const generateCheckoutURLMutation = useMutation<PaymentSession, Error, {tier: TierId}>({
+  const generateCheckoutURLMutation = useMutation<PaymentSession, Error, { tier: TierId }>({
     mutationFn: getProductCheckoutURL,
     onSuccess: (result) => {
       window.location.href = result.url;
@@ -69,15 +66,17 @@ const TierSelection: FC = () => {
         </div>
       )}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-6 lg:gap-12">
-        {orderedTierInfo.map((plan) => (
-          <TierCard
-            key={plan.displayName}
-            isDisabled={isButtonDisabled(plan.id)}
-            isLoading={isButtonLoading(plan.id)}
-            plan={plan}
-            onSelect={handleTierSelect}
-          />
-        ))}
+        {extendedTierInfo.map((tier) => {
+          return (
+            <TierCard
+              key={tier.id}
+              isDisabled={isButtonDisabled(tier.id)}
+              isLoading={isButtonLoading(tier.id)}
+              tier={tier}
+              onSelect={handleTierSelect}
+            />
+          );
+        })}
       </div>
 
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>

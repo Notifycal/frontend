@@ -55,19 +55,42 @@
       "es": "Español",
       "en": "Inglés"
     },
-    "month": "mes"
+    "month": "mes",
+    "remember": "recuerda"
   },
   "billing": {
+    "topup": "Recarga",
+    "subscription": "Subscripcion",
     "title": "Información de Facturación",
     "currentPlan": "Tu plan actual es: <0>{{tierName}}</0>.",
-    "manageSubscription": "Gestionar Suscripción",
     "error": {
       "fetch": "Hubo un error al obtener tu información de facturación."
     },
-    "topUp": {
-      "title": "Créditos de Recarga",
-      "currentCredits": "Te quedan {{credits}} créditos de Topup.",
-      "addCredits": "Añadir Créditos"
+    "credits": {
+      "addTopupCredits": "Añadir Créditos",
+      "currentCredits_zero": "No tienes ningun crédito de {{type}}.",
+      "currentCredits": "Te quedan {{count}} créditos de {{type}}.",
+      "title": "Balance de Créditos",
+      "toIncrementSubscriptionCredits": "Para incrementar el número de creditos de sucripción, debes <0>mejorar tu subscripción</0>."
+    },
+    "manage": {
+      "title": "Gestiona tu cuenta",
+      "customerPortal": {
+        "button":  "Portal de cliente",
+        "explanation": "Para cualquier otra gestión:"
+      },
+      "modifySubscription": {
+        "button": "Modificar suscripción",
+        "explanation": "Para hacer upgrade o downgrade de tu suscripción:"
+      },
+      "paymentMethods": {
+        "button": "Métodos de pago",
+        "explanation": "Para añadir o actualizar tu metodo de pago:"
+      },
+      "invoices": {
+        "button": "Facturas",
+        "explanation": "Para ver y descargar tus facturas:"
+      }
     }
   }
 }

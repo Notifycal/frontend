@@ -1,19 +1,83 @@
-import BillingInfoCard from "@components/ui/BillingInfoCard/BillingInfoCard";
-import TopUpCard from "@components/ui/TopUpCard/TopUpCard";
-import { useQuery } from '@tanstack/react-query';
 import { getUserProfile } from '@/api/userProfile';
-import type { JSX } from "react";
+import { capitalize } from 'radashi';
+import type { JSX } from 'react';
+
+import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
+import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
+
+import { IconCircleCheckFilled } from '@tabler/icons-react';
+import { Alert, Card, Divider, Title } from '@mantine/core';
+import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
+import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
+import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
 
 const Billing = (): JSX.Element => {
+  const { t } = useTranslation('onboarding');
   const { data: user, isLoading: isLoadingUser } = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile
   });
 
+  // TODO: user.credits isn't defined
+  console.log(isLoadingUser);
+
+  if (!user?.credits?.tier) {
+    return <div> No tier found</div>;
+  }
+
+  
+  const tierInfo = useExtendedTierInfo(user?.credits.tier);
+  const { icon: TierIcon } = tierInfo;
+  
+  console.log(tierInfo);
+
+  const cardCommonProps = {
+    withBorder: true,
+    padding: 'lg',
+    radius: 'md',
+    shadow: 'md'
+  }
+
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <BillingInfoCard isLoadingUser={isLoadingUser} user={user} />
-      <TopUpCard isLoadingUser={isLoadingUser} user={user} />
+      <Card {...cardCommonProps}>
+        {tierInfo && (
+          <>
+            <Title className="flex items-center gap-2" order={1}>
+              <TierIcon className="inline w-[1em] h-[1em] text-amber-400" />
+              {tierInfo.displayName}
+            </Title>
+            <div>
+              You are currently in the <span className="font-bold">{tierInfo.displayName}</span> plan.
+            </div>
+            <Divider my="md" />
+
+            <div>Your plan includes:</div>
+            <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
+            <Divider my="md" />
+            <Alert title={capitalize(t('generic.remember', { ns: 'translations'}))} classNames={{
+              title: 'text-sm',
+              message: 'text-xs'
+            }}>
+              {t('tierSelection.disclaimer')}
+            </Alert>
+          </>
+        )}
+      </Card>
+      
+      <Card {...cardCommonProps}>
+        <CreditBalance
+          topupCreditBalance={user?.credits?.topupCreditBalance}
+          subscriptionCreditBalance={{
+            used: user?.credits?.subscriptionCreditBalance,
+            total: tierInfo.credits
+          }}
+        />
+      </Card>
+      <Card {...cardCommonProps} className="lg:col-span-2">
+        <ManageBilling />
+      </Card>
     </div>
   );
 };

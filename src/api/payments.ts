@@ -1,4 +1,10 @@
-import type { TierId, TopupId, Url, SuccessResponseContainer, Topup } from '@notifycal/shared/types';
+import type {
+  TierId,
+  TopupId,
+  Url,
+  SuccessResponseContainer,
+  CustomerPortalFlowType
+} from '@notifycal/shared/types';
 import getApiClient from './common';
 
 type RedirectUrlSession = { url: Url };
@@ -6,7 +12,7 @@ type RedirectUrlSession = { url: Url };
 export type PaymentSession = RedirectUrlSession;
 export type CustomerPortalSession = RedirectUrlSession;
 
-type CheckoutPayload = { tier: TierId, topup?: never } | { topup: TopupId, tier?: never }
+type CheckoutPayload = { tier: TierId; topup?: never } | { topup: TopupId; tier?: never };
 
 export const getProductCheckoutURL = async (productPayload: CheckoutPayload): Promise<PaymentSession> => {
   try {
@@ -18,9 +24,10 @@ export const getProductCheckoutURL = async (productPayload: CheckoutPayload): Pr
   }
 };
 
-export const getCustomerPortalURL = async (): Promise<CustomerPortalSession> => {
+export const getCustomerPortalURL = async (flowType?: CustomerPortalFlowType): Promise<CustomerPortalSession> => {
+  const payload = flowType ? { flowType } : {};
   try {
-    const response = await getApiClient().post('/api/v1/customer-portal-session');
+    const response = await getApiClient().post('/api/v1/customer-portal-session', payload);
     const { result } = response.data as SuccessResponseContainer<CustomerPortalSession>;
     return result;
   } catch (error) {

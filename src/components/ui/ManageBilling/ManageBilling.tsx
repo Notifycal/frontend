@@ -1,0 +1,77 @@
+import { getCustomerPortalURL } from '@api/payments';
+import { Button, Title } from '@mantine/core';
+import { useMutation } from '@tanstack/react-query';
+import { useState, type FC } from 'react';
+import { useTranslation } from 'react-i18next';
+
+const ManageBilling: FC = () => {
+  const [clickedButton, setClickedButton] = useState<string | null>(null);
+
+  const { t } = useTranslation();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: getCustomerPortalURL,
+    onSuccess: (result) => {
+      // console.log(result.url);
+      window.location.href = result.url;
+    },
+    onError: () => {
+      console.log('error');
+    }
+  });
+
+  const buttons = [
+    {
+      id: 'update_subscription',
+      flowType: 'subscription_update' as const,
+      buttonText: t('billing.manage.modifySubscription.button'),
+      explanationText: t('billing.manage.modifySubscription.explanation')
+    },
+    {
+      id: 'payment_method',
+      flowType: 'payment_method_update' as const,
+      buttonText: t('billing.manage.paymentMethods.button'),
+      explanationText: t('billing.manage.paymentMethods.explanation')
+    },
+    {
+      id: 'invoices',
+      flowType: undefined,
+      buttonText: t('billing.manage.invoices.button'),
+      explanationText: t('billing.manage.invoices.explanation')
+    },
+    {
+      id: 'portal',
+      flowType: undefined,
+      buttonText: t('billing.manage.customerPortal.button'),
+      explanationText: t('billing.manage.customerPortal.explanation')
+    }
+  ];
+
+  return (
+    <>
+      <Title className="pb-6" order={2}>
+        {t('billing.manage.title')}
+      </Title>
+      <ul className="px-0 flex flex-col gap-5">
+        {buttons.map(({ id, flowType, buttonText, explanationText }) => (
+          <div key={id} className="flex flex-col gap-1 md:flex-row md:items-center md:gap-5">
+            <span className="w-full md:w-1/2">{explanationText}</span>
+            <Button
+              className="w-full md:w-1/2"
+              disabled={clickedButton ? clickedButton !== id : false}
+              loading={clickedButton === id}
+              onClick={() => {
+                setClickedButton(id);
+                mutate(flowType);
+              }}
+            >
+              {buttonText}
+            </Button>
+          </div>
+        ))}
+      </ul>
+    </>
+  );
+};
+
+export default ManageBilling;
