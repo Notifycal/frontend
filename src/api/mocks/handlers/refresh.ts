@@ -1,8 +1,6 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, type HttpHandler } from 'msw';
 import { fakeAuthResponse } from './common';
 
-export const refreshHandlers = [
-  http.post('/api/v1/refresh', () => {
-    return HttpResponse.json(fakeAuthResponse);
-  })
+export const getRefreshHandlers = (): Array<HttpHandler> => [
+  http.post('/api/v1/refresh', () => HttpResponse.json(fakeAuthResponse))
 ];

@@ -1,8 +1,8 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, type HttpHandler } from 'msw';
 
-export const userProfileHandlers = [
-  http.get('/api/v1/user-profile', () => {
-    return HttpResponse.json({
+export const getUserProfileHandlers = (): Array<HttpHandler> => [
+  http.get('/api/v1/user-profile', () =>
+    HttpResponse.json({
       result: {
         userId: '34ee63f4-8ef8-520d-81c1-afb3323fc14b',
         email: 'notifycal@gmail.com',
@@ -48,6 +48,6 @@ export const userProfileHandlers = [
           topupCreditBalance: 100
         }
       }
-    });
-  })
+    })
+  )
 ];

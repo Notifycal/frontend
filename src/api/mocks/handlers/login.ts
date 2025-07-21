@@ -1,8 +1,6 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, type HttpHandler } from 'msw';
 import { fakeAuthResponse } from './common';
 
-export const loginHandlers = [
-  http.post('/api/v1/login', () => {
-    return HttpResponse.json(fakeAuthResponse);
-  })
-];
+export function getLoginHandlers(): Array<HttpHandler> {
+  return [http.post('/api/v1/login', () => HttpResponse.json(fakeAuthResponse))];
+}

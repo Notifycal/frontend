@@ -1,11 +1,9 @@
 import { setupWorker } from 'msw/browser';
-
-import { loginHandlers } from './handlers/login';
-import { refreshHandlers } from './handlers/refresh';
-import { userProfileHandlers } from './handlers/userProfile';
+import { getMSWHandlers } from './handlers';
 
 console.log('MSW: Initializing worker...');
 
-export const handlers = [...loginHandlers, ...refreshHandlers, ...userProfileHandlers];
+const handlers = getMSWHandlers();
+console.log('MSW: Registered handlers:', handlers);
 
 export const worker = setupWorker(...handlers);
