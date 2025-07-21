@@ -6,10 +6,6 @@ import { userProfileHandlers } from './handlers/userProfile';
 
 console.log('MSW: Initializing worker...');
 
-export const handlers = [
-  ...loginHandlers,
-  ...refreshHandlers,
-  ...userProfileHandlers,
-];
+export const handlers = [...loginHandlers, ...refreshHandlers, ...userProfileHandlers];
 
 export const worker = setupWorker(...handlers);
