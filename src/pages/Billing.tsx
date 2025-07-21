@@ -14,23 +14,22 @@ import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
 
 const Billing = (): JSX.Element => {
   const { t } = useTranslation('onboarding');
-  const { data: user, isLoading: isLoadingUser } = useQuery({
+  const { data: user, isLoading, isError } = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile
   });
 
-  // TODO: user.credits isn't defined
-  console.log(isLoadingUser);
+  // if (isLoading) {
+  //   return <div>Loading user data...</div>;
+  // }
 
-  if (!user?.credits?.tier) {
-    return <div> No tier found</div>;
+  
+  if (isError || !user?.credits?.tier) {
+    throw new Error('Unable to load user data');
   }
-
   
-  const tierInfo = useExtendedTierInfo(user?.credits.tier);
+  const tierInfo = useExtendedTierInfo(user.credits.tier);
   const { icon: TierIcon } = tierInfo;
-  
-  console.log(tierInfo);
 
   const cardCommonProps = {
     withBorder: true,

@@ -10,8 +10,6 @@ interface TierFeatures {
 }
 
 const TierFeatures: FC<TierFeatures> = ({ tier, className, icon: Icon = IconCheck }) => {
-  console.log(tier);
-
   return (
     <ul className={clsx('mt-4 flex flex-col gap-2 items-start text-sm opacity-80 px-0', className)}>
       {tier.features.map((feature, index) => (
