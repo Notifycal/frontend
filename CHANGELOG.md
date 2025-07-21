@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.20.3](https://github.com/Notifycal/frontend/compare/v0.20.2...v0.20.3) (2025-07-21)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v5 ([#378](https://github.com/Notifycal/frontend/issues/378)) ([e1f3a64](https://github.com/Notifycal/frontend/commit/e1f3a6410610142fb6fb223d0b40ff0039425e14))
+* **deps:** Update dependency @notifycal/shared to v5.0.1 ([#384](https://github.com/Notifycal/frontend/issues/384)) ([8e911fc](https://github.com/Notifycal/frontend/commit/8e911fcbc2bf16794d97778c85cc9561912e31c1))
+* **deps:** Update dependency @notifycal/shared to v5.0.2 ([#391](https://github.com/Notifycal/frontend/issues/391)) ([8ca2ab5](https://github.com/Notifycal/frontend/commit/8ca2ab54ae59ad81d1db07eece0ffb3e1f6c02c6))
+* **deps:** Update dependency @tabler/icons-react to v3.34.1 ([#389](https://github.com/Notifycal/frontend/issues/389)) ([3744eab](https://github.com/Notifycal/frontend/commit/3744eab3b833a37e070990ce3ca285a341052489))
+* **deps:** Update dependency motion to v12.23.5 ([#376](https://github.com/Notifycal/frontend/issues/376)) ([60bc43a](https://github.com/Notifycal/frontend/commit/60bc43a6557735f757f4631fe0af94974a066d22))
+* **deps:** Update dependency motion to v12.23.6 ([#387](https://github.com/Notifycal/frontend/issues/387)) ([dec1c97](https://github.com/Notifycal/frontend/commit/dec1c972816d1b4ef309542d75cce330e94e1a10))
+* **deps:** Update Node.js Dependencies ([#373](https://github.com/Notifycal/frontend/issues/373)) ([66ea29f](https://github.com/Notifycal/frontend/commit/66ea29fe694f12e1e1ddca3968166ba0a125a356))
+* **undo:** tabler-icons 5k chunks ([#329](https://github.com/Notifycal/frontend/issues/329)) ([#401](https://github.com/Notifycal/frontend/issues/401)) ([14f0265](https://github.com/Notifycal/frontend/commit/14f0265c9746d33d82a3990421250a7bde09da38))
+
 ## [0.20.2](https://github.com/Notifycal/frontend/compare/v0.20.1...v0.20.2) (2025-07-11)
 
 
