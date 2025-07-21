@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, Button, Badge } from '@mantine/core';
 import clsx from 'clsx';
 import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
+import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 
 export interface TierInfo extends Tier{
   id: TierId;
@@ -13,15 +14,17 @@ export interface TierInfo extends Tier{
 }
 
 interface TierCardProps {
-  tier: TierInfo;
+  tierId: TierId;
   isLoading: boolean;
   isDisabled: boolean;
   onSelect: (tierId: TierId) => void;
 }
 
-const TierCard: FC<TierCardProps> = ({ tier, isLoading, isDisabled, onSelect }) => {
+const TierCard: FC<TierCardProps> = ({ tierId, isLoading, isDisabled, onSelect }) => {
   const translationNs = 'onboarding' as const;
   const { t } = useTranslation(translationNs);
+
+  const tier = useExtendedTierInfo(tierId);
 
   return (
     <div key={tier.displayName}>

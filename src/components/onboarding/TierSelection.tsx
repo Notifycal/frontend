@@ -11,7 +11,6 @@ import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
 import TierCard from './TierCard';
 import OnboardingBackButton from './OnboardingBackButton';
-import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 
 export type TierSelectionValues = null;
 
@@ -21,8 +20,6 @@ const TierSelection: FC = () => {
 
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
-
-  const extendedTierInfo = tierOrder.map((tierInfo) => useExtendedTierInfo(tierInfo) );
 
   const generateCheckoutURLMutation = useMutation<PaymentSession, Error, { tier: TierId }>({
     mutationFn: getProductCheckoutURL,
@@ -66,13 +63,13 @@ const TierSelection: FC = () => {
         </div>
       )}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-6 lg:gap-12">
-        {extendedTierInfo.map((tier) => {
+        {tierOrder.map((tierId) => {
           return (
             <TierCard
-              key={tier.id}
-              isDisabled={isButtonDisabled(tier.id)}
-              isLoading={isButtonLoading(tier.id)}
-              tier={tier}
+              key={tierId}
+              isDisabled={isButtonDisabled(tierId)}
+              isLoading={isButtonLoading(tierId)}
+              tierId={tierId}
               onSelect={handleTierSelect}
             />
           );
