@@ -40,47 +40,36 @@ const handleServiceConfigPlugin = (): import('vite').Plugin => {
 };
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
-  const isLocalDev = mode !== 'production' && command === 'serve';
-
-  const resolveDev = {
-    alias: {
-      '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs'
-    }
-  };
-
-  return {
-    plugins: [
-      tanstackRouter({
-        target: 'react'
-      }),
-      react(),
-      viteStaticCopy({
-        targets: [
-          {
-            src: normalizePath(path.resolve('./src/assets/locales')),
-            dest: normalizePath(path.resolve('./dist'))
-          }
-        ]
-      }),
-      tsconfigPaths(),
-      handleServiceConfigPlugin()
-    ],
-    resolve: isLocalDev ? resolveDev : {},
-    server: {
-      host: true,
-      strictPort: true,
-      port: 5173
-    },
-    preview: {
-      port: 5173
-    },
-    test: {
-      globals: true,
-      environment: 'jsdom',
-      setupFiles: ['./vitest.setup.ts'],
-      css: true,
-      passWithNoTests: true
-    }
-  };
+export default defineConfig({
+  plugins: [
+    tanstackRouter({
+      target: 'react'
+    }),
+    react(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: normalizePath(path.resolve('./src/assets/locales')),
+          dest: normalizePath(path.resolve('./dist'))
+        }
+      ]
+    }),
+    tsconfigPaths(),
+    handleServiceConfigPlugin()
+  ],
+  server: {
+    host: true,
+    strictPort: true,
+    port: 5173
+  },
+  preview: {
+    port: 5173
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.ts'],
+    css: true,
+    passWithNoTests: true
+  }
 });
