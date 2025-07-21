@@ -1,6 +1,6 @@
 import { getCustomerPortalURL } from '@api/payments';
+import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import { Button, Title } from '@mantine/core';
-import { useMutation } from '@tanstack/react-query';
 import { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -9,12 +9,7 @@ const ManageBilling: FC = () => {
 
   const { t } = useTranslation();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: getCustomerPortalURL,
-    onSuccess: (result) => {
-      // console.log(result.url);
-      window.location.href = result.url;
-    },
+  const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, {
     onError: () => {
       console.log('error');
     }
@@ -62,7 +57,7 @@ const ManageBilling: FC = () => {
               loading={clickedButton === id}
               onClick={() => {
                 setClickedButton(id);
-                mutate(flowType);
+                generateCustomerPortalURLMutation.mutate(flowType);
               }}
             >
               {buttonText}

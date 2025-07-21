@@ -7,7 +7,7 @@ import type {
 } from '@notifycal/shared/types';
 import getApiClient from './common';
 
-type RedirectUrlSession = { url: Url };
+export type RedirectUrlSession = { url: Url };
 
 export type PaymentSession = RedirectUrlSession;
 export type CustomerPortalSession = RedirectUrlSession;

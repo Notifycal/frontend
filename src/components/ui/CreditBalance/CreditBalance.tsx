@@ -1,10 +1,11 @@
-import { getCustomerPortalURL, getProductCheckoutURL, type PaymentSession } from '@api/payments';
+import { getCustomerPortalURL, getProductCheckoutURL } from '@api/payments';
 import { Alert, Button, Divider, Title } from '@mantine/core';
 import type { TopupId } from '@notifycal/shared/types';
-import { useMutation } from '@tanstack/react-query';
 import type { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import UsageBar from '../UsageBar/UsageBar';
+import ClickableSpan from '../ClickableSpan/ClickableSpan';
 
 interface CreditBalanceProps {
   subscriptionCreditBalance: {
@@ -17,53 +18,44 @@ interface CreditBalanceProps {
 const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptionCreditBalance }) => {
   const { t } = useTranslation();
 
-  const generateTopupCheckoutURLMutation = useMutation<PaymentSession, Error, { topup: TopupId }>({
-    mutationFn: getProductCheckoutURL,
-    onSuccess: (result) => {
-      window.location.href = result.url;
-    },
-    onError: () => {
-      console.log('error');
-    }
-  });
+  const onError = (): void => {
+    console.log('error');
+  };
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: getCustomerPortalURL,
-    onSuccess: (result) => {
-      // console.log(result.url);
-      window.location.href = result.url;
-    },
-    onError: () => {
-      console.log('error');
-    }
+  const generateTopupCheckoutURLMutation = usePaymentRedirectMutation<{ topup: TopupId }>(getProductCheckoutURL, {
+    onError
   });
+  const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, { onError });
 
   const handleAddCredits = (): void => {
     generateTopupCheckoutURLMutation.mutate({ topup: 'single' });
   };
 
+  const handleChangeSubscription = (): void => {
+    generateCustomerPortalURLMutation.mutate('subscription_update');
+  };
+
   return (
     <>
       <Title order={2}>{t('billing.credits.title')}</Title>
-      {/* TODO: display subscription used vs remaining (used / remaining). Use colors: green, yellow, red. Bold for fraction */}
       <ul className="list-none px-0">
         <li>
           <Title order={4}>{t('billing.subscription')}</Title>
-          {/* {t('billing.credits.currentCredits', { credits: subscriptionCreditBalance, type: t('billing.subscription') })} */}
           <UsageBar usage={{ remaining: subscriptionCreditBalance.used, total: subscriptionCreditBalance.total }} />
           <Alert>
             <Trans
               i18nKey="billing.credits.toIncrementSubscriptionCredits"
               ns="translations"
               components={[
-                <span className="underline text-blue-600 cursor-pointer" onClick={() => {
-                  if (!isPending) {
-                    mutate('subscription_update');
-                  }
-                }}/>
+                <ClickableSpan
+                  isPending={generateCustomerPortalURLMutation.isPending}
+                  loaderProps={{
+                    size: 'xs'
+                  }}
+                  onClick={handleChangeSubscription}
+                />
               ]}
             />
-            {/* {t('billing.credits.toIncrementSubscriptionCredits')} */}
           </Alert>
         </li>
         <Divider my="md" />
