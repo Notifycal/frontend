@@ -56,7 +56,9 @@
       "en": "Inglés"
     },
     "month": "mes",
-    "remember": "recuerda"
+    "remember": "recuerda",
+    "used": "{{credits}} usados",
+    "remaining": "{{credits}} restantes"
   },
   "billing": {
     "topup": "Recarga",

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-import type { FC } from 'react';
+import type { FC, FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface UsageBarProps {
   usage: {
@@ -9,6 +10,7 @@ interface UsageBarProps {
 }
 
 const UsageBar: FC<UsageBarProps> = ({ usage: { remaining, total } }) => {
+  const { t } = useTranslation();
   const percentage = (remaining / total) * 100;
   const used = total - remaining;
 
@@ -24,8 +26,8 @@ const UsageBar: FC<UsageBarProps> = ({ usage: { remaining, total } }) => {
       </div>
 
       <div className="text-sm text-gray-700 flex justify-between">
-        <span>{remaining} restantes</span>
-        <span>{used} usados</span>
+        <span>{t('generic.remaining', { credits: remaining })}</span>
+        <span>{t('generic.used', { credits: used })}</span>
       </div>
     </div>
   );
