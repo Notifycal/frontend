@@ -1,9 +1,20 @@
 import { getUserProfile } from '@api/userProfile';
 import type { FunctionComponent } from '@common/types';
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import type { UserStatus } from '@notifycal/shared/types';
 import { useQuery } from '@tanstack/react-query';
 import { Navigate, useMatches } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
+
+const userStatuses: Record<UserStatus, string> = {
+  onboarding: '/onboarding',
+  demo: '/onboarding/try-it-out',
+  live: '/dashboard',
+  "out-of-credits": '/dashboard/billing',
+  unpaid: '/dashboard/billing',
+  cancelled: '/dashboard/billing',
+  banned: '/banned'
+};
 
 export const UserProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
   const matches = useMatches();
@@ -16,10 +27,13 @@ export const UserProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   if (isLoading) return <FullPageSpinner />;
 
-  const isInOnboardingAlready = matches.some((match) => match.pathname.startsWith('/onboarding'));
+  const isThereAlready = (path: string): boolean => matches.some((match) => match.pathname.startsWith(path));
 
-  if (user && user.userStatus === 'onboarding' && !isInOnboardingAlready) {
-    return <Navigate to="/onboarding" />;
+  if (user) {
+    const goToRoute = userStatuses[user.userStatus];
+    if (!isThereAlready(goToRoute)) {
+      return <Navigate to={goToRoute} />
+    }
   }
 
   return <>{children}</>;
