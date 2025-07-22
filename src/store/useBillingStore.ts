@@ -8,7 +8,7 @@ interface BillingState {
   // State
   topupCreditBalance: number;
   tier: TierId | null; // Assuming tier is a string, or null if not set
-  purchaseOperation: PurchaseOperation | null,
+  purchaseOperation: PurchaseOperation | null;
   // Actions
   setTopupCreditBalance: (balance: number) => void;
   setTier: (tier: TierId) => void;
@@ -18,7 +18,7 @@ interface BillingState {
 const initialState = {
   topupCreditBalance: 0,
   tier: null,
-  purchaseOperation: null,
+  purchaseOperation: null
 };
 
 export const useBillingStore = create<BillingState>()(

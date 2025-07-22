@@ -11,6 +11,7 @@ const ManageBilling: FC = () => {
 
   const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, {
     onError: () => {
+      // REVIEW: cannot do the classic "display a red alert" for this because it'll break the layout
       console.log('error');
     }
   });
