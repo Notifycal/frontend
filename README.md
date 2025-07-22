@@ -309,3 +309,4 @@ export const getGoogleGSIHandler = (): Array<HttpHandler> => [
 
 
 This handler will intercept any request to `https://accounts.google.com/gsi/client` and return a mock JavaScript response, preventing the actual script from being loaded during development or testing.
+```
