@@ -1,0 +1,275 @@
+{
+  "header": "Benvingut a Notifycal",
+  "footer": "{{year}} Notifycal. Tots els drets reservats.",
+  "welcome": {
+    "msg1": "Abans de continuar, necessitem saber més sobre tu i el teu negoci.",
+    "msg2": "La següent informació és necessària per poder enviar recordatoris als teus clients."
+  },
+  "businessDetails": {
+    "title": "Detalls del negoci",
+    "subtitle": "Explica'ns sobre el teu negoci",
+    "industries": {
+      "technology": {
+        "label": "Tecnologia",
+        "sectors": {
+          "saas": "Programari com a Servei (SaaS)",
+          "itSupport": "Suport TI",
+          "webDev": "Desenvolupament Web",
+          "digitalMarketing": "Màrqueting Digital",
+          "cybersecurity": "Ciberseguretat",
+          "other": "Altre"
+        }
+      },
+      "healthcare": {
+        "label": "Sanitat",
+        "sectors": {
+          "doctors": "Metges",
+          "dentists": "Dentistes",
+          "therapists": "Terapeutes",
+          "optometrists": "Optometristes",
+          "chiropractors": "Quiropràctics",
+          "veterinarians": "Veterinaris",
+          "other": "Altre"
+        }
+      },
+      "wellness": {
+        "label": "Bellesa i Benestar",
+        "sectors": {
+          "salons": "Salons i Barberies",
+          "spas": "Balnearis",
+          "massageTherapists": "Massatgistes",
+          "nailTechnicians": "Tècnics d'Ungles",
+          "other": "Altre"
+        }
+      },
+      "homeServices": {
+        "label": "Serveis Domèstics",
+        "sectors": {
+          "plumbers": "Fontaners",
+          "electricians": "Electricistes",
+          "cleaners": "Netejadors",
+          "hvac": "Tècnics HVAC",
+          "pestControl": "Control de Plagues",
+          "other": "Altre"
+        }
+      },
+      "finance": {
+        "label": "Finances",
+        "sectors": {
+          "accountants": "Comptables",
+          "taxAdvisors": "Assessors Fiscals",
+          "financialPlanners": "Planificadors Financers",
+          "bookkeepers": "Comptabilistes",
+          "insuranceAgents": "Agents d'Assegurances",
+          "other": "Altre"
+        }
+      },
+      "legal": {
+        "label": "Jurídic",
+        "sectors": {
+          "lawFirms": "Bufets d'Advocats",
+          "notaries": "Notaris",
+          "compliance": "Consultors de Compliment",
+          "other": "Altre"
+        }
+      },
+      "education": {
+        "label": "Educació",
+        "sectors": {
+          "tutors": "Tutors",
+          "testPrep": "Preparació d'Exàmens",
+          "languageInstructors": "Instructors d'Idiomes",
+          "lifeCoaches": "Coaches de Vida",
+          "other": "Altre"
+        }
+      },
+      "retail": {
+        "label": "Comerç",
+        "sectors": {
+          "dryCleaners": "Tintoreries",
+          "tailors": "Sastres",
+          "shoeRepair": "Reparació de Calçat",
+          "subscriptionBoxes": "Caixes de Subscripció",
+          "mealPlans": "Plans d'Àpats",
+          "other": "Altre"
+        }
+      },
+      "automotive": {
+        "label": "Automòbil",
+        "sectors": {
+          "mechanics": "Mecànics",
+          "carDetailing": "Detallistes d'Automòbils",
+          "vehicleInspection": "Serveis d'Inspecció",
+          "other": "Altre"
+        }
+      },
+      "events": {
+        "label": "Esdeveniments i Hosteleria",
+        "sectors": {
+          "weddingPlanners": "Planificadors de Casaments",
+          "photographers": "Fotògrafs",
+          "djs": "DJs",
+          "venueManagers": "Gestors de Venues",
+          "hotels": "Hotels i Cases Rurals",
+          "tourOperators": "Operadors Turístics",
+          "other": "Altre"
+        }
+      },
+      "government": {
+        "label": "Govern i Llicències",
+        "sectors": {
+          "dmv": "Registre de Vehicles (DGT)",
+          "visaServices": "Serveis de Visa i Immigració",
+          "buildingInspectors": "Inspectors d'Edificis",
+          "fireSafety": "Inspectors de Seguretat contra Incendis",
+          "other": "Altre"
+        }
+      },
+      "nonProfit": {
+        "label": "Sense Ànim de Lucre",
+        "sectors": {
+          "charities": "Organitzacions Benèfiques",
+          "communityOrgs": "Organitzacions Comunitàries",
+          "other": "Altre"
+        }
+      },
+      "other": {
+        "label": "Altre",
+        "sectors": {
+          "custom": "Personalitzat/Altre"
+        }
+      }
+    },
+    "companySizes": {
+      "me": "Només jo",
+      "xs": "2-5 empleats",
+      "sm": "6-20 empleats",
+      "md": "21-50 empleats",
+      "lg": "51-200 empleats",
+      "xl": "201-1000 empleats",
+      "xxl": "1000+ empleats"
+    },
+    "formNameField": {
+      "label": "Nom del negoci",
+      "placeholder": "Introdueix el nom del teu negoci",
+      "isRequired": "El nom del negoci és obligatori",
+      "isMax": "El nom del negoci és massa llarg"
+    },
+    "formAddressField": {
+      "label": "Adreça del negoci",
+      "placeholder": "Introdueix l'adreça del teu negoci",
+      "isRequired": "L'adreça del negoci és obligatòria",
+      "isMax": "L'adreça del negoci és massa llarga"
+    },
+    "formIndustryCategoryField": {
+      "label": "Indústria",
+      "placeholder": "Selecciona la teva indústria",
+      "isRequired": "Si us plau selecciona una indústria"
+    },
+    "formIndustrySubcategoryField": {
+      "label": "Subindústria",
+      "placeholder": "Selecciona la teva subindústria",
+      "isRequired": "Si us plau selecciona una subindústria"
+    },
+    "formCustomIndustryField": {
+      "label": "Indústria personalitzada",
+      "placeholder": "Escriu la teva indústria",
+      "isRequired": "Si us plau introdueix la indústria del teu negoci",
+      "isMax": "La indústria és massa llarga"
+    },
+    "formCompanySizeField": {
+      "label": "Mida de l'empresa",
+      "placeholder": "Selecciona la mida de l'empresa",
+      "isRequired": "Si us plau selecciona una mida d'empresa"
+    },
+    "formUserLanguageField": {
+      "label": "Idioma",
+      "placeholder": "Selecciona el teu idioma",
+      "isRequired": "Si us plau selecciona un idioma"
+    },
+    "explanation": "Aquesta informació ens ajudarà a personalitzar els recordatoris que rebran els teus clients."
+  },
+  "reminderType": {
+    "title": "Tipus de recordatori",
+    "subtitle": "Configura el teu missatge de recordatori",
+    "formReminderTypeField": {
+      "isRequired": "Selecciona un tipus de missatge de recordatori"
+    },
+    "changeReminderLanguage": "Canviar idioma del recordatori",
+    "characterCountHeadsUpBilling": {
+      "msg1": "Els recordatoris es carreguen en múltiples de 160 caràcters.",
+      "msg2": "No es permeten caràcters especials."
+    },
+    "specialCharactersExplanation": "Si us plau utilitza només lletres estàndard, números i símbols bàsics.",
+    "characterCount": "El tipus de recordatori seleccionat resulta en recordatoris de {{characterCount}} caràcters de llargada."
+  },
+  "calendars": {
+    "title": "Calendaris",
+    "subtitle": "Configura els teus calendaris",
+    "formCalendarsField": {
+      "label": "Selecciona el(s) calendari(s) que vols utilitzar per {{businessName}}",
+      "placeholderLoading": "Cercant els teus calendaris...",
+      "placeholderLoaded": "Selecciona un o més calendaris"
+    },
+    "selectMenu": {
+      "error": "Cal seleccionar almenys un calendari"
+    },
+    "explanation": "Utilitzarem els esdeveniments d'aquests calendaris per enviar recordatoris als teus clients."
+  },
+  "senderDetails": {
+    "title": "Detalls de l'emissor",
+    "subtitle": "El teu número de telèfon",
+    "formSenderNumber": {
+      "label": "Número de telèfon",
+      "placeholder": "Introdueix el teu número de telèfon",
+      "isRequired": "El número de telèfon és obligatori",
+      "isInvalid": "El número de telèfon no és vàlid"
+    },
+    "explanation": "Enviarem recordatoris als teus clients des del teu propi número. D'aquesta manera sabran qui els està contactant."
+  },
+  "tryItOut": {
+    "title": "Prova-ho",
+    "subtitle": "Comprova el recordatori al teu telèfon!",
+    "imageAlt": "Notificació del Telèfon",
+    "sendTestReminder": "Enviar recordatori de prova",
+    "explanation": "Això t'ajudarà a veure el missatge que rebran els teus clients, al teu propi telèfon.",
+    "warning": "Els caràcters especials seran substituïts o eliminats del recordatori de demostració. El recordatori es truncarà a 480 caràcters si excedeix aquesta longitud.",
+    "apiError": "Hi ha hagut un problema enviant el recordatori de prova al teu telèfon."
+  },
+  "confirm": {
+    "title": "Confirmar",
+    "subtitle": "Finalitza la configuració del teu compte",
+    "accountSummary": "Resum del Compte",
+    "formTosField": {
+      "label": "Accepto els <0>Termes del Servei</0>",
+      "isRequired": "Has d'acceptar els Termes del Servei"
+    },
+    "formPrivacyField": {
+      "label": "Accepto la <0>Política de Privacitat</0>",
+      "isRequired": "Has d'acceptar la Política de Privacitat"
+    },
+    "formMarketingField": {
+      "label": "Accepto rebre comunicacions de màrqueting (opcional)"
+    },
+    "apiError": "Hi ha hagut un problema desant la teva informació."
+  },
+  "tierSelection": {
+    "title": "El teu pla",
+    "subtitle": "Tria el millor pla per a tu",
+    "checkoutURLApiError": "Hi ha hagut un problema amb el pagament. Si us plau torna-ho a provar i dona'ns el teu comentari si no funciona.",
+    "tierDescriptions": {
+      "good": "Ideal per a freelancers o emprenedors en solitari.",
+      "better": "Dissenyat per a equips petits de 2-3 persones.",
+      "best": "Perfecte per a empreses amb més de 5 empleats."
+    },
+    "popularBadge": "Popular",
+    "numberOfMonthlyReminders": "{{qty}} recordatoris mensuals",
+    "googleCalendarIntegration": "Integració amb Google Calendar",
+    "disclaimer": "El nombre de recordatoris es basa en un cost estimat de 0,05€/recordatori per a números espanyols. Pot canviar segons el país del número de destinació."
+  },
+  "completed": {
+    "heading": "Configuració Completada!",
+    "subheading": "Gràcies per completar el procés de configuració. Ja estàs a punt per començar a utilitzar la nostra plataforma!",
+    "goToDashboard": "Anar al Tauler"
+  }
+}

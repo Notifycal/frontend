@@ -1,0 +1,61 @@
+{
+  "home": {
+    "greeting": "Hola, món!",
+    "signInToYourAccount": "Inicia sessió a la teva àrea privada",
+    "orCheckOurDemo": "O prova la nostra demostració",
+    "wantToKnowMore": "Vols saber-ne més?",
+    "checkOurSite": "Visita el nostre lloc web",
+    "demo": "Demo",
+    "loginErrorInvalidScopes": "Hi ha hagut un error en iniciar sessió, si us plau assegura't de seleccionar tots els permisos a la finestra emergent de Google quan iniciïs sessió.",
+    "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, si us plau torna-ho a provar en uns minuts."
+  },
+  "feedback": {
+    "type": "Has de seleccionar un tipus de comentari",
+    "content": "Es requereix algun contingut",
+    "importance": "La teva opinió és important per a nosaltres",
+    "typeLabel": "Tipus de comentari",
+    "selectOption": "Selecciona una opció",
+    "featureRequest": "Sol·licitud de funcionalitat",
+    "generalFeedback": "Comentari general",
+    "bugReport": "Informe d'error",
+    "complaint": "Queixa",
+    "other": "Altre",
+    "messageLabel": "Missatge",
+    "messagePlaceholder": "Escriu el teu comentari aquí...",
+    "submit": "Enviar",
+    "thankYou": "Gràcies pel teu comentari!",
+    "received": "Hem rebut la teva informació i la revisarem aviat.",
+    "sendAnother": "Enviar un altre comentari",
+    "goToDashboard": "Anar al tauler"
+  },
+  "404": {
+    "pageNotFound": "Pàgina no trobada",
+    "weCouldNotFindThePage": "Ho sentim, no hem pogut trobar la pàgina que cerques.",
+    "backToDashboard": "Tornar al Tauler"
+  },
+  "globalError": {
+    "somethingWrong": "Ups! Alguna cosa ha anat malament",
+    "refreshPage": "Actualitzar Pàgina",
+    "contactSupport": "Contactar Suport",
+    "genericError": "Alguna cosa ha anat malament. Si us plau actualitza la pàgina o contacta amb el suport si el problema persisteix."
+  },
+  "generic": {
+    "button": {
+      "start": "Començar!",
+      "back": "Enrere",
+      "finish": "Finalitzar",
+      "continue": "Continuar",
+      "complete": "Completar",
+      "select": "Seleccionar"
+    },
+    "error": "Error",
+    "clear": "Esborrar",
+    "skip": "Ometre",
+    "languages": {
+      "es": "Espanyol",
+      "en": "Anglès",
+      "ca": "Català"
+    },
+    "month": "mes"
+  }
+}

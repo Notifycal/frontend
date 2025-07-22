@@ -53,7 +53,8 @@
     "skip": "Skip",
     "languages": {
       "es": "Spanish",
-      "en": "English"
+      "en": "English",
+      "ca": "Catalan"
     },
     "month": "month",
     "remember": "remember",
