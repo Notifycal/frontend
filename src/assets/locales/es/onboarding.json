@@ -1,6 +1,9 @@
 {
   "header": "Bienvenid@ a Notifycal",
-  "footer": "{{year}} Notifycal. Todos los derechos reservados.",
+  "footer": {
+    "allRightsReserved": "{{year}} Notifycal. Todos los derechos reservados.",
+    "feedbackLink": "Feedback"
+  },
   "welcome": {
     "msg1": "Antes de continuar, necesitamos conocer un poco más sobre ti y tu negocio.",
     "msg2": "Estos datos son necesarios para poder mandarle recordatorios a tus clientes."
