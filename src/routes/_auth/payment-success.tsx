@@ -6,11 +6,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useBillingStore } from '@store/useBillingStore';
 
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import { useOnboardingStore } from '@store/useOnboardingStore';
 
 function PaymentSuccessRedirect(): JSX.Element {
   const navigate = useNavigate();
   const [shouldPoll, setShouldPoll] = useState(true);
   const { topupCreditBalance, purchaseOperation, reset } = useBillingStore();
+  const { markStepAsCompleted } = useOnboardingStore();
 
   const { data: user, isSuccess } = useQuery({
     queryKey: ['user-profile'],
@@ -39,10 +41,11 @@ function PaymentSuccessRedirect(): JSX.Element {
       }
       // If not increased, polling continues
     } else if (purchaseOperation === 'tierPurchase') {
+      markStepAsCompleted('tierSelection');
       stopAndReset();
       void navigate({ to: '/onboarding/completed' });
     }
-  }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation, reset]);
+  }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation, reset, markStepAsCompleted]);
 
   return <FullPageSpinner />;
 }
