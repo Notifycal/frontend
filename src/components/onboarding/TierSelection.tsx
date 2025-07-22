@@ -1,8 +1,7 @@
-import { getProductCheckoutURL, type PaymentSession } from '@api/payments';
+import { getProductCheckoutURL } from '@api/payments';
 import type { TierId } from '@notifycal/shared/types';
 import { tierOrder } from '@constants/tiers';
 
-import { useMutation } from '@tanstack/react-query';
 import { type ReactNode, useState, type FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
@@ -12,6 +11,7 @@ import { Group } from '@mantine/core';
 import TierCard from './TierCard';
 import OnboardingBackButton from './OnboardingBackButton';
 import { useBillingStore } from '@store/useBillingStore';
+import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 
 export type TierSelectionValues = null;
 
@@ -24,11 +24,7 @@ const TierSelection: FC = () => {
 
   const { setPurchaseOperation } = useBillingStore();
 
-  const generateCheckoutURLMutation = useMutation<PaymentSession, Error, { tier: TierId }>({
-    mutationFn: getProductCheckoutURL,
-    onSuccess: (result) => {
-      window.location.href = result.url;
-    },
+  const generateCheckoutURLMutation = usePaymentRedirectMutation<{ tier: TierId }>(getProductCheckoutURL, {
     onError: () => {
       setError(
         <Trans
@@ -37,9 +33,6 @@ const TierSelection: FC = () => {
           ns={translationNs}
         />
       );
-    },
-    onSettled: () => {
-      setSelectedTier(null);
     }
   });
 
