@@ -13,14 +13,14 @@ import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
 import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
 
 const Billing = (): JSX.Element => {
-  const { t } = useTranslation('onboarding');
+  const { t } = useTranslation();
   const { data: user, isError } = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile
   });
 
   if (isError || !user?.credits?.tier) {
-    throw new Error(t('billing.error.noUserData', { ns: 'translations' }));
+    throw new Error(t('billing.error.noUserData'));
   }
 
   const tierInfo = useExtendedTierInfo(user.credits.tier);
@@ -52,17 +52,17 @@ const Billing = (): JSX.Element => {
             </div>
             <Divider my="md" />
 
-            <div>{t('billing.yourPlanIncludes', { ns: 'translations' })}</div>
+            <div>{t('billing.yourPlanIncludes')}</div>
             <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
             <Divider my="md" />
             <Alert
-              title={capitalize(t('generic.remember', { ns: 'translations' }))}
+              title={capitalize(t('generic.remember'))}
               classNames={{
                 title: 'text-sm',
                 message: 'text-xs'
               }}
             >
-              {t('tierSelection.disclaimer')}
+              {t('tierSelection.disclaimer', { ns: 'onboarding' })}
             </Alert>
           </>
         )}
