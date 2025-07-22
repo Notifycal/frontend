@@ -35,21 +35,26 @@ export const tierExtraInfo = {
   }
 };
 
-function useExtendedTierInfo(tierId: TierId): TierInfoWithIcon {
+function useExtendedTierInfo(tierId: TierId | undefined): TierInfoWithIcon | undefined {
   const { t } = useTranslation('onboarding');
   const {
     TIER_INFO: { tiers }
   } = getServiceConfig();
 
-  return useMemo(
-    () => ({
-      ...tiers[tierId],
-      ...tierExtraInfo[tierId],
-      features: tierFeatures(t, tiers[tierId].numberOfReminders),
-      id: tierId
-    }),
-    [tiers, tierId, t]
-  );
+  const extendedTierInfo = useMemo(() => {
+    if (tierId) {
+      return {
+        ...tiers[tierId],
+        ...tierExtraInfo[tierId],
+        features: tierFeatures(t, tiers[tierId].numberOfReminders),
+        id: tierId
+      };
+    } else {
+      return undefined;
+    }
+  }, [tiers, tierId, t]);
+
+  return extendedTierInfo;
 }
 
 export default useExtendedTierInfo;

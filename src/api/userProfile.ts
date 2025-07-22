@@ -1,9 +1,11 @@
 import type { IdpName, ReminderConfig, SuccessResponseContainer, User } from '@notifycal/shared/types';
 import getApiClient from './common';
+import { sleep } from 'radashi';
 
 export const getUserProfile = async (): Promise<User<IdpName>> => {
   try {
     const response = await getApiClient().get('/api/v1/user-profile');
+    await sleep(4000);
     const { result } = response.data as SuccessResponseContainer<User<IdpName>>;
     return result;
   } catch (error) {
