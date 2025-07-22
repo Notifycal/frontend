@@ -13,6 +13,7 @@ interface BillingState {
   setTopupCreditBalance: (balance: number) => void;
   setTier: (tier: TierId) => void;
   setPurchaseOperation: (operation: PurchaseOperation) => void;
+  reset: () => void;
 }
 
 const initialState = {
@@ -34,6 +35,10 @@ export const useBillingStore = create<BillingState>()(
       },
       setPurchaseOperation: (purchaseOperation): void => {
         set({ purchaseOperation });
+      },
+      reset: (): void => {
+        useBillingStore.persist.clearStorage();
+        // set({...initialState});
       }
     }),
     { name: 'billingInfo' }

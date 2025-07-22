@@ -10,7 +10,7 @@ import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
 function PaymentSuccessRedirect(): JSX.Element {
   const navigate = useNavigate();
   const [shouldPoll, setShouldPoll] = useState(true);
-  const { topupCreditBalance, purchaseOperation } = useBillingStore();
+  const { topupCreditBalance, purchaseOperation, reset } = useBillingStore();
 
   const { data: user, isSuccess } = useQuery({
     queryKey: ['user-profile'],
@@ -23,21 +23,26 @@ function PaymentSuccessRedirect(): JSX.Element {
   const isTopupCreditIncrease = (oldCredits: number, newCredits: number): boolean => newCredits > oldCredits;
 
   useEffect(() => {
+    const stopAndReset = (): void => {
+      setShouldPoll(false);
+      reset();
+    };
+
     if (!isSuccess || !user.credits) {
       return;
     }
 
     if (purchaseOperation === 'topupPurchase') {
       if (isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)) {
-        setShouldPoll(false);
+        stopAndReset();
         void navigate({ to: '/dashboard/billing' });
       }
       // If not increased, polling continues
     } else if (purchaseOperation === 'tierPurchase') {
-      setShouldPoll(false);
+      stopAndReset();
       void navigate({ to: '/onboarding/completed' });
     }
-  }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation]);
+  }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation, reset]);
 
   return <FullPageSpinner />;
 }
