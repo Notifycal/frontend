@@ -23,22 +23,18 @@ function PaymentSuccessRedirect(): JSX.Element {
   const isTopupCreditIncrease = (oldCredits: number, newCredits: number): boolean => newCredits > oldCredits;
 
   useEffect(() => {
-    if (!isSuccess) {
+    if (!isSuccess || !user.credits) {
       return;
     }
 
     if (purchaseOperation === 'topupPurchase') {
-      if (
-        user?.credits?.topupCreditBalance &&
-        isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)
-      ) {
+      if (isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)) {
         setShouldPoll(false);
         void navigate({ to: '/dashboard/billing' });
       }
       // If not increased, polling continues
     } else if (purchaseOperation === 'tierPurchase') {
-      console.log('tierPurchase');
-      setShouldPoll(false); // Stop polling for tier purchase
+      setShouldPoll(false);
       void navigate({ to: '/onboarding/completed' });
     }
   }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation]);
