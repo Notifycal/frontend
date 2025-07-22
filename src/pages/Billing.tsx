@@ -14,16 +14,11 @@ import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
 
 const Billing = (): JSX.Element => {
   const { t } = useTranslation('onboarding');
-  const { data: user, isLoading, isError } = useQuery({
+  const { data: user, isError } = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile
   });
 
-  // if (isLoading) {
-  //   return <div>Loading user data...</div>;
-  // }
-
-  
   if (isError || !user?.credits?.tier) {
     throw new Error('Unable to load user data');
   }
