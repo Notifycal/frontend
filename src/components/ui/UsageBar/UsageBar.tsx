@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import type { FC, FC } from 'react';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface UsageBarProps {

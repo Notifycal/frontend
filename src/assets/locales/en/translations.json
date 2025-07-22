@@ -64,9 +64,11 @@
     "topup": "Top-up",
     "subscription": "Subscription",
     "title": "Billing Information",
-    "currentPlan": "Your current plan is:<0>{{tierName}}</0>.",
+    "currentPlan": "Your current plan is: <0>{{tierName}}</0>.",
+    "yourPlanIncludes": "Your plan includes:",
     "error": {
-      "fetch": "There was an error fetching your billing information."
+      "fetch": "There was an error fetching your billing information.",
+      "noUserData": "There was an error loading user data."
     },
     "credits": {
       "addTopupCredits": "Add Credits",

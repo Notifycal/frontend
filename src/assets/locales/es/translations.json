@@ -65,8 +65,10 @@
     "subscription": "Subscripcion",
     "title": "Información de Facturación",
     "currentPlan": "Tu plan actual es: <0>{{tierName}}</0>.",
+    "yourPlanIncludes": "Tu plan incluye:",
     "error": {
-      "fetch": "Hubo un error al obtener tu información de facturación."
+      "fetch": "Hubo un error al obtener tu información de facturación.",
+      "noUserData": "Hubo un error al cargar los datos del usuario."
     },
     "credits": {
       "addTopupCredits": "Añadir Créditos",

@@ -4,7 +4,7 @@ import type { JSX } from 'react';
 
 import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 import { useQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 import { Alert, Card, Divider, Title } from '@mantine/core';
@@ -20,7 +20,7 @@ const Billing = (): JSX.Element => {
   });
 
   if (isError || !user?.credits?.tier) {
-    throw new Error('Unable to load user data');
+    throw new Error(t('billing.error.noUserData', { ns: 'translations' }));
   }
 
   const tierInfo = useExtendedTierInfo(user.credits.tier);
@@ -43,11 +43,16 @@ const Billing = (): JSX.Element => {
               {tierInfo.displayName}
             </Title>
             <div>
-              You are currently in the <span className="font-bold">{tierInfo.displayName}</span> plan.
+              <Trans
+                components={[<span className="font-bold" />]}
+                i18nKey="billing.currentPlan"
+                ns="translations"
+                values={{ tierName: tierInfo.displayName }}
+              />
             </div>
             <Divider my="md" />
 
-            <div>Your plan includes:</div>
+            <div>{t('billing.yourPlanIncludes', { ns: 'translations' })}</div>
             <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
             <Divider my="md" />
             <Alert

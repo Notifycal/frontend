@@ -38,7 +38,6 @@ export const useBillingStore = create<BillingState>()(
       },
       reset: (): void => {
         useBillingStore.persist.clearStorage();
-        // set({...initialState});
       }
     }),
     { name: 'billingInfo' }
