@@ -4,6 +4,7 @@ import type { TopupId } from '@notifycal/shared/types';
 import type { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
+import { useBillingStore } from '@store/useBillingStore';
 import UsageBar from '../UsageBar/UsageBar';
 import ClickableSpan from '../ClickableSpan/ClickableSpan';
 
@@ -17,8 +18,10 @@ interface CreditBalanceProps {
 
 const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptionCreditBalance }) => {
   const { t } = useTranslation();
+  const { setTopupCreditBalance, setPurchaseOperation } = useBillingStore();
 
   const onError = (): void => {
+    // REVIEW: cannot do the classic "display a red alert" for this because it'll break the layout
     console.log('error');
   };
 
@@ -28,6 +31,8 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
   const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, { onError });
 
   const handleAddCredits = (): void => {
+    setPurchaseOperation('topupPurchase');
+    setTopupCreditBalance(topupCreditBalance);
     generateTopupCheckoutURLMutation.mutate({ topup: 'single' });
   };
 

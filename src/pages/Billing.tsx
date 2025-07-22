@@ -22,7 +22,7 @@ const Billing = (): JSX.Element => {
   if (isError || !user?.credits?.tier) {
     throw new Error('Unable to load user data');
   }
-  
+
   const tierInfo = useExtendedTierInfo(user.credits.tier);
   const { icon: TierIcon } = tierInfo;
 
@@ -31,7 +31,7 @@ const Billing = (): JSX.Element => {
     padding: 'lg',
     radius: 'md',
     shadow: 'md'
-  }
+  };
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -50,16 +50,19 @@ const Billing = (): JSX.Element => {
             <div>Your plan includes:</div>
             <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
             <Divider my="md" />
-            <Alert title={capitalize(t('generic.remember', { ns: 'translations'}))} classNames={{
-              title: 'text-sm',
-              message: 'text-xs'
-            }}>
+            <Alert
+              title={capitalize(t('generic.remember', { ns: 'translations' }))}
+              classNames={{
+                title: 'text-sm',
+                message: 'text-xs'
+              }}
+            >
               {t('tierSelection.disclaimer')}
             </Alert>
           </>
         )}
       </Card>
-      
+
       <Card {...cardCommonProps}>
         <CreditBalance
           topupCreditBalance={user?.credits?.topupCreditBalance}

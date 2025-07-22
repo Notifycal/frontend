@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
 import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 
-export interface TierInfo extends Tier{
+export interface TierInfo extends Tier {
   id: TierId;
   displayName: string;
   recommended?: boolean;
@@ -77,7 +77,7 @@ const TierCard: FC<TierCardProps> = ({ tierId, isLoading, isDisabled, onSelect }
           >
             {t('generic.button.select', { ns: 'translations' })}
           </Button>
-          <TierFeatures className="min-h-[8rem]" tier={tier}/>
+          <TierFeatures className="min-h-[8rem]" tier={tier} />
         </div>
       </Card>
     </div>

@@ -76,7 +76,7 @@
     "manage": {
       "title": "Gestiona tu cuenta",
       "customerPortal": {
-        "button":  "Portal de cliente",
+        "button": "Portal de cliente",
         "explanation": "Para cualquier otra gestión:"
       },
       "modifySubscription": {

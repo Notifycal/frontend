@@ -1,10 +1,4 @@
-import type {
-  TierId,
-  TopupId,
-  Url,
-  SuccessResponseContainer,
-  CustomerPortalFlowType
-} from '@notifycal/shared/types';
+import type { TierId, TopupId, Url, SuccessResponseContainer, CustomerPortalFlowType } from '@notifycal/shared/types';
 import getApiClient from './common';
 
 export type RedirectUrlSession = { url: Url };

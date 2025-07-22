@@ -11,6 +11,7 @@ import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
 import TierCard from './TierCard';
 import OnboardingBackButton from './OnboardingBackButton';
+import { useBillingStore } from '@store/useBillingStore';
 
 export type TierSelectionValues = null;
 
@@ -20,6 +21,8 @@ const TierSelection: FC = () => {
 
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
+
+  const { setPurchaseOperation } = useBillingStore();
 
   const generateCheckoutURLMutation = useMutation<PaymentSession, Error, { tier: TierId }>({
     mutationFn: getProductCheckoutURL,
@@ -46,6 +49,7 @@ const TierSelection: FC = () => {
 
   const handleTierSelect = (tierId: TierId): void => {
     setSelectedTier(tierId);
+    setPurchaseOperation('tierPurchase');
     generateCheckoutURLMutation.mutate({ tier: tierId });
   };
 

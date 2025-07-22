@@ -10,7 +10,7 @@ const userStatuses: Record<UserStatus, string> = {
   onboarding: '/onboarding',
   demo: '/onboarding/try-it-out',
   live: '/dashboard',
-  "out-of-credits": '/dashboard/billing',
+  'out-of-credits': '/dashboard/billing',
   unpaid: '/dashboard/billing',
   cancelled: '/dashboard/billing',
   banned: '/banned'
@@ -32,7 +32,7 @@ export const UserProvider = ({ children }: { children: ReactNode }): FunctionCom
   if (user) {
     const goToRoute = userStatuses[user.userStatus];
     if (!isThereAlready(goToRoute)) {
-      return <Navigate to={goToRoute} />
+      return <Navigate to={goToRoute} />;
     }
   }
 
