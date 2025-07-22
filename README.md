@@ -284,4 +284,29 @@ The project uses a custom configuration system:
 
 ### 5. API Mocking
 
-MSW is configured for API mocking during development. Mock handlers are defined in the `src/api/` directory and automatically enabled in development mode.
+MSW (Mock Service Worker) is configured for API mocking during development and testing. This allows for a consistent and predictable development experience by intercepting network requests. Mock handlers are defined in the `src/api/mocks/handlers` directory. The handler needs to be added to `src/api/mocks/handlers.ts`.
+
+When running the development server locally, MSW intercepts requests made to the `apiUrl` defined in `config/config.local.js`. For this to work correctly, `apiUrl` must be set to the same URL as the frontend application, typically `http://localhost:5173`.
+
+Alternatively, you can also mock external requests (to URLs that don't belong to the project, for example Google's). To mock an external URL, you define a handler with the full URL string.
+
+**Example:** Mocking the Google GSI client script in `src/api/mocks/handlers/googleGsi.ts`:
+
+```typescript
+import { http, HttpResponse } from 'msw';
+
+export const getGoogleGSIHandler = (): Array<HttpHandler> => [
+  http.get('https://accounts.google.com/gsi/client', () => {
+    // Return a mock script or an empty response
+    return HttpResponse.text('// Mocked Google GSI Client Script', {
+      headers: {
+        'Content-Type': 'text/javascript',
+      },
+    });
+  })
+];
+
+
+
+This handler will intercept any request to `https://accounts.google.com/gsi/client` and return a mock JavaScript response, preventing the actual script from being loaded during development or testing.
+```
