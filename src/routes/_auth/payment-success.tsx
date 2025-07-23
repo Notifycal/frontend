@@ -37,9 +37,12 @@ function PaymentSuccessRedirect(): JSX.Element {
     if (purchaseOperation === 'topupPurchase') {
       if (isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)) {
         stopAndReset();
-        void navigate({ to: '/dashboard/billing', search: {
-          creditsAdded: true
-        } });
+        void navigate({
+          to: '/dashboard/billing',
+          search: {
+            creditsAdded: true
+          }
+        });
       }
       // If not increased, polling continues
     } else if (purchaseOperation === 'tierPurchase') {
