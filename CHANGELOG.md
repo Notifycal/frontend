@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.20.4](https://github.com/Notifycal/frontend/compare/v0.20.3...v0.20.4) (2025-07-23)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-router to v1.129.4 ([#408](https://github.com/Notifycal/frontend/issues/408)) ([25d9aaf](https://github.com/Notifycal/frontend/commit/25d9aaf66969a9651fada05bd2806020244154b8))
+* **deps:** Update dependency @tanstack/react-router to v1.129.7 ([#416](https://github.com/Notifycal/frontend/issues/416)) ([ebd1065](https://github.com/Notifycal/frontend/commit/ebd1065f93b02e081f529ac3c92d6b17d3e28155))
+* **deps:** Update dependency axios to v1.11.0 ([#418](https://github.com/Notifycal/frontend/issues/418)) ([4d4f317](https://github.com/Notifycal/frontend/commit/4d4f3179074850653122135c6357d7fbf1011c6d))
+* **deps:** Update dependency motion to v12.23.7 ([#420](https://github.com/Notifycal/frontend/issues/420)) ([1025cab](https://github.com/Notifycal/frontend/commit/1025cab867cb22fee4095f789a683e4c0c8d45e9))
+* **deps:** Update dependency react-i18next to v15.6.1 ([#413](https://github.com/Notifycal/frontend/issues/413)) ([65b3f7c](https://github.com/Notifycal/frontend/commit/65b3f7c139854c634f999adbffcc8303f8a8f035))
+* **deps:** Update Node.js Dependencies to v8.2.1 ([#404](https://github.com/Notifycal/frontend/issues/404)) ([d0f9ab3](https://github.com/Notifycal/frontend/commit/d0f9ab3dde2ff542bb997a9ef6934472a434e9a4))
+* lift restriction on createSmsContentSchema ([#410](https://github.com/Notifycal/frontend/issues/410)) ([d7e493e](https://github.com/Notifycal/frontend/commit/d7e493ea094305206da4a3043b5e7e5ead12426b))
+* **local:** MSW handlers working ([#402](https://github.com/Notifycal/frontend/issues/402)) ([4efba2b](https://github.com/Notifycal/frontend/commit/4efba2bdbe4603c071ac3e4bf2f0441bcf848c2d))
+
 ## [0.20.3](https://github.com/Notifycal/frontend/compare/v0.20.2...v0.20.3) (2025-07-21)
 
 
