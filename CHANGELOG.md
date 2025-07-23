@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/Notifycal/frontend/compare/v0.21.0...v0.22.0) (2025-07-23)
+
+
+### Features
+
+* customer portal language ([#427](https://github.com/Notifycal/frontend/issues/427)) ([05cfbe5](https://github.com/Notifycal/frontend/commit/05cfbe598e44346051c650d56f3c418cc56e0dd3))
+
 ## [0.21.0](https://github.com/Notifycal/frontend/compare/v0.20.4...v0.21.0) (2025-07-23)
 
 
