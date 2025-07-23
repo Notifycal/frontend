@@ -2,16 +2,16 @@
   "home": {
     "greeting": "Hola, món!",
     "signInToYourAccount": "Inicia sessió a la teva àrea privada",
-    "orCheckOurDemo": "O prova la nostra demostració",
-    "wantToKnowMore": "Vols saber-ne més?",
+    "orCheckOurDemo": "O prova la nostra demo",
+    "wantToKnowMore": "Vols saber més?",
     "checkOurSite": "Visita el nostre lloc web",
     "demo": "Demo",
-    "loginErrorInvalidScopes": "Hi ha hagut un error en iniciar sessió, si us plau assegura't de seleccionar tots els permisos a la finestra emergent de Google quan iniciïs sessió.",
-    "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, si us plau torna-ho a provar en uns minuts."
+    "loginErrorInvalidScopes": "Hi ha hagut un error en iniciar sessió, assegura't de seleccionar tots els àmbits al popup de Google quan facis login.",
+    "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, prova-ho de nou en uns minuts."
   },
   "feedback": {
     "type": "Has de seleccionar un tipus de comentari",
-    "content": "Es requereix algun contingut",
+    "content": "Cal introduir contingut",
     "importance": "La teva opinió és important per a nosaltres",
     "typeLabel": "Tipus de comentari",
     "selectOption": "Selecciona una opció",
@@ -30,14 +30,14 @@
   },
   "404": {
     "pageNotFound": "Pàgina no trobada",
-    "weCouldNotFindThePage": "Ho sentim, no hem pogut trobar la pàgina que cerques.",
+    "weCouldNotFindThePage": "Ho sentim, no hem pogut trobar la pàgina que busques.",
     "backToDashboard": "Tornar al Tauler"
   },
   "globalError": {
     "somethingWrong": "Ups! Alguna cosa ha anat malament",
     "refreshPage": "Actualitzar Pàgina",
     "contactSupport": "Contactar Suport",
-    "genericError": "Alguna cosa ha anat malament. Si us plau actualitza la pàgina o contacta amb el suport si el problema persisteix."
+    "genericError": "Alguna cosa ha anat malament. Actualitza la pàgina o contacta amb suport si el problema persisteix."
   },
   "generic": {
     "button": {
@@ -50,12 +50,59 @@
     },
     "error": "Error",
     "clear": "Esborrar",
-    "skip": "Ometre",
+    "skip": "Saltar",
     "languages": {
       "es": "Espanyol",
       "en": "Anglès",
       "ca": "Català"
     },
-    "month": "mes"
+    "month": "mes",
+    "remember": "recordar",
+    "used": "{{credits}} utilitzats",
+    "remaining": "{{credits}} restants"
+  },
+  "billing": {
+    "topup": "Recàrrega",
+    "subscription": "Subscripció",
+    "title": "Informació de Facturació",
+    "currentPlan": "El teu pla actual és: <0>{{tierName}}</0>.",
+    "yourPlanIncludes": "El teu pla inclou:",
+    "error": {
+      "fetch": "Hi ha hagut un error en obtenir la teva informació de facturació.",
+      "noUserData": "Hi ha hagut un error en carregar les dades d'usuari."
+    },
+    "credits": {
+      "addTopupCredits": "Afegir Crèdits",
+      "currentCredits_zero": "No tens cap crèdit de {{type}}.",
+      "currentCredits": "Et queden {{count}} crèdits de {{type}}.",
+      "title": "Balanç de crèdits",
+      "toIncrementSubscriptionCredits": "Per incrementar el nombre de crèdits de subscripció disponibles, necessites <0>millorar la teva subscripció</0>.",
+      "error": {
+        "buyMoreCredits": "Hi ha hagut un error en intentar comprar crèdits de recàrrega.",
+        "upgradeSubscription": "Hi ha hagut un error en intentar millorar el Pla de l'usuari."
+      }
+    },
+    "manage": {
+      "title": "Gestiona el teu compte",
+      "customerPortal": {
+        "button": "Portal de client",
+        "explanation": "Per a qualsevol altra cosa:"
+      },
+      "modifySubscription": {
+        "button": "Modificar subscripció",
+        "explanation": "Per millorar o reduir la teva subscripció:"
+      },
+      "paymentMethods": {
+        "button": "Mètodes de pagament",
+        "explanation": "Per afegir o actualitzar el teu mètode de pagament:"
+      },
+      "invoices": {
+        "button": "Factures",
+        "explanation": "Per veure i descarregar les teves factures:"
+      },
+      "error": {
+        "customerPortal": "Hi ha hagut un error en accedir al Portal de Client."
+      }
+    }
   }
 }
