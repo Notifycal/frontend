@@ -6,7 +6,7 @@ export type RedirectUrlSession = { url: Url };
 export type PaymentSession = RedirectUrlSession;
 export type CustomerPortalSession = RedirectUrlSession;
 
-type CheckoutPayload = { tier: TierId; topup?: never } | { topup: TopupId; tier?: never };
+type CheckoutPayload = { tier: TierId } | { topup: TopupId };
 
 export const getProductCheckoutURL = async (productPayload: CheckoutPayload): Promise<PaymentSession> => {
   try {
