@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/Notifycal/frontend/compare/v0.20.4...v0.21.0) (2025-07-23)
+
+
+### Features
+
+* billing page ([#406](https://github.com/Notifycal/frontend/issues/406)) ([18ea2f8](https://github.com/Notifycal/frontend/commit/18ea2f8c7a494853f1eb92d034c030669268416c))
+
 ## [0.20.4](https://github.com/Notifycal/frontend/compare/v0.20.3...v0.20.4) (2025-07-23)
 
 
