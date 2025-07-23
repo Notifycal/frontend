@@ -1,30 +1,32 @@
-import { getProductCheckoutURL } from '@api/payments';
-import type { TierId } from '@notifycal/shared/types';
+import { getProductCheckoutURL, type TierCheckoutURLPayload } from '@api/payments';
+import type { LanguageCode, TierId } from '@notifycal/shared/types';
 import { tierOrder } from '@constants/tiers';
 
 import { type ReactNode, useState, type FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { Link } from '@tanstack/react-router';
+import { useBillingStore } from '@store/useBillingStore';
+import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 
+import { Link } from '@tanstack/react-router';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
 import TierCard from './TierCard';
 import OnboardingBackButton from './OnboardingBackButton';
-import { useBillingStore } from '@store/useBillingStore';
-import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 
 export type TierSelectionValues = null;
 
 const TierSelection: FC = () => {
   const translationNs = 'onboarding' as const;
-  const { t } = useTranslation(translationNs);
+  const { t, i18n } = useTranslation(translationNs);
+
+  const language = i18n.languages[0] as LanguageCode;
 
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
 
   const { setPurchaseOperation } = useBillingStore();
 
-  const generateCheckoutURLMutation = usePaymentRedirectMutation<{ tier: TierId }>(getProductCheckoutURL, {
+  const generateCheckoutURLMutation = usePaymentRedirectMutation<TierCheckoutURLPayload>(getProductCheckoutURL, {
     onError: () => {
       setError(
         <Trans
@@ -43,7 +45,7 @@ const TierSelection: FC = () => {
   const handleTierSelect = (tierId: TierId): void => {
     setSelectedTier(tierId);
     setPurchaseOperation('tierPurchase');
-    generateCheckoutURLMutation.mutate({ tier: tierId });
+    generateCheckoutURLMutation.mutate({ tier: tierId, language });
   };
 
   return (

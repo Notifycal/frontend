@@ -1,10 +1,12 @@
-import { getCustomerPortalURL, getProductCheckoutURL } from '@api/payments';
-import { Alert, Button, Divider, Title } from '@mantine/core';
-import type { TopupId } from '@notifycal/shared/types';
+import { getCustomerPortalURL, getProductCheckoutURL, type TopupCheckoutURLPayload } from '@api/payments';
+import type { LanguageCode } from '@notifycal/shared/types';
 import type { FC } from 'react';
+
 import { Trans, useTranslation } from 'react-i18next';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import { useBillingStore } from '@store/useBillingStore';
+
+import { Alert, Button, Divider, Title } from '@mantine/core';
 import UsageBar from '../UsageBar/UsageBar';
 import ClickableSpan from '../ClickableSpan/ClickableSpan';
 
@@ -17,15 +19,17 @@ interface CreditBalanceProps {
 }
 
 const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptionCreditBalance }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { setTopupCreditBalance, setPurchaseOperation } = useBillingStore();
+
+  const language = i18n.languages[0] as LanguageCode;
 
   const onError = (): void => {
     // REVIEW: cannot do the classic "display a red alert" for this because it'll break the layout
     console.log('error');
   };
 
-  const generateTopupCheckoutURLMutation = usePaymentRedirectMutation<{ topup: TopupId }>(getProductCheckoutURL, {
+  const generateTopupCheckoutURLMutation = usePaymentRedirectMutation<TopupCheckoutURLPayload>(getProductCheckoutURL, {
     onError
   });
   const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, { onError });
@@ -33,7 +37,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
   const handleAddCredits = (): void => {
     setPurchaseOperation('topupPurchase');
     setTopupCreditBalance(topupCreditBalance);
-    generateTopupCheckoutURLMutation.mutate({ topup: 'single' });
+    generateTopupCheckoutURLMutation.mutate({ topup: 'single', language });
   };
 
   const handleChangeSubscription = (): void => {

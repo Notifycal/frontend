@@ -1,4 +1,11 @@
-import type { TierId, TopupId, Url, SuccessResponseContainer, CustomerPortalFlowType } from '@notifycal/shared/types';
+import type {
+  TierId,
+  TopupId,
+  Url,
+  SuccessResponseContainer,
+  CustomerPortalFlowType,
+  LanguageCode
+} from '@notifycal/shared/types';
 import getApiClient from './common';
 
 export type RedirectUrlSession = { url: Url };
@@ -6,11 +13,16 @@ export type RedirectUrlSession = { url: Url };
 export type PaymentSession = RedirectUrlSession;
 export type CustomerPortalSession = RedirectUrlSession;
 
-type CheckoutPayload = { tier: TierId } | { topup: TopupId };
+type WithLanguage<T> = T & { language: LanguageCode };
+
+export type TopupCheckoutURLPayload = WithLanguage<{ topup: TopupId }>;
+export type TierCheckoutURLPayload = WithLanguage<{ tier: TierId }>;
+
+type CheckoutPayload = TierCheckoutURLPayload | TopupCheckoutURLPayload;
 
 export const getProductCheckoutURL = async (productPayload: CheckoutPayload): Promise<PaymentSession> => {
   try {
-    const response = await getApiClient().post('/api/v1/payment-session', { ...productPayload, language: 'es' });
+    const response = await getApiClient().post('/api/v1/payment-session', productPayload);
     const { result } = response.data as SuccessResponseContainer<PaymentSession>;
     return result;
   } catch (error) {
