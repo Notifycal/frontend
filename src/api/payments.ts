@@ -14,7 +14,7 @@ export const getProductCheckoutURL = async (productPayload: CheckoutPayload): Pr
     const { result } = response.data as SuccessResponseContainer<PaymentSession>;
     return result;
   } catch (error) {
-    throw new Error(`Something went wrong about GET api/v1/payment-session call. Error: ${JSON.stringify(error)}`);
+    throw new Error(`Something went wrong about POST api/v1/payment-session call. Error: ${JSON.stringify(error)}`);
   }
 };
 
@@ -25,6 +25,6 @@ export const getCustomerPortalURL = async (flowType?: CustomerPortalFlowType): P
     const { result } = response.data as SuccessResponseContainer<CustomerPortalSession>;
     return result;
   } catch (error) {
-    throw new Error(`Something went wrong about GET api/v1/payment-session call. Error: ${JSON.stringify(error)}`);
+    throw new Error(`Something went wrong about POST api/v1/customer-portal-session call. Error: ${JSON.stringify(error)}`);
   }
 };
