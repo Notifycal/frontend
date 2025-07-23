@@ -19,7 +19,7 @@ STAGE_NAME=$ENV_NAME
 REGION="${AWS_REGION:-$(aws configure get region)}"
 CONFIG_FILE="config/config.local.js"
 
-if [ -z "${REGION:-}" ]; then
+if [ -z "$REGION" ]; then
   echo "AWS region not configured. Set AWS_REGION or run 'aws configure'."
   exit 1
 fi
