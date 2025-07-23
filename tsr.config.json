@@ -1,0 +1,4 @@
+{
+  "routeFileIgnorePattern": "(.test.(t|j)sx?$|__tests__)",
+  "quoteStyle": "single"
+}

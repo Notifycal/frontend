@@ -13,7 +13,7 @@ import type { UserModel } from '@our-types/UserModel';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Template', href: '/template' },
-  { name: 'Billing', href: '/billing' },
+  { name: 'Billing', href: '/dashboard/billing' },
   { name: 'Feedback', href: '/feedback' }
 ];
 

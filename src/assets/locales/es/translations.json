@@ -55,6 +55,53 @@
       "es": "Español",
       "en": "Inglés"
     },
-    "month": "mes"
+    "month": "mes",
+    "remember": "recuerda",
+    "used": "{{credits}} usados",
+    "remaining": "{{credits}} restantes"
+  },
+  "billing": {
+    "topup": "Recarga",
+    "subscription": "Subscripcion",
+    "title": "Información de Facturación",
+    "currentPlan": "Tu plan actual es: <0>{{tierName}}</0>.",
+    "yourPlanIncludes": "Tu plan incluye:",
+    "error": {
+      "fetch": "Hubo un error al obtener tu información de facturación.",
+      "noUserData": "Hubo un error al cargar los datos del usuario."
+    },
+    "credits": {
+      "addTopupCredits": "Añadir Créditos",
+      "currentCredits_zero": "No tienes ningun crédito de {{type}}.",
+      "currentCredits": "Te quedan {{count}} créditos de {{type}}.",
+      "title": "Balance de Créditos",
+      "toIncrementSubscriptionCredits": "Para incrementar el número de creditos de sucripción, debes <0>mejorar tu subscripción</0>.",
+      "error": {
+        "buyMoreCredits": "Ha habido un error al intentar recargar créditos de Top-up.",
+        "upgradeSubscription": "Ha habido un error al intentar hacer upgrade del Plan del usuario."
+      }
+    },
+    "manage": {
+      "title": "Gestiona tu cuenta",
+      "customerPortal": {
+        "button": "Portal de cliente",
+        "explanation": "Para cualquier otra gestión:"
+      },
+      "modifySubscription": {
+        "button": "Modificar suscripción",
+        "explanation": "Para hacer upgrade o downgrade de tu suscripción:"
+      },
+      "paymentMethods": {
+        "button": "Métodos de pago",
+        "explanation": "Para añadir o actualizar tu metodo de pago:"
+      },
+      "invoices": {
+        "button": "Facturas",
+        "explanation": "Para ver y descargar tus facturas:"
+      },
+      "error": {
+        "customerPortal": "Ha habido un error intentando acceder al Customer Portal."
+      }
+    }
   }
 }

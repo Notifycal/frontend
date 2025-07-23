@@ -263,7 +263,7 @@
       "best": "Perfect for companies with more than 5 employees."
     },
     "popularBadge": "Popular",
-    "numberOfMonthlyReminders": "{{qty}} monthly reminders",
+    "numberOfMonthlyReminders": "{{qty}} monthly reminders*",
     "googleCalendarIntegration": "Integration with Google Calendar",
     "disclaimer": "The number of reminders is based on an estimated cost of 0,05€/reminder to Spanish numbers. It can change depending on the destination number country."
   },

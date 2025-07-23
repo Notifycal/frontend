@@ -1,8 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-
 import { getUserProfile } from '@api/userProfile';
-
-import type { FunctionComponent } from '@common/types';
 import type { JSX } from 'react';
 import { isObject } from 'radashi';
 
@@ -39,7 +36,7 @@ function KeyValueRecursive({ data, depth = 0 }: DisplayProps): JSX.Element {
   return <span>{String(data)}</span>;
 }
 
-export const Dashboard = (): FunctionComponent => {
+const Dashboard = (): JSX.Element => {
   const query = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile
@@ -47,3 +44,5 @@ export const Dashboard = (): FunctionComponent => {
 
   return <div>{!!query.data && <KeyValueRecursive data={query.data} />}</div>;
 };
+
+export default Dashboard;

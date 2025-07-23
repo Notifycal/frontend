@@ -1,16 +1,20 @@
-import { useQuery } from '@tanstack/react-query';
 import { getUserProfile } from '@/api/userProfile';
 
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { type JSX, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useBillingStore } from '@store/useBillingStore';
 
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import { useOnboardingStore } from '@store/useOnboardingStore';
 
 function PaymentSuccessRedirect(): JSX.Element {
   const navigate = useNavigate();
   const [shouldPoll, setShouldPoll] = useState(true);
+  const { topupCreditBalance, purchaseOperation, reset } = useBillingStore();
+  const { markStepAsCompleted } = useOnboardingStore();
 
-  const userProfileQuery = useQuery({
+  const { data: user, isSuccess } = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile,
     enabled: true, // Only fetch if polling is enabled
@@ -18,16 +22,35 @@ function PaymentSuccessRedirect(): JSX.Element {
     gcTime: 0 // Data is immediately garbage collected after it's no longer used
   });
 
-  useEffect(() => {
-    if (userProfileQuery.isSuccess) {
-      const hasTier = userProfileQuery.data.credits?.tier;
+  const isTopupCreditIncrease = (oldCredits: number, newCredits: number): boolean => newCredits > oldCredits;
 
-      if (hasTier) {
-        setShouldPoll(false); // Stop polling
-        void navigate({ to: '/onboarding/completed' });
-      }
+  useEffect(() => {
+    const stopAndReset = (): void => {
+      setShouldPoll(false);
+      reset();
+    };
+
+    if (!isSuccess || !user.credits) {
+      return;
     }
-  }, [navigate, userProfileQuery.isSuccess, userProfileQuery.data]);
+
+    if (purchaseOperation === 'topupPurchase') {
+      if (isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)) {
+        stopAndReset();
+        void navigate({
+          to: '/dashboard/billing',
+          search: {
+            creditsAdded: true
+          }
+        });
+      }
+      // If not increased, polling continues
+    } else if (purchaseOperation === 'tierPurchase') {
+      markStepAsCompleted('tierSelection');
+      stopAndReset();
+      void navigate({ to: '/onboarding/completed' });
+    }
+  }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation, reset, markStepAsCompleted]);
 
   return <FullPageSpinner />;
 }
