@@ -187,7 +187,6 @@
       "placeholder": "Select your language",
       "isRequired": "Please select a language"
     },
-    "invalidSMSCharacters": "Contains invalid characters for SMS",
     "explanation": "This info will help us tailor the reminders your clients will receive."
   },
   "reminderType": {

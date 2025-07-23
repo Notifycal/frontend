@@ -36,16 +36,14 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
 
   return z.object({
     name: createSmsContentSchema({
-      invalidType: t('businessDetails.formNameField.isRequired'),
-      regex: t('businessDetails.invalidSMSCharacters')
+      invalidType: t('businessDetails.formNameField.isRequired')
     })
       .min(1, { message: t('businessDetails.formNameField.isRequired') })
       .max(128, { message: t('businessDetails.formNameField.isMax') })
       .transform((value) => value as BusinessName),
 
     address: createSmsContentSchema({
-      invalidType: t('businessDetails.formAddressField.isRequired'),
-      regex: t('businessDetails.invalidSMSCharacters')
+      invalidType: t('businessDetails.formAddressField.isRequired')
     })
       .min(1, { message: t('businessDetails.formAddressField.isRequired') })
       .max(128, { message: t('businessDetails.formAddressField.isMax') })
