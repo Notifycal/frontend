@@ -16,7 +16,7 @@ interface CreditBalanceProps {
     total: number;
   };
   topupCreditBalance: number;
-  onError: (message: string) => void;
+  onError: (message: string | null) => void;
 }
 
 const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptionCreditBalance, onError }) => {
@@ -37,12 +37,14 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
   });
 
   const handleAddCredits = (): void => {
+    onError(null);
     setPurchaseOperation('topupPurchase');
     setTopupCreditBalance(topupCreditBalance);
     generateTopupCheckoutURLMutation.mutate({ topup: 'single', language });
   };
 
   const handleChangeSubscription = (): void => {
+    onError(null);
     generateCustomerPortalURLMutation.mutate('subscription_update');
   };
 

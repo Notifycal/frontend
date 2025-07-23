@@ -5,7 +5,7 @@ import { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ManageBillingProps {
-  onError: (message: string) => void;
+  onError: (message: string | null) => void;
 }
 
 const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
@@ -61,6 +61,7 @@ const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
               disabled={clickedButton ? clickedButton !== id : false}
               loading={clickedButton === id}
               onClick={() => {
+                onError(null);
                 setClickedButton(id);
                 generateCustomerPortalURLMutation.mutate(flowType);
               }}
