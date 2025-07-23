@@ -6,7 +6,7 @@ import { IconAward, IconMedal, IconTrophy, type TablerIcon } from '@tabler/icons
 import { useTranslation } from 'react-i18next';
 import type { NotifycalTFunction } from '@common/i18n';
 
-type TierInfoWithIcon = TierInfo & { icon: TablerIcon };
+export type TierInfoWithIcon = TierInfo & { icon: TablerIcon };
 
 export const tierFeatures = (t: NotifycalTFunction, tierNumberOfReminders: number): Array<string> => [
   t('tierSelection.numberOfMonthlyReminders', { qty: tierNumberOfReminders.toLocaleString() }),
