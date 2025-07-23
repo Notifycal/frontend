@@ -1,5 +1,4 @@
 import { getServiceConfig } from '@config/serviceConfig';
-// import { tierExtraInfo, tierFeatures } from '@constants/tiers';
 import type { TierId } from '@notifycal/shared/types';
 import { useMemo } from 'react';
 import type { TierInfo } from '@components/onboarding/TierCard';

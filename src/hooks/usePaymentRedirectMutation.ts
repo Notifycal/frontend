@@ -19,7 +19,6 @@ const usePaymentRedirectMutation = <TVariables>(
     onSuccess: (result: RedirectUrlSession) => {
       window.location.href = result.url;
     },
-    // Spread all other options, including the now-mandatory onError
     ...options
   });
 };
