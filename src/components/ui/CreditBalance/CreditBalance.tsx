@@ -2,13 +2,13 @@ import { getCustomerPortalURL, getProductCheckoutURL, type TopupCheckoutURLPaylo
 import type { LanguageCode } from '@notifycal/shared/types';
 import type { FC } from 'react';
 
-import { Trans, useTranslation } from 'react-i18next';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import { useBillingStore } from '@store/useBillingStore';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { Alert, Button, Divider, Title } from '@mantine/core';
-import UsageBar from '../UsageBar/UsageBar';
 import ClickableSpan from '../ClickableSpan/ClickableSpan';
+import UsageBar from '../UsageBar/UsageBar';
 
 interface CreditBalanceProps {
   subscriptionCreditBalance: {
@@ -45,7 +45,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
 
   const handleChangeSubscription = (): void => {
     onError(null);
-    generateCustomerPortalURLMutation.mutate('subscription_update');
+    generateCustomerPortalURLMutation.mutate({ language, flowType: 'subscription_update' });
   };
 
   return (
