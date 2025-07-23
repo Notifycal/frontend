@@ -1,10 +1,10 @@
 import type {
+  CustomerPortalFlowType,
+  LanguageCode,
+  SuccessResponseContainer,
   TierId,
   TopupId,
-  Url,
-  SuccessResponseContainer,
-  CustomerPortalFlowType,
-  LanguageCode
+  Url
 } from '@notifycal/shared/types';
 import getApiClient from './common';
 
@@ -30,8 +30,9 @@ export const getProductCheckoutURL = async (productPayload: CheckoutPayload): Pr
   }
 };
 
-export const getCustomerPortalURL = async (flowType?: CustomerPortalFlowType): Promise<CustomerPortalSession> => {
-  const payload = flowType ? { flowType } : {};
+type CustomerPortalPayload = WithLanguage<{ flowType?: CustomerPortalFlowType }>;
+
+export const getCustomerPortalURL = async (payload: CustomerPortalPayload): Promise<CustomerPortalSession> => {
   try {
     const response = await getApiClient().post('/api/v1/customer-portal-session', payload);
     const { result } = response.data as SuccessResponseContainer<CustomerPortalSession>;

@@ -1,6 +1,7 @@
 import { getCustomerPortalURL } from '@api/payments';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import { Button, Title } from '@mantine/core';
+import type { LanguageCode } from '@notifycal/shared/types';
 import { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +12,8 @@ interface ManageBillingProps {
 const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
   const [clickedButton, setClickedButton] = useState<string | null>(null);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.languages[0] as LanguageCode;
 
   const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, {
     onError: () => {
@@ -63,7 +65,7 @@ const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
               onClick={() => {
                 onError(null);
                 setClickedButton(id);
-                generateCustomerPortalURLMutation.mutate(flowType);
+                generateCustomerPortalURLMutation.mutate(flowType ? { language, flowType } : { language });
               }}
             >
               {buttonText}

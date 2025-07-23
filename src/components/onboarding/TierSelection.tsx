@@ -1,17 +1,17 @@
 import { getProductCheckoutURL, type TierCheckoutURLPayload } from '@api/payments';
-import type { LanguageCode, TierId } from '@notifycal/shared/types';
 import { tierOrder } from '@constants/tiers';
+import type { LanguageCode, TierId } from '@notifycal/shared/types';
 
-import { type ReactNode, useState, type FC } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { useBillingStore } from '@store/useBillingStore';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
+import { useBillingStore } from '@store/useBillingStore';
+import { useState, type FC, type ReactNode } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
-import { Link } from '@tanstack/react-router';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
-import TierCard from './TierCard';
+import { Link } from '@tanstack/react-router';
 import OnboardingBackButton from './OnboardingBackButton';
+import TierCard from './TierCard';
 
 export type TierSelectionValues = null;
 
