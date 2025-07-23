@@ -75,7 +75,11 @@
       "currentCredits_zero": "You don't have any {{type}} credits.",
       "currentCredits": "You have {{count}} {{type}} credits remaining.",
       "title": "Credit balance",
-      "toIncrementSubscriptionCredits": "To increment the number of available subscription credits, you need to <0>upgrade your subscription</0>."
+      "toIncrementSubscriptionCredits": "To increment the number of available subscription credits, you need to <0>upgrade your subscription</0>.",
+      "error": {
+        "buyMoreCredits": "There was an error when attempting to buy Top-up credits.",
+        "upgradeSubscription": "There was an error when attempting to upgrade the user Plan."
+      }
     },
     "manage": {
       "title": "Manage your account",
@@ -94,6 +98,9 @@
       "invoices": {
         "button": "Invoices",
         "explanation": "To view and download your invoices:"
+      },
+      "error": {
+        "customerPortal": "There was an error trying to access the Customer Portal."
       }
     }
   }

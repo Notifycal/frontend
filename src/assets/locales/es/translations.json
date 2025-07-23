@@ -75,7 +75,11 @@
       "currentCredits_zero": "No tienes ningun crédito de {{type}}.",
       "currentCredits": "Te quedan {{count}} créditos de {{type}}.",
       "title": "Balance de Créditos",
-      "toIncrementSubscriptionCredits": "Para incrementar el número de creditos de sucripción, debes <0>mejorar tu subscripción</0>."
+      "toIncrementSubscriptionCredits": "Para incrementar el número de creditos de sucripción, debes <0>mejorar tu subscripción</0>.",
+      "error": {
+        "buyMoreCredits": "Ha habido un error al intentar recargar créditos de Top-up.",
+        "upgradeSubscription": "Ha habido un error al intentar hacer upgrade del Plan del usuario."
+      }
     },
     "manage": {
       "title": "Gestiona tu cuenta",
@@ -94,6 +98,9 @@
       "invoices": {
         "button": "Facturas",
         "explanation": "Para ver y descargar tus facturas:"
+      },
+      "error": {
+        "customerPortal": "Ha habido un error intentando acceder al Customer Portal."
       }
     }
   }

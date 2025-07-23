@@ -16,23 +16,25 @@ interface CreditBalanceProps {
     total: number;
   };
   topupCreditBalance: number;
+  onError: (message: string) => void;
 }
 
-const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptionCreditBalance }) => {
+const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptionCreditBalance, onError }) => {
   const { t, i18n } = useTranslation();
   const { setTopupCreditBalance, setPurchaseOperation } = useBillingStore();
 
   const language = i18n.languages[0] as LanguageCode;
 
-  const onError = (): void => {
-    // REVIEW: cannot do the classic "display a red alert" for this because it'll break the layout
-    console.log('error');
-  };
-
   const generateTopupCheckoutURLMutation = usePaymentRedirectMutation<TopupCheckoutURLPayload>(getProductCheckoutURL, {
-    onError
+    onError: () => {
+      onError(t('billing.credits.error.buyMoreCredits'));
+    }
   });
-  const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, { onError });
+  const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, {
+    onError: () => {
+      onError(t('billing.credits.error.upgradeSubscription'));
+    }
+  });
 
   const handleAddCredits = (): void => {
     setPurchaseOperation('topupPurchase');

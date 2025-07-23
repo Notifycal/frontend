@@ -4,15 +4,19 @@ import { Button, Title } from '@mantine/core';
 import { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ManageBilling: FC = () => {
+interface ManageBillingProps {
+  onError: (message: string) => void;
+}
+
+const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
   const [clickedButton, setClickedButton] = useState<string | null>(null);
 
   const { t } = useTranslation();
 
   const generateCustomerPortalURLMutation = usePaymentRedirectMutation(getCustomerPortalURL, {
     onError: () => {
-      // REVIEW: cannot do the classic "display a red alert" for this because it'll break the layout
-      console.log('error');
+      setClickedButton(null);
+      onError(t('billing.manage.error.customerPortal'));
     }
   });
 
