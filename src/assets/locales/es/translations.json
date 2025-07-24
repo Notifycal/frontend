@@ -53,7 +53,8 @@
     "skip": "Saltar",
     "languages": {
       "es": "Español",
-      "en": "Inglés"
+      "en": "Inglés",
+      "ca": "Catalán"
     },
     "month": "mes",
     "remember": "recuerda",

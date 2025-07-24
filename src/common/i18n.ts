@@ -9,6 +9,7 @@ import { initReactI18next } from 'react-i18next';
 import { isProduction } from '@common/utils';
 import { deepmerge } from 'deepmerge-ts';
 
+import flagCa from '@assets/icons/lang/ca.png';
 import flagEs from '@assets/icons/lang/es.png';
 import flagGb from '@assets/icons/lang/gb.png';
 
@@ -45,7 +46,8 @@ const flagsByCountry: Record<CountryCode, Pick<PhoneData, 'image'>> = {
 
 const flagsByLanguage: Record<LanguageCode, Pick<LanguageData, 'image'>> = {
   es: { image: flagEs },
-  en: { image: flagGb }
+  en: { image: flagGb },
+  ca: { image: flagCa }
 };
 
 export const languageData: Record<LanguageCode, LanguageData> = deepmerge(
