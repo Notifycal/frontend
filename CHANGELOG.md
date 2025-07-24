@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/Notifycal/frontend/compare/v0.22.0...v0.23.0) (2025-07-24)
+
+
+### Features
+
+* i18n catalan ([#415](https://github.com/Notifycal/frontend/issues/415)) ([0491a1f](https://github.com/Notifycal/frontend/commit/0491a1fa74d2d0d272789f812788e1a7664ca57f))
+
 ## [0.22.0](https://github.com/Notifycal/frontend/compare/v0.21.0...v0.22.0) (2025-07-23)
 
 
