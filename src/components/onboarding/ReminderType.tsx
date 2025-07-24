@@ -4,12 +4,12 @@ import { z } from 'zod';
 import { languageData, type NotifycalTFunction } from '@common/i18n';
 import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
-import type { Template } from '@notifycal/shared/types';
 import {
   templateCaMap,
   templateEnMap,
   templateEsMap,
   type LanguageCode,
+  type Template,
   type TemplateId
 } from '@notifycal/shared/types';
 
