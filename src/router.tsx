@@ -12,7 +12,8 @@ export const router = createRouter({
   history,
   // defaultPreload: 'intent', // routes will be preloaded by default when the user hovers over a <Link>.
   context: {
-    auth: undefined!
+    auth: undefined!,
+    queryClient: undefined!
   },
   defaultNotFoundComponent: NotFoundPage,
   defaultErrorComponent: ({ error, reset }) => (

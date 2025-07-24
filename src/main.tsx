@@ -11,6 +11,7 @@ import '@styles/index.css';
 import '@common/i18n';
 import { initializeApiClient } from '@api/common.ts';
 import { getServiceConfig, loadServiceConfig } from '@config/serviceConfig.ts';
+import { QueryClient } from '@tanstack/react-query';
 
 async function enableMocking(): Promise<void> {
   if (isProduction) {
@@ -27,6 +28,8 @@ loadServiceConfig();
 const config = getServiceConfig();
 initializeApiClient(config.BACKEND_BASE_URL);
 
+const queryClient = new QueryClient();
+
 const rootElement = document.querySelector('#root') as Element;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
@@ -34,7 +37,7 @@ if (!rootElement.innerHTML) {
     root.render(
       <React.StrictMode>
         <React.Suspense fallback="loading">
-          <App router={router} />
+          <App queryClient={queryClient} router={router} />
         </React.Suspense>
       </React.StrictMode>
     );

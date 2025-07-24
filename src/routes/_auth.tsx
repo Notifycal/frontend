@@ -1,10 +1,25 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
+import { getUserProfile } from '@api/userProfile';
 
 // This route (and all the routes starting with _) is not an actual route
 // In fact this defines the layout of all authenticated routes.
 export const Route = createFileRoute('/_auth')({
-  beforeLoad: ({ context, location }) => {
+  beforeLoad: async ({ context, location }) => {
     if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: '/',
+        search: {
+          redirect: location.href
+        }
+      });
+    }
+
+    const user = await context.queryClient.fetchQuery({
+      queryKey: ['user-profile'],
+      queryFn: getUserProfile
+    });
+
+    if (!user) {
       throw redirect({
         to: '/',
         search: {

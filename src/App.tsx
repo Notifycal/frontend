@@ -5,7 +5,7 @@ import type { router } from './router.tsx';
 
 import { MantineProvider } from '@mantine/core';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
 import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
@@ -17,13 +17,12 @@ import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
 import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
 
-const queryClient = new QueryClient();
-
 type AppProps = {
   router: typeof router;
+  queryClient: QueryClient;
 };
 
-const InnerApp = ({ router }: AppProps): FunctionComponent => {
+const InnerApp = ({ router, queryClient }: AppProps): FunctionComponent => {
   // Splitting this from the main App function/component because:
   // useAuth must be used within an AuthProvider. Otherwise it will throw an error.
   // If setting the auth at the top of App, the hook is invoked before the AuthProvider
@@ -36,10 +35,10 @@ const InnerApp = ({ router }: AppProps): FunctionComponent => {
     void router.invalidate();
   }, [router, auth.isAuthenticated]);
 
-  return <RouterProvider context={{ auth }} router={router} />;
+  return <RouterProvider context={{ auth, queryClient }} router={router} />;
 };
 
-const App = ({ router }: AppProps): FunctionComponent => {
+const App = ({ router, queryClient }: AppProps): FunctionComponent => {
   const { t } = useTranslation();
   const { GOOGLE_CLIENT_ID } = getServiceConfig();
 
@@ -58,7 +57,7 @@ const App = ({ router }: AppProps): FunctionComponent => {
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           <AuthProvider>
             <QueryClientProvider client={queryClient}>
-              <InnerApp router={router} />
+              <InnerApp queryClient={queryClient} router={router} />
               {/* Development tools */}
               <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
               <ReactQueryDevelopmentTools initialIsOpen={false} />
