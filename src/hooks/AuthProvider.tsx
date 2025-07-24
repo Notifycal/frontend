@@ -74,10 +74,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const hasMounted = useRef(false);
 
+  // Only fetch user profile when authenticated
   const { data: userProfile } = useQuery({
     queryKey: ['user-profile'],
     queryFn: getUserProfile,
-    enabled: !!accessToken
+    enabled: !!accessToken,
+    retry: false
   });
 
   const updateAuthInfo = useCallback(

@@ -23,6 +23,7 @@ type AppProps = {
   router: typeof router;
 };
 
+
 const InnerApp = ({ router }: AppProps): FunctionComponent => {
   // Splitting this from the main App function/component because:
   // useAuth must be used within an AuthProvider. Otherwise it will throw an error.
