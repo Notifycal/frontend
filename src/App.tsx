@@ -36,7 +36,7 @@ const InnerApp = ({ router }: AppProps): FunctionComponent => {
     void router.invalidate();
   }, [router, auth.isAuthenticated]);
 
-  return <RouterProvider context={{ auth }} router={router} />;
+  return <RouterProvider context={{ auth, queryClient }} router={router} />;
 };
 
 const App = ({ router }: AppProps): FunctionComponent => {
@@ -56,14 +56,14 @@ const App = ({ router }: AppProps): FunctionComponent => {
         }
       >
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-          <AuthProvider>
-            <QueryClientProvider client={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
               <InnerApp router={router} />
               {/* Development tools */}
               <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
               <ReactQueryDevelopmentTools initialIsOpen={false} />
-            </QueryClientProvider>
-          </AuthProvider>
+            </AuthProvider>
+          </QueryClientProvider>
         </GoogleOAuthProvider>
       </ErrorBoundary>
     </MantineProvider>

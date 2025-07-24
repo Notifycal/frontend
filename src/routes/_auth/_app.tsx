@@ -1,14 +1,55 @@
-import { createFileRoute } from '@tanstack/react-router';
-
+import { getUserProfile } from '@api/userProfile';
 import AppLayout from '@components/layout/AppLayout';
-import { UserProvider } from '@hooks/UserProvider';
+import type { UserStatus } from '@notifycal/shared/types';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
-// This route (and all the routes starting with _) is not an actual route
-// In fact this defines the layout of all authenticated routes.
+type RedirectConfig = {
+  forcedRedirect?: string;
+  allowedRoutes?: Array<string>;
+};
+
+const userStatusRedirects: Record<UserStatus, RedirectConfig> = {
+  onboarding: {
+    forcedRedirect: '/onboarding',
+    allowedRoutes: ['/onboarding']
+  },
+  'out-of-credits': {
+    forcedRedirect: '/dashboard/billing'
+  },
+  unpaid: {
+    forcedRedirect: '/dashboard/billing'
+  },
+  cancelled: {
+    forcedRedirect: '/dashboard/billing'
+  },
+  demo: {
+    forcedRedirect: '/onboarding/try-it-out',
+    allowedRoutes: ['/onboarding/try-it-out']
+  },
+  live: {},
+  banned: {}
+};
+
 export const Route = createFileRoute('/_auth/_app')({
-  component: () => (
-    <UserProvider>
-      <AppLayout />
-    </UserProvider>
-  )
+  loader: async ({ context, location }) => {
+    const user = await context.queryClient.fetchQuery({
+      queryKey: ['user-profile'],
+      queryFn: getUserProfile
+    });
+    const redirectConfig = userStatusRedirects[user.userStatus];
+    const { forcedRedirect, allowedRoutes } = redirectConfig;
+    if (forcedRedirect) {
+      if (allowedRoutes) {
+        const isAllowedRoute = allowedRoutes.some((route) => location.pathname.startsWith(route));
+        if (!isAllowedRoute) {
+          throw redirect({ to: forcedRedirect });
+        }
+      } else {
+        throw redirect({ to: forcedRedirect });
+      }
+    }
+
+    return { user };
+  },
+  component: AppLayout
 });
