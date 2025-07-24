@@ -10,14 +10,17 @@ import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorRetu
 
 import type { FunctionComponent } from '@common/types';
 
+import { getUserProfile } from '@api/userProfile';
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
-import type { Email, UserId } from '@notifycal/shared/types';
+import type { Email, UserId, UserStatus } from '@notifycal/shared/types';
+import { useQuery } from '@tanstack/react-query';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
 
 export type AuthInfo = {
   userId: UserId;
   email: Email;
+  userStatus: UserStatus;
 };
 
 export interface AuthContext {
@@ -71,14 +74,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
 
   const hasMounted = useRef(false);
 
-  const updateAuthInfo = useCallback((token: string | null) => {
-    if (!token) {
-      return null;
-    }
+  const { data: userProfile } = useQuery({
+    queryKey: ['user-profile'],
+    queryFn: getUserProfile,
+    enabled: !!accessToken
+  });
 
-    const decoded = decodeToken(token);
-    return decoded;
-  }, []);
+  const updateAuthInfo = useCallback(
+    (token: string | null) => {
+      if (!token) {
+        return null;
+      }
+
+      const decoded = decodeToken(token);
+      const userId = decoded?.userId;
+      if (!userId || !userProfile) {
+        return null;
+      }
+      return { ...decoded, userStatus: userProfile.userStatus };
+    },
+    [userProfile]
+  );
 
   // Update localstorage whenever the state (tokens) changes
   // Using `useEffect` avoids having to call these functions along setAuthState
