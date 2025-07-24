@@ -14,13 +14,13 @@ const userStatusRedirects: Record<UserStatus, RedirectConfig> = {
     allowedRoutes: ['/onboarding']
   },
   'out-of-credits': {
-    forcedRedirect: '/dashboard/billing'
+    forcedRedirect: '/billing'
   },
   unpaid: {
-    forcedRedirect: '/dashboard/billing'
+    forcedRedirect: '/billing'
   },
   cancelled: {
-    forcedRedirect: '/dashboard/billing'
+    forcedRedirect: '/billing'
   },
   demo: {
     forcedRedirect: '/onboarding/try-it-out',
