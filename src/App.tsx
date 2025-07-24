@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
-import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
+import { useAuth, AuthProvider } from '@providers/AuthProvider.tsx';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 

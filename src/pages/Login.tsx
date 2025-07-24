@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { Alert, Transition } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth, type LoginError } from '@hooks/AuthProvider';
+import { useAuth, type LoginError } from '@providers/AuthProvider';
 
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
 
 import type { FunctionComponent } from '@common/types';
-// import { useServiceConfig } from '@hooks/ServiceConfigProvider';
+// import { useServiceConfig } from '@providers/ServiceConfigProvider';
 
 export const Login = (): FunctionComponent => {
   const { t } = useTranslation();

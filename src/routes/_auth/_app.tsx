@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import AppLayout from '@components/layout/AppLayout';
-import { UserProfileProvider } from '@hooks/UserProfileProvider';
+import { UserProfileProvider } from '@providers/UserProfileProvider';
 
 export const Route = createFileRoute('/_auth/_app')({
   component: () => (

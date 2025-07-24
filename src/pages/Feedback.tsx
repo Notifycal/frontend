@@ -1,6 +1,6 @@
 import type { FunctionComponent } from '@common/types';
 import FeedbackForm from '@components/ui/Feedback/Feedback';
-import { useAuth } from '@hooks/AuthProvider';
+import { useAuth } from '@providers/AuthProvider';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 

@@ -7,7 +7,7 @@ import { IconLogout2 } from '@tabler/icons-react';
 
 import type { FunctionComponent } from '@common/types';
 
-import { useAuth } from '@hooks/AuthProvider';
+import { useAuth } from '@providers/AuthProvider';
 import type { UserModel } from '@our-types/UserModel';
 
 const navigation = [
