@@ -1,8 +1,7 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, useContext, type ReactNode, type JSX } from 'react';
 
 import type { z } from 'zod';
 
-import type { FunctionComponent } from '@common/types';
 import { serviceConfigSchema } from '@config/serviceConfig';
 
 export type ServiceConfig = z.infer<typeof serviceConfigSchema>;
@@ -19,7 +18,7 @@ const validateServiceConfig = (config: unknown): ServiceConfig => {
 
 const ServiceConfigContext = createContext<ServiceConfig | null>(null);
 
-export const ServiceConfigProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
+export const ServiceConfigProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   if (!window.globalConfig) {
     throw new Error('Service configuration is missing!');
   }

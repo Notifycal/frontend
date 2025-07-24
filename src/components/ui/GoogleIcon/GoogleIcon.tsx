@@ -1,6 +1,6 @@
-import type { FunctionComponent } from '@common/types';
+import type { JSX } from 'react';
 
-export default function GoogleIcon(): FunctionComponent {
+export default function GoogleIcon(): JSX.Element {
   return (
     <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24">
       <path

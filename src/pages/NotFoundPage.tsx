@@ -2,10 +2,10 @@ import { useTranslation } from 'react-i18next';
 
 import { Link } from '@tanstack/react-router';
 
-import type { FunctionComponent } from '@common/types';
+import type { JSX } from 'react';
 import { MotionWrapper } from '@components/ui/MotionWrapper/MotionWrapper';
 
-export const NotFoundPage = (): FunctionComponent => {
+export const NotFoundPage = (): JSX.Element => {
   const { t } = useTranslation();
 
   return (

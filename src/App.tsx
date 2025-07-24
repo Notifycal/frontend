@@ -1,4 +1,3 @@
-import type { FunctionComponent } from '@common/types.ts';
 import { getServiceConfig } from '@config/serviceConfig.ts';
 import { ErrorBoundary } from 'react-error-boundary';
 import type { router } from './router.tsx';
@@ -9,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
 import { AuthProvider, useAuth } from '@hooks/AuthProvider.tsx';
-import { useEffect } from 'react';
+import { type JSX, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
@@ -23,7 +22,7 @@ type AppProps = {
   router: typeof router;
 };
 
-const InnerApp = ({ router }: AppProps): FunctionComponent => {
+const InnerApp = ({ router }: AppProps): JSX.Element => {
   // Splitting this from the main App function/component because:
   // useAuth must be used within an AuthProvider. Otherwise it will throw an error.
   // If setting the auth at the top of App, the hook is invoked before the AuthProvider
@@ -39,7 +38,7 @@ const InnerApp = ({ router }: AppProps): FunctionComponent => {
   return <RouterProvider context={{ auth }} router={router} />;
 };
 
-const App = ({ router }: AppProps): FunctionComponent => {
+const App = ({ router }: AppProps): JSX.Element => {
   const { t } = useTranslation();
   const { GOOGLE_CLIENT_ID } = getServiceConfig();
 
