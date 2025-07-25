@@ -1,10 +1,9 @@
-import { Outlet, useMatches } from '@tanstack/react-router';
+import { useMatches } from '@tanstack/react-router';
+import type { FC, ReactNode } from 'react';
 
 import Navigation from '@components/ui/Navigation/Navigation';
 
 import clsx from 'clsx';
-
-import type { FunctionComponent } from '@common/types';
 
 const user = {
   name: 'Tom Cook',
@@ -13,7 +12,11 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 };
 
-export default function AppLayout(): FunctionComponent {
+interface AppLayoutProps {
+  children: ReactNode;
+}
+
+export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   const matches = useMatches();
   const currentRoute = matches[matches.length - 1];
   const routeStaticData = currentRoute?.staticData;
@@ -36,11 +39,11 @@ export default function AppLayout(): FunctionComponent {
       </div>
       <main className={clsx({ '-mt-32': useFancyHeader })}>
         <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <div className="rounded-lg bg-white px-5 py-6 shadow-sm sm:px-6">
-            <Outlet />
-          </div>
+          <div className="rounded-lg bg-white px-5 py-6 shadow-sm sm:px-6">{children}</div>
         </div>
       </main>
     </div>
   );
-}
+};
+
+export default AppLayout;
