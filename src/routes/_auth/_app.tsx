@@ -7,9 +7,9 @@ import AppLayout from '@components/layout/AppLayout';
 type RedirectMap = Partial<Record<UserStatus, string>>;
 
 const softRedirects = {
-  cancelled: '/dashboard/billing',
-  'out-of-credits': '/dashboard/billing',
-  unpaid: '/dashboard/billing'
+  cancelled: '/billing',
+  'out-of-credits': '/billing',
+  unpaid: '/billing'
 } satisfies RedirectMap;
 
 const hardRedirects = {

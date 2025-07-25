@@ -38,7 +38,7 @@ function PaymentSuccessRedirect(): JSX.Element {
       if (isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)) {
         stopAndReset();
         void navigate({
-          to: '/dashboard/billing',
+          to: '/billing',
           search: {
             creditsAdded: true
           }
