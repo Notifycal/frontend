@@ -1,5 +1,4 @@
 import { sendDemoReminder } from '@api/demoReminder';
-import { getUserProfile } from '@api/userProfile';
 import type { DateTime, TimeZone } from '@notifycal/shared/types';
 import { DateTime as DT } from 'luxon';
 import { z } from 'zod';
@@ -7,9 +6,10 @@ import { z } from 'zod';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLoaderData } from '@tanstack/react-router';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import FlatError from '@components/ui/FlatError/FlatError';
@@ -41,11 +41,7 @@ const TryItOut: React.FC = () => {
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
-  const { data: user } = useQuery({
-    queryKey: ['user-profile'],
-    queryFn: getUserProfile,
-    retry: false
-  });
+  const { user } = useLoaderData({ from: '/_auth' });
 
   const {
     handleSubmit,
