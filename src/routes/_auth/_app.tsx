@@ -1,6 +1,5 @@
 import type { User, IdpName, UserStatus } from '@notifycal/shared/types';
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
-import { UserProfileProvider } from '@providers/UserProfileProvider';
 
 import AppLayout from '@components/layout/AppLayout';
 
@@ -40,10 +39,8 @@ export const Route = createFileRoute('/_auth/_app')({
     }
   },
   component: () => (
-    <UserProfileProvider>
-      <AppLayout>
-        <Outlet />
-      </AppLayout>
-    </UserProfileProvider>
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
   )
 });
