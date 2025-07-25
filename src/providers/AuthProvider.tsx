@@ -26,6 +26,8 @@ export interface AuthContext {
   logout: () => void;
   loginError: LoginError | null;
   authInfo: AuthInfo | null;
+  hasJustLoggedIn: boolean;
+  setHasJustLoggedIn: (value: boolean) => void;
 }
 
 type AuthState = {
@@ -34,6 +36,7 @@ type AuthState = {
   loginError: LoginError | null;
   loginStatus: 'unauthorized' | 'loading' | 'success';
   authInfo: AuthInfo | null;
+  hasJustLoggedIn: boolean;
 };
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -59,10 +62,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
     refreshToken: getLocalStorageItem('refreshToken'),
     loginError: null,
     loginStatus: 'loading',
-    authInfo: null
+    authInfo: null,
+    hasJustLoggedIn: false
   });
 
-  const { accessToken, refreshToken, loginError, loginStatus, authInfo } = authState;
+  const { accessToken, refreshToken, loginError, loginStatus, authInfo, hasJustLoggedIn } = authState;
 
   const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
@@ -117,7 +121,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
           ...previous,
           accessToken: newAccessToken,
           refreshToken: newRefreshToken,
-          loginStatus: 'success'
+          loginStatus: 'success',
+          hasJustLoggedIn: false
         }));
       } else {
         throw new Error('No refresh token available');
@@ -150,7 +155,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
           ...previous,
           accessToken,
           refreshToken,
-          loginStatus: 'success'
+          loginStatus: 'success',
+          hasJustLoggedIn: true
         }));
       } else {
         throw new Error('loginErrorInvalidScopes');
@@ -177,9 +183,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       refreshToken: null,
       loginStatus: 'unauthorized',
       authInfo: null
+      // hasJustLoggedIn: false
     }));
   }, []);
 
+  const setHasJustLoggedIn = useCallback((value: boolean) => {
+    setAuthState((previous: AuthState) => ({
+      ...previous,
+      hasJustLoggedIn: value
+    }));
+  }, []);
+
+  // Interceptors
   useEffect(() => {
     // Setup axios interceptor for authentication when the access token changes
     let requestInterceptor: InterceptorReturn;
@@ -230,7 +245,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: loginStatus === 'success', login, logout, loginError, authInfo }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated: loginStatus === 'success',
+        login,
+        logout,
+        loginError,
+        authInfo,
+        hasJustLoggedIn,
+        setHasJustLoggedIn
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
