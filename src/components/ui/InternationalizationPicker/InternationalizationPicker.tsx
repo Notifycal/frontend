@@ -1,9 +1,8 @@
-import type { FunctionComponent } from '@common/types';
 import { Group, Image, Menu, UnstyledButton } from '@mantine/core';
 import type { InternationalizationData } from '@notifycal/shared/types';
 import { IconChevronDown } from '@tabler/icons-react';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import classes from './InternationalizationPicker.module.css';
 
 interface InternationalizationPickerProps<
@@ -27,7 +26,7 @@ export default function InternationalizationPicker<
   data: data,
   value: value,
   displayFlagOnly = false
-}: InternationalizationPickerProps<TCode, TLabel, TData>): FunctionComponent {
+}: InternationalizationPickerProps<TCode, TLabel, TData>): JSX.Element {
   const [opened, setOpened] = useState(false);
 
   const items = Object.values<TData>(data).map((item) => (
