@@ -166,7 +166,7 @@ All devtools are automatically excluded from production builds. The project incl
 Documentation is, at the time of writing this, non-existent. Having said that, usage is similar to the other TanStack devtools. A utility component restricting the devtools to development builds has been provided. The difference in comparison to the other TanStack devtools is the lack of floating mode. Instead, the Devtools are rendered as a component within the actual TanStack Table you define. An additional caveat being that the DevTools component (built-in and provided utility alike) require a table prop from the `useReactTable()` hook. In other words, if you have multiple tables, each table must have its own Devtools component. Check the simplified code below.
 
 ```
-function Table(): FunctionComponent {
+function Table(): JSX.Element {
   /* some code */
 
   const table = useReactTable({

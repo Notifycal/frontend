@@ -16,7 +16,7 @@ interface AppLayoutProps {
   children: ReactNode;
 }
 
-export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   const matches = useMatches();
   const currentRoute = matches[matches.length - 1];
   const routeStaticData = currentRoute?.staticData;
