@@ -181,7 +181,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
       refreshToken: null,
       loginStatus: 'unauthorized',
       authInfo: null
-      // hasJustLoggedIn: false
     }));
   }, []);
 

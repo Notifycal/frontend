@@ -7,8 +7,6 @@ import { useAuth, type LoginError } from '@providers/AuthProvider';
 
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
 
-// import { useServiceConfig } from '@hooks/ServiceConfigProvider';
-
 export const Login = (): JSX.Element => {
   const { t } = useTranslation();
   // const { t, i18n } = useTranslation();
