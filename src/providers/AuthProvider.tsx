@@ -25,7 +25,6 @@ export interface AuthContext {
   loginError: LoginError | null;
   authInfo: AuthInfo | null;
   hasJustLoggedIn: boolean;
-  setHasJustLoggedIn: (value: boolean) => void;
 }
 
 type AuthState = {
@@ -184,13 +183,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     }));
   }, []);
 
-  const setHasJustLoggedIn = useCallback((value: boolean) => {
-    setAuthState((previous: AuthState) => ({
-      ...previous,
-      hasJustLoggedIn: value
-    }));
-  }, []);
-
   // Interceptors
   useEffect(() => {
     // Setup axios interceptor for authentication when the access token changes
@@ -249,8 +241,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
         logout,
         loginError,
         authInfo,
-        hasJustLoggedIn,
-        setHasJustLoggedIn
+        hasJustLoggedIn
       }}
     >
       {children}
