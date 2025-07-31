@@ -1,4 +1,4 @@
-import { Outlet } from '@tanstack/react-router';
+import { Link, Outlet } from '@tanstack/react-router';
 
 import { languageData } from '@common/i18n';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const OnboardingLayout: React.FC = () => {
       {/* Footer */}
       <footer className="py-4 bg-white border-t border-gray-200">
         <div className="container mx-auto px-4 flex items-center justify-center gap-6 text-gray-500 text-sm">
-          <span>&copy; {t('footer', { year: new Date().getFullYear() })}</span>
+          <span>&copy; {t('footer.allRightsReserved', { year: new Date().getFullYear() })}</span>
           <div>
             <InternationalizationPicker
               displayFlagOnly
@@ -35,10 +35,12 @@ const OnboardingLayout: React.FC = () => {
               }}
             />
           </div>
+          <Link target="_blank" to="/onboarding/feedback">
+            {t('footer.feedbackLink')}
+          </Link>
         </div>
       </footer>
     </div>
   );
 };
-
 export default OnboardingLayout;
