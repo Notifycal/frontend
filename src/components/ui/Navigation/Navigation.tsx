@@ -7,13 +7,13 @@ import { IconLogout2 } from '@tabler/icons-react';
 
 import type { JSX } from 'react';
 
-import { useAuth } from '@hooks/AuthProvider';
+import { useAuth } from '@providers/AuthProvider';
 import type { UserModel } from '@our-types/UserModel';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Template', href: '/template' },
-  { name: 'Billing', href: '/dashboard/billing' },
+  { name: 'Billing', href: '/billing' },
   { name: 'Feedback', href: '/feedback' }
 ];
 

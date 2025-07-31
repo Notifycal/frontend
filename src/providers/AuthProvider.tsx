@@ -24,6 +24,7 @@ export interface AuthContext {
   logout: () => void;
   loginError: LoginError | null;
   authInfo: AuthInfo | null;
+  hasJustLoggedIn: boolean;
 }
 
 type AuthState = {
@@ -32,6 +33,7 @@ type AuthState = {
   loginError: LoginError | null;
   loginStatus: 'unauthorized' | 'loading' | 'success';
   authInfo: AuthInfo | null;
+  hasJustLoggedIn: boolean;
 };
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -57,10 +59,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     refreshToken: getLocalStorageItem('refreshToken'),
     loginError: null,
     loginStatus: 'loading',
-    authInfo: null
+    authInfo: null,
+    hasJustLoggedIn: false
   });
 
-  const { accessToken, refreshToken, loginError, loginStatus, authInfo } = authState;
+  const { accessToken, refreshToken, loginError, loginStatus, authInfo, hasJustLoggedIn } = authState;
 
   const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
@@ -115,7 +118,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
           ...previous,
           accessToken: newAccessToken,
           refreshToken: newRefreshToken,
-          loginStatus: 'success'
+          loginStatus: 'success',
+          hasJustLoggedIn: false
         }));
       } else {
         throw new Error('No refresh token available');
@@ -148,7 +152,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
           ...previous,
           accessToken,
           refreshToken,
-          loginStatus: 'success'
+          loginStatus: 'success',
+          hasJustLoggedIn: true
         }));
       } else {
         throw new Error('loginErrorInvalidScopes');
@@ -178,6 +183,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     }));
   }, []);
 
+  // Interceptors
   useEffect(() => {
     // Setup axios interceptor for authentication when the access token changes
     let requestInterceptor: InterceptorReturn;
@@ -228,7 +234,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated: loginStatus === 'success', login, logout, loginError, authInfo }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated: loginStatus === 'success',
+        login,
+        logout,
+        loginError,
+        authInfo,
+        hasJustLoggedIn
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -3,11 +3,9 @@ import { useEffect, useState, type JSX } from 'react';
 import { Alert, Transition } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
-import { useAuth, type LoginError } from '@hooks/AuthProvider';
+import { useAuth, type LoginError } from '@providers/AuthProvider';
 
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
-
-// import { useServiceConfig } from '@hooks/ServiceConfigProvider';
 
 export const Login = (): JSX.Element => {
   const { t } = useTranslation();
