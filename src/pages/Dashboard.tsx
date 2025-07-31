@@ -2,6 +2,8 @@ import type { JSX } from 'react';
 import { isObject } from 'radashi';
 import { useLoaderData } from '@tanstack/react-router';
 
+import { Route } from '@routes/_auth';
+
 type DisplayProps = {
   data: unknown;
   depth?: number;
@@ -36,7 +38,7 @@ function KeyValueRecursive({ data, depth = 0 }: DisplayProps): JSX.Element {
 }
 
 const Dashboard = (): JSX.Element => {
-  const { user } = useLoaderData({ from: '/_auth' });
+  const { user } = Route.useLoaderData();
 
   return <div>{!!user && <KeyValueRecursive data={user} />}</div>;
 };
