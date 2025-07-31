@@ -2,7 +2,7 @@ import { useState, type JSX } from 'react';
 
 import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 import { useTranslation } from 'react-i18next';
-import { useLoaderData } from '@tanstack/react-router';
+import { Route } from '@routes/_auth/_app/billing';
 
 import { Card } from '@mantine/core';
 import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
@@ -12,7 +12,7 @@ import FlatError from '@components/ui/FlatError/FlatError';
 
 const Billing = (): JSX.Element => {
   const { t } = useTranslation();
-  const { user } = useLoaderData({ from: '/_auth' });
+  const { user } = Route.useLoaderData();
 
   const [error, setError] = useState<string | null>(null);
 
