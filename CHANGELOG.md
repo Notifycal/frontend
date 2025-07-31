@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.0](https://github.com/Notifycal/frontend/compare/v0.24.0...v0.25.0) (2025-07-31)
+
+
+### Features
+
+* feedback footer ([#409](https://github.com/Notifycal/frontend/issues/409)) ([d572ccd](https://github.com/Notifycal/frontend/commit/d572ccd07f469b1e8863ac9d6b28503e6f0307c3))
+
 ## [0.24.0](https://github.com/Notifycal/frontend/compare/v0.23.0...v0.24.0) (2025-07-31)
 
 
