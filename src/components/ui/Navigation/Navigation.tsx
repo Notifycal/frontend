@@ -5,7 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 
 import { IconLogout2 } from '@tabler/icons-react';
 
-import type { FunctionComponent } from '@common/types';
+import type { JSX } from 'react';
 
 import { useAuth } from '@providers/AuthProvider';
 import type { UserModel } from '@our-types/UserModel';
@@ -28,7 +28,7 @@ interface NavigationMenuProps {
   activeClassName: string;
 }
 
-const NavigationMenu = ({ className, activeClassName }: NavigationMenuProps): FunctionComponent => (
+const NavigationMenu = ({ className, activeClassName }: NavigationMenuProps): JSX.Element => (
   <>
     {navigation.map((item) => (
       <Link key={item.href} activeProps={{ className: activeClassName }} className={className} to={item.href}>
@@ -42,7 +42,7 @@ interface UserProps {
   user: UserModel;
 }
 
-export default function Navigation(props: UserProps): FunctionComponent {
+export default function Navigation(props: UserProps): JSX.Element {
   const { user } = props;
 
   const auth = useAuth();

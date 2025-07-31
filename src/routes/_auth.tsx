@@ -15,7 +15,7 @@ export const Route = createFileRoute('/_auth')({
       });
     }
 
-    const user = await context.queryClient.fetchQuery({
+    const user = await context.queryClient.ensureQueryData({
       queryKey: ['user-profile'],
       queryFn: getUserProfile
     });

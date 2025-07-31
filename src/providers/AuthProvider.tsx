@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode, type JSX } from 'react';
 
 import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor, refresh } from '@api/auth';
 import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
@@ -7,8 +7,6 @@ import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
 
 import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorReturn } from '@api/common';
-
-import type { FunctionComponent } from '@common/types';
 
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
 import type { Email, UserId } from '@notifycal/shared/types';
@@ -27,7 +25,6 @@ export interface AuthContext {
   loginError: LoginError | null;
   authInfo: AuthInfo | null;
   hasJustLoggedIn: boolean;
-  setHasJustLoggedIn: (value: boolean) => void;
 }
 
 type AuthState = {
@@ -56,7 +53,7 @@ const decodeToken = (token: string): { userId: UserId; email: Email } | null => 
   }
 };
 
-export const AuthProvider = ({ children }: { children: ReactNode }): FunctionComponent => {
+export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   const [authState, setAuthState] = useState<AuthState>({
     accessToken: null,
     refreshToken: getLocalStorageItem('refreshToken'),
@@ -183,14 +180,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
       refreshToken: null,
       loginStatus: 'unauthorized',
       authInfo: null
-      // hasJustLoggedIn: false
-    }));
-  }, []);
-
-  const setHasJustLoggedIn = useCallback((value: boolean) => {
-    setAuthState((previous: AuthState) => ({
-      ...previous,
-      hasJustLoggedIn: value
     }));
   }, []);
 
@@ -252,8 +241,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): FunctionCom
         logout,
         loginError,
         authInfo,
-        hasJustLoggedIn,
-        setHasJustLoggedIn
+        hasJustLoggedIn
       }}
     >
       {children}

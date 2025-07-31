@@ -1,7 +1,5 @@
-import type { ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 
-import type { FunctionComponent } from '@common/types';
-
-export default function PreFullPage({ children }: { children: ReactNode }): FunctionComponent {
+export default function PreFullPage({ children }: { children: ReactNode }): JSX.Element {
   return <div className="flex h-screen flex-1 flex-col justify-center bg-gray-100">{children}</div>;
 }

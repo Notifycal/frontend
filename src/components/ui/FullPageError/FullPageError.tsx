@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import type { FunctionComponent } from '@common/types';
+import type { JSX } from 'react';
 import { Button } from '@mantine/core';
 
 interface FullScreenErrorProps {
@@ -8,7 +8,7 @@ interface FullScreenErrorProps {
   onRetry?: () => void;
 }
 
-const FullPageError = ({ errorMessage, onRetry }: FullScreenErrorProps): FunctionComponent => {
+const FullPageError = ({ errorMessage, onRetry }: FullScreenErrorProps): JSX.Element => {
   const { t } = useTranslation();
 
   return (

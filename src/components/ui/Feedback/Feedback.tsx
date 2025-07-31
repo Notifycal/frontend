@@ -1,9 +1,8 @@
-import type { FunctionComponent } from '@common/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { Box, Button, Group, Notification, Paper, Select, Text, Textarea } from '@mantine/core';
 import type { Email, UserId } from '@notifycal/shared/types';
-import { useState } from 'react';
+import { useState, type JSX } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -20,7 +19,7 @@ interface FeedbackFormProps {
   userId: UserId;
 }
 
-const FeedbackForm = ({ email, userId }: FeedbackFormProps): FunctionComponent => {
+const FeedbackForm = ({ email, userId }: FeedbackFormProps): JSX.Element => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { t } = useTranslation();

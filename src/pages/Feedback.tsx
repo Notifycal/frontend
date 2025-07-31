@@ -1,10 +1,9 @@
-import type { FunctionComponent } from '@common/types';
 import FeedbackForm from '@components/ui/Feedback/Feedback';
 import { useAuth } from '@providers/AuthProvider';
 import { useNavigate } from '@tanstack/react-router';
-import { useEffect } from 'react';
+import { useEffect, type JSX } from 'react';
 
-export const Feedback = (): FunctionComponent => {
+export const Feedback = (): JSX.Element | null => {
   const { authInfo } = useAuth();
   const navigate = useNavigate();
 
