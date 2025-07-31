@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.24.0](https://github.com/Notifycal/frontend/compare/v0.23.0...v0.24.0) (2025-07-31)
+
+
+### Features
+
+* redirections ([#435](https://github.com/Notifycal/frontend/issues/435)) ([1631f1a](https://github.com/Notifycal/frontend/commit/1631f1a11476ff30814957a8f83c7ccab04d1d7d))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @hookform/resolvers to v5.2.0 ([#438](https://github.com/Notifycal/frontend/issues/438)) ([5f7fabe](https://github.com/Notifycal/frontend/commit/5f7fabe0374585171bda420588941fbf5faee4b6))
+* **deps:** Update dependency @hookform/resolvers to v5.2.1 ([#455](https://github.com/Notifycal/frontend/issues/455)) ([5d78a1e](https://github.com/Notifycal/frontend/commit/5d78a1efe01efe8c2a154ee89c85aecc5ef313d0))
+* **deps:** Update dependency motion to v12.23.12 ([#451](https://github.com/Notifycal/frontend/issues/451)) ([e2094f9](https://github.com/Notifycal/frontend/commit/e2094f9fdbac57f04b11b74ac7b9510095a347a6))
+* **deps:** Update dependency zustand to v5.0.7 ([#454](https://github.com/Notifycal/frontend/issues/454)) ([85245bc](https://github.com/Notifycal/frontend/commit/85245bc80acac470f9b19bc56fd0eae9652707aa))
+* **deps:** Update Node.js Dependencies ([#429](https://github.com/Notifycal/frontend/issues/429)) ([b6a9c9e](https://github.com/Notifycal/frontend/commit/b6a9c9e81c5f2e35776833f7f50d7f3ea6f0aaf5))
+* **deps:** Update Node.js Dependencies ([#445](https://github.com/Notifycal/frontend/issues/445)) ([fa6e09e](https://github.com/Notifycal/frontend/commit/fa6e09e607a7d5ba2d47bde4a4ca5be2ad0190a7))
+* **deps:** Update Node.js Dependencies ([#448](https://github.com/Notifycal/frontend/issues/448)) ([78dfff9](https://github.com/Notifycal/frontend/commit/78dfff9112d15e7a15e508bde2da15fd96e61f1f))
+* **deps:** Update Node.js Dependencies to v8.2.2 ([#452](https://github.com/Notifycal/frontend/issues/452)) ([36991d6](https://github.com/Notifycal/frontend/commit/36991d6636b5d8ea5b05477479596163758d7850))
+* replace FunctionComponent type with JSX.Element ([#434](https://github.com/Notifycal/frontend/issues/434)) ([a929f77](https://github.com/Notifycal/frontend/commit/a929f77bb51ac82166b86079a20f2996782f2c72))
+
 ## [0.23.0](https://github.com/Notifycal/frontend/compare/v0.22.0...v0.23.0) (2025-07-24)
 
 
