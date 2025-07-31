@@ -1,6 +1,5 @@
 import type { JSX } from 'react';
 import { isObject } from 'radashi';
-import { useLoaderData } from '@tanstack/react-router';
 
 import { Route } from '@routes/_auth';
 
