@@ -23,6 +23,7 @@ import { Route as AuthAppDashboardRouteImport } from './routes/_auth/_app/dashbo
 import { Route as AuthAppBillingRouteImport } from './routes/_auth/_app/billing'
 import { Route as AuthOnboardingStepStepRouteImport } from './routes/_auth/onboarding/_step/$step'
 import { Route as AuthOnboardingNostepWelcomeRouteImport } from './routes/_auth/onboarding/_nostep/welcome'
+import { Route as AuthOnboardingNostepFeedbackRouteImport } from './routes/_auth/onboarding/_nostep/feedback'
 import { Route as AuthOnboardingNostepCompletedRouteImport } from './routes/_auth/onboarding/_nostep/completed'
 
 const AuthRoute = AuthRouteImport.update({
@@ -92,6 +93,12 @@ const AuthOnboardingNostepWelcomeRoute =
     path: '/welcome',
     getParentRoute: () => AuthOnboardingNostepRoute,
   } as any)
+const AuthOnboardingNostepFeedbackRoute =
+  AuthOnboardingNostepFeedbackRouteImport.update({
+    id: '/feedback',
+    path: '/feedback',
+    getParentRoute: () => AuthOnboardingNostepRoute,
+  } as any)
 const AuthOnboardingNostepCompletedRoute =
   AuthOnboardingNostepCompletedRouteImport.update({
     id: '/completed',
@@ -109,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/template': typeof AuthAppTemplateRoute
   '/onboarding/': typeof AuthOnboardingIndexRoute
   '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/onboarding/feedback': typeof AuthOnboardingNostepFeedbackRoute
   '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
   '/onboarding/$step': typeof AuthOnboardingStepStepRoute
 }
@@ -121,6 +129,7 @@ export interface FileRoutesByTo {
   '/template': typeof AuthAppTemplateRoute
   '/onboarding': typeof AuthOnboardingIndexRoute
   '/onboarding/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/onboarding/feedback': typeof AuthOnboardingNostepFeedbackRoute
   '/onboarding/welcome': typeof AuthOnboardingNostepWelcomeRoute
   '/onboarding/$step': typeof AuthOnboardingStepStepRoute
 }
@@ -139,6 +148,7 @@ export interface FileRoutesById {
   '/_auth/onboarding/_step': typeof AuthOnboardingStepRouteWithChildren
   '/_auth/onboarding/': typeof AuthOnboardingIndexRoute
   '/_auth/onboarding/_nostep/completed': typeof AuthOnboardingNostepCompletedRoute
+  '/_auth/onboarding/_nostep/feedback': typeof AuthOnboardingNostepFeedbackRoute
   '/_auth/onboarding/_nostep/welcome': typeof AuthOnboardingNostepWelcomeRoute
   '/_auth/onboarding/_step/$step': typeof AuthOnboardingStepStepRoute
 }
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/template'
     | '/onboarding/'
     | '/onboarding/completed'
+    | '/onboarding/feedback'
     | '/onboarding/welcome'
     | '/onboarding/$step'
   fileRoutesByTo: FileRoutesByTo
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/template'
     | '/onboarding'
     | '/onboarding/completed'
+    | '/onboarding/feedback'
     | '/onboarding/welcome'
     | '/onboarding/$step'
   id:
@@ -183,6 +195,7 @@ export interface FileRouteTypes {
     | '/_auth/onboarding/_step'
     | '/_auth/onboarding/'
     | '/_auth/onboarding/_nostep/completed'
+    | '/_auth/onboarding/_nostep/feedback'
     | '/_auth/onboarding/_nostep/welcome'
     | '/_auth/onboarding/_step/$step'
   fileRoutesById: FileRoutesById
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthOnboardingNostepWelcomeRouteImport
       parentRoute: typeof AuthOnboardingNostepRoute
     }
+    '/_auth/onboarding/_nostep/feedback': {
+      id: '/_auth/onboarding/_nostep/feedback'
+      path: '/feedback'
+      fullPath: '/onboarding/feedback'
+      preLoaderRoute: typeof AuthOnboardingNostepFeedbackRouteImport
+      parentRoute: typeof AuthOnboardingNostepRoute
+    }
     '/_auth/onboarding/_nostep/completed': {
       id: '/_auth/onboarding/_nostep/completed'
       path: '/completed'
@@ -319,11 +339,13 @@ const AuthAppRouteWithChildren =
 
 interface AuthOnboardingNostepRouteChildren {
   AuthOnboardingNostepCompletedRoute: typeof AuthOnboardingNostepCompletedRoute
+  AuthOnboardingNostepFeedbackRoute: typeof AuthOnboardingNostepFeedbackRoute
   AuthOnboardingNostepWelcomeRoute: typeof AuthOnboardingNostepWelcomeRoute
 }
 
 const AuthOnboardingNostepRouteChildren: AuthOnboardingNostepRouteChildren = {
   AuthOnboardingNostepCompletedRoute: AuthOnboardingNostepCompletedRoute,
+  AuthOnboardingNostepFeedbackRoute: AuthOnboardingNostepFeedbackRoute,
   AuthOnboardingNostepWelcomeRoute: AuthOnboardingNostepWelcomeRoute,
 }
 

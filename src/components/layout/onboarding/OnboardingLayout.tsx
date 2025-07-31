@@ -35,7 +35,7 @@ const OnboardingLayout: React.FC = () => {
               }}
             />
           </div>
-          <Link target="_blank" to="/feedback">
+          <Link target="_blank" to="/onboarding/feedback">
             {t('footer.feedbackLink')}
           </Link>
         </div>
