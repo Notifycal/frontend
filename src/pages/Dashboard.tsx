@@ -1,7 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import { getUserProfile } from '@api/userProfile';
 import type { JSX } from 'react';
 import { isObject } from 'radashi';
+
+import { Route } from '@routes/_auth';
 
 type DisplayProps = {
   data: unknown;
@@ -37,12 +37,9 @@ function KeyValueRecursive({ data, depth = 0 }: DisplayProps): JSX.Element {
 }
 
 const Dashboard = (): JSX.Element => {
-  const query = useQuery({
-    queryKey: ['user-profile'],
-    queryFn: getUserProfile
-  });
+  const { user } = Route.useLoaderData();
 
-  return <div>{!!query.data && <KeyValueRecursive data={query.data} />}</div>;
+  return <div>{!!user && <KeyValueRecursive data={user} />}</div>;
 };
 
 export default Dashboard;
