@@ -12,7 +12,7 @@ interface UsageBarProps {
 const UsageBar: FC<UsageBarProps> = ({ usage: { remaining, total } }) => {
   const { t } = useTranslation();
   const percentage = (remaining / total) * 100;
-  const used = parseFloat((total - remaining).toFixed(2));
+  const used = Math.round((total - remaining) * 100) / 100;
 
   return (
     <div className="w-full flex flex-col gap-2 py-4">
