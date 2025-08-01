@@ -64,4 +64,3 @@ export function useExtendedTierInfo(tierId: TierId): TierInfoWithIcon {
 export function useExtendedTierInfoOpt(tierId: TierId | undefined): TierInfoWithIcon | undefined {
   return useExtendedTierInfoBase(tierId);
 }
-
