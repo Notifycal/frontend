@@ -1,9 +1,6 @@
 import { z } from 'zod';
 
-export const stringArrayValidatorSchema = (
-  validValues: Array<string>,
-  message?: string
-): z.ZodEffects<z.ZodString, string, string> => {
+export const stringArrayValidatorSchema = (validValues: Array<string>, message?: string): z.ZodString => {
   const base = message ? z.string({ message }) : z.string();
   return base.refine(
     (currentValue) => (currentValue ? validValues.includes(currentValue) : false),
@@ -11,17 +8,21 @@ export const stringArrayValidatorSchema = (
   );
 };
 
-export const nullableInputSchema = <T extends z.ZodTypeAny>(
-  schema: T,
+export function nullableInputSchema<TInputSchema extends z.ZodTypeAny>(
+  schema: TInputSchema,
   message = 'Output value can not be null'
-): z.ZodEffects<z.ZodNullable<T>, z.infer<T>> => {
-  return schema.nullable().superRefine((value, context) => {
-    if (value === null) {
-      context.addIssue({
-        code: z.ZodIssueCode.custom,
-        fatal: true,
-        message
-      });
-    }
-  }) as z.ZodEffects<z.ZodNullable<T>, z.infer<T>>;
-};
+): z.ZodType<z.infer<typeof schema>, z.infer<typeof schema> | null> {
+  return schema
+    .nullable()
+    .superRefine((value, context): void => {
+      if (value === null) {
+        context.addIssue({
+          code: 'custom',
+          fatal: true,
+          message
+        });
+      }
+      return;
+    })
+    .transform((v) => v!) as z.ZodType<z.infer<typeof schema>, z.infer<typeof schema> | null>;
+}

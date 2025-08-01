@@ -17,11 +17,11 @@ import { Alert, Button, Image } from '@mantine/core';
 
 import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const tryItOutSchema = () =>
-  z.object({
+const tryItOutSchema = function (): z.ZodObject<{ hasSentTestReminder: z.ZodBoolean }, z.core.$strip> {
+  return z.object({
     hasSentTestReminder: z.boolean()
   });
+};
 
 export type TryItOutInput = z.input<ReturnType<typeof tryItOutSchema>>;
 export type TryItOutOutput = z.output<ReturnType<typeof tryItOutSchema>>;

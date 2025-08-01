@@ -14,8 +14,8 @@ import { Trans, useTranslation } from 'react-i18next';
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import AccountOverview from '@components/ui/AccountOverview/AccountOverview';
 import FlatError from '@components/ui/FlatError/FlatError';
-import { Checkbox } from '@mantine/core';
 import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
+import { Checkbox } from '@mantine/core';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const confirmSchema = (t: NotifycalTFunction) =>
@@ -23,17 +23,13 @@ const confirmSchema = (t: NotifycalTFunction) =>
     termsAccepted: z.preprocess(
       (value) => value === true,
       z.literal(true, {
-        errorMap: () => ({
-          message: t('confirm.formTosField.isRequired')
-        })
+        message: t('confirm.formTosField.isRequired')
       })
     ),
     privacyAccepted: z.preprocess(
       (value) => value === true,
       z.literal(true, {
-        errorMap: () => ({
-          message: t('confirm.formPrivacyField.isRequired')
-        })
+        message: t('confirm.formPrivacyField.isRequired')
       })
     ),
     marketingOptInAccepted: z.boolean()
