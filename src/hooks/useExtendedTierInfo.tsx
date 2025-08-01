@@ -1,10 +1,12 @@
-import { getServiceConfig } from '@config/serviceConfig';
-import type { TierId } from '@notifycal/shared/types';
-import { useMemo } from 'react';
-import type { TierInfo } from '@components/onboarding/TierCard';
-import { IconAward, IconMedal, IconTrophy, type TablerIcon } from '@tabler/icons-react';
-import { useTranslation } from 'react-i18next';
 import type { NotifycalTFunction } from '@common/i18n';
+import type { TierInfo } from '@components/onboarding/TierCard';
+import { getServiceConfig } from '@config/serviceConfig';
+import type { tierMapSchema } from '@notifycal/shared/schemas';
+import type { TierId } from '@notifycal/shared/types';
+import { IconAward, IconMedal, IconTrophy, type TablerIcon } from '@tabler/icons-react';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { z } from 'zod';
 
 export type TierInfoWithIcon = TierInfo & { icon: TablerIcon };
 
@@ -33,22 +35,32 @@ export const tierExtraInfo = {
     icon: IconAward
   }
 };
+function createExtendedTierInfo(
+  tierId: TierId,
+  t: NotifycalTFunction,
+  tiers: z.infer<typeof tierMapSchema>
+): TierInfoWithIcon {
+  return {
+    ...tiers[tierId],
+    ...tierExtraInfo[tierId],
+    features: tierFeatures(t, tiers[tierId].numberOfReminders),
+    id: tierId
+  };
+}
 
-function useExtendedTierInfo(tierId: TierId): TierInfoWithIcon {
+function useExtendedTierInfoBase(tierId: TierId | undefined): TierInfoWithIcon | undefined {
   const { t } = useTranslation('onboarding');
   const {
     TIER_INFO: { tiers }
   } = getServiceConfig();
 
-  return useMemo(
-    () => ({
-      ...tiers[tierId],
-      ...tierExtraInfo[tierId],
-      features: tierFeatures(t, tiers[tierId].numberOfReminders),
-      id: tierId
-    }),
-    [tiers, tierId, t]
-  );
+  return useMemo(() => (tierId ? createExtendedTierInfo(tierId, t, tiers) : undefined), [tiers, tierId, t]);
 }
 
-export default useExtendedTierInfo;
+export function useExtendedTierInfo(tierId: TierId): TierInfoWithIcon {
+  return useExtendedTierInfoBase(tierId)!;
+}
+
+export function useExtendedTierInfoOpt(tierId: TierId | undefined): TierInfoWithIcon | undefined {
+  return useExtendedTierInfoBase(tierId);
+}

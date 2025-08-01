@@ -1,26 +1,22 @@
 import { useState, type JSX } from 'react';
 
-import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
-import { useTranslation } from 'react-i18next';
 import { Route } from '@routes/_auth/_app/billing';
 
-import { Card } from '@mantine/core';
-import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
+import TierSelection from '@components/onboarding/TierSelection';
 import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
-import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
 import FlatError from '@components/ui/FlatError/FlatError';
+import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
+import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
+import { useExtendedTierInfoOpt } from '@hooks/useExtendedTierInfo';
+import { Card } from '@mantine/core';
+import type { UserStatus } from '@notifycal/shared/types';
 
 const Billing = (): JSX.Element => {
-  const { t } = useTranslation();
   const { user } = Route.useLoaderData();
 
   const [error, setError] = useState<string | null>(null);
 
-  if (!user?.credits?.tier) {
-    throw new Error(t('billing.error.noUserData'));
-  }
-
-  const tierInfo = useExtendedTierInfo(user.credits.tier);
+  const tierInfo = useExtendedTierInfoOpt(user.credits?.tier);
 
   const cardCommonProps = {
     withBorder: true,
@@ -28,6 +24,8 @@ const Billing = (): JSX.Element => {
     radius: 'md',
     shadow: 'md'
   };
+
+  const displayTierSelection: Array<UserStatus> = ['cancelled'];
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -42,19 +40,31 @@ const Billing = (): JSX.Element => {
           </FlatError>
         </div>
       )}
-      <Card {...cardCommonProps}>{tierInfo && <UserTierInfo tierInfo={tierInfo} />}</Card>
-      <Card {...cardCommonProps}>
-        <CreditBalance
-          topupCreditBalance={user?.credits?.topupCreditBalance}
-          subscriptionCreditBalance={{
-            used: user?.credits?.subscriptionCreditBalance,
-            total: tierInfo.credits
-          }}
-          onError={setError}
-        />
-      </Card>
+
+      {tierInfo && user?.credits && !displayTierSelection.some((status) => status === user.userStatus) ? (
+        <>
+          <Card {...cardCommonProps}>
+            <UserTierInfo tierInfo={tierInfo} />
+          </Card>
+          <Card {...cardCommonProps}>
+            <CreditBalance
+              topupCreditBalance={user?.credits?.topupCreditBalance}
+              subscriptionCreditBalance={{
+                used: user?.credits?.subscriptionCreditBalance,
+                total: tierInfo.credits
+              }}
+              onError={setError}
+            />
+          </Card>
+        </>
+      ) : (
+        <Card {...cardCommonProps} className="lg:col-span-2">
+          <TierSelection displayNavigationButtons={false} />
+        </Card>
+      )}
+
       <Card {...cardCommonProps} className="lg:col-span-2">
-        <ManageBilling onError={setError} />
+        <ManageBilling userStatus={user.userStatus} onError={setError} />
       </Card>
     </div>
   );

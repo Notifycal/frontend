@@ -11,7 +11,7 @@ import { useOnboardingStore } from '@store/useOnboardingStore';
 function PaymentSuccessRedirect(): JSX.Element {
   const navigate = useNavigate();
   const [shouldPoll, setShouldPoll] = useState(true);
-  const { topupCreditBalance, purchaseOperation, reset } = useBillingStore();
+  const { topupCreditBalance, purchaseOperation, reset, previousUserStatus } = useBillingStore();
   const { markStepAsCompleted } = useOnboardingStore();
 
   const { data: user, isSuccess } = useQuery({
@@ -48,9 +48,22 @@ function PaymentSuccessRedirect(): JSX.Element {
     } else if (purchaseOperation === 'tierPurchase') {
       markStepAsCompleted('tierSelection');
       stopAndReset();
-      void navigate({ to: '/onboarding/completed' });
+      if (previousUserStatus === 'cancelled') {
+        void navigate({ to: '/billing' });
+      } else {
+        void navigate({ to: '/onboarding/completed' });
+      }
     }
-  }, [navigate, isSuccess, user, topupCreditBalance, purchaseOperation, reset, markStepAsCompleted]);
+  }, [
+    navigate,
+    isSuccess,
+    user,
+    topupCreditBalance,
+    purchaseOperation,
+    reset,
+    markStepAsCompleted,
+    previousUserStatus
+  ]);
 
   return <FullPageSpinner />;
 }
