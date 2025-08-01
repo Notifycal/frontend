@@ -15,7 +15,11 @@ import TierCard from './TierCard';
 
 export type TierSelectionValues = null;
 
-const TierSelection: FC = () => {
+interface TierSelectionProps {
+  displayNavigationButtons: boolean;
+}
+
+const TierSelection: FC<TierSelectionProps> = ({ displayNavigationButtons = true }: TierSelectionProps) => {
   const translationNs = 'onboarding' as const;
   const { t, i18n } = useTranslation(translationNs);
 
@@ -76,9 +80,11 @@ const TierSelection: FC = () => {
       </div>
 
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
-      <Group justify="space-between" mt="xl" pt="md">
-        <OnboardingBackButton />
-      </Group>
+      {displayNavigationButtons && (
+        <Group justify="space-between" mt="xl" pt="md">
+          <OnboardingBackButton />
+        </Group>
+      )}
     </div>
   );
 };

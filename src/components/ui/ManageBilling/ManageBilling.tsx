@@ -1,15 +1,16 @@
 import { getCustomerPortalURL } from '@api/payments';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import { Button, Title } from '@mantine/core';
-import type { LanguageCode } from '@notifycal/shared/types';
+import type { LanguageCode, UserStatus } from '@notifycal/shared/types';
 import { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface ManageBillingProps {
   onError: (message: string | null) => void;
+  userStatus: UserStatus;
 }
 
-const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
+const ManageBilling: FC<ManageBillingProps> = ({ onError, userStatus }) => {
   const [clickedButton, setClickedButton] = useState<string | null>(null);
 
   const { t, i18n } = useTranslation();
@@ -22,32 +23,37 @@ const ManageBilling: FC<ManageBillingProps> = ({ onError }) => {
     }
   });
 
-  const buttons = [
+  const allButtons = [
     {
       id: 'update_subscription',
       flowType: 'subscription_update' as const,
       buttonText: t('billing.manage.modifySubscription.button'),
-      explanationText: t('billing.manage.modifySubscription.explanation')
+      explanationText: t('billing.manage.modifySubscription.explanation'),
+      hiddenOn: ['cancelled']
     },
     {
       id: 'payment_method',
       flowType: 'payment_method_update' as const,
       buttonText: t('billing.manage.paymentMethods.button'),
-      explanationText: t('billing.manage.paymentMethods.explanation')
+      explanationText: t('billing.manage.paymentMethods.explanation'),
+      hiddenOn: ['cancelled']
     },
     {
       id: 'invoices',
       flowType: undefined,
       buttonText: t('billing.manage.invoices.button'),
-      explanationText: t('billing.manage.invoices.explanation')
+      explanationText: t('billing.manage.invoices.explanation'),
+      hiddenOn: []
     },
     {
       id: 'portal',
       flowType: undefined,
       buttonText: t('billing.manage.customerPortal.button'),
-      explanationText: t('billing.manage.customerPortal.explanation')
+      explanationText: t('billing.manage.customerPortal.explanation'),
+      hiddenOn: []
     }
-  ];
+  ] as const;
+  const buttons = allButtons.filter((button) => !button.hiddenOn.some((status) => status === userStatus));
 
   return (
     <>

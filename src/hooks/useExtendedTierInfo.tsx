@@ -1,10 +1,10 @@
+import type { NotifycalTFunction } from '@common/i18n';
+import type { TierInfo } from '@components/onboarding/TierCard';
 import { getServiceConfig } from '@config/serviceConfig';
 import type { TierId } from '@notifycal/shared/types';
-import { useMemo } from 'react';
-import type { TierInfo } from '@components/onboarding/TierCard';
 import { IconAward, IconMedal, IconTrophy, type TablerIcon } from '@tabler/icons-react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { NotifycalTFunction } from '@common/i18n';
 
 export type TierInfoWithIcon = TierInfo & { icon: TablerIcon };
 
@@ -34,19 +34,22 @@ export const tierExtraInfo = {
   }
 };
 
-function useExtendedTierInfo(tierId: TierId): TierInfoWithIcon {
+function useExtendedTierInfo(tierId: TierId | undefined): TierInfoWithIcon | undefined {
   const { t } = useTranslation('onboarding');
   const {
     TIER_INFO: { tiers }
   } = getServiceConfig();
 
   return useMemo(
-    () => ({
-      ...tiers[tierId],
-      ...tierExtraInfo[tierId],
-      features: tierFeatures(t, tiers[tierId].numberOfReminders),
-      id: tierId
-    }),
+    () =>
+      tierId
+        ? {
+            ...tiers[tierId],
+            ...tierExtraInfo[tierId],
+            features: tierFeatures(t, tiers[tierId].numberOfReminders),
+            id: tierId
+          }
+        : undefined,
     [tiers, tierId, t]
   );
 }
