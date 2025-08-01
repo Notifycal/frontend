@@ -59,7 +59,8 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
           t('businessDetails.formIndustryCategoryField.isRequired')
         ),
         subcategory: nullableInputSchema(
-          z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') })
+          z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') }),
+          t('businessDetails.formIndustrySubcategoryField.isRequired')
         ),
         customIndustry: z
           .string({ message: t('businessDetails.formCustomIndustryField.isRequired') })
