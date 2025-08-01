@@ -1,6 +1,5 @@
 import { useState, type JSX } from 'react';
 
-import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 import { Route } from '@routes/_auth/_app/billing';
 
 import TierSelection from '@components/onboarding/TierSelection';
@@ -8,6 +7,7 @@ import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
 import FlatError from '@components/ui/FlatError/FlatError';
 import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
 import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
+import { useExtendedTierInfoOpt } from '@hooks/useExtendedTierInfo';
 import { Card } from '@mantine/core';
 import type { UserStatus } from '@notifycal/shared/types';
 
@@ -16,7 +16,7 @@ const Billing = (): JSX.Element => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const tierInfo = useExtendedTierInfo(user.credits?.tier);
+  const tierInfo = useExtendedTierInfoOpt(user.credits?.tier);
 
   const cardCommonProps = {
     withBorder: true,

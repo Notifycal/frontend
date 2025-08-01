@@ -1,10 +1,10 @@
+import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
+import { useExtendedTierInfo } from '@hooks/useExtendedTierInfo';
+import { Badge, Button, Card } from '@mantine/core';
 import type { Tier, TierId } from '@notifycal/shared/types';
+import clsx from 'clsx';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Button, Badge } from '@mantine/core';
-import clsx from 'clsx';
-import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
-import useExtendedTierInfo from '@hooks/useExtendedTierInfo';
 
 export interface TierInfo extends Tier {
   id: TierId;
