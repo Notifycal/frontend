@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.25.1](https://github.com/Notifycal/frontend/compare/v0.25.0...v0.25.1) (2025-08-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-query to v5.83.1 ([#460](https://github.com/Notifycal/frontend/issues/460)) ([a36c610](https://github.com/Notifycal/frontend/commit/a36c610a2a56167586b2a62af5158274c1c08f1e))
+* **deps:** Update dependency @tanstack/react-query to v5.84.0 ([#465](https://github.com/Notifycal/frontend/issues/465)) ([38d9740](https://github.com/Notifycal/frontend/commit/38d97406b987043dc70d64032df097e910390a4b))
+* **deps:** Update dependency @tanstack/react-query to v5.84.1 ([#469](https://github.com/Notifycal/frontend/issues/469)) ([e12bea5](https://github.com/Notifycal/frontend/commit/e12bea5882457c8e0ddb62a40f00a9197beaa6d3))
+* **deps:** Update dependency @tanstack/react-router to v1.130.10 ([#466](https://github.com/Notifycal/frontend/issues/466)) ([fda215d](https://github.com/Notifycal/frontend/commit/fda215d1ae4d340fadafbb9013fb0c82933cb848))
+* handle cancelled user status in billing page ([#468](https://github.com/Notifycal/frontend/issues/468)) ([8222a62](https://github.com/Notifycal/frontend/commit/8222a626c6211fec5c2a7b15a9241bdc13786671))
+* precision in Usage Bar ([#464](https://github.com/Notifycal/frontend/issues/464)) ([7cd2157](https://github.com/Notifycal/frontend/commit/7cd21579c08b91fe116d62c00f2d0ec9579e2e25))
+
 ## [0.25.0](https://github.com/Notifycal/frontend/compare/v0.24.0...v0.25.0) (2025-07-31)
 
 
