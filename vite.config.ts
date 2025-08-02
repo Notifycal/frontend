@@ -1,3 +1,4 @@
+import { bundleSizePlugin } from '@notifycal/shared/utils';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react-swc';
 import fs from 'node:fs';
@@ -41,43 +42,6 @@ const handleServiceConfigPlugin = (): import('vite').Plugin => {
   };
 };
 
-const handleBundleSizePlugin = (): import('vite').Plugin => {
-  const pluginName = 'bundle-size-limit';
-  return {
-    name: pluginName,
-    generateBundle(_options, bundle) {
-      console.log(`[${pluginName}] Checking bundle size limits...`);
-      let totalSize = 0;
-      for (const [fileName, chunk] of Object.entries(bundle)) {
-        let size = 0;
-
-        if (chunk.type === 'chunk' && chunk.code) {
-          size = Buffer.byteLength(chunk.code, 'utf8');
-          if (size > maxBundleChunkSizeInBytes) {
-            throw new Error(
-              `Chunk ${fileName} ${bytestoMB(size)}MB exceeds the chunk size limit of ${bytestoMB(maxBundleChunkSizeInBytes)}MB`
-            );
-          }
-        } else if (chunk.type === 'asset' && chunk.source) {
-          size = Buffer.isBuffer(chunk.source) ? chunk.source.length : Buffer.byteLength(chunk.source, 'utf8');
-        }
-        totalSize += size;
-      }
-      const totalSizeInMB = bytestoMB(totalSize);
-      console.log(`Total bundle size: ${totalSizeInMB}MB`);
-      if (totalSize > maxTotalBundleSizeInBytes) {
-        throw new Error(
-          `Total bundle size ${totalSizeInMB}MB exceeds the total bundle size limit of ${bytestoMB(maxTotalBundleSizeInBytes)}MB`
-        );
-      }
-    }
-  };
-};
-
-export function bytestoMB(numberOfBytes: number): string {
-  return (numberOfBytes / 1024 / 1024).toFixed(2);
-}
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -100,7 +64,7 @@ export default defineConfig({
     reportCompressedSize: false,
     chunkSizeWarningLimit: (maxBundleChunkSizeInBytes / 1024) * 0.9, // Expressed in KB. The budget is 90% of the limit.
     rollupOptions: {
-      plugins: [handleBundleSizePlugin()]
+      plugins: [bundleSizePlugin(maxBundleChunkSizeInBytes, maxTotalBundleSizeInBytes)]
     }
   },
   server: {
