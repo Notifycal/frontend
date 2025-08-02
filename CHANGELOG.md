@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.25.2](https://github.com/Notifycal/frontend/compare/v0.25.1...v0.25.2) (2025-08-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-router to v1.130.12 ([#471](https://github.com/Notifycal/frontend/issues/471)) ([80dc673](https://github.com/Notifycal/frontend/commit/80dc6735698b33e008dc3f02278932c60e72f04c))
+* **deps:** Update dependency react-hook-form to v7.62.0 ([#473](https://github.com/Notifycal/frontend/issues/473)) ([562ca23](https://github.com/Notifycal/frontend/commit/562ca238f4812fa9e5043ba6793702e9b9663be2))
+* forgot to replace chore in previous commit so it gets releases ([230c349](https://github.com/Notifycal/frontend/commit/230c3494df505757fa930d601c40775be13e8f36))
+
 ## [0.25.1](https://github.com/Notifycal/frontend/compare/v0.25.0...v0.25.1) (2025-08-01)
 
 
