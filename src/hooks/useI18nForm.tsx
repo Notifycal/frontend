@@ -3,17 +3,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useMemo } from 'react';
 import { useForm, type FieldValues, type UseFormProps, type UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import type { ZodType } from 'zod';
 
-// Workaround while we update to Zod 4
-interface Zod3Type<O = unknown, I = unknown> {
-  _output: O;
-  _input: I;
-  _def: {
-    typeName: string;
-  };
-}
-
-type SchemaBuilder<TFormInput, TFormOutput> = (t: NotifycalTFunction) => Zod3Type<TFormOutput, TFormInput>;
+type SchemaBuilder<TFormInput, TFormOutput> = (t: NotifycalTFunction) => ZodType<TFormOutput, TFormInput>;
 
 // Replicating react-hook-form useForm signature generics (including order)
 export function useI18nForm<
