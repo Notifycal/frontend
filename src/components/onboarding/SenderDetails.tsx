@@ -27,11 +27,9 @@ const senderDetailsSchema = (t: NotifycalTFunction) =>
       })
     })
     .superRefine((values, context) => {
-      if (
-        !isValidMobilePhoneNumber(values.senderContact.phoneNumber as PhoneNumber, values.senderContact.countryCode)
-      ) {
+      if (!isValidMobilePhoneNumber(values.senderContact.phoneNumber, values.senderContact.countryCode)) {
         context.addIssue({
-          code: z.ZodIssueCode.custom,
+          code: 'custom',
           message: t('senderDetails.formSenderNumber.isInvalid'),
           path: ['senderContact', 'phoneNumber']
         });
