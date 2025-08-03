@@ -8,10 +8,9 @@ import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
 import TierSelection from '@components/ui/TierSelection/TierSelection';
 import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
 import { getServiceConfig } from '@config/serviceConfig';
-import { tierOrder } from '@constants/tiers';
 import { Card } from '@mantine/core';
+import { orderedTierInfoWithIcons as orderedTierInfoWithIconsUtility } from '@notifycal/shared/pricing';
 import type { LanguageCode, UserStatus } from '@notifycal/shared/types';
-import { extendTierInfo } from '@services/tier';
 import { useTranslation } from 'react-i18next';
 
 const Billing = (): JSX.Element => {
@@ -26,7 +25,7 @@ const Billing = (): JSX.Element => {
   const { i18n } = useTranslation();
   const lang = i18n.language as LanguageCode;
 
-  const orderedTierInfoWithIcons = tierOrder.map((tierId) => extendTierInfo(tierId, tiers, lang));
+  const orderedTierInfoWithIcons = orderedTierInfoWithIconsUtility(tiers, lang);
   const tierInfo = orderedTierInfoWithIcons.find((t) => t.id === user.credits?.tier);
 
   const cardCommonProps = {

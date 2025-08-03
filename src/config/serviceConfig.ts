@@ -1,6 +1,6 @@
 import z from 'zod';
 
-import { productsInfoSchema } from './pricing';
+import { productsInfoSchema } from '@notifycal/shared/pricing';
 
 export const serviceConfigSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().nonempty('GOOGLE_CLIENT_ID is required'),
