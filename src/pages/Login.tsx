@@ -6,9 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { useAuth, type LoginError } from '@providers/AuthProvider';
 
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';
-
+import { TestCard } from '@notifycal/shared/components';
+import type { LanguageCode } from '@notifycal/shared/types';
 export const Login = (): JSX.Element => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language as LanguageCode;
   // const { t, i18n } = useTranslation();
 
   // TODO: Add language toggle/picker
@@ -83,6 +85,14 @@ export const Login = (): JSX.Element => {
           >
             {t('home.demo')}
           </a>
+
+          <TestCard
+            locale={locale}
+            title="Test Component from Shared"
+            onButtonClick={() => {
+              console.log('Shared component clicked in Astro!');
+            }}
+          />
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             {t('home.wantToKnowMore')}{' '}
