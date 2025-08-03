@@ -10,4 +10,5 @@ https://github.com/orgs/mantinedev/discussions/1672#discussioncomment-11534898 *
 @import '@mantine/core/styles.layer.css';
 
 /* @import './tailwind.css'; */
+@source "../../node_modules/@notifycal/shared";
 /* @import './mantine.css'; */
