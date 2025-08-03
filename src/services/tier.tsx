@@ -1,6 +1,6 @@
 import type { NotifycalTFunction } from '@common/i18n';
-import type { TierInfoWithIcon } from '@components/onboarding/TierCard';
 import { getServiceConfig } from '@config/serviceConfig';
+import type { TierInfoWithIcon } from '@notifycal/shared/components';
 import type { TierId } from '@notifycal/shared/types';
 import { IconAward, IconMedal, IconTrophy } from '@tabler/icons-react';
 

@@ -3,10 +3,10 @@ import type { FC } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import type { TierInfoWithIcon } from '@components/onboarding/TierCard';
 import { Alert, Divider, Title } from '@mantine/core';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
-import TierFeatures from '../TierFeatures/TierFeatures';
+
+import { TierFeatures, type TierInfoWithIcon } from '@notifycal/shared/components';
 
 interface UserTierInfoProps {
   tierInfo: TierInfoWithIcon;

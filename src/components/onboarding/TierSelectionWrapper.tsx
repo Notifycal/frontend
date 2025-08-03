@@ -12,10 +12,10 @@ import { Trans, useTranslation } from 'react-i18next';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { tierOrder } from '@constants/tiers';
 import { Group } from '@mantine/core';
+import { TierSelection } from '@notifycal/shared/components';
 import { extendTierInfo } from '@services/tier';
 import { Link } from '@tanstack/react-router';
 import OnboardingBackButton from './OnboardingBackButton';
-import TierSelection from './TierSelection';
 
 interface TierSelectionWrapperProps {
   displayNavigationButtons?: boolean;
