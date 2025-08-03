@@ -6,7 +6,7 @@ import Calendars from '@components/onboarding/Calendars';
 import Confirm from '@components/onboarding/Confirm';
 import ReminderType from '@components/onboarding/ReminderType';
 import SenderDetails from '@components/onboarding/SenderDetails';
-import TierSelectionWrapper from '@components/onboarding/TierSelectionWrapper';
+import TierSelection from '@components/onboarding/TierSelection';
 import TryItOut from '@components/onboarding/TryItOut';
 
 export type StepKey = keyof OnboardingData;
@@ -54,7 +54,7 @@ export const onboardingSteps: Array<StepConfig> = [
   {
     path: 'tier-selection',
     stepKey: 'tierSelection',
-    component: TierSelectionWrapper,
+    component: TierSelection,
     customWidth: 'max-w-6xl' // Tailwind CSS classname
   }
 ];

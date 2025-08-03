@@ -10,22 +10,22 @@ import { useState, type FC, type ReactNode } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import FlatError from '@components/ui/FlatError/FlatError';
-import { tierOrder } from '@constants/tiers';
 import { Group } from '@mantine/core';
-import { TierSelection } from '@notifycal/shared/components';
-import { extendTierInfo } from '@services/tier';
+import { TierSelection as TierSelectionBase, type TierInfoWithIcon } from '@notifycal/shared/components';
 import { Link } from '@tanstack/react-router';
-import OnboardingBackButton from './OnboardingBackButton';
+import OnboardingBackButton from '../../onboarding/OnboardingBackButton';
 
-interface TierSelectionWrapperProps {
+interface TierSelectionProps {
   displayNavigationButtons?: boolean;
+  orderedTierInfoWithIcons: Array<TierInfoWithIcon>;
 }
 
 export type TierSelectionValues = null;
 
-const TierSelectionWrapper: FC<TierSelectionWrapperProps> = ({
-  displayNavigationButtons = true
-}: TierSelectionWrapperProps) => {
+const TierSelection: FC<TierSelectionProps> = ({
+  displayNavigationButtons,
+  orderedTierInfoWithIcons
+}: TierSelectionProps) => {
   const translationNs = 'onboarding' as const;
   const { t, i18n } = useTranslation(translationNs);
   const queryClient = useQueryClient();
@@ -78,13 +78,13 @@ const TierSelectionWrapper: FC<TierSelectionWrapperProps> = ({
           </FlatError>
         </div>
       )}
-      <TierSelection
+      <TierSelectionBase
         isCardButtonDisabled={isButtonDisabled}
         isCardButtonLoading={isButtonLoading}
         lang={language}
-        orderedTierInfoWithIcons={tierOrder.map((tierId) => extendTierInfo(tierId, t))}
+        orderedTierInfoWithIcons={orderedTierInfoWithIcons}
         onTierSelection={handleTierSelect}
-      ></TierSelection>
+      ></TierSelectionBase>
 
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
       {displayNavigationButtons && (
@@ -96,4 +96,4 @@ const TierSelectionWrapper: FC<TierSelectionWrapperProps> = ({
   );
 };
 
-export default TierSelectionWrapper;
+export default TierSelection;

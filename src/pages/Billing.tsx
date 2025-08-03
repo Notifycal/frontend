@@ -2,23 +2,32 @@ import { useState, type JSX } from 'react';
 
 import { Route } from '@routes/_auth/_app/billing';
 
-import TierSelectionWrapper from '@components/onboarding/TierSelectionWrapper';
 import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
 import FlatError from '@components/ui/FlatError/FlatError';
 import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
+import TierSelection from '@components/ui/TierSelection/TierSelection';
 import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
+import { getServiceConfig } from '@config/serviceConfig';
+import { tierOrder } from '@constants/tiers';
 import { Card } from '@mantine/core';
-import type { UserStatus } from '@notifycal/shared/types';
+import type { LanguageCode, UserStatus } from '@notifycal/shared/types';
 import { extendTierInfo } from '@services/tier';
 import { useTranslation } from 'react-i18next';
 
 const Billing = (): JSX.Element => {
   const { user } = Route.useLoaderData();
 
+  const {
+    TIER_INFO: { tiers }
+  } = getServiceConfig();
+
   const [error, setError] = useState<string | null>(null);
 
-  const { t } = useTranslation('onboarding');
-  const tierInfo = user.credits?.tier ? extendTierInfo(user.credits?.tier, t) : undefined;
+  const { i18n } = useTranslation();
+  const lang = i18n.language as LanguageCode;
+
+  const orderedTierInfoWithIcons = tierOrder.map((tierId) => extendTierInfo(tierId, tiers, lang));
+  const tierInfo = orderedTierInfoWithIcons.find((t) => t.id === user.credits?.tier);
 
   const cardCommonProps = {
     withBorder: true,
@@ -61,7 +70,7 @@ const Billing = (): JSX.Element => {
         </>
       ) : (
         <Card {...cardCommonProps} className="lg:col-span-2">
-          <TierSelectionWrapper displayNavigationButtons={false} />
+          <TierSelection displayNavigationButtons={false} orderedTierInfoWithIcons={orderedTierInfoWithIcons} />
         </Card>
       )}
 

@@ -7,7 +7,7 @@ const pricingSchema = z.object({
   topups: topupMapSchema
 });
 
-export const tierInfoSchema = z.string().transform((data, context) => {
+export const productsInfoSchema = z.string().transform((data, context) => {
   try {
     const jsonParsed = JSON.parse(data);
     return pricingSchema.parse(jsonParsed);
@@ -16,3 +16,5 @@ export const tierInfoSchema = z.string().transform((data, context) => {
     return z.NEVER;
   }
 });
+
+export type ProductsInfo = z.infer<typeof productsInfoSchema>;
