@@ -1,0 +1,10 @@
+{
+  "tierDescriptions": {
+    "good": "Ideal para autónomos o emprendedores que trabajan solos.",
+    "better": "Pensado para equipos pequeños de 2-3 personas.",
+    "best": "Perfecto para empresas con más de 5 empleados."
+  },
+  "popularBadge": "Más popular",
+  "month": "mes",
+  "selectButton": "Seleccionar"
+}

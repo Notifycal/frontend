@@ -257,12 +257,6 @@
     "title": "El teu pla",
     "subtitle": "Tria el millor pla per a tu",
     "checkoutURLApiError": "Hi ha hagut un problema amb el checkout. Si us plau, torna-ho a intentar i dóna'ns feedback si no funciona.",
-    "tierDescriptions": {
-      "good": "Ideal per a freelancers o emprenedors autònoms.",
-      "better": "Dissenyat per a equips petits de 2-3 persones.",
-      "best": "Perfecte per a empreses amb més de 5 empleats."
-    },
-    "popularBadge": "Popular",
     "numberOfMonthlyReminders": "{{qty}} recordatoris mensuals*",
     "googleCalendarIntegration": "Integració amb Google Calendar",
     "disclaimer": "El nombre de recordatoris es basa en un cost estimat de 0,05€/recordatori a números espanyols. Pot canviar depenent del país del número de destinació."

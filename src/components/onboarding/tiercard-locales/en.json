@@ -1,0 +1,10 @@
+{
+  "tierDescriptions": {
+    "good": "Ideal for freelancers or solo entrepreneurs.",
+    "better": "Designed for small teams of 2–3 people.",
+    "best": "Perfect for companies with more than 5 employees."
+  },
+  "popularBadge": "Popular",
+  "month": "mes",
+  "selectButton": "Select"
+}

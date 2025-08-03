@@ -1,10 +1,9 @@
 import TierFeatures from '@components/ui/TierFeatures/TierFeatures';
-import { useExtendedTierInfo } from '@hooks/useExtendedTierInfo';
 import { Badge, Button, Card } from '@mantine/core';
-import type { Tier, TierId } from '@notifycal/shared/types';
+import type { LanguageCode, Tier, TierId } from '@notifycal/shared/types';
+import type { TablerIcon } from '@tabler/icons-react';
 import clsx from 'clsx';
 import type { FC } from 'react';
-import { useTranslation } from 'react-i18next';
 
 export interface TierInfo extends Tier {
   id: TierId;
@@ -13,19 +12,27 @@ export interface TierInfo extends Tier {
   features: Array<string>;
 }
 
+export type TierInfoWithIcon = TierInfo & { icon: TablerIcon };
 interface TierCardProps {
-  tierId: TierId;
+  tier: TierInfoWithIcon;
   isLoading: boolean;
   isDisabled: boolean;
   onSelect: (tierId: TierId) => void;
+  lang: LanguageCode;
 }
 
-const TierCard: FC<TierCardProps> = ({ tierId, isLoading, isDisabled, onSelect }) => {
-  const translationNs = 'onboarding' as const;
-  const { t } = useTranslation(translationNs);
+import caTranslations from './tiercard-locales/ca.json' with { type: 'json' };
+import enTranslations from './tiercard-locales/en.json' with { type: 'json' };
+import esTranslations from './tiercard-locales/es.json' with { type: 'json' };
 
-  const tier = useExtendedTierInfo(tierId);
+const translations = {
+  en: enTranslations,
+  es: esTranslations,
+  ca: caTranslations
+};
 
+const TierCard: FC<TierCardProps> = ({ tier, isLoading, isDisabled, onSelect, lang }) => {
+  const translation = translations[lang];
   return (
     <div key={tier.displayName}>
       {tier.recommended && (
@@ -38,7 +45,7 @@ const TierCard: FC<TierCardProps> = ({ tierId, isLoading, isDisabled, onSelect }
             size="lg"
             variant="filled"
           >
-            {t('tierSelection.popularBadge')}
+            {translation.popularBadge}
           </Badge>
         </div>
       )}
@@ -57,12 +64,12 @@ const TierCard: FC<TierCardProps> = ({ tierId, isLoading, isDisabled, onSelect }
         <div className="space-y-2">
           <div className="text-xl font-semibold">{tier.displayName}</div>
           <div className="text-sm opacity-80 min-h-[3.5rem] flex items-start justify-start">
-            {t(`tierSelection.tierDescriptions.${tier.id}`)}
+            {translation.tierDescriptions[tier.id]}
           </div>
 
           <div className="flex justify-start items-baseline gap-1">
             <div className="text-4xl font-bold">{tier.priceEur}€</div>
-            <div className="text-sm opacity-80">/{t('generic.month', { ns: 'translations' })}</div>
+            <div className="text-sm opacity-80">/{translation.month}</div>
           </div>
           <Button
             fullWidth
@@ -75,7 +82,7 @@ const TierCard: FC<TierCardProps> = ({ tierId, isLoading, isDisabled, onSelect }
               onSelect(tier.id);
             }}
           >
-            {t('generic.button.select', { ns: 'translations' })}
+            {translation.selectButton}
           </Button>
           <TierFeatures className="min-h-[8rem]" tier={tier} />
         </div>

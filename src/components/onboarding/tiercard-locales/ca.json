@@ -1,0 +1,10 @@
+{
+  "tierDescriptions": {
+    "good": "Ideal per a freelancers o emprenedors autònoms.",
+    "better": "Dissenyat per a equips petits de 2-3 persones.",
+    "best": "Perfecte per a empreses amb més de 5 empleats."
+  },
+  "popularBadge": "Popular",
+  "month": "mes",
+  "selectButton": "Seleccionar"
+}

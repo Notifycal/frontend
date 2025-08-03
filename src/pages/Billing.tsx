@@ -2,21 +2,23 @@ import { useState, type JSX } from 'react';
 
 import { Route } from '@routes/_auth/_app/billing';
 
-import TierSelection from '@components/onboarding/TierSelection';
+import TierSelectionWrapper from '@components/onboarding/TierSelectionWrapper';
 import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
 import FlatError from '@components/ui/FlatError/FlatError';
 import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
 import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
-import { useExtendedTierInfoOpt } from '@hooks/useExtendedTierInfo';
 import { Card } from '@mantine/core';
 import type { UserStatus } from '@notifycal/shared/types';
+import { extendTierInfo } from '@services/tier';
+import { useTranslation } from 'react-i18next';
 
 const Billing = (): JSX.Element => {
   const { user } = Route.useLoaderData();
 
   const [error, setError] = useState<string | null>(null);
 
-  const tierInfo = useExtendedTierInfoOpt(user.credits?.tier);
+  const { t } = useTranslation('onboarding');
+  const tierInfo = user.credits?.tier ? extendTierInfo(user.credits?.tier, t) : undefined;
 
   const cardCommonProps = {
     withBorder: true,
@@ -59,7 +61,7 @@ const Billing = (): JSX.Element => {
         </>
       ) : (
         <Card {...cardCommonProps} className="lg:col-span-2">
-          <TierSelection displayNavigationButtons={false} />
+          <TierSelectionWrapper displayNavigationButtons={false} />
         </Card>
       )}
 
