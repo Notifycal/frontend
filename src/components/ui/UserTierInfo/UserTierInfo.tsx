@@ -1,19 +1,19 @@
-import type { FC } from 'react';
-import type { TierInfoWithIcon } from '@hooks/useExtendedTierInfo';
 import { capitalize } from 'radashi';
+import type { FC } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import TierFeatures from '../TierFeatures/TierFeatures';
-import { Title, Divider, Alert } from '@mantine/core';
+import { Alert, Divider, Title } from '@mantine/core';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
+
+import { TierFeatures, type TierInfoWithIcon } from '@notifycal/shared/components';
 
 interface UserTierInfoProps {
   tierInfo: TierInfoWithIcon;
 }
 
 const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['translations', 'onboarding']);
 
   const { icon: TierIcon } = tierInfo;
 
@@ -33,11 +33,11 @@ const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
       </div>
       <Divider my="md" />
 
-      <div>{t('billing.yourPlanIncludes')}</div>
+      <div>{t('billing.yourPlanIncludes', { ns: 'translations' })}</div>
       <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
       <Divider my="md" />
       <Alert
-        title={capitalize(t('generic.remember'))}
+        title={capitalize(t('generic.remember', { ns: 'translations' }))}
         classNames={{
           title: 'text-sm',
           message: 'text-xs'
