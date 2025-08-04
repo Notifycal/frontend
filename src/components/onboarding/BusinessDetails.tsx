@@ -31,22 +31,22 @@ type CompanySizes = {
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const businessDetailsSchema = (t: NotifycalTFunction) => {
-  const industriesObject = t('businessDetails.industries', { returnObjects: true }) as Industries;
-  const companySizesObject = t('businessDetails.companySizes', { returnObjects: true }) as CompanySizes;
+  const industriesObject = t('businessDetails.industries', { ns: 'onboarding', returnObjects: true }) as Industries;
+  const companySizesObject = t('businessDetails.companySizes', { ns: 'onboarding', returnObjects: true }) as CompanySizes;
 
   return z.object({
     name: createSmsContentSchema({
-      invalidType: t('businessDetails.formNameField.isRequired')
+      invalidType: t('businessDetails.formNameField.isRequired', { ns: 'onboarding' })
     })
-      .min(1, { message: t('businessDetails.formNameField.isRequired') })
-      .max(128, { message: t('businessDetails.formNameField.isMax') })
+      .min(1, { message: t('businessDetails.formNameField.isRequired', { ns: 'onboarding' }) })
+      .max(128, { message: t('businessDetails.formNameField.isMax', { ns: 'onboarding' }) })
       .transform((value) => value as BusinessName),
 
     address: createSmsContentSchema({
-      invalidType: t('businessDetails.formAddressField.isRequired')
+      invalidType: t('businessDetails.formAddressField.isRequired', { ns: 'onboarding' })
     })
-      .min(1, { message: t('businessDetails.formAddressField.isRequired') })
-      .max(128, { message: t('businessDetails.formAddressField.isMax') })
+      .min(1, { message: t('businessDetails.formAddressField.isRequired', { ns: 'onboarding' }) })
+      .max(128, { message: t('businessDetails.formAddressField.isMax', { ns: 'onboarding' }) })
       .transform((value) => value as BusinessAddress),
 
     companyIndustry: z
@@ -54,17 +54,17 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
         category: nullableInputSchema(
           stringArrayValidatorSchema(
             Object.keys(industriesObject),
-            t('businessDetails.formIndustryCategoryField.isRequired')
+            t('businessDetails.formIndustryCategoryField.isRequired', { ns: 'onboarding' })
           ),
-          t('businessDetails.formIndustryCategoryField.isRequired')
+          t('businessDetails.formIndustryCategoryField.isRequired', { ns: 'onboarding' })
         ),
         subcategory: nullableInputSchema(
-          z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired') }),
-          t('businessDetails.formIndustrySubcategoryField.isRequired')
+          z.string({ message: t('businessDetails.formIndustrySubcategoryField.isRequired', { ns: 'onboarding' }) }),
+          t('businessDetails.formIndustrySubcategoryField.isRequired', { ns: 'onboarding' })
         ),
         customIndustry: z
-          .string({ message: t('businessDetails.formCustomIndustryField.isRequired') })
-          .max(128, { message: t('businessDetails.formCustomIndustryField.isMax') })
+          .string({ message: t('businessDetails.formCustomIndustryField.isRequired', { ns: 'onboarding' }) })
+          .max(128, { message: t('businessDetails.formCustomIndustryField.isMax', { ns: 'onboarding' }) })
           .optional()
       })
       .superRefine((values, context) => {
@@ -75,7 +75,7 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
           context.addIssue({
             path: ['subcategory'],
             code: z.ZodIssueCode.custom,
-            message: t('businessDetails.formIndustrySubcategoryField.isRequired')
+            message: t('businessDetails.formIndustrySubcategoryField.isRequired', { ns: 'onboarding' })
           });
         }
 
@@ -83,17 +83,23 @@ const businessDetailsSchema = (t: NotifycalTFunction) => {
           context.addIssue({
             path: ['customIndustry'],
             code: z.ZodIssueCode.custom,
-            message: t('businessDetails.formCustomIndustryField.isRequired')
+            message: t('businessDetails.formCustomIndustryField.isRequired', { ns: 'onboarding' })
           });
         }
       }),
     companySize: nullableInputSchema(
-      stringArrayValidatorSchema(Object.keys(companySizesObject), t('businessDetails.formCompanySizeField.isRequired')),
-      t('businessDetails.formCompanySizeField.isRequired')
+      stringArrayValidatorSchema(
+        Object.keys(companySizesObject),
+        t('businessDetails.formCompanySizeField.isRequired', { ns: 'onboarding' })
+      ),
+      t('businessDetails.formCompanySizeField.isRequired', { ns: 'onboarding' })
     ),
     language: nullableInputSchema(
-      stringArrayValidatorSchema(Object.keys(languageData), t('businessDetails.formUserLanguageField.isRequired')),
-      t('businessDetails.formUserLanguageField.isRequired')
+      stringArrayValidatorSchema(
+        Object.keys(languageData),
+        t('businessDetails.formUserLanguageField.isRequired', { ns: 'onboarding' })
+      ),
+      t('businessDetails.formUserLanguageField.isRequired', { ns: 'onboarding' })
     ).transform((value) => value as LanguageCode)
   });
 };
@@ -144,13 +150,13 @@ const BusinessDetails: React.FC = () => {
   const selectedIndustrySubCategory = watch('companyIndustry.subcategory');
   const isCustomIndustry = [selectedIndustrySubCategory, selectedIndustryCategory].includes('other');
 
-  const industryCategoryObject = t('businessDetails.industries', { returnObjects: true });
+  const industryCategoryObject = t('businessDetails.industries', { ns: 'onboarding', returnObjects: true });
   const industryCategoryData = labeledObjectToDropdownData(industryCategoryObject);
 
   const industrySubCategoryObject = get(industryCategoryObject, `${selectedIndustryCategory}.sectors`, {});
   const industrySubCategoryData = flatObjectToDropdownData(industrySubCategoryObject);
 
-  const companySizeObject = t('businessDetails.companySizes', { returnObjects: true });
+  const companySizeObject = t('businessDetails.companySizes', { ns: 'onboarding', returnObjects: true });
   const companySizeData = flatObjectToDropdownData(companySizeObject);
 
   return (
@@ -170,8 +176,8 @@ const BusinessDetails: React.FC = () => {
                   label: t(`generic.languages.${item.code}`, { ns: 'translations' })
                 }))}
                 {...commonFormFieldProps('language', {
-                  label: t('businessDetails.formUserLanguageField.label'),
-                  placeholder: t('businessDetails.formUserLanguageField.placeholder'),
+                  label: t('businessDetails.formUserLanguageField.label', { ns: 'onboarding' }),
+                  placeholder: t('businessDetails.formUserLanguageField.placeholder', { ns: 'onboarding' }),
                   registration: field
                 })}
                 leftSection={image && <Image alt="" className="w-4 h-4" src={image} />}
@@ -207,8 +213,8 @@ const BusinessDetails: React.FC = () => {
         <TextInput
           type="text"
           {...commonFormFieldProps('name', {
-            label: t('businessDetails.formNameField.label'),
-            placeholder: t('businessDetails.formNameField.placeholder'),
+            label: t('businessDetails.formNameField.label', { ns: 'onboarding' }),
+            placeholder: t('businessDetails.formNameField.placeholder', { ns: 'onboarding' }),
             resetValue: '',
             registration: register('name')
           })}
@@ -218,8 +224,8 @@ const BusinessDetails: React.FC = () => {
         <TextInput
           type="text"
           {...commonFormFieldProps('address', {
-            label: t('businessDetails.formAddressField.label'),
-            placeholder: t('businessDetails.formAddressField.placeholder'),
+            label: t('businessDetails.formAddressField.label', { ns: 'onboarding' }),
+            placeholder: t('businessDetails.formAddressField.placeholder', { ns: 'onboarding' }),
             resetValue: '',
             registration: register('address')
           })}
@@ -237,8 +243,8 @@ const BusinessDetails: React.FC = () => {
                     clearable
                     data={industryCategoryData}
                     {...commonFormFieldProps('companyIndustry.category', {
-                      label: t('businessDetails.formIndustryCategoryField.label'),
-                      placeholder: t('businessDetails.formIndustryCategoryField.placeholder'),
+                      label: t('businessDetails.formIndustryCategoryField.label', { ns: 'onboarding' }),
+                      placeholder: t('businessDetails.formIndustryCategoryField.placeholder', { ns: 'onboarding' }),
                       registration: field
                     })}
                     onChange={(value) => {
@@ -263,8 +269,8 @@ const BusinessDetails: React.FC = () => {
                   data={industrySubCategoryData}
                   disabled={!selectedIndustryCategory}
                   {...commonFormFieldProps('companyIndustry.subcategory', {
-                    label: t('businessDetails.formIndustrySubcategoryField.label'),
-                    placeholder: t('businessDetails.formIndustrySubcategoryField.placeholder'),
+                    label: t('businessDetails.formIndustrySubcategoryField.label', { ns: 'onboarding' }),
+                    placeholder: t('businessDetails.formIndustrySubcategoryField.placeholder', { ns: 'onboarding' }),
                     registration: field
                   })}
                 />
@@ -275,8 +281,8 @@ const BusinessDetails: React.FC = () => {
         {isCustomIndustry && (
           <TextInput
             {...commonFormFieldProps('companyIndustry.customIndustry', {
-              label: t('businessDetails.formCustomIndustryField.label'),
-              placeholder: t('businessDetails.formCustomIndustryField.placeholder'),
+              label: t('businessDetails.formCustomIndustryField.label', { ns: 'onboarding' }),
+              placeholder: t('businessDetails.formCustomIndustryField.placeholder', { ns: 'onboarding' }),
               resetValue: '',
               registration: register('companyIndustry.customIndustry')
             })}
@@ -292,15 +298,15 @@ const BusinessDetails: React.FC = () => {
               clearable
               data={companySizeData}
               {...commonFormFieldProps('companySize', {
-                label: t('businessDetails.formCompanySizeField.label'),
-                placeholder: t('businessDetails.formCompanySizeField.placeholder'),
+                label: t('businessDetails.formCompanySizeField.label', { ns: 'onboarding' }),
+                placeholder: t('businessDetails.formCompanySizeField.placeholder', { ns: 'onboarding' }),
                 registration: field
               })}
             />
           )}
         />
 
-        <div className="text-sm text-gray-500 mt-4">{t('businessDetails.explanation')}</div>
+        <div className="text-sm text-gray-500 mt-4">{t('businessDetails.explanation', { ns: 'onboarding' })}</div>
       </div>
 
       <OnboardingNavigation canProceed={isValid} onProceed={handleSubmit(handleStepSubmit)} />
