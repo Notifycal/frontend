@@ -13,7 +13,7 @@ import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
 import { TierSelection as TierSelectionBase, type TierInfoWithIcon } from '@notifycal/shared/components';
 import { Link } from '@tanstack/react-router';
-import OnboardingBackButton from '../../onboarding/OnboardingBackButton';
+import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
 
 interface TierSelectionProps {
   displayNavigationButtons?: boolean;
@@ -84,7 +84,7 @@ const TierSelection: FC<TierSelectionProps> = ({
         lang={language}
         orderedTierInfoWithIcons={orderedTierInfoWithIcons}
         onTierSelection={handleTierSelect}
-      ></TierSelectionBase>
+      />
 
       <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
       {displayNavigationButtons && (
