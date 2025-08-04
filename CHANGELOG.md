@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.26.0](https://github.com/Notifycal/frontend/compare/v0.25.2...v0.26.0) (2025-08-04)
+
+
+### Features
+
+* extract components to shared ([#482](https://github.com/Notifycal/frontend/issues/482)) ([0d68e33](https://github.com/Notifycal/frontend/commit/0d68e33cc3cb7a9f2bac9e08ca39d39385dd3be0))
+* set HTML page title to Notifycal ([#477](https://github.com/Notifycal/frontend/issues/477)) ([8b57c16](https://github.com/Notifycal/frontend/commit/8b57c16a2a289ed083bd2672fe14c1a46c3e6d59))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v6.2.0 ([#483](https://github.com/Notifycal/frontend/issues/483)) ([74d6d60](https://github.com/Notifycal/frontend/commit/74d6d604e5ef224dacf6b38d3fc01bccece26c9c))
+* load both i18n namespaces if used ([#484](https://github.com/Notifycal/frontend/issues/484)) ([93a590b](https://github.com/Notifycal/frontend/commit/93a590ba1edd525ab6f48732a62510fe45d4ca1f))
+
 ## [0.25.2](https://github.com/Notifycal/frontend/compare/v0.25.1...v0.25.2) (2025-08-02)
 
 
