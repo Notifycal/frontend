@@ -37,7 +37,7 @@ const TryItOut: React.FC = () => {
   const queryClient = useQueryClient();
 
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t } = useTranslation(['translations', 'onboarding']);
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
@@ -71,7 +71,7 @@ const TryItOut: React.FC = () => {
       await handleSubmit(setTryItOutData)();
     },
     onError: () => {
-      setError(t('tryItOut.apiError'));
+      setError(t('tryItOut.apiError', { ns: 'onboarding' }));
     }
   });
 
@@ -97,20 +97,26 @@ const TryItOut: React.FC = () => {
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">
         <div className="flex flex-col">
-          <Image alt={t('tryItOut.imageAlt')} fit="contain" maw={200} mx="auto" src={phoneNotificationImg} />
+          <Image
+            alt={t('tryItOut.imageAlt', { ns: 'onboarding' })}
+            fit="contain"
+            maw={200}
+            mx="auto"
+            src={phoneNotificationImg}
+          />
 
           <Button
             disabled={hasSentTestReminder}
             loading={sendDemoReminderMutation.isPending}
             onClick={onTestReminderSendButtonClick}
           >
-            {t('tryItOut.sendTestReminder')}
+            {t('tryItOut.sendTestReminder', { ns: 'onboarding' })}
           </Button>
         </div>
 
-        <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation')}</div>
+        <div className="text-sm text-gray-500 mt-4">{t('tryItOut.explanation', { ns: 'onboarding' })}</div>
         <Alert color="blue" variant="light">
-          <div className="text-sm text-gray-500">{t('tryItOut.warning')}</div>
+          <div className="text-sm text-gray-500">{t('tryItOut.warning', { ns: 'onboarding' })}</div>
         </Alert>
         {/* Error Message from API */}
         {!sendDemoReminderMutation.isPending && sendDemoReminderMutation.isError && error && (
