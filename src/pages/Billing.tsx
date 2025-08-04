@@ -61,7 +61,7 @@ const Billing = (): JSX.Element => {
               topupCreditBalance={user?.credits?.topupCreditBalance}
               subscriptionCreditBalance={{
                 used: user?.credits?.subscriptionCreditBalance,
-                total: tierInfo.credits
+                total: user?.credits?.usableTierCredits
               }}
               onError={setError}
             />
