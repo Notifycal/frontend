@@ -4,7 +4,7 @@ import type { ConfirmValues } from '@components/onboarding/Confirm';
 import type { ReminderTypeValues } from '@components/onboarding/ReminderType';
 import type { SenderDetailsValues } from '@components/onboarding/SenderDetails';
 import type { TryItOutValues } from '@components/onboarding/TryItOut';
-import type { TierSelectionValues } from '@components/onboarding/TierSelection';
+import type { TierSelectionValues } from '@components/ui/TierSelection/TierSelection';
 
 export interface OnboardingData {
   businessDetails: BusinessDetailsValues;

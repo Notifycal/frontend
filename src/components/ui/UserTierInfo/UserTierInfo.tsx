@@ -1,12 +1,12 @@
-import type { FC } from 'react';
-import type { TierInfoWithIcon } from '@hooks/useExtendedTierInfo';
 import { capitalize } from 'radashi';
+import type { FC } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import TierFeatures from '../TierFeatures/TierFeatures';
-import { Title, Divider, Alert } from '@mantine/core';
+import { Alert, Divider, Title } from '@mantine/core';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
+
+import { TierFeatures, type TierInfoWithIcon } from '@notifycal/shared/components';
 
 interface UserTierInfoProps {
   tierInfo: TierInfoWithIcon;

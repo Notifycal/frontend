@@ -6,8 +6,8 @@ import Calendars from '@components/onboarding/Calendars';
 import Confirm from '@components/onboarding/Confirm';
 import ReminderType from '@components/onboarding/ReminderType';
 import SenderDetails from '@components/onboarding/SenderDetails';
-import TryItOut from '@components/onboarding/TryItOut';
 import TierSelection from '@components/onboarding/TierSelection';
+import TryItOut from '@components/onboarding/TryItOut';
 
 export type StepKey = keyof OnboardingData;
 

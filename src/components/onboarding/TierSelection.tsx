@@ -1,100 +1,20 @@
-import { getProductCheckoutURL, type TierCheckoutURLPayload } from '@api/payments';
-import { getUserProfile } from '@api/userProfile';
-import { tierOrder } from '@constants/tiers';
-import type { LanguageCode, TierId } from '@notifycal/shared/types';
+import { getServiceConfig } from '@config/serviceConfig';
+import type { LanguageCode } from '@notifycal/shared/types';
+import { useTranslation } from 'react-i18next';
 
-import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
-import { useBillingStore } from '@store/useBillingStore';
-import { useState, type FC, type ReactNode } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { useQueryClient } from '@tanstack/react-query';
+import { orderedTierInfoWithIcons } from '@notifycal/shared/pricing';
+import TierSelectionComponent from '../ui/TierSelection/TierSelection';
 
-import FlatError from '@components/ui/FlatError/FlatError';
-import { Group } from '@mantine/core';
-import { Link } from '@tanstack/react-router';
-import OnboardingBackButton from './OnboardingBackButton';
-import TierCard from './TierCard';
+const TierSelection: React.FC = () => {
+  const {
+    TIER_INFO: { tiers }
+  } = getServiceConfig();
 
-export type TierSelectionValues = null;
-
-interface TierSelectionProps {
-  displayNavigationButtons?: boolean;
-}
-
-const TierSelection: FC<TierSelectionProps> = ({ displayNavigationButtons = true }: TierSelectionProps) => {
-  const translationNs = 'onboarding' as const;
-  const { t, i18n } = useTranslation(translationNs);
-  const queryClient = useQueryClient();
-
-  const language = i18n.languages[0] as LanguageCode;
-
-  const [selectedTier, setSelectedTier] = useState<string | null>(null);
-  const [error, setError] = useState<ReactNode | null>(null);
-
-  const { setPurchaseOperation, setPreviousUserStatus } = useBillingStore();
-
-  const generateCheckoutURLMutation = usePaymentRedirectMutation<TierCheckoutURLPayload>(getProductCheckoutURL, {
-    onError: () => {
-      setError(
-        <Trans
-          components={[<Link className="underline text-blue-600" to="/feedback" />]}
-          i18nKey="tierSelection.checkoutURLApiError"
-          ns={translationNs}
-        />
-      );
-    }
-  });
-
-  const isButtonLoading = (tierId: TierId): boolean => selectedTier === tierId && generateCheckoutURLMutation.isPending;
-  const isButtonDisabled = (tierId: TierId): boolean =>
-    selectedTier !== tierId && generateCheckoutURLMutation.isPending;
-
-  const handleTierSelect = async (tierId: TierId): Promise<void> => {
-    const user = await queryClient.ensureQueryData({
-      queryKey: ['user-profile'],
-      queryFn: getUserProfile
-    });
-
-    setSelectedTier(tierId);
-    setPurchaseOperation('tierPurchase');
-    setPreviousUserStatus(user.userStatus);
-    generateCheckoutURLMutation.mutate({ tier: tierId, language });
-  };
+  const { i18n } = useTranslation();
+  const lang = i18n.language as LanguageCode;
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
-      {!generateCheckoutURLMutation.isPending && generateCheckoutURLMutation.isError && error && (
-        <div className="mb-10">
-          <FlatError
-            onErrorClose={() => {
-              setError(null);
-            }}
-          >
-            {error}
-          </FlatError>
-        </div>
-      )}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-6 lg:gap-12">
-        {tierOrder.map((tierId) => {
-          return (
-            <TierCard
-              key={tierId}
-              isDisabled={isButtonDisabled(tierId)}
-              isLoading={isButtonLoading(tierId)}
-              tierId={tierId}
-              onSelect={handleTierSelect}
-            />
-          );
-        })}
-      </div>
-
-      <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
-      {displayNavigationButtons && (
-        <Group justify="space-between" mt="xl" pt="md">
-          <OnboardingBackButton />
-        </Group>
-      )}
-    </div>
+    <TierSelectionComponent displayNavigationButtons orderedTierInfoWithIcons={orderedTierInfoWithIcons(tiers, lang)} />
   );
 };
 
