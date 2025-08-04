@@ -32,7 +32,10 @@ type CompanySizes = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const businessDetailsSchema = (t: NotifycalTFunction) => {
   const industriesObject = t('businessDetails.industries', { ns: 'onboarding', returnObjects: true }) as Industries;
-  const companySizesObject = t('businessDetails.companySizes', { ns: 'onboarding', returnObjects: true }) as CompanySizes;
+  const companySizesObject = t('businessDetails.companySizes', {
+    ns: 'onboarding',
+    returnObjects: true
+  }) as CompanySizes;
 
   return z.object({
     name: createSmsContentSchema({
