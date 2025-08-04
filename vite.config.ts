@@ -1,12 +1,15 @@
+import { bundleSizePlugin } from '@notifycal/shared/utils';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react-swc';
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
 import { normalizePath } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { defineConfig } from 'vitest/config';
 
 import tsconfigPaths from 'vite-tsconfig-paths';
+const maxBundleChunkSizeInBytes = 1.3 * 1024 * 1024; //MB
+const maxTotalBundleSizeInBytes = 1.8 * 1024 * 1024; //MB
 
 const handleServiceConfigPlugin = (): import('vite').Plugin => {
   const pluginName = 'service-config-handler';
@@ -57,6 +60,13 @@ export default defineConfig({
     tsconfigPaths(),
     handleServiceConfigPlugin()
   ],
+  build: {
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: (maxBundleChunkSizeInBytes / 1024) * 0.9, // Expressed in KB. The budget is 90% of the limit.
+    rollupOptions: {
+      plugins: [bundleSizePlugin(maxBundleChunkSizeInBytes, maxTotalBundleSizeInBytes)]
+    }
+  },
   server: {
     host: true,
     strictPort: true,
