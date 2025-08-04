@@ -6,7 +6,7 @@ import { Button } from '@mantine/core';
 import { IconPencil } from '@tabler/icons-react';
 
 const OnboardingWelcome: React.FC = () => {
-  const { t } = useTranslation('onboarding');
+  const { t } = useTranslation(['translations', 'onboarding']);
 
   const firstStep = getStepByIndex(0);
   const firstStepPath = firstStep ? firstStep.path : '';

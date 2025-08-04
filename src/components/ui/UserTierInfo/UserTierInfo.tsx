@@ -13,7 +13,7 @@ interface UserTierInfoProps {
 }
 
 const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['translations', 'onboarding']);
 
   const { icon: TierIcon } = tierInfo;
 

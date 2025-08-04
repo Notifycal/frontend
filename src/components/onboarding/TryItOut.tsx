@@ -37,7 +37,7 @@ const TryItOut: React.FC = () => {
   const queryClient = useQueryClient();
 
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation('onboarding');
+  const { t } = useTranslation(['translations', 'onboarding']);
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 

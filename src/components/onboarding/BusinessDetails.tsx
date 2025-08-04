@@ -118,7 +118,7 @@ const emptyInitialValue = {
 const BusinessDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t, i18n } = useTranslation('onboarding');
+  const { t, i18n } = useTranslation(['translations', 'onboarding']);
 
   const methods = useI18nForm<BusinessDetailsInput, unknown, BusinessDetailsOutput>(
     businessDetailsSchema,
