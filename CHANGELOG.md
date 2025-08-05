@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.26.1](https://github.com/Notifycal/frontend/compare/v0.26.0...v0.26.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* backport from static landing learnings ([#492](https://github.com/Notifycal/frontend/issues/492)) ([0bb9307](https://github.com/Notifycal/frontend/commit/0bb93072c54d64164ec3e3a9a68117f59cbbfd54))
+* **deps:** Update dependency @notifycal/shared to v6.3.0 ([#487](https://github.com/Notifycal/frontend/issues/487)) ([551a229](https://github.com/Notifycal/frontend/commit/551a229a35a69ccabcb17de6bdf03d42abb89ff1))
+* **deps:** Update Node.js Dependencies to v8.2.3 ([#491](https://github.com/Notifycal/frontend/issues/491)) ([2c0c5a3](https://github.com/Notifycal/frontend/commit/2c0c5a344cd0d6e6729ba63e113f301c1ec50e01))
+
 ## [0.26.0](https://github.com/Notifycal/frontend/compare/v0.25.2...v0.26.0) (2025-08-04)
 
 
