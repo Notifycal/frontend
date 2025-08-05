@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.2](https://github.com/Notifycal/frontend/compare/v0.26.1...v0.26.2) (2025-08-05)
+
+
+### Bug Fixes
+
+* usable tier credits for subscription upgrades ([#486](https://github.com/Notifycal/frontend/issues/486)) ([8b1e1f6](https://github.com/Notifycal/frontend/commit/8b1e1f667aaf7eeec2e766573739ac2df57fda21))
+
 ## [0.26.1](https://github.com/Notifycal/frontend/compare/v0.26.0...v0.26.1) (2025-08-05)
 
 
