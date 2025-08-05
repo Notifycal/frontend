@@ -26,6 +26,7 @@ variable "cloudflare_config" {
       # Name of the identity provider set up in Cloudflare
       idp_name = optional(string, "Github")
     }))
+    precedence = optional(number, 1)
   })
   default = {
     private_site_auth = null
