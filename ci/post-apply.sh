@@ -29,7 +29,7 @@ echo "PATH: ${RUNNING_PATH}"
 echo "==================================="
 echo
 
-pushd $RUNNING_PATH > /dev/null
+pushd "${RUNNING_PATH}" > /dev/null
 
 
 echo "Retrieving outputs from ${TF_TOOL}..."
