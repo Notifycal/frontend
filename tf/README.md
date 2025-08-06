@@ -4,14 +4,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 4.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | >= 5.8 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_frontend"></a> [frontend](#module\_frontend) | git@github.com:Notifycal/tofu-module-static-website.git | v2.2.2 |
+| <a name="module_frontend"></a> [frontend](#module\_frontend) | git@github.com:Notifycal/tofu-module-static-website.git | v3.0.0 |
 
 ## Inputs
 
