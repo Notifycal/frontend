@@ -1,5 +1,5 @@
 module "frontend" {
-  source = "git@github.com:Notifycal/tofu-module-static-website.git?ref=v2.2.2"
+  source = "git@github.com:Notifycal/tofu-module-static-website.git?ref=v3.0.0"
 
   force_destroy_bucket = var.force_destroy_bucket
 
