@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.3](https://github.com/Notifycal/frontend/compare/v0.26.2...v0.26.3) (2025-08-06)
+
+
+### Bug Fixes
+
+* Cloudflare provider upgrade 5.8.x ([#494](https://github.com/Notifycal/frontend/issues/494)) ([102ea03](https://github.com/Notifycal/frontend/commit/102ea03e1d682b43450a1b79ecf8c7338b1bff07))
+
 ## [0.26.2](https://github.com/Notifycal/frontend/compare/v0.26.1...v0.26.2) (2025-08-05)
 
 
