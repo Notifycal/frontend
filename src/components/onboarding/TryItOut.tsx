@@ -200,7 +200,7 @@ const TryItOut: React.FC = () => {
       </div>
 
       <OnboardingNavigation
-        canProceed={isValid}
+        canProceed={hasSentTestReminder || !isValid}
         nextButtonLabel={nextButtonLabel}
         onProceed={handleSubmit(handleStepSubmit)}
       />
