@@ -111,18 +111,14 @@ const TryItOut: React.FC = () => {
   });
 
   const hasSentTestReminderFromForm = watch('hasSentTestReminder');
-  const hasSentTestReminderFromApi = user?.demoReminderCount === 1;
+  const hasSentTestReminderFromApi = (user?.demoReminderCount || 0) >= 1;
   const hasSentTestReminder = hasSentTestReminderFromForm || hasSentTestReminderFromApi;
 
-  const receiverContactFromForm = watch('receiverContact');
-  const hasValidPhoneNumber =
-    // receiverContactFromForm &&
-    // receiverContactFromForm.phoneNumber &&
-    // receiverContactFromForm.phoneNumber.length > 0 &&
-    !errors.receiverContact;
+  const receiverContact = watch('receiverContact');
+  const hasValidPhoneNumber = receiverContact?.countryCode && receiverContact.phoneNumber && !errors.receiverContact;
 
   const onTestReminderSendButtonClick = (): void => {
-    if (!hasSentTestReminder && hasValidPhoneNumber && receiverContactFromForm) {
+    if (!hasSentTestReminder && hasValidPhoneNumber && receiverContact) {
       const demoReminderPayload = {
         startTime: {
           dateTime: DT.now().toUTC().toISO() as DateTime,
@@ -130,8 +126,8 @@ const TryItOut: React.FC = () => {
         },
         receiverContact: {
           type: 'phone' as const,
-          phoneNumber: receiverContactFromForm.phoneNumber as PhoneNumber,
-          countryCode: receiverContactFromForm.countryCode
+          phoneNumber: receiverContact.phoneNumber as PhoneNumber,
+          countryCode: receiverContact.countryCode
         }
       };
 
@@ -142,16 +138,20 @@ const TryItOut: React.FC = () => {
   const onNavigationProceed = (): Promise<void> => {
     const currentData = {
       hasSentTestReminder: hasSentTestReminder,
-      receiverContact: receiverContactFromForm
+      receiverContact: receiverContact
         ? {
-            ...receiverContactFromForm,
-            phoneNumber: receiverContactFromForm.phoneNumber as PhoneNumber
+            ...receiverContact,
+            phoneNumber: receiverContact.phoneNumber as PhoneNumber
           }
         : undefined
     };
     setTryItOutData(currentData);
     return handleStepSubmit(currentData);
   };
+
+  console.log('hasSentTestReminder', hasSentTestReminder);
+  console.log('hasValidPhoneNumber', hasValidPhoneNumber);
+  console.log('receiverContactFromForm', receiverContact);
 
   const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translations' }) : undefined;
   return (
@@ -164,7 +164,7 @@ const TryItOut: React.FC = () => {
             const errorKey =
               errors.receiverContact?.phoneNumber?.message || errors.receiverContact?.countryCode?.message;
 
-            return (
+            return !hasSentTestReminder ? (
               <PhoneInput
                 ref={ref}
                 value={{
@@ -180,6 +180,8 @@ const TryItOut: React.FC = () => {
                 error={errorKey}
                 {...restField}
               />
+            ) : (
+              <></>
             );
           }}
         />
@@ -198,7 +200,9 @@ const TryItOut: React.FC = () => {
             loading={sendDemoReminderMutation.isPending}
             onClick={onTestReminderSendButtonClick}
           >
-            {t('tryItOut.sendTestReminder', { ns: 'onboarding' })}
+            {hasSentTestReminder
+              ? t('tryItOut.testReminderSent', { ns: 'onboarding' })
+              : t('tryItOut.sendTestReminder', { ns: 'onboarding' })}
           </Button>
         </div>
 

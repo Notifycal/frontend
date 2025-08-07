@@ -236,6 +236,7 @@
     "subtitle": "Verifica el recordatorio en tu móvil",
     "imageAlt": "Notificación",
     "sendTestReminder": "Mandar recordatorio de prueba",
+    "testReminderSent": "Recordatorio de prueba enviado",
     "formPhoneNumber": {
       "label": "Tu número de teléfono",
       "placeholder": "Introduce tu número de teléfono",

@@ -236,6 +236,7 @@
     "subtitle": "Check out the reminder in your phone!",
     "imageAlt": "Phone Notification",
     "sendTestReminder": "Send test reminder",
+    "testReminderSent": "Test reminder sent",
     "formPhoneNumber": {
       "label": "Your phone number",
       "placeholder": "Enter your phone number",

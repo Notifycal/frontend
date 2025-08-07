@@ -233,6 +233,7 @@
     "subtitle": "Mira el recordatori al teu telèfon!",
     "imageAlt": "Notificació de Telèfon",
     "sendTestReminder": "Enviar recordatori de prova",
+    "testReminderSent": "Recordatori de prova enviat",
     "formPhoneNumber": {
       "label": "El teu número de telèfon",
       "placeholder": "Introdueix el teu número de telèfon",
