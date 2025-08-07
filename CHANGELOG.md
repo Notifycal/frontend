@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.26.4](https://github.com/Notifycal/frontend/compare/v0.26.3...v0.26.4) (2025-08-07)
+
+
+### Bug Fixes
+
+* **deps:** Update Node.js Dependencies to v8.2.4 ([#501](https://github.com/Notifycal/frontend/issues/501)) ([b51cc4d](https://github.com/Notifycal/frontend/commit/b51cc4d9e6de2f0bc8aa510e926e7dc5f6695792))
+* maximum call stack in browser due to never finishing the post-login "flow" ([#503](https://github.com/Notifycal/frontend/issues/503)) ([cfa559d](https://github.com/Notifycal/frontend/commit/cfa559dba04f40141acdb9e1733520e9ff298d76))
+
 ## [0.26.3](https://github.com/Notifycal/frontend/compare/v0.26.2...v0.26.3) (2025-08-06)
 
 
