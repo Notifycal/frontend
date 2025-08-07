@@ -7,6 +7,7 @@ import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import { requireOnboardingSteps } from '@constants/onboardingSteps';
@@ -60,10 +61,16 @@ const SenderDetails: React.FC = () => {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { isValid }
   } = methods;
 
   const { commonFormFieldProps } = useFormFieldCommonProps(methods);
+
+  useEffect(() => {
+    // Because we preset business name as sender ID, it is possible it is not valid.
+    void trigger();
+  }, [trigger]);
 
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
