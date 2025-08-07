@@ -221,14 +221,15 @@
   },
   "senderDetails": {
     "title": "Sender details",
-    "subtitle": "Your phone number",
-    "formSenderNumber": {
-      "label": "Phone number",
-      "placeholder": "Enter your phone number",
-      "isRequired": "Phone number is required",
-      "isInvalid": "Phone number is invalid"
+    "subtitle": "Your Sender ID",
+    "formSenderId": {
+      "label": "Sender name",
+      "placeholder": "Enter your Sender ID",
+      "isRequired": "Sender name is required",
+      "isInvalid": "Letters and numbers only, max 11 characters",
+      "maxLength": "Sender name cannot exceed 11 characters"
     },
-    "explanation": "We'll send reminders to your customers from your own number. This way they'll know who's contacting them."
+    "explanation": "This is the name your customers will see when they receive SMS reminders. It helps them identify that the message comes from your business."
   },
   "tryItOut": {
     "title": "Try it out",

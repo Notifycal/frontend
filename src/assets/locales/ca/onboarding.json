@@ -218,14 +218,15 @@
   },
   "senderDetails": {
     "title": "Detalls de l'emissor",
-    "subtitle": "El teu número de telèfon",
-    "formSenderNumber": {
-      "label": "Número de telèfon",
-      "placeholder": "Introdueix el teu número de telèfon",
-      "isRequired": "El número de telèfon és obligatori",
-      "isInvalid": "El número de telèfon no és vàlid"
+    "subtitle": "El teu Sender ID",
+    "formSenderId": {
+      "label": "Nom del remitent",
+      "placeholder": "Introdueix el teu Sender ID",
+      "isRequired": "El nom del remitent és obligatori",
+      "isInvalid": "Només lletres i números, màxim 11 caràcters",
+      "maxLength": "El nom del remitent no pot tenir més de 11 caràcters"
     },
-    "explanation": "Enviarem recordatoris als teus clients des del teu propi número. Així sabran qui els està contactant."
+    "explanation": "Aquest serà el nom que veuran els teus clients quan rebin els recordatoris per SMS. Els ajuda a identificar que el missatge ve del teu negoci."
   },
   "tryItOut": {
     "title": "Prova-ho",

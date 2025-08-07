@@ -220,15 +220,16 @@
     "explanation": "Usaremos los eventos de estos calendarios para mandar recordatorios a tus clientes."
   },
   "senderDetails": {
-    "title": "Tu número",
-    "subtitle": "El número desde el que mandaras recordatorios",
-    "formSenderNumber": {
-      "label": "Número de teléfono",
-      "placeholder": "Introduce tu número de teléfono",
-      "isRequired": "El numero de telefono es obligatorio",
-      "isInvalid": "El numero de telefono introducido es invalido"
+    "title": "Tu Sender ID",
+    "subtitle": "El identificador desde el que mandaras recordatorios",
+    "formSenderId": {
+      "label": "Nombre del remitente",
+      "placeholder": "Introduce tu Sender ID",
+      "isRequired": "El nombre del remitente es obligatorio",
+      "isInvalid": "Solo letras y números, máximo 11 caracteres",
+      "maxLength": "El nombre del remitente no puede tener más de 11 caracteres"
     },
-    "explanation": "Usaremos tu número de teléfono para enviarle recordatorios a tus clientes. Así sabrán quién les contacta."
+    "explanation": "Este será el nombre que verán tus clientes cuando reciban los recordatorios por SMS. Les ayuda a identificar que el mensaje viene de tu negocio."
   },
   "tryItOut": {
     "title": "Demo",
