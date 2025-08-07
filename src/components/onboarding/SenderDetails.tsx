@@ -6,8 +6,8 @@ import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import { requireOnboardingSteps } from '@constants/onboardingSteps';
@@ -21,7 +21,7 @@ const senderDetailsSchema = (t: NotifycalTFunction) => {
       .string({ message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' }) })
       .min(1, { message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' }) })
       .max(11, { message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' }) })
-      .regex(/^[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ]+$/, {
+      .regex(/^[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]+$/, {
         message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' })
       })
       .transform((data) => data as SMSSenderId)
