@@ -236,6 +236,12 @@
     "subtitle": "Verifica el recordatorio en tu móvil",
     "imageAlt": "Notificación",
     "sendTestReminder": "Mandar recordatorio de prueba",
+    "formPhoneNumber": {
+      "label": "Tu número de teléfono",
+      "placeholder": "Introduce tu número de teléfono",
+      "isRequired": "El número de teléfono es obligatorio",
+      "isInvalid": "Introduce un número de teléfono válido"
+    },
     "explanation": "Recibirás un ejemplo del mensaje que mandaremos a tus clientes, en tu propio móvil.",
     "warning": "Los caracteres especiales serán reemplazados o suprimidos del recordatorio de demostración. El recordatorio será truncado a 480 caracteres en caso de ser más largo.",
     "apiError": "Ha habido un problema mandando el recordatorio de prueba a tu móvil."

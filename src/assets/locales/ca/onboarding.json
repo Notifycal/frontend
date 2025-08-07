@@ -233,6 +233,12 @@
     "subtitle": "Mira el recordatori al teu telèfon!",
     "imageAlt": "Notificació de Telèfon",
     "sendTestReminder": "Enviar recordatori de prova",
+    "formPhoneNumber": {
+      "label": "El teu número de telèfon",
+      "placeholder": "Introdueix el teu número de telèfon",
+      "isRequired": "El número de telèfon és obligatori",
+      "isInvalid": "Introdueix un número de telèfon vàlid"
+    },
     "explanation": "Això t'ajudarà a veure el missatge que rebran els teus clients, al teu propi telèfon.",
     "warning": "Els caràcters especials seran reemplaçats o eliminats del recordatori de demo. El recordatori serà truncat a 480 caràcters si excedeix aquesta longitud.",
     "apiError": "Hi ha hagut un problema enviant el recordatori de prova al teu telèfon."
