@@ -24,7 +24,9 @@ export interface AuthContext {
   logout: () => void;
   loginError: LoginError | null;
   authInfo: AuthInfo | null;
-  hasJustLoggedIn: boolean;
+  // These 2 are used to control things that should happen immediately after the user logs in.
+  shouldHandlePostLoginFlow: boolean;
+  setShouldHandlePostLoginFlow: (value: boolean) => void;
 }
 
 type AuthState = {
@@ -33,7 +35,7 @@ type AuthState = {
   loginError: LoginError | null;
   loginStatus: 'unauthorized' | 'loading' | 'success';
   authInfo: AuthInfo | null;
-  hasJustLoggedIn: boolean;
+  shouldHandlePostLoginFlow: boolean;
 };
 
 const AuthContext = createContext<AuthContext | null>(null);
@@ -60,10 +62,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     loginError: null,
     loginStatus: 'loading',
     authInfo: null,
-    hasJustLoggedIn: false
+    shouldHandlePostLoginFlow: false
   });
 
-  const { accessToken, refreshToken, loginError, loginStatus, authInfo, hasJustLoggedIn } = authState;
+  const { accessToken, refreshToken, loginError, loginStatus, authInfo, shouldHandlePostLoginFlow } = authState;
 
   const googleLogin = usePromisifiedGoogleLogin({
     flow: 'auth-code',
@@ -119,7 +121,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
           accessToken: newAccessToken,
           refreshToken: newRefreshToken,
           loginStatus: 'success',
-          hasJustLoggedIn: false
+          shouldHandlePostLoginFlow: false
         }));
       } else {
         throw new Error('No refresh token available');
@@ -153,7 +155,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
           accessToken,
           refreshToken,
           loginStatus: 'success',
-          hasJustLoggedIn: true
+          shouldHandlePostLoginFlow: true
         }));
       } else {
         throw new Error('loginErrorInvalidScopes');
@@ -180,6 +182,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
       refreshToken: null,
       loginStatus: 'unauthorized',
       authInfo: null
+    }));
+  }, []);
+
+  const setShouldHandlePostLoginFlow = useCallback((value: boolean) => {
+    setAuthState((previous: AuthState) => ({
+      ...previous,
+      shouldHandlePostLoginFlow: value
     }));
   }, []);
 
@@ -241,7 +250,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
         logout,
         loginError,
         authInfo,
-        hasJustLoggedIn
+        shouldHandlePostLoginFlow,
+        setShouldHandlePostLoginFlow
       }}
     >
       {children}
