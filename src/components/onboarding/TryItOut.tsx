@@ -24,10 +24,10 @@ import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const tryItOutSchema = (t: NotifycalTFunction) => {
-  return z
-    .object({
-      hasSentTestReminder: z.boolean(),
-      receiverContact: z.object({
+  return z.object({
+    hasSentTestReminder: z.boolean(),
+    receiverContact: z
+      .object({
         type: z.literal('phone'),
         countryCode: countryCodeSchema,
         phoneNumber: z
@@ -35,16 +35,17 @@ const tryItOutSchema = (t: NotifycalTFunction) => {
           .min(1, { message: t('tryItOut.formPhoneNumber.isRequired', { ns: 'onboarding' }) })
           .transform((value) => value as PhoneNumber)
       })
-    })
-    .superRefine((values, context) => {
-      if (!isValidMobilePhoneNumber(values.receiverContact.phoneNumber, values.receiverContact.countryCode)) {
-        context.addIssue({
-          code: 'custom',
-          message: t('tryItOut.formPhoneNumber.isInvalid', { ns: 'onboarding' }),
-          path: ['receiverContact', 'phoneNumber']
-        });
-      }
-    });
+      .superRefine((value, context) => {
+        if (!isValidMobilePhoneNumber(value.phoneNumber, value.countryCode)) {
+          context.addIssue({
+            code: 'custom',
+            message: t('tryItOut.formPhoneNumber.isInvalid', { ns: 'onboarding' }),
+            path: ['phoneNumber']
+          });
+        }
+      })
+      .optional()
+  });
 };
 
 export type TryItOutInput = z.input<ReturnType<typeof tryItOutSchema>>;
@@ -90,7 +91,7 @@ const TryItOut: React.FC = () => {
     handleSubmit,
     setValue,
     watch,
-    formState: { isValid }
+    formState: { errors }
   } = methods;
 
   const { commonFormFieldProps } = useFormFieldCommonProps(methods);
@@ -114,9 +115,14 @@ const TryItOut: React.FC = () => {
   const hasSentTestReminder = hasSentTestReminderFromForm || hasSentTestReminderFromApi;
 
   const receiverContactFromForm = watch('receiverContact');
+  const hasValidPhoneNumber =
+    // receiverContactFromForm &&
+    // receiverContactFromForm.phoneNumber &&
+    // receiverContactFromForm.phoneNumber.length > 0 &&
+    !errors.receiverContact;
 
   const onTestReminderSendButtonClick = (): void => {
-    if (!hasSentTestReminder && isValid) {
+    if (!hasSentTestReminder && hasValidPhoneNumber && receiverContactFromForm) {
       const demoReminderPayload = {
         startTime: {
           dateTime: DT.now().toUTC().toISO() as DateTime,
@@ -133,6 +139,20 @@ const TryItOut: React.FC = () => {
     }
   };
 
+  const onNavigationProceed = (): Promise<void> => {
+    const currentData = {
+      hasSentTestReminder: hasSentTestReminder,
+      receiverContact: receiverContactFromForm
+        ? {
+            ...receiverContactFromForm,
+            phoneNumber: receiverContactFromForm.phoneNumber as PhoneNumber
+          }
+        : undefined
+    };
+    setTryItOutData(currentData);
+    return handleStepSubmit(currentData);
+  };
+
   const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translations' }) : undefined;
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
@@ -140,25 +160,24 @@ const TryItOut: React.FC = () => {
         <Controller
           control={control}
           name="receiverContact"
-          render={({ field: { ref, value, ...restField }, formState }) => {
+          render={({ field: { ref, value, ...restField } }) => {
             const errorKey =
-              formState.errors.receiverContact?.phoneNumber?.message ||
-              formState.errors.receiverContact?.countryCode?.message;
+              errors.receiverContact?.phoneNumber?.message || errors.receiverContact?.countryCode?.message;
 
             return (
               <PhoneInput
                 ref={ref}
                 value={{
                   type: 'phone',
-                  countryCode: value.countryCode,
-                  phoneNumber: value.phoneNumber as PhoneNumber
+                  countryCode: value?.countryCode || 'ES',
+                  phoneNumber: (value?.phoneNumber || '') as PhoneNumber
                 }}
                 {...commonFormFieldProps('receiverContact', {
                   label: t('tryItOut.formPhoneNumber.label', { ns: 'onboarding' }),
                   placeholder: t('tryItOut.formPhoneNumber.placeholder', { ns: 'onboarding' }),
                   resetValue: emptyInitialValue.receiverContact
                 })}
-                error={errorKey && errorKey}
+                error={errorKey}
                 {...restField}
               />
             );
@@ -175,7 +194,7 @@ const TryItOut: React.FC = () => {
           />
 
           <Button
-            disabled={hasSentTestReminder || !isValid}
+            disabled={hasSentTestReminder || !hasValidPhoneNumber}
             loading={sendDemoReminderMutation.isPending}
             onClick={onTestReminderSendButtonClick}
           >
@@ -199,11 +218,7 @@ const TryItOut: React.FC = () => {
         )}
       </div>
 
-      <OnboardingNavigation
-        canProceed={hasSentTestReminder || !isValid}
-        nextButtonLabel={nextButtonLabel}
-        onProceed={handleSubmit(handleStepSubmit)}
-      />
+      <OnboardingNavigation canProceed nextButtonLabel={nextButtonLabel} onProceed={onNavigationProceed} />
     </form>
   );
 };
