@@ -17,9 +17,11 @@ const hardRedirects = {
   onboarding: '/onboarding'
 } satisfies RedirectMap;
 
-const doRedirect = (userStatus: UserStatus, redirectMap: RedirectMap): void => {
+const doRedirect = (userStatus: UserStatus, redirectMap: RedirectMap, currentPath: string): void => {
   const redirectTarget = redirectMap[userStatus];
-  if (redirectTarget) {
+  // this not only avoids de double redirect if in the same path, but if the user has some
+  // query/hash parameters, it also preserves them: same path, but not necessarily the same full URL.
+  if (redirectTarget && redirectTarget !== currentPath) {
     throw redirect({
       to: redirectTarget
     });
@@ -27,14 +29,15 @@ const doRedirect = (userStatus: UserStatus, redirectMap: RedirectMap): void => {
 };
 
 export const Route = createFileRoute('/_auth/_app')({
-  beforeLoad: ({ context }) => {
+  beforeLoad: ({ context, location }) => {
     const user = context.queryClient.getQueryData<User<IdpName>>(['user-profile']);
 
     if (user?.userStatus) {
-      doRedirect(user.userStatus, hardRedirects);
+      doRedirect(user.userStatus, hardRedirects, location.pathname);
 
-      if (context.auth.hasJustLoggedIn) {
-        doRedirect(user?.userStatus, softRedirects);
+      if (context.auth.shouldHandlePostLoginFlow) {
+        context.auth.setShouldHandlePostLoginFlow(false);
+        doRedirect(user?.userStatus, softRedirects, location.pathname);
       }
     }
   },
