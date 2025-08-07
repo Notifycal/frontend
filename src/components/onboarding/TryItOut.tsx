@@ -24,25 +24,27 @@ import phoneNotificationImg from '@assets/images/phone-notification.jpg';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const tryItOutSchema = (t: NotifycalTFunction) => {
-  return z.object({
-    hasSentTestReminder: z.boolean(),
-    receiverContact: z.object({
-      type: z.literal('phone'),
-      countryCode: countryCodeSchema,
-      phoneNumber: z
-        .string()
-        .min(1, { message: t('tryItOut.formPhoneNumber.isRequired', { ns: 'onboarding' }) })
-        .transform((value) => value as PhoneNumber)
+  return z
+    .object({
+      hasSentTestReminder: z.boolean(),
+      receiverContact: z.object({
+        type: z.literal('phone'),
+        countryCode: countryCodeSchema,
+        phoneNumber: z
+          .string()
+          .min(1, { message: t('tryItOut.formPhoneNumber.isRequired', { ns: 'onboarding' }) })
+          .transform((value) => value as PhoneNumber)
+      })
     })
-  }).superRefine((values, context) => {
-    if (!isValidMobilePhoneNumber(values.receiverContact.phoneNumber, values.receiverContact.countryCode)) {
-      context.addIssue({
-        code: 'custom',
-        message: t('tryItOut.formPhoneNumber.isInvalid', { ns: 'onboarding' }),
-        path: ['receiverContact', 'phoneNumber']
-      });
-    }
-  });
+    .superRefine((values, context) => {
+      if (!isValidMobilePhoneNumber(values.receiverContact.phoneNumber, values.receiverContact.countryCode)) {
+        context.addIssue({
+          code: 'custom',
+          message: t('tryItOut.formPhoneNumber.isInvalid', { ns: 'onboarding' }),
+          path: ['receiverContact', 'phoneNumber']
+        });
+      }
+    });
 };
 
 export type TryItOutInput = z.input<ReturnType<typeof tryItOutSchema>>;
