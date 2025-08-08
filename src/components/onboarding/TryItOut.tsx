@@ -102,7 +102,6 @@ const TryItOut: React.FC = () => {
       setError(null);
       setValue('hasSentTestReminder', true, { shouldValidate: true });
       await queryClient.refetchQueries({ queryKey: ['user-profile'] });
-      // Doing this to persist/"send" the form as soon as the button is clicked
       await handleSubmit(setTryItOutData)();
     },
     onError: () => {
@@ -148,10 +147,6 @@ const TryItOut: React.FC = () => {
     setTryItOutData(currentData);
     return handleStepSubmit(currentData);
   };
-
-  console.log('hasSentTestReminder', hasSentTestReminder);
-  console.log('hasValidPhoneNumber', hasValidPhoneNumber);
-  console.log('receiverContactFromForm', receiverContact);
 
   const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translations' }) : undefined;
   return (
