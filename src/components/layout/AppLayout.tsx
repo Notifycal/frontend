@@ -25,7 +25,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-full">
-      <div className={clsx({ 'bg-indigo-600': true, 'pb-32': useFancyHeader })}>
+      <div className={clsx({ 'bg-primary-800': true, 'pb-32': useFancyHeader })}>
         {/* TODO global state */}
         <Navigation user={user} />
 
