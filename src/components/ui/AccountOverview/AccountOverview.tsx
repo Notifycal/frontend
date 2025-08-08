@@ -1,7 +1,6 @@
 import type { BusinessDetailsValues } from '@components/onboarding/BusinessDetails';
 import type { CalendarsValues } from '@components/onboarding/Calendars';
 import type { SenderDetailsValues } from '@components/onboarding/SenderDetails';
-import { phoneByCountry } from '@notifycal/shared/i18n';
 import type { ParseKeys } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -15,9 +14,7 @@ const AccountOverview: React.FC<AccountOverviewProps> = ({ businessDetails, cale
   const { t } = useTranslation('onboarding');
 
   const senderContactDetails = senderDetails.senderContact;
-  const currentCountryCode = senderContactDetails.countryCode;
-  const dialCode = phoneByCountry[currentCountryCode].phoneDetails.dialCode;
-  const canonicalFormattedPhoneNumber = `${dialCode} ${senderContactDetails.phoneNumber}`;
+  const senderId = senderContactDetails.identifier;
 
   const industryCategory = t(
     `businessDetails.industries.${businessDetails.companyIndustry.category}.label` as ParseKeys<'onboarding'>
@@ -42,8 +39,8 @@ const AccountOverview: React.FC<AccountOverviewProps> = ({ businessDetails, cale
       value: businessDetails.address
     },
     {
-      label: t('senderDetails.title'),
-      value: canonicalFormattedPhoneNumber
+      label: t('senderDetails.formSenderId.label'),
+      value: senderId
     },
     {
       label: t('businessDetails.formIndustryCategoryField.label'),

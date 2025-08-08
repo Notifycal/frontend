@@ -1,57 +1,53 @@
-import { type NotifycalTFunction, isValidMobilePhoneNumber } from '@common/i18n';
-import { countryCodeSchema } from '@notifycal/shared/schemas';
-import type { PhoneNumber } from '@notifycal/shared/types';
+import type { NotifycalTFunction } from '@common/i18n';
+import type { SMSSenderId } from '@notifycal/shared/types';
 import { z } from 'zod';
 
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
 import { useOnboardingStore } from '@store/useOnboardingStore';
-import { Controller } from 'react-hook-form';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import PhoneInput from '../ui/PhoneInput/PhoneInput';
+import { requireOnboardingSteps } from '@constants/onboardingSteps';
+import { TextInput } from '@mantine/core';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const senderDetailsSchema = (t: NotifycalTFunction) =>
-  z
-    .object({
-      senderContact: z.object({
-        type: z.literal('phone'),
-        countryCode: countryCodeSchema,
-        phoneNumber: z
-          .string()
-          .min(1, { message: t('senderDetails.formSenderNumber.isRequired') })
-          .transform((value) => value as PhoneNumber)
+const senderDetailsSchema = (t: NotifycalTFunction) => {
+  const customSmsSenderSchema = z.object({
+    type: z.literal('sms'),
+    identifier: z
+      .string({ message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' }) })
+      .min(1, { message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' }) })
+      .max(11, { message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' }) })
+      .regex(/^[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]+$/, {
+        message: t('senderDetails.formSenderId.isInvalid', { ns: 'onboarding' })
       })
-    })
-    .superRefine((values, context) => {
-      if (!isValidMobilePhoneNumber(values.senderContact.phoneNumber, values.senderContact.countryCode)) {
-        context.addIssue({
-          code: 'custom',
-          message: t('senderDetails.formSenderNumber.isInvalid'),
-          path: ['senderContact', 'phoneNumber']
-        });
-      }
-    });
+      .transform((data) => data as SMSSenderId)
+  });
 
+  return z.object({
+    senderContact: customSmsSenderSchema
+  });
+};
 type SenderDetailsInput = z.input<ReturnType<typeof senderDetailsSchema>>;
 type SenderDetailsOutput = z.output<ReturnType<typeof senderDetailsSchema>>;
 export type SenderDetailsValues = SenderDetailsOutput;
-
-const emptyInitialValue = {
-  senderContact: {
-    type: 'phone',
-    countryCode: 'ES',
-    phoneNumber: '' as PhoneNumber
-  }
-} as SenderDetailsInput;
 
 const SenderDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation('onboarding');
+
+  const { businessDetails } = requireOnboardingSteps(data, ['businessDetails']);
+
+  const emptyInitialValue: SenderDetailsInput = {
+    senderContact: {
+      type: 'sms',
+      identifier: businessDetails.name as unknown as SMSSenderId
+    }
+  };
 
   const methods = useI18nForm<SenderDetailsInput, unknown, SenderDetailsOutput>(
     senderDetailsSchema,
@@ -63,43 +59,29 @@ const SenderDetails: React.FC = () => {
   );
 
   const {
-    control,
+    register,
     handleSubmit,
+    trigger,
     formState: { isValid }
   } = methods;
 
   const { commonFormFieldProps } = useFormFieldCommonProps(methods);
 
+  useEffect(() => {
+    // Because we preset business name as sender ID, it is possible it is not valid.
+    void trigger();
+  }, [trigger]);
+
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">
-        {/* Phone number */}
-        <Controller
-          control={control}
-          name="senderContact"
-          render={({ field: { ref, value, ...restField }, formState }) => {
-            const errorKey =
-              formState.errors.senderContact?.phoneNumber?.message ||
-              formState.errors.senderContact?.countryCode?.message;
-
-            return (
-              <PhoneInput
-                ref={ref}
-                value={{
-                  type: 'phone',
-                  countryCode: value.countryCode,
-                  phoneNumber: value.phoneNumber as PhoneNumber
-                }}
-                {...commonFormFieldProps('senderContact', {
-                  label: t('senderDetails.formSenderNumber.label'),
-                  placeholder: t('senderDetails.formSenderNumber.placeholder'),
-                  resetValue: emptyInitialValue.senderContact
-                })}
-                error={errorKey && errorKey}
-                {...restField} // Registering the component this way due to it being the only "weird" one/different than Mantine's
-              />
-            );
-          }}
+        <TextInput
+          {...commonFormFieldProps('senderContact.identifier', {
+            label: t('senderDetails.formSenderId.label'),
+            placeholder: t('senderDetails.formSenderId.placeholder'),
+            resetValue: '',
+            registration: register('senderContact.identifier')
+          })}
         />
 
         <div className="text-sm text-gray-500 mt-4">{t('senderDetails.explanation')}</div>
