@@ -1,6 +1,6 @@
 import { useEffect, useState, type JSX } from 'react';
 
-import { Alert, Transition } from '@mantine/core';
+import { Alert, Transition, Button } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth, type LoginError } from '@providers/AuthProvider';
@@ -50,14 +50,15 @@ export const Login = (): JSX.Element => {
               {t('home.signInToYourAccount')}
             </h2>
           </div>
-          <button
-            className="flex w-full items-center justify-center gap-3 mb-5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent cursor-pointer"
+          <Button
+            className="w-full rounded-md bg-white hover:bg-gray-50 text-gray-900 ring-1 ring-inset ring-gray-300 focus-visible:ring-transparent shadow-xs"
             onClick={handleLogin}
           >
-            {GoogleIcon()}
-            <span className="text-sm/6 font-semibold">Google</span>
-          </button>
-
+            <div className="flex gap-3 items-center justify-center">
+              {GoogleIcon()}
+              <span className="text-sm font-semibold">Google</span>
+            </div>
+          </Button>
           {lastLoginError && (
             <Transition duration={300} mounted={!!loginErrorMessage} timingFunction="ease" transition="fade">
               {(styles) => (
@@ -77,18 +78,16 @@ export const Login = (): JSX.Element => {
             </div>
           </div>
 
-          <a
-            className="mt-6 flex w-full justify-center rounded-md bg-primary-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+          <Button
+            className="w-full mt-6 rounded-md font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 shadow-xs"
+            component="a"
             href="/feedback"
           >
             {t('home.demo')}
-          </a>
+          </Button>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-            {t('home.wantToKnowMore')}{' '}
-            <a className="font-semibold" href="#">
-              {t('home.checkOurSite')}
-            </a>
+            {t('home.wantToKnowMore')} <a href="#">{t('home.checkOurSite')}</a>
           </p>
         </div>
       </div>
