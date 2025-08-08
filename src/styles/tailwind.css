@@ -23,13 +23,3 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 }
-
-@layer tw-base {
-  @import 'tailwindcss';
-}
-
-@layer tw-components {
-}
-
-@layer tw-utilities {
-}

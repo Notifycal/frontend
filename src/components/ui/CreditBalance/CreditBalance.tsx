@@ -51,7 +51,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
   return (
     <>
       <Title order={2}>{t('billing.credits.title')}</Title>
-      <ul className="list-none px-0">
+      <ul className="list-none px-0 my-4">
         <li>
           <Title order={4}>{t('billing.subscription')}</Title>
           <UsageBar usage={{ remaining: subscriptionCreditBalance.used, total: subscriptionCreditBalance.total }} />
