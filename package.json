@@ -12,7 +12,7 @@
     "url": "https://github.com/Notifycal/frontend"
   },
   "license": "MIT",
-  "version": "0.26.4",
+  "version": "0.26.5",
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
@@ -40,7 +40,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@mantine/core": "8.2.4",
     "@mantine/hooks": "8.2.4",
-    "@notifycal/shared": "6.3.1",
+    "@notifycal/shared": "7.0.0",
     "@react-oauth/google": "^0.12.1",
     "@tabler/icons-react": "^3.29.0",
     "@tanstack/react-query": "^5.64.2",

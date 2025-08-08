@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.5](https://github.com/Notifycal/frontend/compare/v0.26.4...v0.26.5) (2025-08-08)
+
+
+### Bug Fixes
+
+* adapt onboarding to regulation fixes ([#504](https://github.com/Notifycal/frontend/issues/504)) ([f29eb7d](https://github.com/Notifycal/frontend/commit/f29eb7d446d4674598188ff41d0c8372c2937afd))
+
 ## [0.26.4](https://github.com/Notifycal/frontend/compare/v0.26.3...v0.26.4) (2025-08-07)
 
 
