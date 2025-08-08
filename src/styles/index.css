@@ -2,13 +2,7 @@
 https://github.com/orgs/mantinedev/discussions/1672#discussioncomment-11534898 */
 @layer theme, base, mantine, components, utilities;
 
-@import 'tailwindcss/theme.css' layer(theme);
-/* @import 'tailwindcss/base.css' layer(base); */
-@import 'tailwindcss/utilities.css' layer(utilities);
-/* @import 'tailwindcss/components.css' layer(components); */
+@import 'tailwindcss';
 
 @import '@mantine/core/styles.layer.css';
-
-/* @import './tailwind.css'; */
 @source "../../node_modules/@notifycal/shared";
-/* @import './mantine.css'; */
