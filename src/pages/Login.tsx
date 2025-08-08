@@ -86,7 +86,7 @@ export const Login = (): JSX.Element => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             {t('home.wantToKnowMore')}{' '}
-            <a className="font-semibold text-indigo-600 hover:text-indigo-500" href="#">
+            <a className="font-semibold" href="#">
               {t('home.checkOurSite')}
             </a>
           </p>

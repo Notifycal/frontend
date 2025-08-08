@@ -22,4 +22,8 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+
+  a {
+    @apply text-indigo-600 hover:text-indigo-800 hover:underline
+  }
 }

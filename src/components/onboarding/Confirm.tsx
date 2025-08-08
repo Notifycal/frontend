@@ -152,7 +152,7 @@ const Confirm: React.FC = () => {
                     ns="onboarding"
                     components={[
                       <a
-                        className="text-primary-600 hover:underline"
+                        className="hover:underline"
                         href={url}
                         rel="noopener noreferrer"
                         target="_blank"
