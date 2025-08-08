@@ -52,7 +52,7 @@ const AccountOverview: React.FC<AccountOverviewProps> = ({ businessDetails, cale
     }
   ];
 
-  const pMarginClasses = 'mt-3.5 mb-3.5'
+  const pMarginClasses = 'mt-3.5 mb-3.5';
 
   return (
     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
