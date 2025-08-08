@@ -1,0 +1,9 @@
+{
+  "color": {
+    "primary": { "value": "#8A2BE2" },
+    "secondary": { "value": "#FFD700" },
+    "accent1": { "value": "#4682B4" },
+    "accent2": { "value": "#1E90FF" },
+    "neutral": { "value": "#778899" }
+  }
+}

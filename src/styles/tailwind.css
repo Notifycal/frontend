@@ -1,4 +1,4 @@
-@import './colors.css';
+@import './generated-color-shades.css';
 
 @theme {
   --breakpoint-xs: 36em;
@@ -26,6 +26,6 @@
   }
 
   a {
-    @apply text-primary-600 hover:text-primary-800 hover:underline
+    @apply font-semibold text-primary-600 hover:text-primary-800 hover:underline;
   }
 }
