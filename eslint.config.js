@@ -24,7 +24,7 @@ const storybookFiles = ['**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)'];
 const baseESLintConfig = {
   name: 'eslint',
   extends: [eslintJS.configs.recommended],
-  files: mainLintableFiles,
+  files: [...mainLintableFiles, 'style-dictionary/**/*.mjs'],
   rules: {
     'no-await-in-loop': 'error',
     'no-constant-binary-expression': 'error',
@@ -154,7 +154,7 @@ const unicornConfig = {
   plugins: {
     unicorn: eslintPluginUnicorn
   },
-  files: mainLintableFiles,
+  files: [...mainLintableFiles, 'style-dictionary/**/*.mjs'],
   rules: {
     'unicorn/custom-error-definition': 'error',
     'unicorn/empty-brace-spaces': 'error',

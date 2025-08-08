@@ -1,9 +1,12 @@
 {
   "color": {
-    "primary": { "value": "#8A2BE2" },
-    "secondary": { "value": "#FFD700" },
-    "accent1": { "value": "#4682B4" },
-    "accent2": { "value": "#1E90FF" },
-    "neutral": { "value": "#778899" }
+    "primary": { "value": "#8A2BE2", "generateShades": true },
+    "secondary": { "value": "#FFD700", "generateShades": true },
+    "accent1": { "value": "#4682B4", "generateShades": true },
+    "accent2": { "value": "#1E90FF", "generateShades": true },
+    "neutral": { "value": "#778899", "generateShades": true },
+    "background": { "value": "#FBFAF9" },
+    "text-primary": { "value": "#212121" },
+    "text-secondary": { "value": "#545454" }
   }
 }

@@ -83,6 +83,3 @@ terragrunt-debug.tfvars.json
 .ai/
 .claude/
 .gemini/
-
-# Generated colors
-src/styles/generated-color-shades.css

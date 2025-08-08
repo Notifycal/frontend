@@ -1,4 +1,4 @@
-@import './generated-color-shades.css';
+@import './_generated-color-shades.css';
 
 @theme {
   --breakpoint-xs: 36em;
