@@ -1,6 +1,7 @@
 import type { BusinessDetailsValues } from '@components/onboarding/BusinessDetails';
 import type { CalendarsValues } from '@components/onboarding/Calendars';
 import type { SenderDetailsValues } from '@components/onboarding/SenderDetails';
+import clsx from 'clsx';
 import type { ParseKeys } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -48,22 +49,24 @@ const AccountOverview: React.FC<AccountOverviewProps> = ({ businessDetails, cale
     }
   ];
 
+  const pMarginClasses = 'mt-3.5 mb-3.5';
+
   return (
     <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
-      <h3 className="text-lg font-medium text-gray-800 mb-4">{t('confirm.accountSummary')}</h3>
+      <h3 className="mt-4.5 mb-4 text-lg font-medium text-gray-800">{t('confirm.accountSummary')}</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 xl:gap-4 text-sm">
         {summaryFields.map(({ label, value }) => (
-          <div>
-            <p className="text-gray-500">{label}</p>
-            <p className="font-medium">{value}</p>
+          <div key={label}>
+            <p className={clsx(pMarginClasses, 'text-gray-500')}>{label}</p>
+            <p className={clsx(pMarginClasses, 'font-medium')}>{value}</p>
           </div>
         ))}
 
         <div>
           <p className="text-gray-500">{t('calendars.title')}</p>
           {calendars.calendars.map(({ id, name }) => (
-            <p key={id} className="font-medium">
+            <p key={id} className={clsx(pMarginClasses, 'font-medium')}>
               {name}
             </p>
           ))}

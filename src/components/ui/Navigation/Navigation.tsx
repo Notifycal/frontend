@@ -52,9 +52,9 @@ export default function Navigation(props: UserProps): JSX.Element {
   const onLogoutHandler = auth.logout;
 
   return (
-    <nav className="border-b border-indigo-300/25 bg-indigo-600 lg:border-none">
+    <nav className="border-b border-primary-300/25 bg-primary-800 lg:border-none">
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between lg:border-b lg:border-indigo-400/25">
+        <div className="relative flex h-16 items-center justify-between lg:border-b lg:border-primary-400/25">
           <div className="flex items-center px-2 lg:px-0">
             <div className="shrink-0">
               <img
@@ -66,21 +66,21 @@ export default function Navigation(props: UserProps): JSX.Element {
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
                 <NavigationMenu
-                  activeClassName="bg-indigo-700"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500/75"
+                  activeClassName="bg-primary-900"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-primary-500/75"
                 />
               </div>
             </div>
           </div>
           <div className="flex lg:hidden">
             {/* Mobile menu button */}
-            <div className="group relative inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500/75 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600">
+            <div className="group relative inline-flex items-center justify-center rounded-md bg-primary-600 p-2 text-primary-200 hover:bg-primary-500/75 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600">
               <Burger
                 aria-label="Toggle navigation"
                 opened={opened}
                 size="sm"
                 classNames={{
-                  burger: 'bg-indigo-200 before:bg-indigo-200 after:bg-indigo-200'
+                  burger: 'bg-primary-200 before:bg-primary-200 after:bg-primary-200'
                 }}
                 onClick={toggle}
               >
@@ -95,7 +95,7 @@ export default function Navigation(props: UserProps): JSX.Element {
               <Menu position="bottom-end" shadow="md" width={200}>
                 <Menu.Target>
                   <button
-                    className="relative flex rounded-full bg-indigo-600 text-sm text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                    className="relative flex rounded-full bg-primary-600 text-sm text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600"
                     type="button"
                   >
                     <span className="absolute -inset-1.5" />
@@ -122,34 +122,34 @@ export default function Navigation(props: UserProps): JSX.Element {
       <Drawer
         opened={opened}
         classNames={{
-          content: 'bg-indigo-600',
-          header: 'bg-indigo-600',
-          close: 'text-indigo-200'
+          content: 'bg-primary-600',
+          header: 'bg-primary-600',
+          close: 'text-primary-200'
         }}
         onClose={toggle}
       >
         <div className="lg:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
             <NavigationMenu
-              activeClassName="bg-indigo-700 text-white"
-              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500/75"
+              activeClassName="bg-primary-700 text-white"
+              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary-500/75"
             />
           </div>
-          <div className="border-t border-indigo-700 pb-3 pt-4">
+          <div className="border-t border-primary-700 pb-3 pt-4">
             <div className="flex items-center px-5">
               <div className="shrink-0">
                 <img alt="" className="size-10 rounded-full" src={user.imageUrl} />
               </div>
               <div className="ml-3">
                 <div className="text-base font-medium text-white">{user.name}</div>
-                <div className="text-sm font-medium text-indigo-300">{user.email}</div>
+                <div className="text-sm font-medium text-primary-300">{user.email}</div>
               </div>
             </div>
             <div className="mt-3 space-y-1 px-2">
               {userNavigation.map((item) => (
                 <a
                   key={item.name}
-                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500/75"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary-500/75"
                   href={item.href}
                 >
                   {item.name}

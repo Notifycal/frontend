@@ -16,8 +16,8 @@ const OnboardingCompleted: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center py-8 text-center">
-      <div className="flex items-center justify-center p-6 mb-6 rounded-full bg-green-100">
-        <IconCircleCheck className="text-green-600" size="5rem" />
+      <div className="flex items-center justify-center p-6 mb-6 rounded-full bg-primary-100">
+        <IconCircleCheck className="text-primary-600" size="5rem" />
       </div>
       <h2 className="text-2xl font-bold text-gray-800 mb-2">{t('completed.heading')}</h2>
       <p className="text-gray-600 mb-6 max-w-md">{t('completed.subheading')}</p>

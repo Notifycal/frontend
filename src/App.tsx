@@ -16,6 +16,8 @@ import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
 import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
 
+import { colors } from '@theme/_generated-colors-mantine.ts';
+
 type AppProps = {
   router: typeof router;
   queryClient: QueryClient;
@@ -42,7 +44,12 @@ const App = ({ router, queryClient }: AppProps): JSX.Element => {
   const { GOOGLE_CLIENT_ID } = getServiceConfig();
 
   return (
-    <MantineProvider>
+    <MantineProvider
+      theme={{
+        primaryColor: 'primary',
+        colors: colors
+      }}
+    >
       <ErrorBoundary
         fallback={
           <FullPageError

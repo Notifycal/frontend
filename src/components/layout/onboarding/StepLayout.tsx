@@ -15,8 +15,8 @@ interface SubHeaderProps {
 
 const SubHeader: React.FC<SubHeaderProps> = ({ title, subtitle }) => (
   <div className="text-center 2xl:mt-8">
-    <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-    <p className="text-gray-600">{subtitle}</p>
+    <h2 className="mt-4 mb-4 text-xl font-semibold text-gray-800">{title}</h2>
+    <p className="mt-4 mb-4 text-gray-600">{subtitle}</p>
   </div>
 );
 

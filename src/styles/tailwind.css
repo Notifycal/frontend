@@ -1,3 +1,5 @@
+@import './_generated-color-shades.css';
+
 @theme {
   --breakpoint-xs: 36em;
   --breakpoint-sm: 48em;
@@ -22,14 +24,8 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
 
-@layer tw-base {
-  @import 'tailwindcss';
-}
-
-@layer tw-components {
-}
-
-@layer tw-utilities {
+  a {
+    @apply font-semibold text-primary-600 hover:text-primary-800 hover:underline;
+  }
 }
