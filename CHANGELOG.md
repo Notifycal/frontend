@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.27.0](https://github.com/Notifycal/frontend/compare/v0.26.5...v0.27.0) (2025-08-11)
+
+
+### Features
+
+* fix mantine and tailwind integration. Single color source of truth ([#514](https://github.com/Notifycal/frontend/issues/514)) ([a94e09c](https://github.com/Notifycal/frontend/commit/a94e09c0bafac315278e3fc48ff1404ca8032f8e))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-query to v5.84.2 ([#510](https://github.com/Notifycal/frontend/issues/510)) ([670c2e6](https://github.com/Notifycal/frontend/commit/670c2e62ed594652ffa956e9a5694ea32fb2ac12))
+* **deps:** Update dependency i18next to v25.3.3 ([#517](https://github.com/Notifycal/frontend/issues/517)) ([565aec6](https://github.com/Notifycal/frontend/commit/565aec606494d3770eacc3780e60f3699bcfea13))
+* **deps:** Update dependency i18next to v25.3.4 ([#518](https://github.com/Notifycal/frontend/issues/518)) ([b1eca72](https://github.com/Notifycal/frontend/commit/b1eca726da8eec3209ae1960a6b250fc384aed5d))
+* **deps:** Update dependency radashi to v12.6.1 ([#516](https://github.com/Notifycal/frontend/issues/516)) ([1ac1c60](https://github.com/Notifycal/frontend/commit/1ac1c60d0e3853d1d987629d02711cdf0665478e))
+
 ## [0.26.5](https://github.com/Notifycal/frontend/compare/v0.26.4...v0.26.5) (2025-08-08)
 
 
