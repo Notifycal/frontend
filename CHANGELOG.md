@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.28.0](https://github.com/Notifycal/frontend/compare/v0.27.0...v0.28.0) (2025-08-14)
+
+
+### Features
+
+* privacy policy and terms and conditions ([#532](https://github.com/Notifycal/frontend/issues/532)) ([7b26da0](https://github.com/Notifycal/frontend/commit/7b26da0aae2300596704c0c8cfd9a32a2059ce22))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency i18next to v25.3.6 ([#520](https://github.com/Notifycal/frontend/issues/520)) ([f91bcef](https://github.com/Notifycal/frontend/commit/f91bcefce4921f274a671daa90fbef3c422b2adc))
+
 ## [0.27.0](https://github.com/Notifycal/frontend/compare/v0.26.5...v0.27.0) (2025-08-11)
 
 
