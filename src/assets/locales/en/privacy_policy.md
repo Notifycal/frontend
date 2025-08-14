@@ -10,9 +10,9 @@
 | **Trade Name** | Notifycal |
 | **Tax ID (NIF/CIF)** | [PENDING] |
 | **Registered Address** | [PENDING] |
-| **Privacy Email** | privacidad@notifycal.com |
-| **Support Email** | soporte@notifycal.com |
-| **Cancellation Email** | baja@notifycal.com |
+| **Privacy Email** | privacy@notifycal.com |
+| **Support Email** | support@notifycal.com |
+| **Cancellation Email** | unsubscribe@notifycal.com |
 
 ## 1. General Information
 

@@ -10,9 +10,9 @@
 | **Trade Name**         | Notifycal              |
 | **Tax ID**             | [PENDING]              |
 | **Registered Address** | [PENDING]              |
-| **Terms Email**        | terminos@notifycal.com |
-| **Support Email**      | soporte@notifycal.com  |
-| **Cancellation Email** | baja@notifycal.com     |
+| **Terms Email**        | terms@notifycal.com |
+| **Support Email**      | support@notifycal.com  |
+| **Cancellation Email** | unsubscribe@notifycal.com     |
 
 ## 1. General Information
 
