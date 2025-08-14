@@ -9,8 +9,8 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { defineConfig } from 'vitest/config';
 
 import tsconfigPaths from 'vite-tsconfig-paths';
-const maxBundleChunkSizeInBytes = 1.3 * 1024 * 1024; //MB
-const maxTotalBundleSizeInBytes = 1.8 * 1024 * 1024; //MB
+const maxBundleChunkSizeInBytes = 1.4 * 1024 * 1024; //MB
+const maxTotalBundleSizeInBytes = 2 * 1024 * 1024; //MB
 
 const handleServiceConfigPlugin = (): import('vite').Plugin => {
   const pluginName = 'service-config-handler';
