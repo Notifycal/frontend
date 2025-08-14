@@ -4,12 +4,13 @@ import react from '@vitejs/plugin-react-swc';
 import fs from 'node:fs';
 import path from 'node:path';
 import { normalizePath } from 'vite';
+import { plugin as markdown, Mode } from 'vite-plugin-markdown';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { defineConfig } from 'vitest/config';
 
 import tsconfigPaths from 'vite-tsconfig-paths';
-const maxBundleChunkSizeInBytes = 1.3 * 1024 * 1024; //MB
-const maxTotalBundleSizeInBytes = 1.8 * 1024 * 1024; //MB
+const maxBundleChunkSizeInBytes = 1.4 * 1024 * 1024; //MB
+const maxTotalBundleSizeInBytes = 2 * 1024 * 1024; //MB
 
 const handleServiceConfigPlugin = (): import('vite').Plugin => {
   const pluginName = 'service-config-handler';
@@ -45,6 +46,7 @@ const handleServiceConfigPlugin = (): import('vite').Plugin => {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    markdown({ mode: [Mode.HTML] }),
     tanstackRouter({
       target: 'react'
     }),
