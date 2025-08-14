@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 import fs from 'node:fs';
 import path from 'node:path';
 import { normalizePath } from 'vite';
+import { plugin as markdown, Mode } from 'vite-plugin-markdown';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { defineConfig } from 'vitest/config';
 
@@ -45,6 +46,7 @@ const handleServiceConfigPlugin = (): import('vite').Plugin => {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    markdown({ mode: [Mode.HTML] }),
     tanstackRouter({
       target: 'react'
     }),
