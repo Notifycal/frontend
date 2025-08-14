@@ -1,6 +1,6 @@
 # Política de privacidad
 
-**Fecha de última actualización**: 12 de agosto de 2025
+**Documento revisado y validado legalmente el**: 12 de agosto de 2025
 
 ## Datos de contacto y empresa
 
@@ -474,4 +474,3 @@ Para facilitar la comprensión de esta política, incluimos un glosario de los t
 
 _Esta Política de Privacidad ha sido redactada originalmente en español. En caso de que se realicen traducciones a otros idiomas y existan discrepancias en la interpretación, prevalecerá siempre la versión en español._
 
-**Documento revisado y validado legalmente el**: [Ver fecha al inicio del documento]
