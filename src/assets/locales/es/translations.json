@@ -61,6 +61,12 @@
     "used": "{{credits}} usados",
     "remaining": "{{credits}} restantes"
   },
+  "footer": {
+    "allRightsReserved": "{{year}} Notifycal. Todos los derechos reservados.",
+    "feedbackLink": "Feedback",
+    "terms": "Términos y condiciones",
+    "privacy": "Política de privacidad"
+  },
   "billing": {
     "topup": "Recarga",
     "subscription": "Subscripcion",

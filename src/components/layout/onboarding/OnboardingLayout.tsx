@@ -1,12 +1,10 @@
-import { Link, Outlet } from '@tanstack/react-router';
-
-import { languageData } from '@common/i18n';
+import { Outlet } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-import InternationalizationPicker from '@components/ui/InternationalizationPicker/InternationalizationPicker';
+import Footer from '@components/ui/Footer/Footer';
 
 const OnboardingLayout: React.FC = () => {
-  const { t, i18n } = useTranslation('onboarding');
+  const { t } = useTranslation('onboarding');
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -21,25 +19,7 @@ const OnboardingLayout: React.FC = () => {
 
       <Outlet />
 
-      {/* Footer */}
-      <footer className="py-4 bg-white border-t border-gray-200">
-        <div className="container mx-auto px-4 flex items-center justify-center gap-6 text-gray-500 text-sm">
-          <span>&copy; {t('footer.allRightsReserved', { year: new Date().getFullYear() })}</span>
-          <div>
-            <InternationalizationPicker
-              displayFlagOnly
-              data={languageData}
-              value={(i18n.languages[0] ?? 'es') as keyof typeof languageData}
-              onSelected={async (item) => {
-                await i18n.changeLanguage(item.code);
-              }}
-            />
-          </div>
-          <Link target="_blank" to="/onboarding/feedback">
-            {t('footer.feedbackLink')}
-          </Link>
-        </div>
-      </footer>
+      <Footer showFeedbackLink />
     </div>
   );
 };

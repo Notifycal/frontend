@@ -1,6 +1,7 @@
 import { useMatches } from '@tanstack/react-router';
 import type { FC, ReactNode } from 'react';
 
+import Footer from '@components/ui/Footer/Footer';
 import Navigation from '@components/ui/Navigation/Navigation';
 
 import clsx from 'clsx';
@@ -42,6 +43,8 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
           <div className="rounded-lg bg-white px-5 py-6 shadow-sm sm:px-6">{children}</div>
         </div>
       </main>
+
+      <Footer showFeedbackLink />
     </div>
   );
 };
