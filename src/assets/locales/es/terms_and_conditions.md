@@ -14,8 +14,6 @@ PROVINCIA: [PENDIENTE]
 EMAIL TÉRMINOS: terminos@notifycal.com
 EMAIL SOPORTE: soporte@notifycal.com
 EMAIL CANCELACIÓN: baja@notifycal.com
-SITIO WEB: www.notifycal.com
-ÁREA PRIVADA: private.notifycal.com
 ```
 
 **Fecha de última actualización**: 12 de agosto de 2025

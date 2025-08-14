@@ -14,10 +14,9 @@ PROVINCIA: [PENDIENTE]
 EMAIL PRIVACIDAD: privacidad@notifycal.com
 EMAIL SOPORTE: soporte@notifycal.com
 EMAIL BAJA: baja@notifycal.com
-SITIO WEB: www.notifycal.com
 ```
 
-**Fecha de última actualización**: 12 de agosto de 2025  
+**Fecha de última actualización**: 12 de agosto de 2025
 
 ## 1. INFORMACIÓN GENERAL
 
@@ -25,9 +24,10 @@ SITIO WEB: www.notifycal.com
 
 Esta Política de Privacidad se aplica a cualquier persona que utilice nuestros servicios a través de:
 
-- **Nuestros sitios web principales**: www.notifycal.com y www.notifycal.es
-- **Nuestras áreas privadas**: private.notifycal.com y private.notifycal.es
+- **Sitios web principales**: notifycal.com y notifycal.es
+- **Áreas privadas de usuario**: private.notifycal.com y private.notifycal.es
 - **Todos los subdominios** asociados a estos dominios principales
+- **Aplicaciones móviles** y cualquier otro canal de acceso que podamos desarrollar en el futuro
 
 Cualquier interacción con estas plataformas digitales estará sujeta a los términos establecidos en esta política.
 
@@ -56,8 +56,6 @@ Es fundamental comprender que Notifycal opera bajo dos roles diferentes según e
 Actuamos como **Responsable del Tratamiento** cuando procesamos los datos de nuestros Usuarios directos. Esto significa que determinamos los fines y medios del tratamiento de esta información, estableciendo para qué la utilizamos y cómo la protegemos. En este rol, tenemos la responsabilidad directa sobre estos datos y respondemos ante nuestros Usuarios por su correcto tratamiento.
 
 Por otro lado, actuamos como **Encargado del Tratamiento** respecto a los datos de los Destinatarios de los recordatorios. En este caso, procesamos la información siguiendo exclusivamente las instrucciones de nuestros Usuarios, quienes son los verdaderos responsables de estos datos. No tomamos decisiones sobre qué hacer con esta información ni la utilizamos para fines propios; simplemente ejecutamos el servicio de envío de recordatorios según lo configurado por cada Usuario.
-
-
 
 ## 2. INFORMACIÓN QUE RECOPILAMOS
 
@@ -90,8 +88,6 @@ Cuando la información de contacto no está explícitamente disponible, nuestro 
 Como la mayoría de servicios web modernos, recopilamos automáticamente cierta información técnica cuando se accede a nuestra plataforma. Esta información incluye la dirección IP desde la que se accede, el tipo y versión del navegador utilizado, el sistema operativo del dispositivo, las páginas visitadas dentro de nuestra plataforma y el tiempo de permanencia en cada una, los enlaces desde los que se llegó a nuestro sitio, y diversos parámetros del dispositivo que nos ayudan a optimizar la experiencia.
 
 Además, utilizamos herramientas especializadas de análisis para entender mejor cómo se utiliza nuestra plataforma y poder mejorarla continuamente. Estas herramientas nos proporcionan métricas agregadas y anonimizadas sobre el uso general del servicio, así como análisis de experiencia de usuario que nos permiten optimizar la interfaz sin comprometer información personal identificable.
-
-
 
 ## 3. BASES LEGALES Y FINALIDADES DEL TRATAMIENTO
 
@@ -189,8 +185,6 @@ En el caso improbable de una fusión, adquisición o venta de activos de la empr
 
 Es importante destacar que **nunca vendemos datos personales a terceros** ni los compartimos con fines publicitarios o de marketing.
 
-
-
 ## 6. SEGURIDAD DE LA INFORMACIÓN
 
 ### Medidas técnicas de seguridad
@@ -227,8 +221,6 @@ Si la brecha supone un alto riesgo para tus derechos y libertades, te comunicare
 
 Mantenemos un registro documentado de todos los incidentes de seguridad, incluyendo aquellos que no requieren notificación, para poder aprender de ellos y mejorar continuamente nuestras medidas de protección.
 
-
-
 ## 7. CONSERVACIÓN DE DATOS
 
 ### Plazos de conservación
@@ -258,8 +250,6 @@ Las copias de seguridad que contengan datos personales también se eliminan sigu
 ### Portabilidad de datos
 
 Reconocemos tu derecho a la portabilidad de los datos. Si eres Usuario de Notifycal, puedes solicitar en cualquier momento una copia de todos tus datos personales en un formato estructurado, de uso común y lectura mecánica. Esto te permite llevarte tus datos a otro servicio si así lo deseas, o simplemente mantener una copia para tus propios registros.
-
-
 
 ## 8. DERECHOS DE LOS INTERESADOS
 
@@ -313,8 +303,6 @@ En España, la autoridad de control es la **Agencia Española de Protección de 
 
 Te recomendamos que, antes de acudir a la AEPD, nos des la oportunidad de resolver cualquier problema contactando con nosotros directamente. Nuestro objetivo es resolver cualquier preocupación de forma rápida y satisfactoria.
 
-
-
 ## 9. OBLIGACIONES ESPECÍFICAS PARA USUARIOS
 
 ### Tu responsabilidad como Usuario de Notifycal
@@ -351,8 +339,6 @@ Te comprometes a utilizar Notifycal únicamente para fines legítimos y legales.
 
 Es tu responsabilidad mantener actualizados y exactos los datos de tus clientes en tu calendario, así como eliminar o actualizar los eventos cuando sea necesario para evitar el envío de recordatorios incorrectos o a personas equivocadas.
 
-
-
 ## 10. MENORES DE EDAD
 
 ### Nuestra política sobre menores
@@ -366,8 +352,6 @@ Si eres Usuario de Notifycal y tus clientes incluyen menores de edad, es tu resp
 Si llegamos a tener conocimiento de que hemos recopilado inadvertidamente datos personales de un menor de 14 años sin la autorización parental apropiada, tomaremos medidas inmediatas para eliminar dicha información de nuestros sistemas.
 
 Recomendamos encarecidamente a los padres y tutores que supervisen el uso de internet de los menores a su cargo y que nos contacten inmediatamente si creen que un menor ha proporcionado información personal a Notifycal sin su consentimiento.
-
-
 
 ## 11. CAMBIOS EN LA POLÍTICA DE PRIVACIDAD
 
@@ -392,8 +376,6 @@ Si los cambios requieren tu consentimiento, te lo solicitaremos expresamente y n
 ### Archivo de versiones
 
 Mantenemos un archivo de las versiones anteriores de esta Política de Privacidad. Si deseas consultar una versión anterior, puedes solicitárnosla en el email de privacidad indicado al inicio de este documento (**EMAIL PRIVACIDAD**) indicando la fecha aproximada de la versión que te interesa consultar.
-
-
 
 ## 12. INFORMACIÓN ADICIONAL
 
@@ -438,8 +420,6 @@ La **transparencia** es fundamental para nosotros, por eso esta política de pri
 
 La **seguridad por defecto** significa que las opciones más protectoras de la privacidad están preseleccionadas. Por ejemplo, las comunicaciones comerciales son opt-in (debes activarlas expresamente) en lugar de opt-out.
 
-
-
 ## 13. CONTACTO
 
 ### Cómo contactar con nosotros
@@ -463,8 +443,6 @@ Si tu consulta es urgente o está relacionada con una posible brecha de segurida
 ### Idioma de comunicación
 
 Aunque esta política está redactada en español y es la versión oficial, podemos atender consultas en español e inglés. Si necesitas comunicarte en otro idioma, haremos nuestro mejor esfuerzo para entenderte y responder adecuadamente, aunque podríamos tardar un poco más en estos casos.
-
-
 
 ## 14. GLOSARIO DE TÉRMINOS
 
@@ -498,8 +476,6 @@ Para facilitar la comprensión de esta política, incluimos un glosario de los t
 
 **DPIA**: Data Protection Impact Assessment (Evaluación de Impacto en la Protección de Datos), análisis requerido por el RGPD para tratamientos de alto riesgo.
 
-
-
 _Esta Política de Privacidad ha sido redactada originalmente en español. En caso de que se realicen traducciones a otros idiomas y existan discrepancias en la interpretación, prevalecerá siempre la versión en español._
 
-**Documento revisado y validado legalmente el**: [Ver fecha al inicio del documento]  
+**Documento revisado y validado legalmente el**: [Ver fecha al inicio del documento]
