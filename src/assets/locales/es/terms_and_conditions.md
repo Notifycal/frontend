@@ -4,15 +4,15 @@
 
 ## Datos de contacto y empresa
 
-| Campo | Valor |
-|-------|-------|
-| **Razón Social** | [PENDIENTE] |
-| **Nombre Comercial** | Notifycal |
-| **NIF/CIF** | [PENDIENTE] |
-| **Domicilio Social** | [PENDIENTE] |
-| **Email Términos** | terminos@notifycal.com |
-| **Email Soporte** | soporte@notifycal.com |
-| **Email Cancelación** | baja@notifycal.com |
+| Campo                 | Valor                  |
+| --------------------- | ---------------------- |
+| **Razón Social**      | [PENDIENTE]            |
+| **Nombre Comercial**  | Notifycal              |
+| **NIF/CIF**           | [PENDIENTE]            |
+| **Domicilio Social**  | [PENDIENTE]            |
+| **Email Términos**    | terminos@notifycal.com |
+| **Email Soporte**     | soporte@notifycal.com  |
+| **Email Cancelación** | baja@notifycal.com     |
 
 ## 1. Información general
 
@@ -1112,4 +1112,3 @@ c) Se considerarán válidamente entregadas 24 horas después del envío al emai
 20.4.3 **LOPD-GDD**: Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales, normativa española complementaria al RGPD.
 
 _Estos Términos y Condiciones han sido redactados originalmente en español. En caso de que se realicen traducciones a otros idiomas y existan discrepancias en la interpretación, prevalecerá siempre la versión en español._
-

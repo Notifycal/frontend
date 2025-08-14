@@ -4,15 +4,15 @@
 
 ## Datos de contacto y empresa
 
-| Campo | Valor |
-|-------|-------|
-| **Razón Social** | [PENDIENTE] |
-| **Nombre Comercial** | Notifycal |
-| **NIF/CIF** | [PENDIENTE] |
-| **Domicilio Social** | [PENDIENTE] |
+| Campo                | Valor                    |
+| -------------------- | ------------------------ |
+| **Razón Social**     | [PENDIENTE]              |
+| **Nombre Comercial** | Notifycal                |
+| **NIF/CIF**          | [PENDIENTE]              |
+| **Domicilio Social** | [PENDIENTE]              |
 | **Email Privacidad** | privacidad@notifycal.com |
-| **Email Soporte** | soporte@notifycal.com |
-| **Email Baja** | baja@notifycal.com |
+| **Email Soporte**    | soporte@notifycal.com    |
+| **Email Baja**       | baja@notifycal.com       |
 
 ## 1. Información general
 
@@ -473,4 +473,3 @@ Para facilitar la comprensión de esta política, incluimos un glosario de los t
 **DPIA**: Data Protection Impact Assessment (Evaluación de Impacto en la Protección de Datos), análisis requerido por el RGPD para tratamientos de alto riesgo.
 
 _Esta Política de Privacidad ha sido redactada originalmente en español. En caso de que se realicen traducciones a otros idiomas y existan discrepancias en la interpretación, prevalecerá siempre la versión en español._
-
