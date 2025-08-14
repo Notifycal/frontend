@@ -4,14 +4,14 @@
 
 ## Contact and Company Details
 
-| Field | Value |
-|------|-------|
-| **Corporate Name** | [PENDING] |
-| **Trade Name** | Notifycal |
-| **Tax ID (NIF/CIF)** | [PENDING] |
-| **Registered Address** | [PENDING] |
-| **Privacy Email** | privacy@notifycal.com |
-| **Support Email** | support@notifycal.com |
+| Field                  | Value                     |
+| ---------------------- | ------------------------- |
+| **Corporate Name**     | [PENDING]                 |
+| **Trade Name**         | Notifycal                 |
+| **Tax ID (NIF/CIF)**   | [PENDING]                 |
+| **Registered Address** | [PENDING]                 |
+| **Privacy Email**      | privacy@notifycal.com     |
+| **Support Email**      | support@notifycal.com     |
 | **Cancellation Email** | unsubscribe@notifycal.com |
 
 ## 1. General Information
@@ -20,9 +20,9 @@
 
 This Privacy Policy applies to anyone who uses our services through:
 
-- **Primary websites**: notifycal.com and notifycal.es  
-- **Private user areas**: private.notifycal.com and private.notifycal.es  
-- **All subdomains** associated with these main domains  
+- **Primary websites**: notifycal.com and notifycal.es
+- **Private user areas**: private.notifycal.com and private.notifycal.es
+- **All subdomains** associated with these main domains
 - **Mobile applications** and any other access channel we may develop in the future
 
 Any interaction with these digital platforms will be subject to the terms set out in this policy.
@@ -91,19 +91,19 @@ We also use specialised analytics tools to better understand how our platform is
 
 The GDPR requires all processing of personal data to rely on a valid legal basis. Below we detail the legal bases underpinning each of our processing activities:
 
-| **Processing purpose** | **Legal basis (GDPR)** | **Detailed explanation** |
-| --- | --- | --- |
-| Provision of the reminder service | Art. 6(1)(b) – Contract performance | Processing is necessary to provide the service the User has contracted, including reading calendars and sending reminders |
-| Account management and administration | Art. 6(1)(b) – Contract performance | Necessary to keep the account active, manage the User’s settings and preferences |
-| Payment processing and billing | Art. 6(1)(b) – Contract performance | Essential to charge for our services and issue the relevant invoices |
-| Compliance with legal obligations | Art. 6(1)(c) – Legal obligation | Retention of invoices and tax data in accordance with Spanish law |
-| Technical support and customer service | Art. 6(1)(f) – Legitimate interests | We have a legitimate interest in assisting our users and resolving their issues |
-| Security and fraud prevention | Art. 6(1)(f) – Legitimate interests | To protect our platform and our users from fraudulent or malicious use |
-| Service analysis and improvement | Art. 6(1)(a) – Consent | Only with the User’s express consent via the cookies banner |
-| Operational account notices | Art. 6(1)(b) – Contract performance | Notifications about credit status, service limits and technical notices required for operation |
-| Updates communications | Art. 6(1)(f) – Legitimate interests | To inform about changes to terms, conditions, policies or features that affect the contracted service |
-| Marketing and commercial communications | Art. 6(1)(a) – Consent | News, offers, newsletters, surveys and promotional material only if expressly authorised by the User |
-| Collection of comments and feedback | Art. 6(1)(b) – Contract performance | Collecting opinions and suggestions to improve the contracted service through forms that store responses |
+| **Processing purpose**                  | **Legal basis (GDPR)**              | **Detailed explanation**                                                                                                  |
+| --------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Provision of the reminder service       | Art. 6(1)(b) – Contract performance | Processing is necessary to provide the service the User has contracted, including reading calendars and sending reminders |
+| Account management and administration   | Art. 6(1)(b) – Contract performance | Necessary to keep the account active, manage the User’s settings and preferences                                          |
+| Payment processing and billing          | Art. 6(1)(b) – Contract performance | Essential to charge for our services and issue the relevant invoices                                                      |
+| Compliance with legal obligations       | Art. 6(1)(c) – Legal obligation     | Retention of invoices and tax data in accordance with Spanish law                                                         |
+| Technical support and customer service  | Art. 6(1)(f) – Legitimate interests | We have a legitimate interest in assisting our users and resolving their issues                                           |
+| Security and fraud prevention           | Art. 6(1)(f) – Legitimate interests | To protect our platform and our users from fraudulent or malicious use                                                    |
+| Service analysis and improvement        | Art. 6(1)(a) – Consent              | Only with the User’s express consent via the cookies banner                                                               |
+| Operational account notices             | Art. 6(1)(b) – Contract performance | Notifications about credit status, service limits and technical notices required for operation                            |
+| Updates communications                  | Art. 6(1)(f) – Legitimate interests | To inform about changes to terms, conditions, policies or features that affect the contracted service                     |
+| Marketing and commercial communications | Art. 6(1)(a) – Consent              | News, offers, newsletters, surveys and promotional material only if expressly authorised by the User                      |
+| Collection of comments and feedback     | Art. 6(1)(b) – Contract performance | Collecting opinions and suggestions to improve the contracted service through forms that store responses                  |
 
 ### 3.2. Processing of Recipients’ Data
 
@@ -149,15 +149,15 @@ If you decide to refuse analytics cookies, you will still be able to use Notifyc
 
 To provide a robust, high-quality service, we work with carefully selected providers who act as processors under strict Data Processing Agreements (DPAs) that guarantee the protection of your information:
 
-| **Provider type** | **Service provided** | **Data shared** | **Processing location** |
-| --- | --- | --- | --- |
-| Infrastructure and hosting provider | Hosting and data processing | All platform data | EU |
-| Authentication, calendar and contacts provider | Integration with Calendar & People APIs | OAuth tokens, calendar and contacts data | EU/US (with SCCs) |
-| Payments processor | Payments and billing management | Billing and payment information | EU/US (with SCCs) |
-| Communications provider | Sending reminders | Contact information and message content | EU |
-| Transactional email provider | Sending system emails | Email addresses and email content | EU |
-| Experience analytics tools | Usability analysis | Anonymised browsing data | US (with SCCs) |
-| Web metrics tools | Usage statistics | Aggregated usage data | US (with SCCs) |
+| **Provider type**                              | **Service provided**                    | **Data shared**                          | **Processing location** |
+| ---------------------------------------------- | --------------------------------------- | ---------------------------------------- | ----------------------- |
+| Infrastructure and hosting provider            | Hosting and data processing             | All platform data                        | EU                      |
+| Authentication, calendar and contacts provider | Integration with Calendar & People APIs | OAuth tokens, calendar and contacts data | EU/US (with SCCs)       |
+| Payments processor                             | Payments and billing management         | Billing and payment information          | EU/US (with SCCs)       |
+| Communications provider                        | Sending reminders                       | Contact information and message content  | EU                      |
+| Transactional email provider                   | Sending system emails                   | Email addresses and email content        | EU                      |
+| Experience analytics tools                     | Usability analysis                      | Anonymised browsing data                 | US (with SCCs)          |
+| Web metrics tools                              | Usage statistics                        | Aggregated usage data                    | US (with SCCs)          |
 
 All these providers are selected not only for service quality but also for their commitment to data protection and GDPR compliance. We maintain contractual agreements with each of them requiring them to protect data to the same security level we apply and not to use the data for any purpose other than the service they provide to us.
 
@@ -223,17 +223,17 @@ We maintain a documented record of all security incidents, including those that 
 
 We apply the principle of storage limitation, keeping personal data only for as long as necessary to fulfil the purposes for which they were collected and to comply with our legal obligations:
 
-| **Data type** | **Retention period** | **Justification** |
-| --- | --- | --- |
-| User account data | While the account is active + 30 days | Allow reactivation and resolve pending issues |
-| Billing information | 5 years from invoice issuance | Legal obligation under Spanish tax regulations |
-| Reminder delivery logs | 6 months from sending | Issue resolution and claims |
-| History of processed events | 6 months from processing | Service audit and problem resolution |
-| Recipients’ data | 6 months from the last message | Service traceability and issue management |
-| Technical system logs | 1 year | Debugging and security analysis |
-| Recordings from experience tools | 30 days | User-experience analysis |
-| Web metrics data | 26 months | Analytics-tool standard |
-| Feedback and comments data | 1 year from submission | Continuous improvement of the contracted service |
+| **Data type**                    | **Retention period**                  | **Justification**                                |
+| -------------------------------- | ------------------------------------- | ------------------------------------------------ |
+| User account data                | While the account is active + 30 days | Allow reactivation and resolve pending issues    |
+| Billing information              | 5 years from invoice issuance         | Legal obligation under Spanish tax regulations   |
+| Reminder delivery logs           | 6 months from sending                 | Issue resolution and claims                      |
+| History of processed events      | 6 months from processing              | Service audit and problem resolution             |
+| Recipients’ data                 | 6 months from the last message        | Service traceability and issue management        |
+| Technical system logs            | 1 year                                | Debugging and security analysis                  |
+| Recordings from experience tools | 30 days                               | User-experience analysis                         |
+| Web metrics data                 | 26 months                             | Analytics-tool standard                          |
+| Feedback and comments data       | 1 year from submission                | Continuous improvement of the contracted service |
 
 ### Deletion Process
 
@@ -293,8 +293,8 @@ If you are not satisfied with our response to your rights request, or if you bel
 
 In Spain, the supervisory authority is the **Spanish Data Protection Agency (AEPD)**:
 
-- Website: www.aepd.es  
-- Address: C/ Jorge Juan, 6. 28001 Madrid  
+- Website: www.aepd.es
+- Address: C/ Jorge Juan, 6. 28001 Madrid
 - Telephone: 901 100 099 / 91 266 35 17
 
 We recommend that, before contacting the AEPD, you give us the opportunity to resolve any issue by contacting us directly. Our aim is to resolve any concern quickly and satisfactorily.
@@ -379,9 +379,9 @@ We keep an archive of previous versions of this Privacy Policy. If you wish to c
 
 Our platform may contain links to third-party websites, such as:
 
-- **Social networks** (Instagram, Facebook, LinkedIn) where we share corporate content  
-- **Websites of our clients**, which may appear as references or case studies on our homepage  
-- **Technical documentation** for integrated services, provider dashboards, or external help resources  
+- **Social networks** (Instagram, Facebook, LinkedIn) where we share corporate content
+- **Websites of our clients**, which may appear as references or case studies on our homepage
+- **Technical documentation** for integrated services, provider dashboards, or external help resources
 - **Support platforms** or educational resources related to our sector
 
 By clicking these links, it is possible that you allow third parties to collect or share data about you. **We do not control these third-party websites and are not responsible for their privacy standards.** Once you leave our platform, remember that this policy no longer applies.

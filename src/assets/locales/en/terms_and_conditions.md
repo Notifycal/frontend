@@ -4,15 +4,15 @@
 
 ## Company Contact and Information
 
-| Field                  | Value                  |
-| ---------------------- | ---------------------- |
-| **Company Name**       | [PENDING]              |
-| **Trade Name**         | Notifycal              |
-| **Tax ID**             | [PENDING]              |
-| **Registered Address** | [PENDING]              |
-| **Terms Email**        | terms@notifycal.com |
-| **Support Email**      | support@notifycal.com  |
-| **Cancellation Email** | unsubscribe@notifycal.com     |
+| Field                  | Value                     |
+| ---------------------- | ------------------------- |
+| **Company Name**       | [PENDING]                 |
+| **Trade Name**         | Notifycal                 |
+| **Tax ID**             | [PENDING]                 |
+| **Registered Address** | [PENDING]                 |
+| **Terms Email**        | terms@notifycal.com       |
+| **Support Email**      | support@notifycal.com     |
+| **Cancellation Email** | unsubscribe@notifycal.com |
 
 ## 1. General Information
 
