@@ -1,22 +1,18 @@
 # TÉRMINOS Y CONDICIONES DE SERVICIO
 
+**Fecha de última actualización**: 12 de agosto de 2025
+
 ## DATOS DE CONTACTO Y EMPRESA
 
-```
-RAZÓN SOCIAL: [PENDIENTE]
-NOMBRE COMERCIAL: Notifycal
-NIF/CIF: [PENDIENTE]
-DOMICILIO SOCIAL: [PENDIENTE]
-CÓDIGO POSTAL: [PENDIENTE]
-LOCALIDAD: [PENDIENTE]
-PROVINCIA: [PENDIENTE]
-
-EMAIL TÉRMINOS: terminos@notifycal.com
-EMAIL SOPORTE: soporte@notifycal.com
-EMAIL CANCELACIÓN: baja@notifycal.com
-```
-
-**Fecha de última actualización**: 12 de agosto de 2025
+| Campo | Valor |
+|-------|-------|
+| **Razón Social** | [PENDIENTE] |
+| **Nombre Comercial** | Notifycal |
+| **NIF/CIF** | [PENDIENTE] |
+| **Domicilio Social** | [PENDIENTE] |
+| **Email Términos** | terminos@notifycal.com |
+| **Email Soporte** | soporte@notifycal.com |
+| **Email Cancelación** | baja@notifycal.com |
 
 ## 1. INFORMACIÓN GENERAL
 
@@ -599,7 +595,7 @@ c) **Cambios críticos** (descontinuación de funcionalidades, cambios en precio
 
 a) **Revocación de permisos**: Eliminando el acceso de Notifycal desde el panel de control del proveedor de autenticación
 
-b) **Cancelación de suscripción**: Utilizando las herramientas de cancelación disponibles en tu panel de control. O contactando con nuestro servicio de atención por email a (**EMAIL CANCELACIÓN**) en caso de experimentar problemas con las herramientas disponibles en el panel de control
+b) **Cancelación de suscripción**: Utilizando las herramientas de cancelación disponibles en tu panel de control. O contactando con nuestro servicio de atención por email a (**Email Cancelación**) en caso de experimentar problemas con las herramientas disponibles en el panel de control
 
 ### 11.3 TERMINACIÓN POR NOTIFYCAL
 
@@ -783,7 +779,7 @@ d) El reconocimiento expreso de que, debido a la naturaleza digital e inmediata 
 
 13.4.1 Para ejercer el derecho de desistimiento, el consumidor deberá:
 
-a) **Comunicar la decisión**: Notificar de manera inequívoca su decisión de desistir del contrato mediante correo electrónico a la dirección **EMAIL CANCELACIÓN** indicada al inicio del documento
+a) **Comunicar la decisión**: Notificar de manera inequívoca su decisión de desistir del contrato mediante correo electrónico a la dirección **Email Cancelación** indicada al inicio del documento
 
 b) **Plazo de comunicación**: La comunicación debe realizarse dentro del plazo de 14 días naturales establecido en la normativa
 
@@ -853,7 +849,7 @@ b) **Usuarios con Términos de Servicio Completo**: Además de lo anterior, sopo
 
 15.2.1 El soporte técnico está disponible a través de:
 
-a) **Email de soporte**: Dirección específica indicada al inicio de este documento (**EMAIL SOPORTE**) para todas las consultas técnicas y de funcionamiento.
+a) **Email de soporte**: Dirección específica indicada al inicio de este documento (**Email Soporte**) para todas las consultas técnicas y de funcionamiento.
 
 b) **Documentación online**: Tutoriales, guías de configuración, y resolución de problemas más comunes disponibles en nuestro sitio web.
 
@@ -1009,11 +1005,11 @@ d) **Cambios de dirección**: Es tu responsabilidad mantener actualizada tu dire
 
 19.1.1 Para cualquier cuestión relacionada con estos Términos y Condiciones, puedes contactar con nosotros a través de:
 
-a) **Para consultas generales sobre términos y condiciones**: **EMAIL TÉRMINOS** (ver datos de contacto al inicio)
+a) **Para consultas generales sobre términos y condiciones**: **Email Términos** (ver datos de contacto al inicio)
 
-b) **Para soporte técnico y funcionamiento del servicio**: **EMAIL SOPORTE** (ver datos de contacto al inicio)
+b) **Para soporte técnico y funcionamiento del servicio**: **Email Soporte** (ver datos de contacto al inicio)
 
-c) **Para cancelación de cuenta y eliminación de datos**: **EMAIL CANCELACIÓN** (ver datos de contacto al inicio)
+c) **Para cancelación de cuenta y eliminación de datos**: **Email Cancelación** (ver datos de contacto al inicio)
 
 d) **Dirección postal**: Puedes contactarnos también por correo postal en la dirección indicada en los **DATOS DE CONTACTO Y EMPRESA** al inicio de este documento
 
@@ -1053,7 +1049,7 @@ c) **Escalado de incidencias**: Si no recibes respuesta en los plazos establecid
 
 19.5.2 **Dirección para notificaciones a Notifycal**:
 
-a) Email certificado: **EMAIL TÉRMINOS** (ver datos de contacto al inicio)
+a) Email certificado: **Email Términos** (ver datos de contacto al inicio)
 
 b) Dirección postal: [Dirección indicada en datos de contacto al inicio del documento]
 

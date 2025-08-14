@@ -1,22 +1,18 @@
 # POLÍTICA DE PRIVACIDAD
 
+**Fecha de última actualización**: 12 de agosto de 2025
+
 ## DATOS DE CONTACTO Y EMPRESA
 
-```
-RAZÓN SOCIAL: [PENDIENTE]
-NOMBRE COMERCIAL: Notifycal
-NIF/CIF: [PENDIENTE]
-DOMICILIO SOCIAL: [PENDIENTE]
-CÓDIGO POSTAL: [PENDIENTE]
-LOCALIDAD: [PENDIENTE]
-PROVINCIA: [PENDIENTE]
-
-EMAIL PRIVACIDAD: privacidad@notifycal.com
-EMAIL SOPORTE: soporte@notifycal.com
-EMAIL BAJA: baja@notifycal.com
-```
-
-**Fecha de última actualización**: 12 de agosto de 2025
+| Campo | Valor |
+|-------|-------|
+| **Razón Social** | [PENDIENTE] |
+| **Nombre Comercial** | Notifycal |
+| **NIF/CIF** | [PENDIENTE] |
+| **Domicilio Social** | [PENDIENTE] |
+| **Email Privacidad** | privacidad@notifycal.com |
+| **Email Soporte** | soporte@notifycal.com |
+| **Email Baja** | baja@notifycal.com |
 
 ## 1. INFORMACIÓN GENERAL
 
@@ -275,9 +271,9 @@ El Reglamento General de Protección de Datos reconoce una serie de derechos que
 
 Hemos establecido procedimientos sencillos y gratuitos para que puedas ejercer tus derechos:
 
-Si eres **Usuario de Notifycal**, puedes ejercer tus derechos contactándonos directamente en el email indicado al inicio de este documento (**EMAIL PRIVACIDAD**) especificando qué derecho deseas ejercer y proporcionando información suficiente para verificar tu identidad.
+Si eres **Usuario de Notifycal**, puedes ejercer tus derechos contactándonos directamente en el email indicado al inicio de este documento (**Email Privacidad**) especificando qué derecho deseas ejercer y proporcionando información suficiente para verificar tu identidad.
 
-Si eres **Destinatario de recordatorios**, el primer paso debería ser contactar con el profesional o empresa que gestiona tu cita (nuestro Usuario), ya que ellos son los responsables principales de tus datos. No obstante, si tienes dificultades para contactar con ellos o no obtienes respuesta satisfactoria, puedes dirigirte a nosotros en el email de privacidad indicado al inicio de este documento (**EMAIL PRIVACIDAD**) y te ayudaremos en la medida de lo posible.
+Si eres **Destinatario de recordatorios**, el primer paso debería ser contactar con el profesional o empresa que gestiona tu cita (nuestro Usuario), ya que ellos son los responsables principales de tus datos. No obstante, si tienes dificultades para contactar con ellos o no obtienes respuesta satisfactoria, puedes dirigirte a nosotros en el email de privacidad indicado al inicio de este documento (**Email Privacidad**) y te ayudaremos en la medida de lo posible.
 
 ### Procedimiento y plazos
 
@@ -375,7 +371,7 @@ Si los cambios requieren tu consentimiento, te lo solicitaremos expresamente y n
 
 ### Archivo de versiones
 
-Mantenemos un archivo de las versiones anteriores de esta Política de Privacidad. Si deseas consultar una versión anterior, puedes solicitárnosla en el email de privacidad indicado al inicio de este documento (**EMAIL PRIVACIDAD**) indicando la fecha aproximada de la versión que te interesa consultar.
+Mantenemos un archivo de las versiones anteriores de esta Política de Privacidad. Si deseas consultar una versión anterior, puedes solicitárnosla en el email de privacidad indicado al inicio de este documento (**Email Privacidad**) indicando la fecha aproximada de la versión que te interesa consultar.
 
 ## 12. INFORMACIÓN ADICIONAL
 
@@ -426,11 +422,11 @@ La **seguridad por defecto** significa que las opciones más protectoras de la p
 
 Si tienes cualquier pregunta, duda o preocupación sobre esta Política de Privacidad o sobre cómo tratamos tus datos personales, queremos escucharte. Puedes contactar con nosotros a través de varios canales:
 
-Para cuestiones específicas de privacidad y protección de datos, incluyendo solicitudes de ejercicio de derechos, el canal preferente es nuestro email dedicado indicado al inicio de este documento: **EMAIL PRIVACIDAD**
+Para cuestiones específicas de privacidad y protección de datos, incluyendo solicitudes de ejercicio de derechos, el canal preferente es nuestro email dedicado indicado al inicio de este documento: **Email Privacidad**
 
-Para soporte técnico general o preguntas sobre el funcionamiento del servicio, puedes escribirnos a: **EMAIL SOPORTE** (ver datos de contacto al inicio)
+Para soporte técnico general o preguntas sobre el funcionamiento del servicio, puedes escribirnos a: **Email Soporte** (ver datos de contacto al inicio)
 
-Si deseas darte de baja del servicio y eliminar todos tus datos, hemos habilitado un email específico para agilizar el proceso: **EMAIL BAJA** (ver datos de contacto al inicio)
+Si deseas darte de baja del servicio y eliminar todos tus datos, hemos habilitado un email específico para agilizar el proceso: **Email Baja** (ver datos de contacto al inicio)
 
 También puedes contactarnos por correo postal en nuestra dirección oficial que encontrarás en los **DATOS DE CONTACTO Y EMPRESA** al inicio de este documento.
 
