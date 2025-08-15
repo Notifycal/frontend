@@ -12,11 +12,11 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 };
 
-interface AppLayoutProps {
+interface AppAuthedLayoutProps {
   children: ReactNode;
 }
 
-const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+const AppAuthedLayout: FC<AppAuthedLayoutProps> = ({ children }) => {
   const matches = useMatches();
   const currentRoute = matches[matches.length - 1];
   const routeStaticData = currentRoute?.staticData;
@@ -46,4 +46,4 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   );
 };
 
-export default AppLayout;
+export default AppAuthedLayout;

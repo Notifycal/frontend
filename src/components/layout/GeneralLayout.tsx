@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import Footer from '@components/ui/Footer/Footer';
 import { useAuth } from '@providers/AuthProvider';
 
-const GeneralLayout: FC = () => {
+const AppLayout: FC = () => {
   const { isAuthenticated } = useAuth();
 
   return (
@@ -17,4 +17,4 @@ const GeneralLayout: FC = () => {
   );
 };
 
-export default GeneralLayout;
+export default AppLayout;
