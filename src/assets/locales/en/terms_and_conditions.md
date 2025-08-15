@@ -1098,9 +1098,13 @@ c) Will be considered validly delivered 24 hours after sending to the registered
 ### 20.3 Abbreviations
 
 20.3.1 **EU**: European Union
+
 20.3.2 **EEA**: European Economic Area
+
 20.3.3 **PCI-DSS**: Payment Card Industry Data Security Standard
+
 20.3.4 **TLS**: Transport Layer Security
+
 20.3.5 **GSM**: Global System for Mobile Communications
 
 ### 20.4 Regulatory References
