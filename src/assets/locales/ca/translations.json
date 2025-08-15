@@ -1,11 +1,11 @@
 {
   "home": {
-    "greeting": "Hola, món!",
     "signInToYourAccount": "Inicia sessió a la teva àrea privada",
-    "orCheckOurDemo": "O prova la nostra demo",
     "wantToKnowMore": "Vols saber més?",
     "checkOurSite": "Visita el nostre lloc web",
-    "demo": "Demo",
+    "signIn": "Iniciar Sessió",
+    "welcomeBack": "Benvingut de nou! Inicia sessió al teu compte.",
+    "signInWithGoogle": "Iniciar sessió amb Google",
     "loginErrorInvalidScopes": "Hi ha hagut un error en iniciar sessió, assegura't de seleccionar tots els àmbits al popup de Google quan facis login.",
     "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, prova-ho de nou en uns minuts."
   },
