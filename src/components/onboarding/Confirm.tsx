@@ -152,7 +152,7 @@ const Confirm: React.FC = () => {
                     i18nKey={i18nKey}
                     ns="onboarding"
                     components={[
-                      <Link className="hover:underline" rel="noopener noreferrer" target="_blank" to={path}></Link>
+                      <Link className="hover:underline" rel="noopener noreferrer" target="_blank" to={path} />
                     ]}
                   />
                 ) : (

@@ -1,7 +1,7 @@
 import type { IdpName, User, UserStatus } from '@notifycal/shared/types';
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 
-import AppAuthedLayout from '@components/layout/AppLayout';
+import AppAuthedLayout from '@components/layout/AppAuthedLayout';
 
 type RedirectMap = Partial<Record<UserStatus, string>>;
 
