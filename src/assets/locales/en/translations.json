@@ -1,11 +1,8 @@
 {
   "home": {
-    "greeting": "Hello, world!",
     "signInToYourAccount": "Sign in to your private area",
-    "orCheckOurDemo": "Or check our demo",
     "wantToKnowMore": "Want to know more?",
     "checkOurSite": "Check our website",
-    "demo": "Demo",
     "signIn": "Sign In",
     "welcomeBack": "Welcome back! Please sign in to your account.",
     "signInWithGoogle": "Sign in with Google",
