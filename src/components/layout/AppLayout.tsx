@@ -1,7 +1,6 @@
 import { useMatches } from '@tanstack/react-router';
 import type { FC, ReactNode } from 'react';
 
-import Footer from '@components/ui/Footer/Footer';
 import Navigation from '@components/ui/Navigation/Navigation';
 
 import clsx from 'clsx';
@@ -25,7 +24,7 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   const { useFancyHeader = false, fancyHeaderTitle = '' } = routeStaticData?.layout || {};
 
   return (
-    <div className="min-h-full">
+    <div>
       <div className={clsx({ 'bg-primary-800': true, 'pb-32': useFancyHeader })}>
         {/* TODO global state */}
         <Navigation user={user} />
@@ -39,12 +38,10 @@ const AppLayout: FC<AppLayoutProps> = ({ children }) => {
         )}
       </div>
       <main className={clsx({ '-mt-32': useFancyHeader })}>
-        <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8">
           <div className="rounded-lg px-5 py-6 sm:px-6">{children}</div>
         </div>
       </main>
-
-      <Footer showFeedbackLink />
     </div>
   );
 };

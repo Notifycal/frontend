@@ -1,13 +1,11 @@
 import { Outlet } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-import Footer from '@components/ui/Footer/Footer';
-
 const OnboardingLayout: React.FC = () => {
   const { t } = useTranslation('onboarding');
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div>
       {/* Header */}
       <div className="w-full pt-6 bg-white">
         <div className="container mx-auto px-4">
@@ -18,8 +16,6 @@ const OnboardingLayout: React.FC = () => {
       </div>
 
       <Outlet />
-
-      <Footer showFeedbackLink />
     </div>
   );
 };
