@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.29.0](https://github.com/Notifycal/frontend/compare/v0.28.0...v0.29.0) (2025-08-15)
+
+
+### Features
+
+* beautify login. Inspired by _the template_ ([#542](https://github.com/Notifycal/frontend/issues/542)) ([7baf029](https://github.com/Notifycal/frontend/commit/7baf02920cbca4cf139573cde82a330df89fc5cb))
+* layout and footer ([#534](https://github.com/Notifycal/frontend/issues/534)) ([1759dfc](https://github.com/Notifycal/frontend/commit/1759dfcdd33093b3b10afedc5a182f6e668aea6a))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-router to v1.131.13 ([#537](https://github.com/Notifycal/frontend/issues/537)) ([cb68772](https://github.com/Notifycal/frontend/commit/cb68772012061e91b503ac385506ea863ad98f4e))
+
 ## [0.28.0](https://github.com/Notifycal/frontend/compare/v0.27.0...v0.28.0) (2025-08-14)
 
 
