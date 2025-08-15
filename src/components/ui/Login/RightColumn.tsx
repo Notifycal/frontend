@@ -1,8 +1,8 @@
 import type { JSX } from 'react';
 
-import { LoginBannerCarousel } from './LoginBannerCarousel';
+import { BannerCarousel } from './BannerCarousel';
 
-export const LoginRightColumn = (): JSX.Element => {
+export const RightColumn = (): JSX.Element => {
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-purple-600 to-secondary-600 flex lg:w-1/2 lg:order-2 min-h-[400px] lg:min-h-auto">
       <div className="absolute inset-0 bg-black/20" />
@@ -12,7 +12,7 @@ export const LoginRightColumn = (): JSX.Element => {
           reality
         </h2>
 
-        <LoginBannerCarousel />
+        <BannerCarousel />
       </div>
     </div>
   );

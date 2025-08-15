@@ -26,7 +26,7 @@ const carouselImages: Array<CarouselSlide> = [
   }
 ];
 
-export const LoginBannerCarousel = (): JSX.Element => {
+export const BannerCarousel = (): JSX.Element => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {

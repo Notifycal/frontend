@@ -8,10 +8,10 @@ import FlatError from '@components/ui/FlatError/FlatError';
 
 import { getServiceConfig } from '@config/serviceConfig';
 import { Link } from '@tanstack/react-router';
-import { LoginDecorativeIcon } from './LoginDecorativeIcon';
-import { LoginWithGoogleButton } from './LoginWithGoogleButton';
+import { DecorativeIcon } from './DecorativeIcon';
+import { LoginWithGoogleButton } from './GoogleLoginButton';
 
-export const LoginFormContainer = (): JSX.Element => {
+export const LoginForm = (): JSX.Element => {
   const { t } = useTranslation();
   const auth = useAuth();
   const { STATIC_LANDING_URL } = getServiceConfig();
@@ -27,7 +27,7 @@ export const LoginFormContainer = (): JSX.Element => {
 
   return (
     <>
-      <LoginDecorativeIcon />
+      <DecorativeIcon />
 
       <h1 className="text-4xl font-bold text-primary mb-4">{t('home.signIn')}</h1>
       <p className="text-text-secondary mb-10">{t('home.welcomeBack')}</p>

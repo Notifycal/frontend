@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 
-export const LoginDecorativeIcon = (): JSX.Element => {
+export const DecorativeIcon = (): JSX.Element => {
   return (
     <div className="mb-8">
       <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl flex items-center justify-center mx-auto">
