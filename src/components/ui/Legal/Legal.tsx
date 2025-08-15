@@ -7,12 +7,8 @@ interface LegalProps {
 
 export const Legal = ({ htmlText }: LegalProps): JSX.Element => {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8">
-      <div className="bg-white rounded-lg shadow-sm p-8 md:p-8">
-        <Typography>
-          <div dangerouslySetInnerHTML={{ __html: htmlText }} />
-        </Typography>
-      </div>
-    </div>
+    <Typography>
+      <div dangerouslySetInnerHTML={{ __html: htmlText }} />
+    </Typography>
   );
 };

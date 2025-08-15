@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { html as termsEn } from '@assets/locales/en/terms_and_conditions.md';
 import { html as termsEs } from '@assets/locales/es/terms_and_conditions.md';
+import LegalLayout from '@components/layout/LegalLayout';
 
 const termsAndConditionsByLanguage: Record<LanguageCode, string> = {
   es: termsEs,
@@ -17,5 +18,9 @@ export const TermsAndConditions = (): JSX.Element => {
   const currentLanguage = i18n.language as LanguageCode;
   const termsContent = termsAndConditionsByLanguage[currentLanguage];
 
-  return <Legal htmlText={termsContent} />;
+  return (
+    <LegalLayout>
+      <Legal htmlText={termsContent} />
+    </LegalLayout>
+  );
 };
