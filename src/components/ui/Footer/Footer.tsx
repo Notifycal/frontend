@@ -11,13 +11,20 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
   const { t, i18n } = useTranslation();
 
+  const footerLinks = [
+    { title: t('footer.terms'), to: '/terms-and-conditions' },
+    { title: t('footer.privacy'), to: '/privacy-policy' }
+  ].concat(showFeedbackLink ? [{ title: t('footer.feedbackLink'), to: '/onboarding/feedback' }] : []);
+
   return (
     <footer className="py-4 bg-white border-t border-gray-200">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-gray-500 text-sm">
-          <span>&copy; {t('footer.allRightsReserved', { year: new Date().getFullYear() })}</span>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-gray-500 text-sm">
+          <span className="text-center md:text-left">
+            &copy; {t('footer.allRightsReserved', { year: new Date().getFullYear() })}
+          </span>
 
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex flex-col items-center gap-4 md:gap-8 xs:flex-row">
             <div>
               <InternationalizationPicker
                 displayFlagOnly
@@ -29,19 +36,11 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
               />
             </div>
 
-            <Link className="hover:underline" target="_blank" to="/terms-and-conditions">
-              {t('footer.terms')}
-            </Link>
-
-            <Link className="hover:underline" target="_blank" to="/privacy-policy">
-              {t('footer.privacy')}
-            </Link>
-
-            {showFeedbackLink && (
-              <Link className="hover:underline" target="_blank" to="/onboarding/feedback">
-                {t('footer.feedbackLink')}
+            {footerLinks.map(({ title, to }) => (
+              <Link target="_blank" to={to}>
+                {title}
               </Link>
-            )}
+            ))}
           </div>
         </div>
       </div>
