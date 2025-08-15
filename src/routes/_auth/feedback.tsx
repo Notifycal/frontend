@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import AppAuthedLayout from '@components/layout/AppAuthedLayout';
 import { Feedback } from '@pages/Feedback';
-import AppLayout from '@components/layout/AppLayout';
 
 export const Route = createFileRoute('/_auth/feedback')({
   component: () => (
-    <AppLayout>
+    <AppAuthedLayout>
       <Feedback />
-    </AppLayout>
+    </AppAuthedLayout>
   )
 });

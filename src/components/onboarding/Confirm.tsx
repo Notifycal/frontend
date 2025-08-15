@@ -16,6 +16,7 @@ import AccountOverview from '@components/ui/AccountOverview/AccountOverview';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { Checkbox } from '@mantine/core';
+import { Link } from '@tanstack/react-router';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const confirmSchema = (t: NotifycalTFunction) =>
@@ -115,17 +116,17 @@ const Confirm: React.FC = () => {
     name: keyof ConfirmInput;
     i18nKey?: ParseKeys<'onboarding'>;
     label?: string;
-    url?: string;
+    path?: string;
   }> = [
     {
       name: 'termsAccepted',
       i18nKey: 'confirm.formTosField.label',
-      url: 'https://TODO/TOS'
+      path: '/terms-and-conditions'
     },
     {
       name: 'privacyAccepted',
       i18nKey: 'confirm.formPrivacyField.label',
-      url: 'https://TODO/Privacy'
+      path: '/privacy-policy'
     },
     {
       name: 'marketingOptInAccepted',
@@ -140,19 +141,17 @@ const Confirm: React.FC = () => {
 
         {/* Terms & Agreements */}
         <div className="space-y-3">
-          {checkboxes.map(({ name, i18nKey, label, url }) => (
+          {checkboxes.map(({ name, i18nKey, label, path }) => (
             <Checkbox
               key={name}
               className="mt-1"
               label={
-                i18nKey && url ? (
+                i18nKey && path ? (
                   <Trans
                     className="text-sm text-gray-700"
+                    components={[<Link rel="noopener noreferrer" target="_blank" to={path} />]}
                     i18nKey={i18nKey}
                     ns="onboarding"
-                    components={[
-                      <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank" />
-                    ]}
                   />
                 ) : (
                   label

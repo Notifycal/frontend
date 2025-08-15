@@ -1098,9 +1098,13 @@ c) Se considerarán válidamente entregadas 24 horas después del envío al emai
 ### 20.3 Abreviaciones
 
 20.3.1 **UE**: Unión Europea
+
 20.3.2 **EEE**: Espacio Económico Europeo
+
 20.3.3 **PCI-DSS**: Payment Card Industry Data Security Standard
+
 20.3.4 **TLS**: Transport Layer Security
+
 20.3.5 **GSM**: Global System for Mobile Communications
 
 ### 20.4 Referencias normativas

@@ -1,6 +1,6 @@
 import { useEffect, useState, type JSX } from 'react';
 
-import { Alert, Transition, Button } from '@mantine/core';
+import { Alert, Button, Transition } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth, type LoginError } from '@providers/AuthProvider';
@@ -37,7 +37,7 @@ export const Login = (): JSX.Element => {
   // const { STATIC_LANDING_URL } = useServiceConfig();
 
   return (
-    <div className="flex h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
+    <div className="min-h-[calc(100vh-120px)] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
           <div className="sm:mx-auto sm:w-full sm:max-w-md mb-6">

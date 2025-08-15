@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { html as privacyEn } from '@assets/locales/en/privacy_policy.md';
 import { html as privacyEs } from '@assets/locales/es/privacy_policy.md';
+import LegalLayout from '@components/layout/LegalLayout';
 
 const privacyPolicyByLanguage: Record<LanguageCode, string> = {
   es: privacyEs,
@@ -17,5 +18,9 @@ export const PrivacyPolicy = (): JSX.Element => {
   const currentLanguage = i18n.language as LanguageCode;
   const privacyContent = privacyPolicyByLanguage[currentLanguage];
 
-  return <Legal htmlText={privacyContent} />;
+  return (
+    <LegalLayout>
+      <Legal htmlText={privacyContent} />
+    </LegalLayout>
+  );
 };

@@ -61,6 +61,12 @@
     "used": "{{credits}} utilitzats",
     "remaining": "{{credits}} restants"
   },
+  "footer": {
+    "allRightsReserved": "{{year}} Notifycal. Tots els drets reservats.",
+    "feedbackLink": "Feedback",
+    "terms": "Termes i condicions",
+    "privacy": "Política de privacitat"
+  },
   "billing": {
     "topup": "Recàrrega",
     "subscription": "Subscripció",

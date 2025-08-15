@@ -1,6 +1,7 @@
-import { createRootRouteWithContext, Outlet } from '@tanstack/react-router';
 import type { QueryClient } from '@tanstack/react-query';
+import { createRootRouteWithContext } from '@tanstack/react-router';
 
+import AppLayout from '@components/layout/AppLayout';
 import type { AuthContext } from '@providers/AuthProvider';
 
 interface MyRouterContext {
@@ -9,5 +10,5 @@ interface MyRouterContext {
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
-  component: Outlet
+  component: AppLayout
 });

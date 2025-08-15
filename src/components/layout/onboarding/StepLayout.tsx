@@ -5,8 +5,8 @@ import { Outlet, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { Progress, Stepper } from '@mantine/core';
-import { AnimatePresence, motion } from 'motion/react';
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'motion/react';
 
 interface SubHeaderProps {
   title: string;
@@ -80,7 +80,7 @@ const StepLayout: React.FC = () => {
           <Progress radius={0} size="sm" value={(currentStep / (onboardingSteps.length - 1)) * 100} />
 
           {/* Main content */}
-          <main className="flex-1 container mx-auto px-4 py-6">
+          <main className="mx-auto px-4 py-4">
             <AnimatePresence mode="wait">
               <div
                 className={clsx(
