@@ -6,14 +6,17 @@ import { useAuth, type LoginError } from '@providers/AuthProvider';
 
 import FlatError from '@components/ui/FlatError/FlatError';
 
+import { getServiceConfig } from '@config/serviceConfig';
+import { Link } from '@tanstack/react-router';
 import { LoginDecorativeIcon } from './LoginDecorativeIcon';
 import { LoginWithGoogleButton } from './LoginWithGoogleButton';
 
 export const LoginFormContainer = (): JSX.Element => {
   const { t } = useTranslation();
-  const [lastLoginError, setLastLoginError] = useState<LoginError | null>(null);
-
   const auth = useAuth();
+  const { STATIC_LANDING_URL } = getServiceConfig();
+
+  const [lastLoginError, setLastLoginError] = useState<LoginError | null>(null);
   const loginErrorMessage = auth.loginError;
 
   useEffect(() => {
@@ -26,12 +29,18 @@ export const LoginFormContainer = (): JSX.Element => {
     <>
       <LoginDecorativeIcon />
 
-      <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('home.signIn')}</h1>
-      <p className="text-gray-600 mb-10">{t('home.welcomeBack')}</p>
+      <h1 className="text-4xl font-bold text-primary mb-4">{t('home.signIn')}</h1>
+      <p className="text-text-secondary mb-10">{t('home.welcomeBack')}</p>
       <div className="space-y-6">
         <LoginWithGoogleButton />
         {lastLoginError && <FlatError isDismissable={false}>{t(`home.${lastLoginError}`)}</FlatError>}
       </div>
+      <p className="mt-10 text-center text-sm/6 text-text-secondary">
+        {t('home.wantToKnowMore')}{' '}
+        <Link target="_blank" to={STATIC_LANDING_URL}>
+          {t('home.checkOurSite')}
+        </Link>
+      </p>
     </>
   );
 };
