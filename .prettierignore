@@ -10,6 +10,3 @@ src/routeTree.gen.ts
 config/**
 public/**
 dist/**
-
-# Automatically generated files
-**/_generated-*

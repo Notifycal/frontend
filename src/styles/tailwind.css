@@ -1,4 +1,4 @@
-@import './_generated-color-shades.css';
+@import '@notifycal/shared/styles';
 
 @theme {
   --breakpoint-xs: 36em;

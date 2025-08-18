@@ -16,7 +16,7 @@ import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
 import { ReactQueryDevelopmentTools } from '@components/utils/development-tools/ReactQueryDevelopmentTools.tsx';
 import { TanStackRouterDevelopmentTools } from '@components/utils/development-tools/TanStackRouterDevelopmentTools';
 
-import { colors } from '@theme/_generated-colors-mantine.ts';
+import { colors } from '@notifycal/shared/theme';
 
 type AppProps = {
   router: typeof router;
