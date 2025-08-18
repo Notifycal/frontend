@@ -15,4 +15,3 @@ export type ServiceConfig = z.infer<typeof serviceConfigSchema>;
 const { loadServiceConfig, getServiceConfig } = serviceConfigFactory(serviceConfigSchema);
 
 export { getServiceConfig, loadServiceConfig };
-
