@@ -1,6 +1,7 @@
 import z from 'zod';
 
 import { productsInfoSchema } from '@notifycal/shared/pricing';
+import { serviceConfigFactory } from '@notifycal/shared/utils';
 
 export const serviceConfigSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().nonempty('GOOGLE_CLIENT_ID is required'),
@@ -11,28 +12,6 @@ export const serviceConfigSchema = z.object({
 
 export type ServiceConfig = z.infer<typeof serviceConfigSchema>;
 
-let config: ServiceConfig | null = null;
+const { loadServiceConfig, getServiceConfig } = serviceConfigFactory(serviceConfigSchema);
 
-export const loadServiceConfig = (): void => {
-  if (config) return;
-
-  const raw = window.globalConfig;
-
-  if (!raw) {
-    throw new Error('Service configuration is missing');
-  }
-
-  try {
-    config = serviceConfigSchema.parse(raw);
-  } catch {
-    throw new Error('Invalid service configuration');
-  }
-};
-
-export const getServiceConfig = (): ServiceConfig => {
-  if (!config) {
-    throw new Error('Service config not loaded.');
-  }
-
-  return config;
-};
+export { getServiceConfig, loadServiceConfig };
