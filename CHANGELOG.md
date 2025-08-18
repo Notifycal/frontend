@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.30.0](https://github.com/Notifycal/frontend/compare/v0.29.0...v0.30.0) (2025-08-18)
+
+
+### Features
+
+* use style-dictionary from shared ([#553](https://github.com/Notifycal/frontend/issues/553)) ([4c8feaa](https://github.com/Notifycal/frontend/commit/4c8feaa73f824e6b34180d2a594dc6851ec58637))
+
+
+### Bug Fixes
+
+* **deps:** Update Node.js Dependencies to v8.2.5 ([#541](https://github.com/Notifycal/frontend/issues/541)) ([652a26f](https://github.com/Notifycal/frontend/commit/652a26f3699d99beff7ff4c2412c735bca2ae513))
+
 ## [0.29.0](https://github.com/Notifycal/frontend/compare/v0.28.0...v0.29.0) (2025-08-15)
 
 
