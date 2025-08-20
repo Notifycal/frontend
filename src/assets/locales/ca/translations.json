@@ -1,5 +1,5 @@
 {
-  "home": {
+  "login": {
     "signInToYourAccount": "Inicia sessió a la teva àrea privada",
     "wantToKnowMore": "Vols saber més?",
     "checkOurSite": "Visita el nostre lloc web",
@@ -7,7 +7,25 @@
     "welcomeBack": "Benvingut de nou! Inicia sessió al teu compte.",
     "signInWithGoogle": "Iniciar sessió amb Google",
     "loginErrorInvalidScopes": "Hi ha hagut un error en iniciar sessió, assegura't de seleccionar tots els àmbits al popup de Google quan facis login.",
-    "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, prova-ho de nou en uns minuts."
+    "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, prova-ho de nou en uns minuts.",
+    "rightCta": "La teva agenda,<br />sense sorpreses",
+    "carouselSlides": [
+      {
+        "title": "Adéu als oblits",
+        "description": "Els teus clients reben recordatoris perquè no perdin cap cita.",
+        "icon": "📅"
+      },
+      {
+        "title": "Comunicació fluida",
+        "description": "Informa fàcil i ràpid, sense trucades ni correus d'última hora.",
+        "icon": "💬"
+      },
+      {
+        "title": "Més temps lliure per a tu",
+        "description": "Dedica'l al teu negoci (o al que vulguis), no a perseguir cites.",
+        "icon": "⏳"
+      }
+    ]
   },
   "feedback": {
     "type": "Has de seleccionar un tipus de comentari",

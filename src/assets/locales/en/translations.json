@@ -1,5 +1,5 @@
 {
-  "home": {
+  "login": {
     "signInToYourAccount": "Sign in to your private area",
     "wantToKnowMore": "Want to know more?",
     "checkOurSite": "Check our website",
@@ -7,7 +7,25 @@
     "welcomeBack": "Welcome back! Please sign in to your account.",
     "signInWithGoogle": "Sign in with Google",
     "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
-    "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
+    "loginErrorGeneric": "There was an error logging in, please try again in a few minutes.",
+    "rightCta": "Your schedule,<br />no surprises",
+    "carouselSlides": [
+      {
+        "title": "No more missed appointments",
+        "description": "Your clients receive reminders so they never miss a booking.",
+        "icon": "📅"
+      },
+      {
+        "title": "Smooth communication",
+        "description": "Keep everyone updated without last-minute calls or emails.",
+        "icon": "💬"
+      },
+      {
+        "title": "More free time for you",
+        "description": "Focus on your business (or whatever you want), not chasing appointments.",
+        "icon": "⏳"
+      }
+    ]
   },
   "feedback": {
     "type": "You must select a feedback type",
