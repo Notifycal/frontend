@@ -1,5 +1,5 @@
 import '@notifycal/shared/styles/cookie-consent-theme.css';
-import { cookieConsentConfig } from '@notifycal/shared/utils';
+import { cookieConsentConfig } from './cookieConsentConfig';
 import { type JSX, useEffect } from 'react';
 import { run } from 'vanilla-cookieconsent';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
