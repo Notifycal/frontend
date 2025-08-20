@@ -29,16 +29,16 @@ export const LoginForm = (): JSX.Element => {
     <>
       <DecorativeIcon />
 
-      <h1 className="text-4xl font-bold text-primary mb-4 text-center lg:text-left">{t('home.signIn')}</h1>
-      <p className="text-text-secondary mb-10">{t('home.welcomeBack')}</p>
+      <h1 className="text-4xl font-bold text-primary mb-4 text-center lg:text-left">{t('login.signIn')}</h1>
+      <p className="text-text-secondary mb-10">{t('login.welcomeBack')}</p>
       <div className="space-y-6">
         <LoginWithGoogleButton />
-        {lastLoginError && <FlatError isDismissable={false}>{t(`home.${lastLoginError}`)}</FlatError>}
+        {lastLoginError && <FlatError isDismissable={false}>{t(`login.${lastLoginError}`)}</FlatError>}
       </div>
       <p className="mt-10 text-center text-sm/6 text-text-secondary">
-        {t('home.wantToKnowMore')}{' '}
+        {t('login.wantToKnowMore')}{' '}
         <Link target="_blank" to={STATIC_LANDING_URL}>
-          {t('home.checkOurSite')}
+          {t('login.checkOurSite')}
         </Link>
       </p>
     </>
