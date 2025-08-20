@@ -37,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
             </div>
 
             {footerLinks.map(({ title, to }) => (
-              <Link target="_blank" to={to}>
+              <Link key={to} target="_blank" to={to}>
                 {title}
               </Link>
             ))}

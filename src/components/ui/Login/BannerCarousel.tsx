@@ -40,13 +40,12 @@ export const BannerCarousel = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="w-full max-w-lg">
-      <div className="relative h-60 lg:h-80">
+    <div className="max-w-lg">
+      <div className="h-60 lg:h-80">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute inset-0 flex flex-col items-center justify-center"
             exit={{ opacity: 0, y: -20 }}
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
@@ -58,21 +57,6 @@ export const BannerCarousel = (): JSX.Element => {
             </div>
           </motion.div>
         </AnimatePresence>
-      </div>
-
-      <div className="flex justify-center mt-6 lg:mt-8 space-x-2">
-        {carouselImages.map((_, index) => (
-          <button
-            key={index}
-            aria-label={`Go to slide ${index + 1}`}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-white' : 'bg-white/40'
-            }`}
-            onClick={() => {
-              setCurrentSlide(index);
-            }}
-          />
-        ))}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const AppLayout: FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="flex-grow bg-neutral-50">
+      <div className="flex-grow bg-neutral-50 flex flex-col">
         <Outlet />
       </div>
       <Footer showFeedbackLink={isAuthenticated} />
