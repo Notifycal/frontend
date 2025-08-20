@@ -65,7 +65,8 @@
     "allRightsReserved": "{{year}} Notifycal. All rights reserved.",
     "feedbackLink": "Feedback",
     "terms": "Terms and conditions",
-    "privacy": "Privacy policy"
+    "privacy": "Privacy policy",
+    "cookieSettings": "Cookie settings"
   },
   "billing": {
     "topup": "Top-up",

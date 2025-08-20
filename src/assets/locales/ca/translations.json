@@ -65,7 +65,8 @@
     "allRightsReserved": "{{year}} Notifycal. Tots els drets reservats.",
     "feedbackLink": "Feedback",
     "terms": "Termes i condicions",
-    "privacy": "Política de privacitat"
+    "privacy": "Política de privacitat",
+    "cookieSettings": "Configuració de cookies"
   },
   "billing": {
     "topup": "Recàrrega",

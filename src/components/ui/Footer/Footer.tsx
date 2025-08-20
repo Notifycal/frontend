@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { languageData } from '@common/i18n';
+import CookieConsent from '@components/ui/CookieConsent/CookieConsent';
 import InternationalizationPicker from '@components/ui/InternationalizationPicker/InternationalizationPicker';
 
 interface FooterProps {
@@ -37,10 +38,14 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
             </div>
 
             {footerLinks.map(({ title, to }) => (
-              <Link target="_blank" to={to}>
+              <Link key={to} target="_blank" to={to}>
                 {title}
               </Link>
             ))}
+            <CookieConsent />
+            <a className="cursor-pointer" data-cc="show-preferencesModal">
+              {t('footer.cookieSettings')}
+            </a>
           </div>
         </div>
       </div>
