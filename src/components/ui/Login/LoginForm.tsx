@@ -29,7 +29,7 @@ export const LoginForm = (): JSX.Element => {
     <>
       <DecorativeIcon />
 
-      <h1 className="text-4xl font-bold text-primary mb-4">{t('home.signIn')}</h1>
+      <h1 className="text-4xl font-bold text-primary mb-4 text-center lg:text-left">{t('home.signIn')}</h1>
       <p className="text-text-secondary mb-10">{t('home.welcomeBack')}</p>
       <div className="space-y-6">
         <LoginWithGoogleButton />
