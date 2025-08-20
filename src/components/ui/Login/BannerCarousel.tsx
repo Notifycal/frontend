@@ -23,7 +23,7 @@ export const BannerCarousel: FC<BannerCarouselProps> = ({ slides }) => {
     return (): void => {
       clearInterval(timer);
     };
-  }, []);
+  }, [slides]);
 
   return (
     <div className="max-w-lg">
