@@ -1,5 +1,5 @@
 import { errorPopUpTransition } from '@constants/animation';
-import { Alert } from '@mantine/core';
+import { Alert, type MantineColor } from '@mantine/core';
 import { IconExclamationCircle } from '@tabler/icons-react';
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 interface FlatErrorProps extends React.PropsWithChildren {
   title?: string;
+  color?: MantineColor;
   children: ReactNode;
   isDismissable?: boolean;
   onErrorClose?: () => void;
@@ -14,6 +15,7 @@ interface FlatErrorProps extends React.PropsWithChildren {
 
 const FlatError: React.FC<FlatErrorProps> = ({
   title,
+  color,
   children,
   isDismissable = true,
   onErrorClose = (): void => {}
@@ -21,11 +23,12 @@ const FlatError: React.FC<FlatErrorProps> = ({
   const { t } = useTranslation();
 
   const errorTitle = title || t('generic.error');
+  const _color: MantineColor = color || 'pink';
 
   return (
     <motion.div key="error-alert" {...errorPopUpTransition}>
       <Alert
-        color="pink"
+        color={_color}
         icon={<IconExclamationCircle />}
         radius="md"
         title={errorTitle}

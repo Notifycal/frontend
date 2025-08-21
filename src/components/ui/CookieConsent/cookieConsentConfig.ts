@@ -84,7 +84,8 @@ export function cookieConsentConfig(): CookieConsentConfig {
               name: 'SOCS',
               domain: '.google.com'
             }
-          ]
+          ],
+          reloadPage: true
         },
         services: {
           [SERVICE_SECURITY_STORAGE]: {

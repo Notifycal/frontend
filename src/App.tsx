@@ -5,7 +5,7 @@ import { MantineProvider } from '@mantine/core';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
-import { ConditionalGoogleOAuthProvider } from '@components/providers/ConditionalGoogleOAuthProvider.tsx';
+import { ConditionalAuthProvider } from '@components/providers/ConditionalAuthProvider.tsx';
 import { useAuth } from '@providers/AuthProvider.tsx';
 import { type JSX, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -58,14 +58,14 @@ const App = ({ router, queryClient }: AppProps): JSX.Element => {
           />
         }
       >
-        <ConditionalGoogleOAuthProvider>
+        <ConditionalAuthProvider>
           <QueryClientProvider client={queryClient}>
             <InnerApp queryClient={queryClient} router={router} />
             {/* Development tools */}
             <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
             <ReactQueryDevelopmentTools initialIsOpen={false} />
           </QueryClientProvider>
-        </ConditionalGoogleOAuthProvider>
+        </ConditionalAuthProvider>
       </ErrorBoundary>
     </MantineProvider>
   );

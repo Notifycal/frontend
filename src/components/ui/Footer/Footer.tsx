@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { languageData } from '@common/i18n';
 import CookieConsent from '@components/ui/CookieConsent/CookieConsent';
 import InternationalizationPicker from '@components/ui/InternationalizationPicker/InternationalizationPicker';
+import { showPreferences } from 'vanilla-cookieconsent';
 
 interface FooterProps {
   showFeedbackLink?: boolean;
@@ -43,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
               </Link>
             ))}
             <CookieConsent />
-            <a className="cursor-pointer" data-cc="show-preferencesModal">
+            <a className="cursor-pointer" onClick={showPreferences}>
               {t('footer.cookieSettings')}
             </a>
           </div>
