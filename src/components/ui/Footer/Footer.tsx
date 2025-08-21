@@ -44,9 +44,9 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
               </Link>
             ))}
             <CookieConsent>
-              <a className="cursor-pointer" onClick={showPreferences}>
+              <Link to="." onClick={showPreferences}>
                 {t('footer.cookieSettings')}
-              </a>
+              </Link>
             </CookieConsent>
           </div>
         </div>

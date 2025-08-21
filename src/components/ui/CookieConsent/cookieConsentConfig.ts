@@ -11,7 +11,7 @@ type PreferencesModalSection = NonNullable<NonNullable<Translation['preferencesM
 type CookieTable = NonNullable<PreferencesModalSection['cookieTable']>;
 
 export function cookieConsentConfig(language: LanguageCode): CookieConsentConfig {
-  const baseConfig = commonCookieConsentConfig();
+  const baseConfig = commonCookieConsentConfig(language);
 
   const config: CookieConsentConfig = {
     ...baseConfig,
