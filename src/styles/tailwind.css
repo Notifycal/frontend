@@ -25,6 +25,15 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-primary;
+  }
+
   a {
     @apply font-semibold text-primary-600 hover:text-primary-800 hover:underline;
   }
