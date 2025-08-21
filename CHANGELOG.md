@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.1](https://github.com/Notifycal/frontend/compare/v0.31.0...v0.31.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency radashi to v12.6.2 ([#569](https://github.com/Notifycal/frontend/issues/569)) ([3078038](https://github.com/Notifycal/frontend/commit/3078038a58f9471489f5192ad3ced06a7641fe46))
+
 ## [0.31.0](https://github.com/Notifycal/frontend/compare/v0.30.0...v0.31.0) (2025-08-20)
 
 
