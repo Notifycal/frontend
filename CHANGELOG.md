@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.32.0](https://github.com/Notifycal/frontend/compare/v0.31.1...v0.32.0) (2025-08-21)
+
+
+### Features
+
+* cookie consent ([#564](https://github.com/Notifycal/frontend/issues/564)) ([8e934f7](https://github.com/Notifycal/frontend/commit/8e934f7f6c7cc45d163e46e68fcdbd6d84ee0f79))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency react-i18next to v15.7.1 ([#574](https://github.com/Notifycal/frontend/issues/574)) ([f944c9e](https://github.com/Notifycal/frontend/commit/f944c9e989ad51292e38a6d72c885caac0737fa2))
+
 ## [0.31.1](https://github.com/Notifycal/frontend/compare/v0.31.0...v0.31.1) (2025-08-21)
 
 
