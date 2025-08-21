@@ -2,7 +2,9 @@ import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { languageData } from '@common/i18n';
+import CookieConsent from '@components/ui/CookieConsent/CookieConsent';
 import InternationalizationPicker from '@components/ui/InternationalizationPicker/InternationalizationPicker';
+import { showPreferences } from 'vanilla-cookieconsent';
 
 interface FooterProps {
   showFeedbackLink?: boolean;
@@ -41,6 +43,11 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
                 {title}
               </Link>
             ))}
+            <CookieConsent>
+              <Link to="." onClick={showPreferences}>
+                {t('footer.cookieSettings')}
+              </Link>
+            </CookieConsent>
           </div>
         </div>
       </div>
