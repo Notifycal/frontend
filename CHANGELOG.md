@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.0](https://github.com/Notifycal/frontend/compare/v0.32.0...v0.33.0) (2025-08-21)
+
+
+### Features
+
+* Use google typography from shared ([#577](https://github.com/Notifycal/frontend/issues/577)) ([6e53048](https://github.com/Notifycal/frontend/commit/6e5304876a9d851231dfff6bd58f4355442932b8))
+
 ## [0.32.0](https://github.com/Notifycal/frontend/compare/v0.31.1...v0.32.0) (2025-08-21)
 
 
