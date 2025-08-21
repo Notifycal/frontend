@@ -1,7 +1,6 @@
 import {
   CAT_ANALYTICS,
   CAT_NECESSARY,
-  CAT_SECURITY,
   cookieConsentConfig as commonCookieConsentConfig,
   SERVICE_SECURITY_STORAGE
 } from '@notifycal/shared/utils';
@@ -18,10 +17,6 @@ export function cookieConsentConfig(): CookieConsentConfig {
     categories: {
       ...baseConfig.categories,
       [CAT_NECESSARY]: {
-        enabled: true,
-        readOnly: true
-      },
-      [CAT_SECURITY]: {
         enabled: true,
         readOnly: true,
         autoClear: {
@@ -113,13 +108,7 @@ export function cookieConsentConfig(): CookieConsentConfig {
                 title: 'Strictly necessary cookies',
                 description:
                   'These cookies are essential for the proper functioning of the website, including user authentication.',
-                linkedCategory: CAT_NECESSARY
-              },
-              {
-                title: 'Security & Authentication',
-                description:
-                  'We use Google authentication for secure login. Google sets security cookies to authenticate users, prevent fraudulent use of login credentials, and protect user data from unauthorized access. These cookies are essential for maintaining your session and ensuring secure access to the platform.',
-                linkedCategory: CAT_SECURITY,
+                linkedCategory: CAT_NECESSARY,
                 cookieTable: {
                   headers: {
                     name: 'Name',
