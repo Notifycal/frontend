@@ -25,7 +25,7 @@ export const LoginWithGoogleButton = (): JSX.Element => {
 
   const button = (
     <Button
-      className="w-full rounded-md bg-white hover:bg-gray-50 text-primary ring-1 ring-inset ring-gray-300 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 shadow-xs py-2.5 px-3 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full rounded-md bg-white hover:bg-gray-50 text-primary ring-1 ring-inset ring-gray-300 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 shadow-xs py-2.5 px-3"
       size="md"
       variant="default"
       onClick={handleClick}

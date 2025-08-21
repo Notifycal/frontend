@@ -12,40 +12,30 @@ type CookieTable = NonNullable<PreferencesModalSection['cookieTable']>;
 
 export function cookieConsentConfig(onChange?: () => void): CookieConsentConfig {
   const baseConfig = commonCookieConsentConfig();
+  
+  const extendHandler =
+    <T extends object>(handlerName: keyof typeof baseConfig) =>
+    (parameters: T): void => {
+      const baseHandler = baseConfig[handlerName] as ((parameters_: T) => void) | undefined;
+      baseHandler?.(parameters);
+      onChange?.();
+    };
+
   const config: CookieConsentConfig = {
     ...baseConfig,
-    onFirstConsent: ({ cookie }) => {
-      if (baseConfig.onFirstConsent) {
-        baseConfig.onFirstConsent({ cookie });
-      }
-      if (onChange) {
-        onChange();
-      }
-    },
-    onConsent: ({ cookie }) => {
-      if (baseConfig.onConsent) {
-        baseConfig.onConsent({ cookie });
-      }
-      if (onChange) {
-        onChange();
-      }
-    },
-    onChange: ({ changedCategories, changedServices, cookie }) => {
-      if (baseConfig.onChange) {
-        baseConfig.onChange({ changedCategories, changedServices, cookie });
-      }
-      if (onChange) {
-        onChange();
-      }
-    },
+    onFirstConsent: extendHandler('onFirstConsent'),
+    onConsent: extendHandler('onConsent'),
+    onChange: extendHandler('onChange'),
     categories: {
       ...baseConfig.categories,
       [CAT_NECESSARY]: {
-        enabled: true
+        enabled: true,
+        readOnly: true
       },
       [CAT_SECURITY]: {
         enabled: true,
         autoClear: {
+          reloadPage: true,
           cookies: [
             {
               name: 'SID',
@@ -107,8 +97,7 @@ export function cookieConsentConfig(onChange?: () => void): CookieConsentConfig 
               name: 'SOCS',
               domain: '.google.com'
             }
-          ],
-          reloadPage: true
+          ]
         },
         services: {
           [SERVICE_SECURITY_STORAGE]: {

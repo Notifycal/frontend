@@ -24,7 +24,12 @@ export const CookieConsentProvider = ({ children }: CookieConsentProviderProps):
 export const useCookieConsent = (): CookieConsentContextType => {
   const context = useContext(CookieConsentContext);
   if (!context) {
-    throw new Error('useCookieConsentContext must be used within a CookieConsentProvider');
+    return {
+      hasSecurityConsent: false,
+      setHasSecurityConsent: (): void => {
+        console.warn('useCookieConsent must be used within a CookieConsentProvider');
+      }
+    };
   }
   return context;
 };
