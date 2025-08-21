@@ -400,7 +400,7 @@ export function cookieConsentConfig(language: LanguageCode): CookieConsentConfig
               {
                 title: 'Cookies estrictament necessàries',
                 description:
-                  'Aquestes cookies són essencials per al funcionament correcte del lloc web, incloent l\'autenticació d\'usuaris.',
+                  "Aquestes cookies són essencials per al funcionament correcte del lloc web, incloent l'autenticació d'usuaris.",
                 linkedCategory: CAT_NECESSARY,
                 cookieTable: {
                   headers: {
@@ -414,14 +414,14 @@ export function cookieConsentConfig(language: LanguageCode): CookieConsentConfig
                       name: 'SID',
                       domain: 'Autenticació de Google',
                       description:
-                        'Conté registres signats digitalment i xifrats de l\'ID del compte de Google de l\'usuari i l\'hora d\'inici de sessió més recent. La combinació de les cookies SID i HSID permet a Google bloquejar molts tipus d\'atacs, com ara intents de robar el contingut de formularis enviats als serveis de Google. Veure <a href="https://policies.google.com/technologies/cookies">Política de Cookies de Google</a>',
+                        "Conté registres signats digitalment i xifrats de l'ID del compte de Google de l'usuari i l'hora d'inici de sessió més recent. La combinació de les cookies SID i HSID permet a Google bloquejar molts tipus d'atacs, com ara intents de robar el contingut de formularis enviats als serveis de Google. Veure <a href=\"https://policies.google.com/technologies/cookies\">Política de Cookies de Google</a>",
                       expiration: '2 anys'
                     },
                     {
                       name: 'HSID',
                       domain: 'Autenticació de Google',
                       description:
-                        'Conté registres signats digitalment i xifrats de l\'ID del compte de Google de l\'usuari i l\'hora d\'inici de sessió més recent. Funciona amb la cookie SID per autenticar usuaris i bloquejar molts tipus d\'atacs. Veure <a href="https://policies.google.com/technologies/cookies">Política de Cookies de Google</a>',
+                        "Conté registres signats digitalment i xifrats de l'ID del compte de Google de l'usuari i l'hora d'inici de sessió més recent. Funciona amb la cookie SID per autenticar usuaris i bloquejar molts tipus d'atacs. Veure <a href=\"https://policies.google.com/technologies/cookies\">Política de Cookies de Google</a>",
                       expiration: '2 anys'
                     },
                     {
@@ -514,7 +514,7 @@ export function cookieConsentConfig(language: LanguageCode): CookieConsentConfig
               {
                 title: 'Analítiques',
                 description:
-                  'Utilitzem cookies d\'analítiques per entendre com els usuaris interactuen amb el nostre lloc web a través de serveis com Google Analytics i Microsoft Clarity. Aquestes cookies poden heretar-se del domini principal.',
+                  "Utilitzem cookies d'analítiques per entendre com els usuaris interactuen amb el nostre lloc web a través de serveis com Google Analytics i Microsoft Clarity. Aquestes cookies poden heretar-se del domini principal.",
                 linkedCategory: CAT_ANALYTICS,
                 ...((): { cookieTable?: CookieTable } => {
                   const analyticsSection = (
