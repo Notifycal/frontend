@@ -1,6 +1,6 @@
 import { getServiceConfig } from '@config/serviceConfig';
-import { useCookieConsent } from '@hooks/useCookieConsent';
 import { AuthProvider } from '@providers/AuthProvider';
+import { useCookieConsent } from '@providers/CookieConsentProvider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { JSX, ReactNode } from 'react';
 

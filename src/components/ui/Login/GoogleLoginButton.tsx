@@ -3,8 +3,8 @@ import { useState, type JSX } from 'react';
 import { Button } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
-import { useCookieConsent } from '@hooks/useCookieConsent';
 import { useAuth } from '@providers/AuthProvider';
+import { useCookieConsent } from '@providers/CookieConsentProvider';
 
 import FlatError from '@components/ui/FlatError/FlatError';
 import GoogleIcon from '@components/ui/GoogleIcon/GoogleIcon';

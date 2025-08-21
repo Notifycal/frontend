@@ -7,6 +7,7 @@ import { RouterProvider } from '@tanstack/react-router';
 
 import { ConditionalAuthProvider } from '@components/providers/ConditionalAuthProvider.tsx';
 import { useAuth } from '@providers/AuthProvider.tsx';
+import { CookieConsentProvider } from '@providers/CookieConsentProvider.tsx';
 import { type JSX, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -58,14 +59,16 @@ const App = ({ router, queryClient }: AppProps): JSX.Element => {
           />
         }
       >
-        <ConditionalAuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <InnerApp queryClient={queryClient} router={router} />
-            {/* Development tools */}
-            <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
-            <ReactQueryDevelopmentTools initialIsOpen={false} />
-          </QueryClientProvider>
-        </ConditionalAuthProvider>
+        <CookieConsentProvider>
+          <ConditionalAuthProvider>
+            <QueryClientProvider client={queryClient}>
+              <InnerApp queryClient={queryClient} router={router} />
+              {/* Development tools */}
+              <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
+              <ReactQueryDevelopmentTools initialIsOpen={false} />
+            </QueryClientProvider>
+          </ConditionalAuthProvider>
+        </CookieConsentProvider>
       </ErrorBoundary>
     </MantineProvider>
   );

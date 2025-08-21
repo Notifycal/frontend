@@ -10,11 +10,34 @@ import type { CookieConsentConfig, Translation } from 'vanilla-cookieconsent';
 type PreferencesModalSection = NonNullable<NonNullable<Translation['preferencesModal']>['sections']>[0];
 type CookieTable = NonNullable<PreferencesModalSection['cookieTable']>;
 
-export function cookieConsentConfig(): CookieConsentConfig {
+export function cookieConsentConfig(onChange?: () => void): CookieConsentConfig {
   const baseConfig = commonCookieConsentConfig();
-
   const config: CookieConsentConfig = {
     ...baseConfig,
+    onFirstConsent: ({ cookie }) => {
+      if (baseConfig.onFirstConsent) {
+        baseConfig.onFirstConsent({ cookie });
+      }
+      if (onChange) {
+        onChange();
+      }
+    },
+    onConsent: ({ cookie }) => {
+      if (baseConfig.onConsent) {
+        baseConfig.onConsent({ cookie });
+      }
+      if (onChange) {
+        onChange();
+      }
+    },
+    onChange: ({ changedCategories, changedServices, cookie }) => {
+      if (baseConfig.onChange) {
+        baseConfig.onChange({ changedCategories, changedServices, cookie });
+      }
+      if (onChange) {
+        onChange();
+      }
+    },
     categories: {
       ...baseConfig.categories,
       [CAT_NECESSARY]: {
