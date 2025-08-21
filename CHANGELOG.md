@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.31.1](https://github.com/Notifycal/frontend/compare/v0.31.0...v0.31.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency radashi to v12.6.2 ([#569](https://github.com/Notifycal/frontend/issues/569)) ([3078038](https://github.com/Notifycal/frontend/commit/3078038a58f9471489f5192ad3ced06a7641fe46))
+
+## [0.31.0](https://github.com/Notifycal/frontend/compare/v0.30.0...v0.31.0) (2025-08-20)
+
+
+### Features
+
+* i18n login carousel/banner ([#568](https://github.com/Notifycal/frontend/issues/568)) ([12ef99f](https://github.com/Notifycal/frontend/commit/12ef99fea8c4a41bea2ae7931a6d02c5dc333735))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v7.2.1 ([#555](https://github.com/Notifycal/frontend/issues/555)) ([850114c](https://github.com/Notifycal/frontend/commit/850114c3c909ba57f5e3d0829fe2a6b2e5731a1f))
+* **deps:** Update dependency @notifycal/shared to v7.3.0 ([#559](https://github.com/Notifycal/frontend/issues/559)) ([a3f916f](https://github.com/Notifycal/frontend/commit/a3f916f7a67c8158bf0e52e224d3a527e01e53f8))
+* **deps:** Update dependency @notifycal/shared to v7.4.0 ([#563](https://github.com/Notifycal/frontend/issues/563)) ([e41922a](https://github.com/Notifycal/frontend/commit/e41922a7ab47a835c43203540b913ac75e5d65c3))
+* **deps:** Update Node.js Dependencies ([#550](https://github.com/Notifycal/frontend/issues/550)) ([ebdad2e](https://github.com/Notifycal/frontend/commit/ebdad2eb893ab28df730eed82a54a12b7a74aa8d))
+* **deps:** Update Node.js Dependencies ([#567](https://github.com/Notifycal/frontend/issues/567)) ([acfc32f](https://github.com/Notifycal/frontend/commit/acfc32f63ed57c873ee1593191298b3eb9640b04))
+* login and footer tweaks ([#565](https://github.com/Notifycal/frontend/issues/565)) ([bbf10f3](https://github.com/Notifycal/frontend/commit/bbf10f33924efd5a852af00ae86ca43cbf322b4b))
+
 ## [0.30.0](https://github.com/Notifycal/frontend/compare/v0.29.0...v0.30.0) (2025-08-18)
 
 

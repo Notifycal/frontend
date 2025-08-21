@@ -21,7 +21,7 @@ export const LoginWithGoogleButton = (): JSX.Element => {
     >
       <div className="flex gap-3 items-center justify-center">
         {GoogleIcon()}
-        <span className="text-md font-semibold">{t('home.signInWithGoogle')}</span>
+        <span className="text-md font-semibold">{t('login.signInWithGoogle')}</span>
       </div>
     </Button>
   );

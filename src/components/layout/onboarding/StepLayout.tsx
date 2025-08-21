@@ -48,6 +48,7 @@ const StepLayout: React.FC = () => {
               <div className="w-full max-w-7xl mx-auto">
                 <Stepper
                   active={currentStep}
+                  className="pt-4"
                   size="sm"
                   onStepClick={async (stepIndex) => {
                     const step = getStepByIndex(stepIndex);
@@ -72,7 +73,7 @@ const StepLayout: React.FC = () => {
           {/* SubHeader for mobile (was inside Stepper block before) */}
 
           <div className="flex 2xl:hidden w-full justify-center bg-white pb-8">
-            <div className="container mx-auto px-4 mt-4">
+            <div className="container mx-auto px-4">
               <SubHeader subtitle={t(`${step.stepKey}.subtitle`)} title={t(`${step.stepKey}.title`)} />
             </div>
           </div>
@@ -80,7 +81,7 @@ const StepLayout: React.FC = () => {
           <Progress radius={0} size="sm" value={(currentStep / (onboardingSteps.length - 1)) * 100} />
 
           {/* Main content */}
-          <main className="mx-auto px-4 py-4">
+          <main className="mx-auto px-4 py-4 w-full">
             <AnimatePresence mode="wait">
               <div
                 className={clsx(

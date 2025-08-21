@@ -6,8 +6,8 @@ interface LeftColumnProps {
 
 export const LeftColumn = ({ children }: LeftColumnProps): JSX.Element => {
   return (
-    <div className="flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-white lg:w-1/2 lg:order-1">
-      <div className="mx-auto w-full max-w-sm lg:w-96">{children}</div>
+    <div className="flex flex-col justify-center bg-white flex-1 basis-0">
+      <div className="mx-auto max-w-sm lg:w-96 px-4">{children}</div>
     </div>
   );
 };

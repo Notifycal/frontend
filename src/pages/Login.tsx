@@ -6,7 +6,7 @@ import { RightColumn } from '@components/ui/Login/RightColumn';
 
 export const Login = (): JSX.Element => {
   return (
-    <div className="min-h-[calc(100vh-71px)] bg-white flex flex-col lg:flex-row">
+    <div className="bg-white flex flex-col lg:flex-row flex-1">
       <LeftColumn>
         <LoginForm />
       </LeftColumn>
