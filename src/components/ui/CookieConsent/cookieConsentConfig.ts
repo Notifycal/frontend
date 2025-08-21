@@ -18,12 +18,10 @@ export function cookieConsentConfig(): CookieConsentConfig {
     categories: {
       ...baseConfig.categories,
       [CAT_NECESSARY]: {
-        enabled: true,
-        readOnly: true
+        enabled: true
       },
       [CAT_SECURITY]: {
         enabled: true,
-        readOnly: true,
         autoClear: {
           cookies: [
             {

@@ -1,13 +1,12 @@
-import { getServiceConfig } from '@config/serviceConfig.ts';
 import { ErrorBoundary } from 'react-error-boundary';
 import type { router } from './router.tsx';
 
 import { MantineProvider } from '@mantine/core';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
-import { useAuth, AuthProvider } from '@providers/AuthProvider.tsx';
+import { ConditionalGoogleOAuthProvider } from '@components/providers/ConditionalGoogleOAuthProvider.tsx';
+import { useAuth } from '@providers/AuthProvider.tsx';
 import { type JSX, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -41,7 +40,6 @@ const InnerApp = ({ router, queryClient }: AppProps): JSX.Element => {
 
 const App = ({ router, queryClient }: AppProps): JSX.Element => {
   const { t } = useTranslation();
-  const { GOOGLE_CLIENT_ID } = getServiceConfig();
 
   return (
     <MantineProvider
@@ -60,16 +58,14 @@ const App = ({ router, queryClient }: AppProps): JSX.Element => {
           />
         }
       >
-        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-          <AuthProvider>
-            <QueryClientProvider client={queryClient}>
-              <InnerApp queryClient={queryClient} router={router} />
-              {/* Development tools */}
-              <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
-              <ReactQueryDevelopmentTools initialIsOpen={false} />
-            </QueryClientProvider>
-          </AuthProvider>
-        </GoogleOAuthProvider>
+        <ConditionalGoogleOAuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <InnerApp queryClient={queryClient} router={router} />
+            {/* Development tools */}
+            <TanStackRouterDevelopmentTools initialIsOpen={false} position="bottom-right" router={router} />
+            <ReactQueryDevelopmentTools initialIsOpen={false} />
+          </QueryClientProvider>
+        </ConditionalGoogleOAuthProvider>
       </ErrorBoundary>
     </MantineProvider>
   );

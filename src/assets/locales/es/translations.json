@@ -7,7 +7,8 @@
     "welcomeBack": "¡Bienvenido de nuevo! Por favor, inicia sesión en tu cuenta.",
     "signInWithGoogle": "Iniciar sesión con Google",
     "loginErrorInvalidScopes": "Ha habido un error al hacer login. Por favor asegura que seleccionas todos los scopes al acceder con tu cuenta de Google.",
-    "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos."
+    "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos.",
+    "loginErrorNoConsent": "Por favor acepta las cookies de seguridad para habilitar la funcionalidad de inicio de sesión."
   },
   "feedback": {
     "type": "Debes seleccionar un tipo de comentario",

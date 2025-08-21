@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode, type JSX } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type JSX, type ReactNode } from 'react';
 
 import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor, refresh } from '@api/auth';
 import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
@@ -9,6 +9,7 @@ import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
 import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorReturn } from '@api/common';
 
 import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import { useCookieConsent } from '@hooks/useCookieConsent';
 import type { Email, UserId } from '@notifycal/shared/types';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
@@ -260,9 +261,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 };
 
 export const useAuth = (): AuthContext => {
+  const { hasSecurityConsent } = useCookieConsent();
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+  // if (!context) {
+  //   throw new Error('useAuth must be used within an AuthProvider');
+  // }
+  if (!context || !hasSecurityConsent) {
+    return {
+      isAuthenticated: false,
+      login: () => Promise.reject(new Error('Not authenticated')),
+      logout: (): void => {},
+      loginError: null,
+      authInfo: null,
+      shouldHandlePostLoginFlow: false,
+      setShouldHandlePostLoginFlow: (): void => {}
+    };
   }
   return context;
 };

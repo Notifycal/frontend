@@ -7,7 +7,8 @@
     "welcomeBack": "Welcome back! Please sign in to your account.",
     "signInWithGoogle": "Sign in with Google",
     "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
-    "loginErrorGeneric": "There was an error logging in, please try again in a few minutes."
+    "loginErrorGeneric": "There was an error logging in, please try again in a few minutes.",
+    "loginErrorNoConsent": "Please accept security cookies to enable login functionality."
   },
   "feedback": {
     "type": "You must select a feedback type",
