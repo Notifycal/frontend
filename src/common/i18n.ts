@@ -12,21 +12,28 @@ import { deepmerge } from 'deepmerge-ts';
 import flagCa from '@assets/icons/lang/ca.png';
 import flagEs from '@assets/icons/lang/es.png';
 import flagGb from '@assets/icons/lang/gb.png';
+import { languageCodeSchema } from '@notifycal/shared/schemas';
 
 export type NotifycalI18nNamespaces = 'onboarding' | 'translations';
 export type NotifycalTFunction = TFunction<NotifycalI18nNamespaces, undefined>;
 
 export const defaultNS = 'translations';
+export const supportedLngs: Array<LanguageCode> = languageCodeSchema.options;
 
 const i18nOptions: InitOptions = {
   // https://github.com/i18next/i18next-http-backend?tab=readme-ov-file#seeing-failed-http-requests-like-404
   load: 'languageOnly',
   defaultNS,
   fallbackLng: 'en',
+  supportedLngs,
   debug: !isProduction,
   detection: {
     order: ['localStorage', 'navigator'],
-    caches: ['localStorage']
+    caches: ['localStorage'],
+    convertDetectedLanguage: (lng: string) => {
+      const langCode = lng.split('-')[0];
+      return supportedLngs.includes(langCode as LanguageCode) ? (langCode as LanguageCode) : 'en';
+    }
   },
   interpolation: {
     escapeValue: false // not needed for react as it escapes by default
