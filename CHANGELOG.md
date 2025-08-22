@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.2](https://github.com/Notifycal/frontend/compare/v0.33.1...v0.33.2) (2025-08-22)
+
+
+### Bug Fixes
+
+* make cookies obey cookie consent ([#584](https://github.com/Notifycal/frontend/issues/584)) ([57ff6f9](https://github.com/Notifycal/frontend/commit/57ff6f99014e1ca6aad0188729bd4522fb60f976))
+
 ## [0.33.1](https://github.com/Notifycal/frontend/compare/v0.33.0...v0.33.1) (2025-08-22)
 
 
