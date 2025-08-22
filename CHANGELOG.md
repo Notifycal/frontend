@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.1](https://github.com/Notifycal/frontend/compare/v0.33.0...v0.33.1) (2025-08-22)
+
+
+### Bug Fixes
+
+* shared import so compatible with backend ([#580](https://github.com/Notifycal/frontend/issues/580)) ([2236f49](https://github.com/Notifycal/frontend/commit/2236f495de2606c395888458cf4831120fce3820))
+
 ## [0.33.0](https://github.com/Notifycal/frontend/compare/v0.32.0...v0.33.0) (2025-08-21)
 
 
