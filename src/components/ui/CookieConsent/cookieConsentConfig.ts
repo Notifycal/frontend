@@ -4,7 +4,7 @@ import {
   CAT_NECESSARY,
   cookieConsentConfig as commonCookieConsentConfig,
   SERVICE_SECURITY_STORAGE
-} from '@notifycal/shared/utils';
+} from '@notifycal/shared/cookies';
 import type { CookieConsentConfig, Translation } from 'vanilla-cookieconsent';
 
 type PreferencesModalSection = NonNullable<NonNullable<Translation['preferencesModal']>['sections']>[0];
