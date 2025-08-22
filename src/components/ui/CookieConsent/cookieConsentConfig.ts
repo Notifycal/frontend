@@ -1,17 +1,18 @@
-import type { LanguageCode } from '@notifycal/shared/types';
 import {
   CAT_ANALYTICS,
   CAT_NECESSARY,
-  cookieConsentConfig as commonCookieConsentConfig,
-  SERVICE_SECURITY_STORAGE
+  gtagConsentConfig,
+  SERVICE_SECURITY_STORAGE,
+  updateAllGtagConsent
 } from '@notifycal/shared/cookies';
+import type { LanguageCode } from '@notifycal/shared/types';
 import type { CookieConsentConfig, Translation } from 'vanilla-cookieconsent';
 
 type PreferencesModalSection = NonNullable<NonNullable<Translation['preferencesModal']>['sections']>[0];
 type CookieTable = NonNullable<PreferencesModalSection['cookieTable']>;
 
 export function cookieConsentConfig(language: LanguageCode): CookieConsentConfig {
-  const baseConfig = commonCookieConsentConfig(language);
+  const baseConfig = gtagConsentConfig(language, updateAllGtagConsent);
 
   const config: CookieConsentConfig = {
     ...baseConfig,

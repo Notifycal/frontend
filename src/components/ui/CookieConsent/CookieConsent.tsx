@@ -1,3 +1,4 @@
+import { denyAllGtag } from '@notifycal/shared/cookies';
 import '@notifycal/shared/styles/cookie-consent-theme.css';
 import type { LanguageCode } from '@notifycal/shared/types';
 import { type PropsWithChildren, useEffect } from 'react';
@@ -13,6 +14,7 @@ const CookieConsentComponent: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     document.body.classList.add('cc--theme');
     void setLanguage(lang);
+    denyAllGtag();
     void run(cookieConsentConfig(lang));
   }, [lang]);
 
