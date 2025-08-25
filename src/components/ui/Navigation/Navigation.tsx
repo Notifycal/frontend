@@ -23,21 +23,6 @@ const userNavigation = [
   { name: 'Sign out', href: '#' }
 ];
 
-interface NavigationMenuProps {
-  className: string;
-  activeClassName: string;
-}
-
-const NavigationMenu = ({ className, activeClassName }: NavigationMenuProps): JSX.Element => (
-  <>
-    {navigation.map((item) => (
-      <Link key={item.href} activeProps={{ className: activeClassName }} className={className} to={item.href}>
-        {item.name}
-      </Link>
-    ))}
-  </>
-);
-
 interface UserProps {
   user: UserModel;
 }
@@ -65,10 +50,16 @@ export default function Navigation(props: UserProps): JSX.Element {
             </div>
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
-                <NavigationMenu
-                  activeClassName="bg-primary-900"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-primary-500/75"
-                />
+                {navigation.map((item) => (
+                  <Link
+                    key={item.href}
+                    activeProps={{ className: 'bg-primary-900' }}
+                    className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-primary-500/75"
+                    to={item.href}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
