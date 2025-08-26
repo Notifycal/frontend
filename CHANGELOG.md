@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.33.3](https://github.com/Notifycal/frontend/compare/v0.33.2...v0.33.3) (2025-08-25)
+
+
+### Bug Fixes
+
+* **deps:** Update Node.js Dependencies ([#587](https://github.com/Notifycal/frontend/issues/587)) ([5833843](https://github.com/Notifycal/frontend/commit/5833843aed7e2575e5aa6b7ae020ce786a4c807e))
+* login layout all screens ([#591](https://github.com/Notifycal/frontend/issues/591)) ([fd0f07d](https://github.com/Notifycal/frontend/commit/fd0f07dee25e4bd7902ca40dd17e71fca84add81))
+
 ## [0.33.2](https://github.com/Notifycal/frontend/compare/v0.33.1...v0.33.2) (2025-08-22)
 
 
