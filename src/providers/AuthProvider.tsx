@@ -83,6 +83,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     return decoded;
   }, []);
 
+  const refreshTokenFromServer = async (refreshToken: string | null): Promise<void> => {
+    if (refreshToken) {
+      const response = await refresh(refreshToken);
+      const newAccessToken = response.accessToken;
+      const newRefreshToken = response.refreshToken;
+
+      setAuthState((previous: AuthState) => ({
+        ...previous,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+        loginStatus: 'success',
+        shouldHandlePostLoginFlow: false
+      }));
+    } else {
+      throw new Error('No refresh token available');
+    }
+  };
+
   // Update localstorage whenever the state (tokens) changes
   // Using `useEffect` avoids having to call these functions along setAuthState
   useEffect(() => {
@@ -110,26 +128,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
     const refreshToken = getLocalStorageItem('refreshToken');
 
-    const refreshTokenFromServer = async (): Promise<void> => {
-      if (refreshToken) {
-        const response = await refresh(refreshToken);
-        const newAccessToken = response.accessToken;
-        const newRefreshToken = response.refreshToken;
-
-        setAuthState((previous: AuthState) => ({
-          ...previous,
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-          loginStatus: 'success',
-          shouldHandlePostLoginFlow: false
-        }));
-      } else {
-        throw new Error('No refresh token available');
-      }
-    };
-
     // cannot use async functions from useEffect, must use Promise or IIFE
-    refreshTokenFromServer().catch(() => {
+    refreshTokenFromServer(refreshToken).catch(() => {
       // this catches both a failed request, as well as a missing refresh token
       setAuthState((previous: AuthState) => ({
         ...previous,
