@@ -1,14 +1,11 @@
-import { Link } from '@tanstack/react-router';
-
 import { Burger, Drawer, Menu, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-
-import { IconLogout2 } from '@tabler/icons-react';
-
-import type { JSX } from 'react';
-
-import { useAuth } from '@providers/AuthProvider';
+import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
 import type { UserModel } from '@our-types/UserModel';
+import { useAuth } from '@providers/AuthProvider';
+import { IconLogout2 } from '@tabler/icons-react';
+import { Link } from '@tanstack/react-router';
+import type { JSX } from 'react';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
@@ -57,11 +54,7 @@ export default function Navigation(props: UserProps): JSX.Element {
         <div className="relative flex h-16 items-center justify-between lg:border-b lg:border-primary-400/25">
           <div className="flex items-center px-2 lg:px-0">
             <div className="shrink-0">
-              <img
-                alt="Your Company"
-                className="block size-8"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=300"
-              />
+              <NotifycalIsologo className="text-primary-500 h-10" />
             </div>
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
