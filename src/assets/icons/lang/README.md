@@ -1,1 +1,0 @@
-To include more flags, grab the .svg from [here](https://hatscripts.github.io/circle-flags/gallery.html) and transform it into .png. 512x512 px. Hint: [use this](https://cloudconvert.com/svg-to-png).
