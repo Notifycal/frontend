@@ -1,14 +1,10 @@
-import { useEffect, useState, type JSX } from 'react';
-
-import { useTranslation } from 'react-i18next';
-
-import { useAuth, type LoginError } from '@providers/AuthProvider';
-
 import FlatError from '@components/ui/FlatError/FlatError';
-
 import { getServiceConfig } from '@config/serviceConfig';
+import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
+import { useAuth, type LoginError } from '@providers/AuthProvider';
 import { Link } from '@tanstack/react-router';
-import { DecorativeIcon } from './DecorativeIcon';
+import { useEffect, useState, type JSX } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LoginWithGoogleButton } from './GoogleLoginButton';
 
 export const LoginForm = (): JSX.Element => {
@@ -27,10 +23,10 @@ export const LoginForm = (): JSX.Element => {
 
   return (
     <>
-      <DecorativeIcon />
-
-      <h1 className="text-3xl sm:text-4xl font-bold text-primary text-center pb-2 sm:pb-4">{t('login.signIn')}</h1>
-      <p className="text-center text-text-secondary">{t('login.welcomeBack')}</p>
+      <div className="w-[80%] text-primary-500 mx-auto ">
+        <NotifycalIsologo className="drop-shadow-md drop-shadow-secondary-100" />
+      </div>
+      <p className="text-center text-text-secondary pb-4 sm:pb-6">{t('login.welcomeBack')}</p>
       <div className="mx-auto">
         <LoginWithGoogleButton />
         {lastLoginError && <FlatError isDismissable={false}>{t(`login.${lastLoginError}`)}</FlatError>}

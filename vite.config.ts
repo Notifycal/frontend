@@ -7,10 +7,11 @@ import Unfonts from 'unplugin-fonts/vite';
 import { normalizePath } from 'vite';
 import { plugin as markdown, Mode } from 'vite-plugin-markdown';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import svgr from 'vite-plugin-svgr';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
-import tsconfigPaths from 'vite-tsconfig-paths';
-const maxBundleChunkSizeInBytes = 1.4 * 1024 * 1024; //MB
+const maxBundleChunkSizeInBytes = 1.5 * 1024 * 1024; //MB
 const maxTotalBundleSizeInBytes = 2.05 * 1024 * 1024; //MB
 
 // https://vitejs.dev/config/
@@ -26,6 +27,7 @@ export default defineConfig({
       target: 'react'
     }),
     react(),
+    svgr(),
     viteStaticCopy({
       targets: [
         {

@@ -9,9 +9,10 @@ import { initReactI18next } from 'react-i18next';
 import { isProduction } from '@common/utils';
 import { deepmerge } from 'deepmerge-ts';
 
-import flagCa from '@assets/icons/lang/ca.png';
-import flagEs from '@assets/icons/lang/es.png';
-import flagGb from '@assets/icons/lang/gb.png';
+import flagCa from '@notifycal/shared/assets/icons/lang/ca.svg';
+import flagEs from '@notifycal/shared/assets/icons/lang/es.svg';
+import flagGb from '@notifycal/shared/assets/icons/lang/gb.svg';
+
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 
 export type NotifycalI18nNamespaces = 'onboarding' | 'translations';
