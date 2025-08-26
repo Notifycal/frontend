@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.0](https://github.com/Notifycal/frontend/compare/v0.33.3...v0.34.0) (2025-08-26)
+
+
+### Features
+
+* logos and icons from shared ([#594](https://github.com/Notifycal/frontend/issues/594)) ([5575c81](https://github.com/Notifycal/frontend/commit/5575c8189d5182f4da387cdff43ef2b79423d465))
+
 ## [0.33.3](https://github.com/Notifycal/frontend/compare/v0.33.2...v0.33.3) (2025-08-25)
 
 
