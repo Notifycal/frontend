@@ -5,6 +5,7 @@ declare module '*.svg?react' {
 }
 
 declare module '*.svg' {
+  // eslint-disable-next-line unicorn/prevent-abbreviations
   const src: string;
   export default src;
 }
