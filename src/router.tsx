@@ -4,6 +4,7 @@ import { routeTree } from './routeTree.gen.ts';
 import { NotFoundPage } from './pages/NotFoundPage.tsx';
 
 import FullPageError from '@components/ui/FullPageError/FullPageError.tsx';
+import FullPageOverlaySpinner from '@components/ui/FullPageOverlaySpinner/FullPageOverlaySpinner.tsx';
 
 const history = createHashHistory();
 
@@ -24,7 +25,9 @@ export const router = createRouter({
         window.location.reload();
       }}
     />
-  )
+  ),
+  defaultPendingComponent: FullPageOverlaySpinner,
+  defaultPendingMs: 0
 });
 
 declare module '@tanstack/react-router' {

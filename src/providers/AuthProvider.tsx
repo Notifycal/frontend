@@ -1,15 +1,10 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode, type JSX } from 'react';
-
 import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor, refresh } from '@api/auth';
-import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
-import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
-
-import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
-
 import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorReturn } from '@api/common';
-
-import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
+import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
+import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 import type { Email, UserId } from '@notifycal/shared/types';
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type JSX, type ReactNode } from 'react';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
 
@@ -20,6 +15,7 @@ export type AuthInfo = {
 
 export interface AuthContext {
   isAuthenticated: boolean;
+  isLoading: boolean;
   login: () => Promise<void>;
   logout: () => void;
   loginError: LoginError | null;
@@ -33,7 +29,7 @@ type AuthState = {
   accessToken: string | null;
   refreshToken: string | null;
   loginError: LoginError | null;
-  loginStatus: 'unauthorized' | 'loading' | 'success';
+  loginStatus: 'unauthorized' | 'loading' | 'success' | 'reloading';
   authInfo: AuthInfo | null;
   shouldHandlePostLoginFlow: boolean;
 };
@@ -126,6 +122,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
     hasMounted.current = true;
 
+    setAuthState((previous: AuthState) => ({ ...previous, loginStatus: 'reloading' }));
+
     const refreshToken = getLocalStorageItem('refreshToken');
 
     // cannot use async functions from useEffect, must use Promise or IIFE
@@ -146,6 +144,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
     try {
       const codeResponse = await googleLogin();
+
+      setAuthState((previous: AuthState) => ({ ...previous, loginStatus: 'loading' }));
 
       if (checkScopes(codeResponse.scope)) {
         const { accessToken, refreshToken } = await apiLogin(codeResponse);
@@ -238,14 +238,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     };
   }, [refreshToken]);
 
-  if (loginStatus === 'loading') {
-    return <FullPageSpinner />;
-  }
-
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: loginStatus === 'success',
+        isAuthenticated: loginStatus === 'success' || loginStatus === 'reloading',
+        isLoading: loginStatus === 'loading',
         login,
         logout,
         loginError,
