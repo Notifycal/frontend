@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.35.0](https://github.com/Notifycal/frontend/compare/v0.34.0...v0.35.0) (2025-08-26)
+
+
+### Features
+
+* i18n page title with index.html fallback ([#596](https://github.com/Notifycal/frontend/issues/596)) ([c173063](https://github.com/Notifycal/frontend/commit/c173063f1590572591cfe19bd86be7135fa800fc))
+
+
+### Bug Fixes
+
+* **deps:** Update @notifycal/shared and zod ([#578](https://github.com/Notifycal/frontend/issues/578)) ([d3c1d9b](https://github.com/Notifycal/frontend/commit/d3c1d9ba73ae4d0bc471ace7831c37bb4018eb71))
+
 ## [0.34.0](https://github.com/Notifycal/frontend/compare/v0.33.3...v0.34.0) (2025-08-26)
 
 
