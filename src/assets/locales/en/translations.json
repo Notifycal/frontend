@@ -81,7 +81,8 @@
     "remaining": "{{credits}} remaining"
   },
   "navigation": {
-    "openMainMenu": "Open main menu"
+    "openMainMenu": "Open main menu",
+    "signOut": "Sign out"
   },
   "footer": {
     "allRightsReserved": "{{year}} Notifycal. All rights reserved.",
