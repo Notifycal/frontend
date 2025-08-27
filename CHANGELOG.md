@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.35.2](https://github.com/Notifycal/frontend/compare/v0.35.1...v0.35.2) (2025-08-27)
+
+
+### Bug Fixes
+
+* auth interceptor + spinner (log in and general) ([#606](https://github.com/Notifycal/frontend/issues/606)) ([fbb1bed](https://github.com/Notifycal/frontend/commit/fbb1bed12d1d956e3efdd1b6813f182146ec1287))
+* **deps:** Update dependency dayjs to v1.11.14 ([#600](https://github.com/Notifycal/frontend/issues/600)) ([d881808](https://github.com/Notifycal/frontend/commit/d8818085ba1e757a19c7ce486e82fbc7293c466f))
+
 ## [0.35.1](https://github.com/Notifycal/frontend/compare/v0.35.0...v0.35.1) (2025-08-27)
 
 
