@@ -87,6 +87,10 @@
     "privacy": "Política de privacitat",
     "cookieSettings": "Configuració de cookies"
   },
+  "navigation": {
+    "openMainMenu": "Obrir menú principal",
+    "signOut": "Tancar sessió"
+  },
   "billing": {
     "topup": "Recàrrega",
     "subscription": "Subscripció",

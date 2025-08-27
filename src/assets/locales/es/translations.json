@@ -80,6 +80,10 @@
     "used": "{{credits}} usados",
     "remaining": "{{credits}} restantes"
   },
+  "navigation": {
+    "openMainMenu": "Abrir menú principal",
+    "signOut": "Cerrar sesión"
+  },
   "footer": {
     "allRightsReserved": "{{year}} Notifycal. Todos los derechos reservados.",
     "feedbackLink": "Feedback",
