@@ -114,6 +114,7 @@ export default function Navigation(props: UserProps): JSX.Element {
 
       <Drawer
         opened={opened}
+        size="xs"
         classNames={{
           content: 'bg-primary-600',
           header: 'bg-primary-600',
