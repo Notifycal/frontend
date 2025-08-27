@@ -23,7 +23,6 @@ import { Route as AuthOnboardingStepRouteImport } from './routes/_auth/onboardin
 import { Route as AuthOnboardingNostepRouteImport } from './routes/_auth/onboarding/_nostep'
 import { Route as AuthAppTemplateRouteImport } from './routes/_auth/_app/template'
 import { Route as AuthAppDashboardRouteImport } from './routes/_auth/_app/dashboard'
-import { Route as AuthAppBillingRouteImport } from './routes/_auth/_app/billing'
 import { Route as AuthOnboardingStepStepRouteImport } from './routes/_auth/onboarding/_step/$step'
 import { Route as AuthOnboardingNostepWelcomeRouteImport } from './routes/_auth/onboarding/_nostep/welcome'
 import { Route as AuthOnboardingNostepFeedbackRouteImport } from './routes/_auth/onboarding/_nostep/feedback'
@@ -95,11 +94,6 @@ const AuthAppDashboardRoute = AuthAppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthAppRoute,
 } as any)
-const AuthAppBillingRoute = AuthAppBillingRouteImport.update({
-  id: '/billing',
-  path: '/billing',
-  getParentRoute: () => AuthAppRoute,
-} as any)
 const AuthOnboardingStepStepRoute = AuthOnboardingStepStepRouteImport.update({
   id: '/$step',
   path: '/$step',
@@ -132,7 +126,6 @@ export interface FileRoutesByFullPath {
   '/feedback': typeof AuthFeedbackRoute
   '/onboarding': typeof AuthOnboardingStepRouteWithChildren
   '/payment-success': typeof AuthPaymentSuccessRoute
-  '/billing': typeof AuthAppBillingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
   '/onboarding/': typeof AuthOnboardingIndexRoute
@@ -148,7 +141,6 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/feedback': typeof AuthFeedbackRoute
   '/payment-success': typeof AuthPaymentSuccessRoute
-  '/billing': typeof AuthAppBillingRoute
   '/dashboard': typeof AuthAppDashboardRoute
   '/template': typeof AuthAppTemplateRoute
   '/onboarding': typeof AuthOnboardingIndexRoute
@@ -168,7 +160,6 @@ export interface FileRoutesById {
   '/_auth/feedback': typeof AuthFeedbackRoute
   '/_auth/onboarding': typeof AuthOnboardingRouteWithChildren
   '/_auth/payment-success': typeof AuthPaymentSuccessRoute
-  '/_auth/_app/billing': typeof AuthAppBillingRoute
   '/_auth/_app/dashboard': typeof AuthAppDashboardRoute
   '/_auth/_app/template': typeof AuthAppTemplateRoute
   '/_auth/onboarding/_nostep': typeof AuthOnboardingNostepRouteWithChildren
@@ -189,7 +180,6 @@ export interface FileRouteTypes {
     | '/feedback'
     | '/onboarding'
     | '/payment-success'
-    | '/billing'
     | '/dashboard'
     | '/template'
     | '/onboarding/'
@@ -205,7 +195,6 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/feedback'
     | '/payment-success'
-    | '/billing'
     | '/dashboard'
     | '/template'
     | '/onboarding'
@@ -224,7 +213,6 @@ export interface FileRouteTypes {
     | '/_auth/feedback'
     | '/_auth/onboarding'
     | '/_auth/payment-success'
-    | '/_auth/_app/billing'
     | '/_auth/_app/dashboard'
     | '/_auth/_app/template'
     | '/_auth/onboarding/_nostep'
@@ -344,13 +332,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthAppDashboardRouteImport
       parentRoute: typeof AuthAppRoute
     }
-    '/_auth/_app/billing': {
-      id: '/_auth/_app/billing'
-      path: '/billing'
-      fullPath: '/billing'
-      preLoaderRoute: typeof AuthAppBillingRouteImport
-      parentRoute: typeof AuthAppRoute
-    }
     '/_auth/onboarding/_step/$step': {
       id: '/_auth/onboarding/_step/$step'
       path: '/$step'
@@ -383,13 +364,11 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthAppRouteChildren {
-  AuthAppBillingRoute: typeof AuthAppBillingRoute
   AuthAppDashboardRoute: typeof AuthAppDashboardRoute
   AuthAppTemplateRoute: typeof AuthAppTemplateRoute
 }
 
 const AuthAppRouteChildren: AuthAppRouteChildren = {
-  AuthAppBillingRoute: AuthAppBillingRoute,
   AuthAppDashboardRoute: AuthAppDashboardRoute,
   AuthAppTemplateRoute: AuthAppTemplateRoute,
 }

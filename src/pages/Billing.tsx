@@ -1,6 +1,6 @@
 import { useState, type JSX } from 'react';
 
-import { Route } from '@routes/_auth/_app/billing';
+import { Route } from '@routes/_auth/_app/dashboard';
 
 import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
 import FlatError from '@components/ui/FlatError/FlatError';
