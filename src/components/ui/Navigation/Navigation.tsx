@@ -44,7 +44,7 @@ export default function Navigation(props: UserProps): JSX.Element {
 
   const auth = useAuth();
 
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
 
   const onLogoutHandler = auth.logout;
 
@@ -123,10 +123,12 @@ export default function Navigation(props: UserProps): JSX.Element {
       >
         <div className="lg:hidden">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            <NavigationMenu
-              activeClassName="bg-primary-700 text-white"
-              className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary-500/75"
-            />
+            <nav onClick={close}>
+              <NavigationMenu
+                activeClassName="bg-primary-700 text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary-500/75"
+              />
+            </nav>
           </div>
           <div className="border-t border-primary-700 pb-3 pt-4">
             <div className="flex items-center px-5">
