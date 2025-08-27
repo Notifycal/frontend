@@ -192,15 +192,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     }));
   }, []);
 
+  const accessTokenRef = useRef(accessToken);
+
+  useEffect(() => {
+    accessTokenRef.current = accessToken;
+  }, [accessToken]);
+
   // Interceptors
   useEffect(() => {
     // Setup axios interceptor for authentication when the access token changes
-    let requestInterceptor: InterceptorReturn;
-
-    if (accessToken) {
-      const authInterceptor = createAuthInterceptor(accessToken);
-      requestInterceptor = setupRequestInterceptor(authInterceptor);
-    }
+    const authInterceptor = createAuthInterceptor(() => accessTokenRef.current);
+    const requestInterceptor = setupRequestInterceptor(authInterceptor);
 
     return (): void => {
       // Cleanup by ejecting interceptor on component unmount
@@ -208,7 +210,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
         requestInterceptor.eject();
       }
     };
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
     // Setup axios interceptor for token refresh on 401 unauthorized

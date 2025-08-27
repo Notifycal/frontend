@@ -59,9 +59,10 @@ export const refresh = async (refreshToken: string): Promise<RefreshResponse> =>
   }
 };
 
-export const createAuthInterceptor = (accessToken: string): RequestInterceptor => {
+export const createAuthInterceptor = (accessTokenFn: () => string | null): RequestInterceptor => {
   return {
     onRequest: (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+      const accessToken = accessTokenFn();
       if (accessToken && !config.skipAuthorization) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
@@ -77,6 +78,7 @@ export const createUnauthorizedInterceptor = (
   refreshToken: string,
   onTokenRefresh: TokenRefreshCallback
 ): ResponseInterceptor => {
+  console.log('interceptor 401');
   return {
     onResponse: (response: AxiosResponse) => response,
     onResponseError: async (error: AxiosError): Promise<never> => {
