@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.35.1](https://github.com/Notifycal/frontend/compare/v0.35.0...v0.35.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* put padding into inner divs to ensure it does not alter the 50/50 layout ([#602](https://github.com/Notifycal/frontend/issues/602)) ([9b24621](https://github.com/Notifycal/frontend/commit/9b246212b61ca2e6a207b6a4b640ff147a8a2386))
+
 ## [0.35.0](https://github.com/Notifycal/frontend/compare/v0.34.0...v0.35.0) (2025-08-26)
 
 
