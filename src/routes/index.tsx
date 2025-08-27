@@ -9,7 +9,7 @@ export const Route = createFileRoute('/')({
   }),
   beforeLoad: ({ context, search }) => {
     // If the user is authenticated, there is no need to show them the login page.
-    if (context.auth.isAuthenticated) {
+    if (context.auth.isAuthenticated || context.auth.isReloading) {
       throw redirect({ to: search.redirect || '/dashboard' });
     }
   },

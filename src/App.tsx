@@ -34,7 +34,7 @@ const InnerApp = ({ router, queryClient }: AppProps): JSX.Element => {
   // "manually" call invalidate, which ensures the AuthContext and RouterProvider context are in sync.
   useEffect(() => {
     void router.invalidate();
-  }, [router, auth.isAuthenticated]);
+  }, [router, auth.isAuthenticated, auth.isReloading]);
 
   return <RouterProvider context={{ auth, queryClient }} router={router} />;
 };

@@ -16,6 +16,7 @@ export type AuthInfo = {
 export interface AuthContext {
   isAuthenticated: boolean;
   isLoading: boolean;
+  isReloading: boolean;
   login: () => Promise<void>;
   logout: () => void;
   loginError: LoginError | null;
@@ -241,8 +242,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: loginStatus === 'success' || loginStatus === 'reloading',
+        isAuthenticated: loginStatus === 'success',
         isLoading: loginStatus === 'loading',
+        isReloading: loginStatus === 'reloading',
         login,
         logout,
         loginError,
