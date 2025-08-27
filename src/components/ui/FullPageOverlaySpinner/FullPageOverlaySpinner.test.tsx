@@ -1,9 +1,9 @@
 import { render, screen } from '@testing/utils';
-import FullPageSpinner from './FullPageSpinner';
+import FullPageOverlaySpinner from './FullPageOverlaySpinner';
 
-describe('FullPageSpinner', () => {
+describe('FullPageOverlaySpinner', () => {
   it('should render the spinner', () => {
-    render(<FullPageSpinner />);
+    render(<FullPageOverlaySpinner />);
     const spinner = screen.getByTestId('full-page-spinner');
     expect(spinner).toBeInTheDocument();
   });

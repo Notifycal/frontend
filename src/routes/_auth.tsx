@@ -6,6 +6,15 @@ import type { IdpName, User } from '@notifycal/shared/types';
 // In fact this defines the layout of all authenticated routes.
 export const Route = createFileRoute('/_auth')({
   beforeLoad: async ({ context, location }) => {
+    if (context.auth.isReloading) {
+      throw redirect({
+        to: '/loading',
+        search: {
+          redirect: location.href
+        }
+      });
+    }
+
     if (!context.auth.isAuthenticated) {
       throw redirect({
         to: '/',

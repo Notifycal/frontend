@@ -1,15 +1,10 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode, type JSX } from 'react';
-
 import { login as apiLogin, createAuthInterceptor, createUnauthorizedInterceptor, refresh } from '@api/auth';
-import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
-import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
-
-import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
-
 import { setupRequestInterceptor, setupResponseInterceptor, type InterceptorReturn } from '@api/common';
-
-import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
+import { checkScopes, GOOGLE_OAUTH_SCOPES } from '@auth/google';
+import { getLocalStorageItem, setLocalStorageItem } from '@common/utils';
+import usePromisifiedGoogleLogin from '@hooks/usePromisifiedGoogleLogin';
 import type { Email, UserId } from '@notifycal/shared/types';
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type JSX, type ReactNode } from 'react';
 
 export type LoginError = 'loginErrorInvalidScopes' | 'loginErrorGeneric';
 
@@ -20,6 +15,8 @@ export type AuthInfo = {
 
 export interface AuthContext {
   isAuthenticated: boolean;
+  isLoading: boolean;
+  isReloading: boolean;
   login: () => Promise<void>;
   logout: () => void;
   loginError: LoginError | null;
@@ -33,7 +30,7 @@ type AuthState = {
   accessToken: string | null;
   refreshToken: string | null;
   loginError: LoginError | null;
-  loginStatus: 'unauthorized' | 'loading' | 'success';
+  loginStatus: 'unauthorized' | 'loading' | 'success' | 'reloading';
   authInfo: AuthInfo | null;
   shouldHandlePostLoginFlow: boolean;
 };
@@ -83,6 +80,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     return decoded;
   }, []);
 
+  const refreshTokenFromServer = async (refreshToken: string | null): Promise<void> => {
+    if (refreshToken) {
+      const response = await refresh(refreshToken);
+      const newAccessToken = response.accessToken;
+      const newRefreshToken = response.refreshToken;
+
+      setAuthState((previous: AuthState) => ({
+        ...previous,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+        loginStatus: 'success',
+        shouldHandlePostLoginFlow: false
+      }));
+    } else {
+      throw new Error('No refresh token available');
+    }
+  };
+
   // Update localstorage whenever the state (tokens) changes
   // Using `useEffect` avoids having to call these functions along setAuthState
   useEffect(() => {
@@ -108,28 +123,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
     hasMounted.current = true;
 
+    setAuthState((previous: AuthState) => ({ ...previous, loginStatus: 'reloading' }));
+
     const refreshToken = getLocalStorageItem('refreshToken');
 
-    const refreshTokenFromServer = async (): Promise<void> => {
-      if (refreshToken) {
-        const response = await refresh(refreshToken);
-        const newAccessToken = response.accessToken;
-        const newRefreshToken = response.refreshToken;
-
-        setAuthState((previous: AuthState) => ({
-          ...previous,
-          accessToken: newAccessToken,
-          refreshToken: newRefreshToken,
-          loginStatus: 'success',
-          shouldHandlePostLoginFlow: false
-        }));
-      } else {
-        throw new Error('No refresh token available');
-      }
-    };
-
     // cannot use async functions from useEffect, must use Promise or IIFE
-    refreshTokenFromServer().catch(() => {
+    refreshTokenFromServer(refreshToken).catch(() => {
       // this catches both a failed request, as well as a missing refresh token
       setAuthState((previous: AuthState) => ({
         ...previous,
@@ -146,6 +145,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
     try {
       const codeResponse = await googleLogin();
+
+      setAuthState((previous: AuthState) => ({ ...previous, loginStatus: 'loading' }));
 
       if (checkScopes(codeResponse.scope)) {
         const { accessToken, refreshToken } = await apiLogin(codeResponse);
@@ -192,15 +193,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     }));
   }, []);
 
+  const accessTokenRef = useRef(accessToken);
+
+  useEffect(() => {
+    accessTokenRef.current = accessToken;
+  }, [accessToken]);
+
   // Interceptors
   useEffect(() => {
     // Setup axios interceptor for authentication when the access token changes
-    let requestInterceptor: InterceptorReturn;
-
-    if (accessToken) {
-      const authInterceptor = createAuthInterceptor(accessToken);
-      requestInterceptor = setupRequestInterceptor(authInterceptor);
-    }
+    const authInterceptor = createAuthInterceptor(() => accessTokenRef.current);
+    const requestInterceptor = setupRequestInterceptor(authInterceptor);
 
     return (): void => {
       // Cleanup by ejecting interceptor on component unmount
@@ -208,7 +211,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
         requestInterceptor.eject();
       }
     };
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
     // Setup axios interceptor for token refresh on 401 unauthorized
@@ -238,14 +241,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
     };
   }, [refreshToken]);
 
-  if (loginStatus === 'loading') {
-    return <FullPageSpinner />;
-  }
-
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated: loginStatus === 'success',
+        isLoading: loginStatus === 'loading',
+        isReloading: loginStatus === 'reloading',
         login,
         logout,
         loginError,

@@ -1,12 +1,10 @@
 import { getUserProfile } from '@/api/userProfile';
-
+import FullPageOverlaySpinner from '@components/ui/FullPageOverlaySpinner/FullPageOverlaySpinner';
+import { useBillingStore } from '@store/useBillingStore';
+import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useQuery } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { type JSX, useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { useBillingStore } from '@store/useBillingStore';
-
-import FullPageSpinner from '@components/ui/FullPageSpinner/FullPageSpinner';
-import { useOnboardingStore } from '@store/useOnboardingStore';
 
 function PaymentSuccessRedirect(): JSX.Element {
   const navigate = useNavigate();
@@ -65,7 +63,7 @@ function PaymentSuccessRedirect(): JSX.Element {
     previousUserStatus
   ]);
 
-  return <FullPageSpinner />;
+  return <FullPageOverlaySpinner />;
 }
 
 export const Route = createFileRoute('/_auth/payment-success')({
