@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import FullPageOverlaySpinner from '@components/ui/FullPageOverlaySpinner/FullPageOverlaySpinner';
 
 const AppLayout: FC = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, isReloading } = useAuth();
   const { t } = useTranslation();
 
   return (
@@ -21,7 +21,7 @@ const AppLayout: FC = () => {
         </div>
         <Footer showFeedbackLink={isAuthenticated} />
       </div>
-      {isLoading && <FullPageOverlaySpinner />}
+      {(isLoading || isReloading) && <FullPageOverlaySpinner />}
     </>
   );
 };

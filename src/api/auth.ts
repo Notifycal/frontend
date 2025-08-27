@@ -78,7 +78,6 @@ export const createUnauthorizedInterceptor = (
   refreshToken: string,
   onTokenRefresh: TokenRefreshCallback
 ): ResponseInterceptor => {
-  console.log('interceptor 401');
   return {
     onResponse: (response: AxiosResponse) => response,
     onResponseError: async (error: AxiosError): Promise<never> => {
