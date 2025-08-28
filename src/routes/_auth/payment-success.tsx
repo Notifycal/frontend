@@ -36,7 +36,7 @@ function PaymentSuccessRedirect(): JSX.Element {
       if (isTopupCreditIncrease(topupCreditBalance, user.credits.topupCreditBalance)) {
         stopAndReset();
         void navigate({
-          to: '/billing',
+          to: '/dashboard',
           search: {
             creditsAdded: true
           }
@@ -47,7 +47,7 @@ function PaymentSuccessRedirect(): JSX.Element {
       markStepAsCompleted('tierSelection');
       stopAndReset();
       if (previousUserStatus === 'cancelled') {
-        void navigate({ to: '/billing' });
+        void navigate({ to: '/dashboard' });
       } else {
         void navigate({ to: '/onboarding/completed' });
       }
