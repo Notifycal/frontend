@@ -38,16 +38,16 @@ const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
               />
             </div>
 
-            {footerLinks.map(({ title, to }) => (
-              <Link key={to} target="_blank" to={to}>
-                {title}
-              </Link>
-            ))}
             <CookieConsent>
               <Link to="." onClick={showPreferences}>
                 {t('footer.cookieSettings')}
               </Link>
             </CookieConsent>
+            {footerLinks.map(({ title, to }) => (
+              <Link key={to} target="_blank" to={to}>
+                {title}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
