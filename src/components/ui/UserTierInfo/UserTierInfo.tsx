@@ -6,6 +6,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Alert, Divider, Title } from '@mantine/core';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 
+import { getServiceConfig } from '@config/serviceConfig';
 import { TierFeatures, type TierInfoWithIcon } from '@notifycal/shared/components';
 
 interface UserTierInfoProps {
@@ -15,6 +16,7 @@ interface UserTierInfoProps {
 const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
   const { t } = useTranslation(['translations', 'onboarding']);
 
+  const { COUNTRY_TO_SMS_COST_MAP: countryToSmsCostMap } = getServiceConfig();
   const { icon: TierIcon } = tierInfo;
 
   return (
@@ -43,7 +45,10 @@ const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
           message: 'text-xs'
         }}
       >
-        {t('tierSelection.disclaimer', { ns: 'onboarding' })}
+        {t('tierSelection.disclaimer', {
+          spainSmsCost: countryToSmsCostMap.ES,
+          ns: 'onboarding'
+        })}
       </Alert>
     </>
   );

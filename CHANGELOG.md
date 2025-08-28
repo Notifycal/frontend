@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.35.3](https://github.com/Notifycal/frontend/compare/v0.35.2...v0.35.3) (2025-08-28)
+
+
+### Bug Fixes
+
+* **deps:** Update @notifycal/shared and zod ([#610](https://github.com/Notifycal/frontend/issues/610)) ([4958db5](https://github.com/Notifycal/frontend/commit/4958db580c031a3fd0ab2a880d18acc5c0a283de))
+* **deps:** Update dependency @notifycal/shared to v7.9.0 ([#613](https://github.com/Notifycal/frontend/issues/613)) ([0e90f5d](https://github.com/Notifycal/frontend/commit/0e90f5db42f47b7a5d8f2f9df6f3dfb233254e68))
+* **deps:** Update dependency dayjs to v1.11.15 ([#612](https://github.com/Notifycal/frontend/issues/612)) ([5d8f3a2](https://github.com/Notifycal/frontend/commit/5d8f3a2bfbe483848b01b574842e0360a5c21138))
+* footer link ordering. Reminder cost banner in billing page ([#609](https://github.com/Notifycal/frontend/issues/609)) ([443a8c0](https://github.com/Notifycal/frontend/commit/443a8c05da6bd3e81c9173d719e7ca4814e548dc))
+
 ## [0.35.2](https://github.com/Notifycal/frontend/compare/v0.35.1...v0.35.2) (2025-08-27)
 
 

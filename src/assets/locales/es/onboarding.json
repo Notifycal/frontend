@@ -268,7 +268,7 @@
     "title": "Tu plan",
     "subtitle": "Elige el plan que más se adapta a ti",
     "checkoutURLApiError": "Ha habido un problema con el checkout. Vuelve a intentarlo, y danos <0>feedback</0> si no funciona.",
-    "disclaimer": "El número de recordatorios indicados se basa en un coste estimado de 0,05 €/recordatorio a numeros Españoles. Puede variar en función del número del país de destino."
+    "disclaimer": "El número de recordatorios indicados se basa en un coste estimado de {{spainSmsCost}} €/recordatorio a numeros Españoles. Puede variar en función del número del país de destino."
   },
   "completed": {
     "heading": "¡Integración completada!",
