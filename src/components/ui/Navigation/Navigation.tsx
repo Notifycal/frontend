@@ -1,15 +1,16 @@
 import { Menu } from '@mantine/core';
 import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
-import type { UserModel } from '@our-types/UserModel';
 import { useAuth } from '@providers/AuthProvider';
 import { IconLogout2, IconUserFilled } from '@tabler/icons-react';
 import type { JSX } from 'react';
 import NavigationMenu from '../NavigationMenu/NavigationMenu';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import { useTranslation } from 'react-i18next';
+import type { IdpName, User } from '@notifycal/shared/types';
+import { Link } from '@tanstack/react-router';
 
 interface UserProps {
-  user: UserModel;
+  user: User<IdpName>;
 }
 
 export default function Navigation(props: UserProps): JSX.Element {
@@ -34,7 +35,9 @@ export default function Navigation(props: UserProps): JSX.Element {
         <div className="relative flex h-16 items-center justify-between lg:border-b lg:border-primary-400/25">
           <div className="flex items-center px-2 lg:px-0">
             <div className="shrink-0">
-              <NotifycalIsologo className="text-primary-500 h-10" />
+              <Link to="/dashboard">
+                <NotifycalIsologo className="text-primary-500 h-10" />
+              </Link>
             </div>
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
@@ -48,26 +51,38 @@ export default function Navigation(props: UserProps): JSX.Element {
 
           <div className="hidden lg:ml-4 lg:block">
             <div className="flex items-center">
-              <Menu position="bottom-end" shadow="md" width={200}>
-                <Menu.Target>
-                  <button
-                    className="relative flex rounded-full bg-primary-600 text-sm text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600"
-                    type="button"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">{t('navigation.openMainMenu')}</span>
-                    <IconUserFilled className="size-8 rounded-full border-primary-500 border-1 p-0.5" />
-                  </button>
-                </Menu.Target>
+              {user && (
+                <Menu position="bottom-end" shadow="md" width={200}>
+                  <Menu.Target>
+                    <button
+                      className="flex items-center gap-2 px-4 py-2 hover:hover:bg-primary-500/75 rounded-xl"
+                      type="button"
+                    >
+                      <div className="text-right">
+                        <div className="text-sm font-medium text-primary-200">{user.config?.business.name}</div>
+                        <div className="text-xs font-medium text-primary-50">{user.email}</div>
+                      </div>
+                      <div className="size-8 relative flex rounded-full bg-primary-600 text-sm text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600">
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">{t('navigation.openMainMenu')}</span>
+                        <IconUserFilled className="size-8 rounded-full border-primary-500 border-1 p-0.5" />
+                      </div>
+                    </button>
+                  </Menu.Target>
 
-                <Menu.Dropdown>
-                  {userNavigation.map(({ name, onClick, color, icon: Icon }) => (
-                    <Menu.Item color={color} leftSection={<Icon style={{ width: 14, height: 14 }} />} onClick={onClick}>
-                      {name}
-                    </Menu.Item>
-                  ))}
-                </Menu.Dropdown>
-              </Menu>
+                  <Menu.Dropdown>
+                    {userNavigation.map(({ name, onClick, color, icon: Icon }) => (
+                      <Menu.Item
+                        color={color}
+                        leftSection={<Icon style={{ width: 14, height: 14 }} />}
+                        onClick={onClick}
+                      >
+                        {name}
+                      </Menu.Item>
+                    ))}
+                  </Menu.Dropdown>
+                </Menu>
+              )}
             </div>
           </div>
 

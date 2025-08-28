@@ -1,13 +1,13 @@
-import { Burger, Drawer, rem } from '@mantine/core';
+import { Burger, Drawer } from '@mantine/core';
 import NavigationMenu from '../NavigationMenu/NavigationMenu';
 import { useDisclosure } from '@mantine/hooks';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
-import type { UserModel } from '@our-types/UserModel';
 import { type IconProps, type Icon, IconUserFilled } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
+import type { User, IdpName } from '@notifycal/shared/types';
 
 interface NavigationDrawerProps {
-  user: UserModel;
+  user: User<IdpName>;
   userNavigation: Array<{
     name: string;
     onClick: () => void;
@@ -54,7 +54,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
                 <IconUserFilled className="size-10 rounded-full border-primary-500 border-1 p-0.5" />
               </div>
               <div className="ml-3">
-                <div className="text-base font-medium">{user.name}</div>
+                <div className="text-base font-medium">{user.config?.business.name}</div>
                 <div className="text-sm font-medium text-primary-300">{user.email}</div>
               </div>
             </div>
@@ -65,7 +65,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
                   onClick={onClick}
                 >
                   <div className="flex items-center gap-4">
-                    <Icon style={{ width: rem(14), height: rem(14) }} />
+                    <Icon style={{ width: 14, height: 14 }} />
                     <p>{name}</p>
                   </div>
                 </div>

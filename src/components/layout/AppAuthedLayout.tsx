@@ -5,12 +5,7 @@ import Navigation from '@components/ui/Navigation/Navigation';
 
 import clsx from 'clsx';
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-};
+import { Route } from '@routes/_auth';
 
 interface AppAuthedLayoutProps {
   children: ReactNode;
@@ -23,11 +18,13 @@ const AppAuthedLayout: FC<AppAuthedLayoutProps> = ({ children }) => {
 
   const { useFancyHeader = false, fancyHeaderTitle = '' } = routeStaticData?.layout || {};
 
+  const { user } = Route.useLoaderData();
+
   return (
     <>
       <div className={clsx({ 'bg-primary-800': true, 'pb-32': useFancyHeader })}>
         {/* TODO global state */}
-        <Navigation user={user} />
+        {user && <Navigation user={user} />}
 
         {useFancyHeader && (
           <header className="py-10">
