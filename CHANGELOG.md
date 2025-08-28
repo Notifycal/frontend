@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.35.4](https://github.com/Notifycal/frontend/compare/v0.35.3...v0.35.4) (2025-08-28)
+
+
+### Bug Fixes
+
+* Navigation menu ([#607](https://github.com/Notifycal/frontend/issues/607)) ([a117a42](https://github.com/Notifycal/frontend/commit/a117a42fa2bfb1c8f3cce030251bb710e9abb467))
+
 ## [0.35.3](https://github.com/Notifycal/frontend/compare/v0.35.2...v0.35.3) (2025-08-28)
 
 
