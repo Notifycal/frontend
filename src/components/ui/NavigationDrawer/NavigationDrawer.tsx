@@ -23,7 +23,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
   return (
     <>
       <div className="group relative inline-flex items-center justify-center rounded-md bg-primary-600 p-2 text-primary-200 hover:bg-primary-500/75 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600">
-        <Burger aria-label="Toggle navigation" color="white" opened={opened} size="sm" onClick={toggle}>
+        <Burger aria-label="Toggle navigation" color="white" opened={opened} size="md" onClick={toggle}>
           <span className="absolute -inset-0.5" />
           <span className="sr-only">{t('navigation.openMainMenu')}</span>
         </Burger>
@@ -33,18 +33,18 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
         opened={opened}
         size="xs"
         classNames={{
-          content: 'bg-primary-600',
-          header: 'bg-primary-600',
+          content: 'bg-secondary-500',
+          header: 'bg-secondary-500',
           close: 'text-primary-200'
         }}
         onClose={toggle}
       >
         <div className="lg:hidden text-white">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            <nav onClick={close}>
+            <nav className="flex flex-col" onClick={close}>
               <NavigationMenu
-                activeClassName="bg-primary-700"
-                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary-500/75"
+                activeClassName="cursor-default after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
+                className="relative after:absolute px-3 py-2 text-md font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
               />
             </nav>
           </div>
