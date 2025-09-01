@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.35.5](https://github.com/Notifycal/frontend/compare/v0.35.4...v0.35.5) (2025-08-31)
+
+
+### Bug Fixes
+
+* **deps:** Update Node.js Dependencies ([#620](https://github.com/Notifycal/frontend/issues/620)) ([cb05b64](https://github.com/Notifycal/frontend/commit/cb05b649a64c0899761e951ddd02188f2c496ed0))
+
 ## [0.35.4](https://github.com/Notifycal/frontend/compare/v0.35.3...v0.35.4) (2025-08-28)
 
 
