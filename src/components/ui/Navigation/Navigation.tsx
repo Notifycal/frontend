@@ -1,13 +1,13 @@
 import { Menu } from '@mantine/core';
 import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
+import type { IdpName, User } from '@notifycal/shared/types';
 import { useAuth } from '@providers/AuthProvider';
 import { IconLogout2, IconUserFilled } from '@tabler/icons-react';
-import type { JSX } from 'react';
-import NavigationMenu from '../NavigationMenu/NavigationMenu';
-import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
-import { useTranslation } from 'react-i18next';
-import type { IdpName, User } from '@notifycal/shared/types';
 import { Link } from '@tanstack/react-router';
+import type { JSX } from 'react';
+import { useTranslation } from 'react-i18next';
+import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
+import NavigationMenu from '../NavigationMenu/NavigationMenu';
 
 interface UserProps {
   user: User<IdpName>;
@@ -45,8 +45,8 @@ export default function Navigation(props: UserProps): JSX.Element {
             <div className="hidden lg:ml-10 lg:block">
               <div className="flex space-x-4">
                 <NavigationMenu
-                  activeClassName="cursor-default after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
-                  className="relative after:absolute px-3 py-2 text-md font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
+                  activeClassName="relative after:absolute cursor-default px-3 py-2 text-lg font-medium text-white hover:no-underline transition-all duration-300 after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
+                  className="relative after:absolute px-3 py-2 text-lg font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
                 />
               </div>
             </div>
@@ -62,8 +62,8 @@ export default function Navigation(props: UserProps): JSX.Element {
                       type="button"
                     >
                       <div className="text-right">
-                        <div className="text-sm font-medium text-primary-200">{user.config?.business.name}</div>
-                        <div className="text-xs font-medium text-primary-50">{user.email}</div>
+                        <div className="text-md font-semibold text-primary-300">{user.config?.business.name}</div>
+                        <div className="text-sm font-medium text-primary-50">{user.email}</div>
                       </div>
                       <div className="size-8 relative flex rounded-full bg-primary-600 text-sm text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600">
                         <span className="absolute -inset-1.5" />
