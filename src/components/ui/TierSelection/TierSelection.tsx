@@ -27,7 +27,7 @@ const TierSelection: FC<TierSelectionProps> = ({
   orderedTierInfoWithIcons
 }: TierSelectionProps) => {
   const translationNs = 'onboarding' as const;
-  const { t, i18n } = useTranslation(translationNs);
+  const { i18n } = useTranslation(translationNs);
   const queryClient = useQueryClient();
 
   const language = i18n.languages[0] as LanguageCode;

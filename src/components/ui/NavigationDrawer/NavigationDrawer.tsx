@@ -44,11 +44,11 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
             <nav className="flex flex-col" onClick={close}>
               <NavigationMenu
                 activeClassName="cursor-default after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
-                className="relative after:absolute px-3 py-2 text-md font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
+                className="w-fit relative after:absolute px-3 py-2 text-md font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
               />
             </nav>
           </div>
-          <div className="border-t border-primary-700 pb-3 pt-4">
+          <div className="border-t border-secondary-400 pb-3 pt-4">
             <div className="flex items-center px-5">
               <div className="shrink-0">
                 <IconUserFilled className="size-10 rounded-full border-primary-500 border-1 p-0.5" />
