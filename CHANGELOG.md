@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.36.1](https://github.com/Notifycal/frontend/compare/v0.36.0...v0.36.1) (2025-09-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v7.10.0 ([#633](https://github.com/Notifycal/frontend/issues/633)) ([e141c58](https://github.com/Notifycal/frontend/commit/e141c584057d82e89ed0e291c0fe0953c2704d04))
+
 ## [0.36.0](https://github.com/Notifycal/frontend/compare/v0.35.5...v0.36.0) (2025-09-02)
 
 
