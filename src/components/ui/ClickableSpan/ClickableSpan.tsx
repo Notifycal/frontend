@@ -11,7 +11,10 @@ interface ClickableSpanProps extends PropsWithChildren {
 const ClickableSpan: FC<ClickableSpanProps> = ({ children, onClick, isPending, loaderProps }) => (
   <span className="inline-flex items-center gap-1">
     <span
-      className={clsx('underline', isPending ? 'text-gray-600 cursor-not-allowed' : 'text-blue-600 cursor-pointer')}
+      className={clsx(
+        'underline',
+        isPending ? 'text-primary-900 cursor-not-allowed' : 'text-primary-700 cursor-pointer'
+      )}
       onClick={isPending ? (): void => {} : onClick}
     >
       {children}

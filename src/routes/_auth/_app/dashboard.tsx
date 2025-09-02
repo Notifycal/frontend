@@ -10,5 +10,11 @@ export const Route = createFileRoute('/_auth/_app/dashboard')({
     });
     return { user };
   },
-  component: Billing
+  component: Billing,
+  staticData: {
+    layout: {
+      useFancyHeader: true,
+      fancyHeaderTitle: 'Dashboard'
+    }
+  }
 });

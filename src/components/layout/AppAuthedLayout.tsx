@@ -22,7 +22,7 @@ const AppAuthedLayout: FC<AppAuthedLayoutProps> = ({ children }) => {
 
   return (
     <>
-      <div className={clsx({ 'bg-primary-800': true, 'pb-32': useFancyHeader })}>
+      <div className={clsx({ 'bg-secondary-500': true, 'pb-32': useFancyHeader })}>
         {/* TODO global state */}
         {user && <Navigation user={user} />}
 

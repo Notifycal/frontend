@@ -1,10 +1,10 @@
 import { Burger, Drawer } from '@mantine/core';
-import NavigationMenu from '../NavigationMenu/NavigationMenu';
 import { useDisclosure } from '@mantine/hooks';
+import type { IdpName, User } from '@notifycal/shared/types';
+import { type Icon, type IconProps, IconUserFilled } from '@tabler/icons-react';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
-import { type IconProps, type Icon, IconUserFilled } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
-import type { User, IdpName } from '@notifycal/shared/types';
+import NavigationMenu from '../NavigationMenu/NavigationMenu';
 
 interface NavigationDrawerProps {
   user: User<IdpName>;
@@ -23,32 +23,33 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
   return (
     <>
       <div className="group relative inline-flex items-center justify-center rounded-md bg-primary-600 p-2 text-primary-200 hover:bg-primary-500/75 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600">
-        <Burger aria-label="Toggle navigation" color="white" opened={opened} size="sm" onClick={toggle}>
+        <Burger aria-label="Toggle navigation" color="white" opened={opened} size="md" onClick={toggle}>
           <span className="absolute -inset-0.5" />
           <span className="sr-only">{t('navigation.openMainMenu')}</span>
         </Burger>
       </div>
 
       <Drawer
+        closeButtonProps={{ size: 'xl' }}
         opened={opened}
         size="xs"
         classNames={{
-          content: 'bg-primary-600',
-          header: 'bg-primary-600',
+          content: 'bg-secondary-500',
+          header: 'bg-secondary-500',
           close: 'text-primary-200'
         }}
         onClose={toggle}
       >
         <div className="lg:hidden text-white">
           <div className="space-y-1 px-2 pb-3 pt-2">
-            <nav onClick={close}>
+            <nav className="flex flex-col" onClick={close}>
               <NavigationMenu
-                activeClassName="bg-primary-700"
-                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-primary-500/75"
+                activeClassName="w-fit relative after:absolute cursor-default px-3 py-2 text-lg font-medium text-white hover:no-underline transition-all duration-300 after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
+                className="w-fit relative after:absolute px-3 py-2 text-lg font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
               />
             </nav>
           </div>
-          <div className="border-t border-primary-700 pb-3 pt-4">
+          <div className="border-t border-secondary-400 pb-3 pt-4">
             <div className="flex items-center px-5">
               <div className="shrink-0">
                 <IconUserFilled className="size-10 rounded-full border-primary-500 border-1 p-0.5" />
@@ -61,7 +62,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
             <div className="mt-3 space-y-1 px-2">
               {userNavigation.map(({ name, onClick, icon: Icon }) => (
                 <div
-                  className="block rounded-md px-3 py-2 text-base font-medium  hover:bg-primary-500/75"
+                  className="block rounded-md px-3 py-2 text-lg font-medium hover:bg-primary-500/75"
                   onClick={onClick}
                 >
                   <div className="flex items-center gap-4">

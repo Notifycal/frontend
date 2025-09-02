@@ -27,7 +27,7 @@ const TierSelection: FC<TierSelectionProps> = ({
   orderedTierInfoWithIcons
 }: TierSelectionProps) => {
   const translationNs = 'onboarding' as const;
-  const { t, i18n } = useTranslation(translationNs);
+  const { i18n } = useTranslation(translationNs);
   const queryClient = useQueryClient();
 
   const language = i18n.languages[0] as LanguageCode;
@@ -86,7 +86,6 @@ const TierSelection: FC<TierSelectionProps> = ({
         onTierSelection={handleTierSelect}
       />
 
-      <div className="mt-8 text-sm text-center text-gray-500 max-w-2xl mx-auto">* {t('tierSelection.disclaimer')}</div>
       {displayNavigationButtons && (
         <Group justify="space-between" mt="xl" pt="md">
           <OnboardingBackButton />
