@@ -1,10 +1,10 @@
 import { Burger, Drawer } from '@mantine/core';
-import NavigationMenu from '../NavigationMenu/NavigationMenu';
 import { useDisclosure } from '@mantine/hooks';
+import type { IdpName, User } from '@notifycal/shared/types';
+import { type Icon, type IconProps, IconUserFilled } from '@tabler/icons-react';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
-import { type IconProps, type Icon, IconUserFilled } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
-import type { User, IdpName } from '@notifycal/shared/types';
+import NavigationMenu from '../NavigationMenu/NavigationMenu';
 
 interface NavigationDrawerProps {
   user: User<IdpName>;
@@ -30,6 +30,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
       </div>
 
       <Drawer
+        closeButtonProps={{ size: 'xl' }}
         opened={opened}
         size="xs"
         classNames={{
@@ -43,8 +44,8 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
           <div className="space-y-1 px-2 pb-3 pt-2">
             <nav className="flex flex-col" onClick={close}>
               <NavigationMenu
-                activeClassName="cursor-default after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
-                className="w-fit relative after:absolute px-3 py-2 text-md font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
+                activeClassName="w-fit relative after:absolute cursor-default px-3 py-2 text-lg font-medium text-white hover:no-underline transition-all duration-300 after:right-2 after:bottom-0 after:left-2 after:h-0.5 after:bg-gradient-to-tl after:content-['']"
+                className="w-fit relative after:absolute px-3 py-2 text-lg font-medium text-white hover:no-underline transition-all duration-300 hover:scale-105 hover:after:right-2 hover:after:bottom-0 hover:after:left-2 hover:after:h-1 hover:after:bg-gradient-accent1 hover:after:content-['']"
               />
             </nav>
           </div>
@@ -61,7 +62,7 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
             <div className="mt-3 space-y-1 px-2">
               {userNavigation.map(({ name, onClick, icon: Icon }) => (
                 <div
-                  className="block rounded-md px-3 py-2 text-base font-medium  hover:bg-primary-500/75"
+                  className="block rounded-md px-3 py-2 text-lg font-medium hover:bg-primary-500/75"
                   onClick={onClick}
                 >
                   <div className="flex items-center gap-4">
