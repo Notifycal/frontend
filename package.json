@@ -12,7 +12,7 @@
     "url": "https://github.com/Notifycal/frontend"
   },
   "license": "MIT",
-  "version": "0.35.5",
+  "version": "0.36.0",
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist",
