@@ -15,12 +15,7 @@ const NavigationMenu = ({ className, activeClassName }: NavigationMenuProps): JS
   return (
     <>
       {navigationItems.map((item) => (
-        <Link 
-          key={item.to} 
-          activeProps={{ className: activeClassName }}
-          inactiveProps={{ className }}
-          to={item.to}
-        >
+        <Link key={item.to} activeProps={{ className: activeClassName }} inactiveProps={{ className }} to={item.to}>
           {item.name}
         </Link>
       ))}
