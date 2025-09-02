@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.36.0](https://github.com/Notifycal/frontend/compare/v0.35.5...v0.36.0) (2025-09-02)
+
+
+### Features
+
+* styling [WIP] ([#618](https://github.com/Notifycal/frontend/issues/618)) ([a701224](https://github.com/Notifycal/frontend/commit/a7012243554eea35d47a94bf4ccd1f6b2d1e5e13))
+
+
+### Bug Fixes
+
+* **deps:** Update @notifycal/shared and zod ([#624](https://github.com/Notifycal/frontend/issues/624)) ([e4507e7](https://github.com/Notifycal/frontend/commit/e4507e7ba83ecac81cd6ee831e25deed742a59a6))
+* **deps:** Update dependency @notifycal/shared to v7.9.2 ([#627](https://github.com/Notifycal/frontend/issues/627)) ([cbf5f5c](https://github.com/Notifycal/frontend/commit/cbf5f5cbdc1382a6b78e9c9b0a43a2fc81670f35))
+
 ## [0.35.5](https://github.com/Notifycal/frontend/compare/v0.35.4...v0.35.5) (2025-08-31)
 
 
