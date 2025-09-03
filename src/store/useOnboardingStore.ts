@@ -82,8 +82,6 @@ export const useOnboardingStore = create<OnboardingState>()(
       },
 
       loadConfigFromUserProfile: (config: ReminderConfigTransformed): void => {
-        console.log(`Fetched config`, config);
-
         function businessDetails(business: ReminderConfigTransformed['business']): Partial<OnboardingData> {
           if (!business) return {};
           return {
@@ -96,7 +94,6 @@ export const useOnboardingStore = create<OnboardingState>()(
             }
           };
         }
-
         function reminderType(
           template: ReminderConfigTransformed['calendars'][0]['template'] | undefined
         ): Partial<OnboardingData> {
@@ -108,7 +105,6 @@ export const useOnboardingStore = create<OnboardingState>()(
             }
           };
         }
-
         function calendarData(calendars: ReminderConfigTransformed['calendars']): Partial<OnboardingData> {
           if (!calendars || calendars.length === 0) return {};
 
@@ -117,7 +113,6 @@ export const useOnboardingStore = create<OnboardingState>()(
             ...reminderType(calendars[0]?.template)
           };
         }
-
         function senderDetails(
           senderContact: ReminderConfigTransformed['business']['senderContact']
         ): Partial<OnboardingData> {
@@ -132,8 +127,6 @@ export const useOnboardingStore = create<OnboardingState>()(
           ...calendarData(config.calendars),
           ...senderDetails(config.business?.senderContact)
         };
-
-        console.log(`mapped data`, mappedData);
 
         set({
           data: mappedData,
