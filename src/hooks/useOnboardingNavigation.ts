@@ -1,10 +1,11 @@
 import { getStepByIndex } from '@constants/onboardingSteps';
+import type { UserStatus } from '@notifycal/shared/types';
 import { useOnboardingStore } from '@store/useOnboardingStore';
 import { useNavigate } from '@tanstack/react-router';
 
 interface OnboardingNavigationHook {
   handleBackNavigation: () => Promise<void>;
-  handleForwardNavigation: () => Promise<void>;
+  handleForwardNavigation: (userStatus?: UserStatus) => Promise<void>;
   canGoBack: boolean;
 }
 
@@ -21,7 +22,11 @@ export function useOnboardingNavigation(): OnboardingNavigationHook {
     }
   };
 
-  const handleForwardNavigation = async (): Promise<void> => {
+  const handleForwardNavigation = async (userStatus?: UserStatus): Promise<void> => {
+    if (userStatus && userStatus !== 'demo') {
+      await navigate({ to: '/dashboard' });
+      return;
+    }
     const nextStep = getStepByIndex(currentStep + 1);
     if (nextStep) {
       await navigate({ to: `/onboarding/$step`, params: { step: nextStep.path } });

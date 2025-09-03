@@ -1,4 +1,4 @@
-import { updateUserProfile } from '@api/userProfile';
+import { getUserProfile, updateUserProfile } from '@api/userProfile';
 import type { NotifycalTFunction } from '@common/i18n';
 import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import type { ParseKeys } from 'i18next';
@@ -90,8 +90,8 @@ const Confirm: React.FC = () => {
     mutationFn: updateUserProfile,
     onSuccess: async () => {
       setError(null);
-      await queryClient.refetchQueries({ queryKey: ['user-profile'] });
-      await handleForwardNavigation();
+      const userProfile = await queryClient.fetchQuery({ queryKey: ['user-profile'], queryFn: getUserProfile });
+      await handleForwardNavigation(userProfile.userStatus);
     },
     onError: () => {
       setError(t('confirm.apiError'));
