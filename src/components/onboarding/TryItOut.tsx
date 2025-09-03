@@ -67,7 +67,7 @@ const TryItOut: React.FC = () => {
   const queryClient = useQueryClient();
 
   const { handleStepSubmit } = useStepSubmit();
-  const { t } = useTranslation(['translations', 'onboarding']);
+  const { t } = useTranslation(['translation', 'onboarding']);
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
 
@@ -148,7 +148,7 @@ const TryItOut: React.FC = () => {
     return handleStepSubmit(currentData);
   };
 
-  const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translations' }) : undefined;
+  const nextButtonLabel = !hasSentTestReminder ? t('generic.skip', { ns: 'translation' }) : undefined;
   return (
     <form onSubmit={handleSubmit(handleStepSubmit)}>
       <div className="space-y-6">

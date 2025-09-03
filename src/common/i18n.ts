@@ -15,16 +15,17 @@ import flagGb from '@notifycal/shared/assets/icons/lang/gb.svg';
 
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 
-export type NotifycalI18nNamespaces = 'onboarding' | 'translations';
+export type NotifycalI18nNamespaces = 'onboarding' | 'translation';
 export type NotifycalTFunction = TFunction<NotifycalI18nNamespaces, undefined>;
 
-export const defaultNS = 'translations';
+export const defaultNS = 'translation';
 export const supportedLngs: Array<LanguageCode> = languageCodeSchema.options;
 
 const i18nOptions: InitOptions = {
   // https://github.com/i18next/i18next-http-backend?tab=readme-ov-file#seeing-failed-http-requests-like-404
   load: 'languageOnly',
   defaultNS,
+  ns: defaultNS,
   fallbackLng: 'en',
   supportedLngs,
   debug: !isProduction,

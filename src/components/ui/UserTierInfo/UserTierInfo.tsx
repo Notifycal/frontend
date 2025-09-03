@@ -14,7 +14,7 @@ interface UserTierInfoProps {
 }
 
 const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
-  const { t } = useTranslation(['translations', 'onboarding']);
+  const { t } = useTranslation(['translation', 'onboarding']);
 
   const { COUNTRY_TO_SMS_COST_MAP: countryToSmsCostMap } = getServiceConfig();
   const { icon: TierIcon } = tierInfo;
@@ -29,17 +29,17 @@ const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
         <Trans
           components={[<span className="font-bold" />]}
           i18nKey="billing.currentPlan"
-          ns="translations"
+          ns="translation"
           values={{ tierName: tierInfo.displayName }}
         />
       </div>
       <Divider my="md" />
 
-      <div>{t('billing.yourPlanIncludes', { ns: 'translations' })}</div>
+      <div>{t('billing.yourPlanIncludes', { ns: 'translation' })}</div>
       <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
       <Divider my="md" />
       <Alert
-        title={capitalize(t('generic.remember', { ns: 'translations' }))}
+        title={capitalize(t('generic.remember', { ns: 'translation' }))}
         classNames={{
           title: 'text-sm',
           message: 'text-xs'
