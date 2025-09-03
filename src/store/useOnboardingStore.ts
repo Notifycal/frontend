@@ -1,4 +1,5 @@
 import { findStepIndexByProperty, onboardingSteps, type StepKey } from '@constants/onboardingSteps';
+import type { ReminderConfigTransformed } from '@notifycal/shared/types';
 import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -14,6 +15,7 @@ interface OnboardingState {
   markStepAsCompleted: (step: keyof StepsCompletion) => void;
   setCurrentStep: (step: number) => void;
   resetOnboarding: () => void;
+  loadConfigFromUserProfile: (config: ReminderConfigTransformed) => void;
 }
 
 const initialState = {
@@ -77,6 +79,67 @@ export const useOnboardingStore = create<OnboardingState>()(
         useOnboardingStore.persist.clearStorage();
         // reset initial state
         set(initialState);
+      },
+
+      loadConfigFromUserProfile: (config: ReminderConfigTransformed): void => {
+        console.log(`Fetched config`, config);
+
+        function businessDetails(business: ReminderConfigTransformed['business']): Partial<OnboardingData> {
+          if (!business) return {};
+          return {
+            businessDetails: {
+              name: business.name,
+              address: business.address,
+              companyIndustry: business.companyIndustry,
+              companySize: business.companySize,
+              language: business.language
+            }
+          };
+        }
+
+        function reminderType(
+          template: ReminderConfigTransformed['calendars'][0]['template'] | undefined
+        ): Partial<OnboardingData> {
+          if (!template) return {};
+          return {
+            reminderType: {
+              reminderId: template.id,
+              reminderLanguage: template.language
+            }
+          };
+        }
+
+        function calendarData(calendars: ReminderConfigTransformed['calendars']): Partial<OnboardingData> {
+          if (!calendars || calendars.length === 0) return {};
+
+          return {
+            calendars: { calendars },
+            ...reminderType(calendars[0]?.template)
+          };
+        }
+
+        function senderDetails(
+          senderContact: ReminderConfigTransformed['business']['senderContact']
+        ): Partial<OnboardingData> {
+          if (!senderContact || senderContact.type !== 'sms') return {};
+          return {
+            senderDetails: { senderContact }
+          };
+        }
+
+        const mappedData: Partial<OnboardingData> = {
+          ...businessDetails(config.business),
+          ...calendarData(config.calendars),
+          ...senderDetails(config.business?.senderContact)
+        };
+
+        console.log(`mapped data`, mappedData);
+
+        set({
+          data: mappedData,
+          completedSteps: initialState.completedSteps,
+          currentStep: 0
+        });
       }
     }),
     {
