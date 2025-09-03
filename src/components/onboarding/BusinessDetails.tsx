@@ -127,7 +127,7 @@ const emptyInitialValue = {
 const BusinessDetails: React.FC = () => {
   const { data } = useOnboardingStore();
   const { handleStepSubmit } = useStepSubmit();
-  const { t, i18n } = useTranslation(['translations', 'onboarding']);
+  const { t, i18n } = useTranslation(['translation', 'onboarding']);
 
   const methods = useI18nForm<BusinessDetailsInput, unknown, BusinessDetailsOutput>(
     businessDetailsSchema,
@@ -176,7 +176,7 @@ const BusinessDetails: React.FC = () => {
                 clearable
                 data={Object.values(languageData).map((item) => ({
                   value: item.code,
-                  label: t(`generic.languages.${item.code}`, { ns: 'translations' })
+                  label: t(`generic.languages.${item.code}`, { ns: 'translation' })
                 }))}
                 {...commonFormFieldProps('language', {
                   label: t('businessDetails.formUserLanguageField.label', { ns: 'onboarding' }),

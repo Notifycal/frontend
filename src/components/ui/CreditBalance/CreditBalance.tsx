@@ -58,7 +58,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
           <Alert>
             <Trans
               i18nKey="billing.credits.toIncrementSubscriptionCredits"
-              ns="translations"
+              ns="translation"
               components={[
                 <ClickableSpan
                   isPending={generateCustomerPortalURLMutation.isPending}
