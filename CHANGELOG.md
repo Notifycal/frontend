@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0](https://github.com/Notifycal/frontend/compare/v0.36.1...v1.0.0) (2025-09-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* go live ([#641](https://github.com/Notifycal/frontend/issues/641))
+
+### Features
+
+* go live ([#641](https://github.com/Notifycal/frontend/issues/641)) ([d95ae7f](https://github.com/Notifycal/frontend/commit/d95ae7f8e6b980092c8810d1508390a6dbc40c2f))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency i18next to v25.5.0 ([#629](https://github.com/Notifycal/frontend/issues/629)) ([0b67440](https://github.com/Notifycal/frontend/commit/0b67440492ed8aa568e18189dc948fcb7ac4aa18))
+* translation fetching. 404s ([#635](https://github.com/Notifycal/frontend/issues/635)) ([41db0b4](https://github.com/Notifycal/frontend/commit/41db0b467ec1b5a40ea02ff8f29bd3100cb611f3))
+
 ## [0.36.1](https://github.com/Notifycal/frontend/compare/v0.36.0...v0.36.1) (2025-09-02)
 
 
