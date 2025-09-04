@@ -28,7 +28,7 @@ export default function Navigation(props: UserProps): JSX.Element {
 
   const userNavigation: Array<UserNavigationItem> = [
     {
-      name: t('navigation.editConfiguration'),
+      name: t('navigation.configuration'),
       href: '/onboarding?edit=true',
       icon: IconSettings,
       color: 'dark'

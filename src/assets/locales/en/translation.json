@@ -83,7 +83,7 @@
   "navigation": {
     "openMainMenu": "Open main menu",
     "signOut": "Sign out",
-    "editConfiguration": "Edit configuration"
+    "configuration": "Configuration"
   },
   "footer": {
     "allRightsReserved": "{{year}} Notifycal. All rights reserved.",
