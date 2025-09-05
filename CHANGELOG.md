@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/Notifycal/frontend/compare/v1.0.1...v1.0.2) (2025-09-05)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency i18next to v25.5.1 ([#648](https://github.com/Notifycal/frontend/issues/648)) ([18bf17f](https://github.com/Notifycal/frontend/commit/18bf17f4f8930e2685428c1eba26bca8f0dc7620))
+* reduce google oauth scopes ([#652](https://github.com/Notifycal/frontend/issues/652)) ([e16c32f](https://github.com/Notifycal/frontend/commit/e16c32fa6ece4e0f1d45417b92a318b0546f95f8))
+
 ## [1.0.1](https://github.com/Notifycal/frontend/compare/v1.0.0...v1.0.1) (2025-09-04)
 
 
