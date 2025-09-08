@@ -1,12 +1,10 @@
 import { getUserProfile, updateUserProfile } from '@api/userProfile';
 import type { NotifycalTFunction } from '@common/i18n';
-import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import type { ParseKeys } from 'i18next';
 import { z } from 'zod';
 
 import { useI18nForm } from '@hooks/useI18nForm';
-import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -14,7 +12,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
 import AccountOverview from '@components/ui/AccountOverview/AccountOverview';
 import FlatError from '@components/ui/FlatError/FlatError';
-import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { Checkbox } from '@mantine/core';
 import { Link } from '@tanstack/react-router';
 
@@ -49,16 +46,14 @@ const emptyInitialValue = {
 } as ConfirmInput;
 
 const Confirm: React.FC = () => {
-  const { data } = useOnboardingStore();
-  const { businessDetails, senderDetails, reminderType, calendars } = requireOnboardingSteps(data, [
+  const { onboardingData, handleStepData, requireDataFromSteps, handleForwardNavigation } = useOnboardingNavigation();
+  const { businessDetails, senderDetails, reminderType, calendars } = requireDataFromSteps([
     'businessDetails',
     'senderDetails',
     'reminderType',
     'calendars'
   ]);
   const [error, setError] = useState<string | null>(null);
-  const { handleStepData } = useStepSubmit();
-  const { handleForwardNavigation } = useOnboardingNavigation();
   const { t } = useTranslation('onboarding');
 
   const {
@@ -69,7 +64,7 @@ const Confirm: React.FC = () => {
     confirmSchema,
     {
       mode: 'onChange',
-      defaultValues: data.confirm || emptyInitialValue
+      defaultValues: onboardingData.confirm || emptyInitialValue
     },
     t
   );

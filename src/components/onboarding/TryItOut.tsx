@@ -8,8 +8,7 @@ import { z } from 'zod';
 
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
-import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Controller } from 'react-hook-form';
@@ -62,11 +61,9 @@ const emptyInitialValue = {
 } as TryItOutInput;
 
 const TryItOut: React.FC = () => {
-  const { data, setStepData } = useOnboardingStore();
+  const { onboardingData, setStepData, handleStepSubmit } = useOnboardingNavigation();
   const [error, setError] = useState<string | null>(null);
   const queryClient = useQueryClient();
-
-  const { handleStepSubmit } = useStepSubmit();
   const { t } = useTranslation(['translation', 'onboarding']);
 
   const setTryItOutData = setStepData.bind(null, 'tryItOut');
@@ -81,7 +78,7 @@ const TryItOut: React.FC = () => {
     tryItOutSchema,
     {
       mode: 'onChange',
-      defaultValues: data.tryItOut || emptyInitialValue
+      defaultValues: onboardingData.tryItOut || emptyInitialValue
     },
     t
   );

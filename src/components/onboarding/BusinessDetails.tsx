@@ -7,8 +7,7 @@ import { z } from 'zod';
 
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
-import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -125,15 +124,14 @@ const emptyInitialValue = {
 } as BusinessDetailsInput;
 
 const BusinessDetails: React.FC = () => {
-  const { data } = useOnboardingStore();
-  const { handleStepSubmit } = useStepSubmit();
+  const { onboardingData, handleStepSubmit } = useOnboardingNavigation();
   const { t, i18n } = useTranslation(['translation', 'onboarding']);
 
   const methods = useI18nForm<BusinessDetailsInput, unknown, BusinessDetailsOutput>(
     businessDetailsSchema,
     {
       mode: 'onChange',
-      defaultValues: data.businessDetails || emptyInitialValue
+      defaultValues: onboardingData.businessDetails || emptyInitialValue
     },
     t
   );

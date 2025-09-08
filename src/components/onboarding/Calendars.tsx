@@ -1,13 +1,11 @@
 import { getUserCalendarsFromGoogle } from '@api/googleUserCalendar';
 import type { NotifycalTFunction } from '@common/i18n';
-import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { calendarSchema } from '@notifycal/shared/schemas';
 import { z } from 'zod';
 
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
-import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useQuery } from '@tanstack/react-query';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -33,16 +31,15 @@ const emptyInitialValue = {
 } as CalendarsInput;
 
 const Calendars: React.FC = () => {
-  const { data } = useOnboardingStore();
-  const { businessDetails } = requireOnboardingSteps(data, ['businessDetails']);
-  const { handleStepSubmit } = useStepSubmit();
+  const { onboardingData, handleStepSubmit, requireDataFromSteps } = useOnboardingNavigation();
+  const { businessDetails } = requireDataFromSteps(['businessDetails']);
   const { t } = useTranslation('onboarding');
 
   const methods = useI18nForm<CalendarsInput, unknown, CalendarsOutput>(
     calendarsSchema,
     {
       mode: 'onChange',
-      defaultValues: data.calendars || emptyInitialValue
+      defaultValues: onboardingData.calendars || emptyInitialValue
     },
     t
   );
