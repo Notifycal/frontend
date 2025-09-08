@@ -9,7 +9,7 @@
     "signInWithGoogle": "Sign in with Google",
     "loginErrorInvalidScopes": "There was an error logging in, please ensure you select all the scopes in the Google popup when logging in.",
     "loginErrorGeneric": "There was an error logging in, please try again in a few minutes.",
-    "rightCta": "Your schedule,<br />no surprises",
+    "rightCta": "Send reminders to your clients<br />and get",
     "carouselSlides": [
       {
         "title": "No more missed appointments",
