@@ -1,19 +1,20 @@
-import type { StepKey } from '@hooks/useOnboardingNavigation';
 import type { ReminderConfigTransformed } from '@notifycal/shared/types';
-import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
+import type { OnboardingData, StepKey, StepsCompletion } from '@our-types/onboarding';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface OnboardingState {
   // State
   data: Partial<OnboardingData>;
   completedSteps: StepsCompletion;
   currentStep: number;
+  editMode: boolean;
 
   // Actions
   setStepData: <K extends StepKey>(step: K, data: OnboardingData[K]) => void;
   markStepAsCompleted: (step: keyof StepsCompletion) => void;
   setCurrentStep: (step: number) => void;
+  setEditMode: (editMode: boolean) => void;
   resetOnboarding: () => void;
   loadConfigFromUserProfile: (config: ReminderConfigTransformed) => void;
 }
@@ -29,7 +30,8 @@ const initialState = {
     tryItOut: false,
     tierSelection: false
   },
-  currentStep: 0
+  currentStep: 0,
+  editMode: false
 };
 
 const useOnboardingStore = create<OnboardingState>()(
@@ -63,10 +65,11 @@ const useOnboardingStore = create<OnboardingState>()(
         set({ currentStep: step });
       },
 
+      setEditMode: (editMode): void => {
+        set({ editMode });
+      },
+
       resetOnboarding: (): void => {
-        // Clear zustand-managed localStorage
-        useOnboardingStore.persist.clearStorage();
-        // reset initial state
         set(initialState);
       },
 
@@ -126,14 +129,44 @@ const useOnboardingStore = create<OnboardingState>()(
     }),
     {
       name: 'onboarding',
+      storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         completedSteps: state.completedSteps,
-        data: state.data
+        data: state.data,
+        currentStep: state.currentStep
       })
     }
   )
 );
 
-export { useOnboardingStore };
+const useEditModeStore = create<{ editMode: boolean; setEditMode: (editMode: boolean) => void }>()(
+  persist(
+    (set) => ({
+      editMode: false,
+      setEditMode: (editMode: boolean): unknown => set({ editMode })
+    }),
+    {
+      name: 'onboarding-edit-mode',
+      storage: createJSONStorage(() => sessionStorage)
+    }
+  )
+);
+
+const useOnboardingStoreHybrid = (): OnboardingState => {
+  const mainStore = useOnboardingStore();
+  const editStore = useEditModeStore();
+
+  return {
+    ...mainStore,
+    editMode: editStore.editMode,
+    setEditMode: editStore.setEditMode
+  };
+};
+
+export type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
+export {
+  useOnboardingStore as localStorageStore,
+  useEditModeStore as sessionStorageStore,
+  useOnboardingStoreHybrid as useOnboardingStore
+};
 export type { OnboardingState };
-export type { StepsCompletion, OnboardingData } from '@our-types/onboarding';

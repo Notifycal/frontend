@@ -1,6 +1,7 @@
 import type { KebabCase } from '@common/types';
 import OnboardingErrorFallback from '@components/onboarding/OnboardingErrorFallback';
-import { useOnboardingNavigationStatic, type StepKey } from '@hooks/useOnboardingNavigation';
+import { useOnboardingNavigationStatic } from '@hooks/useOnboardingNavigation';
+import type { StepKey } from '@our-types/onboarding';
 import { createFileRoute, Navigate, redirect, useMatch, useNavigate } from '@tanstack/react-router';
 import { ErrorBoundary } from 'react-error-boundary';
 

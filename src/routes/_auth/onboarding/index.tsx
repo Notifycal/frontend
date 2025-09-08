@@ -9,6 +9,7 @@ export const Route = createFileRoute('/_auth/onboarding/')({
   }),
   beforeLoad: async ({ search }) => {
     if (search.edit) {
+      useOnboardingNavigationStatic.setEditMode(true);
       try {
         const userProfile = await getUserProfile();
         if (userProfile?.config) {
@@ -17,13 +18,14 @@ export const Route = createFileRoute('/_auth/onboarding/')({
       } catch (error) {
         console.error('Error loading user profile for edit mode:', error);
       }
+    } else {
+      useOnboardingNavigationStatic.setEditMode(false);
     }
 
     const path = useOnboardingNavigationStatic.getFirstIncompleteStepPath();
     if (!search.edit && !path) {
       throw redirect({ to: '/onboarding/welcome' });
     }
-
-    throw redirect({ to: '/onboarding/$step', params: { step: path || 'business-details' } });
+    throw redirect({ to: '/onboarding/$step', params: { step: path } });
   }
 });

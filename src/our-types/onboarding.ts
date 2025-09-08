@@ -1,3 +1,4 @@
+import type { KebabCase } from '@common/types';
 import type { BusinessDetailsValues } from '@components/onboarding/BusinessDetails';
 import type { CalendarsValues } from '@components/onboarding/Calendars';
 import type { ConfirmValues } from '@components/onboarding/Confirm';
@@ -24,4 +25,15 @@ export interface StepsCompletion {
   confirm: boolean;
   tryItOut: boolean;
   tierSelection: boolean;
+}
+
+export type StepKey = keyof OnboardingData;
+
+export interface StepConfig {
+  path: KebabCase<StepKey>;
+  stepKey: StepKey;
+  component: React.ComponentType;
+  resetOnChangeBefore?: boolean;
+  customWidth?: string;
+  hiddenInEditMode?: boolean;
 }
