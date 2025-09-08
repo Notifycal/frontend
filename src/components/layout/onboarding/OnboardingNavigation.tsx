@@ -1,7 +1,5 @@
-import { isLastStep } from '@constants/onboardingSteps';
 import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
-
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Group } from '@mantine/core';
@@ -20,20 +18,19 @@ const OnboardingNavigation: React.FC<OnboardingNavigationProps> = ({
   onProceed,
   isSubmitting = false
 }) => {
-  const { currentStep } = useOnboardingStore();
+  const { canGoBack, isLastStep } = useOnboardingNavigation();
   const { t } = useTranslation();
 
-  const isTheLastStep = isLastStep(currentStep);
-  const nextLabel = nextButtonLabel || t(isTheLastStep ? 'generic.button.complete' : 'generic.button.continue');
+  const nextLabel = nextButtonLabel || t(isLastStep ? 'generic.button.complete' : 'generic.button.continue');
 
   return (
     <Group justify="space-between" mt="xl" pt="md">
-      {currentStep > 0 ? <OnboardingBackButton /> : <div />}
+      {canGoBack ? <OnboardingBackButton /> : <div />}
 
       <Button
         disabled={!canProceed}
         loading={isSubmitting}
-        rightSection={!isTheLastStep ? <IconArrowRight size={16} /> : <IconCheck size={16} />}
+        rightSection={!isLastStep ? <IconArrowRight size={16} /> : <IconCheck size={16} />}
         onClick={onProceed}
       >
         {nextLabel}

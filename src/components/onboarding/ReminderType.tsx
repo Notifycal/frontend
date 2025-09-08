@@ -2,7 +2,6 @@ import { DateTime } from 'luxon';
 import { z } from 'zod';
 
 import { languageData, type NotifycalTFunction } from '@common/i18n';
-import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 import {
   templateCaMap,
@@ -14,8 +13,7 @@ import {
 } from '@notifycal/shared/types';
 
 import { useI18nForm } from '@hooks/useI18nForm';
-import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -47,9 +45,8 @@ const emptyInitialValue = (languageCode: LanguageCode): ReminderTypeInput => ({
 });
 
 const ReminderType: React.FC = () => {
-  const { data } = useOnboardingStore();
-  const { businessDetails } = requireOnboardingSteps(data, ['businessDetails']);
-  const { handleStepSubmit } = useStepSubmit();
+  const { onboardingData, handleStepSubmit, requireDataFromSteps } = useOnboardingNavigation();
+  const { businessDetails } = requireDataFromSteps(['businessDetails']);
 
   const { t, i18n } = useTranslation('onboarding');
 
@@ -63,7 +60,7 @@ const ReminderType: React.FC = () => {
     reminderTypeSchema,
     {
       mode: 'onChange',
-      defaultValues: data.reminderType || emptyInitialValue(i18n.languages[0] as LanguageCode)
+      defaultValues: onboardingData.reminderType || emptyInitialValue(i18n.languages[0] as LanguageCode)
     },
     t
   );

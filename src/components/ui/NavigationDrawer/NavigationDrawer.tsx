@@ -2,23 +2,45 @@ import { Burger, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import type { IdpName, User } from '@notifycal/shared/types';
 import { type Icon, type IconProps, IconUserFilled } from '@tabler/icons-react';
+import { Link } from '@tanstack/react-router';
 import type { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 import NavigationMenu from '../NavigationMenu/NavigationMenu';
 
+interface UserNavigationItem {
+  name: string;
+  icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
+  onClick?: () => void;
+  href?: string;
+  color?: string;
+}
+
 interface NavigationDrawerProps {
   user: User<IdpName>;
-  userNavigation: Array<{
-    name: string;
-    onClick: () => void;
-    color: string;
-    icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
-  }>;
+  userNavigation: Array<UserNavigationItem>;
 }
 
 const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) => {
   const { t } = useTranslation();
   const [opened, { toggle, close }] = useDisclosure();
+
+  const NavigationItem: FC<{
+    href?: string | undefined;
+    onClick?: (() => void) | undefined;
+    className: string;
+    children: React.ReactNode;
+  }> = ({ href, onClick, className, children }) => {
+    const Component = href ? Link : 'div';
+    return (
+      <Component
+        {...(href ? { to: href } : {})}
+        className={`${className} ${href ? 'hover:no-underline text-white hover:text-white' : ''}`}
+        onClick={onClick}
+      >
+        {children}
+      </Component>
+    );
+  };
 
   return (
     <>
@@ -60,16 +82,18 @@ const NavigationDrawer: FC<NavigationDrawerProps> = ({ user, userNavigation }) =
               </div>
             </div>
             <div className="mt-3 space-y-1 px-2">
-              {userNavigation.map(({ name, onClick, icon: Icon }) => (
-                <div
+              {userNavigation.map(({ name, href, onClick, icon: Icon }, index) => (
+                <NavigationItem
+                  key={index}
                   className="block rounded-md px-3 py-2 text-lg font-medium hover:bg-primary-500/75"
+                  href={href}
                   onClick={onClick}
                 >
                   <div className="flex items-center gap-4">
                     <Icon style={{ width: 14, height: 14 }} />
                     <p>{name}</p>
                   </div>
-                </div>
+                </NavigationItem>
               ))}
             </div>
           </div>

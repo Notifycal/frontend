@@ -1,14 +1,15 @@
 import { useTranslation } from 'react-i18next';
 
 import RouterLink from '@components/utils/RouterLink';
-import { getStepByIndex } from '@constants/onboardingSteps';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { Button } from '@mantine/core';
 import { IconPencil } from '@tabler/icons-react';
 
 const OnboardingWelcome: React.FC = () => {
   const { t } = useTranslation(['translation', 'onboarding']);
+  const { onboardingSteps } = useOnboardingNavigation();
 
-  const firstStep = getStepByIndex(0);
+  const firstStep = onboardingSteps[0];
   const firstStepPath = firstStep ? firstStep.path : '';
 
   return (

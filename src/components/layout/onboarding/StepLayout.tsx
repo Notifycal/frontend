@@ -1,7 +1,5 @@
-import { getFirstIncompleteStepIndex, getStepByIndex, onboardingSteps } from '@constants/onboardingSteps';
-
-import { useOnboardingStore } from '@store/useOnboardingStore';
-import { Outlet, useNavigate } from '@tanstack/react-router';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
+import { Outlet } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { Progress, Stepper } from '@mantine/core';
@@ -14,7 +12,7 @@ interface SubHeaderProps {
 }
 
 const SubHeader: React.FC<SubHeaderProps> = ({ title, subtitle }) => (
-  <div className="text-center 2xl:mt-8">
+  <div className="text-center xl:mt-8">
     <h2 className="mt-4 mb-4 text-xl font-semibold text-gray-800">{title}</h2>
     <p className="mt-4 mb-4 text-gray-600">{subtitle}</p>
   </div>
@@ -28,35 +26,20 @@ const pageTransition = {
 };
 
 const StepLayout: React.FC = () => {
-  const { currentStep, completedSteps } = useOnboardingStore();
-  const navigate = useNavigate();
+  const { currentStepIndex, shouldAllowSelectStep, navigateToStep, onboardingSteps, currentStep } =
+    useOnboardingNavigation();
 
   const { t } = useTranslation('onboarding');
 
-  const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
-  const shouldAllowSelectStep = (step: number): boolean => firstIncompleteIndex >= step;
-
-  const step = getStepByIndex(currentStep);
-
   return (
     <>
-      {step && (
+      {currentStep && (
         <>
           {/* Stepper */}
-          <div className="hidden 2xl:flex w-full justify-center bg-white">
+          <div className="hidden xl:flex w-full justify-center bg-white">
             <div className="container mx-auto px-4 mb-6">
               <div className="w-full max-w-7xl mx-auto">
-                <Stepper
-                  active={currentStep}
-                  className="pt-4"
-                  size="sm"
-                  onStepClick={async (stepIndex) => {
-                    const step = getStepByIndex(stepIndex);
-                    if (step) {
-                      await navigate({ to: `/onboarding/$step`, params: { step: step.path } });
-                    }
-                  }}
-                >
+                <Stepper active={currentStepIndex} className="pt-4" size="sm" onStepClick={navigateToStep}>
                   {onboardingSteps.map(({ path, stepKey }, index) => {
                     const tTitle = t(`${stepKey}.title`);
                     return (
@@ -72,13 +55,13 @@ const StepLayout: React.FC = () => {
 
           {/* SubHeader for mobile (was inside Stepper block before) */}
 
-          <div className="flex 2xl:hidden w-full justify-center bg-white pb-8">
+          <div className="flex xl:hidden w-full justify-center bg-white pb-8">
             <div className="container mx-auto px-4">
-              <SubHeader subtitle={t(`${step.stepKey}.subtitle`)} title={t(`${step.stepKey}.title`)} />
+              <SubHeader subtitle={t(`${currentStep.stepKey}.subtitle`)} title={t(`${currentStep.stepKey}.title`)} />
             </div>
           </div>
 
-          <Progress radius={0} size="sm" value={(currentStep / (onboardingSteps.length - 1)) * 100} />
+          <Progress radius={0} size="sm" value={(currentStepIndex / (onboardingSteps.length - 1)) * 100} />
 
           {/* Main content */}
           <main className="mx-auto px-4 py-4 w-full">
@@ -86,11 +69,11 @@ const StepLayout: React.FC = () => {
               <div
                 className={clsx(
                   'w-full mx-auto bg-white rounded-lg shadow-md p-6 md:p-8',
-                  step.customWidth ?? 'max-w-3xl'
+                  currentStep.customWidth ?? 'max-w-3xl'
                 )}
               >
                 <motion.div
-                  key={step.path}
+                  key={currentStep.path}
                   animate="animate"
                   exit="exit"
                   initial="initial"

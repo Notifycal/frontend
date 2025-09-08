@@ -1,13 +1,21 @@
-import { Menu } from '@mantine/core';
+import { Menu, type MantineColor } from '@mantine/core';
 import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
 import type { IdpName, User } from '@notifycal/shared/types';
 import { useAuth } from '@providers/AuthProvider';
-import { IconLogout2, IconUserFilled } from '@tabler/icons-react';
+import { IconLogout2, IconSettings, IconUserFilled, type Icon, type IconProps } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
-import type { JSX } from 'react';
+import type { ForwardRefExoticComponent, JSX, RefAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import NavigationMenu from '../NavigationMenu/NavigationMenu';
+
+interface UserNavigationItem {
+  name: string;
+  icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
+  color: MantineColor;
+  onClick?: () => void;
+  href?: string;
+}
 
 interface UserProps {
   user: User<IdpName>;
@@ -18,7 +26,13 @@ export default function Navigation(props: UserProps): JSX.Element {
   const onLogoutHandler = auth.logout;
   const { t } = useTranslation();
 
-  const userNavigation = [
+  const userNavigation: Array<UserNavigationItem> = [
+    {
+      name: t('navigation.configuration'),
+      href: '/onboarding?edit=true',
+      icon: IconSettings,
+      color: 'dark'
+    },
     {
       name: t('navigation.signOut'),
       onClick: onLogoutHandler,
@@ -75,8 +89,14 @@ export default function Navigation(props: UserProps): JSX.Element {
                 </Menu.Target>
 
                 <Menu.Dropdown>
-                  {userNavigation.map(({ name, onClick, color, icon: Icon }) => (
-                    <Menu.Item color={color} leftSection={<Icon style={{ width: 14, height: 14 }} />} onClick={onClick}>
+                  {userNavigation.map(({ name, href, onClick, color, icon: Icon }) => (
+                    <Menu.Item
+                      key={name}
+                      color={color}
+                      leftSection={<Icon style={{ width: 14, height: 14 }} />}
+                      {...(href ? { component: Link, to: href, className: 'font-medium' } : {})}
+                      onClick={onClick}
+                    >
                       {name}
                     </Menu.Item>
                   ))}

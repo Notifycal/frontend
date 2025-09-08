@@ -1,6 +1,4 @@
-import { useOnboardingStore } from '@store/useOnboardingStore';
-
-import { hasIncompleteSteps } from '@constants/onboardingSteps';
+import { useOnboardingNavigationStatic } from '@hooks/useOnboardingNavigation';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import OnboardingCompleted from '@components/onboarding/OnboardingCompleted';
@@ -8,9 +6,7 @@ import OnboardingCompleted from '@components/onboarding/OnboardingCompleted';
 export const Route = createFileRoute('/_auth/onboarding/_nostep/completed')({
   component: OnboardingCompleted,
   beforeLoad: () => {
-    const { completedSteps } = useOnboardingStore.getState();
-
-    if (hasIncompleteSteps(completedSteps)) {
+    if (useOnboardingNavigationStatic.hasIncompleteSteps()) {
       throw redirect({ to: `/onboarding` });
     }
   }

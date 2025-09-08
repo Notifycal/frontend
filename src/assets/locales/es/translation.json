@@ -82,7 +82,8 @@
   },
   "navigation": {
     "openMainMenu": "Abrir menú principal",
-    "signOut": "Cerrar sesión"
+    "signOut": "Cerrar sesión",
+    "configuration": "Configuración"
   },
   "footer": {
     "allRightsReserved": "{{year}} Notifycal. Todos los derechos reservados.",

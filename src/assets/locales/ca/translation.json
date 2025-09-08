@@ -89,7 +89,8 @@
   },
   "navigation": {
     "openMainMenu": "Obrir menú principal",
-    "signOut": "Tancar sessió"
+    "signOut": "Tancar sessió",
+    "configuration": "Configuració"
   },
   "billing": {
     "topup": "Recàrrega",

@@ -1,4 +1,4 @@
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +7,7 @@ import { IconCircleCheck } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
 
 const OnboardingCompleted: React.FC = () => {
-  const { resetOnboarding } = useOnboardingStore();
+  const { resetOnboarding } = useOnboardingNavigation();
   const { t } = useTranslation('onboarding');
 
   useEffect(() => {

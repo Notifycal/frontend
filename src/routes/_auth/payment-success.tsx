@@ -1,7 +1,7 @@
 import { getUserProfile } from '@/api/userProfile';
 import FullPageOverlaySpinner from '@components/ui/FullPageOverlaySpinner/FullPageOverlaySpinner';
 import { useBillingStore } from '@store/useBillingStore';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { type JSX, useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ function PaymentSuccessRedirect(): JSX.Element {
   const navigate = useNavigate();
   const [shouldPoll, setShouldPoll] = useState(true);
   const { topupCreditBalance, purchaseOperation, reset, previousUserStatus } = useBillingStore();
-  const { markStepAsCompleted } = useOnboardingStore();
+  const { markStepAsCompleted } = useOnboardingNavigation();
 
   const { data: user, isSuccess } = useQuery({
     queryKey: ['user-profile'],
