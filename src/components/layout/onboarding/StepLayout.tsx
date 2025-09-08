@@ -26,7 +26,7 @@ const pageTransition = {
 };
 
 const StepLayout: React.FC = () => {
-  const { currentStepIndex, shouldAllowSelectStep, navigateToStep, availableSteps, currentStep } =
+  const { currentStepIndex, shouldAllowSelectStep, navigateToStep, onboardingSteps, currentStep } =
     useOnboardingNavigation();
 
   const { t } = useTranslation('onboarding');
@@ -40,7 +40,7 @@ const StepLayout: React.FC = () => {
             <div className="container mx-auto px-4 mb-6">
               <div className="w-full max-w-7xl mx-auto">
                 <Stepper active={currentStepIndex} className="pt-4" size="sm" onStepClick={navigateToStep}>
-                  {availableSteps.map(({ path, stepKey }, index) => {
+                  {onboardingSteps.map(({ path, stepKey }, index) => {
                     const tTitle = t(`${stepKey}.title`);
                     return (
                       <Stepper.Step key={path} allowStepSelect={shouldAllowSelectStep(index)} label={tTitle}>
@@ -61,7 +61,7 @@ const StepLayout: React.FC = () => {
             </div>
           </div>
 
-          <Progress radius={0} size="sm" value={(currentStepIndex / (availableSteps.length - 1)) * 100} />
+          <Progress radius={0} size="sm" value={(currentStepIndex / (onboardingSteps.length - 1)) * 100} />
 
           {/* Main content */}
           <main className="mx-auto px-4 py-4 w-full">

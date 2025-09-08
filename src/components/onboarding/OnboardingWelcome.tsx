@@ -7,9 +7,9 @@ import { IconPencil } from '@tabler/icons-react';
 
 const OnboardingWelcome: React.FC = () => {
   const { t } = useTranslation(['translation', 'onboarding']);
-  const { availableSteps } = useOnboardingNavigation();
+  const { onboardingSteps } = useOnboardingNavigation();
 
-  const firstStep = availableSteps[0];
+  const firstStep = onboardingSteps[0];
   const firstStepPath = firstStep ? firstStep.path : '';
 
   return (
