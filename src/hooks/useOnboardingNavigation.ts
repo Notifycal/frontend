@@ -1,7 +1,7 @@
 import type { KebabCase } from '@common/types';
 import type { ReminderConfigTransformed, UserStatus } from '@notifycal/shared/types';
 import type { OnboardingData, StepConfig, StepKey, StepsCompletion } from '@our-types/onboarding';
-import { localStorageStore, sessionStorageStore, useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingStore, getOnboardingState } from '@store/useOnboardingStore';
 import { useNavigate } from '@tanstack/react-router';
 
 import BusinessDetails from '@components/onboarding/BusinessDetails';
@@ -55,7 +55,7 @@ const onboardingSteps: Array<StepConfig> = [
 ];
 
 const isEditMode = (): boolean => {
-  return sessionStorageStore.getState().editMode;
+  return getOnboardingState().editMode;
 };
 
 const getAvailableSteps = (): Array<StepConfig> => {
@@ -78,26 +78,24 @@ const findStepIndexByProperty = <K extends keyof StepConfig>(key: K, value: Step
   return index > -1 ? index : undefined;
 };
 
-const getFirstIncompleteStepIndex = (stepsCompleted: StepsCompletion): number | undefined => {
-  const index = getAvailableSteps().findIndex((step) => !stepsCompleted[step.stepKey]);
-  return index > -1 ? index : undefined;
+const getFirstIncompleteStepIndex = (stepsCompleted: StepsCompletion): number => {
+  const steps = getAvailableSteps();
+  const index = steps.findIndex((step) => !stepsCompleted[step.stepKey]);
+  return index > -1 ? index : steps.length - 1;
 };
 
 const getFirstIncompleteStep = (stepsCompleted: StepsCompletion): StepConfig => {
   const index = getFirstIncompleteStepIndex(stepsCompleted);
-  return getStepByIndex(index || 0)!;
+  return getStepByIndex(index)!;
 };
 
 const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
-  !Object.values(stepsCompleted).every((step) => step);
+  !Object.values(stepsCompleted).every((stepCompleted) => stepCompleted);
 
 const isLastStep = (stepIndex: number): boolean => stepIndex === getAvailableSteps().length - 1;
 
 const canAccessStep = (stepIndex: number, completedSteps: StepsCompletion): boolean => {
-  if (isEditMode()) {
-    return true;
-  }
-  const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
+  const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps);
   return stepIndex <= firstIncompleteIndex;
 };
 
@@ -259,28 +257,34 @@ export function useOnboardingNavigation(): OnboardingNavigation {
 
 export const useOnboardingNavigationStatic = {
   validateStepAccess: (stepPath: string): { isValid: boolean; redirectTo?: string } => {
-    const state = localStorageStore.getState();
-    return validateOnboardingStepAccess(stepPath, state.completedSteps);
+    const { completedSteps } = getOnboardingState();
+    return validateOnboardingStepAccess(stepPath, completedSteps);
   },
   validateCompletedAccess: (): { isValid: boolean } => {
-    const state = localStorageStore.getState();
-    return { isValid: !hasIncompleteSteps(state.completedSteps) };
+    const { completedSteps } = getOnboardingState();
+    return { isValid: !hasIncompleteSteps(completedSteps) };
   },
   getStepComponent: (stepPath: string): React.ComponentType | undefined =>
     getStepByProperty('path', stepPath as KebabCase<StepKey>)?.component,
   setCurrentStepFromPath: (stepPath: string): void => {
     const index = findStepIndexByProperty('path', stepPath as KebabCase<StepKey>) || 0;
-    localStorageStore.getState().setCurrentStep(index);
+    getOnboardingState().setCurrentStep(index);
+  },
+  getFirstStepPath: (): string => {
+    return getAvailableSteps()[0]!.path;
+  },
+  getFirstIncompleteStepIndex: (): number => {
+    const { completedSteps } = getOnboardingState();
+    return getFirstIncompleteStepIndex(completedSteps);
   },
   getFirstIncompleteStepPath: (): string => {
-    const state = localStorageStore.getState();
-    const index = getFirstIncompleteStepIndex(state.completedSteps);
-    return index !== undefined ? getStepByIndex(index)?.path || '' : '';
+    const { completedSteps } = getOnboardingState();
+    return getFirstIncompleteStep(completedSteps).path;
   },
   loadUserProfile: (config: ReminderConfigTransformed): void => {
-    localStorageStore.getState().loadConfigFromUserProfile(config);
+    getOnboardingState().loadConfigFromUserProfile(config);
   },
   setEditMode: (enabled: boolean): void => {
-    sessionStorageStore.getState().setEditMode(enabled);
+    getOnboardingState().setEditMode(enabled);
   }
 };

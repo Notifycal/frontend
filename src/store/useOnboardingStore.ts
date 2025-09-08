@@ -34,7 +34,7 @@ const initialState = {
   editMode: false
 };
 
-const useOnboardingStore = create<OnboardingState>()(
+const _useOnboardingStore = create<OnboardingState>()(
   persist(
     (set) => ({
       ...initialState,
@@ -122,7 +122,15 @@ const useOnboardingStore = create<OnboardingState>()(
 
         set({
           data: mappedData,
-          completedSteps: initialState.completedSteps,
+          completedSteps: {
+            businessDetails: true,
+            reminderType: true,
+            calendars: true,
+            senderDetails: true,
+            confirm: true,
+            tryItOut: true,
+            tierSelection: true
+          },
           currentStep: 0
         });
       }
@@ -152,8 +160,8 @@ const useEditModeStore = create<{ editMode: boolean; setEditMode: (editMode: boo
   )
 );
 
-const useOnboardingStoreHybrid = (): OnboardingState => {
-  const mainStore = useOnboardingStore();
+const useOnboardingStore = (): OnboardingState => {
+  const mainStore = _useOnboardingStore();
   const editStore = useEditModeStore();
 
   return {
@@ -163,10 +171,18 @@ const useOnboardingStoreHybrid = (): OnboardingState => {
   };
 };
 
-export type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
-export {
-  useOnboardingStore as localStorageStore,
-  useEditModeStore as sessionStorageStore,
-  useOnboardingStoreHybrid as useOnboardingStore
+const getOnboardingState = (): OnboardingState => {
+  const mainState = _useOnboardingStore.getState();
+  const editState = useEditModeStore.getState();
+
+  return {
+    ...mainState,
+    editMode: editState.editMode,
+    setEditMode: editState.setEditMode
+  };
 };
+
+export type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
+export { useOnboardingStore, getOnboardingState };
 export type { OnboardingState };
+

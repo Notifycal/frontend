@@ -7,25 +7,30 @@ export const Route = createFileRoute('/_auth/onboarding/')({
   validateSearch: z.object({
     edit: z.boolean().optional()
   }),
-  beforeLoad: async ({ search }) => {
+  beforeLoad: async ({ search, context }) => {
     if (search.edit) {
       useOnboardingNavigationStatic.setEditMode(true);
-      try {
-        const userProfile = await getUserProfile();
-        if (userProfile?.config) {
-          useOnboardingNavigationStatic.loadUserProfile(userProfile.config);
-        }
-      } catch (error) {
-        console.error('Error loading user profile for edit mode:', error);
-      }
+      await context.queryClient
+        .ensureQueryData({
+          queryKey: ['user-profile'],
+          queryFn: getUserProfile
+        })
+        .then((userProfile) => {
+          if (userProfile?.config) {
+            useOnboardingNavigationStatic.loadUserProfile(userProfile.config);
+          }
+        });
+      const firstStepPath = useOnboardingNavigationStatic.getFirstStepPath();
+      throw redirect({ to: '/onboarding/$step', params: { step: firstStepPath } });
     } else {
       useOnboardingNavigationStatic.setEditMode(false);
+      const firstIncompleteStep = useOnboardingNavigationStatic.getFirstIncompleteStepIndex();
+      if (firstIncompleteStep === 0) {
+        throw redirect({ to: '/onboarding/welcome' });
+      } else {
+        const path = useOnboardingNavigationStatic.getFirstIncompleteStepPath();
+        throw redirect({ to: '/onboarding/$step', params: { step: path } });
+      }
     }
-
-    const path = useOnboardingNavigationStatic.getFirstIncompleteStepPath();
-    if (!search.edit && !path) {
-      throw redirect({ to: '/onboarding/welcome' });
-    }
-    throw redirect({ to: '/onboarding/$step', params: { step: path } });
   }
 });
