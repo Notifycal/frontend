@@ -183,4 +183,3 @@ const getOnboardingState = (): OnboardingState => {
 };
 export { getOnboardingState, useOnboardingStore };
 export type { OnboardingState };
-
