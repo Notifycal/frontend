@@ -181,8 +181,6 @@ const getOnboardingState = (): OnboardingState => {
     setEditMode: editState.setEditMode
   };
 };
-
-export type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
-export { useOnboardingStore, getOnboardingState };
+export { getOnboardingState, useOnboardingStore };
 export type { OnboardingState };
 
