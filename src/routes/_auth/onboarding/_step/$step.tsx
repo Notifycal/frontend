@@ -1,6 +1,7 @@
 import type { KebabCase } from '@common/types';
 import OnboardingErrorFallback from '@components/onboarding/OnboardingErrorFallback';
-import { useOnboardingNavigationStatic, type StepKey } from '@hooks/useOnboardingNavigation';
+import { useOnboardingNavigationStatic } from '@hooks/useOnboardingNavigation';
+import type { StepKey } from '@our-types/onboarding';
 import { createFileRoute, Navigate, redirect, useMatch, useNavigate } from '@tanstack/react-router';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -26,10 +27,9 @@ export const Route = createFileRoute('/_auth/onboarding/_step/$step')({
   component: StepComponent,
   beforeLoad: ({ params }) => {
     const stepPathParameter = params.step as KebabCase<StepKey>;
-    const validation = useOnboardingNavigationStatic.validateStepAccess(stepPathParameter);
-
-    if (!validation.isValid && validation.redirectTo) {
-      throw redirect({ to: `/onboarding/$step`, params: { step: validation.redirectTo } });
+    if (!useOnboardingNavigationStatic.canStepBeAccessed(stepPathParameter)) {
+      const firstIncompleteStepPath = useOnboardingNavigationStatic.getFirstIncompleteStepPath();
+      throw redirect({ to: `/onboarding/$step`, params: { step: firstIncompleteStepPath } });
     }
     useOnboardingNavigationStatic.setCurrentStepFromPath(stepPathParameter);
   }

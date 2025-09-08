@@ -1,7 +1,7 @@
 import type { KebabCase } from '@common/types';
 import type { ReminderConfigTransformed, UserStatus } from '@notifycal/shared/types';
-import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import type { OnboardingData, StepConfig, StepKey, StepsCompletion } from '@our-types/onboarding';
+import { getOnboardingState, useOnboardingStore } from '@store/useOnboardingStore';
 import { useNavigate } from '@tanstack/react-router';
 
 import BusinessDetails from '@components/onboarding/BusinessDetails';
@@ -11,16 +11,6 @@ import ReminderType from '@components/onboarding/ReminderType';
 import SenderDetails from '@components/onboarding/SenderDetails';
 import TierSelection from '@components/onboarding/TierSelection';
 import TryItOut from '@components/onboarding/TryItOut';
-
-export type StepKey = keyof OnboardingData;
-
-export interface StepConfig {
-  path: KebabCase<StepKey>;
-  stepKey: StepKey;
-  component: React.ComponentType;
-  resetOnChangeBefore?: boolean;
-  customWidth?: string;
-}
 
 const onboardingSteps: Array<StepConfig> = [
   {
@@ -52,37 +42,68 @@ const onboardingSteps: Array<StepConfig> = [
   {
     path: 'try-it-out',
     stepKey: 'tryItOut',
-    component: TryItOut
+    component: TryItOut,
+    hiddenInEditMode: true
   },
   {
     path: 'tier-selection',
     stepKey: 'tierSelection',
     component: TierSelection,
-    customWidth: 'max-w-6xl'
+    customWidth: 'max-w-6xl',
+    hiddenInEditMode: true
   }
 ];
 
-const isValidStepPath = (path: string): boolean => onboardingSteps.map((step) => step.path).includes(path);
+const isEditMode = (): boolean => {
+  return getOnboardingState().editMode;
+};
+
+const getOnboardingSteps = (): Array<StepConfig> => {
+  const editMode = isEditMode();
+  return editMode ? onboardingSteps.filter((step) => !step.hiddenInEditMode) : onboardingSteps;
+};
+
+const isValidStepPath = (path: string): boolean =>
+  getOnboardingSteps()
+    .map((step) => step.path)
+    .includes(path);
 
 const getStepByProperty = <K extends keyof StepConfig>(key: K, value: StepConfig[K]): StepConfig | undefined =>
-  onboardingSteps.find((step) => step[key] === value);
+  getOnboardingSteps().find((step) => step[key] === value);
 
-const getStepByIndex = (index: number): StepConfig | undefined => onboardingSteps[index];
+const getStepByIndex = (index: number): StepConfig | undefined => getOnboardingSteps()[index];
 
 const findStepIndexByProperty = <K extends keyof StepConfig>(key: K, value: StepConfig[K]): number | undefined => {
-  const index = onboardingSteps.findIndex((step) => step[key] === value);
+  const index = getOnboardingSteps().findIndex((step) => step[key] === value);
   return index > -1 ? index : undefined;
 };
 
-const getFirstIncompleteStepIndex = (stepsCompleted: StepsCompletion): number | undefined => {
-  const index = onboardingSteps.findIndex((step) => !stepsCompleted[step.stepKey]);
-  return index > -1 ? index : undefined;
+const getFirstIncompleteStepIndex = (stepsCompleted: StepsCompletion): number => {
+  const steps = getOnboardingSteps();
+  const index = steps.findIndex((step) => !stepsCompleted[step.stepKey]);
+  return index > -1 ? index : steps.length - 1;
 };
 
-const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
-  !Object.values(stepsCompleted).every((step) => step);
+const getFirstIncompleteStep = (stepsCompleted: StepsCompletion): StepConfig => {
+  const index = getFirstIncompleteStepIndex(stepsCompleted);
+  return getStepByIndex(index)!;
+};
 
-const isLastStep = (stepIndex: number): boolean => stepIndex === onboardingSteps.length - 1;
+const isLastStep = (stepIndex: number): boolean => stepIndex === getOnboardingSteps().length - 1;
+
+const canStepBeAccessedByIndex = (stepIndex: number, completedSteps: StepsCompletion): boolean => {
+  const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps);
+  return stepIndex <= firstIncompleteIndex;
+};
+
+const canStepBeAccessedByPath = (stepPath: string, completedSteps: StepsCompletion): boolean => {
+  const stepPathParameter = stepPath as KebabCase<StepKey>;
+  const currentStepIndex = findStepIndexByProperty('path', stepPathParameter) || 0;
+  if (!isValidStepPath(stepPathParameter) || !canStepBeAccessedByIndex(currentStepIndex, completedSteps)) {
+    return false;
+  }
+  return true;
+};
 
 const requireDataFromSteps = <const Keys extends ReadonlyArray<keyof OnboardingData>>(
   data: Partial<OnboardingData>,
@@ -101,34 +122,6 @@ const requireDataFromSteps = <const Keys extends ReadonlyArray<keyof OnboardingD
   };
 };
 
-const validateOnboardingStepAccess = (
-  stepPath: string,
-  completedSteps: StepsCompletion
-): { isValid: boolean; redirectTo?: string } => {
-  const stepPathParameter = stepPath as KebabCase<StepKey>;
-
-  if (!isValidStepPath(stepPathParameter)) {
-    const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
-    const firstIncompleteStepPath = getStepByIndex(firstIncompleteIndex)?.path || '';
-    return { isValid: false, redirectTo: firstIncompleteStepPath };
-  }
-
-  const currentStepIndex = findStepIndexByProperty('path', stepPathParameter) || 0;
-  const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
-  const isAheadOfFirstIncomplete = currentStepIndex > firstIncompleteIndex;
-
-  if (isAheadOfFirstIncomplete) {
-    const firstIncompleteStepPath = getStepByIndex(firstIncompleteIndex)?.path || '';
-    return { isValid: false, redirectTo: firstIncompleteStepPath };
-  }
-
-  return { isValid: true };
-};
-
-const validateOnboardingCompletedAccess = (completedSteps: StepsCompletion): { isValid: boolean } => ({
-  isValid: !hasIncompleteSteps(completedSteps)
-});
-
 interface OnboardingNavigation {
   handleBackNavigation: () => Promise<void>;
   handleForwardNavigation: (userStatus?: UserStatus) => Promise<void>;
@@ -139,23 +132,20 @@ interface OnboardingNavigation {
 
   navigateToStep: (stepIndex: number) => Promise<void>;
 
-  isValidStepTransition: (fromIndex: number, toIndex: number) => boolean;
-  validateStepAccess: (stepPath: string) => { isValid: boolean; redirectTo?: string };
+  canBeAccessed: (stepPath: string) => boolean;
 
   handleStepSubmit: <K extends StepKey>(formData: OnboardingData[K]) => Promise<void>;
   handleStepData: <K extends StepKey>(formData: OnboardingData[K]) => void;
 
   onboardingData: Partial<OnboardingData>;
-  completedSteps: StepsCompletion;
   currentStepIndex: number;
 
-  availableSteps: Array<StepConfig>;
+  onboardingSteps: Array<StepConfig>;
   currentStep: StepConfig | undefined;
 
   requireDataFromSteps: <const Keys extends ReadonlyArray<keyof OnboardingData>>(
     keys: Keys
   ) => { [K in Keys[number]]: NonNullable<OnboardingData[K]> };
-  hasIncompleteSteps: () => boolean;
 
   resetOnboarding: () => void;
   setStepData: <K extends StepKey>(step: K, data: OnboardingData[K]) => void;
@@ -203,13 +193,7 @@ export function useOnboardingNavigation(): OnboardingNavigation {
   };
 
   const shouldAllowSelectStep = (stepIndex: number): boolean => {
-    const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
-    return firstIncompleteIndex >= stepIndex;
-  };
-
-  const isValidStepTransition = (_fromIndex: number, toIndex: number): boolean => {
-    const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps) || 0;
-    return toIndex <= firstIncompleteIndex;
+    return canStepBeAccessedByIndex(stepIndex, completedSteps);
   };
 
   const handleStepData = <K extends StepKey>(formData: OnboardingData[K]): void => {
@@ -235,24 +219,20 @@ export function useOnboardingNavigation(): OnboardingNavigation {
     shouldAllowSelectStep,
 
     navigateToStep,
-
-    isValidStepTransition,
-    validateStepAccess: (stepPath: string) => validateOnboardingStepAccess(stepPath, completedSteps),
+    canBeAccessed: (stepPath: string) => canStepBeAccessedByPath(stepPath, completedSteps),
 
     handleStepSubmit,
     handleStepData,
 
     onboardingData,
-    completedSteps,
     currentStepIndex: currentStep,
 
-    availableSteps: onboardingSteps,
+    onboardingSteps: getOnboardingSteps(),
     currentStep: getStepByIndex(currentStep),
 
     requireDataFromSteps: <const Keys extends ReadonlyArray<keyof OnboardingData>>(
       keys: Keys
     ): { [K in Keys[number]]: NonNullable<OnboardingData[K]> } => requireDataFromSteps(onboardingData, keys),
-    hasIncompleteSteps: () => hasIncompleteSteps(completedSteps),
 
     resetOnboarding,
     setStepData,
@@ -261,28 +241,35 @@ export function useOnboardingNavigation(): OnboardingNavigation {
 }
 
 export const useOnboardingNavigationStatic = {
-  validateStepAccess: (stepPath: string): { isValid: boolean; redirectTo?: string } => {
-    const { completedSteps } = useOnboardingStore.getState();
-    return validateOnboardingStepAccess(stepPath, completedSteps);
+  canStepBeAccessed: (stepPath: string): boolean => {
+    const { completedSteps } = getOnboardingState();
+    return canStepBeAccessedByPath(stepPath, completedSteps);
   },
-  validateCompletedAccess: (): { isValid: boolean } => {
-    const { completedSteps } = useOnboardingStore.getState();
-    return validateOnboardingCompletedAccess(completedSteps);
+  hasIncompleteSteps: (): boolean => {
+    const { completedSteps } = getOnboardingState();
+    return !Object.values(completedSteps).every((stepCompleted) => stepCompleted);
   },
   getStepComponent: (stepPath: string): React.ComponentType | undefined =>
     getStepByProperty('path', stepPath as KebabCase<StepKey>)?.component,
   setCurrentStepFromPath: (stepPath: string): void => {
-    const { setCurrentStep } = useOnboardingStore.getState();
     const index = findStepIndexByProperty('path', stepPath as KebabCase<StepKey>) || 0;
-    setCurrentStep(index);
+    getOnboardingState().setCurrentStep(index);
+  },
+  getFirstStepPath: (): string => {
+    return getOnboardingSteps()[0]!.path;
+  },
+  hasOnboardingBeenStarted: (): boolean => {
+    const { completedSteps } = getOnboardingState();
+    return getFirstIncompleteStepIndex(completedSteps) !== 0;
   },
   getFirstIncompleteStepPath: (): string => {
-    const { completedSteps } = useOnboardingStore.getState();
-    const index = getFirstIncompleteStepIndex(completedSteps);
-    return index !== undefined ? getStepByIndex(index)?.path || '' : '';
+    const { completedSteps } = getOnboardingState();
+    return getFirstIncompleteStep(completedSteps).path;
   },
   loadUserProfile: (config: ReminderConfigTransformed): void => {
-    const { loadConfigFromUserProfile } = useOnboardingStore.getState();
-    loadConfigFromUserProfile(config);
+    getOnboardingState().loadConfigFromUserProfile(config);
+  },
+  setEditMode: (enabled: boolean): void => {
+    getOnboardingState().setEditMode(enabled);
   }
 };

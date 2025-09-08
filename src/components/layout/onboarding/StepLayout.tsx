@@ -12,7 +12,7 @@ interface SubHeaderProps {
 }
 
 const SubHeader: React.FC<SubHeaderProps> = ({ title, subtitle }) => (
-  <div className="text-center 2xl:mt-8">
+  <div className="text-center xl:mt-8">
     <h2 className="mt-4 mb-4 text-xl font-semibold text-gray-800">{title}</h2>
     <p className="mt-4 mb-4 text-gray-600">{subtitle}</p>
   </div>
@@ -26,7 +26,7 @@ const pageTransition = {
 };
 
 const StepLayout: React.FC = () => {
-  const { currentStepIndex, shouldAllowSelectStep, navigateToStep, availableSteps, currentStep } =
+  const { currentStepIndex, shouldAllowSelectStep, navigateToStep, onboardingSteps, currentStep } =
     useOnboardingNavigation();
 
   const { t } = useTranslation('onboarding');
@@ -36,11 +36,11 @@ const StepLayout: React.FC = () => {
       {currentStep && (
         <>
           {/* Stepper */}
-          <div className="hidden 2xl:flex w-full justify-center bg-white">
+          <div className="hidden xl:flex w-full justify-center bg-white">
             <div className="container mx-auto px-4 mb-6">
               <div className="w-full max-w-7xl mx-auto">
                 <Stepper active={currentStepIndex} className="pt-4" size="sm" onStepClick={navigateToStep}>
-                  {availableSteps.map(({ path, stepKey }, index) => {
+                  {onboardingSteps.map(({ path, stepKey }, index) => {
                     const tTitle = t(`${stepKey}.title`);
                     return (
                       <Stepper.Step key={path} allowStepSelect={shouldAllowSelectStep(index)} label={tTitle}>
@@ -55,13 +55,13 @@ const StepLayout: React.FC = () => {
 
           {/* SubHeader for mobile (was inside Stepper block before) */}
 
-          <div className="flex 2xl:hidden w-full justify-center bg-white pb-8">
+          <div className="flex xl:hidden w-full justify-center bg-white pb-8">
             <div className="container mx-auto px-4">
               <SubHeader subtitle={t(`${currentStep.stepKey}.subtitle`)} title={t(`${currentStep.stepKey}.title`)} />
             </div>
           </div>
 
-          <Progress radius={0} size="sm" value={(currentStepIndex / (availableSteps.length - 1)) * 100} />
+          <Progress radius={0} size="sm" value={(currentStepIndex / (onboardingSteps.length - 1)) * 100} />
 
           {/* Main content */}
           <main className="mx-auto px-4 py-4 w-full">
