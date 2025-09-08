@@ -9,20 +9,20 @@
     "signInWithGoogle": "Iniciar sesión con Google",
     "loginErrorInvalidScopes": "Ha habido un error al hacer login. Por favor asegura que seleccionas todos los scopes al acceder con tu cuenta de Google.",
     "loginErrorGeneric": "Ha habido un error al hacer login, por favor, intentalo de nuevo en unos minutos.",
-    "rightCta": "Tu agenda,<br />sin sorpresas",
+    "rightCta": "Mana recordatoris<br />als teus clients i",
     "carouselSlides": [
       {
-        "title": "Adiós a los olvidos",
+        "title": "Dile adiós a los olvidos",
         "description": "Tus clientes reciben recordatorios para no perder ninguna cita.",
         "icon": "📅"
       },
       {
-        "title": "Comunicación fluida",
+        "title": "Consigue una comunicación fluida",
         "description": "Informa fácil y rápido, sin llamadas ni correos de última hora.",
         "icon": "💬"
       },
       {
-        "title": "Más tiempo libre para ti",
+        "title": "Ten más tiempo libre para ti",
         "description": "Dedícalo a tu negocio (o a lo que quieras), no a perseguir citas.",
         "icon": "⏳"
       }
