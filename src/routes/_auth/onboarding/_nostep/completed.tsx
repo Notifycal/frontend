@@ -6,8 +6,7 @@ import OnboardingCompleted from '@components/onboarding/OnboardingCompleted';
 export const Route = createFileRoute('/_auth/onboarding/_nostep/completed')({
   component: OnboardingCompleted,
   beforeLoad: () => {
-    const validation = useOnboardingNavigationStatic.validateCompletedAccess();
-    if (!validation.isValid) {
+    if (useOnboardingNavigationStatic.hasIncompleteSteps()) {
       throw redirect({ to: `/onboarding` });
     }
   }

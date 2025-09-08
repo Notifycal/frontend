@@ -89,14 +89,20 @@ const getFirstIncompleteStep = (stepsCompleted: StepsCompletion): StepConfig => 
   return getStepByIndex(index)!;
 };
 
-const hasIncompleteSteps = (stepsCompleted: StepsCompletion): boolean =>
-  !Object.values(stepsCompleted).every((stepCompleted) => stepCompleted);
-
 const isLastStep = (stepIndex: number): boolean => stepIndex === getOnboardingSteps().length - 1;
 
-const canAccessStep = (stepIndex: number, completedSteps: StepsCompletion): boolean => {
+const canStepBeAccessedByIndex = (stepIndex: number, completedSteps: StepsCompletion): boolean => {
   const firstIncompleteIndex = getFirstIncompleteStepIndex(completedSteps);
   return stepIndex <= firstIncompleteIndex;
+};
+
+const canStepBeAccessedByPath = (stepPath: string, completedSteps: StepsCompletion): boolean => {
+  const stepPathParameter = stepPath as KebabCase<StepKey>;
+  const currentStepIndex = findStepIndexByProperty('path', stepPathParameter) || 0;
+  if (!isValidStepPath(stepPathParameter) || !canStepBeAccessedByIndex(currentStepIndex, completedSteps)) {
+    return false;
+  }
+  return true;
 };
 
 const requireDataFromSteps = <const Keys extends ReadonlyArray<keyof OnboardingData>>(
@@ -116,27 +122,6 @@ const requireDataFromSteps = <const Keys extends ReadonlyArray<keyof OnboardingD
   };
 };
 
-const validateOnboardingStepAccess = (
-  stepPath: string,
-  completedSteps: StepsCompletion
-): { isValid: boolean; redirectTo?: string } => {
-  const stepPathParameter = stepPath as KebabCase<StepKey>;
-
-  if (!isValidStepPath(stepPathParameter)) {
-    const firstIncompleteStepPath = getFirstIncompleteStep(completedSteps).path;
-    return { isValid: false, redirectTo: firstIncompleteStepPath };
-  }
-
-  const currentStepIndex = findStepIndexByProperty('path', stepPathParameter) || 0;
-
-  if (!canAccessStep(currentStepIndex, completedSteps)) {
-    const firstIncompleteStepPath = getFirstIncompleteStep(completedSteps).path;
-    return { isValid: false, redirectTo: firstIncompleteStepPath };
-  }
-
-  return { isValid: true };
-};
-
 interface OnboardingNavigation {
   handleBackNavigation: () => Promise<void>;
   handleForwardNavigation: (userStatus?: UserStatus) => Promise<void>;
@@ -147,7 +132,7 @@ interface OnboardingNavigation {
 
   navigateToStep: (stepIndex: number) => Promise<void>;
 
-  validateStepAccess: (stepPath: string) => { isValid: boolean; redirectTo?: string };
+  canBeAccessed: (stepPath: string) => boolean;
 
   handleStepSubmit: <K extends StepKey>(formData: OnboardingData[K]) => Promise<void>;
   handleStepData: <K extends StepKey>(formData: OnboardingData[K]) => void;
@@ -208,7 +193,7 @@ export function useOnboardingNavigation(): OnboardingNavigation {
   };
 
   const shouldAllowSelectStep = (stepIndex: number): boolean => {
-    return canAccessStep(stepIndex, completedSteps);
+    return canStepBeAccessedByIndex(stepIndex, completedSteps);
   };
 
   const handleStepData = <K extends StepKey>(formData: OnboardingData[K]): void => {
@@ -234,7 +219,7 @@ export function useOnboardingNavigation(): OnboardingNavigation {
     shouldAllowSelectStep,
 
     navigateToStep,
-    validateStepAccess: (stepPath: string) => validateOnboardingStepAccess(stepPath, completedSteps),
+    canBeAccessed: (stepPath: string) => canStepBeAccessedByPath(stepPath, completedSteps),
 
     handleStepSubmit,
     handleStepData,
@@ -256,13 +241,13 @@ export function useOnboardingNavigation(): OnboardingNavigation {
 }
 
 export const useOnboardingNavigationStatic = {
-  validateStepAccess: (stepPath: string): { isValid: boolean; redirectTo?: string } => {
+  canStepBeAccessed: (stepPath: string): boolean => {
     const { completedSteps } = getOnboardingState();
-    return validateOnboardingStepAccess(stepPath, completedSteps);
+    return canStepBeAccessedByPath(stepPath, completedSteps);
   },
-  validateCompletedAccess: (): { isValid: boolean } => {
+  hasIncompleteSteps: (): boolean => {
     const { completedSteps } = getOnboardingState();
-    return { isValid: !hasIncompleteSteps(completedSteps) };
+    return !Object.values(completedSteps).every((stepCompleted) => stepCompleted);
   },
   getStepComponent: (stepPath: string): React.ComponentType | undefined =>
     getStepByProperty('path', stepPath as KebabCase<StepKey>)?.component,
