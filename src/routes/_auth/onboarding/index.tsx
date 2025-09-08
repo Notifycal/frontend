@@ -24,8 +24,7 @@ export const Route = createFileRoute('/_auth/onboarding/')({
       throw redirect({ to: '/onboarding/$step', params: { step: firstStepPath } });
     } else {
       useOnboardingNavigationStatic.setEditMode(false);
-      const firstIncompleteStep = useOnboardingNavigationStatic.getFirstIncompleteStepIndex();
-      if (firstIncompleteStep === 0) {
+      if (!useOnboardingNavigationStatic.hasOnboardingBeenStarted()) {
         throw redirect({ to: '/onboarding/welcome' });
       } else {
         const path = useOnboardingNavigationStatic.getFirstIncompleteStepPath();

@@ -273,9 +273,9 @@ export const useOnboardingNavigationStatic = {
   getFirstStepPath: (): string => {
     return getOnboardingSteps()[0]!.path;
   },
-  getFirstIncompleteStepIndex: (): number => {
+  hasOnboardingBeenStarted: (): boolean => {
     const { completedSteps } = getOnboardingState();
-    return getFirstIncompleteStepIndex(completedSteps);
+    return getFirstIncompleteStepIndex(completedSteps) !== 0;
   },
   getFirstIncompleteStepPath: (): string => {
     const { completedSteps } = getOnboardingState();
