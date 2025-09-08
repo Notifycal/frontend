@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/Notifycal/frontend/compare/v1.0.2...v1.0.3) (2025-09-08)
+
+
+### Bug Fixes
+
+* be more explicit about what the app does in homepage ([#661](https://github.com/Notifycal/frontend/issues/661)) ([c4a8105](https://github.com/Notifycal/frontend/commit/c4a8105fc89b12714cd87eb7b14edd0808fa9fcd))
+* **deps:** Update dependency @tanstack/react-query to v5.87.1 ([#653](https://github.com/Notifycal/frontend/issues/653)) ([8318b2e](https://github.com/Notifycal/frontend/commit/8318b2e5e902d321894ab66eac59b03ca4699cb6))
+
 ## [1.0.2](https://github.com/Notifycal/frontend/compare/v1.0.1...v1.0.2) (2025-09-05)
 
 
