@@ -1,4 +1,4 @@
-import { findStepIndexByProperty, onboardingSteps, type StepKey } from '@constants/onboardingSteps';
+import type { StepKey } from '@hooks/useOnboardingNavigation';
 import type { ReminderConfigTransformed } from '@notifycal/shared/types';
 import type { OnboardingData, StepsCompletion } from '@our-types/onboarding';
 import { create } from 'zustand';
@@ -32,7 +32,7 @@ const initialState = {
   currentStep: 0
 };
 
-export const useOnboardingStore = create<OnboardingState>()(
+const useOnboardingStore = create<OnboardingState>()(
   persist(
     (set) => ({
       ...initialState,
@@ -44,18 +44,7 @@ export const useOnboardingStore = create<OnboardingState>()(
             [step]: data
           };
 
-          const changedStepIndex = findStepIndexByProperty('stepKey', step);
-
-          const updatedCompletedSteps: StepsCompletion = onboardingSteps.reduce((accumulator, stepConfig, index) => {
-            const shouldInvalidate =
-              stepConfig.resetOnChangeBefore && changedStepIndex !== undefined && index > changedStepIndex;
-            return {
-              ...accumulator,
-              [stepConfig.stepKey]: shouldInvalidate ? false : state.completedSteps[stepConfig.stepKey]
-            };
-          }, state.completedSteps);
-
-          return { data: newData, completedSteps: updatedCompletedSteps };
+          return { data: newData };
         });
       },
 
@@ -144,3 +133,7 @@ export const useOnboardingStore = create<OnboardingState>()(
     }
   )
 );
+
+export { useOnboardingStore };
+export type { OnboardingState };
+export type { StepsCompletion, OnboardingData } from '@our-types/onboarding';

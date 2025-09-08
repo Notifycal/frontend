@@ -4,13 +4,11 @@ import { z } from 'zod';
 
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
 import { useI18nForm } from '@hooks/useI18nForm';
-import { useStepSubmit } from '@hooks/useOnboardingStepSubmit';
-import { useOnboardingStore } from '@store/useOnboardingStore';
+import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
-import { requireOnboardingSteps } from '@constants/onboardingSteps';
 import { TextInput } from '@mantine/core';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -36,11 +34,9 @@ type SenderDetailsOutput = z.output<ReturnType<typeof senderDetailsSchema>>;
 export type SenderDetailsValues = SenderDetailsOutput;
 
 const SenderDetails: React.FC = () => {
-  const { data } = useOnboardingStore();
-  const { handleStepSubmit } = useStepSubmit();
+  const { onboardingData, handleStepSubmit, requireDataFromSteps } = useOnboardingNavigation();
+  const { businessDetails } = requireDataFromSteps(['businessDetails']);
   const { t } = useTranslation('onboarding');
-
-  const { businessDetails } = requireOnboardingSteps(data, ['businessDetails']);
 
   const emptyInitialValue: SenderDetailsInput = {
     senderContact: {
@@ -53,7 +49,7 @@ const SenderDetails: React.FC = () => {
     senderDetailsSchema,
     {
       mode: 'onChange',
-      defaultValues: data.senderDetails || emptyInitialValue
+      defaultValues: onboardingData.senderDetails || emptyInitialValue
     },
     t
   );
