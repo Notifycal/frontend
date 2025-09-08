@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.3](https://github.com/Notifycal/frontend/compare/v1.0.2...v1.0.3) (2025-09-08)
+
+
+### Bug Fixes
+
+* be more explicit about what the app does in homepage ([#661](https://github.com/Notifycal/frontend/issues/661)) ([c4a8105](https://github.com/Notifycal/frontend/commit/c4a8105fc89b12714cd87eb7b14edd0808fa9fcd))
+* **deps:** Update dependency @tanstack/react-query to v5.87.1 ([#653](https://github.com/Notifycal/frontend/issues/653)) ([8318b2e](https://github.com/Notifycal/frontend/commit/8318b2e5e902d321894ab66eac59b03ca4699cb6))
+
+## [1.0.2](https://github.com/Notifycal/frontend/compare/v1.0.1...v1.0.2) (2025-09-05)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency i18next to v25.5.1 ([#648](https://github.com/Notifycal/frontend/issues/648)) ([18bf17f](https://github.com/Notifycal/frontend/commit/18bf17f4f8930e2685428c1eba26bca8f0dc7620))
+* reduce google oauth scopes ([#652](https://github.com/Notifycal/frontend/issues/652)) ([e16c32f](https://github.com/Notifycal/frontend/commit/e16c32fa6ece4e0f1d45417b92a318b0546f95f8))
+
 ## [1.0.1](https://github.com/Notifycal/frontend/compare/v1.0.0...v1.0.1) (2025-09-04)
 
 

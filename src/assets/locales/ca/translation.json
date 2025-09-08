@@ -9,20 +9,20 @@
     "signInWithGoogle": "Iniciar sessió amb Google",
     "loginErrorInvalidScopes": "Hi ha hagut un error en iniciar sessió, assegura't de seleccionar tots els àmbits al popup de Google quan facis login.",
     "loginErrorGeneric": "Hi ha hagut un error en iniciar sessió, prova-ho de nou en uns minuts.",
-    "rightCta": "La teva agenda,<br />sense sorpreses",
+    "rightCta": "Mana recordatoris<br />als teus clients i",
     "carouselSlides": [
       {
-        "title": "Adéu als oblits",
+        "title": "Digues-li adéu als oblits",
         "description": "Els teus clients reben recordatoris perquè no perdin cap cita.",
         "icon": "📅"
       },
       {
-        "title": "Comunicació fluida",
+        "title": "Aconsegueix una comunicació fluida",
         "description": "Informa fàcil i ràpid, sense trucades ni correus d'última hora.",
         "icon": "💬"
       },
       {
-        "title": "Més temps lliure per a tu",
+        "title": "Tingues més temps lliure per a tu",
         "description": "Dedica'l al teu negoci (o al que vulguis), no a perseguir cites.",
         "icon": "⏳"
       }
