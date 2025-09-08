@@ -1,0 +1,102 @@
+{
+  "title": "Preguntas Frecuentes",
+  "questionsCount_one": "{{count}} pregunta",
+  "questionsCount_other": "{{count}} preguntas",
+  "categories": [
+    {
+      "id": "funcionamiento",
+      "title": "Funcionamiento y Configuración",
+      "description": "Todo sobre cómo funciona el sistema de recordatorios",
+      "icon": "⚙️",
+      "color": "blue",
+      "questions": [
+        {
+          "question": "¿Cómo decide la app a quién enviar un recordatorio?",
+          "answer": "Se revisan los asistentes del evento en Google Calendar. Para cada uno, se busca su teléfono en Google Contacts. Si no se encuentra, se intenta extraer del título o la descripción. Se normaliza a formato E.164 y se deduplican los números. No se envían mensajes al creador del evento."
+        },
+        {
+          "question": "¿Qué pasa si un teléfono es inválido?",
+          "answer": "Si no cumple el formato válido, se excluye del envío y el recordatorio se marca como fallido para ese destinatario."
+        },
+        {
+          "question": "¿Limitáis el número de destinatarios?",
+          "answer": "No. No tenemos un límite técnico por evento."
+        },
+        {
+          "question": "¿Qué pasa si el mismo número aparece varias veces?",
+          "answer": "Se envía solo una vez, gracias a la deduplicación."
+        },
+        {
+          "question": "¿Qué pasa con números fijos o no SMS?",
+          "answer": "No filtramos. Si el envío falla, se considera no entregado."
+        },
+        {
+          "question": "¿En qué momento se programa el recordatorio?",
+          "answer": "Procesamos eventos de forma periódica y frecuente, buscando los que ocurren en una ventana futura de tiempo en las siguientes 24 horas. Incluso si el evento se crea o modifica segundos antes del envío, se enviará en base a su estado modificado."
+        },
+        {
+          "question": "¿Qué pasa si revoco permisos de Google Calendar o Contacts?",
+          "answer": "El sistema lo detecta en operaciones y te contactamos por email para reconectar. Si no lo haces en un plazo prudencial, se programa la cancelación de tu cuenta."
+        }
+      ]
+    },
+    {
+      "id": "facturacion",
+      "title": "Facturación y Mensajes",
+      "description": "Información sobre créditos, costes y personalización de mensajes",
+      "icon": "💰",
+      "color": "green",
+      "questions": [
+        {
+          "question": "¿Qué pasa si no hay créditos suficientes?",
+          "answer": "El recordatorio no se envía. Se te avisará por email la primera vez que no se pueda enviar un recordatorio."
+        },
+        {
+          "question": "¿Cuándo se descuentan créditos?",
+          "answer": "Inmediatamente antes de enviar. Si un mensaje falla, se devuelven créditos. Si ocupa más partes de lo previsto, se ajustan después. Guardamos en el audit trail todo el detalle."
+        },
+        {
+          "question": "¿Qué hace el sistema si un envío falla por el operador?",
+          "answer": "Nuestro proveedor reintenta varias veces en un plazo razonable, y lejos de la hora de la cita, y si no se entrega, devolvemos los créditos."
+        },
+        {
+          "question": "¿Puedo usar emojis o acentos?",
+          "answer": "Sí, pero cada carácter fuera de GSM 7-bit puede aumentar el número de partes SMS y, por tanto, el coste en créditos."
+        },
+        {
+          "question": "¿Se truncan los mensajes largos?",
+          "answer": "En el demo, sí. 480 caracteres de límite. En envíos reales no se truncan, pero se cobran las partes adicionales."
+        },
+        {
+          "question": "¿Puedo añadir variables dinámicas?",
+          "answer": "No. Solo las predefinidas de negocio y ubicación."
+        }
+      ]
+    },
+    {
+      "id": "eventos",
+      "title": "Eventos y Seguimiento",
+      "description": "Gestión de eventos, horarios y reportes de envío",
+      "icon": "📅",
+      "color": "orange",
+      "questions": [
+        {
+          "question": "¿Y si se cancela un evento?",
+          "answer": "No se envía el recordatorio."
+        },
+        {
+          "question": "¿Hay horas de silencio?",
+          "answer": "No. Los envíos se hacen según la programación (por defecto, 24h antes de la cita)."
+        },
+        {
+          "question": "¿Se guarda un histórico detallado por destinatario?",
+          "answer": "No como exportación directa, pero podemos generarlo si es necesario."
+        },
+        {
+          "question": "¿Se envía un resumen de errores?",
+          "answer": "Sí, cuando el ratio de fallos supera un umbral interno, se envía un email con el número de envíos correctos y fallidos."
+        }
+      ]
+    }
+  ]
+}

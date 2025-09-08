@@ -90,7 +90,8 @@
   "navigation": {
     "openMainMenu": "Obrir menú principal",
     "signOut": "Tancar sessió",
-    "configuration": "Configuració"
+    "configuration": "Configuració",
+    "faq": "Preguntes freqüents"
   },
   "billing": {
     "topup": "Recàrrega",
