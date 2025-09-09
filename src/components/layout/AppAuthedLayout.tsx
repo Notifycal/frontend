@@ -1,7 +1,7 @@
-import { useMatches } from '@tanstack/react-router';
 import type { FC, ReactNode } from 'react';
 
 import Navigation from '@components/ui/Navigation/Navigation';
+import { useRouteStaticData } from '@hooks/useRouteStaticData';
 
 import clsx from 'clsx';
 
@@ -12,11 +12,7 @@ interface AppAuthedLayoutProps {
 }
 
 const AppAuthedLayout: FC<AppAuthedLayoutProps> = ({ children }) => {
-  const matches = useMatches();
-  const currentRoute = matches[matches.length - 1];
-  const routeStaticData = currentRoute?.staticData;
-
-  const { header: { useFancyHeader = false, fancyHeaderTitle = '' } = {} } = routeStaticData?.layout || {};
+  const { header: { useFancyHeader = false, fancyHeaderTitle = '' } = {} } = useRouteStaticData(['layout.header']);
 
   const { user } = Route.useLoaderData();
 

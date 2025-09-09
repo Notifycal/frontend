@@ -30,20 +30,23 @@ export const router = createRouter({
   defaultPendingMs: 0
 });
 
+export interface StaticDataRoute {
+  layout?: {
+    header?: {
+      useFancyHeader: boolean;
+      fancyHeaderTitle: string;
+    };
+    container?: {
+      narrow: boolean;
+    };
+  };
+}
+
 declare module '@tanstack/react-router' {
   interface Register {
     // This infers the type of our router and registers it across your entire project
     router: typeof router;
   }
-  interface StaticDataRouteOption {
-    layout?: {
-      header?: {
-        useFancyHeader: boolean;
-        fancyHeaderTitle: string;
-      };
-      container?: {
-        narrow: boolean;
-      };
-    };
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface StaticDataRouteOption extends StaticDataRoute {}
 }

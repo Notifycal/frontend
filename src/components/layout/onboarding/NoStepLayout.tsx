@@ -1,14 +1,9 @@
 import { ContentCard } from '@components/ui/ContentCard/ContentCard';
-import { Outlet, useMatches } from '@tanstack/react-router';
+import { useRouteStaticData } from '@hooks/useRouteStaticData';
+import { Outlet } from '@tanstack/react-router';
 
 const NoStepLayout: React.FC = () => {
-  const matches = useMatches();
-  const currentRoute = matches[matches.length - 1];
-  const routeStaticData = currentRoute?.staticData;
-
-  const {
-    container: { narrow = false } = {}
-  } = routeStaticData?.layout || {};
+  const { container: { narrow = false } = {} } = useRouteStaticData(['layout.container']);
 
   return (
     <main className="mx-auto px-4 py-6 w-full">
