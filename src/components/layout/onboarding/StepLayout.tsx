@@ -1,9 +1,9 @@
+import { ContentCard } from '@components/ui/ContentCard/ContentCard';
 import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { Outlet } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { Progress, Stepper } from '@mantine/core';
-import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 
 interface SubHeaderProps {
@@ -66,12 +66,7 @@ const StepLayout: React.FC = () => {
           {/* Main content */}
           <main className="mx-auto px-4 py-4 w-full">
             <AnimatePresence mode="wait">
-              <div
-                className={clsx(
-                  'w-full mx-auto bg-white rounded-lg shadow-md p-6 md:p-8',
-                  currentStep.customWidth ?? 'max-w-3xl'
-                )}
-              >
+              <ContentCard customMaxWidth={currentStep.customWidth ?? 'max-w-3xl'} maxWidth="custom">
                 <motion.div
                   key={currentStep.path}
                   animate="animate"
@@ -82,7 +77,7 @@ const StepLayout: React.FC = () => {
                 >
                   <Outlet />
                 </motion.div>
-              </div>
+              </ContentCard>
             </AnimatePresence>
           </main>
         </>
