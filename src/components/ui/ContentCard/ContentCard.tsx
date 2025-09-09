@@ -18,7 +18,7 @@ const maxWidthClasses: Record<MaxWidth, string> = {
   custom: ''
 };
 
-export const ContentCard = ({ children, maxWidth = 'md', customMaxWidth }: ContentCardProps): JSX.Element => {
+export const ContentCard = ({ children, maxWidth = 'lg', customMaxWidth }: ContentCardProps): JSX.Element => {
   const maxWidthClass = maxWidth === 'custom' ? customMaxWidth : maxWidthClasses[maxWidth];
 
   return (
