@@ -24,6 +24,7 @@ export const FaqAccordion = ({ activeCategoryData }: FaqAccordionProps): JSX.Ele
 
   return (
     <Accordion
+      key={activeCategoryData.id}
       chevronIconSize="36"
       chevronPosition="right"
       variant="separated"
