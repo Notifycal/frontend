@@ -12,7 +12,9 @@ export const Route = createFileRoute('/_auth/onboarding/_nostep/completed')({
   },
   staticData: {
     layout: {
-      narrowContainer: true
+      container: {
+        narrow: true
+      }
     }
   }
 });

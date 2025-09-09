@@ -16,7 +16,7 @@ const AppAuthedLayout: FC<AppAuthedLayoutProps> = ({ children }) => {
   const currentRoute = matches[matches.length - 1];
   const routeStaticData = currentRoute?.staticData;
 
-  const { useFancyHeader = false, fancyHeaderTitle = '' } = routeStaticData?.layout || {};
+  const { header: { useFancyHeader = false, fancyHeaderTitle = '' } = {} } = routeStaticData?.layout || {};
 
   const { user } = Route.useLoaderData();
 

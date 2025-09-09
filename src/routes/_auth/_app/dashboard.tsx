@@ -13,8 +13,10 @@ export const Route = createFileRoute('/_auth/_app/dashboard')({
   component: Billing,
   staticData: {
     layout: {
-      useFancyHeader: true,
-      fancyHeaderTitle: 'Dashboard'
+      header: {
+        useFancyHeader: true,
+        fancyHeaderTitle: 'Dashboard'
+      }
     }
   }
 });

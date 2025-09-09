@@ -5,7 +5,9 @@ export const Route = createFileRoute('/_auth/onboarding/_nostep/welcome')({
   component: OnboardingWelcome,
   staticData: {
     layout: {
-      narrowContainer: true
+      container: {
+        narrow: true
+      }
     }
   }
 });
