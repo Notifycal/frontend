@@ -1,0 +1,102 @@
+{
+  "title": "Preguntes Freqüents",
+  "questionsCount_one": "{{count}} pregunta",
+  "questionsCount_other": "{{count}} preguntes",
+  "categories": [
+    {
+      "id": "funcionamiento",
+      "title": "Funcionament i Configuració",
+      "description": "Tot sobre com funciona el sistema de recordatoris",
+      "icon": "⚙️",
+      "color": "blue",
+      "questions": [
+        {
+          "question": "Com decideix l'aplicació a qui enviar un recordatori?",
+          "answer": "Es revisen els assistents de l'esdeveniment a Google Calendar. Per a cada un, es busca el seu telèfon a Google Contacts. Si no es troba, s'intenta extreure del títol o la descripció. Es normalitza a format E.164 i es dedupliquen els números. No s'envien missatges al creador de l'esdeveniment."
+        },
+        {
+          "question": "Què passa si un telèfon és invàlid?",
+          "answer": "Si no compleix el format vàlid, s'exclou de l'enviament i el recordatori es marca com a fallat per a aquest destinatari."
+        },
+        {
+          "question": "Limiteu el nombre de destinataris?",
+          "answer": "No. No tenim un límit tècnic per esdeveniment."
+        },
+        {
+          "question": "Què passa si el mateix número apareix diverses vegades?",
+          "answer": "S'envia només una vegada, gràcies a la deduplicació."
+        },
+        {
+          "question": "Què passa amb números fixos o no SMS?",
+          "answer": "No filtrem. Si l'enviament falla, es considera no entregat."
+        },
+        {
+          "question": "En quin moment es programa el recordatori?",
+          "answer": "Processem esdeveniments de forma periòdica i freqüent, buscant els que ocorren en una finestra futura de temps en les següents 24 hores. Fins i tot si l'esdeveniment es crea o modifica segons abans de l'enviament, s'enviarà en base al seu estat modificat."
+        },
+        {
+          "question": "Què passa si revoco permisos de Google Calendar o Contacts?",
+          "answer": "El sistema ho detecta en operacions i et contactem per email per reconnectar. Si no ho fas en un termini prudencial, es programa la cancel·lació del teu compte."
+        }
+      ]
+    },
+    {
+      "id": "facturacion",
+      "title": "Facturació i Missatges",
+      "description": "Informació sobre crèdits, costos i personalització de missatges",
+      "icon": "💰",
+      "color": "green",
+      "questions": [
+        {
+          "question": "Què passa si no hi ha crèdits suficients?",
+          "answer": "El recordatori no s'envia. Se't avisarà per email la primera vegada que no es pugui enviar un recordatori."
+        },
+        {
+          "question": "Quan es descompten crèdits?",
+          "answer": "Immediatament abans d'enviar. Si un missatge falla, es retornen crèdits. Si ocupa més parts del previst, s'ajusten després. Guardem a l'audit trail tot el detall."
+        },
+        {
+          "question": "Què fa el sistema si un enviament falla per l'operador?",
+          "answer": "El nostre proveïdor reintenta diverses vegades en un termini raonable, i lluny de l'hora de la cita, i si no s'entrega, retornem els crèdits."
+        },
+        {
+          "question": "Puc usar emojis o accents?",
+          "answer": "Sí, però cada caràcter fora de GSM 7-bit pot augmentar el nombre de parts SMS i, per tant, el cost en crèdits."
+        },
+        {
+          "question": "Es trunquen els missatges llargs?",
+          "answer": "A la demo, sí. 480 caràcters de límit. En enviaments reals no es trunquen, però es cobren les parts addicionals."
+        },
+        {
+          "question": "Puc afegir variables dinàmiques?",
+          "answer": "No. Només les predefinides de negoci i ubicació."
+        }
+      ]
+    },
+    {
+      "id": "eventos",
+      "title": "Esdeveniments i Seguiment",
+      "description": "Gestió d'esdeveniments, horaris i informes d'enviament",
+      "icon": "📅",
+      "color": "orange",
+      "questions": [
+        {
+          "question": "I si es cancel·la un esdeveniment?",
+          "answer": "No s'envia el recordatori."
+        },
+        {
+          "question": "Hi ha hores de silenci?",
+          "answer": "No. Els enviaments es fan segons la programació (per defecte, 24h abans de la cita)."
+        },
+        {
+          "question": "Es guarda un històric detallat per destinatari?",
+          "answer": "No com a exportació directa, però podem generar-ho si és necessari."
+        },
+        {
+          "question": "S'envia un resum d'errors?",
+          "answer": "Sí, quan la ràtio de fallades supera un llindar intern, s'envia un email amb el nombre d'enviaments correctes i fallats."
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,8 @@ interface NavigationMenuProps {
 const NavigationMenu = ({ className, activeClassName }: NavigationMenuProps): JSX.Element => {
   const navigationItems = [
     { name: 'Dashboard', to: '/dashboard' },
-    { name: 'Feedback', to: '/feedback' }
+    { name: 'Feedback', to: '/feedback' },
+    { name: 'FAQ', to: '/faq' }
   ];
 
   return (

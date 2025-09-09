@@ -29,6 +29,7 @@
     ]
   },
   "feedback": {
+    "title": "Feedback",
     "type": "You must select a feedback type",
     "content": "Some content is required",
     "importance": "Your opinion is important to us",
@@ -83,7 +84,8 @@
   "navigation": {
     "openMainMenu": "Open main menu",
     "signOut": "Sign out",
-    "configuration": "Configuration"
+    "configuration": "Configuration",
+    "faq": "Frequently asked questions"
   },
   "footer": {
     "allRightsReserved": "{{year}} Notifycal. All rights reserved.",

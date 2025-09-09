@@ -1,3 +1,4 @@
+import { ContentCard } from '@components/ui/ContentCard/ContentCard';
 import type { FC, ReactNode } from 'react';
 
 interface LegalLayoutProps {
@@ -7,7 +8,7 @@ interface LegalLayoutProps {
 const LegalLayout: FC<LegalLayoutProps> = ({ children }) => {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8">
-      <div className="bg-white rounded-lg shadow-sm p-8 md:p-8">{children}</div>
+      <ContentCard maxWidth="xl">{children}</ContentCard>
     </div>
   );
 };

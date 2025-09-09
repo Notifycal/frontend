@@ -15,7 +15,7 @@ import flagGb from '@notifycal/shared/assets/icons/lang/gb.svg';
 
 import { languageCodeSchema } from '@notifycal/shared/schemas';
 
-export type NotifycalI18nNamespaces = 'onboarding' | 'translation';
+export type NotifycalI18nNamespaces = 'onboarding' | 'translation' | 'faq';
 export type NotifycalTFunction = TFunction<NotifycalI18nNamespaces, undefined>;
 
 export const defaultNS = 'translation';

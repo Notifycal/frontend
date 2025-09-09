@@ -1,0 +1,102 @@
+{
+  "title": "Frequently Asked Questions",
+  "questionsCount_one": "{{count}} question",
+  "questionsCount_other": "{{count}} questions",
+  "categories": [
+    {
+      "id": "funcionamiento",
+      "title": "System Operation & Configuration",
+      "description": "Everything about how the reminder system works",
+      "icon": "⚙️",
+      "color": "blue",
+      "questions": [
+        {
+          "question": "How does the app decide who to send a reminder to?",
+          "answer": "We review event attendees in Google Calendar. For each one, we search for their phone number in Google Contacts. If not found, we try to extract it from the title or description. We normalize to E.164 format and deduplicate numbers. Messages are not sent to the event creator."
+        },
+        {
+          "question": "What happens if a phone number is invalid?",
+          "answer": "If it doesn't meet the valid format, it's excluded from sending and the reminder is marked as failed for that recipient."
+        },
+        {
+          "question": "Do you limit the number of recipients?",
+          "answer": "No. We don't have a technical limit per event."
+        },
+        {
+          "question": "What happens if the same number appears multiple times?",
+          "answer": "It's sent only once, thanks to deduplication."
+        },
+        {
+          "question": "What about landline or non-SMS numbers?",
+          "answer": "We don't filter. If the sending fails, it's considered undelivered."
+        },
+        {
+          "question": "When is the reminder scheduled?",
+          "answer": "We process events periodically and frequently, looking for those occurring in a future time window within the next 24 hours. Even if the event is created or modified seconds before sending, it will be sent based on its modified state."
+        },
+        {
+          "question": "What happens if I revoke Google Calendar or Contacts permissions?",
+          "answer": "The system detects it in operations and we contact you by email to reconnect. If you don't do it within a reasonable timeframe, your account cancellation is scheduled."
+        }
+      ]
+    },
+    {
+      "id": "facturacion",
+      "title": "Billing & Messages",
+      "description": "Information about credits, costs and message customization",
+      "icon": "💰",
+      "color": "green",
+      "questions": [
+        {
+          "question": "What happens if there aren't enough credits?",
+          "answer": "The reminder is not sent. You'll be notified by email the first time a reminder cannot be sent."
+        },
+        {
+          "question": "When are credits deducted?",
+          "answer": "Immediately before sending. If a message fails, credits are returned. If it takes more parts than expected, they're adjusted afterwards. We save all details in the audit trail."
+        },
+        {
+          "question": "What does the system do if a sending fails due to the operator?",
+          "answer": "Our provider retries several times within a reasonable timeframe, well before the appointment time, and if not delivered, we return the credits."
+        },
+        {
+          "question": "Can I use emojis or accents?",
+          "answer": "Yes, but each character outside of GSM 7-bit can increase the number of SMS parts and therefore the cost in credits."
+        },
+        {
+          "question": "Are long messages truncated?",
+          "answer": "In demo mode, yes. 480 character limit. In real sends they're not truncated, but additional parts are charged."
+        },
+        {
+          "question": "Can I add dynamic variables?",
+          "answer": "No. Only predefined business and location variables."
+        }
+      ]
+    },
+    {
+      "id": "eventos",
+      "title": "Events & Tracking",
+      "description": "Event management, schedules and delivery reports",
+      "icon": "📅",
+      "color": "orange",
+      "questions": [
+        {
+          "question": "What if an event is canceled?",
+          "answer": "The reminder is not sent."
+        },
+        {
+          "question": "Are there silent hours?",
+          "answer": "No. Sends are made according to scheduling (by default, 24h before the appointment)."
+        },
+        {
+          "question": "Is a detailed history kept per recipient?",
+          "answer": "Not as a direct export, but we can generate it if necessary."
+        },
+        {
+          "question": "Is an error summary sent?",
+          "answer": "Yes, when the failure rate exceeds an internal threshold, an email is sent with the number of successful and failed sends."
+        }
+      ]
+    }
+  ]
+}

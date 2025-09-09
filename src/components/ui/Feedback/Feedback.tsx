@@ -3,7 +3,11 @@ import { useAuth } from '@providers/AuthProvider';
 import { useNavigate } from '@tanstack/react-router';
 import { useEffect, type JSX } from 'react';
 
-export const Feedback = (): JSX.Element | null => {
+interface FeedbackProps {
+  showTitle?: boolean;
+}
+
+export const Feedback = ({ showTitle = true }: FeedbackProps): JSX.Element | null => {
   const { authInfo } = useAuth();
   const navigate = useNavigate();
 
@@ -13,5 +17,7 @@ export const Feedback = (): JSX.Element | null => {
     }
   }, [authInfo, navigate]);
 
-  return authInfo?.email && authInfo?.userId ? <FeedbackForm email={authInfo.email} userId={authInfo.userId} /> : null;
+  return authInfo?.email && authInfo?.userId ? (
+    <FeedbackForm email={authInfo.email} showTitle={showTitle} userId={authInfo.userId} />
+  ) : null;
 };

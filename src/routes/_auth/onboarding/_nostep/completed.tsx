@@ -9,5 +9,10 @@ export const Route = createFileRoute('/_auth/onboarding/_nostep/completed')({
     if (useOnboardingNavigationStatic.hasIncompleteSteps()) {
       throw redirect({ to: `/onboarding` });
     }
+  },
+  staticData: {
+    layout: {
+      narrowContainer: true
+    }
   }
 });
