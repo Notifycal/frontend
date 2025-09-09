@@ -29,6 +29,7 @@
     ]
   },
   "feedback": {
+    "title": "Feedback",
     "type": "You must select a feedback type",
     "content": "Some content is required",
     "importance": "Your opinion is important to us",

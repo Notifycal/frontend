@@ -29,6 +29,7 @@
     ]
   },
   "feedback": {
+    "title": "Feedback",
     "type": "Has de seleccionar un tipus de comentari",
     "content": "Cal introduir contingut",
     "importance": "La teva opinió és important per a nosaltres",

@@ -5,7 +5,7 @@ import type { JSX } from 'react';
 export const Feedback = (): JSX.Element | null => {
   return (
     <ContentCard>
-      <FeedbackComponent />
+      <FeedbackComponent showTitle={false} />
     </ContentCard>
   );
 };

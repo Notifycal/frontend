@@ -29,6 +29,7 @@
     ]
   },
   "feedback": {
+    "title": "Feedback",
     "type": "Debes seleccionar un tipo de comentario",
     "content": "Debes de escrbir algo",
     "importance": "Tu opinión es importante para nosotros",

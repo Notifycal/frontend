@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFormFieldCommonProps } from '@hooks/useFormFieldCommonProps';
-import { Box, Button, Group, Notification, Paper, Select, Text, Textarea } from '@mantine/core';
+import { Box, Button, Group, Notification, Paper, Select, Textarea } from '@mantine/core';
 import type { Email, UserId } from '@notifycal/shared/types';
 import { useState, type JSX } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -17,9 +17,10 @@ import { z } from 'zod';
 interface FeedbackFormProps {
   email: Email;
   userId: UserId;
+  showTitle?: boolean;
 }
 
-const FeedbackForm = ({ email, userId }: FeedbackFormProps): JSX.Element => {
+const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): JSX.Element => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { t } = useTranslation();
@@ -90,9 +91,9 @@ const FeedbackForm = ({ email, userId }: FeedbackFormProps): JSX.Element => {
         </Box>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Text mb="md" size="lg">
-            {t('feedback.importance')}
-          </Text>
+          {showTitle && <h1 className="text-2xl font-bold text-secondary-500 mb-5">{t('feedback.title')}</h1>}
+
+          <h1 className="mb-4 font-medium">{t('feedback.importance')}</h1>
 
           <Controller
             control={control}

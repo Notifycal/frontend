@@ -5,7 +5,7 @@ import type { JSX } from 'react';
 export const Faq = (): JSX.Element | null => {
   return (
     <ContentCard>
-      <FaqComponent />
+      <FaqComponent showTitle={false} />
     </ContentCard>
   );
 };
