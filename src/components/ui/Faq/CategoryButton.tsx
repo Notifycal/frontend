@@ -25,7 +25,7 @@ export const CategoryButton = ({ category, isActive, onClick }: CategoryButtonPr
   return (
     <button
       className={`
-        flex flex-col items-center text-center text-gray-700 p-6 rounded-2xl border transition-all duration-200
+        flex flex-col items-center text-center text-gray-700 p-6 rounded-2xl border transition-all duration-200 cursor-pointer
         ${
           isActive
             ? 'border-primary-500 bg-primary-50 shadow-md'
