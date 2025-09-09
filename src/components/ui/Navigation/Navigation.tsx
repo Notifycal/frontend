@@ -2,14 +2,7 @@ import { Menu, type MantineColor } from '@mantine/core';
 import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
 import type { IdpName, User } from '@notifycal/shared/types';
 import { useAuth } from '@providers/AuthProvider';
-import {
-  IconLogout2,
-  IconMessageQuestion,
-  IconSettings,
-  IconUserFilled,
-  type Icon,
-  type IconProps
-} from '@tabler/icons-react';
+import { IconLogout2, IconSettings, IconUserFilled, type Icon, type IconProps } from '@tabler/icons-react';
 import { Link } from '@tanstack/react-router';
 import type { ForwardRefExoticComponent, JSX, RefAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,12 +32,6 @@ export default function Navigation(props: UserProps): JSX.Element {
       href: '/onboarding?edit=true',
       icon: IconSettings,
       color: 'dark'
-    },
-    {
-      name: t('navigation.faq'),
-      href: '/faq',
-      color: 'dark',
-      icon: IconMessageQuestion
     },
     {
       name: t('navigation.signOut'),
