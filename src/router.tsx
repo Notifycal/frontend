@@ -37,8 +37,9 @@ declare module '@tanstack/react-router' {
   }
   interface StaticDataRouteOption {
     layout?: {
-      useFancyHeader: boolean;
-      fancyHeaderTitle: string;
+      useFancyHeader?: boolean;
+      fancyHeaderTitle?: string;
+      narrowContainer?: boolean;
     };
   }
 }
