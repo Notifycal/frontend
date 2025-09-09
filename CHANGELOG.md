@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/Notifycal/frontend/compare/v1.0.3...v1.1.0) (2025-09-08)
+
+
+### Features
+
+* edit profile. ([#636](https://github.com/Notifycal/frontend/issues/636)) ([0940f6d](https://github.com/Notifycal/frontend/commit/0940f6d99338e6b5cc14b5346234cedd53779c28))
+
+
+### Bug Fixes
+
+* **deps:** Update Node.js Dependencies to v8.3.0 ([#660](https://github.com/Notifycal/frontend/issues/660)) ([d26d434](https://github.com/Notifycal/frontend/commit/d26d434eda1705cd15ec4df3a6e85b8b1f431ad1))
+
 ## [1.0.3](https://github.com/Notifycal/frontend/compare/v1.0.2...v1.0.3) (2025-09-08)
 
 
