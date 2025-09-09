@@ -1,10 +1,11 @@
 import { Faq as FaqComponent } from '@components/ui/Faq/Faq';
+import { ContentCard } from '@components/ui/ContentCard/ContentCard';
 import type { JSX } from 'react';
 
 export const Faq = (): JSX.Element | null => {
   return (
-    <div className="mx-auto bg-white rounded-lg shadow-md p-6 md:p-8">
+    <ContentCard>
       <FaqComponent />
-    </div>
+    </ContentCard>
   );
 };
