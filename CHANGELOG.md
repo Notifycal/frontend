@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Notifycal/frontend/compare/v1.1.0...v1.1.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* billing disclaimer. credits per reminder ([#668](https://github.com/Notifycal/frontend/issues/668)) ([2d8038a](https://github.com/Notifycal/frontend/commit/2d8038a0cd9eeea35c41bd5054c50c02359edb00))
+
 ## [1.1.0](https://github.com/Notifycal/frontend/compare/v1.0.3...v1.1.0) (2025-09-08)
 
 
