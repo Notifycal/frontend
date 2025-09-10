@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Notifycal/frontend/compare/v1.1.1...v1.2.0) (2025-09-09)
+
+
+### Features
+
+* faq pages ([#670](https://github.com/Notifycal/frontend/issues/670)) ([fe7dbd4](https://github.com/Notifycal/frontend/commit/fe7dbd4c9d675344deaaedd1d30df7dc6f38929c))
+
 ## [1.1.1](https://github.com/Notifycal/frontend/compare/v1.1.0...v1.1.1) (2025-09-09)
 
 
