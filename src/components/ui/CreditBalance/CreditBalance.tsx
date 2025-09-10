@@ -50,10 +50,10 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
 
   return (
     <>
-      <h2 className="text-4xl font-bold font-secondary">{t('billing.credits.title')}</h2>
+      <h2 className="text-4xl font-bold">{t('billing.credits.title')}</h2>
       <ul className="list-none px-0 my-4">
         <li>
-          <h4 className="text-2xl font-bold font-secondary">{t('billing.subscription')}</h4>
+          <h4 className="text-2xl font-bold">{t('billing.subscription')}</h4>
           <UsageBar usage={{ remaining: subscriptionCreditBalance.used, total: subscriptionCreditBalance.total }} />
           <Alert>
             <Trans
@@ -73,7 +73,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
         </li>
         <Divider my="md" />
         <li className="flex flex-col items-start gap-2">
-          <h4 className="text-lg font-bold font-secondary">{t('billing.topup')}</h4>
+          <h4 className="text-2xl font-bold">{t('billing.topup')}</h4>
           <div className="flex flex-col gap-2 md:flex-row md:items-center justify-between w-full">
             {t('billing.credits.currentCredits', { count: topupCreditBalance, type: t('billing.topup') })}
             <Button component="a" loading={generateTopupCheckoutURLMutation.isPending} onClick={handleAddCredits}>

@@ -21,7 +21,7 @@ const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
 
   return (
     <>
-      <h1 className="flex items-center gap-2 text-4xl font-extrabold font-secondary">
+      <h1 className="flex items-center gap-2 text-4xl font-bold">
         <TierIcon className="inline w-[1em] h-[1em] text-amber-400" />
         {tierInfo.displayName}
       </h1>
