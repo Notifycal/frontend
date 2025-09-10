@@ -7,7 +7,7 @@ interface LegalLayoutProps {
 
 const LegalLayout: FC<LegalLayoutProps> = ({ children }) => {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8">
+    <div className="mx-auto px-6 py-8">
       <ContentCard maxWidth="xl">{children}</ContentCard>
     </div>
   );
