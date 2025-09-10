@@ -93,7 +93,7 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
         <form onSubmit={handleSubmit(onSubmit)}>
           {showTitle && <h1 className="text-2xl font-bold text-secondary-500 mb-5">{t('feedback.title')}</h1>}
 
-          <h1 className="mb-4 font-medium">{t('feedback.importance')}</h1>
+          <h5 className="mb-4 font-regular">{t('feedback.importance')}</h5>
 
           <Controller
             control={control}

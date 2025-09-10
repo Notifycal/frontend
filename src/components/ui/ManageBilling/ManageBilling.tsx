@@ -57,7 +57,7 @@ const ManageBilling: FC<ManageBillingProps> = ({ onError, userStatus }) => {
 
   return (
     <>
-      <h2 className="pb-6 text-4xl font-bold font-secondary">{t('billing.manage.title')}</h2>
+      <h2 className="pb-6 text-4xl font-bold">{t('billing.manage.title')}</h2>
       <ul className="px-0 flex flex-col gap-5">
         {buttons.map(({ id, flowType, buttonText, explanationText }) => (
           <div key={id} className="flex flex-col gap-1 md:flex-row md:items-center md:gap-5">

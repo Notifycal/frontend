@@ -38,7 +38,7 @@ export const BannerCarousel: FC<BannerCarouselProps> = ({ slides }) => {
           {slides[currentSlide] && (
             <div className="bg-accent1-400/20 rounded-2xl p-4 xs:p-8 backdrop-blur-sm border border-white/20 w-full">
               <div className="text-[2.5rem]">{slides[currentSlide].icon}</div>
-              <h3 className="text-xl font-bold text-white">{slides[currentSlide].title}</h3>
+              <h4 className="font-bold text-white">{slides[currentSlide].title}</h4>
               <p className="text-white/80 text-base leading-relaxed">{slides[currentSlide].description}</p>
             </div>
           )}
