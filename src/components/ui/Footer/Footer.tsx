@@ -7,16 +7,18 @@ import InternationalizationPicker from '@components/ui/InternationalizationPicke
 import { showPreferences } from 'vanilla-cookieconsent';
 
 interface FooterProps {
-  showFeedbackLink?: boolean;
+  feedback?: {
+    link: string;
+  };
 }
 
-const Footer: React.FC<FooterProps> = ({ showFeedbackLink = false }) => {
+const Footer: React.FC<FooterProps> = ({ feedback }) => {
   const { t, i18n } = useTranslation();
 
   const footerLinks = [
     { title: t('footer.terms'), to: '/terms-and-conditions' },
     { title: t('footer.privacy'), to: '/privacy-policy' }
-  ].concat(showFeedbackLink ? [{ title: t('footer.feedbackLink'), to: '/onboarding/feedback' }] : []);
+  ].concat(feedback ? [{ title: t('footer.feedbackLink'), to: feedback.link }] : []);
 
   return (
     <footer className="py-4 bg-white border-t border-gray-200">
