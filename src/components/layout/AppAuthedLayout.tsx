@@ -12,7 +12,8 @@ interface AppAuthedLayoutProps {
 }
 
 const AppAuthedLayout: FC<AppAuthedLayoutProps> = ({ children }) => {
-  const { header: { useFancyHeader = false, fancyHeaderTitle = '' } = {} } = useRouteStaticData(['layout.header']);
+  const { header: { useFancyHeader = false, fancyHeaderTitle = '' } = {} } =
+    useRouteStaticData(['layout.header']) || {};
 
   const { user } = Route.useLoaderData();
 
