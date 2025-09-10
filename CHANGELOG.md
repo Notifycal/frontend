@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.1](https://github.com/Notifycal/frontend/compare/v1.2.0...v1.2.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v7.11.0 ([#675](https://github.com/Notifycal/frontend/issues/675)) ([9061145](https://github.com/Notifycal/frontend/commit/906114583c24455b3f790214cf15c9c40d033db9))
+* **deps:** Update Node.js Dependencies to v8.3.1 ([#678](https://github.com/Notifycal/frontend/issues/678)) ([c34a37f](https://github.com/Notifycal/frontend/commit/c34a37f2a815fe070bbc5a638f36861f3291cf5b))
+* feedback link. code improvements  ([#674](https://github.com/Notifycal/frontend/issues/674)) ([00c820d](https://github.com/Notifycal/frontend/commit/00c820d9bb43d93caf5707afed87cfaae1d7223c))
+
 ## [1.2.0](https://github.com/Notifycal/frontend/compare/v1.1.1...v1.2.0) (2025-09-09)
 
 
