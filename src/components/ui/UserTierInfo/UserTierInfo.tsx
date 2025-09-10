@@ -3,7 +3,7 @@ import type { FC } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import { Alert, Divider, Title } from '@mantine/core';
+import { Alert, Divider } from '@mantine/core';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 
 import { getServiceConfig } from '@config/serviceConfig';
@@ -21,10 +21,10 @@ const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
 
   return (
     <>
-      <Title className="flex items-center gap-2" order={1}>
+      <h1 className="flex items-center gap-2 text-4xl font-extrabold font-secondary">
         <TierIcon className="inline w-[1em] h-[1em] text-amber-400" />
         {tierInfo.displayName}
-      </Title>
+      </h1>
       <div>
         <Trans
           components={[<span className="font-bold" />]}

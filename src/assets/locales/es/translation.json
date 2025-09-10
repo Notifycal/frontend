@@ -96,7 +96,7 @@
   },
   "billing": {
     "topup": "Recarga",
-    "subscription": "Subscripcion",
+    "subscription": "Subscripción",
     "title": "Información de Facturación",
     "currentPlan": "Tu plan actual es: <0>{{tierName}}</0>.",
     "yourPlanIncludes": "Tu plan incluye:",
