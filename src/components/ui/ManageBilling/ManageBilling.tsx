@@ -1,6 +1,6 @@
 import { getCustomerPortalURL } from '@api/payments';
 import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
-import { Button, Title } from '@mantine/core';
+import { Button } from '@mantine/core';
 import type { LanguageCode, UserStatus } from '@notifycal/shared/types';
 import { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -57,9 +57,7 @@ const ManageBilling: FC<ManageBillingProps> = ({ onError, userStatus }) => {
 
   return (
     <>
-      <Title className="pb-6" order={2}>
-        {t('billing.manage.title')}
-      </Title>
+      <h2 className="pb-6 text-4xl font-bold">{t('billing.manage.title')}</h2>
       <ul className="px-0 flex flex-col gap-5">
         {buttons.map(({ id, flowType, buttonText, explanationText }) => (
           <div key={id} className="flex flex-col gap-1 md:flex-row md:items-center md:gap-5">

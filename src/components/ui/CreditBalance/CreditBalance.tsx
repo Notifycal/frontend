@@ -6,7 +6,7 @@ import usePaymentRedirectMutation from '@hooks/usePaymentRedirectMutation';
 import { useBillingStore } from '@store/useBillingStore';
 import { Trans, useTranslation } from 'react-i18next';
 
-import { Alert, Button, Divider, Title } from '@mantine/core';
+import { Alert, Button, Divider } from '@mantine/core';
 import ClickableSpan from '../ClickableSpan/ClickableSpan';
 import UsageBar from '../UsageBar/UsageBar';
 
@@ -50,10 +50,10 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
 
   return (
     <>
-      <Title order={2}>{t('billing.credits.title')}</Title>
+      <h2 className="text-4xl font-bold">{t('billing.credits.title')}</h2>
       <ul className="list-none px-0 my-4">
         <li>
-          <Title order={4}>{t('billing.subscription')}</Title>
+          <h4 className="text-2xl font-bold">{t('billing.subscription')}</h4>
           <UsageBar usage={{ remaining: subscriptionCreditBalance.used, total: subscriptionCreditBalance.total }} />
           <Alert>
             <Trans
@@ -73,7 +73,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
         </li>
         <Divider my="md" />
         <li className="flex flex-col items-start gap-2">
-          <Title order={4}>{t('billing.topup')}</Title>
+          <h4 className="text-2xl font-bold">{t('billing.topup')}</h4>
           <div className="flex flex-col gap-2 md:flex-row md:items-center justify-between w-full">
             {t('billing.credits.currentCredits', { count: topupCreditBalance, type: t('billing.topup') })}
             <Button component="a" loading={generateTopupCheckoutURLMutation.isPending} onClick={handleAddCredits}>

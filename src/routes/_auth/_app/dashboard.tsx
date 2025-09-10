@@ -1,5 +1,5 @@
 import { getUserProfile } from '@/api/userProfile';
-import Billing from '@pages/Billing';
+import Dashboard from '@pages/Dashboard';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_auth/_app/dashboard')({
@@ -10,11 +10,13 @@ export const Route = createFileRoute('/_auth/_app/dashboard')({
     });
     return { user };
   },
-  component: Billing,
+  component: Dashboard,
   staticData: {
     layout: {
-      useFancyHeader: true,
-      fancyHeaderTitle: 'Dashboard'
+      header: {
+        useFancyHeader: true,
+        fancyHeaderTitle: 'Dashboard'
+      }
     }
   }
 });
