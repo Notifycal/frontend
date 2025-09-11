@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/Notifycal/frontend/compare/v1.2.1...v1.3.0) (2025-09-11)
+
+
+### Features
+
+* set GTM script in index.html for early loading ([#686](https://github.com/Notifycal/frontend/issues/686)) ([970b57a](https://github.com/Notifycal/frontend/commit/970b57a6c2a6e0559550b0209cad8ee303c65f54))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-query to v5.87.4 ([#679](https://github.com/Notifycal/frontend/issues/679)) ([37db1e0](https://github.com/Notifycal/frontend/commit/37db1e056ad6b94291e3953383df9dc2c86a274f))
+
 ## [1.2.1](https://github.com/Notifycal/frontend/compare/v1.2.0...v1.2.1) (2025-09-10)
 
 
