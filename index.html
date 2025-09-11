@@ -26,9 +26,7 @@
     <script>
       window.onServiceConfigReady = function (callback, configKey) {
         function executeCallback() {
-          console.log('callback');
           if (window.serviceConfig) {
-            console.log('anotherif');
             const configValue = window.serviceConfig[configKey];
             if (configValue) {
               callback(configValue, window.serviceConfig);
@@ -44,14 +42,6 @@
           });
         }
       };
-      window.onServiceConfigReady((tagManagerId) => {
-        if (!document.querySelector('noscript[data-gtm]')) {
-          const noscript = document.createElement('noscript');
-          noscript.setAttribute('data-gtm', 'true');
-          noscript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${tagManagerId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
-          document.body.insertBefore(noscript, document.body.firstChild);
-        }
-      }, 'GOOGLE_TAG_MANAGER_ID');
       window.onServiceConfigReady((tagManagerId) => {
         const gtmSetupScript = document.createElement('script');
         gtmSetupScript.innerHTML = `
@@ -69,16 +59,12 @@
         let attempts = 0;
 
         function check() {
-          console.log('check')
           attempts++;
           if (window.globalConfig) {
-            console.log('if1')
             callback();
           } else if (attempts < maxAttempts) {
-            console.log('if2')
             setTimeout(check, 10);
           } else {
-            console.log('else')
             console.error('Timeout waiting for window.globalConfig');
           }
         }
