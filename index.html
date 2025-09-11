@@ -5,10 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/svg+xml" href="/images/favicon.svg" />
     <title>Notifycal</title>
+    <script type="text/javascript" src="/config.js"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+
+      // Default consent denied needs to happen early, before loading GTM
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'denied',
+        personalization_storage: 'denied',
+        security_storage: 'denied'
+      });
+    </script>
+    <script>
+      window.onServiceConfigReady = function (callback, configKey) {
+        function executeCallback() {
+          if (window.serviceConfig) {
+            const configValue = window.serviceConfig[configKey];
+            if (configValue) {
+              callback(configValue, window.serviceConfig);
+            }
+          }
+        }
+
+        if (window.serviceConfig) {
+          executeCallback();
+        } else {
+          window.addEventListener('serviceConfigReady', function () {
+            executeCallback();
+          });
+        }
+      };
+      window.onServiceConfigReady((tagManagerId) => {
+        if (!document.querySelector('noscript[data-gtm]')) {
+          const noscript = document.createElement('noscript');
+          noscript.setAttribute('data-gtm', 'true');
+          noscript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${tagManagerId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+          document.body.insertBefore(noscript, document.body.firstChild);
+        }
+      }, 'GOOGLE_TAG_MANAGER_ID');
+      window.onServiceConfigReady((tagManagerId) => {
+        const gtmSetupScript = document.createElement('script');
+        gtmSetupScript.innerHTML = `
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','${tagManagerId}');
+        `;
+        document.head.appendChild(gtmSetupScript);
+      }, 'GOOGLE_TAG_MANAGER_ID');
+    </script>
   </head>
   <body class="h-full">
     <div id="root" class="min-h-full"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script type="text/javascript" src="/config.js"></script>
+    
   </body>
 </html>
