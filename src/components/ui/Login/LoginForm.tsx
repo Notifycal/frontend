@@ -23,8 +23,8 @@ export const LoginForm = (): JSX.Element => {
 
   return (
     <>
-      <div className="w-84 text-primary-600 mx-auto">
-        <NotifycalIsologo className="drop-shadow-md drop-shadow-secondary-100" />
+      <div className="w-full max-w-84 px-4 text-primary-600 mx-auto">
+        <NotifycalIsologo className="w-full h-auto drop-shadow-md drop-shadow-secondary-100" />
       </div>
       <p className="text-center text-text-secondary pb-4 sm:pb-6">{t('login.welcomeBack')}</p>
       <div className="mx-auto">
