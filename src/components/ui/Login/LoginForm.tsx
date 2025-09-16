@@ -23,14 +23,18 @@ export const LoginForm = (): JSX.Element => {
 
   return (
     <>
-      <div className="w-[80%] text-primary-600 mx-auto ">
-        <NotifycalIsologo className="drop-shadow-md drop-shadow-secondary-100" />
+      <div className="w-full max-w-84 px-4 text-primary-600 mx-auto">
+        <NotifycalIsologo className="w-full h-auto drop-shadow-md drop-shadow-secondary-100" />
       </div>
       <p className="text-center text-text-secondary pb-4 sm:pb-6">{t('login.welcomeBack')}</p>
       <div className="mx-auto">
         <LoginWithGoogleButton />
-        {lastLoginError && <FlatError isDismissable={false}>{t(`login.${lastLoginError}`)}</FlatError>}
       </div>
+      {lastLoginError && (
+        <div className="min-h-20 my-2">
+          <FlatError isDismissable={false}>{t(`login.${lastLoginError}`)}</FlatError>
+        </div>
+      )}
       <p className="text-center text-sm/6 text-text-secondary">
         {t('login.wantToKnowMore')}{' '}
         <Link target="_blank" to={STATIC_LANDING_URL}>
