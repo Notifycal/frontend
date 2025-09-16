@@ -8,12 +8,7 @@ interface FooterLinkProps {
 }
 
 const FooterLink: React.FC<FooterLinkProps> = ({ children, onClick, target, to }) => (
-  <Link
-    className="hover:text-gray-700 transition-colors"
-    to={to}
-    {...(target && { target })}
-    onClick={onClick}
-  >
+  <Link className="hover:text-gray-700 transition-colors" to={to} {...(target && { target })} onClick={onClick}>
     {children}
   </Link>
 );
