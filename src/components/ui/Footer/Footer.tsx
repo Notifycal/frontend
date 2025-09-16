@@ -1,10 +1,9 @@
-import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { languageData } from '@common/i18n';
-import CookieConsent from '@components/ui/CookieConsent/CookieConsent';
 import InternationalizationPicker from '@components/ui/InternationalizationPicker/InternationalizationPicker';
-import { showPreferences } from 'vanilla-cookieconsent';
+
+import FooterLinks from './FooterLinks';
 
 interface FooterProps {
   feedback?: {
@@ -15,7 +14,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ feedback }) => {
   const { t, i18n } = useTranslation();
 
-  const footerLinks = [
+  const links = [
     { title: t('footer.terms'), to: '/terms-and-conditions' },
     { title: t('footer.privacy'), to: '/privacy-policy' }
   ].concat(feedback ? [{ title: t('footer.feedbackLink'), to: feedback.link }] : []);
@@ -28,28 +27,16 @@ const Footer: React.FC<FooterProps> = ({ feedback }) => {
             &copy; {t('footer.allRightsReserved', { year: new Date().getFullYear() })}
           </span>
 
-          <div className="flex flex-col items-center gap-4 md:gap-8 xs:flex-row">
-            <div>
-              <InternationalizationPicker
-                displayFlagOnly
-                data={languageData}
-                value={(i18n.languages[0] ?? 'es') as keyof typeof languageData}
-                onSelected={async (item) => {
-                  await i18n.changeLanguage(item.code);
-                }}
-              />
-            </div>
-
-            <CookieConsent>
-              <Link to="." onClick={showPreferences}>
-                {t('footer.cookieSettings')}
-              </Link>
-            </CookieConsent>
-            {footerLinks.map(({ title, to }) => (
-              <Link key={to} target="_blank" to={to}>
-                {title}
-              </Link>
-            ))}
+          <div className="flex flex-col items-center gap-4 md:gap-8 md:flex-row">
+            <InternationalizationPicker
+              displayFlagOnly
+              data={languageData}
+              value={(i18n.languages[0] ?? 'es') as keyof typeof languageData}
+              onSelected={async (item) => {
+                await i18n.changeLanguage(item.code);
+              }}
+            />
+            <FooterLinks links={links} />
           </div>
         </div>
       </div>
