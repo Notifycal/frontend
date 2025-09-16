@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.1](https://github.com/Notifycal/frontend/compare/v1.3.0...v1.3.1) (2025-09-16)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @hookform/resolvers to v5.2.2 ([#693](https://github.com/Notifycal/frontend/issues/693)) ([31eaf89](https://github.com/Notifycal/frontend/commit/31eaf8929e15bbc87057a960597ebd6e90d4dfb3))
+* **deps:** Update dependency @tabler/icons-react to v3.35.0 ([#696](https://github.com/Notifycal/frontend/issues/696)) ([63b7362](https://github.com/Notifycal/frontend/commit/63b7362753916e5b6d6687217e7a31b0d74528f9))
+* **deps:** Update dependency axios to v1.12.0 [SECURITY] ([#688](https://github.com/Notifycal/frontend/issues/688)) ([17ae844](https://github.com/Notifycal/frontend/commit/17ae844173aa69087bebe1ecf4ebe22e62110cb1))
+* **deps:** Update dependency axios to v1.12.1 ([#684](https://github.com/Notifycal/frontend/issues/684)) ([a70e0c4](https://github.com/Notifycal/frontend/commit/a70e0c421428b3004c3e63261e44fff74eee9526))
+* **deps:** Update dependency axios to v1.12.2 ([#694](https://github.com/Notifycal/frontend/issues/694)) ([b2367d0](https://github.com/Notifycal/frontend/commit/b2367d0d107f42270e4a7e9d3ac9d217ac36f3c9))
+* **deps:** Update dependency motion to v12.23.13 ([#698](https://github.com/Notifycal/frontend/issues/698)) ([c87b4bf](https://github.com/Notifycal/frontend/commit/c87b4bf459cf587dd7ada65018c4bfb6e7cdf76f))
+
 ## [1.3.0](https://github.com/Notifycal/frontend/compare/v1.2.1...v1.3.0) (2025-09-11)
 
 
