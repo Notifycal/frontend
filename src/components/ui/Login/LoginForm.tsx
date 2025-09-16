@@ -23,7 +23,7 @@ export const LoginForm = (): JSX.Element => {
 
   return (
     <>
-      <div className="w-[80%] text-primary-600 mx-auto ">
+      <div className="w-84 text-primary-600 mx-auto">
         <NotifycalIsologo className="drop-shadow-md drop-shadow-secondary-100" />
       </div>
       <p className="text-center text-text-secondary pb-4 sm:pb-6">{t('login.welcomeBack')}</p>
