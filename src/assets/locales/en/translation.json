@@ -92,7 +92,11 @@
     "feedbackLink": "Feedback",
     "terms": "Terms and conditions",
     "privacy": "Privacy policy",
-    "cookieSettings": "Cookie settings"
+    "cookieSettings": "Cookie settings",
+    "more": "More",
+    "less": "Less",
+    "hideLinks": "Hide links",
+    "showMoreLinks": "Show more links"
   },
   "billing": {
     "topup": "Top-up",

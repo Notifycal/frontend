@@ -86,7 +86,11 @@
     "feedbackLink": "Feedback",
     "terms": "Termes i condicions",
     "privacy": "Política de privacitat",
-    "cookieSettings": "Configuració de cookies"
+    "cookieSettings": "Configuració de cookies",
+    "more": "Més",
+    "less": "Menys",
+    "hideLinks": "Amagar enllaços",
+    "showMoreLinks": "Mostrar més enllaços"
   },
   "navigation": {
     "openMainMenu": "Obrir menú principal",
