@@ -9,22 +9,26 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useState, type FC, type ReactNode } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
-import FlatError from '@components/ui/FlatError/FlatError';
-import { Group } from '@mantine/core';
-import { TierSelection as TierSelectionBase, type TierInfoWithIcon } from '@notifycal/shared/components';
-import { Link } from '@tanstack/react-router';
 import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
+import FlatError from '@components/ui/FlatError/FlatError';
+import PricingCalculator from '@components/ui/PricingCalculator/PricingCalculator';
+import { Group } from '@mantine/core';
+import type { TierInfoWithIcon } from '@notifycal/shared/components';
+import { Link } from '@tanstack/react-router';
+import TierSelectionWithRecommendation from './TierSelectionWithRecommendation';
 
 interface TierSelectionProps {
   displayNavigationButtons?: boolean;
   orderedTierInfoWithIcons: Array<TierInfoWithIcon>;
+  showPricingCalculator?: boolean;
 }
 
 export type TierSelectionValues = null;
 
 const TierSelection: FC<TierSelectionProps> = ({
   displayNavigationButtons,
-  orderedTierInfoWithIcons
+  orderedTierInfoWithIcons,
+  showPricingCalculator = false
 }: TierSelectionProps) => {
   const translationNs = 'onboarding' as const;
   const { i18n } = useTranslation(translationNs);
@@ -34,6 +38,8 @@ const TierSelection: FC<TierSelectionProps> = ({
 
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
+  const [recommendedTier, setRecommendedTier] = useState<string | null>(null);
+  const [showContactUs, setShowContactUs] = useState<boolean>(false);
 
   const { setPurchaseOperation, setPreviousUserStatus } = useBillingStore();
 
@@ -66,7 +72,7 @@ const TierSelection: FC<TierSelectionProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4">
       {!generateCheckoutURLMutation.isPending && generateCheckoutURLMutation.isError && error && (
         <div className="mb-10">
           <FlatError
@@ -78,13 +84,31 @@ const TierSelection: FC<TierSelectionProps> = ({
           </FlatError>
         </div>
       )}
-      <TierSelectionBase
-        isCardButtonDisabled={isButtonDisabled}
-        isCardButtonLoading={isButtonLoading}
-        lang={language}
-        orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-        onTierSelection={handleTierSelect}
-      />
+
+      <div className={showPricingCalculator ? 'grid grid-cols-1 lg:grid-cols-4 gap-8' : ''}>
+        {showPricingCalculator && (
+          <div className="lg:col-span-1 order-2 lg:order-1 mt-7 ">
+            <PricingCalculator
+              orderedTierInfoWithIcons={orderedTierInfoWithIcons}
+              onContactUsNeeded={setShowContactUs}
+              onTierRecommendation={setRecommendedTier}
+              onTierSelect={handleTierSelect}
+            />
+          </div>
+        )}
+
+        <div className={showPricingCalculator ? 'lg:col-span-3 order-1 lg:order-2' : ''}>
+          <TierSelectionWithRecommendation
+            isCardButtonDisabled={isButtonDisabled}
+            isCardButtonLoading={isButtonLoading}
+            lang={language}
+            orderedTierInfoWithIcons={orderedTierInfoWithIcons}
+            recommendedTier={showPricingCalculator ? recommendedTier : null}
+            showContactUs={showPricingCalculator ? showContactUs : false}
+            onTierSelection={handleTierSelect}
+          />
+        </div>
+      </div>
 
       {displayNavigationButtons && (
         <Group justify="space-between" mt="xl" pt="md">

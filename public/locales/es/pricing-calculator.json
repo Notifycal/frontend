@@ -1,0 +1,27 @@
+{
+  "title": "Conoce tu tarifa perfecta",
+  "subtitle": "Introduce la siguiente información y conoce tu mejor plan",
+  "employeesLabel": "Introduce el número de empleados:",
+  "avgTimeLabel": "Tiempo medio con el cliente:",
+  "workingHoursLabel": "Jornada del trabajador al día (horas):",
+  "formulaText": "Fórmula usada = Empleados * (Jornada / Tiempo con Cliente) * 20 (5 días laborables)",
+  "calculateButton": "Calcular estimación",
+  "contactSectionTitle": "Habla con nosotros",
+  "contactSectionSubtitle": "Si buscas una solución más avanzada o personalizada",
+  "contactButton": "Contactar",
+  "resultMessages": {
+    "needsContactUs": "Con {monthlyMessages} mensajes mensuales estimados, contacta con nosotros para un plan personalizado.",
+    "exceedsTopTier": "Con {monthlyMessages} mensajes mensuales estimados, te recomendamos el plan {tierName} + top-ups adicionales.",
+    "recommended": "Con {monthlyMessages} mensajes mensuales estimados, te recomendamos el plan {tierName}.",
+    "noRecommendation": "No pudimos calcular una recomendación para {monthlyMessages} mensajes mensuales."
+  },
+  "timeOptions": {
+    "15": "15 min",
+    "30": "30 min",
+    "45": "45 min",
+    "60": "1 hora",
+    "90": "1.5 horas",
+    "120": "2 horas",
+    "180": "3 horas"
+  }
+}

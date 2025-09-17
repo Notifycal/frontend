@@ -1,0 +1,27 @@
+{
+  "title": "Troba el teu pla perfecte",
+  "subtitle": "Introdueix la següent informació i descobreix el teu millor pla",
+  "employeesLabel": "Nombre d'empleats:",
+  "avgTimeLabel": "Temps mitjà amb el client:",
+  "workingHoursLabel": "Hores de treball al dia:",
+  "formulaText": "Fórmula usada = Empleats * (Hores de treball / Temps amb Client) * 20 (5 dies laborables)",
+  "calculateButton": "Calcular estimació",
+  "contactSectionTitle": "Parla amb nosaltres",
+  "contactSectionSubtitle": "Si busques una solució més avançada o personalitzada",
+  "contactButton": "Contactar",
+  "resultMessages": {
+    "needsContactUs": "Amb {monthlyMessages} missatges mensuals estimats, contacta amb nosaltres per un pla personalitzat.",
+    "exceedsTopTier": "Amb {monthlyMessages} missatges mensuals estimats, et recomanem el pla {tierName} + top-ups addicionals.",
+    "recommended": "Amb {monthlyMessages} missatges mensuals estimats, et recomanem el pla {tierName}.",
+    "noRecommendation": "No hem pogut calcular una recomanació per {monthlyMessages} missatges mensuals."
+  },
+  "timeOptions": {
+    "15": "15 min",
+    "30": "30 min",
+    "45": "45 min",
+    "60": "1 hora",
+    "90": "1.5 hores",
+    "120": "2 hores",
+    "180": "3 hores"
+  }
+}

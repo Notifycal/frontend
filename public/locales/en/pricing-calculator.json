@@ -1,0 +1,27 @@
+{
+  "title": "Find your perfect plan",
+  "subtitle": "Enter the following information and discover your best plan",
+  "employeesLabel": "Number of employees:",
+  "avgTimeLabel": "Average time with client:",
+  "workingHoursLabel": "Working hours per day:",
+  "formulaText": "Formula used = Employees * (Working Hours / Time with Client) * 20 (5 working days)",
+  "calculateButton": "Calculate estimate",
+  "contactSectionTitle": "Contact us",
+  "contactSectionSubtitle": "If you're looking for a more advanced or personalized solution",
+  "contactButton": "Contact",
+  "resultMessages": {
+    "needsContactUs": "With {monthlyMessages} estimated monthly messages, contact us for a personalized plan.",
+    "exceedsTopTier": "With {monthlyMessages} estimated monthly messages, we recommend the {tierName} plan + additional top-ups.",
+    "recommended": "With {monthlyMessages} estimated monthly messages, we recommend the {tierName} plan.",
+    "noRecommendation": "We couldn't calculate a recommendation for {monthlyMessages} monthly messages."
+  },
+  "timeOptions": {
+    "15": "15 min",
+    "30": "30 min",
+    "45": "45 min",
+    "60": "1 hour",
+    "90": "1.5 hours",
+    "120": "2 hours",
+    "180": "3 hours"
+  }
+}
