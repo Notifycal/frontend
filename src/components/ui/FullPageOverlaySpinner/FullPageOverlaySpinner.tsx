@@ -1,12 +1,6 @@
-import { Loader, Overlay } from '@mantine/core';
+import OverlaySpinner from '@components/ui/Spinner/OverlaySpinner';
 import type { JSX } from 'react';
 
-const FullPageOverlaySpinner = (): JSX.Element => (
-  <Overlay blur={3}>
-    <div className="flex h-full w-full items-center justify-center">
-      <Loader data-testid="full-page-spinner" size="xl" />
-    </div>
-  </Overlay>
-);
+const FullPageOverlaySpinner = (): JSX.Element => <OverlaySpinner blur={3} data-testid="full-page-spinner" size="xl" />;
 
 export default FullPageOverlaySpinner;

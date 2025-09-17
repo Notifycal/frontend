@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
 import { router } from './router.tsx';
+import FullPageOverlaySpinner from '@components/ui/FullPageOverlaySpinner/FullPageOverlaySpinner.tsx';
 
 import { isProduction } from '@common/utils.ts';
 
@@ -36,7 +37,7 @@ if (!rootElement.innerHTML) {
   void enableMocking().then(() => {
     root.render(
       <React.StrictMode>
-        <React.Suspense fallback="loading">
+        <React.Suspense fallback={<FullPageOverlaySpinner />}>
           <App queryClient={queryClient} router={router} />
         </React.Suspense>
       </React.StrictMode>
