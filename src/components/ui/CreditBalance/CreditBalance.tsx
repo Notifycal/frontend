@@ -81,6 +81,22 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
             </Button>
           </div>
         </li>
+        <Divider my="md" />
+        <h4 className="text-2xl font-bold">Coste de recordatorios por país de destino</h4>
+        <div className="mt-3 px-1 space-y-2">
+          <div className="flex justify-between items-center font-medium py-1 px-6 pl-1">
+            <span>País de destino</span>
+            <span>Créditos</span>
+          </div>
+          <div className="flex justify-between items-center hover:bg-gray-50 py-1 px-6 rounded transition-colors">
+            <span className="text-dark">España (+34)</span>
+            <span className="bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-6 rounded-full">5</span>
+          </div>
+          <div className="flex justify-between items-center py-1 px-6">
+            <span className="text-gray-500">Próximamente más países</span>
+            <span className="text-gray-500 px-4">—</span>
+          </div>
+        </div>
       </ul>
     </>
   );

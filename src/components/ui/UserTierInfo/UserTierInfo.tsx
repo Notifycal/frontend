@@ -37,14 +37,16 @@ const UserTierInfo: FC<UserTierInfoProps> = ({ tierInfo }) => {
 
       <div>{t('billing.yourPlanIncludes', { ns: 'translation' })}</div>
       <TierFeatures icon={IconCircleCheckFilled} tier={tierInfo} />
-      <Divider my="md" />
+      <br></br>
       <Alert
+        color="neutral"
         title={capitalize(t('generic.remember', { ns: 'translation' }))}
         classNames={{
           title: 'text-sm',
           message: 'text-xs'
         }}
       >
+        (*){' '}
         {t('tierSelection.disclaimer', {
           spainSmsCost: countryToSmsCostMap.ES,
           ns: 'onboarding'
