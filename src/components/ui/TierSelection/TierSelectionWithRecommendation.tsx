@@ -93,7 +93,6 @@ export const TierSelectionWithRecommendation: FC<TierSelectionWithRecommendation
           <IconShieldCheck className="text-primary-600" size={24} />
           <span className="text-base font-medium">{translation.confidenceBooster}</span>
         </div>
-        <div className="text-sm text-gray-500 max-w-2xl mx-auto mt-6">* {translation.disclaimer}</div>
       </div>
     </>
   );
