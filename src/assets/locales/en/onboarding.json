@@ -268,7 +268,7 @@
     "title": "Your plan",
     "subtitle": "Choose the best plan for you",
     "checkoutURLApiError": "There was a problem with the checkout. Please try again and give us some feedback if it doesn't work.",
-    "disclaimer": "The number of reminders is based on an estimated cost of {{spainSmsCost}} credits/reminder to Spanish numbers. It can change depending on the destination number country."
+    "disclaimer": "The number of reminders shown may vary depending on the destination country. The displayed amounts are based on costs for Spanish numbers."
   },
   "completed": {
     "heading": "Onboarding Complete!",

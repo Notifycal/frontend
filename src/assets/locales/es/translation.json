@@ -79,7 +79,10 @@
     "month": "mes",
     "remember": "recuerda",
     "used": "{{credits}} usados",
-    "remaining": "{{credits}} restantes"
+    "remaining": "{{credits}} restantes",
+    "countries": {
+      "spain": "España"
+    }
   },
   "navigation": {
     "openMainMenu": "Abrir menú principal",
@@ -113,6 +116,7 @@
       "currentCredits_zero": "No tienes ningun crédito de {{type}}.",
       "currentCredits": "Te quedan {{count}} créditos de {{type}}.",
       "title": "Balance de Créditos",
+      "moreCreditsNeeded": "¿necesitas más créditos?",
       "toIncrementSubscriptionCredits": "Para incrementar el número de creditos de sucripción, debes <0>mejorar tu subscripción</0>.",
       "error": {
         "buyMoreCredits": "Ha habido un error al intentar recargar créditos de Top-up.",
@@ -141,5 +145,11 @@
         "customerPortal": "Ha habido un error intentando acceder al Customer Portal."
       }
     }
+  },
+  "pricing": {
+    "title": "Información",
+    "description": "El coste de cada recordatorio depende del prefijo internacional del número de teléfono del destinatario:",
+    "comingSoon": "Próximamente más países",
+    "credits": "Créditos"
   }
 }

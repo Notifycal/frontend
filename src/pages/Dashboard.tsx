@@ -5,6 +5,7 @@ import { Route } from '@routes/_auth/_app/dashboard';
 import CreditBalance from '@components/ui/CreditBalance/CreditBalance';
 import FlatError from '@components/ui/FlatError/FlatError';
 import ManageBilling from '@components/ui/ManageBilling/ManageBilling';
+import PricingInfo from '@components/ui/PricingInfo/PricingInfo';
 import TierSelection from '@components/ui/TierSelection/TierSelection';
 import UserTierInfo from '@components/ui/UserTierInfo/UserTierInfo';
 import { getServiceConfig } from '@config/serviceConfig';
@@ -17,7 +18,8 @@ const Dashboard = (): JSX.Element => {
   const { user } = Route.useLoaderData();
 
   const {
-    TIER_INFO: { tiers }
+    TIER_INFO: { tiers },
+    COUNTRY_TO_SMS_COST_MAP: countryToSmsCostMap
   } = getServiceConfig();
 
   const [error, setError] = useState<string | null>(null);
@@ -75,6 +77,9 @@ const Dashboard = (): JSX.Element => {
 
       <Card {...cardCommonProps} className="lg:col-span-2">
         <ManageBilling userStatus={user.userStatus} onError={setError} />
+      </Card>
+      <Card {...cardCommonProps} className="lg:col-span-2">
+        <PricingInfo countryToSmsCostMap={countryToSmsCostMap} />
       </Card>
     </div>
   );

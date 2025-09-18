@@ -79,7 +79,10 @@
     "month": "month",
     "remember": "remember",
     "used": "{{credits}} used",
-    "remaining": "{{credits}} remaining"
+    "remaining": "{{credits}} remaining",
+    "countries": {
+      "spain": "Spain"
+    }
   },
   "navigation": {
     "openMainMenu": "Open main menu",
@@ -113,6 +116,7 @@
       "currentCredits_zero": "You don't have any {{type}} credits.",
       "currentCredits": "You have {{count}} {{type}} credits remaining.",
       "title": "Credit balance",
+      "moreCreditsNeeded": "do you need more credits?",
       "toIncrementSubscriptionCredits": "To increment the number of available subscription credits, you need to <0>upgrade your subscription</0>.",
       "error": {
         "buyMoreCredits": "There was an error when attempting to buy Top-up credits.",
@@ -141,5 +145,11 @@
         "customerPortal": "There was an error trying to access the Customer Portal."
       }
     }
+  },
+  "pricing": {
+    "title": "Information",
+    "description": "The cost of each reminder depends on the international prefix of the recipient's phone number:",
+    "comingSoon": "More countries coming soon",
+    "credits": "Credits"
   }
 }
