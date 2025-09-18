@@ -98,8 +98,9 @@ const TierSelection: FC<TierSelectionProps> = ({
       </div>
 
       {showPricingCalculator && (
-        <div className="mb-8">
+        <div className="mt-10">
           <PricingCalculator
+            collapsible
             orderedTierInfoWithIcons={orderedTierInfoWithIcons}
             onContactUsNeeded={setShowContactUs}
             onTierRecommendation={setRecommendedTier}

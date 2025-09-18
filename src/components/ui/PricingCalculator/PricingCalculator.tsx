@@ -1,7 +1,14 @@
 import { Button, Card, Group, NumberInput, Select, Text } from '@mantine/core';
 import type { TierInfoWithIcon } from '@notifycal/shared/components';
 import type { TierId } from '@notifycal/shared/types';
-import { IconArrowRight, IconCalculator, IconChartBar, IconClock } from '@tabler/icons-react';
+import {
+  IconArrowRight,
+  IconCalculator,
+  IconChartBar,
+  IconChevronDown,
+  IconChevronUp,
+  IconClock
+} from '@tabler/icons-react';
 import { useState, type FC, type ReactElement } from 'react';
 
 interface PricingCalculatorProps {
@@ -9,6 +16,8 @@ interface PricingCalculatorProps {
   onTierRecommendation?: (recommendedTierId: string | null) => void;
   onContactUsNeeded?: (shouldShow: boolean) => void;
   onTierSelect?: (tierId: TierId) => void;
+  collapsible?: boolean;
+  defaultExpanded?: boolean;
 }
 
 interface CalculationResult {
@@ -23,13 +32,16 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
   orderedTierInfoWithIcons,
   onTierRecommendation,
   onContactUsNeeded,
-  onTierSelect
+  onTierSelect,
+  collapsible = false,
+  defaultExpanded = false
 }) => {
   const [employees, setEmployees] = useState<number>(1);
   const [avgTimeWithClient, setAvgTimeWithClient] = useState<string>('60');
   const [workingHoursPerDay, setWorkingHoursPerDay] = useState<string>('8');
   const [workingDaysPerMonth, setWorkingDaysPerMonth] = useState<number>(22);
   const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null);
+  const [isExpanded, setIsExpanded] = useState<boolean>(collapsible ? defaultExpanded : true);
 
   const minutesPerMessage = 5;
 
@@ -204,7 +216,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     );
   };
 
-  return (
+  const renderCalculatorContent = (): ReactElement => (
     <Card withBorder className="bg-white max-w-4xl mx-auto" padding="lg" radius="md" shadow="md">
       <Group gap="xs" justify="center" mb="md">
         <IconCalculator className="text-accent2-600 mb-2" size={30} />
@@ -272,8 +284,45 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
           </div>
         )}
       </div>
+
+      {collapsible && (
+        <div className="mt-4 text-center">
+          <Button
+            className="text-gray-600"
+            size="sm"
+            variant="subtle"
+            onClick={() => {
+              setIsExpanded(false);
+            }}
+          >
+            <IconChevronUp className="mr-2" size={16} />
+            Ocultar calculadora
+          </Button>
+        </div>
+      )}
     </Card>
   );
+
+  if (collapsible && !isExpanded) {
+    return (
+      <div className="flex justify-center py-2">
+        <div
+          className="text-center cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => {
+            setIsExpanded(true);
+          }}
+        >
+          <div className="flex items-center justify-center gap-2 text-accent2-600 hover:text-accent2-800">
+            <span className="font-medium text-lg underline">¿Necesitas ayuda para elegir plan?</span>
+            <IconChevronDown size={24} />
+          </div>
+          <div className="text-sm text-gray-600 mt-1">Usa nuestra calculadora para encontrar el plan perfecto</div>
+        </div>
+      </div>
+    );
+  }
+
+  return renderCalculatorContent();
 };
 
 export default PricingCalculator;

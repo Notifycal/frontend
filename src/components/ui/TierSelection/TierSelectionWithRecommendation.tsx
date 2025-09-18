@@ -1,6 +1,5 @@
 import { type TierInfoWithIcon, TierCard } from '@notifycal/shared/components';
 import type { LanguageCode, TierId } from '@notifycal/shared/types';
-import { IconShieldCheck } from '@tabler/icons-react';
 import type { FC } from 'react';
 
 interface TierSelectionWithRecommendationProps {
@@ -16,18 +15,14 @@ interface TierSelectionWithRecommendationProps {
 const translations = {
   en: {
     confidenceBooster: 'Cancel your subscription at any time from your control panel.',
-    disclaimer:
-      'The number of reminders shown may vary depending on the destination country number. The number of reminders displayed is based on the cost per reminder to Spanish numbers.',
     recommended: 'Recommended'
   },
   es: {
     confidenceBooster: 'Prueba gratuita de 30 días. Cancela cuando quieras.',
-    disclaimer: 'Todos los planes incluyen recordatorios ilimitados por email e integración con calendario.',
     recommended: 'Recomendado'
   },
   ca: {
     confidenceBooster: 'Prova gratuïta de 30 dies. Cancel·la quan vulguis.',
-    disclaimer: 'Tots els plans inclouen recordatoris il·limitats per email i integració amb calendari.',
     recommended: 'Recomanat'
   }
 };
@@ -42,6 +37,7 @@ export const TierSelectionWithRecommendation: FC<TierSelectionWithRecommendation
   showContactUs
 }: TierSelectionWithRecommendationProps) => {
   const translation = translations[lang];
+  console.log(translation);
 
   const modifyTierForRecommendation = (tier: TierInfoWithIcon): TierInfoWithIcon => {
     if (recommendedTier && tier.id === recommendedTier) {
@@ -87,13 +83,6 @@ export const TierSelectionWithRecommendation: FC<TierSelectionWithRecommendation
           </div>
         </div>
       )}
-
-      <div className="mt-12 text-center">
-        <div className="flex items-center justify-center gap-3 text-gray-600">
-          <IconShieldCheck className="text-primary-600" size={24} />
-          <span className="text-base font-medium">{translation.confidenceBooster}</span>
-        </div>
-      </div>
     </>
   );
 };
