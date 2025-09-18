@@ -85,30 +85,28 @@ const TierSelection: FC<TierSelectionProps> = ({
         </div>
       )}
 
-      <div className={showPricingCalculator ? 'grid grid-cols-1 lg:grid-cols-4 gap-8' : ''}>
-        {showPricingCalculator && (
-          <div className="lg:col-span-1 order-2 lg:order-1 mt-7 ">
-            <PricingCalculator
-              orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-              onContactUsNeeded={setShowContactUs}
-              onTierRecommendation={setRecommendedTier}
-              onTierSelect={handleTierSelect}
-            />
-          </div>
-        )}
+      <div>
+        <TierSelectionWithRecommendation
+          isCardButtonDisabled={isButtonDisabled}
+          isCardButtonLoading={isButtonLoading}
+          lang={language}
+          orderedTierInfoWithIcons={orderedTierInfoWithIcons}
+          recommendedTier={showPricingCalculator ? recommendedTier : null}
+          showContactUs={showPricingCalculator ? showContactUs : false}
+          onTierSelection={handleTierSelect}
+        />
+      </div>
 
-        <div className={showPricingCalculator ? 'lg:col-span-3 order-1 lg:order-2' : ''}>
-          <TierSelectionWithRecommendation
-            isCardButtonDisabled={isButtonDisabled}
-            isCardButtonLoading={isButtonLoading}
-            lang={language}
+      {showPricingCalculator && (
+        <div className="mb-8">
+          <PricingCalculator
             orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-            recommendedTier={showPricingCalculator ? recommendedTier : null}
-            showContactUs={showPricingCalculator ? showContactUs : false}
-            onTierSelection={handleTierSelect}
+            onContactUsNeeded={setShowContactUs}
+            onTierRecommendation={setRecommendedTier}
+            onTierSelect={handleTierSelect}
           />
         </div>
-      </div>
+      )}
 
       {displayNavigationButtons && (
         <Group justify="space-between" mt="xl" pt="md">

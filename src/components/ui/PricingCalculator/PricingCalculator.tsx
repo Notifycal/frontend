@@ -1,4 +1,4 @@
-import { Button, Card, Group, NumberInput, Select, Text, Title } from '@mantine/core';
+import { Button, Card, Divider, Group, NumberInput, Select, Text, Title } from '@mantine/core';
 import type { TierInfoWithIcon } from '@notifycal/shared/components';
 import type { TierId } from '@notifycal/shared/types';
 import { IconCalculator } from '@tabler/icons-react';
@@ -110,11 +110,15 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
 
     if (needsContactUs) {
       return (
-        <div className="mt-3 p-3 bg-white border border-accent2-200 rounded text-center">
+        <div className="text-center py-3">
           <Text className="text-gray-700 mb-2" size="sm">
-            📊 {monthlyMessages}+ mensajes → Contacto
+            📊 {monthlyMessages}+ mensajes
           </Text>
-          <Button fullWidth color="gray" size="sm" variant="outline">
+          <Text className="text-gray-600 mb-3" size="xs">
+            ¡Excelente volumen! Te invitamos a que llames, no te cortes en llamar. Si tienes este volumen de verdad, te
+            hacemos algo, te buscamos una solución.
+          </Text>
+          <Button color="accent2" size="xs" variant="outline">
             Contactar
           </Button>
         </div>
@@ -123,17 +127,11 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
 
     if (recommendedTier) {
       return (
-        <div className="mt-3 p-3 bg-white border border-accent2-200 rounded text-center">
-          <Text className="text-gray-700 mb-2" size="sm">
-            📊 {monthlyMessages} mensajes → Plan {recommendedTier.displayName}
+        <div className="flex items-center justify-center gap-3 text-sm">
+          <Text className="text-gray-600" size="sm">
+            📊 {monthlyMessages} mensajes →
           </Text>
-          <Button
-            fullWidth
-            color="accent2"
-            size="sm"
-            variant="filled"
-            onClick={() => onTierSelect?.(recommendedTier.id)}
-          >
+          <Button color="accent2" size="xs" variant="filled" onClick={() => onTierSelect?.(recommendedTier.id)}>
             Seleccionar {recommendedTier.displayName}
           </Button>
         </div>
@@ -141,31 +139,25 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     }
 
     return (
-      <div className="mt-3 p-3 bg-white border border-accent2-200 rounded text-center">
-        <Text className="text-gray-700" size="sm">
-          📊 {monthlyMessages} mensajes
-        </Text>
-      </div>
+      <Text className="text-gray-600 text-center" size="sm">
+        📊 {monthlyMessages} mensajes
+      </Text>
     );
   };
 
   return (
-    <Card withBorder className="bg-white" padding="lg" radius="md" shadow="md">
-      <Group gap="xs" mb="md">
+    <Card withBorder className="bg-white max-w-4xl mx-auto" padding="lg" radius="md" shadow="md">
+      <Group gap="xs" justify="center" mb="md">
         <IconCalculator className="text-accent2-600" size={24} />
         <Title className="text-accent2-900" order={3}>
-          Conoce tu tarifa perfecta
+          Calculadora de Plan
         </Title>
       </Group>
 
-      {/* <Text c="gray.6" mb="md" size="sm">
-        Introduce la siguiente información y conoce tu mejor plan
-      </Text> */}
-
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
         <NumberInput
           className="w-full"
-          label="Número de empleados:"
+          label="Empleados"
           max={100}
           min={1}
           value={employees}
@@ -177,7 +169,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
         <Select
           className="w-full"
           data={timeOptions}
-          label="Tiempo medio con el cliente:"
+          label="Tiempo con cliente"
           value={avgTimeWithClient}
           onChange={(value) => {
             setAvgTimeWithClient(value || '60');
@@ -187,7 +179,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
         <Select
           className="w-full"
           data={workingHoursOptions}
-          label="Jornada del trabajador:"
+          label="Jornada"
           value={workingHoursPerDay}
           onChange={(value) => {
             setWorkingHoursPerDay(value || '8');
@@ -196,7 +188,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
 
         <NumberInput
           className="w-full"
-          label="Días laborables por mes:"
+          label="Días laborables"
           max={31}
           min={1}
           value={workingDaysPerMonth}
@@ -205,23 +197,22 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
           }}
         />
 
-        <Button fullWidth className="mt-3" color="accent2" variant="filled" onClick={handleCalculate}>
-          Calcular estimación
-        </Button>
-
-        {renderResult()}
+        <div className="flex items-end">
+          <Button className="w-full" color="accent2" variant="filled" onClick={handleCalculate}>
+            Calcular
+          </Button>
+        </div>
       </div>
 
-      <div className="mt-4">
-        <Title className="text-gray-700 mb-1" order={5}>
-          Habla con nosotros
-        </Title>
-        <Text c="gray.6" mb="2" size="xs">
-          Si buscas una solución más avanzada o personalizada
-        </Text>
-        <Button fullWidth color="gray" size="xs" variant="outline">
-          Contactar
-        </Button>
+      <Divider my="sm" />
+
+      <div className="text-center mt-2">
+        {renderResult() || (
+          <div className="text-gray-500 py-2">
+            <IconCalculator className="mx-auto mb-1 opacity-50" size={24} />
+            <Text size="xs">Calcula para ver tu recomendación</Text>
+          </div>
+        )}
       </div>
     </Card>
   );
