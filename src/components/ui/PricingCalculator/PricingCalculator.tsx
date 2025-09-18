@@ -112,23 +112,6 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     onContactUsNeeded?.(result.needsContactUs);
   };
 
-  const renderSecondaryMetrics = (monthlyMessages: number, savedHours: number): ReactElement => (
-    <div className="space-y-1">
-      <div className="p-1 px-4 flex items-center gap-3">
-        <IconClock className="ml-2 hidden xs:inline-block" size={16} />
-        <div>
-          <div className="text-sm text-gray-700">
-            <span>
-              {monthlyMessages} mensajes × {minutesPerMessage} minutos =
-            </span>
-            <span className="font-semibold"> {savedHours} h ahorradas</span>
-          </div>
-          <div className="text-xs text-gray-400">Basado en {minutesPerMessage} minutos por mensaje manual</div>
-        </div>
-      </div>
-    </div>
-  );
-
   const renderMetrics = (monthlyMessages: number, savedHours: number, isContactUs = false): ReactElement => (
     <div className="space-y-1 md:col-span-6">
       <div className="p-1 px-4 flex items-center gap-3">
@@ -141,7 +124,18 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
           <div className="text-xs text-gray-400">Tu estimación mensual</div>
         </div>
       </div>
-      {renderSecondaryMetrics(monthlyMessages, savedHours)}
+      <div className="p-1 px-4 flex items-center gap-3">
+        <IconClock className="ml-2 hidden xs:inline-block" size={16} />
+        <div>
+          <div className="text-sm text-gray-700">
+            <span>
+              {monthlyMessages} mensajes × {minutesPerMessage} minutos =
+            </span>
+            <span className="font-semibold"> {savedHours} h ahorradas</span>
+          </div>
+          <div className="text-xs text-gray-400">Basado en {minutesPerMessage} minutos por mensaje manual</div>
+        </div>
+      </div>
     </div>
   );
 
@@ -219,15 +213,6 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
         <h4 className="font-semibold">Calculadora de plan</h4>
       </Group>
 
-      {/* RESULTS SECTION - NOW AT TOP */}
-      <div className="mb-4 p-4 md:px-10 border border-gray-400 rounded-lg min-h-[200px] flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 shadow-inner">
-        {renderResult() || (
-          <div className="text-gray-500 py-2 text-center">
-            <IconCalculator className="mx-auto mb-1 opacity-50" size={24} />
-            <Text size="xs">Calcula para ver tu recomendación</Text>
-          </div>
-        )}
-      </div>
       {/* INPUTS + CALCULATE BUTTON - RESPONSIVE LAYOUT */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <NumberInput
@@ -279,6 +264,15 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
             Calcular
           </Button>
         </div>
+      </div>
+
+      <div className="mt-6 p-4 border border-gray-400 rounded-lg min-h-[200px] flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 shadow-inner">
+        {renderResult() || (
+          <div className="text-gray-500 py-2 text-center">
+            <IconCalculator className="mx-auto mb-1 opacity-50" size={24} />
+            <Text size="xs">Calcula para ver tu recomendación</Text>
+          </div>
+        )}
       </div>
     </Card>
   );
