@@ -31,7 +31,6 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
   const [workingDaysPerMonth, setWorkingDaysPerMonth] = useState<number>(22);
   const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null);
 
-  // Calculation constants
   const minutesPerMessage = 5;
 
   const timeOptions = [
@@ -74,9 +73,8 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     const totalAppointmentsPerDay = appointmentsPerEmployeePerDay * employees;
     const monthlyMessages = Math.ceil(totalAppointmentsPerDay * workingDaysPerMonth);
 
-    // Calculate saved hours (assuming X minutes per manual message)
     const totalMinutesSaved = monthlyMessages * minutesPerMessage;
-    const savedHours = Math.round((totalMinutesSaved / 60) * 10) / 10; // Round to 1 decimal
+    const savedHours = Math.round((totalMinutesSaved / 60) * 10) / 10;
 
     let recommendedTier: TierInfoWithIcon | null = null;
     let needsContactUs = false;
