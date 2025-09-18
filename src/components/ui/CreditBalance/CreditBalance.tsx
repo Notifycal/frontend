@@ -7,6 +7,8 @@ import { useBillingStore } from '@store/useBillingStore';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { Alert, Button, Divider } from '@mantine/core';
+import { IconMessageUp } from '@tabler/icons-react';
+import { capitalize } from 'radashi';
 import ClickableSpan from '../ClickableSpan/ClickableSpan';
 import UsageBar from '../UsageBar/UsageBar';
 
@@ -51,11 +53,19 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
   return (
     <>
       <h2 className="text-4xl font-bold">{t('billing.credits.title')}</h2>
-      <ul className="list-none px-0 my-4">
+      <ul className="list-none px-0 my-2">
         <li>
           <h4 className="text-2xl font-bold">{t('billing.subscription')}</h4>
           <UsageBar usage={{ remaining: subscriptionCreditBalance.used, total: subscriptionCreditBalance.total }} />
-          <Alert>
+          <Alert
+            className="mt-2"
+            title={
+              <div className="flex items-center gap-2">
+                <IconMessageUp />
+                {capitalize(t('billing.credits.moreCreditsNeeded', { ns: 'translation' }))}
+              </div>
+            }
+          >
             <Trans
               i18nKey="billing.credits.toIncrementSubscriptionCredits"
               ns="translation"
@@ -71,7 +81,7 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
             />
           </Alert>
         </li>
-        <Divider my="md" />
+        <Divider my="lg" />
         <li className="flex flex-col items-start gap-2">
           <h4 className="text-2xl font-bold">{t('billing.topup')}</h4>
           <div className="flex flex-col gap-2 md:flex-row md:items-center justify-between w-full">
@@ -81,22 +91,6 @@ const CreditBalance: FC<CreditBalanceProps> = ({ topupCreditBalance, subscriptio
             </Button>
           </div>
         </li>
-        <Divider my="md" />
-        <h4 className="text-2xl font-bold">Coste de recordatorios por país de destino</h4>
-        <div className="mt-3 px-1 space-y-2">
-          <div className="flex justify-between items-center font-medium py-1 px-6 pl-1">
-            <span>País de destino</span>
-            <span>Créditos</span>
-          </div>
-          <div className="flex justify-between items-center hover:bg-gray-50 py-1 px-6 rounded transition-colors">
-            <span className="text-dark">España (+34)</span>
-            <span className="bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-6 rounded-full">5</span>
-          </div>
-          <div className="flex justify-between items-center py-1 px-6">
-            <span className="text-gray-500">Próximamente más países</span>
-            <span className="text-gray-500 px-4">—</span>
-          </div>
-        </div>
       </ul>
     </>
   );

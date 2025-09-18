@@ -79,7 +79,10 @@
     "month": "mes",
     "remember": "recordar",
     "used": "{{credits}} utilitzats",
-    "remaining": "{{credits}} restants"
+    "remaining": "{{credits}} restants",
+    "countries": {
+      "spain": "Espanya"
+    }
   },
   "footer": {
     "allRightsReserved": "{{year}} Notifycal. Tots els drets reservats.",
@@ -113,6 +116,7 @@
       "currentCredits_zero": "No tens cap crèdit de {{type}}.",
       "currentCredits": "Et queden {{count}} crèdits de {{type}}.",
       "title": "Balanç de crèdits",
+      "moreCreditsNeeded": "necessites més crèdits?",
       "toIncrementSubscriptionCredits": "Per incrementar el nombre de crèdits de subscripció disponibles, necessites <0>millorar la teva subscripció</0>.",
       "error": {
         "buyMoreCredits": "Hi ha hagut un error en intentar comprar crèdits de recàrrega.",
@@ -141,5 +145,11 @@
         "customerPortal": "Hi ha hagut un error en accedir al Portal de Client."
       }
     }
+  },
+  "pricing": {
+    "title": "Informació",
+    "description": "El cost de cada recordatori depèn del prefix internacional del número de telèfon del destinatari:",
+    "comingSoon": "Més països aviat",
+    "credits": "Crèdits"
   }
 }
