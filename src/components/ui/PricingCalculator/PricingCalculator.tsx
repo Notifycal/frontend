@@ -142,9 +142,18 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     </div>
   );
 
-  const Arrow = (): ReactElement => (
-    <div className="col-span-1 text-center flex flex-col items-center justify-center h-full">
-      <IconArrowRight className="text-accent2-300" size={58} />
+  const Arrow = (orientation: 'horizontal' | 'vertical' = 'horizontal'): ReactElement => (
+    <div
+      className={
+        orientation === 'horizontal'
+          ? 'col-span-1 text-center flex flex-col items-center justify-center h-full'
+          : 'text-center'
+      }
+    >
+      <IconArrowRight
+        className={`text-accent2-300 ${orientation === 'vertical' ? 'mx-auto rotate-90' : ''}`}
+        size={orientation === 'horizontal' ? 58 : 32}
+      />
     </div>
   );
 
@@ -199,27 +208,34 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     </div>
   );
 
-  const CalculatorResultDisplay = (): ReactElement => {
-    if (!calculationResult) return CalculatorStandbyDisplayContent();
+  const CalculatorResultDisplay = ({
+    layoutType,
+    data
+  }: {
+    layoutType: 'desktop' | 'mobile';
+    data: CalculationResult;
+  }): ReactElement => {
+    const layoutConfigs = {
+      desktop: {
+        container: 'hidden md:grid md:grid-cols-12 items-center',
+        arrow: 'horizontal' as const
+      },
+      mobile: {
+        container: 'md:hidden space-y-4',
+        arrow: 'vertical' as const
+      }
+    };
+    const config = layoutConfigs[layoutType];
 
-    const { monthlyMessages, recommendedTier, exceedsTopTier, savedHours } = calculationResult;
+    const { monthlyMessages, recommendedTier, exceedsTopTier, savedHours } = data;
+    const estimateAndMetrics = MonthlyEstimateAndMetrics(monthlyMessages, savedHours, exceedsTopTier);
+    const actionButton = Action(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined);
+
     return (
-      <div className="w-full">
-        {/* Desktop: horizontal layout */}
-        <div className="hidden md:grid md:grid-cols-12 items-center">
-          {MonthlyEstimateAndMetrics(monthlyMessages, savedHours, exceedsTopTier)}
-          {Arrow()}
-          {Action(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
-        </div>
-
-        {/* Mobile: vertical layout */}
-        <div className="md:hidden space-y-4">
-          {MonthlyEstimateAndMetrics(monthlyMessages, savedHours, exceedsTopTier)}
-          <div className="text-center">
-            <IconArrowRight className="text-accent2-300 mx-auto rotate-90" size={32} />
-          </div>
-          {Action(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
-        </div>
+      <div className={config.container}>
+        {estimateAndMetrics}
+        {Arrow(config.arrow)}
+        {actionButton}
       </div>
     );
   };
@@ -288,7 +304,14 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
       {CalculatorInputSection()}
 
       <div className="mt-6 p-4 border border-gray-400 rounded-lg min-h-[200px] flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 shadow-inner">
-        {CalculatorResultDisplay()}
+        {!calculationResult ? (
+          <CalculatorStandbyDisplayContent />
+        ) : (
+          <div className="w-full">
+            <CalculatorResultDisplay data={calculationResult} layoutType="desktop" />
+            <CalculatorResultDisplay data={calculationResult} layoutType="mobile" />
+          </div>
+        )}
       </div>
 
       {collapsible && (
