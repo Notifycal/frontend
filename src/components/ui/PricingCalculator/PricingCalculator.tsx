@@ -13,7 +13,7 @@ import { useState, type FC, type ReactElement } from 'react';
 
 interface PricingCalculatorProps {
   orderedTierInfoWithIcons: Array<TierInfoWithIcon>;
-  onTierRecommendation?: (recommendedTierId: string | null) => void;
+  onTierRecommendation?: (recommendedTierId: TierId | null) => void;
   onContactUsNeeded?: (shouldShow: boolean) => void;
   onTierSelect?: (tierId: TierId) => void;
   collapsible?: boolean;
@@ -23,7 +23,6 @@ interface PricingCalculatorProps {
 interface CalculationResult {
   monthlyMessages: number;
   recommendedTier: TierInfoWithIcon | null;
-  needsContactUs: boolean;
   exceedsTopTier: boolean;
   savedHours: number;
 }
@@ -89,16 +88,13 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     const savedHours = Math.round((totalMinutesSaved / 60) * 10) / 10;
 
     let recommendedTier: TierInfoWithIcon | null = null;
-    let needsContactUs = false;
     let exceedsTopTier = false;
 
     const sortedTiers = [...orderedTierInfoWithIcons].sort((a, b) => a.numberOfReminders - b.numberOfReminders);
     const topTier = sortedTiers[sortedTiers.length - 1];
     const maxTierLimit = topTier?.numberOfReminders || 0;
 
-    if (monthlyMessages > maxTierLimit * 1.5) {
-      needsContactUs = true;
-    } else if (monthlyMessages > maxTierLimit) {
+    if (monthlyMessages > maxTierLimit) {
       exceedsTopTier = true;
       recommendedTier = topTier ?? null;
     } else {
@@ -108,7 +104,6 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     return {
       monthlyMessages,
       recommendedTier,
-      needsContactUs,
       exceedsTopTier,
       savedHours
     };
@@ -119,7 +114,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     setCalculationResult(result);
 
     onTierRecommendation?.(result.recommendedTier?.id || null);
-    onContactUsNeeded?.(result.needsContactUs);
+    onContactUsNeeded?.(result.exceedsTopTier);
   };
 
   const renderMetrics = (monthlyMessages: number, savedHours: number, isContactUs = false): ReactElement => (
@@ -155,55 +150,70 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     </div>
   );
 
-  const renderActionButton = (type: 'contact' | 'tier', tier?: TierInfoWithIcon): ReactElement => (
-    <div className="mx-auto text-center md:col-span-5">
-      {type === 'contact' ? (
-        <>
-          <Button className="w-full md:w-auto text-xl py-4 font-bold" color="accent2" size="xl" variant="filled">
-            Contactar
-          </Button>
-          <Text className="text-gray-500 mt-1" size="xs">
-            Solución personalizada
-          </Text>
-        </>
-      ) : (
-        <Button
-          className="w-full md:w-auto md:min-w-62 text-sm md:text-xl py-4 font-bold"
-          color="primary"
-          size="xl"
-          variant="filled"
-          onClick={() => tier && onTierSelect?.(tier.id)}
-        >
-          <span className="md:hidden">Plan {tier?.displayName}</span>
-          <span className="hidden md:inline">Seleccionar Plan {tier?.displayName}</span>
+  const renderActionButton = (type: 'contact' | 'tier', tier?: TierInfoWithIcon): ReactElement => {
+    const baseProps = {
+      className: 'w-full md:w-auto md:min-w-62 text-sm md:text-xl py-4 font-bold',
+      size: 'xl' as const,
+      variant: 'filled' as const
+    };
+
+    const contactProps = {
+      ...baseProps,
+      color: 'accent2' as const,
+      component: 'a' as const,
+      href: '/#/onboarding/feedback'
+    };
+
+    const tierProps = {
+      ...baseProps,
+      color: 'primary' as const,
+      onClick: (): void => tier && onTierSelect?.(tier.id)
+    };
+
+    return (
+      <div className="mx-auto text-center md:col-span-5">
+        <Button {...(type === 'contact' ? contactProps : tierProps)}>
+          {type === 'contact' ? (
+            <span>Contactar</span>
+          ) : (
+            <>
+              <span className="md:hidden">Plan {tier?.displayName}</span>
+              <span className="hidden md:inline">Seleccionar Plan {tier?.displayName}</span>
+            </>
+          )}
         </Button>
-      )}
-    </div>
-  );
+        {type === 'contact' && (
+          <Text className="text-gray-600 mt-2" size="xs">
+            No te preocupes, ponte en contacto con nosotros y encontraremos una solución
+          </Text>
+        )}
+      </div>
+    );
+  };
 
   const renderResult = (): ReactElement | null => {
     if (!calculationResult) return null;
 
-    const { monthlyMessages, recommendedTier, needsContactUs, savedHours } = calculationResult;
-    const showRecommendation = needsContactUs || recommendedTier;
+    const { monthlyMessages, recommendedTier, exceedsTopTier, savedHours } = calculationResult;
+    const showRecommendation = exceedsTopTier || recommendedTier;
 
     if (showRecommendation) {
       return (
         <div className="w-full">
           {/* Desktop: horizontal layout */}
           <div className="hidden md:grid md:grid-cols-12 items-center">
-            {renderMetrics(monthlyMessages, savedHours, needsContactUs)}
+            {renderMetrics(monthlyMessages, savedHours, exceedsTopTier)}
             {renderRecommendationSection()}
-            {renderActionButton(needsContactUs ? 'contact' : 'tier', recommendedTier ?? undefined)}
+            {renderActionButton(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
           </div>
 
           {/* Mobile: vertical layout */}
           <div className="md:hidden space-y-4">
-            {renderMetrics(monthlyMessages, savedHours, needsContactUs)}
+            {renderMetrics(monthlyMessages, savedHours, exceedsTopTier)}
             <div className="text-center">
               <IconArrowRight className="text-accent2-300 mx-auto rotate-90" size={32} />
             </div>
-            {renderActionButton(needsContactUs ? 'contact' : 'tier', recommendedTier ?? undefined)}
+            {renderActionButton(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
           </div>
         </div>
       );
@@ -211,7 +221,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
 
     return (
       <div className="w-full flex items-center justify-center">
-        {renderMetrics(monthlyMessages, savedHours, needsContactUs)}
+        {renderMetrics(monthlyMessages, savedHours, exceedsTopTier)}
       </div>
     );
   };

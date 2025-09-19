@@ -38,8 +38,7 @@ const TierSelection: FC<TierSelectionProps> = ({
 
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [error, setError] = useState<ReactNode | null>(null);
-  const [recommendedTier, setRecommendedTier] = useState<string | null>(null);
-  const [showContactUs, setShowContactUs] = useState<boolean>(false);
+  const [recommendedTier, setRecommendedTier] = useState<TierId | null>(null);
 
   const { setPurchaseOperation, setPreviousUserStatus } = useBillingStore();
 
@@ -92,7 +91,6 @@ const TierSelection: FC<TierSelectionProps> = ({
           lang={language}
           orderedTierInfoWithIcons={orderedTierInfoWithIcons}
           recommendedTier={showPricingCalculator ? recommendedTier : null}
-          showContactUs={showPricingCalculator ? showContactUs : false}
           onTierSelection={handleTierSelect}
         />
       </div>
@@ -102,7 +100,6 @@ const TierSelection: FC<TierSelectionProps> = ({
           <PricingCalculator
             collapsible
             orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-            onContactUsNeeded={setShowContactUs}
             onTierRecommendation={setRecommendedTier}
             onTierSelect={handleTierSelect}
           />
