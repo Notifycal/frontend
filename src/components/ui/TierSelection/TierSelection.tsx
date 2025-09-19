@@ -11,9 +11,12 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
 import FlatError from '@components/ui/FlatError/FlatError';
-import PricingCalculator from '@components/ui/PricingCalculator/PricingCalculator';
 import { Group } from '@mantine/core';
-import { TierSelection as TierSelectionBase, type TierInfoWithIcon } from '@notifycal/shared/components';
+import {
+  PricingCalculator,
+  TierSelection as TierSelectionBase,
+  type TierInfoWithIcon
+} from '@notifycal/shared/components';
 import { Link } from '@tanstack/react-router';
 
 interface TierSelectionProps {
