@@ -111,7 +111,7 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
                 data={[
                   // Gotcha: these values need to match values in field in the Google Form. It is case-sensitive.
                   { value: 'Feature request', label: t('feedback.featureRequest') },
-                  { value: 'Larger plan allowance', label: t('feedback.higherPlanRequest') },
+                  { value: 'Higher plan request', label: t('feedback.higherPlanRequest') },
                   { value: 'Feedback', label: t('feedback.generalFeedback') },
                   { value: 'Bug', label: t('feedback.bugReport') },
                   { value: 'Complain', label: t('feedback.complaint') },
