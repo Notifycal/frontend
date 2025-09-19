@@ -2,7 +2,7 @@ import { Card, Group } from '@mantine/core';
 import type { TierInfoWithIcon } from '@notifycal/shared/components';
 import type { TierId } from '@notifycal/shared/types';
 import { IconCalculator } from '@tabler/icons-react';
-import { useState, type FC, type ReactElement } from 'react';
+import { useState, type FC } from 'react';
 import { CalculatorInputSection } from './CalculatorInputSection';
 import { CalculatorResultArea } from './CalculatorResultArea';
 import { calculateTierRecommendation, type CalculationResult } from './calculatorUtils';
@@ -14,9 +14,9 @@ interface PricingCalculatorProps {
   onTierRecommendation: (data: { tierId: TierId; trigger: number }) => void;
   onTierSelect: (tierId: TierId) => void;
   isSelectButtonLoading: boolean;
+  contactUrl: string;
   collapsible?: boolean;
   defaultExpanded?: boolean;
-  contactUrl?: string;
 }
 
 const PricingCalculator: FC<PricingCalculatorProps> = ({
@@ -24,9 +24,9 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
   onTierRecommendation,
   onTierSelect,
   isSelectButtonLoading,
+  contactUrl,
   collapsible = false,
-  defaultExpanded = false,
-  contactUrl = '/#/onboarding/feedback'
+  defaultExpanded = false
 }) => {
   const [employees, setEmployees] = useState<number>(1);
   const [avgTimeWithClient, setAvgTimeWithClient] = useState<string>('60');

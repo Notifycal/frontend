@@ -96,6 +96,7 @@ const TierSelection: FC<TierSelectionProps> = ({
       <div className="mt-16">
         <PricingCalculator
           collapsible
+          contactUrl="/#/onboarding/feedback"
           isSelectButtonLoading={generateCheckoutURLMutation.isPending}
           orderedTierInfoWithIcons={orderedTierInfoWithIcons}
           onTierRecommendation={setTierRecommended}
