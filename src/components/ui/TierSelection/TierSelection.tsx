@@ -101,6 +101,7 @@ const TierSelection: FC<TierSelectionProps> = ({
           collapsible
           contactUrl="/#/onboarding/feedback"
           isSelectButtonLoading={generateCheckoutURLMutation.isPending}
+          lang={language}
           orderedTierInfoWithIcons={orderedTierInfoWithIcons}
           onTierRecommendation={setTierRecommended}
           onTierSelect={handleTierSelect}
