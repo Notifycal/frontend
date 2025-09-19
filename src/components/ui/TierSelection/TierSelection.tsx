@@ -22,7 +22,6 @@ import { Link } from '@tanstack/react-router';
 interface TierSelectionProps {
   displayNavigationButtons?: boolean;
   orderedTierInfoWithIcons: Array<TierInfoWithIcon>;
-  showPricingCalculator?: boolean;
 }
 
 export type TierSelectionValues = null;

@@ -14,11 +14,7 @@ const TierSelection: React.FC = () => {
   const lang = i18n.language as LanguageCode;
 
   return (
-    <TierSelectionComponent
-      displayNavigationButtons
-      showPricingCalculator
-      orderedTierInfoWithIcons={orderedTierInfoWithIcons(tiers, lang)}
-    />
+    <TierSelectionComponent displayNavigationButtons orderedTierInfoWithIcons={orderedTierInfoWithIcons(tiers, lang)} />
   );
 };
 
