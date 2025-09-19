@@ -13,9 +13,8 @@ import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
 import FlatError from '@components/ui/FlatError/FlatError';
 import PricingCalculator from '@components/ui/PricingCalculator/PricingCalculator';
 import { Group } from '@mantine/core';
-import type { TierInfoWithIcon } from '@notifycal/shared/components';
+import { TierSelection as TierSelectionBase, type TierInfoWithIcon } from '@notifycal/shared/components';
 import { Link } from '@tanstack/react-router';
-import TierSelectionWithRecommendation from './TierSelectionWithRecommendation';
 
 interface TierSelectionProps {
   displayNavigationButtons?: boolean;
@@ -36,9 +35,9 @@ const TierSelection: FC<TierSelectionProps> = ({
 
   const language = i18n.languages[0] as LanguageCode;
 
-  const [selectedTier, setSelectedTier] = useState<string | null>(null);
-  const [error, setError] = useState<ReactNode | null>(null);
-  const [recommendedTier, setRecommendedTier] = useState<TierId | null>(null);
+  const [selectedTier, setSelectedTier] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<ReactNode | undefined>(undefined);
+  const [recommendedTier, setRecommendedTier] = useState<TierId | undefined>(undefined);
 
   const { setPurchaseOperation, setPreviousUserStatus } = useBillingStore();
 
@@ -85,20 +84,21 @@ const TierSelection: FC<TierSelectionProps> = ({
       )}
 
       <div>
-        <TierSelectionWithRecommendation
+        <TierSelectionBase
           isCardButtonDisabled={isButtonDisabled}
           isCardButtonLoading={isButtonLoading}
           lang={language}
           orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-          recommendedTier={showPricingCalculator ? recommendedTier : null}
+          recommendedTier={showPricingCalculator ? recommendedTier : undefined}
           onTierSelection={handleTierSelect}
         />
       </div>
 
       {showPricingCalculator && (
-        <div className="mt-10">
+        <div className="mt-16">
           <PricingCalculator
             collapsible
+            isSelectButtonLoading={generateCheckoutURLMutation.isPending}
             orderedTierInfoWithIcons={orderedTierInfoWithIcons}
             onTierRecommendation={setRecommendedTier}
             onTierSelect={handleTierSelect}

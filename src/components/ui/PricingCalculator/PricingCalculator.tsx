@@ -13,16 +13,16 @@ import { useState, type FC, type ReactElement } from 'react';
 
 interface PricingCalculatorProps {
   orderedTierInfoWithIcons: Array<TierInfoWithIcon>;
-  onTierRecommendation?: (recommendedTierId: TierId | null) => void;
-  onContactUsNeeded?: (shouldShow: boolean) => void;
-  onTierSelect?: (tierId: TierId) => void;
+  onTierRecommendation: (recommendedTierId: TierId | undefined) => void;
+  onTierSelect: (tierId: TierId) => void;
+  isSelectButtonLoading: boolean;
   collapsible?: boolean;
   defaultExpanded?: boolean;
 }
 
 interface CalculationResult {
   monthlyMessages: number;
-  recommendedTier: TierInfoWithIcon | null;
+  recommendedTier: TierInfoWithIcon;
   exceedsTopTier: boolean;
   savedHours: number;
 }
@@ -30,8 +30,8 @@ interface CalculationResult {
 const PricingCalculator: FC<PricingCalculatorProps> = ({
   orderedTierInfoWithIcons,
   onTierRecommendation,
-  onContactUsNeeded,
   onTierSelect,
+  isSelectButtonLoading,
   collapsible = false,
   defaultExpanded = false
 }) => {
@@ -39,7 +39,7 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
   const [avgTimeWithClient, setAvgTimeWithClient] = useState<string>('60');
   const [workingHoursPerDay, setWorkingHoursPerDay] = useState<string>('8');
   const [workingDaysPerMonth, setWorkingDaysPerMonth] = useState<number>(22);
-  const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null);
+  const [calculationResult, setCalculationResult] = useState<CalculationResult | undefined>(undefined);
   const [isExpanded, setIsExpanded] = useState<boolean>(collapsible ? defaultExpanded : true);
 
   const minutesPerMessage = 5;
@@ -87,19 +87,12 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     const totalMinutesSaved = monthlyMessages * minutesPerMessage;
     const savedHours = Math.round((totalMinutesSaved / 60) * 10) / 10;
 
-    let recommendedTier: TierInfoWithIcon | null = null;
-    let exceedsTopTier = false;
-
     const sortedTiers = [...orderedTierInfoWithIcons].sort((a, b) => a.numberOfReminders - b.numberOfReminders);
     const topTier = sortedTiers[sortedTiers.length - 1];
     const maxTierLimit = topTier?.numberOfReminders || 0;
 
-    if (monthlyMessages > maxTierLimit) {
-      exceedsTopTier = true;
-      recommendedTier = topTier ?? null;
-    } else {
-      recommendedTier = sortedTiers.find((tier) => monthlyMessages <= tier.numberOfReminders) ?? null;
-    }
+    const exceedsTopTier = monthlyMessages > maxTierLimit;
+    const recommendedTier = sortedTiers.find((tier) => monthlyMessages <= tier.numberOfReminders) ?? topTier!;
 
     return {
       monthlyMessages,
@@ -112,12 +105,11 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
   const handleCalculate = (): void => {
     const result = calculateTierRecommendation();
     setCalculationResult(result);
-
-    onTierRecommendation?.(result.recommendedTier?.id || null);
-    onContactUsNeeded?.(result.exceedsTopTier);
+    onTierRecommendation?.(undefined);
+    onTierRecommendation?.(result.recommendedTier?.id);
   };
 
-  const renderMetrics = (monthlyMessages: number, savedHours: number, isContactUs = false): ReactElement => (
+  const MonthlyEstimateAndMetrics = (monthlyMessages: number, savedHours: number, isContactUs = false): ReactElement => (
     <div className="space-y-1 md:col-span-6">
       <div className="p-1 px-4 flex items-center gap-3">
         <IconChartBar className="ml-1 text-accent2-600 hidden xs:inline-block" size={20} />
@@ -144,13 +136,13 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     </div>
   );
 
-  const renderRecommendationSection = (): ReactElement => (
+  const Arrow = (): ReactElement => (
     <div className="col-span-1 text-center flex flex-col items-center justify-center h-full">
       <IconArrowRight className="text-accent2-300" size={58} />
     </div>
   );
 
-  const renderActionButton = (type: 'contact' | 'tier', tier?: TierInfoWithIcon): ReactElement => {
+  const Action = (type: 'contact' | 'tier', tier: TierInfoWithIcon): ReactElement => {
     const baseProps = {
       className: 'w-full md:w-auto md:min-w-62 text-sm md:text-xl py-4 font-bold',
       size: 'xl' as const,
@@ -167,7 +159,10 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     const tierProps = {
       ...baseProps,
       color: 'primary' as const,
-      onClick: (): void => tier && onTierSelect?.(tier.id)
+      loading: isSelectButtonLoading,
+      onClick: (): void => {
+        onTierSelect(tier.id);
+      }
     };
 
     return (
@@ -191,108 +186,103 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     );
   };
 
-  const renderResult = (): ReactElement | null => {
-    if (!calculationResult) return null;
+  const CalculatorStandbyDisplayContent = (): ReactElement => (
+    <div className="text-gray-500 py-2 text-center">
+      <IconCalculator className="mx-auto mb-1 opacity-50" size={24} />
+      <Text size="xs">Calcula para ver tu recomendación</Text>
+    </div>
+  );
+
+  const CalculatorResultDisplay = (): ReactElement => {
+    if (!calculationResult) return CalculatorStandbyDisplayContent();
 
     const { monthlyMessages, recommendedTier, exceedsTopTier, savedHours } = calculationResult;
-    const showRecommendation = exceedsTopTier || recommendedTier;
-
-    if (showRecommendation) {
-      return (
-        <div className="w-full">
-          {/* Desktop: horizontal layout */}
-          <div className="hidden md:grid md:grid-cols-12 items-center">
-            {renderMetrics(monthlyMessages, savedHours, exceedsTopTier)}
-            {renderRecommendationSection()}
-            {renderActionButton(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
-          </div>
-
-          {/* Mobile: vertical layout */}
-          <div className="md:hidden space-y-4">
-            {renderMetrics(monthlyMessages, savedHours, exceedsTopTier)}
-            <div className="text-center">
-              <IconArrowRight className="text-accent2-300 mx-auto rotate-90" size={32} />
-            </div>
-            {renderActionButton(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
-          </div>
-        </div>
-      );
-    }
-
     return (
-      <div className="w-full flex items-center justify-center">
-        {renderMetrics(monthlyMessages, savedHours, exceedsTopTier)}
+      <div className="w-full">
+        {/* Desktop: horizontal layout */}
+        <div className="hidden md:grid md:grid-cols-12 items-center">
+          {MonthlyEstimateAndMetrics(monthlyMessages, savedHours, exceedsTopTier)}
+          {Arrow()}
+          {Action(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
+        </div>
+
+        {/* Mobile: vertical layout */}
+        <div className="md:hidden space-y-4">
+          {MonthlyEstimateAndMetrics(monthlyMessages, savedHours, exceedsTopTier)}
+          <div className="text-center">
+            <IconArrowRight className="text-accent2-300 mx-auto rotate-90" size={32} />
+          </div>
+          {Action(exceedsTopTier ? 'contact' : 'tier', recommendedTier ?? undefined)}
+        </div>
       </div>
     );
   };
 
-  const renderCalculatorContent = (): ReactElement => (
+  const CalculatorInputSection = (): ReactElement => (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      <NumberInput
+        className="w-full md:order-1"
+        label="Empleados"
+        max={100}
+        min={1}
+        value={employees}
+        onChange={(value) => {
+          setEmployees(Number(value) || 1);
+        }}
+      />
+      <Select
+        className="w-full md:order-2"
+        data={timeOptions}
+        label="Tiempo con cliente"
+        value={avgTimeWithClient}
+        onChange={(value) => {
+          setAvgTimeWithClient(value || '60');
+        }}
+      />
+      <Select
+        className="w-full md:order-4"
+        data={workingHoursOptions}
+        label="Jornada"
+        value={workingHoursPerDay}
+        onChange={(value) => {
+          setWorkingHoursPerDay(value || '8');
+        }}
+      />
+      <NumberInput
+        className="w-full md:order-5"
+        label="Días laborables"
+        max={31}
+        min={1}
+        value={workingDaysPerMonth}
+        onChange={(value) => {
+          setWorkingDaysPerMonth(Number(value) || 22);
+        }}
+      />
+      <div className="md:order-3 md:row-span-2 flex items-center md:py-1 md:pt-6 md:pl-4">
+        <Button
+          className="w-full h-full md:min-h-[90px] text-lg md:text-xl font-bold py-4 md:py-0"
+          color="accent2"
+          size="lg"
+          variant="outline"
+          onClick={handleCalculate}
+        >
+          Calcular
+        </Button>
+      </div>
+    </div>
+  );
+
+  const Calculator = (): ReactElement => (
     <Card withBorder className="bg-white max-w-4xl mx-auto" padding="lg" radius="md" shadow="md">
       <Group gap="xs" justify="center" mb="md">
         <IconCalculator className="text-accent2-600 mb-2" size={30} />
         <h4 className="font-semibold">Calculadora de plan</h4>
       </Group>
 
-      {/* INPUTS + CALCULATE BUTTON - RESPONSIVE LAYOUT */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        <NumberInput
-          className="w-full md:order-1"
-          label="Empleados"
-          max={100}
-          min={1}
-          value={employees}
-          onChange={(value) => {
-            setEmployees(Number(value) || 1);
-          }}
-        />
-        <Select
-          className="w-full md:order-2"
-          data={timeOptions}
-          label="Tiempo con cliente"
-          value={avgTimeWithClient}
-          onChange={(value) => {
-            setAvgTimeWithClient(value || '60');
-          }}
-        />
-        <Select
-          className="w-full md:order-4"
-          data={workingHoursOptions}
-          label="Jornada"
-          value={workingHoursPerDay}
-          onChange={(value) => {
-            setWorkingHoursPerDay(value || '8');
-          }}
-        />
-        <NumberInput
-          className="w-full md:order-5"
-          label="Días laborables"
-          max={31}
-          min={1}
-          value={workingDaysPerMonth}
-          onChange={(value) => {
-            setWorkingDaysPerMonth(Number(value) || 22);
-          }}
-        />
-        <div className="md:order-3 md:row-span-2 flex items-center md:py-1 md:pt-6 md:pl-4">
-          <Button
-            className="w-full h-full md:min-h-[90px] text-lg md:text-xl font-bold py-4 md:py-0"
-            color="accent2"
-            size="lg"
-            variant="outline"
-            onClick={handleCalculate}
-          >
-            Calcular
-          </Button>
-        </div>
-      </div>
+      {CalculatorInputSection()}
 
       <div className="mt-6 p-4 border border-gray-400 rounded-lg min-h-[200px] flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 shadow-inner">
-        {renderResult() || (
-          <div className="text-gray-500 py-2 text-center">
-            <IconCalculator className="mx-auto mb-1 opacity-50" size={24} />
-            <Text size="xs">Calcula para ver tu recomendación</Text>
-          </div>
-        )}
+        {CalculatorResultDisplay()}
       </div>
 
       {collapsible && (
@@ -313,26 +303,28 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
     </Card>
   );
 
-  if (collapsible && !isExpanded) {
-    return (
-      <div className="flex justify-center py-2">
-        <div
-          className="text-center cursor-pointer hover:opacity-80 transition-opacity"
-          onClick={() => {
-            setIsExpanded(true);
-          }}
-        >
-          <div className="flex items-center justify-center gap-2 text-accent2-600 hover:text-accent2-800">
-            <span className="font-medium text-lg underline">¿Necesitas ayuda para elegir plan?</span>
-            <IconChevronDown size={24} />
-          </div>
-          <div className="text-sm text-gray-600 mt-1">Usa nuestra calculadora para encontrar el plan perfecto</div>
+  const NeedHelpButton: ReactElement = (
+    <div className="flex justify-center py-2">
+      <div
+        className="text-center cursor-pointer hover:opacity-80 transition-opacity"
+        onClick={() => {
+          setIsExpanded(true);
+        }}
+      >
+        <div className="flex items-center justify-center gap-2 text-accent2-600 hover:text-accent2-800">
+          <IconChevronDown size={24} />
+          <span className="font-medium text-lg hover:underline">¿Necesitas ayuda para elegir plan?</span>
+          <IconChevronDown size={24} />
         </div>
+        <div className="text-sm text-gray-600 mt-1">Usa nuestra calculadora para encontrar el plan perfecto</div>
       </div>
-    );
-  }
+    </div>
+  );
 
-  return renderCalculatorContent();
+  if (collapsible && !isExpanded) {
+    return NeedHelpButton;
+  }
+  return Calculator();
 };
 
 export default PricingCalculator;
