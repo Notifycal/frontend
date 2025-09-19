@@ -13,7 +13,7 @@ import { useState, type FC, type ReactElement } from 'react';
 
 interface PricingCalculatorProps {
   orderedTierInfoWithIcons: Array<TierInfoWithIcon>;
-  onTierRecommendation: (recommendedTierId: TierId | undefined) => void;
+  onTierRecommendation: (data: { tierId: TierId; trigger: number }) => void;
   onTierSelect: (tierId: TierId) => void;
   isSelectButtonLoading: boolean;
   collapsible?: boolean;
@@ -105,11 +105,17 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
   const handleCalculate = (): void => {
     const result = calculateTierRecommendation();
     setCalculationResult(result);
-    onTierRecommendation?.(undefined);
-    onTierRecommendation?.(result.recommendedTier?.id);
+    onTierRecommendation({
+      tierId: result.recommendedTier.id,
+      trigger: Date.now()
+    });
   };
 
-  const MonthlyEstimateAndMetrics = (monthlyMessages: number, savedHours: number, isContactUs = false): ReactElement => (
+  const MonthlyEstimateAndMetrics = (
+    monthlyMessages: number,
+    savedHours: number,
+    isContactUs = false
+  ): ReactElement => (
     <div className="space-y-1 md:col-span-6">
       <div className="p-1 px-4 flex items-center gap-3">
         <IconChartBar className="ml-1 text-accent2-600 hidden xs:inline-block" size={20} />
@@ -288,15 +294,16 @@ const PricingCalculator: FC<PricingCalculatorProps> = ({
       {collapsible && (
         <div className="mt-4 text-center">
           <Button
-            className="text-gray-600"
+            className="text-gray-600 hover:underline"
             size="sm"
-            variant="subtle"
+            variant="transparent"
             onClick={() => {
               setIsExpanded(false);
             }}
           >
-            <IconChevronUp className="mr-2" size={16} />
-            Ocultar calculadora
+            <IconChevronUp className="mr-2" size={20} />
+            <span>Ocultar calculadora</span>
+            <IconChevronUp className="ml-2" size={20} />
           </Button>
         </div>
       )}

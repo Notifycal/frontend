@@ -26,8 +26,7 @@ export type TierSelectionValues = null;
 
 const TierSelection: FC<TierSelectionProps> = ({
   displayNavigationButtons,
-  orderedTierInfoWithIcons,
-  showPricingCalculator = false
+  orderedTierInfoWithIcons
 }: TierSelectionProps) => {
   const translationNs = 'onboarding' as const;
   const { i18n } = useTranslation(translationNs);
@@ -37,7 +36,7 @@ const TierSelection: FC<TierSelectionProps> = ({
 
   const [selectedTier, setSelectedTier] = useState<string | undefined>(undefined);
   const [error, setError] = useState<ReactNode | undefined>(undefined);
-  const [recommendedTier, setRecommendedTier] = useState<TierId | undefined>(undefined);
+  const [recommendedTier, setTierRecommended] = useState<{ tierId: TierId; trigger: number } | undefined>(undefined);
 
   const { setPurchaseOperation, setPreviousUserStatus } = useBillingStore();
 
@@ -89,22 +88,20 @@ const TierSelection: FC<TierSelectionProps> = ({
           isCardButtonLoading={isButtonLoading}
           lang={language}
           orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-          recommendedTier={showPricingCalculator ? recommendedTier : undefined}
+          recommendedTier={recommendedTier}
           onTierSelection={handleTierSelect}
         />
       </div>
 
-      {showPricingCalculator && (
-        <div className="mt-16">
-          <PricingCalculator
-            collapsible
-            isSelectButtonLoading={generateCheckoutURLMutation.isPending}
-            orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-            onTierRecommendation={setRecommendedTier}
-            onTierSelect={handleTierSelect}
-          />
-        </div>
-      )}
+      <div className="mt-16">
+        <PricingCalculator
+          collapsible
+          isSelectButtonLoading={generateCheckoutURLMutation.isPending}
+          orderedTierInfoWithIcons={orderedTierInfoWithIcons}
+          onTierRecommendation={setTierRecommended}
+          onTierSelect={handleTierSelect}
+        />
+      </div>
 
       {displayNavigationButtons && (
         <Group justify="space-between" mt="xl" pt="md">
