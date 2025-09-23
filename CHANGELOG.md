@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.2](https://github.com/Notifycal/frontend/compare/v1.3.1...v1.3.2) (2025-09-23)
+
+
+### Bug Fixes
+
+* add spinner to react suspense. Remove Mantine dep from FullPageO… ([#703](https://github.com/Notifycal/frontend/issues/703)) ([a4ae61c](https://github.com/Notifycal/frontend/commit/a4ae61c2e0b2aa39206411fbc8b3c9c4a51c807a))
+* **deps:** Update @notifycal/shared and zod ([#706](https://github.com/Notifycal/frontend/issues/706)) ([db34003](https://github.com/Notifycal/frontend/commit/db340036b51f4a9fddc0ab33e2d8061657d21be2))
+* **deps:** Update dependency motion to v12.23.14 ([#707](https://github.com/Notifycal/frontend/issues/707)) ([c54a6b3](https://github.com/Notifycal/frontend/commit/c54a6b3d096604dc3d79dc17d6b692577d5c3d41))
+* gap under topups ([#710](https://github.com/Notifycal/frontend/issues/710)) ([e1bf727](https://github.com/Notifycal/frontend/commit/e1bf72722387fc69d93605e95e8b7c6f52a42955))
+* login form sizes on language change ([#699](https://github.com/Notifycal/frontend/issues/699)) ([e84ce9c](https://github.com/Notifycal/frontend/commit/e84ce9c75d5a0150aafe7bdf986e6932540d14c9))
+* stackable footer links ([#700](https://github.com/Notifycal/frontend/issues/700)) ([fb20b41](https://github.com/Notifycal/frontend/commit/fb20b41d556016b5df2d0931fd978363a9a64fb1))
+
 ## [1.3.1](https://github.com/Notifycal/frontend/compare/v1.3.0...v1.3.1) (2025-09-16)
 
 
