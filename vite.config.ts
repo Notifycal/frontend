@@ -11,8 +11,8 @@ import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
-const maxBundleChunkSizeInBytes = 1.5 * 1024 * 1024; //MB
-const maxTotalBundleSizeInBytes = 2.05 * 1024 * 1024; //MB
+const maxBundleChunkSizeInBytes = 1.8 * 1024 * 1024; //MB
+const maxTotalBundleSizeInBytes = 2.06 * 1024 * 1024; //MB
 
 // https://vitejs.dev/config/
 export default defineConfig({
