@@ -93,7 +93,9 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
         <form onSubmit={handleSubmit(onSubmit)}>
           {showTitle && <h1 className="text-2xl font-bold text-secondary-500 mb-5">{t('feedback.title')}</h1>}
 
-          <h5 className="mb-4 font-regular">{t('feedback.importance')}</h5>
+          <h6 className="font-regular mb-4">
+            {t('feedback.importance')} <span className="text-gray-500">- {t('feedback.responseTime')}</span>
+          </h6>
 
           <Controller
             control={control}
@@ -109,6 +111,7 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
                 data={[
                   // Gotcha: these values need to match values in field in the Google Form. It is case-sensitive.
                   { value: 'Feature request', label: t('feedback.featureRequest') },
+                  { value: 'Higher plan request', label: t('feedback.higherPlanRequest') },
                   { value: 'Feedback', label: t('feedback.generalFeedback') },
                   { value: 'Bug', label: t('feedback.bugReport') },
                   { value: 'Complain', label: t('feedback.complaint') },

@@ -9,11 +9,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useState, type FC, type ReactNode } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
+import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
 import FlatError from '@components/ui/FlatError/FlatError';
 import { Group } from '@mantine/core';
-import { TierSelection as TierSelectionBase, type TierInfoWithIcon } from '@notifycal/shared/components';
+import {
+  PricingCalculator,
+  TierSelection as TierSelectionBase,
+  type TierInfoWithIcon
+} from '@notifycal/shared/components';
 import { Link } from '@tanstack/react-router';
-import OnboardingBackButton from '@components/onboarding/OnboardingBackButton';
 
 interface TierSelectionProps {
   displayNavigationButtons?: boolean;
@@ -32,8 +36,9 @@ const TierSelection: FC<TierSelectionProps> = ({
 
   const language = i18n.languages[0] as LanguageCode;
 
-  const [selectedTier, setSelectedTier] = useState<string | null>(null);
-  const [error, setError] = useState<ReactNode | null>(null);
+  const [selectedTier, setSelectedTier] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<ReactNode | undefined>(undefined);
+  const [recommendedTier, setTierRecommended] = useState<{ tierId: TierId; trigger: number } | undefined>(undefined);
 
   const { setPurchaseOperation, setPreviousUserStatus } = useBillingStore();
 
@@ -66,7 +71,7 @@ const TierSelection: FC<TierSelectionProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4">
       {!generateCheckoutURLMutation.isPending && generateCheckoutURLMutation.isError && error && (
         <div className="mb-10">
           <FlatError
@@ -78,13 +83,29 @@ const TierSelection: FC<TierSelectionProps> = ({
           </FlatError>
         </div>
       )}
-      <TierSelectionBase
-        isCardButtonDisabled={isButtonDisabled}
-        isCardButtonLoading={isButtonLoading}
-        lang={language}
-        orderedTierInfoWithIcons={orderedTierInfoWithIcons}
-        onTierSelection={handleTierSelect}
-      />
+
+      <div>
+        <TierSelectionBase
+          isCardButtonDisabled={isButtonDisabled}
+          isCardButtonLoading={isButtonLoading}
+          lang={language}
+          orderedTierInfoWithIcons={orderedTierInfoWithIcons}
+          recommendedTier={recommendedTier}
+          onTierSelection={handleTierSelect}
+        />
+      </div>
+
+      <div className="mt-16">
+        <PricingCalculator
+          collapsible
+          contactUrl="/#/onboarding/feedback"
+          isSelectButtonLoading={generateCheckoutURLMutation.isPending}
+          lang={language}
+          orderedTierInfoWithIcons={orderedTierInfoWithIcons}
+          onTierRecommendation={setTierRecommended}
+          onTierSelect={handleTierSelect}
+        />
+      </div>
 
       {displayNavigationButtons && (
         <Group justify="space-between" mt="xl" pt="md">
