@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.4](https://github.com/Notifycal/frontend/compare/v1.3.3...v1.3.4) (2025-09-24)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency motion to v12.23.20 ([#722](https://github.com/Notifycal/frontend/issues/722)) ([9d03872](https://github.com/Notifycal/frontend/commit/9d038720e1db8e37307e410074a4f19e626296b9))
+* rollback tanstack router to v1.131.50 to avoid _blank link issue ([#724](https://github.com/Notifycal/frontend/issues/724)) ([434974c](https://github.com/Notifycal/frontend/commit/434974c2aa3193b3d5a965bca13958482a794c02))
+
 ## [1.3.3](https://github.com/Notifycal/frontend/compare/v1.3.2...v1.3.3) (2025-09-24)
 
 
