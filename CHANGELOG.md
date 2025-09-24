@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/Notifycal/frontend/compare/v1.3.4...v1.4.0) (2025-09-24)
+
+
+### Features
+
+* tier calculator ([#716](https://github.com/Notifycal/frontend/issues/716)) ([465e813](https://github.com/Notifycal/frontend/commit/465e813b124d39c3a959f54bbf860322b0e58bbb))
+
 ## [1.3.4](https://github.com/Notifycal/frontend/compare/v1.3.3...v1.3.4) (2025-09-24)
 
 
