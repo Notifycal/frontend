@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/Notifycal/frontend/compare/v1.4.1...v1.4.2) (2025-09-25)
+
+
+### Bug Fixes
+
+* update fiscal information ([#730](https://github.com/Notifycal/frontend/issues/730)) ([0ce634a](https://github.com/Notifycal/frontend/commit/0ce634a46bc771d031c3cd1f3bcfaf1230ed30c7))
+
 ## [1.4.1](https://github.com/Notifycal/frontend/compare/v1.4.0...v1.4.1) (2025-09-25)
 
 
