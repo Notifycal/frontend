@@ -4,15 +4,15 @@
 
 ## Datos de contacto y empresa
 
-| Campo                | Valor                    |
-| -------------------- | ------------------------ |
-| **Razón Social**     | [PENDIENTE]              |
-| **Nombre Comercial** | Notifycal                |
-| **NIF/CIF**          | [PENDIENTE]              |
-| **Domicilio Social** | [PENDIENTE]              |
-| **Email Privacidad** | privacidad@notifycal.com |
-| **Email Soporte**    | soporte@notifycal.com    |
-| **Email Baja**       | baja@notifycal.com       |
+| Campo                | Valor                                       |
+| -------------------- | ------------------------------------------- |
+| **Nombre**           | Daniel Siguero García                       |
+| **Nombre Comercial** | Notifycal                                   |
+| **NIF**              | 47534273-N                                  |
+| **Domicilio Fiscal** | Calle Hermosilla 48, 1º Dcha, 28001, Madrid |
+| **Email Privacidad** | privacidad@notifycal.com                    |
+| **Email Soporte**    | soporte@notifycal.com                       |
+| **Email Baja**       | baja@notifycal.com                          |
 
 ## 1. Información general
 

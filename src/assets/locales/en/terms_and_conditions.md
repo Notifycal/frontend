@@ -4,15 +4,15 @@
 
 ## Company Contact and Information
 
-| Field                  | Value                     |
-| ---------------------- | ------------------------- |
-| **Company Name**       | [PENDING]                 |
-| **Trade Name**         | Notifycal                 |
-| **Tax ID**             | [PENDING]                 |
-| **Registered Address** | [PENDING]                 |
-| **Terms Email**        | terms@notifycal.com       |
-| **Support Email**      | support@notifycal.com     |
-| **Cancellation Email** | unsubscribe@notifycal.com |
+| Field                  | Value                                       |
+| ---------------------- | ------------------------------------------- |
+| **Name**               | Daniel Siguero García                       |
+| **Trade Name**         | Notifycal                                   |
+| **Tax ID**             | 47534273-N                                  |
+| **Fiscal Address**     | Calle Hermosilla 48, 1º Dcha, 28001, Madrid |
+| **Terms Email**        | terms@notifycal.com                         |
+| **Support Email**      | support@notifycal.com                       |
+| **Cancellation Email** | unsubscribe@notifycal.com                   |
 
 ## 1. General Information
 
