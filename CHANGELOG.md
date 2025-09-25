@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/Notifycal/frontend/compare/v1.4.0...v1.4.1) (2025-09-25)
+
+
+### Bug Fixes
+
+* cookie consent privacy policy ([#728](https://github.com/Notifycal/frontend/issues/728)) ([ccc3e5f](https://github.com/Notifycal/frontend/commit/ccc3e5fb7dad8182000606beb17d42aed4a4fefe))
+
 ## [1.4.0](https://github.com/Notifycal/frontend/compare/v1.3.4...v1.4.0) (2025-09-24)
 
 
