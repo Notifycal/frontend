@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/Notifycal/frontend/compare/v1.4.3...v1.4.4) (2025-09-30)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency motion to v12.23.22 ([#726](https://github.com/Notifycal/frontend/issues/726)) ([5be76a5](https://github.com/Notifycal/frontend/commit/5be76a57a500c48df15d5b7b736c09abd2169a36))
+
 ## [1.4.3](https://github.com/Notifycal/frontend/compare/v1.4.2...v1.4.3) (2025-09-30)
 
 
