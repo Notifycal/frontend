@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.3](https://github.com/Notifycal/frontend/compare/v1.4.2...v1.4.3) (2025-09-30)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency react-i18next to v16 ([#732](https://github.com/Notifycal/frontend/issues/732)) ([98c157a](https://github.com/Notifycal/frontend/commit/98c157aa1b37f8ff1c233b555ce44dba659b8b7d))
+* translation in login page ([#734](https://github.com/Notifycal/frontend/issues/734)) ([4ffb2f2](https://github.com/Notifycal/frontend/commit/4ffb2f2acd4a40328036798089a960294dd2acc2))
+
 ## [1.4.2](https://github.com/Notifycal/frontend/compare/v1.4.1...v1.4.2) (2025-09-25)
 
 
