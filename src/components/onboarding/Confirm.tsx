@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { useI18nForm } from '@hooks/useI18nForm';
 import { useOnboardingNavigation } from '@hooks/useOnboardingNavigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import OnboardingNavigation from '@components/layout/onboarding/OnboardingNavigation';
@@ -69,15 +69,13 @@ const Confirm: React.FC = () => {
     t
   );
 
-  const calendarsWithTemplateInfo = useMemo(() => {
-    return calendars.calendars.map((calendar) => ({
-      ...calendar,
-      template: {
-        id: reminderType.reminderId,
-        language: reminderType.reminderLanguage
-      }
-    }));
-  }, [reminderType, calendars.calendars]);
+  const calendarsWithTemplateInfo = calendars.calendars.map((calendar) => ({
+    ...calendar,
+    template: {
+      id: reminderType.reminderId,
+      language: reminderType.reminderLanguage
+    }
+  }));
 
   const queryClient = useQueryClient();
 

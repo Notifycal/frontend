@@ -1,9 +1,9 @@
 import FlatError from '@components/ui/FlatError/FlatError';
 import { getServiceConfig } from '@config/serviceConfig';
 import NotifycalIsologo from '@notifycal/shared/assets/logos/notifycal-isologo.svg?react';
-import { useAuth, type LoginError } from '@providers/AuthProvider';
+import { useAuth } from '@providers/AuthProvider';
 import { Link } from '@tanstack/react-router';
-import { useEffect, useState, type JSX } from 'react';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginWithGoogleButton } from './GoogleLoginButton';
 
@@ -12,14 +12,7 @@ export const LoginForm = (): JSX.Element => {
   const auth = useAuth();
   const { STATIC_LANDING_URL } = getServiceConfig();
 
-  const [lastLoginError, setLastLoginError] = useState<LoginError | null>(null);
-  const loginErrorMessage = auth.loginError;
-
-  useEffect(() => {
-    if (loginErrorMessage) {
-      setLastLoginError(loginErrorMessage);
-    }
-  }, [loginErrorMessage]);
+  const lastLoginError = auth.loginError;
 
   return (
     <>
