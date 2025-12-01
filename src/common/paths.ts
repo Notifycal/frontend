@@ -61,7 +61,8 @@ export function extractFromPaths<T, P extends ReadonlyArray<AllKeyOf<T>>>(source
   return paths
     .map((path) => {
       const value = get(source, path);
-      const lastKey = path.split('.').at(-1);
+      const parts = path.split('.');
+      const lastKey = parts[parts.length - 1];
       return { [lastKey!]: value };
     })
     .reduce((accumulator, current) => ({ ...accumulator, ...current }), {}) as ExtractFromPaths<T, P>;
