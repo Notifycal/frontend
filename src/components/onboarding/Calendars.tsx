@@ -79,7 +79,7 @@ const Calendars: React.FC = () => {
               data={calendarData}
               disabled={isLoading}
               leftSection={isLoading && <IconRefresh size={14} />}
-              value={isLoading ? [] : value.map((v) => v.id)}
+              value={isLoading ? [] : (value || []).map((v) => v.id)}
               onChange={(value) => {
                 if (!isLoading) {
                   onChange(calendarValuesToFullCalendars(value));

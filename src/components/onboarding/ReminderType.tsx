@@ -100,7 +100,7 @@ const ReminderType: React.FC = () => {
               <InternationalizationPicker
                 displayFlagOnly
                 data={languageData}
-                value={value}
+                value={value || (i18n.languages[0] as LanguageCode)}
                 onSelected={(item) => {
                   setValue('reminderId', '' as TemplateId);
                   onChange(item.code);
@@ -114,7 +114,7 @@ const ReminderType: React.FC = () => {
           control={control}
           name="reminderId"
           render={({ field: { value, onChange } }) => (
-            <ReminderTypeCardRadioGroup value={value} onChange={onChange}>
+            <ReminderTypeCardRadioGroup value={value || ''} onChange={onChange}>
               {Object.values(interpolatedTemplates).map((template) => (
                 <ReminderTypeCardRadioGroupOption key={template.id} text={template.text} value={template.id} />
               ))}

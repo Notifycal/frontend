@@ -100,14 +100,15 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
           <Controller
             control={control}
             name="type"
-            render={({ field }) => (
+            render={({ field: { value, onChange, ...rest } }) => (
               <Select
-                {...field}
+                {...rest}
                 clearable
                 error={errors.type?.message}
                 label={t('feedback.typeLabel')}
                 mb="md"
                 placeholder={t('feedback.selectOption')}
+                value={value || null}
                 data={[
                   // Gotcha: these values need to match values in field in the Google Form. It is case-sensitive.
                   { value: 'Feature request', label: t('feedback.featureRequest') },
@@ -118,7 +119,7 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
                   { value: 'Other', label: t('feedback.other') }
                 ]}
                 onChange={(value) => {
-                  field.onChange(value || '');
+                  onChange(value || '');
                 }}
               />
             )}
