@@ -58,7 +58,7 @@ const TierSelection: FC<TierSelectionProps> = ({
   const isButtonDisabled = (tierId: TierId): boolean =>
     selectedTier !== tierId && generateCheckoutURLMutation.isPending;
 
-  const handleTierSelect = async (tierId: TierId): Promise<void> => {
+  const handleTierSelect = async (tierId: TierId | 'good-trial'): Promise<void> => {
     const user = await queryClient.ensureQueryData({
       queryKey: ['user-profile'],
       queryFn: getUserProfile
