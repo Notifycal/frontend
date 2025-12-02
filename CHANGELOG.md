@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/Notifycal/frontend/compare/v1.4.5...v1.5.0) (2025-12-02)
+
+
+### Features
+
+* free trial ([#866](https://github.com/Notifycal/frontend/issues/866)) ([9e2aa6f](https://github.com/Notifycal/frontend/commit/9e2aa6fc3a95fe3671dfd8f882bca46f012a77d5))
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v7.16.1 ([#756](https://github.com/Notifycal/frontend/issues/756)) ([1c0904d](https://github.com/Notifycal/frontend/commit/1c0904d4092a673b620c91c411a2df84e739941e))
+* vulnerabilities ([#869](https://github.com/Notifycal/frontend/issues/869)) ([b91bdfd](https://github.com/Notifycal/frontend/commit/b91bdfdf231966aaf126c9ff5c8f1105f98e6a93))
+
 ## [1.4.5](https://github.com/Notifycal/frontend/compare/v1.4.4...v1.4.5) (2025-12-02)
 
 
