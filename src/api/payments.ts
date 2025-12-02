@@ -16,7 +16,7 @@ export type CustomerPortalSession = RedirectUrlSession;
 type WithLanguage<T> = T & { language: LanguageCode };
 
 export type TopupCheckoutURLPayload = WithLanguage<{ topup: TopupId }>;
-export type TierCheckoutURLPayload = WithLanguage<{ tier: TierId }>;
+export type TierCheckoutURLPayload = WithLanguage<{ tier: TierId | 'good-trial' }>;
 
 type CheckoutPayload = TierCheckoutURLPayload | TopupCheckoutURLPayload;
 

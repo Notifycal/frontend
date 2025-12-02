@@ -81,7 +81,7 @@ const ReminderType: React.FC = () => {
       {
         id,
         language,
-        text: interpolate(businessDetails.name, businessDetails.address, DateTime.now())
+        text: interpolate(businessDetails.name, businessDetails.address, DateTime.now(), true)
       }
     ])
   );
