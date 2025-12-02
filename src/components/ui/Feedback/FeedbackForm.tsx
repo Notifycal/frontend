@@ -108,6 +108,7 @@ const FeedbackForm = ({ email, userId, showTitle = true }: FeedbackFormProps): J
                 label={t('feedback.typeLabel')}
                 mb="md"
                 placeholder={t('feedback.selectOption')}
+                value={field.value || null}
                 data={[
                   // Gotcha: these values need to match values in field in the Google Form. It is case-sensitive.
                   { value: 'Feature request', label: t('feedback.featureRequest') },
