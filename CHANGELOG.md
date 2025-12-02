@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.4.5](https://github.com/Notifycal/frontend/compare/v1.4.4...v1.4.5) (2025-12-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.136.4 ([#849](https://github.com/Notifycal/frontend/issues/849)) ([1422843](https://github.com/Notifycal/frontend/commit/14228433e7e01a7a8a6f9741a5302132afbd77af))
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.136.6 ([#853](https://github.com/Notifycal/frontend/issues/853)) ([c0daa3e](https://github.com/Notifycal/frontend/commit/c0daa3ea0dfa5b2da746034ae6ef3137a24c3c20))
+* **deps:** Update dependency i18next to v25.6.1 ([#820](https://github.com/Notifycal/frontend/issues/820)) ([245c4b4](https://github.com/Notifycal/frontend/commit/245c4b4c99ddac0b9d6ed15319b8b864500dca9c))
+* **deps:** Update dependency i18next to v25.7.1 ([#871](https://github.com/Notifycal/frontend/issues/871)) ([c9a0874](https://github.com/Notifycal/frontend/commit/c9a0874bf79a3398334700e6ad286829ea6cd382))
+* **deps:** Update dependency react-hook-form to v7.66.1 ([#857](https://github.com/Notifycal/frontend/issues/857)) ([dd2547e](https://github.com/Notifycal/frontend/commit/dd2547ef650196ce5a0980fc34fe08112b912ff2))
+* **deps:** Update Node.js Dependencies ([#738](https://github.com/Notifycal/frontend/issues/738)) ([3990ad4](https://github.com/Notifycal/frontend/commit/3990ad476ddfc2453a154367f8a10a800a9f5bc5))
+* **deps:** Update Node.js Dependencies ([#826](https://github.com/Notifycal/frontend/issues/826)) ([50eec7a](https://github.com/Notifycal/frontend/commit/50eec7a7f8a4b4331768b88edbf181ff42e1ae52))
+* **deps:** Update Node.js Dependencies ([#834](https://github.com/Notifycal/frontend/issues/834)) ([659c881](https://github.com/Notifycal/frontend/commit/659c8817f43b678e323fe12e37ba94e6df9f0f1d))
+* **deps:** Update Node.js Dependencies ([#842](https://github.com/Notifycal/frontend/issues/842)) ([788aa21](https://github.com/Notifycal/frontend/commit/788aa2183aa95b9b92e2a4643d4870ab6237dd7e))
+* **deps:** Update Node.js Dependencies ([#844](https://github.com/Notifycal/frontend/issues/844)) ([e5d506b](https://github.com/Notifycal/frontend/commit/e5d506b42ebd2cd8453fa97c82d8fd434f437397))
+* **deps:** Update Node.js Dependencies ([#851](https://github.com/Notifycal/frontend/issues/851)) ([9332f96](https://github.com/Notifycal/frontend/commit/9332f96c448b72419ab0cfefe84b1ffb5899dfba))
+* **deps:** Update Node.js Dependencies ([#855](https://github.com/Notifycal/frontend/issues/855)) ([52e4e61](https://github.com/Notifycal/frontend/commit/52e4e61ab2e153fd4980db16b90e5d91428fb6c9))
+* **deps:** Update Node.js Dependencies ([#860](https://github.com/Notifycal/frontend/issues/860)) ([a8d1968](https://github.com/Notifycal/frontend/commit/a8d1968f834580cbd514addb7a6c5ce27472e9c7))
+* **deps:** Update Node.js Dependencies ([#862](https://github.com/Notifycal/frontend/issues/862)) ([00dfbe3](https://github.com/Notifycal/frontend/commit/00dfbe3aa81ea4e6b2afbbeacf58e4a1d15d0945))
+* **deps:** Update Node.js Dependencies ([#867](https://github.com/Notifycal/frontend/issues/867)) ([6813ba5](https://github.com/Notifycal/frontend/commit/6813ba53229387a5fd3de581fb216a67f44e0b5d))
+* **deps:** Update Node.js Dependencies to v1.136.11 ([#859](https://github.com/Notifycal/frontend/issues/859)) ([ccd28a9](https://github.com/Notifycal/frontend/commit/ccd28a98ed29d236e6387d79f8feeee3a0ac97c6))
+
 ## [1.4.4](https://github.com/Notifycal/frontend/compare/v1.4.3...v1.4.4) (2025-09-30)
 
 
