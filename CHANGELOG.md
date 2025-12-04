@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.1](https://github.com/Notifycal/frontend/compare/v1.5.0...v1.5.1) (2025-12-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-query to v5.90.12 ([#883](https://github.com/Notifycal/frontend/issues/883)) ([b484134](https://github.com/Notifycal/frontend/commit/b484134aef4e3b456bd00367243725b2f5a48135))
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.139.13 ([#874](https://github.com/Notifycal/frontend/issues/874)) ([4d3aa80](https://github.com/Notifycal/frontend/commit/4d3aa80779f6fcc7af37cf1e42bbd2c1598aa804))
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.139.14 ([#877](https://github.com/Notifycal/frontend/issues/877)) ([065e627](https://github.com/Notifycal/frontend/commit/065e627d7b502f31e620db1d779b4e74b85109cb))
+* **deps:** Update dependency react-hook-form to v7.68.0 ([#882](https://github.com/Notifycal/frontend/issues/882)) ([8c69f37](https://github.com/Notifycal/frontend/commit/8c69f374e4b4f967e071f1ec3bed4662d1cba6f7))
+* **deps:** Update Node.js Dependencies to v19.2.1 ([#880](https://github.com/Notifycal/frontend/issues/880)) ([0eb1ab1](https://github.com/Notifycal/frontend/commit/0eb1ab140bd3789b240b10ab3bfd7dcc2288c348))
+
 ## [1.5.0](https://github.com/Notifycal/frontend/compare/v1.4.5...v1.5.0) (2025-12-02)
 
 
