@@ -52,7 +52,7 @@ const decodeToken = (token: string): { userId: UserId; email: Email } | null => 
   }
 };
 
-export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element => {
+export const AuthProvider = ({ children, onLogout }: { children: ReactNode; onLogout: () => void }): JSX.Element => {
   const [authState, setAuthState] = useState<AuthState>({
     accessToken: null,
     refreshToken: getLocalStorageItem('refreshToken'),
@@ -177,6 +177,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
   const logout = useCallback(() => {
     // TODO: Call backend logout to invalidate tokens
+    onLogout();
     setAuthState((previous: AuthState) => ({
       ...previous,
       accessToken: null,
@@ -184,7 +185,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
       loginStatus: 'unauthorized',
       authInfo: null
     }));
-  }, []);
+  }, [onLogout]);
 
   const setShouldHandlePostLoginFlow = useCallback((value: boolean) => {
     setAuthState((previous: AuthState) => ({
