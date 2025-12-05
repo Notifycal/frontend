@@ -7,7 +7,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 
-import { useAuth, AuthProvider } from '@providers/AuthProvider.tsx';
+import { AuthProvider, useAuth } from '@providers/AuthProvider.tsx';
 import { type JSX, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -61,7 +61,11 @@ const App = ({ router, queryClient }: AppProps): JSX.Element => {
         }
       >
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-          <AuthProvider>
+          <AuthProvider
+            onLogout={() => {
+              queryClient.clear();
+            }}
+          >
             <QueryClientProvider client={queryClient}>
               <InnerApp queryClient={queryClient} router={router} />
               {/* Development tools */}
