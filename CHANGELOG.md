@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.3](https://github.com/Notifycal/frontend/compare/v1.5.2...v1.5.3) (2025-12-05)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @notifycal/shared to v7.16.2 ([#887](https://github.com/Notifycal/frontend/issues/887)) ([148354a](https://github.com/Notifycal/frontend/commit/148354a2ad2e3a45b9ead36e15c311dd0b4a3bea))
+* tier card button loading ([#886](https://github.com/Notifycal/frontend/issues/886)) ([98454b9](https://github.com/Notifycal/frontend/commit/98454b9efc8bd9311688214018ebdb76ff8f0449))
+
 ## [1.5.2](https://github.com/Notifycal/frontend/compare/v1.5.1...v1.5.2) (2025-12-05)
 
 
