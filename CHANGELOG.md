@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/Notifycal/frontend/compare/v1.5.1...v1.5.2) (2025-12-05)
+
+
+### Bug Fixes
+
+* clear tanstack query data on logout ([#884](https://github.com/Notifycal/frontend/issues/884)) ([7729a0e](https://github.com/Notifycal/frontend/commit/7729a0ef7364bcc23832cff7a0ecc1f607b5fd82))
+
 ## [1.5.1](https://github.com/Notifycal/frontend/compare/v1.5.0...v1.5.1) (2025-12-04)
 
 
