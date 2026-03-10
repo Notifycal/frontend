@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.5.4](https://github.com/Notifycal/frontend/compare/v1.5.3...v1.5.4) (2026-03-10)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.140.0 ([#892](https://github.com/Notifycal/frontend/issues/892)) ([7ca1440](https://github.com/Notifycal/frontend/commit/7ca1440111d37b4cb6016d2ec85f0e01a1da0471))
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.140.1 ([#901](https://github.com/Notifycal/frontend/issues/901)) ([db41fd9](https://github.com/Notifycal/frontend/commit/db41fd9407804d55724860c0f2bca48db6e19c05))
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.140.5 ([#905](https://github.com/Notifycal/frontend/issues/905)) ([5052160](https://github.com/Notifycal/frontend/commit/5052160017ccd755d1ca3c64f2cfbb073ab1078a))
+* **deps:** Update dependency @tanstack/react-router-devtools to v1.141.2 ([#912](https://github.com/Notifycal/frontend/issues/912)) ([5afc2f4](https://github.com/Notifycal/frontend/commit/5afc2f4c9f20433a63d0edfe604d883c28e2e5ab))
+* **deps:** Update dependency axios to v1.13.5 [SECURITY] ([#1040](https://github.com/Notifycal/frontend/issues/1040)) ([9c26b30](https://github.com/Notifycal/frontend/commit/9c26b30c29c6c159a039aee14ff2955bc4cc2b7c))
+* **deps:** Update dependency i18next to v25.7.2 ([#895](https://github.com/Notifycal/frontend/issues/895)) ([175c19e](https://github.com/Notifycal/frontend/commit/175c19e145367c594c546665118e3e435a66ce3c))
+* **deps:** Update dependency react-i18next to v16.4.0 ([#889](https://github.com/Notifycal/frontend/issues/889)) ([a1b9597](https://github.com/Notifycal/frontend/commit/a1b9597cb3e74feb4547757a00129d7ecde6f113))
+* **deps:** Update dependency react-i18next to v16.5.0 ([#909](https://github.com/Notifycal/frontend/issues/909)) ([49d23db](https://github.com/Notifycal/frontend/commit/49d23db0074205a5c85c229b7c7803e890cf1c12))
+* **deps:** Update Node.js Dependencies ([#903](https://github.com/Notifycal/frontend/issues/903)) ([f8c831b](https://github.com/Notifycal/frontend/commit/f8c831b182de4f394c48e3f7dbe136447e25095f))
+* **deps:** Update Node.js Dependencies ([#907](https://github.com/Notifycal/frontend/issues/907)) ([69905eb](https://github.com/Notifycal/frontend/commit/69905eb6aeb6fa62cfd23ff14bf0adf454d5b1d6))
+* **deps:** Update Node.js Dependencies to v19.2.3 ([#908](https://github.com/Notifycal/frontend/issues/908)) ([6a3b23a](https://github.com/Notifycal/frontend/commit/6a3b23a89b3d2c0f2c6370f73ba2b7345e8da9ba))
+* **deps:** Update Node.js Dependencies to v8.3.10 ([#898](https://github.com/Notifycal/frontend/issues/898)) ([8ff8090](https://github.com/Notifycal/frontend/commit/8ff8090a3dcfc9546e4a0a2f636b0615c2c48192))
+
 ## [1.5.3](https://github.com/Notifycal/frontend/compare/v1.5.2...v1.5.3) (2025-12-05)
 
 
